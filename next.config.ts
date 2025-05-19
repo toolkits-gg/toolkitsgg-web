@@ -1,7 +1,20 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  images: {
+    minimumCacheTTL: 31536000,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'd1ig3kkc8hj9hz.cloudfront.net',
+        port: '',
+        pathname: '/**/*',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

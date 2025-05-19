@@ -2,6 +2,13 @@
   "name": "toolkits.gg",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.12.2 <23",
+    "pnpm": ">=10.9.0"
+  },
+  "prisma": {
+    "schema": "src/lib/prisma"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -16,12 +23,19 @@
     "inngest": "pnpm dlx inngest-cli@latest dev"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.0",
     "@node-rs/argon2": "^2.0.2",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
+    "@prisma/adapter-neon": "^6.8.2",
     "@prisma/client": "^6.8.2",
+    "@radix-ui/react-avatar": "^1.1.9",
+    "@radix-ui/react-collapsible": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.13",
+    "@radix-ui/react-dropdown-menu": "^2.1.14",
+    "@radix-ui/react-separator": "^1.1.6",
     "@radix-ui/react-slot": "^1.2.2",
+    "@radix-ui/react-tooltip": "^1.2.6",
     "@react-email/components": "^0.0.41",
     "@tanstack/react-query": "^5.76.1",
     "big.js": "^7.0.1",
@@ -41,6 +55,7 @@
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.3.0",
     "use-debounce": "^10.0.4",
+    "ws": "^8.18.2",
     "zed": "^0.1.0"
   },
   "devDependencies": {
@@ -50,6 +65,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/ws": "^8.18.1",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
     "eslint-plugin-react-hooks": "^5.2.0",
