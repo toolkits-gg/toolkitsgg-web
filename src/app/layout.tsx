@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { ReactQueryProvider } from '@/app/_providers/react-query/react-query-provider';
-import { SidebarProvider } from '@/app/_navigation/sidebar/sidebar-provider';
+import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
+import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
 import { Header } from '@/app/_navigation/header';
 import { Toaster } from 'sonner';
 

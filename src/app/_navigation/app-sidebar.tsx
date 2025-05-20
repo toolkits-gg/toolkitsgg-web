@@ -7,16 +7,16 @@ import {
   GalleryVerticalEnd,
   LucideChevronRight,
   Settings2,
-  SquareTerminal
+  SquareTerminal,
 } from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
-import { GameSwitcher } from '@/app/_navigation/sidebar/game-switcher';
+import { GameSwitcher } from '@/app/_navigation/game-switcher';
 import { ThemeSwitcher } from '@/components/theme/theme-switcher';
 import {
   Collapsible,
   CollapsibleContent,
-  CollapsibleTrigger
+  CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { Separator } from '@/components/ui/separator';
 import {
@@ -32,7 +32,7 @@ import {
   SidebarMenuSub as BaseSidebarMenuSub,
   SidebarMenuSubButton as BaseSidebarMenuSubButton,
   SidebarMenuSubItem as BaseSidebarMenuSubItem,
-  SidebarRail as BaseSidebarRail
+  SidebarRail as BaseSidebarRail,
 } from '@/components/ui/sidebar';
 
 const data = {
@@ -40,13 +40,13 @@ const data = {
     {
       name: 'Battle Aces',
       logo: AudioWaveform,
-      plan: 'Startup'
+      plan: 'Startup',
     },
     {
       name: 'Remnant 2',
       logo: GalleryVerticalEnd,
-      plan: 'Enterprise'
-    }
+      plan: 'Enterprise',
+    },
   ],
   nav: [
     {
@@ -57,17 +57,17 @@ const data = {
       items: [
         {
           title: 'History',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Starred',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Settings',
-          url: '#'
-        }
-      ]
+          url: '#',
+        },
+      ],
     },
     {
       title: 'Models',
@@ -76,17 +76,17 @@ const data = {
       items: [
         {
           title: 'Genesis',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Explorer',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Quantum',
-          url: '#'
-        }
-      ]
+          url: '#',
+        },
+      ],
     },
     {
       title: 'Documentation',
@@ -95,21 +95,21 @@ const data = {
       items: [
         {
           title: 'Introduction',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Get Started',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Tutorials',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Changelog',
-          url: '#'
-        }
-      ]
+          url: '#',
+        },
+      ],
     },
     {
       title: 'Settings',
@@ -118,30 +118,30 @@ const data = {
       items: [
         {
           title: 'General',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Team',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Billing',
-          url: '#'
+          url: '#',
         },
         {
           title: 'Limits',
-          url: '#'
-        }
-      ]
-    }
-  ]
+          url: '#',
+        },
+      ],
+    },
+  ],
 };
 
-interface SidebarProps extends React.ComponentProps<typeof BaseSidebar> {
+interface AppSidebarProps extends React.ComponentProps<typeof BaseSidebar> {
   userMenu: React.ReactNode | null;
 }
 
-const Sidebar = ({ userMenu, ...props }: SidebarProps) => {
+const AppSidebar = ({ userMenu, ...props }: AppSidebarProps) => {
   return (
     <BaseSidebar collapsible="icon" {...props}>
       <BaseSidebarHeader>
@@ -151,7 +151,7 @@ const Sidebar = ({ userMenu, ...props }: SidebarProps) => {
         <BaseSidebarGroup>
           <BaseSidebarGroupLabel>Platform</BaseSidebarGroupLabel>
           <BaseSidebarMenu>
-            {data.nav.map(item => (
+            {data.nav.map((item) => (
               <Collapsible
                 key={item.title}
                 asChild
@@ -168,7 +168,7 @@ const Sidebar = ({ userMenu, ...props }: SidebarProps) => {
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <BaseSidebarMenuSub>
-                      {item.items?.map(subItem => (
+                      {item.items?.map((subItem) => (
                         <BaseSidebarMenuSubItem key={subItem.title}>
                           <BaseSidebarMenuSubButton asChild>
                             <Link href={subItem.url}>
@@ -187,8 +187,8 @@ const Sidebar = ({ userMenu, ...props }: SidebarProps) => {
       </BaseSidebarContent>
       <BaseSidebarFooter>
         <BaseSidebarGroup>
-          <div className="w-full flex flex-1 items-center justify-end pr-2">
-            <div className="w-8 h-8">
+          <div className="flex w-full flex-1 items-center justify-end pr-2">
+            <div className="h-8 w-8">
               <ThemeSwitcher />
             </div>
           </div>
@@ -201,4 +201,4 @@ const Sidebar = ({ userMenu, ...props }: SidebarProps) => {
   );
 };
 
-export { Sidebar };
+export { AppSidebar };
