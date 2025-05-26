@@ -3,7 +3,6 @@
 import { LucideMoon, LucidePalette, LucideSun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
-import { themes } from '@/components/theme/constants';
 import { ThemeColorButton } from '@/components/theme/theme-color-button';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,7 +11,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from '@/components/ui/dialog';
 
 const ThemeSwitcher = () => {
@@ -64,16 +63,6 @@ const ThemeSwitcher = () => {
           >
             <LucideMoon />
           </Button>
-        </div>
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          {themes.map(themeName => (
-            <ThemeColorButton
-              key={`${themeName}-${isLightMode ? 'light' : 'dark'}`}
-              themeName={themeName}
-              isLightMode={isLightMode}
-              onChangeTheme={(themeName: string) => setTheme(themeName)}
-            />
-          ))}
         </div>
       </DialogContent>
     </Dialog>

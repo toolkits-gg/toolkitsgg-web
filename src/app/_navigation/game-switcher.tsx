@@ -9,30 +9,35 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar
+  useSidebar,
 } from '@/components/ui/sidebar';
+import { ALL_GAME_CONFIGS } from '@/features/games/constants';
+import { useTheme } from 'next-themes';
+import type { GameConfig } from '@/features/games/types';
 
-type GameSwitcherProps = {
-  teams: Array<{
-    name: string;
-    logo: React.ElementType;
-    plan: string;
-  }>;
-};
+const GameSwitcher = () => {
+  const { theme, setTheme } = useTheme();
 
-const GameSwitcher = ({ teams }: GameSwitcherProps) => {
   const { isMobile } = useSidebar();
-  const [activeTeam, setActiveTeam] = React.useState(teams[0]);
 
-  if (!activeTeam) {
+  const [activeGameConfig, setActiveGameConfig] = React.useState(
+    ALL_GAME_CONFIGS.clairObscur
+  );
+
+  if (!activeGameConfig) {
     return null;
   }
+
+  const handleMenuItemClick = (gameConfig: GameConfig) => {
+    setActiveGameConfig(gameConfig);
+    setTheme(gameConfig.themeCSSClass);
+  };
 
   return (
     <SidebarMenu>
@@ -43,12 +48,16 @@ const GameSwitcher = ({ teams }: GameSwitcherProps) => {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                <activeTeam.logo className="size-4" />
+              <div className="bg-sidebar-primary/15 text-sidebar-primary-foreground flex aspect-square size-9 items-center justify-center rounded-lg">
+                {React.cloneElement(activeGameConfig.logo, {
+                  className: 'size-8',
+                })}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{activeTeam.name}</span>
-                <span className="truncate text-xs">{activeTeam.plan}</span>
+                <span className="truncate font-medium">
+                  {activeGameConfig.name}
+                </span>
+                <span className="truncate text-xs">---</span>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
@@ -62,16 +71,18 @@ const GameSwitcher = ({ teams }: GameSwitcherProps) => {
             <DropdownMenuLabel className="text-muted-foreground text-xs">
               Teams
             </DropdownMenuLabel>
-            {teams.map((team, index) => (
+            {Object.values(ALL_GAME_CONFIGS).map((gameConfig, index) => (
               <DropdownMenuItem
-                key={team.name}
-                onClick={() => setActiveTeam(team)}
+                key={gameConfig.name}
+                onClick={() => handleMenuItemClick(gameConfig)}
                 className="gap-2 p-2"
               >
                 <div className="flex size-6 items-center justify-center rounded-md border">
-                  <team.logo className="size-3.5 shrink-0" />
+                  {React.cloneElement(gameConfig.logo, {
+                    className: 'size-3.5 shrink-0',
+                  })}
                 </div>
-                {team.name}
+                {gameConfig.name}
                 <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
               </DropdownMenuItem>
             ))}

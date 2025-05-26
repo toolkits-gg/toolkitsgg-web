@@ -36,18 +36,6 @@ import {
 } from '@/components/ui/sidebar';
 
 const data = {
-  games: [
-    {
-      name: 'Battle Aces',
-      logo: AudioWaveform,
-      plan: 'Startup',
-    },
-    {
-      name: 'Remnant 2',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-  ],
   nav: [
     {
       title: 'Playground',
@@ -145,7 +133,7 @@ const AppSidebar = ({ userMenu, ...props }: AppSidebarProps) => {
   return (
     <BaseSidebar collapsible="icon" {...props}>
       <BaseSidebarHeader>
-        <GameSwitcher teams={data.games} />
+        <GameSwitcher />
       </BaseSidebarHeader>
       <BaseSidebarContent>
         <BaseSidebarGroup>
