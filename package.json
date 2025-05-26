@@ -9,6 +9,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "postinstall": "prisma generate --no-engine",
     "lint": "next lint",
     "lint-fix": "next lint --fix",
     "type": "tsc --noEmit",
