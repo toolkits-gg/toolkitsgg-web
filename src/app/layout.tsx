@@ -7,7 +7,7 @@ import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
 import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
 import { Header } from '@/app/_navigation/header';
 import { Toaster } from 'sonner';
-import PlausibleProvider from 'next-plausible';
+import Script from 'next/script';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,21 +35,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <PlausibleProvider domain="toolkits.gg">
-          <NuqsAdapter>
-            <ThemeProvider>
-              <ReactQueryProvider>
-                <SidebarProvider>
-                  <Header />
-                  <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
-                    {children}
-                  </main>
-                </SidebarProvider>
-                <Toaster expand />
-              </ReactQueryProvider>
-            </ThemeProvider>
-          </NuqsAdapter>
-        </PlausibleProvider>
+        <Script src="https://umami.toolkits.gg/script.js" />
+        <NuqsAdapter>
+          <ThemeProvider>
+            <ReactQueryProvider>
+              <SidebarProvider>
+                <Header />
+                <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                  {children}
+                </main>
+              </SidebarProvider>
+              <Toaster expand />
+            </ReactQueryProvider>
+          </ThemeProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );
