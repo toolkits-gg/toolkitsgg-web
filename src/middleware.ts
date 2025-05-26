@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
     const allowedSubdomains = ['coe33'];
     if (allowedSubdomains.includes(subdomain)) {
       url.hostname = mainDomain;
-      url.pathname = `/games/${subdomain}${url.pathname === '/' ? '' : url.pathname}`;
+      url.pathname = `/${subdomain}${url.pathname === '/' ? '' : url.pathname}`;
       return NextResponse.redirect(url);
     }
   }
