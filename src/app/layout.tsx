@@ -30,7 +30,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Script src="https://umami.toolkits.gg/script.js" />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
