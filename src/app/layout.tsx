@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme/theme-provider';
-import PlausibleProvider from 'next-plausible';
+import Script from 'next/script';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,9 +30,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <PlausibleProvider domain="toolkits.gg">
-          <ThemeProvider>{children}</ThemeProvider>
-        </PlausibleProvider>
+        <Script src="https://umami.toolkits.gg/script.js" />
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
