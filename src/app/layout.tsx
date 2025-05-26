@@ -1,7 +1,13 @@
+import './globals.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
 import { ThemeProvider } from '@/components/theme/theme-provider';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
+import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
+import { Header } from '@/app/_navigation/header';
+import { Toaster } from 'sonner';
+import PlausibleProvider from 'next-plausible';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,7 +35,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <PlausibleProvider domain="toolkits.gg">
+          <NuqsAdapter>
+            <ThemeProvider>
+              <ReactQueryProvider>
+                <SidebarProvider>
+                  <Header />
+                  <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                    {children}
+                  </main>
+                </SidebarProvider>
+                <Toaster expand />
+              </ReactQueryProvider>
+            </ThemeProvider>
+          </NuqsAdapter>
+        </PlausibleProvider>
       </body>
     </html>
   );
