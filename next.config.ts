@@ -5,15 +5,8 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    minimumCacheTTL: 31536000,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'd1ig3kkc8hj9hz.cloudfront.net',
-        port: '',
-        pathname: '/**/*',
-      },
-    ],
+    loader: 'custom',
+    loaderFile: './loader.js',
   },
 };
 
