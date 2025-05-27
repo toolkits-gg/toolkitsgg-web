@@ -3,7 +3,7 @@
 import { LucideMoon, LucidePalette, LucideSun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
-import { ThemeColorButton } from '@/components/theme/theme-color-button';
+import { ThemeColorButton } from '@/features/theme/theme-color-button';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,

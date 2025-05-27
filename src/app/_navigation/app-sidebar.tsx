@@ -1,10 +1,8 @@
 'use client';
 
 import {
-  AudioWaveform,
   BookOpen,
   Bot,
-  GalleryVerticalEnd,
   LucideChevronRight,
   Settings2,
   SquareTerminal,
@@ -12,7 +10,7 @@ import {
 import Link from 'next/link';
 import * as React from 'react';
 import { GameSwitcher } from '@/app/_navigation/game-switcher';
-import { ThemeSwitcher } from '@/components/theme/theme-switcher';
+import { ThemeSwitcher } from '@/features/theme/theme-switcher';
 import {
   Collapsible,
   CollapsibleContent,
@@ -34,6 +32,7 @@ import {
   SidebarMenuSubItem as BaseSidebarMenuSubItem,
   SidebarRail as BaseSidebarRail,
 } from '@/components/ui/sidebar';
+import type { GameConfigKey } from '@/features/games/types';
 
 const data = {
   nav: [
@@ -126,14 +125,15 @@ const data = {
 };
 
 interface AppSidebarProps extends React.ComponentProps<typeof BaseSidebar> {
+  gameConfigKey?: GameConfigKey;
   userMenu: React.ReactNode | null;
 }
 
-const AppSidebar = ({ userMenu, ...props }: AppSidebarProps) => {
+const AppSidebar = ({ gameConfigKey, userMenu, ...props }: AppSidebarProps) => {
   return (
     <BaseSidebar collapsible="icon" {...props}>
       <BaseSidebarHeader>
-        <GameSwitcher />
+        <GameSwitcher game={gameConfigKey} />
       </BaseSidebarHeader>
       <BaseSidebarContent>
         <BaseSidebarGroup>

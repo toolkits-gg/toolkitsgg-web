@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { ThemeProvider } from '@/components/theme/theme-provider';
+import { ThemeProvider } from '@/features/theme/theme-provider';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
 import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
@@ -38,12 +38,7 @@ export default function RootLayout({
         <NuqsAdapter>
           <ThemeProvider>
             <ReactQueryProvider>
-              <SidebarProvider>
-                <Header />
-                <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
-                  {children}
-                </main>
-              </SidebarProvider>
+              {children}
               <Toaster expand />
             </ReactQueryProvider>
           </ThemeProvider>

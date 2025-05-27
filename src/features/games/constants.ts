@@ -1,15 +1,11 @@
-import { clairObscurConfig } from '@/features/games/game-configs/clair-obscur';
-import { testGameConfig } from '@/features/games/game-configs/test-game';
-import type { GameConfig } from '@/features/games/types';
+import { clairObscurConfig } from '@/features/games/coe33/config';
+import type { GameConfig, GameConfigKey } from '@/features/games/types';
 
-export const ALL_GAME_CONFIGS = {
-  clairObscur: clairObscurConfig,
-  testGame: testGameConfig,
+export const allGameConfigs: Record<string, GameConfig> = {
+  coe33: clairObscurConfig,
   // Add more game configs here as needed
-} as const satisfies Record<string, GameConfig>;
+};
 
-export type GameConfigKey = keyof typeof ALL_GAME_CONFIGS;
-
-export const ALL_GAME_NAMES = (
-  Object.keys(ALL_GAME_CONFIGS) as Array<GameConfigKey>
-).map((key) => ALL_GAME_CONFIGS[key].name);
+export const allGameNames = (
+  Object.keys(allGameConfigs) as Array<GameConfigKey>
+).map((key) => allGameConfigs[key].name);

@@ -17,26 +17,49 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { ALL_GAME_CONFIGS } from '@/features/games/constants';
 import { useTheme } from 'next-themes';
-import type { GameConfig } from '@/features/games/types';
+import type { GameConfig, GameConfigKey } from '@/features/games/types';
+import { allGameConfigs } from '@/features/games/constants';
+import { redirect, useSearchParams } from 'next/navigation';
+import { logosPath } from '@/paths';
+import Image from 'next/image';
 
-const GameSwitcher = () => {
-  const { theme, setTheme } = useTheme();
+const defaultConfig: GameConfig = {
+  id: 'default',
+  name: 'Select a game',
+  themeCSSClass: 'default',
+  logo: (
+    <Image
+      src={`${logosPath()}/256Clean.png`}
+      alt="Default Toolkits.gg logo"
+      width={256}
+      height={256}
+    />
+  ),
+};
+
+type GameSwitcherProps = {
+  game?: GameConfigKey;
+};
+
+const GameSwitcher = ({ game }: GameSwitcherProps) => {
+  const activeGameConfig = React.useMemo(() => {
+    if (!game || !allGameConfigs[game as GameConfigKey]) {
+      return defaultConfig;
+    }
+    return allGameConfigs[game as GameConfigKey];
+  }, [game]);
+
+  const { setTheme } = useTheme();
+  React.useEffect(() => {
+    setTheme(activeGameConfig.themeCSSClass);
+  }, [activeGameConfig.themeCSSClass]);
 
   const { isMobile } = useSidebar();
 
-  const [activeGameConfig, setActiveGameConfig] = React.useState(
-    ALL_GAME_CONFIGS.clairObscur
-  );
-
-  if (!activeGameConfig) {
-    return null;
-  }
-
   const handleMenuItemClick = (gameConfig: GameConfig) => {
-    setActiveGameConfig(gameConfig);
     setTheme(gameConfig.themeCSSClass);
+    redirect(`${gameConfig.id}`);
   };
 
   return (
@@ -49,9 +72,10 @@ const GameSwitcher = () => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <div className="bg-sidebar-primary/15 text-sidebar-primary-foreground flex aspect-square size-9 items-center justify-center rounded-lg">
-                {React.cloneElement(activeGameConfig.logo, {
-                  className: 'size-8',
-                })}
+                {activeGameConfig &&
+                  React.cloneElement(activeGameConfig.logo, {
+                    className: 'size-8',
+                  })}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">
@@ -71,7 +95,7 @@ const GameSwitcher = () => {
             <DropdownMenuLabel className="text-muted-foreground text-xs">
               Teams
             </DropdownMenuLabel>
-            {Object.values(ALL_GAME_CONFIGS).map((gameConfig, index) => (
+            {Object.values(allGameConfigs).map((gameConfig, index) => (
               <DropdownMenuItem
                 key={gameConfig.name}
                 onClick={() => handleMenuItemClick(gameConfig)}
