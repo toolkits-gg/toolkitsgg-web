@@ -4,10 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/features/theme/theme-provider';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
-import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
-import { Header } from '@/app/_navigation/header';
 import { Toaster } from 'sonner';
-import Script from 'next/script';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

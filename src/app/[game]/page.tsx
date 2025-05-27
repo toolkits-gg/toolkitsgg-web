@@ -1,4 +1,3 @@
-import { Header } from '@/app/_navigation/header';
 import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
 import { allGameConfigs } from '@/features/games/constants';
 import type { GameConfigKey } from '@/features/games/types';
@@ -18,7 +17,6 @@ export default async function GamePage({ params }: GamePageProps) {
 
   return (
     <SidebarProvider gameConfigKey={gameConfigKey}>
-      <Header />
       <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="flex h-full w-full items-center justify-center">
           <h1 className="text-2xl font-bold text-red-500">Game Page: {game}</h1>

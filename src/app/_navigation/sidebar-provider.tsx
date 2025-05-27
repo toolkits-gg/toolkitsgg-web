@@ -1,4 +1,5 @@
 import { AppSidebar } from '@/app/_navigation/app-sidebar';
+import { Header } from '@/app/_navigation/header';
 import { UserMenu } from '@/app/_navigation/user-menu';
 import {
   SidebarInset as BaseSidebarInset,
@@ -23,7 +24,10 @@ const SidebarProvider = async ({
         userMenu={<UserMenu user={undefined} />}
         gameConfigKey={gameConfigKey}
       />
-      <BaseSidebarInset>{children}</BaseSidebarInset>
+      <BaseSidebarInset>
+        <Header gameConfigKey={gameConfigKey} />
+        {children}
+      </BaseSidebarInset>
     </BaseSidebarProvider>
   );
 };

@@ -20,7 +20,7 @@ import {
 import { useTheme } from 'next-themes';
 import type { GameConfig, GameConfigKey } from '@/features/games/types';
 import { allGameConfigs } from '@/features/games/constants';
-import { redirect, useSearchParams } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { logosPath } from '@/paths';
 import Image from 'next/image';
 
