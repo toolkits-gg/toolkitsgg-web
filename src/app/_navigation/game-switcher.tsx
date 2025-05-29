@@ -18,7 +18,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { useTheme } from 'next-themes';
-import type { GameConfig, GameConfigKey } from '@/features/games/types';
+import type { GameConfig } from '@/features/games/types';
 import { allGameConfigs } from '@/features/games/constants';
 import { redirect } from 'next/navigation';
 import { logosPath } from '@/paths';
@@ -39,15 +39,15 @@ const defaultConfig: GameConfig = {
 };
 
 type GameSwitcherProps = {
-  game?: GameConfigKey;
+  game?: string;
 };
 
 const GameSwitcher = ({ game }: GameSwitcherProps) => {
   const activeGameConfig = React.useMemo(() => {
-    if (!game || !allGameConfigs[game as GameConfigKey]) {
+    if (!game || !allGameConfigs[game]) {
       return defaultConfig;
     }
-    return allGameConfigs[game as GameConfigKey];
+    return allGameConfigs[game];
   }, [game]);
 
   const { setTheme } = useTheme();

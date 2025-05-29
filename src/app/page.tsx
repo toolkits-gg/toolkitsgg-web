@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function HomePage() {
   return (
-    <SidebarProvider gameConfigKey={undefined}>
+    <SidebarProvider gameId={undefined}>
       <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
           <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-24 text-center shadow-2xl sm:rounded-3xl sm:px-16">

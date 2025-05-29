@@ -2,16 +2,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { homePath, logosPath } from '@/paths';
-import type { GameConfigKey } from '@/features/games/types';
 import { allGameConfigs } from '@/features/games/constants';
-import { cloneElement } from 'react';
 
 type HeaderProps = {
-  gameConfigKey?: GameConfigKey;
+  gameId?: string;
 };
 
-const Header = ({ gameConfigKey }: HeaderProps) => {
-  const gameConfig = allGameConfigs[gameConfigKey as GameConfigKey];
+const Header = ({ gameId }: HeaderProps) => {
+  let gameConfig = null;
+  if (gameId) {
+    gameConfig = allGameConfigs[gameId];
+  }
 
   return (
     <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">

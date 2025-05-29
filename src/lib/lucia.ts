@@ -1,5 +1,5 @@
+import prisma from '@/lib/prisma';
 import { hashToken } from '@/utils/crypto';
-import { prisma } from './prisma';
 
 const SESSION_REFRESH_INTERVAL_MS = 1000 * 60 * 60 * 24 * 15; // 15 days
 const SESSION_MAX_DURATION_MS = SESSION_REFRESH_INTERVAL_MS * 2; // 30 days
@@ -10,11 +10,11 @@ export const createSession = async (sessionToken: string, userId: string) => {
   const session = {
     id: sessionId,
     userId,
-    expiresAt: new Date(Date.now() + SESSION_MAX_DURATION_MS)
+    expiresAt: new Date(Date.now() + SESSION_MAX_DURATION_MS),
   };
 
   await prisma.session.create({
-    data: session
+    data: session,
   });
 
   return session;
@@ -25,11 +25,11 @@ export const validateSession = async (sessionToken: string) => {
 
   const result = await prisma.session.findUnique({
     where: {
-      id: sessionId
+      id: sessionId,
     },
     include: {
-      user: true
-    }
+      user: true,
+    },
   });
 
   // if there is no session, return null
@@ -44,8 +44,8 @@ export const validateSession = async (sessionToken: string) => {
     // or your ORM of choice
     await prisma.session.delete({
       where: {
-        id: sessionId
-      }
+        id: sessionId,
+      },
     });
 
     return { session: null, user: null };
@@ -57,20 +57,21 @@ export const validateSession = async (sessionToken: string) => {
 
     await prisma.session.update({
       where: {
-        id: sessionId
+        id: sessionId,
       },
       data: {
-        expiresAt: session.expiresAt
-      }
+        expiresAt: session.expiresAt,
+      },
     });
   }
+
   return { session, user };
 };
 
 export const invalidateSession = async (sessionId: string) => {
   await prisma.session.delete({
     where: {
-      id: sessionId
-    }
+      id: sessionId,
+    },
   });
 };

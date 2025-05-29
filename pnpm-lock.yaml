@@ -107,9 +107,9 @@ importers:
       ws:
         specifier: ^8.18.2
         version: 8.18.2
-      zed:
-        specifier: ^0.1.0
-        version: 0.1.0
+      zod:
+        specifier: ^3.25.34
+        version: 3.25.34
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -2959,9 +2959,6 @@ packages:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
     engines: {node: '>=0.12.0'}
 
-  is-promise@1.0.1:
-    resolution: {integrity: sha512-mjWH5XxnhMA8cFnDchr6qRP9S/kLntKuEfIYku+PaN1CnS8v+OG9O/BKpRCVRJvpIkgAZm0Pf5Is3iSSOILlcg==}
-
   is-regex@1.2.1:
     resolution: {integrity: sha512-MjYsKHO5O7mCsmRGxWcLWheFqN9DJ/2TmngvjKXihe6efViPqc274+Fx/4fYj/r03+ESvBdTXK0V6tA3rgez1g==}
     engines: {node: '>= 0.4'}
@@ -3072,9 +3069,6 @@ packages:
   language-tags@1.0.9:
     resolution: {integrity: sha512-MbjN408fEndfiQXbFQ1vnd+1NoLDsnQW41410oQBXiyXDMYH5z505juWa4KUE1LqxRC7DgOgZDbKLxHIwm27hA==}
     engines: {node: '>=0.10'}
-
-  lazypromise@0.1.0:
-    resolution: {integrity: sha512-oRJM49Au8X6eHpUMvHcoZ7f1/eVXq+UkJXAdCMtXN2/19Cw4guL04CtM5hFU7GeXCaZDb2cYBr3Zp+3hKO8vmQ==}
 
   leac@0.6.0:
     resolution: {integrity: sha512-y+SqErxb8h7nE/fiEX07jsbuhrpO9lL8eca7/Y1nuWV2moNlXhyd59iDGcRf6moVyDMbmTNzL40SUyrFU/yDpg==}
@@ -3581,9 +3575,6 @@ packages:
   prismjs@1.30.0:
     resolution: {integrity: sha512-DEvV2ZF2r2/63V+tK8hQvrR2ZGn10srHbXviTlcv7Kpzw8jWiNTqbVgjO3IY8RxrrOUF8VPMQQFysYYYv0YZxw==}
     engines: {node: '>=6'}
-
-  promise@2.0.0:
-    resolution: {integrity: sha512-OgMc+sxI3zWF8D5BJGtA0z7/IsrDy1/0cPaDv6HPpqa2fSTo7AdON5U10NbZCUeF+zCAj3PtfPE50Hf02386aA==}
 
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
@@ -4118,11 +4109,11 @@ packages:
     resolution: {integrity: sha512-GQHQqAopRhwU8Kt1DDM8NjibDXHC8eoh1erhGAJPEyveY9qqVeXvVikNKrDz69sHowPMorbPUrH/mx8c50eiBQ==}
     engines: {node: '>=18'}
 
-  zed@0.1.0:
-    resolution: {integrity: sha512-0wQoprcmfFPmCBeqzCyxqWhbsnO8SfKHaEE0Nc/MXIgCugtJkt52wU3+J/Rpu14BpBlXoYs6fp15FiTxjvEGoA==}
-
   zod@3.22.5:
     resolution: {integrity: sha512-HqnGsCdVZ2xc0qWPLdO25WnseXThh0kEYKIdV5F/hTHO75hNZFp8thxSeHhiPrHZKrFTo1SOgkAj9po5bexZlw==}
+
+  zod@3.25.34:
+    resolution: {integrity: sha512-lZHvSc2PpWdcfpHlyB33HA9nqP16GpC9IpiG4lYq9jZCJVLZNnWd6Y1cj79bcLSBKTkxepfpjckPv5Y5VOPlwA==}
 
 snapshots:
 
@@ -7155,8 +7146,6 @@ snapshots:
 
   is-number@7.0.0: {}
 
-  is-promise@1.0.1: {}
-
   is-regex@1.2.1:
     dependencies:
       call-bound: 1.0.4
@@ -7261,10 +7250,6 @@ snapshots:
   language-tags@1.0.9:
     dependencies:
       language-subtag-registry: 0.3.23
-
-  lazypromise@0.1.0:
-    dependencies:
-      promise: 2.0.0
 
   leac@0.6.0: {}
 
@@ -7653,10 +7638,6 @@ snapshots:
       typescript: 5.8.3
 
   prismjs@1.30.0: {}
-
-  promise@2.0.0:
-    dependencies:
-      is-promise: 1.0.1
 
   prop-types@15.8.1:
     dependencies:
@@ -8336,8 +8317,6 @@ snapshots:
 
   yoctocolors@2.1.1: {}
 
-  zed@0.1.0:
-    dependencies:
-      lazypromise: 0.1.0
-
   zod@3.22.5: {}
+
+  zod@3.25.34: {}

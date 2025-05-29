@@ -32,7 +32,6 @@ import {
   SidebarMenuSubItem as BaseSidebarMenuSubItem,
   SidebarRail as BaseSidebarRail,
 } from '@/components/ui/sidebar';
-import type { GameConfigKey } from '@/features/games/types';
 
 const data = {
   nav: [
@@ -125,15 +124,15 @@ const data = {
 };
 
 interface AppSidebarProps extends React.ComponentProps<typeof BaseSidebar> {
-  gameConfigKey?: GameConfigKey;
+  gameId?: string;
   userMenu: React.ReactNode | null;
 }
 
-const AppSidebar = ({ gameConfigKey, userMenu, ...props }: AppSidebarProps) => {
+const AppSidebar = ({ gameId, userMenu, ...props }: AppSidebarProps) => {
   return (
     <BaseSidebar collapsible="icon" {...props}>
       <BaseSidebarHeader>
-        <GameSwitcher game={gameConfigKey} />
+        <GameSwitcher game={gameId} />
       </BaseSidebarHeader>
       <BaseSidebarContent>
         <BaseSidebarGroup>
