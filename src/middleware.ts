@@ -8,7 +8,8 @@ export function middleware(request: NextRequest) {
 
   const mainDomain = 'toolkits.gg';
 
-  // Dynamic subdomain handling
+  // This will redirect subdomains to their respective game paths
+  // e.g. game1.toolkits.gg -> toolkits.gg/game1
   if (hostname !== mainDomain && hostname.endsWith(`.${mainDomain}`)) {
     const subdomain = hostname.replace(`.${mainDomain}`, '');
 

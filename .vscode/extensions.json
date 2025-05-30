@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "nize.oklch-preview",
+    "shd101wyy.markdown-preview-enhanced",
+    "yoavbls.pretty-ts-errors",
+    "prisma.prisma",
+    "bradlc.vscode-tailwindcss",
+    "johnpapa.vscode-peacock"
+  ]
+}

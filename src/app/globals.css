@@ -182,7 +182,7 @@
     --chart-5: oklch(0.343 0.164 294);
   }
 
-  html.clair-obscur {
+  html.coe33 {
     --background: oklch(0.24 0.006 78);
     --card: oklch(0.24 0.006 78);
     --popover: oklch(0.24 0.006 78);
@@ -191,33 +191,33 @@
     --card-foreground: oklch(0.962 0 0);
     --popover-foreground: oklch(0.962 0 0);
     --sidebar-foreground: oklch(0.962 0 0);
-    --primary: oklch(0.911 0.094 84);
-    --sidebar-primary: oklch(0.911 0.094 84);
+    --primary: oklch(0.875 0.081 66);
+    --sidebar-primary: oklch(0.875 0.081 66);
     --primary-foreground: oklch(0.218 0 0);
     --sidebar-primary-foreground: oklch(0.218 0 0);
-    --secondary: oklch(0.337 0.026 81);
-    --accent: oklch(0.337 0.026 81);
-    --sidebar-accent: oklch(0.337 0.026 81);
+    --secondary: oklch(0.33 0.024 67);
+    --accent: oklch(0.33 0.024 67);
+    --sidebar-accent: oklch(0.33 0.024 67);
     --secondary-foreground: oklch(0.961 0 0);
     --accent-foreground: oklch(0.961 0 0);
     --sidebar-accent-foreground: oklch(0.961 0 0);
-    --muted: oklch(0.383 0.02 79);
-    --muted-foreground: oklch(0.691 0.012 85);
+    --muted: oklch(0.375 0.019 61);
+    --muted-foreground: oklch(0.686 0.011 68);
     --destructive: oklch(0.613 0.228 27);
     --destructive-foreground: oklch(0.961 0 0);
-    --border: oklch(0.367 0.039 82);
-    --sidebar-border: oklch(0.367 0.039 82);
-    --ring: oklch(0.46 0.08 82);
-    --sidebar-ring: oklch(0.46 0.08 82);
-    --input: oklch(0.366 0.037 83);
-    --chart-1: oklch(0.911 0.094 84);
-    --chart-2: oklch(0.891 0.085 76);
-    --chart-3: oklch(0.935 0.098 99);
-    --chart-4: oklch(0.859 0.075 57);
-    --chart-5: oklch(0.898 0.077 85);
+    --border: oklch(0.356 0.039 66);
+    --sidebar-border: oklch(0.356 0.039 66);
+    --ring: oklch(0.43 0.079 63);
+    --sidebar-ring: oklch(0.43 0.079 63);
+    --input: oklch(0.354 0.035 66);
+    --chart-1: oklch(0.875 0.081 66);
+    --chart-2: oklch(0.86 0.076 57);
+    --chart-3: oklch(0.898 0.078 84);
+    --chart-4: oklch(0.832 0.075 39);
+    --chart-5: oklch(0.868 0.066 67);
   }
 
-  html.clair-obscur-light {
+  html.coe33-light {
     --background: oklch(0.976 0 0);
     --card: oklch(0.976 0 0);
     --popover: oklch(0.976 0 0);

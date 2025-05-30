@@ -3,9 +3,10 @@ import { logosPath } from '@/paths';
 import Image from 'next/image';
 
 export const clairObscurConfig: GameConfig = {
-  id: 'coe33',
   name: 'Clair Obscur',
-  themeCSSClass: 'clair-obscur',
+  id: 'coe33',
+  themeCSSClass: 'coe33',
+  path: 'coe33',
   logo: (
     <Image
       src={`${logosPath()}/256C33.png`}

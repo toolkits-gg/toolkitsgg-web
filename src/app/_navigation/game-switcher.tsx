@@ -23,10 +23,12 @@ import { allGameConfigs } from '@/features/games/constants';
 import { redirect } from 'next/navigation';
 import { logosPath } from '@/paths';
 import Image from 'next/image';
+import { useLocalStorage } from 'usehooks-ts';
 
 const defaultConfig: GameConfig = {
   id: 'default',
   name: 'Select a game',
+  path: '',
   themeCSSClass: 'default',
   logo: (
     <Image
@@ -50,15 +52,24 @@ const GameSwitcher = ({ game }: GameSwitcherProps) => {
     return allGameConfigs[game];
   }, [game]);
 
+  const [gameThemeEnabled] = useLocalStorage('gameThemeEnabled', true);
+
   const { setTheme } = useTheme();
+
   React.useEffect(() => {
-    setTheme(activeGameConfig.themeCSSClass);
+    if (gameThemeEnabled && activeGameConfig.themeCSSClass) {
+      setTheme(activeGameConfig.themeCSSClass);
+    } else {
+      setTheme('default');
+    }
   }, [activeGameConfig.themeCSSClass]);
 
   const { isMobile } = useSidebar();
 
   const handleMenuItemClick = (gameConfig: GameConfig) => {
-    setTheme(gameConfig.themeCSSClass);
+    if (gameThemeEnabled) {
+      setTheme(gameConfig.themeCSSClass);
+    }
     redirect(`${gameConfig.id}`);
   };
 
@@ -93,7 +104,7 @@ const GameSwitcher = ({ game }: GameSwitcherProps) => {
             sideOffset={4}
           >
             <DropdownMenuLabel className="text-muted-foreground text-xs">
-              Teams
+              Games
             </DropdownMenuLabel>
             {Object.values(allGameConfigs).map((gameConfig, index) => (
               <DropdownMenuItem
@@ -107,16 +118,8 @@ const GameSwitcher = ({ game }: GameSwitcherProps) => {
                   })}
                 </div>
                 {gameConfig.name}
-                <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
               </DropdownMenuItem>
             ))}
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="gap-2 p-2">
-              <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
-                <Plus className="size-4" />
-              </div>
-              <div className="text-muted-foreground font-medium">Add team</div>
-            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
