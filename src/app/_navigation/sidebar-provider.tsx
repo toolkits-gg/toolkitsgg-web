@@ -18,7 +18,7 @@ const SidebarProvider = async ({ children, gameId }: SidebarProviderProps) => {
     <BaseSidebarProvider>
       <AppSidebar userMenu={<UserMenu user={undefined} />} gameId={gameId} />
       <BaseSidebarInset>
-        <Header />
+        <Header gameId={gameId} />
         {children}
       </BaseSidebarInset>
     </BaseSidebarProvider>
