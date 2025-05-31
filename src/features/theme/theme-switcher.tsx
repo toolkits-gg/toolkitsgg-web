@@ -14,12 +14,18 @@ import {
 } from '@/components/ui/dialog';
 import { Toggle } from '@/components/ui/toggle';
 import { useLocalStorage } from 'usehooks-ts';
+import { allGameConfigs } from '@/features/games/constants';
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
   const [isLightMode, setIsLightMode] = useState(
     theme?.indexOf('light') !== -1 || false
+  );
+
+  const [gameThemeEnabled, setGameThemeEnabled] = useLocalStorage(
+    'gameThemeEnabled',
+    true
   );
 
   const handleLightMode = () => {
@@ -39,8 +45,13 @@ const ThemeSwitcher = () => {
     setTheme(theme.replace('-light', ''));
   };
 
-  const [gameThemeEnabled, setGameThemeEnabled, removeGameThemeEnabled] =
-    useLocalStorage('gameThemeEnabled', true);
+  const handleThemeChange = (themeCSSClass: string) => {
+    if (isLightMode) {
+      setTheme(`${themeCSSClass}-light`);
+    } else {
+      setTheme(themeCSSClass);
+    }
+  };
 
   return (
     <Dialog>
@@ -80,7 +91,15 @@ const ThemeSwitcher = () => {
           </Toggle>
         </div>
         <div className="text-muted-foreground mt-4 text-sm">
-          <p>Placeholder for theme selector.</p>
+          {allGameConfigs.map((game) => (
+            <Button
+              key={game.id}
+              variant="default"
+              onClick={() => handleThemeChange(game.themeCSSClass)}
+            >
+              {game.name}
+            </Button>
+          ))}
         </div>
       </DialogContent>
     </Dialog>

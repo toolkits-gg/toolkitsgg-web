@@ -1,4 +1,4 @@
-import { allGameThemeCSSClasses } from '@/features/games/constants';
+import { allGameConfigs } from '@/features/games/constants';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 
 type ThemeProviderProps = Parameters<typeof NextThemesProvider>[0];
@@ -11,8 +11,10 @@ const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
       enableSystem
       defaultTheme="default"
       themes={[
-        ...allGameThemeCSSClasses,
-        ...allGameThemeCSSClasses.map((theme) => `${theme}-light`),
+        ...allGameConfigs.map((gameConfig) => gameConfig.themeCSSClass),
+        ...allGameConfigs.map(
+          (gameConfig) => `${gameConfig.themeCSSClass}-light`
+        ),
       ]}
     >
       {children}

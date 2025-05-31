@@ -1,4 +1,4 @@
-import { allGameIds } from '@/features/games/constants';
+import { allGameConfigs } from '@/features/games/constants';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
   if (hostname !== mainDomain && hostname.endsWith(`.${mainDomain}`)) {
     const subdomain = hostname.replace(`.${mainDomain}`, '');
 
-    const allowedSubdomains = allGameIds;
+    const allowedSubdomains = allGameConfigs.map((game) => game.path);
     if (allowedSubdomains.includes(subdomain)) {
       url.hostname = mainDomain;
       url.pathname = `/${subdomain}${url.pathname === '/' ? '' : url.pathname}`;

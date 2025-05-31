@@ -2,18 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { homePath, logosPath } from '@/paths';
-import { allGameConfigs } from '@/features/games/constants';
 
-type HeaderProps = {
-  gameId?: string;
-};
-
-const Header = ({ gameId }: HeaderProps) => {
-  let gameConfig = null;
-  if (gameId) {
-    gameConfig = allGameConfigs[gameId];
-  }
-
+const Header = () => {
   return (
     <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
       <div className="flex w-full items-center gap-2 px-4">
@@ -22,20 +12,6 @@ const Header = ({ gameId }: HeaderProps) => {
 
           <Link href={homePath()}>
             <div className="mt-1 flex flex-1 flex-col items-center justify-center">
-              {/* {gameConfig ? (
-                cloneElement(gameConfig.logo, {
-                  className: 'w-[48px] h-[48px] object-contain',
-                })
-              ) : (
-                <Image
-                  src={`${logosPath()}/256Clean.png`}
-                  alt="Logo of a purple and yellow toolbox."
-                  width={48}
-                  height={48}
-                  loading="eager"
-                  priority
-                />
-              )} */}
               <Image
                 src={`${logosPath()}/256Clean.png`}
                 alt="Logo of a purple and yellow toolbox."

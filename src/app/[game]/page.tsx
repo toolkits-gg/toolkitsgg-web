@@ -1,5 +1,5 @@
 import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
-import { allGameIds } from '@/features/games/constants';
+import { allGameConfigs } from '@/features/games/constants';
 import { redirect } from 'next/navigation';
 
 type GamePageProps = {
@@ -11,7 +11,9 @@ type GamePageProps = {
 export default async function GamePage({ params }: GamePageProps) {
   const { game } = await params;
 
-  const gameId = allGameIds.find((id) => id === game) ? game : null;
+  const gameId = allGameConfigs.find((config) => config.id === game)
+    ? game
+    : null;
   if (!gameId) {
     redirect('/');
   }

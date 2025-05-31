@@ -1,14 +1,12 @@
 'use client';
 
-import { ChevronsUpDown, Plus } from 'lucide-react';
+import { ChevronsUpDown } from 'lucide-react';
 import * as React from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
@@ -46,10 +44,13 @@ type GameSwitcherProps = {
 
 const GameSwitcher = ({ game }: GameSwitcherProps) => {
   const activeGameConfig = React.useMemo(() => {
-    if (!game || !allGameConfigs[game]) {
+    let gameConfig = allGameConfigs.find((config) => config.id === game);
+
+    if (!gameConfig) {
       return defaultConfig;
     }
-    return allGameConfigs[game];
+
+    return gameConfig;
   }, [game]);
 
   const [gameThemeEnabled] = useLocalStorage('gameThemeEnabled', true);
