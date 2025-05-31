@@ -10,7 +10,6 @@ import {
 import Link from 'next/link';
 import * as React from 'react';
 import { GameSwitcher } from '@/app/_navigation/game-switcher';
-import { ThemeSwitcher } from '@/features/theme/theme-switcher';
 import {
   Collapsible,
   CollapsibleContent,
@@ -32,6 +31,7 @@ import {
   SidebarMenuSubItem as BaseSidebarMenuSubItem,
   SidebarRail as BaseSidebarRail,
 } from '@/components/ui/sidebar';
+import { ThemeSwitcher } from '@/features/theme/theme-switcher';
 
 const data = {
   nav: [
@@ -132,7 +132,7 @@ const AppSidebar = ({ gameId, userMenu, ...props }: AppSidebarProps) => {
   return (
     <BaseSidebar collapsible="icon" {...props}>
       <BaseSidebarHeader>
-        <GameSwitcher game={gameId} />
+        <GameSwitcher gameId={gameId} />
       </BaseSidebarHeader>
       <BaseSidebarContent>
         <BaseSidebarGroup>

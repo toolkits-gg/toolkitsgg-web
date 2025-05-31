@@ -25,7 +25,7 @@ const seed = async () => {
 
   const passwordHash = await hash('geheimnis');
 
-  const dbUsers = await prisma.user.createManyAndReturn({
+  await prisma.user.createManyAndReturn({
     data: users.map((user) => ({
       ...user,
       passwordHash,

@@ -1,7 +1,10 @@
 'use client';
 
 import { ChevronsUpDown } from 'lucide-react';
+import { redirect } from 'next/navigation';
+import { useTheme } from 'next-themes';
 import * as React from 'react';
+import { useIsClient } from 'usehooks-ts';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,62 +18,39 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { useTheme } from 'next-themes';
-import type { GameConfig } from '@/features/games/types';
-import { allGameConfigs } from '@/features/games/constants';
-import { redirect } from 'next/navigation';
-import { logosPath } from '@/paths';
-import Image from 'next/image';
-import { useLocalStorage } from 'usehooks-ts';
-
-const defaultConfig: GameConfig = {
-  id: 'default',
-  name: 'Select a game',
-  path: '',
-  themeCSSClass: 'default',
-  logo: (
-    <Image
-      src={`${logosPath()}/256Clean.png`}
-      alt="Default Toolkits.gg logo"
-      width={256}
-      height={256}
-    />
-  ),
-};
+import { allGameConfigs } from '@/features/game/constants';
+import { useActiveGameConfig } from '@/features/game/hooks/useActiveGameConfig';
+import type { GameConfig } from '@/features/game/types';
 
 type GameSwitcherProps = {
-  game?: string;
+  gameId?: string;
 };
 
-const GameSwitcher = ({ game }: GameSwitcherProps) => {
-  const activeGameConfig = React.useMemo(() => {
-    let gameConfig = allGameConfigs.find((config) => config.id === game);
+const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
+  const { theme, setTheme } = useTheme();
+  const { activeGameConfig } = useActiveGameConfig({ gameId });
 
-    if (!gameConfig) {
-      return defaultConfig;
-    }
-
-    return gameConfig;
-  }, [game]);
-
-  const [gameThemeEnabled] = useLocalStorage('gameThemeEnabled', true);
-
-  const { setTheme } = useTheme();
-
-  React.useEffect(() => {
-    if (gameThemeEnabled && activeGameConfig.themeCSSClass) {
-      setTheme(activeGameConfig.themeCSSClass);
-    } else {
-      setTheme('default');
-    }
-  }, [activeGameConfig.themeCSSClass]);
-
+  const isClient = useIsClient();
   const { isMobile } = useSidebar();
 
+  if (!theme) {
+    return null;
+  }
+
+  if (!isClient) {
+    return null;
+  }
+
   const handleMenuItemClick = (gameConfig: GameConfig) => {
-    if (gameThemeEnabled) {
-      setTheme(gameConfig.themeCSSClass);
-    }
+    const isDarkMode = theme.endsWith('-dark');
+    const className = isDarkMode
+      ? `${gameConfig.themeCSSClass}-dark`
+      : gameConfig.themeCSSClass;
+
+    console.info(`Switching to game: ${gameConfig.name} (${gameConfig.id})`);
+    console.info(`Setting theme: ${className}`);
+
+    setTheme(className);
     redirect(`${gameConfig.id}`);
   };
 
@@ -107,7 +87,7 @@ const GameSwitcher = ({ game }: GameSwitcherProps) => {
             <DropdownMenuLabel className="text-muted-foreground text-xs">
               Games
             </DropdownMenuLabel>
-            {Object.values(allGameConfigs).map((gameConfig, index) => (
+            {Object.values(allGameConfigs).map((gameConfig) => (
               <DropdownMenuItem
                 key={gameConfig.name}
                 onClick={() => handleMenuItemClick(gameConfig)}

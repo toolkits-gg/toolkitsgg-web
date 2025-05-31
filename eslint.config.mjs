@@ -1,20 +1,22 @@
-import { FlatCompat } from '@eslint/eslintrc'
-import simpleImportSort from 'eslint-plugin-simple-import-sort'
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
+import { FlatCompat } from '@eslint/eslintrc';
+import reactHooks from 'eslint-plugin-react-hooks';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
-})
+});
 
-const eslintConfig = [
+const config = [
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
     plugins: {
       'simple-import-sort': simpleImportSort,
+      'react-hooks': reactHooks,
     },
     rules: {
       'simple-import-sort/imports': [
@@ -28,6 +30,9 @@ const eslintConfig = [
       '@typescript-eslint/no-unused-vars': 'warn',
     },
   },
-]
+  {
+    ignores: ['/src/generated/**/*.ts'],
+  },
+];
 
-export default [eslintConfig, { ignores: ['/src/generated/**/*.ts'] }]
+export default config;

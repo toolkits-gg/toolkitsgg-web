@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 
 export default function HomePage() {
   return (

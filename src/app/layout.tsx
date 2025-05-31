@@ -1,10 +1,10 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { ThemeProvider } from '@/features/theme/theme-provider';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
 import { Toaster } from 'sonner';
+import { ThemeProvider } from '@/features/theme/theme-provider';
+import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

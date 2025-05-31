@@ -1,5 +1,5 @@
-import { clairObscurConfig } from '@/features/games/coe33/config';
-import type { GameConfig } from '@/features/games/types';
+import { clairObscurConfig } from '@/features/game/games/coe33/config';
+import type { GameConfig } from '@/features/game/types';
 
 export const gameConfigs: Record<string, GameConfig> = {
   coe33: clairObscurConfig,

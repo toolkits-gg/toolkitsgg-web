@@ -1,6 +1,6 @@
-import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
-import { allGameConfigs } from '@/features/games/constants';
 import { redirect } from 'next/navigation';
+import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
+import { allGameConfigs } from '@/features/game/constants';
 
 type GamePageProps = {
   params: Promise<{

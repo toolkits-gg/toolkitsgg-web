@@ -1,6 +1,6 @@
-import { allGameConfigs } from '@/features/games/constants';
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import { allGameConfigs } from '@/features/game/constants';
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();

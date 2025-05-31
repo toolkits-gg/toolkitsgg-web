@@ -2,7 +2,7 @@
 
 import { LucideMoon, LucidePalette, LucideSun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
+import { useIsClient } from 'usehooks-ts';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -12,51 +12,34 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Toggle } from '@/components/ui/toggle';
-import { useLocalStorage } from 'usehooks-ts';
-import { allGameConfigs } from '@/features/games/constants';
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
-  const [isLightMode, setIsLightMode] = useState(
-    theme?.indexOf('light') !== -1 || false
-  );
+  const isClient = useIsClient();
 
-  const [gameThemeEnabled, setGameThemeEnabled] = useLocalStorage(
-    'gameThemeEnabled',
-    true
-  );
+  if (!theme) {
+    return null;
+  }
+
+  if (!isClient) {
+    return null;
+  }
 
   const handleLightMode = () => {
-    setIsLightMode(true);
-
-    if (!theme) return;
-
-    if (theme.indexOf('-light') === -1) {
-      setTheme(`${theme}-light`);
-      return;
-    }
+    setTheme(theme.replace('-dark', ''));
   };
 
   const handleDarkMode = () => {
-    setIsLightMode(false);
-    if (!theme) return;
-    setTheme(theme.replace('-light', ''));
-  };
-
-  const handleThemeChange = (themeCSSClass: string) => {
-    if (isLightMode) {
-      setTheme(`${themeCSSClass}-light`);
-    } else {
-      setTheme(themeCSSClass);
+    if (theme.indexOf('-dark') === -1) {
+      setTheme(`${theme}-dark`);
     }
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary">
+        <Button variant="default">
           <LucidePalette />
         </Button>
       </DialogTrigger>
@@ -67,18 +50,18 @@ const ThemeSwitcher = () => {
         </DialogHeader>
         <div className="flex flex-1 gap-x-2">
           <Button
-            variant={isLightMode ? 'secondary' : 'ghost'}
+            variant={theme.indexOf('-dark') === -1 ? 'default' : 'ghost'}
             onClick={handleLightMode}
           >
             <LucideSun />
           </Button>
           <Button
-            variant={isLightMode ? 'ghost' : 'secondary'}
+            variant={theme.indexOf('-dark') === -1 ? 'ghost' : 'default'}
             onClick={handleDarkMode}
           >
             <LucideMoon />
           </Button>
-          <Toggle
+          {/* <Toggle
             aria-label={
               gameThemeEnabled
                 ? 'Disable game-specific themes'
@@ -88,18 +71,7 @@ const ThemeSwitcher = () => {
             onPressedChange={setGameThemeEnabled}
           >
             Game-specific color themes
-          </Toggle>
-        </div>
-        <div className="text-muted-foreground mt-4 text-sm">
-          {allGameConfigs.map((game) => (
-            <Button
-              key={game.id}
-              variant="default"
-              onClick={() => handleThemeChange(game.themeCSSClass)}
-            >
-              {game.name}
-            </Button>
-          ))}
+          </Toggle> */}
         </div>
       </DialogContent>
     </Dialog>

@@ -1,5 +1,6 @@
 'use server';
 
+import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { setCookieByKey } from '@/actions/cookies';
 import {
@@ -8,13 +9,12 @@ import {
   toActionState,
 } from '@/components/form/utils/to-action-state';
 import { createSession } from '@/lib/lucia';
+import prisma from '@/lib/prisma';
+import { homePath } from '@/paths';
 import { generateRandomToken } from '@/utils/crypto';
 import { getAuthOrRedirect } from '../queries/get-auth-or-redirect';
 import { setSessionCookie } from '../utils/session-cookie';
 import { validateEmailVerificationCode } from '../utils/validate-email-verification-code';
-import prisma from '@/lib/prisma';
-import { homePath } from '@/paths';
-import { redirect } from 'next/navigation';
 
 const emailVerificationSchema = z.object({
   code: z.string().length(8),
