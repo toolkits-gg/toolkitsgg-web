@@ -63,17 +63,16 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <div className="bg-sidebar-primary/15 text-sidebar-primary-foreground flex aspect-square size-9 items-center justify-center rounded-lg">
-                {activeGameConfig &&
-                  React.cloneElement(activeGameConfig.logo, {
-                    className: 'size-8',
-                  })}
+              <div className="bg-background/25 hover:bg-background/75 text-sidebar-primary-foreground flex aspect-square size-10 items-center justify-center rounded-lg p-0.5">
+                {activeGameConfig.logo}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">
                   {activeGameConfig.name}
                 </span>
-                <span className="truncate text-xs">---</span>
+                <span className="truncate text-xs">
+                  {activeGameConfig.path}
+                </span>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
@@ -93,10 +92,8 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
                 onClick={() => handleMenuItemClick(gameConfig)}
                 className="gap-2 p-2"
               >
-                <div className="flex size-6 items-center justify-center rounded-md border">
-                  {React.cloneElement(gameConfig.logo, {
-                    className: 'size-3.5 shrink-0',
-                  })}
+                <div className="bg-background/25 text-primary-foreground flex size-8 items-center justify-center rounded-md border">
+                  {gameConfig.logo}
                 </div>
                 {gameConfig.name}
               </DropdownMenuItem>
