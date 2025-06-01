@@ -18,6 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
+import { Skeleton } from '@/components/ui/skeleton';
 import { allGameConfigs } from '@/features/game/constants';
 import { useActiveGameConfig } from '@/features/game/hooks/useActiveGameConfig';
 import type { GameConfig } from '@/features/game/types';
@@ -34,11 +35,11 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
   const { isMobile } = useSidebar();
 
   if (!theme) {
-    return null;
+    return <Skeleton className="h-12 w-full" />;
   }
 
   if (!isClient) {
-    return null;
+    return <Skeleton className="h-12 w-full" />;
   }
 
   const handleMenuItemClick = (gameConfig: GameConfig) => {

@@ -5,6 +5,7 @@ import { useTheme } from 'next-themes';
 import { useIsClient } from 'usehooks-ts';
 import { Logo } from '@/components/logo';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import { Skeleton } from '@/components/ui/skeleton';
 import { homePath } from '@/paths';
 
 type HeaderProps = {
@@ -16,14 +17,10 @@ const Header = ({ gameId }: HeaderProps) => {
   const { theme, setTheme } = useTheme();
 
   if (!isClient) {
-    return null;
+    return <div className="h-14 w-full" />;
   }
 
-  if (!theme) {
-    return null;
-  }
-
-  const isDarkMode = theme.endsWith('-dark');
+  const isDarkMode = theme?.endsWith('-dark');
 
   return (
     <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-16">
