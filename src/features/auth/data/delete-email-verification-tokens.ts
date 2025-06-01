@@ -1,0 +1,20 @@
+import prisma from '@/lib/prisma';
+
+type DeleteEmailVerificationTokensArgs =
+  | {
+      userId?: string;
+      id?: never;
+    }
+  | {
+      userId?: never;
+      id?: string;
+    };
+
+export async function deleteEmailVerificationTokens({
+  userId,
+  id,
+}: DeleteEmailVerificationTokensArgs) {
+  await prisma.emailVerificationToken.deleteMany({
+    where: { userId, id },
+  });
+}

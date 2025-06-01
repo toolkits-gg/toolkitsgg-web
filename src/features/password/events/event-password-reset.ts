@@ -1,5 +1,5 @@
+import { getUser } from '@/features/auth/data/get-user';
 import { inngest } from '@/lib/inngest';
-import prisma from '@/lib/prisma';
 import { sendEmailPasswordReset } from '../emails/send-email-password-reset';
 import { generatePasswordResetLink } from '../utils/generate-password-reset-link';
 
@@ -15,9 +15,13 @@ export const passwordResetEvent = inngest.createFunction(
   async ({ event }) => {
     const { userId } = event.data;
 
-    const user = await prisma.user.findUniqueOrThrow({
-      where: { id: userId },
+    const user = await getUser({
+      userId,
     });
+
+    if (!user) {
+      throw new Error(`User with ID ${userId} not found`);
+    }
 
     const passwordResetLink = await generatePasswordResetLink(user.id);
 

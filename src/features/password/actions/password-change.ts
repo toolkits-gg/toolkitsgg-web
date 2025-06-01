@@ -6,9 +6,9 @@ import {
   fromErrorToActionState,
   toActionState,
 } from '@/components/form/utils/to-action-state';
+import { getUser } from '@/features/auth/data/get-user';
 import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
 import { inngest } from '@/lib/inngest';
-import prisma from '@/lib/prisma';
 import { verifyPasswordHash } from '../utils/hash-and-verify';
 
 const passwordChangeSchema = z.object({
@@ -26,8 +26,8 @@ export const passwordChange = async (
       password: formData.get('password'),
     });
 
-    const user = await prisma.user.findUnique({
-      where: { email: auth.user.email },
+    const user = await getUser({
+      userEmail: auth.user.email,
     });
 
     if (!user) {

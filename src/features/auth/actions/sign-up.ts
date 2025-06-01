@@ -8,10 +8,10 @@ import {
   fromErrorToActionState,
   toActionState,
 } from '@/components/form/utils/to-action-state';
+import { createUser } from '@/features/auth/data/create-user';
 import { hashPassword } from '@/features/password/utils/hash-and-verify';
 import { inngest } from '@/lib/inngest';
 import { createSession } from '@/lib/lucia';
-import prisma from '@/lib/prisma';
 import { homePath } from '@/paths';
 import { generateRandomToken } from '@/utils/crypto';
 import { setSessionCookie } from '../utils/session-cookie';
@@ -48,12 +48,10 @@ export const signUp = async (_actionState: ActionState, formData: FormData) => {
 
     const passwordHash = await hashPassword(password);
 
-    const user = await prisma.user.create({
-      data: {
-        username,
-        email,
-        passwordHash,
-      },
+    const user = await createUser({
+      username,
+      email,
+      passwordHash,
     });
 
     await inngest.send({

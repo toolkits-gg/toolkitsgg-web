@@ -1,5 +1,5 @@
+import { getUser } from '@/features/auth/data/get-user';
 import { inngest } from '@/lib/inngest';
-import prisma from '@/lib/prisma';
 import { sendEmailVerification } from '../emails/send-email-verification';
 import { generateEmailVerificationCode } from '../utils/generate-email-verification-code';
 
@@ -15,9 +15,13 @@ export const emailVerificationEvent = inngest.createFunction(
   async ({ event }) => {
     const { userId } = event.data;
 
-    const user = await prisma.user.findUniqueOrThrow({
-      where: { id: userId },
+    const user = await getUser({
+      userId,
     });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
 
     const verificationCode = await generateEmailVerificationCode(
       user.id,

@@ -8,8 +8,9 @@ import {
   fromErrorToActionState,
   toActionState,
 } from '@/components/form/utils/to-action-state';
+import { deleteUserSessions } from '@/features/auth/data/delete-user-sessions';
+import { updateUser } from '@/features/auth/data/update-user';
 import { createSession } from '@/lib/lucia';
-import prisma from '@/lib/prisma';
 import { homePath } from '@/paths';
 import { generateRandomToken } from '@/utils/crypto';
 import { getAuthOrRedirect } from '../queries/get-auth-or-redirect';
@@ -43,12 +44,10 @@ export const emailVerification = async (
       return toActionState('ERROR', 'Invalid or expired code');
     }
 
-    await prisma.session.deleteMany({
-      where: { userId: user.id },
-    });
+    await deleteUserSessions({ userId: user.id });
 
-    await prisma.user.update({
-      where: { id: user.id },
+    await updateUser({
+      userId: user.id,
       data: { emailVerified: true },
     });
 

@@ -1,4 +1,5 @@
-import prisma from '@/lib/prisma';
+import { createEmailVerificationToken } from '@/features/auth/data/create-email-verification-token';
+import { deleteEmailVerificationTokens } from '@/features/auth/data/delete-email-verification-tokens';
 import { generateRandomCode } from '@/utils/crypto';
 
 const EMAIL_VERIFICATION_TOKEN_LIFETIME_MS = 1000 * 60 * 15; // 15 minutes
@@ -7,21 +8,15 @@ export const generateEmailVerificationCode = async (
   userId: string,
   email: string
 ) => {
-  await prisma.emailVerificationToken.deleteMany({
-    where: {
-      userId,
-    },
-  });
+  await deleteEmailVerificationTokens({ userId });
 
   const code = generateRandomCode();
 
-  await prisma.emailVerificationToken.create({
-    data: {
-      userId,
-      email,
-      code,
-      expiresAt: new Date(Date.now() + EMAIL_VERIFICATION_TOKEN_LIFETIME_MS),
-    },
+  await createEmailVerificationToken({
+    userId,
+    email,
+    code,
+    expiresAt: new Date(Date.now() + EMAIL_VERIFICATION_TOKEN_LIFETIME_MS),
   });
 
   return code;

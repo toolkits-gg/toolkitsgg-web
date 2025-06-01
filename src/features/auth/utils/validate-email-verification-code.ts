@@ -1,24 +1,21 @@
-import prisma from '@/lib/prisma';
+import { deleteEmailVerificationTokens } from '@/features/auth/data/delete-email-verification-tokens';
+import { getEmailVerificationToken } from '@/features/auth/data/get-email-verification-token';
 
 export const validateEmailVerificationCode = async (
   userId: string,
   email: string,
   code: string
 ) => {
-  const emailVerificationToken = await prisma.emailVerificationToken.findFirst({
-    where: {
-      userId,
-    },
+  const emailVerificationToken = await getEmailVerificationToken({
+    userId,
   });
 
   if (!emailVerificationToken || emailVerificationToken.code !== code) {
     return false;
   }
 
-  await prisma.emailVerificationToken.delete({
-    where: {
-      id: emailVerificationToken.id,
-    },
+  await deleteEmailVerificationTokens({
+    id: emailVerificationToken.id,
   });
 
   const isExpired = Date.now() > emailVerificationToken.expiresAt.getTime();

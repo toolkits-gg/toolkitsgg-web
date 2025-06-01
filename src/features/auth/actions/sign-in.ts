@@ -7,9 +7,9 @@ import {
   fromErrorToActionState,
   toActionState,
 } from '@/components/form/utils/to-action-state';
+import { getUser } from '@/features/auth/data/get-user';
 import { verifyPasswordHash } from '@/features/password/utils/hash-and-verify';
 import { createSession } from '@/lib/lucia';
-import prisma from '@/lib/prisma';
 import { homePath } from '@/paths';
 import { generateRandomToken } from '@/utils/crypto';
 import { setSessionCookie } from '../utils/session-cookie';
@@ -25,8 +25,8 @@ export const signIn = async (_actionState: ActionState, formData: FormData) => {
       Object.fromEntries(formData)
     );
 
-    const user = await prisma.user.findUnique({
-      where: { email },
+    const user = await getUser({
+      userEmail: email,
     });
 
     const validPassword = await verifyPasswordHash(

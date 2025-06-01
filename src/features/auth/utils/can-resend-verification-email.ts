@@ -1,20 +1,18 @@
 import { differenceInSeconds } from 'date-fns';
-import prisma from '@/lib/prisma';
+import { getEmailVerificationToken } from '@/features/auth/data/get-email-verification-token';
 
 export const canResendVerificationEmail = async (userId: string) => {
-  const databaseCode = await prisma.emailVerificationToken.findFirst({
-    where: {
-      userId,
-    },
+  const verificationToken = await getEmailVerificationToken({
+    userId,
   });
 
-  if (!databaseCode) {
+  if (!verificationToken) {
     return true;
   }
 
   const diff = differenceInSeconds(
     new Date(),
-    new Date(databaseCode.createdAt)
+    new Date(verificationToken.createdAt)
   );
 
   return diff > 60;

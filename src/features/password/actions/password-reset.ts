@@ -8,7 +8,10 @@ import {
   fromErrorToActionState,
   toActionState,
 } from '@/components/form/utils/to-action-state';
-import prisma from '@/lib/prisma';
+import { deletePasswordResetToken } from '@/features/auth/data/delete-password-reset-token';
+import { deleteUserSessions } from '@/features/auth/data/delete-user-sessions';
+import { getPasswordResetToken } from '@/features/auth/data/get-password-reset-token';
+import { updateUser } from '@/features/auth/data/update-user';
 import { signInPath } from '@/paths';
 import { hashToken } from '@/utils/crypto';
 import { hashPassword } from '../utils/hash-and-verify';
@@ -41,17 +44,13 @@ export const passwordReset = async (
 
     const tokenHash = hashToken(tokenId);
 
-    const passwordResetToken = await prisma.passwordResetToken.findUnique({
-      where: {
-        tokenHash,
-      },
+    const passwordResetToken = await getPasswordResetToken({
+      tokenHash,
     });
 
     if (passwordResetToken) {
-      await prisma.passwordResetToken.delete({
-        where: {
-          tokenHash,
-        },
+      await deletePasswordResetToken({
+        tokenHash: passwordResetToken.tokenHash,
       });
     }
 
@@ -66,16 +65,14 @@ export const passwordReset = async (
       );
     }
 
-    await prisma.session.deleteMany({
-      where: { userId: passwordResetToken.userId },
+    await deleteUserSessions({
+      userId: passwordResetToken.userId,
     });
 
     const passwordHash = await hashPassword(password);
 
-    await prisma.user.update({
-      where: {
-        id: passwordResetToken.userId,
-      },
+    await updateUser({
+      userId: passwordResetToken.userId,
       data: {
         passwordHash,
       },
