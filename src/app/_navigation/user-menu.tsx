@@ -1,14 +1,16 @@
 'use client';
 
 import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  CreditCard,
-  LogOut,
-  Sparkles
+  LucideBadgeCheck,
+  LucideBell,
+  LucideChevronsUpDown,
+  LucideCreditCard,
+  LucideLogOut,
+  LucideSparkles,
 } from 'lucide-react';
+import Link from 'next/link';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { buttonVariants } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,14 +18,16 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar
+  useSidebar,
 } from '@/components/ui/sidebar';
+import { signOut } from '@/features/auth/actions/sign-out';
+import { signInPath, signUpPath } from '@/paths';
 
 type UserMenuProps = {
   user?: {
@@ -36,7 +40,22 @@ const UserMenu = ({ user }: UserMenuProps) => {
   const { isMobile } = useSidebar();
 
   if (!user) {
-    return <>No user</>;
+    return (
+      <div className="flex w-full flex-1 items-center justify-between">
+        <Link
+          href={signUpPath()}
+          className={buttonVariants({ variant: 'ghost' })}
+        >
+          Sign Up
+        </Link>
+        <Link
+          href={signInPath()}
+          className={buttonVariants({ variant: 'default' })}
+        >
+          Sign In
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -56,7 +75,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
                 <span className="truncate font-medium">{user.username}</span>
                 <span className="truncate text-xs">{user.email}</span>
               </div>
-              <ChevronsUpDown className="ml-auto size-4" />
+              <LucideChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -80,29 +99,31 @@ const UserMenu = ({ user }: UserMenuProps) => {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <Sparkles />
+                <LucideSparkles />
                 Upgrade to Pro
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <BadgeCheck />
+                <LucideBadgeCheck />
                 Account
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <CreditCard />
+                <LucideCreditCard />
                 Billing
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Bell />
+                <LucideBell />
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut />
-              Log out
+            <DropdownMenuItem asChild>
+              <form action={signOut}>
+                <LucideLogOut className="mr-2 h-4 w-4" />
+                <button type="submit">Sign Out</button>
+              </form>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -65,7 +65,13 @@ export const validateSession = async (sessionToken: string) => {
     });
   }
 
-  return { session, user };
+  return {
+    session,
+    user: {
+      ...user,
+      passwordHash: undefined, // Omit password hash for security
+    },
+  };
 };
 
 export const invalidateSession = async (sessionId: string) => {

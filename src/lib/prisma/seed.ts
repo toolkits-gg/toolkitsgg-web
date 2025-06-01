@@ -11,9 +11,21 @@ const users = [
   },
   {
     username: 'tk',
-    // use your own email here
     email: 'yo@toolkits.gg',
     emailVerified: false,
+  },
+];
+
+const userProfiles = [
+  {
+    displayName: 'Toolkit Admin',
+    bio: 'Toolkit Admin bio here',
+    avatarUrl: undefined,
+  },
+  {
+    displayName: 'Toolkit User',
+    bio: 'Toolkit User bio here',
+    avatarUrl: undefined,
   },
 ];
 
@@ -23,12 +35,19 @@ const seed = async () => {
 
   await prisma.user.deleteMany();
 
-  const passwordHash = await hash('geheimnis');
+  const passwordHash = await hash('useruser!');
 
-  await prisma.user.createManyAndReturn({
+  const createdUsers = await prisma.user.createManyAndReturn({
     data: users.map((user) => ({
       ...user,
       passwordHash,
+    })),
+  });
+
+  await prisma.userProfile.createMany({
+    data: userProfiles.map((profile, index) => ({
+      ...profile,
+      userId: createdUsers[index].id,
     })),
   });
 

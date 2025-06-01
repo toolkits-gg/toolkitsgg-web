@@ -5,6 +5,7 @@ import {
   SidebarInset as BaseSidebarInset,
   SidebarProvider as BaseSidebarProvider,
 } from '@/components/ui/sidebar';
+import { getAuth } from '@/features/auth/queries/get-auth';
 
 type SidebarProviderProps = {
   children: React.ReactNode;
@@ -12,11 +13,14 @@ type SidebarProviderProps = {
 };
 
 const SidebarProvider = async ({ children, gameId }: SidebarProviderProps) => {
-  // TODO fetch user data
+  const auth = await getAuth();
 
   return (
     <BaseSidebarProvider>
-      <AppSidebar userMenu={<UserMenu user={undefined} />} gameId={gameId} />
+      <AppSidebar
+        userMenu={<UserMenu user={auth.user ?? undefined} />}
+        gameId={gameId}
+      />
       <BaseSidebarInset>
         <Header gameId={gameId} />
         {children}

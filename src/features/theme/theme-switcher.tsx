@@ -39,7 +39,7 @@ const ThemeSwitcher = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default">
+        <Button variant="outline">
           <LucidePalette />
         </Button>
       </DialogTrigger>

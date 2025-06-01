@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
+import { PageContainer } from '@/app/_navigation/page-container';
 import { allGameConfigs } from '@/features/game/constants';
 
 type GamePageProps = {
@@ -19,14 +19,10 @@ export default async function GamePage({ params }: GamePageProps) {
   }
 
   return (
-    <SidebarProvider gameId={gameId}>
-      <main className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div className="flex h-full w-full items-center justify-center">
-          <h1 className="text-2xl font-bold text-red-500">
-            Game Page: {gameId}
-          </h1>
-        </div>
-      </main>
-    </SidebarProvider>
+    <PageContainer gameId={gameId}>
+      <div className="flex h-full w-full items-center justify-center">
+        <h1 className="text-2xl font-bold text-red-500">Game Page: {gameId}</h1>
+      </div>
+    </PageContainer>
   );
 }
