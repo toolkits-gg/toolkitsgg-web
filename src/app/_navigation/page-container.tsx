@@ -1,8 +1,9 @@
 import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
+import type { GameId } from '@/features/game/types';
 
 type PageContainerProps = {
   children: React.ReactNode;
-  gameId: string | undefined;
+  gameId: GameId | undefined;
 };
 
 const PageContainer = ({ gameId, children }: PageContainerProps) => {

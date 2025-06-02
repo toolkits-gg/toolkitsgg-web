@@ -5,11 +5,11 @@ import { useTheme } from 'next-themes';
 import { useIsClient } from 'usehooks-ts';
 import { Logo } from '@/components/logo';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { Skeleton } from '@/components/ui/skeleton';
+import type { GameId } from '@/features/game/types';
 import { homePath } from '@/paths';
 
 type HeaderProps = {
-  gameId?: string;
+  gameId: GameId | undefined;
 };
 
 const Header = ({ gameId }: HeaderProps) => {
@@ -33,7 +33,7 @@ const Header = ({ gameId }: HeaderProps) => {
             onClick={() => setTheme(isDarkMode ? 'default-dark' : 'default')}
           >
             <div className="flex h-[56px] w-[56px] items-center justify-center">
-              <Logo gameId={gameId} size={64} />
+              <Logo gameId={gameId || 'none'} size={64} />
             </div>
           </Link>
         </div>

@@ -31,6 +31,7 @@ import {
   SidebarMenuSubItem as BaseSidebarMenuSubItem,
   SidebarRail as BaseSidebarRail,
 } from '@/components/ui/sidebar';
+import type { GameId } from '@/features/game/types';
 import { ThemeSwitcher } from '@/features/theme/theme-switcher';
 
 const data = {
@@ -124,7 +125,7 @@ const data = {
 };
 
 interface AppSidebarProps extends React.ComponentProps<typeof BaseSidebar> {
-  gameId?: string;
+  gameId: GameId | undefined;
   userMenu: React.ReactNode | null;
 }
 

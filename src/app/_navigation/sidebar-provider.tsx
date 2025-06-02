@@ -6,10 +6,11 @@ import {
   SidebarProvider as BaseSidebarProvider,
 } from '@/components/ui/sidebar';
 import { getAuth } from '@/features/auth/queries/get-auth';
+import type { GameId } from '@/features/game/types';
 
 type SidebarProviderProps = {
   children: React.ReactNode;
-  gameId?: string;
+  gameId: GameId | undefined;
 };
 
 const SidebarProvider = async ({ children, gameId }: SidebarProviderProps) => {

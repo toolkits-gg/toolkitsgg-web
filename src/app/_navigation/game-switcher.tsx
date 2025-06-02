@@ -20,16 +20,20 @@ import {
 } from '@/components/ui/sidebar';
 import { Skeleton } from '@/components/ui/skeleton';
 import { allGameConfigs } from '@/features/game/constants';
-import { useActiveGameConfig } from '@/features/game/hooks/useActiveGameConfig';
-import type { GameConfig } from '@/features/game/types';
+import { noGameConfig } from '@/features/game/games/no-game-config';
+import { useActiveGameConfig } from '@/features/game/hooks/use-active-game-config';
+import type { GameConfig, GameId } from '@/features/game/types';
 
 type GameSwitcherProps = {
-  gameId?: string;
+  gameId: GameId | undefined;
 };
 
 const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
   const { theme, setTheme } = useTheme();
-  const { activeGameConfig } = useActiveGameConfig({ gameId });
+
+  const { activeGameConfig } = useActiveGameConfig({
+    gameId,
+  });
 
   const isClient = useIsClient();
   const { isMobile } = useSidebar();
@@ -47,9 +51,6 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
     const className = isDarkMode
       ? `${gameConfig.themeCSSClass}-dark`
       : gameConfig.themeCSSClass;
-
-    console.info(`Switching to game: ${gameConfig.name} (${gameConfig.id})`);
-    console.info(`Setting theme: ${className}`);
 
     setTheme(className);
     redirect(`${gameConfig.id}`);
@@ -72,7 +73,9 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
                   {activeGameConfig.name}
                 </span>
                 <span className="truncate text-xs">
-                  {activeGameConfig.path}
+                  {activeGameConfig.path === noGameConfig.path
+                    ? '---'
+                    : activeGameConfig.path}
                 </span>
               </div>
               <ChevronsUpDown className="ml-auto" />
@@ -87,18 +90,20 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
             <DropdownMenuLabel className="text-muted-foreground text-xs">
               Games
             </DropdownMenuLabel>
-            {Object.values(allGameConfigs).map((gameConfig) => (
-              <DropdownMenuItem
-                key={gameConfig.name}
-                onClick={() => handleMenuItemClick(gameConfig)}
-                className="gap-2 p-2"
-              >
-                <div className="bg-background/25 text-primary-foreground flex size-8 items-center justify-center rounded-md border">
-                  {gameConfig.logo}
-                </div>
-                {gameConfig.name}
-              </DropdownMenuItem>
-            ))}
+            {allGameConfigs
+              .filter((gameConfig) => gameConfig.id !== noGameConfig.id)
+              .map((gameConfig) => (
+                <DropdownMenuItem
+                  key={gameConfig.name}
+                  onClick={() => handleMenuItemClick(gameConfig)}
+                  className="gap-2 p-2"
+                >
+                  <div className="bg-background/25 text-primary-foreground flex size-8 items-center justify-center rounded-md border">
+                    {gameConfig.logo}
+                  </div>
+                  {gameConfig.name}
+                </DropdownMenuItem>
+              ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

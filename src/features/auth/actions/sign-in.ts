@@ -27,6 +27,9 @@ export const signIn = async (_actionState: ActionState, formData: FormData) => {
 
     const user = await getUser({
       userEmail: email,
+      options: {
+        omitPasswordHash: false,
+      },
     });
 
     const validPassword = await verifyPasswordHash(

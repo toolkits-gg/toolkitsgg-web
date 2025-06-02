@@ -1,10 +1,10 @@
-import { User } from "@prisma/client";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { getAuth } from "../queries/get-auth";
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import type { UserWithoutPasswordHash } from '@/features/auth/types';
+import { getAuth } from '../queries/get-auth';
 
 const useAuth = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserWithoutPasswordHash | null>(null);
   const [isFetched, setFetched] = useState(false);
 
   const pathname = usePathname();
