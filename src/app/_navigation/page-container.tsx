@@ -7,11 +7,7 @@ type PageContainerProps = {
 };
 
 const PageContainer = ({ gameId, children }: PageContainerProps) => {
-  return (
-    <SidebarProvider gameId={gameId}>
-      <main className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</main>
-    </SidebarProvider>
-  );
+  return <SidebarProvider gameId={gameId}>{children}</SidebarProvider>;
 };
 
 export { PageContainer };

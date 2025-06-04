@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Lora } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { Toaster } from 'sonner';
+import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/features/theme/theme-provider';
 import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
 

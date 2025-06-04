@@ -24,7 +24,9 @@ const SidebarProvider = async ({ children, gameId }: SidebarProviderProps) => {
       />
       <BaseSidebarInset>
         <Header gameId={gameId} />
-        {children}
+        <main className="bg-background flex flex-1 flex-col gap-4 p-4 pt-0">
+          {children}
+        </main>
       </BaseSidebarInset>
     </BaseSidebarProvider>
   );

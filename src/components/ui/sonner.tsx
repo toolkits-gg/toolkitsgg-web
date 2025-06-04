@@ -6,9 +6,16 @@ import { Toaster as Sonner, ToasterProps } from 'sonner';
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = 'system' } = useTheme();
 
+  let colorScheme: 'light' | 'dark' | 'system' = 'system';
+  if (theme?.endsWith('-dark')) {
+    colorScheme = 'dark';
+  } else if (theme) {
+    colorScheme = theme === 'system' ? 'system' : 'light';
+  }
+
   return (
     <Sonner
-      theme={theme as ToasterProps['theme']}
+      theme={colorScheme}
       className="toaster group"
       style={
         {
