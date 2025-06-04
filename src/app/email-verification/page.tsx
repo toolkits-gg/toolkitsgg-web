@@ -1,11 +1,11 @@
-import { PageContainer } from '@/app/_navigation/page-container';
+import { PageLayout } from '@/app/_navigation/page-layout';
 import { CardCompact } from '@/components/card-compact';
 import { EmailVerificationForm } from '@/features/auth/components/email-verification-form';
 import { EmailVerificationResendForm } from '@/features/auth/components/email-verification-resend-form';
 
 const EmailVerificationPage = () => {
   return (
-    <PageContainer gameId={undefined}>
+    <PageLayout gameId={undefined}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="Verify Email"
@@ -19,7 +19,7 @@ const EmailVerificationPage = () => {
           }
         />
       </div>
-    </PageContainer>
+    </PageLayout>
   );
 };
 

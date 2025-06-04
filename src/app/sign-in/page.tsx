@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import { PageContainer } from '@/app/_navigation/page-container';
+import { PageLayout } from '@/app/_navigation/page-layout';
 import { CardCompact } from '@/components/card-compact';
 import { SignInForm } from '@/features/auth/components/sign-in-form';
 import { passwordForgotPath, signUpPath } from '@/paths';
 
 const SignInPage = () => {
   return (
-    <PageContainer gameId={undefined}>
+    <PageLayout gameId={undefined}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="Sign In"
@@ -32,7 +32,7 @@ const SignInPage = () => {
           }
         />
       </div>
-    </PageContainer>
+    </PageLayout>
   );
 };
 

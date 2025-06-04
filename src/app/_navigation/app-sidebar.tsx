@@ -8,8 +8,10 @@ import {
   SquareTerminal,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
 import * as React from 'react';
 import { GameSwitcher } from '@/app/_navigation/game-switcher';
+import { Logo } from '@/components/logo';
 import {
   Collapsible,
   CollapsibleContent,
@@ -32,7 +34,8 @@ import {
   SidebarRail as BaseSidebarRail,
 } from '@/components/ui/sidebar';
 import type { GameId } from '@/features/game/types';
-import { ThemeSwitcher } from '@/features/theme/theme-switcher';
+import { ThemeModeToggle } from '@/features/theme/theme-mode-toggle';
+import { homePath } from '@/paths';
 
 const data = {
   nav: [
@@ -130,6 +133,10 @@ interface AppSidebarProps extends React.ComponentProps<typeof BaseSidebar> {
 }
 
 const AppSidebar = ({ gameId, userMenu, ...props }: AppSidebarProps) => {
+  const { theme, setTheme } = useTheme();
+
+  const isDarkMode = theme?.endsWith('-dark');
+
   return (
     <BaseSidebar collapsible="icon" {...props}>
       <BaseSidebarHeader>
@@ -175,12 +182,19 @@ const AppSidebar = ({ gameId, userMenu, ...props }: AppSidebarProps) => {
       </BaseSidebarContent>
       <BaseSidebarFooter>
         <BaseSidebarGroup>
-          <div className="flex w-full flex-1 items-center justify-end pr-2">
-            <div className="h-8 w-8">
-              <ThemeSwitcher />
-            </div>
+          <div className="flex w-full flex-1 items-center justify-between pr-2">
+            <Link
+              href={homePath()}
+              onClick={() => setTheme(isDarkMode ? 'default-dark' : 'default')}
+            >
+              <div className="flex h-[56px] w-[56px] items-center justify-center">
+                <Logo gameId={gameId || 'none'} size={64} />
+              </div>
+            </Link>
+
+            <ThemeModeToggle />
           </div>
-          <Separator className="my-4" />
+          <Separator className="my-1" />
           {userMenu}
         </BaseSidebarGroup>
       </BaseSidebarFooter>

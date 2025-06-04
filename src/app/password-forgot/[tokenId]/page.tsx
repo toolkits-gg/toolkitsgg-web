@@ -1,4 +1,4 @@
-import { PageContainer } from '@/app/_navigation/page-container';
+import { PageLayout } from '@/app/_navigation/page-layout';
 import { CardCompact } from '@/components/card-compact';
 import { PasswordResetForm } from '@/features/password/components/password-reset-form';
 
@@ -12,7 +12,7 @@ const PasswordResetPage = async ({ params }: PasswordResetPageProps) => {
   const { tokenId } = await params;
 
   return (
-    <PageContainer gameId={undefined}>
+    <PageLayout gameId={undefined}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="New Password"
@@ -21,7 +21,7 @@ const PasswordResetPage = async ({ params }: PasswordResetPageProps) => {
           content={<PasswordResetForm tokenId={tokenId} />}
         />
       </div>
-    </PageContainer>
+    </PageLayout>
   );
 };
 

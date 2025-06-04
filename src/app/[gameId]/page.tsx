@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { PageContainer } from '@/app/_navigation/page-container';
+import { PageLayout } from '@/app/_navigation/page-layout';
 import { toGameId } from '@/features/game/types';
 
 type GamePageProps = {
@@ -18,12 +18,12 @@ export default async function GamePage({ params }: GamePageProps) {
   const validGameId = toGameId(gameId);
 
   return (
-    <PageContainer gameId={validGameId}>
+    <PageLayout gameId={validGameId}>
       <div className="flex h-full w-full items-center justify-center">
         <h1 className="text-2xl font-bold text-red-500">
           Game Page: {validGameId}
         </h1>
       </div>
-    </PageContainer>
+    </PageLayout>
   );
 }

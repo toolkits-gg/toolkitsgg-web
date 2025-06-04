@@ -1,10 +1,10 @@
-import { PageContainer } from '@/app/_navigation/page-container';
+import { PageLayout } from '@/app/_navigation/page-layout';
 import { CardCompact } from '@/components/card-compact';
 import { PasswordForgotForm } from '@/features/password/components/password-forgot-form';
 
 const PasswordForgotPage = () => {
   return (
-    <PageContainer gameId={undefined}>
+    <PageLayout gameId={undefined}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="Forgot Password"
@@ -13,7 +13,7 @@ const PasswordForgotPage = () => {
           content={<PasswordForgotForm />}
         />
       </div>
-    </PageContainer>
+    </PageLayout>
   );
 };
 

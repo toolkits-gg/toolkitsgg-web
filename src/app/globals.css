@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @plugin 'tailwindcss-animate';
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is([class$="-dark"] *));
 
 @theme inline {
   --color-background: var(--background);
@@ -149,7 +149,7 @@
     --chart-3: oklch(0.587 0.267 330);
     --chart-4: oklch(0.383 0.262 265);
     --chart-5: oklch(0.63 0.151 58);
-    --radius: 1rem;
+    --radius: 0.5rem;
   }
 
   /* #7201d3 */
@@ -186,6 +186,7 @@
     --chart-3: oklch(0.695 0.316 330);
     --chart-4: oklch(0.452 0.311 265);
     --chart-5: oklch(0.746 0.179 57);
+    --radius: 0.5rem;
   }
 
   /* #FFD58E */
@@ -222,7 +223,7 @@
     --chart-3: oklch(0.945 0.218 118);
     --chart-4: oklch(0.648 0.239 31);
     --chart-5: oklch(0.882 0.201 159);
-    --radius: 1rem;
+    --radius: 0.5rem;
   }
 
   /* #FFD58E */
@@ -259,5 +260,6 @@
     --chart-3: oklch(0.957 0.176 116);
     --chart-4: oklch(0.731 0.166 30);
     --chart-5: oklch(0.903 0.153 166);
+    --radius: 0.5rem;
   }
 }

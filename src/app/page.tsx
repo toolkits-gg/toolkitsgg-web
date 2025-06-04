@@ -1,5 +1,5 @@
-import { PageContainer } from '@/app/_navigation/page-container';
+import { PageLayout } from '@/app/_navigation/page-layout';
 
 export default function HomePage() {
-  return <PageContainer gameId={undefined}>test</PageContainer>;
+  return <PageLayout gameId={undefined}>test</PageLayout>;
 }

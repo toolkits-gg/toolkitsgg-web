@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import { PageContainer } from '@/app/_navigation/page-container';
+import { PageLayout } from '@/app/_navigation/page-layout';
 import { CardCompact } from '@/components/card-compact';
 import { SignUpForm } from '@/features/auth/components/sign-up-form';
 import { signInPath } from '@/paths';
 
 const SignUpPage = () => {
   return (
-    <PageContainer gameId={undefined}>
+    <PageLayout gameId={undefined}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="Sign Up"
@@ -20,7 +20,7 @@ const SignUpPage = () => {
           }
         />
       </div>
-    </PageContainer>
+    </PageLayout>
   );
 };
 

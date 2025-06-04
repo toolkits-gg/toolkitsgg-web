@@ -1,13 +1,13 @@
 import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
 import type { GameId } from '@/features/game/types';
 
-type PageContainerProps = {
+type PageLayoutProps = {
   children: React.ReactNode;
   gameId: GameId | undefined;
 };
 
-const PageContainer = ({ gameId, children }: PageContainerProps) => {
+const PageLayout = ({ gameId, children }: PageLayoutProps) => {
   return <SidebarProvider gameId={gameId}>{children}</SidebarProvider>;
 };
 
-export { PageContainer };
+export { PageLayout };
