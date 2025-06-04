@@ -8,10 +8,7 @@ import {
   fromErrorToActionState,
   toActionState,
 } from '@/components/form/utils/to-action-state';
-import { deletePasswordResetToken } from '@/features/auth/data/delete-password-reset-token';
-import { deleteUserSessions } from '@/features/auth/data/delete-user-sessions';
-import { getPasswordResetToken } from '@/features/auth/data/get-password-reset-token';
-import { updateUser } from '@/features/auth/data/update-user';
+import { authData } from '@/features/auth/data';
 import { signInPath } from '@/paths';
 import { hashToken } from '@/utils/crypto';
 import { hashPassword } from '../utils/hash-and-verify';
@@ -44,12 +41,12 @@ export const passwordReset = async (
 
     const tokenHash = hashToken(tokenId);
 
-    const passwordResetToken = await getPasswordResetToken({
+    const passwordResetToken = await authData.getPasswordResetToken({
       tokenHash,
     });
 
     if (passwordResetToken) {
-      await deletePasswordResetToken({
+      await authData.deletePasswordResetToken({
         tokenHash: passwordResetToken.tokenHash,
       });
     }
@@ -65,13 +62,13 @@ export const passwordReset = async (
       );
     }
 
-    await deleteUserSessions({
+    await authData.deleteUserSessions({
       userId: passwordResetToken.userId,
     });
 
     const passwordHash = await hashPassword(password);
 
-    await updateUser({
+    await authData.updateUser({
       userId: passwordResetToken.userId,
       data: {
         passwordHash,

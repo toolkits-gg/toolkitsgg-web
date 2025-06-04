@@ -6,7 +6,7 @@ import {
   fromErrorToActionState,
   toActionState,
 } from '@/components/form/utils/to-action-state';
-import { getUser } from '@/features/auth/data/get-user';
+import { authData } from '@/features/auth/data';
 import { inngest } from '@/lib/inngest';
 
 const passwordForgotSchema = z.object({
@@ -22,7 +22,7 @@ export const passwordForgot = async (
       email: formData.get('email'),
     });
 
-    const user = await getUser({
+    const user = await authData.getUser({
       userEmail: email,
     });
 

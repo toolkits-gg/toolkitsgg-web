@@ -8,7 +8,7 @@ import {
   fromErrorToActionState,
   toActionState,
 } from '@/components/form/utils/to-action-state';
-import { createUser } from '@/features/auth/data/create-user';
+import { authData } from '@/features/auth/data';
 import { hashPassword } from '@/features/password/utils/hash-and-verify';
 import { inngest } from '@/lib/inngest';
 import { createSession } from '@/lib/lucia';
@@ -48,7 +48,7 @@ export const signUp = async (_actionState: ActionState, formData: FormData) => {
 
     const passwordHash = await hashPassword(password);
 
-    const user = await createUser({
+    const user = await authData.createUser({
       username,
       email,
       passwordHash,

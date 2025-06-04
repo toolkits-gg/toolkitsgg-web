@@ -8,8 +8,7 @@ import {
   fromErrorToActionState,
   toActionState,
 } from '@/components/form/utils/to-action-state';
-import { deleteUserSessions } from '@/features/auth/data/delete-user-sessions';
-import { updateUser } from '@/features/auth/data/update-user';
+import { authData } from '@/features/auth/data';
 import { createSession } from '@/lib/lucia';
 import { homePath } from '@/paths';
 import { generateRandomToken } from '@/utils/crypto';
@@ -44,9 +43,9 @@ export const emailVerification = async (
       return toActionState('ERROR', 'Invalid or expired code');
     }
 
-    await deleteUserSessions({ userId: user.id });
+    await authData.deleteUserSessions({ userId: user.id });
 
-    await updateUser({
+    await authData.updateUser({
       userId: user.id,
       data: { emailVerified: true },
     });

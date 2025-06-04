@@ -1,8 +1,8 @@
 import { differenceInSeconds } from 'date-fns';
-import { getEmailVerificationToken } from '@/features/auth/data/get-email-verification-token';
+import { authData } from '@/features/auth/data';
 
 export const canResendVerificationEmail = async (userId: string) => {
-  const verificationToken = await getEmailVerificationToken({
+  const verificationToken = await authData.getEmailVerificationToken({
     userId,
   });
 

@@ -7,7 +7,7 @@ import {
   fromErrorToActionState,
   toActionState,
 } from '@/components/form/utils/to-action-state';
-import { getUser } from '@/features/auth/data/get-user';
+import { authData } from '@/features/auth/data';
 import { verifyPasswordHash } from '@/features/password/utils/hash-and-verify';
 import { createSession } from '@/lib/lucia';
 import { homePath } from '@/paths';
@@ -25,7 +25,7 @@ export const signIn = async (_actionState: ActionState, formData: FormData) => {
       Object.fromEntries(formData)
     );
 
-    const user = await getUser({
+    const user = await authData.getUser({
       userEmail: email,
       options: {
         omitPasswordHash: false,

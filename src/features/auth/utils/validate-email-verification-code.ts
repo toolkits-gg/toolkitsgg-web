@@ -1,12 +1,11 @@
-import { deleteEmailVerificationTokens } from '@/features/auth/data/delete-email-verification-tokens';
-import { getEmailVerificationToken } from '@/features/auth/data/get-email-verification-token';
+import { authData } from '@/features/auth/data';
 
 export const validateEmailVerificationCode = async (
   userId: string,
   email: string,
   code: string
 ) => {
-  const emailVerificationToken = await getEmailVerificationToken({
+  const emailVerificationToken = await authData.getEmailVerificationToken({
     userId,
   });
 
@@ -14,7 +13,7 @@ export const validateEmailVerificationCode = async (
     return false;
   }
 
-  await deleteEmailVerificationTokens({
+  await authData.deleteEmailVerificationTokens({
     id: emailVerificationToken.id,
   });
 

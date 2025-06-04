@@ -6,7 +6,7 @@ import {
   fromErrorToActionState,
   toActionState,
 } from '@/components/form/utils/to-action-state';
-import { getUser } from '@/features/auth/data/get-user';
+import { authData } from '@/features/auth/data';
 import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
 import { inngest } from '@/lib/inngest';
 import { verifyPasswordHash } from '../utils/hash-and-verify';
@@ -26,7 +26,7 @@ export const passwordChange = async (
       password: formData.get('password'),
     });
 
-    const user = await getUser({
+    const user = await authData.getUser({
       userEmail: auth.user.email,
     });
 
