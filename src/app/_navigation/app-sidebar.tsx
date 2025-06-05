@@ -1,17 +1,12 @@
-'use client';
-
 import {
-  BookOpen,
-  Bot,
+  LucideBookOpen,
+  LucideBoxes,
   LucideChevronRight,
-  Settings2,
-  SquareTerminal,
+  LucideSettings2,
 } from 'lucide-react';
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
 import * as React from 'react';
 import { GameSwitcher } from '@/app/_navigation/game-switcher';
-import { Logo } from '@/components/logo';
 import {
   Collapsible,
   CollapsibleContent,
@@ -35,53 +30,52 @@ import {
 } from '@/components/ui/sidebar';
 import type { GameId } from '@/features/game/types';
 import { ThemeModeToggle } from '@/features/theme/theme-mode-toggle';
-import { homePath } from '@/paths';
 
 const data = {
   nav: [
     {
-      title: 'Playground',
+      title: 'Builds',
       url: '#',
-      icon: SquareTerminal,
+      icon: LucideSettings2,
       isActive: true,
       items: [
         {
-          title: 'History',
+          title: 'Featured Builds',
           url: '#',
         },
         {
-          title: 'Starred',
+          title: 'Community Builds',
           url: '#',
         },
         {
-          title: 'Settings',
+          title: 'Beginner Builds',
           url: '#',
         },
       ],
     },
     {
-      title: 'Models',
+      title: 'Items',
       url: '#',
-      icon: Bot,
+      icon: LucideBoxes,
       items: [
         {
-          title: 'Genesis',
+          title: 'Item Lookup',
           url: '#',
         },
         {
-          title: 'Explorer',
+          title: 'Item Tracker',
           url: '#',
         },
         {
-          title: 'Quantum',
+          title: 'Item Quiz',
           url: '#',
         },
       ],
     },
     {
-      title: 'Documentation',
+      title: 'Resources',
       url: '#',
-      icon: BookOpen,
+      icon: LucideBookOpen,
       items: [
         {
           title: 'Introduction',
@@ -101,29 +95,6 @@ const data = {
         },
       ],
     },
-    {
-      title: 'Settings',
-      url: '#',
-      icon: Settings2,
-      items: [
-        {
-          title: 'General',
-          url: '#',
-        },
-        {
-          title: 'Team',
-          url: '#',
-        },
-        {
-          title: 'Billing',
-          url: '#',
-        },
-        {
-          title: 'Limits',
-          url: '#',
-        },
-      ],
-    },
   ],
 };
 
@@ -133,18 +104,14 @@ interface AppSidebarProps extends React.ComponentProps<typeof BaseSidebar> {
 }
 
 const AppSidebar = ({ gameId, userMenu, ...props }: AppSidebarProps) => {
-  const { theme, setTheme } = useTheme();
-
-  const isDarkMode = theme?.endsWith('-dark');
-
   return (
-    <BaseSidebar collapsible="icon" {...props}>
+    <BaseSidebar collapsible="offcanvas" {...props}>
       <BaseSidebarHeader>
         <GameSwitcher gameId={gameId} />
       </BaseSidebarHeader>
       <BaseSidebarContent>
         <BaseSidebarGroup>
-          <BaseSidebarGroupLabel>Platform</BaseSidebarGroupLabel>
+          <BaseSidebarGroupLabel>Toolkit</BaseSidebarGroupLabel>
           <BaseSidebarMenu>
             {data.nav.map((item) => (
               <Collapsible
@@ -182,19 +149,10 @@ const AppSidebar = ({ gameId, userMenu, ...props }: AppSidebarProps) => {
       </BaseSidebarContent>
       <BaseSidebarFooter>
         <BaseSidebarGroup>
-          <div className="flex w-full flex-1 items-center justify-between pr-2">
-            <Link
-              href={homePath()}
-              onClick={() => setTheme(isDarkMode ? 'default-dark' : 'default')}
-            >
-              <div className="flex h-[56px] w-[56px] items-center justify-center">
-                <Logo gameId={gameId || 'none'} size={64} />
-              </div>
-            </Link>
-
+          <div className="flex w-full flex-1 items-center justify-end">
             <ThemeModeToggle />
           </div>
-          <Separator className="my-1" />
+          <Separator className="my-4" />
           {userMenu}
         </BaseSidebarGroup>
       </BaseSidebarFooter>
