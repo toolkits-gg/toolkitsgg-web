@@ -21,7 +21,7 @@ type GetSessionArgs = {
 export async function getSession<T extends Options>({
   sessionId,
   options,
-}: GetSessionArgs & { options?: T }): Promise<SessionPayload<T>> {
+}: GetSessionArgs & { options?: T }): Promise<SessionPayload<T> | null> {
   const includeUser = options?.includeUser && { user: true };
 
   const session = await prisma.session.findUnique({
@@ -35,7 +35,8 @@ export async function getSession<T extends Options>({
   });
 
   if (!session) {
-    throw new Error('Session not found');
+    console.error('Session not found');
+    return null;
   }
 
   return session as SessionPayload<T>;
