@@ -1,16 +1,17 @@
 import { usePathname } from 'next/navigation';
-import { useTheme } from 'next-themes';
 import { useEffect, useMemo, useRef } from 'react';
 import { allGameConfigs } from '@/features/game/constants';
 import { noGameConfig } from '@/features/game/games/no-game-config';
 import type { GameId } from '@/features/game/types';
+import { useAppTheme } from '@/features/theme/hooks/use-theme';
 
 type UseActiveGameConfigArgs = {
   gameId: GameId | undefined;
 };
 
 const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
-  const { theme, setTheme } = useTheme();
+  const { theme, gameThemeEnabled, handleChangeTheme } = useAppTheme();
+
   const pathname = usePathname();
 
   const validatedGameId = useRef<GameId | undefined>(gameId);
@@ -35,15 +36,9 @@ const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
   }, [pathname, gameId, theme]);
 
   useEffect(() => {
-    const isDarkMode = theme?.endsWith('-dark');
-    const className = isDarkMode
-      ? `${activeGameConfig.themeCSSClass}-dark`
-      : activeGameConfig.themeCSSClass;
-
-    if (theme !== className) {
-      setTheme(className);
-    }
-  }, [activeGameConfig, theme, setTheme, gameId]);
+    if (!gameThemeEnabled) return;
+    handleChangeTheme(activeGameConfig.id);
+  }, [activeGameConfig, handleChangeTheme, gameThemeEnabled]);
 
   return {
     activeGameConfig,
