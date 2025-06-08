@@ -19,13 +19,15 @@ model User {
   passwordResetTokens     PasswordResetToken[]
   emailVerificationTokens EmailVerificationToken[]
   userProfile             UserProfile?
+  userCollectedItems      UserCollectedItem[]
+  baseBuilds              BaseBuild[]
 }
 
 model Session {
   id        String   @id
   expiresAt DateTime
-  userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
 
   @@index([userId])
 }
@@ -33,8 +35,8 @@ model Session {
 model PasswordResetToken {
   tokenHash String   @unique
   expiresAt DateTime
-  userId    String
   user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+  userId    String
 
   @@index([userId])
 }
@@ -45,8 +47,8 @@ model EmailVerificationToken {
   code      String
   expiresAt DateTime
   email     String
-  userId    String
   user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+  userId    String
 
   @@index([userId])
 }
@@ -55,9 +57,108 @@ model UserProfile {
   id          String   @id @default(cuid())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  displayName String
-  bio         String?
+  displayName String   @default("Traveler")
+  bio         String   @default("No bio provided.") @db.Text
   avatarUrl   String?
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String   @unique
+
+  @@index([userId])
+}
+
+model BaseItem {
+  id                 String              @id @default(cuid())
+  name               String
+  description        String?
+  category           String
+  slug               String
+  imageUrl           String?
+  disabled           Boolean             @default(false)
+  coe33Item          COE33Item?
+  userCollectedItems UserCollectedItem[]
+  baseBuild          BaseBuild?          @relation(fields: [baseBuildId], references: [id])
+  baseBuildId        String?
+
+  @@index([baseBuildId])
+}
+
+model UserCollectedItem {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  baseItem   BaseItem @relation(fields: [baseItemId], references: [id], onDelete: Cascade)
+  baseItemId String
+  quantity   Int      @default(1)
+
+  @@index([userId])
+  @@index([baseItemId])
+}
+
+enum BuildVisibility {
+  PUBLIC
+  UNLISTED
+  PRIVATE
+}
+
+enum BuildModeratorStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  LOCKED
+}
+
+model BaseBuild {
+  id              String               @id @default(cuid())
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  createdBy       User?                @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  createdById     String?
+  name            String
+  description     String?              @db.Text
+  visibility      BuildVisibility      @default(PUBLIC)
+  moderatorStatus BuildModeratorStatus @default(PENDING)
+  items           BaseItem[]
+  videoUrl        String?
+  imageUrl        String?
+  thumbnailUrl    String?
+  referenceUrl    String?
+
+  buildCollectionCount BuildCollectionCount?
+  buildDuplicateCount  BuildDuplicateCount?
+  buildLikeCount       BuildLikeCount?
+  buildViewCount       BuildViewCount?
+
+  cOE33Build COE33Build?
+
+  @@index([createdById])
+}
+
+model BuildCollectionCount {
+  id          String    @id @default(cuid())
+  count       Int       @default(0)
+  baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
+  baseBuildId String    @unique
+}
+
+model BuildLikeCount {
+  id          String    @id @default(cuid())
+  count       Int       @default(0)
+  baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
+  baseBuildId String    @unique
+}
+
+model BuildDuplicateCount {
+  id          String    @id @default(cuid())
+  count       Int       @default(0)
+  baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
+  baseBuildId String    @unique
+}
+
+model BuildViewCount {
+  id          String    @id @default(cuid())
+  count       Int       @default(0)
+  baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
+  baseBuildId String    @unique
 }
