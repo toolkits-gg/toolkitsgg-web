@@ -3,6 +3,7 @@ import type { GameConfig } from '@/features/game/types';
 
 export const clairObscurConfig: GameConfig = {
   name: 'Clair Obscur: Expedition 33',
+  label: 'Clair Obscur',
   id: 'coe33',
   themeCSSClass: 'coe33',
   path: 'coe33',

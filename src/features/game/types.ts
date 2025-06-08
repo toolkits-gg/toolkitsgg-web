@@ -3,6 +3,7 @@ import { gameConfigs } from '@/features/game/constants';
 export type GameConfig = {
   id: GameId;
   name: string;
+  label: string;
   path: string;
   logo: React.ReactElement<HTMLElement>;
   themeCSSClass: string;

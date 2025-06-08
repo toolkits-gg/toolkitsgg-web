@@ -53,7 +53,9 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">
-                  {activeGameConfig.name}
+                  {activeGameConfig.path === noGameConfig.path
+                    ? activeGameConfig.name
+                    : activeGameConfig.label}
                 </span>
                 <span className="truncate text-xs">
                   {activeGameConfig.path === noGameConfig.path
@@ -65,7 +67,7 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+            className="w-(--radix-dropdown-menu-trigger-width) min-w-64 rounded-lg"
             align="start"
             side={isMobile ? 'bottom' : 'right'}
             sideOffset={4}
