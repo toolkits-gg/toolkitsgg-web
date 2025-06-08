@@ -1,11 +1,37 @@
+enum COE33ItemCategory {
+  CHROMA_ELIXIR
+  COLOUR_OF_LUMINA
+  COSTUME
+  ENERGY_TINT
+  HEALING_TINT
+  LUMINA
+  PICTO
+  RECORD
+  REVIVE_TINT
+  SKILL
+  WEAPON
+}
+
+enum COE33ItemTag {
+  HEALTH
+  SPEED
+  DEFENSE
+  CRITICAL_RATE
+}
+
 model COE33Item {
-  baseItem   BaseItem @relation(fields: [baseItemId], references: [id], onDelete: Cascade)
-  baseItemId String   @unique
+  baseItem   BaseItem          @relation(fields: [baseItemId], references: [id], onDelete: Cascade)
+  baseItemId String            @unique
   // COE33 specific fields
+  category   COE33ItemCategory
+  tags       COE33ItemTag[]
+  build      COE33Build?       @relation(fields: [buildId], references: [baseBuildId])
+  buildId    String?
 }
 
 model COE33Build {
-  baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
-  baseBuildId String    @unique
+  baseBuild   BaseBuild   @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
+  baseBuildId String      @unique
   // COE33 specific fields
+  items       COE33Item[]
 }

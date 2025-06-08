@@ -1,10 +1,11 @@
 import { gameConfigs } from '@/features/game/constants';
 
-export type GameConfig = {
+export type GameConfig<GameItemType> = {
   id: GameId;
   name: string;
   label: string;
   path: string;
+  items: GameItemType[] | undefined;
   logo: React.ReactElement<HTMLElement>;
   themeCSSClass: string;
 };

@@ -70,16 +70,11 @@ model BaseItem {
   id                 String              @id @default(cuid())
   name               String
   description        String?
-  category           String
   slug               String
   imageUrl           String?
   disabled           Boolean             @default(false)
   coe33Item          COE33Item?
   userCollectedItems UserCollectedItem[]
-  baseBuild          BaseBuild?          @relation(fields: [baseBuildId], references: [id])
-  baseBuildId        String?
-
-  @@index([baseBuildId])
 }
 
 model UserCollectedItem {
@@ -119,7 +114,6 @@ model BaseBuild {
   description     String?              @db.Text
   visibility      BuildVisibility      @default(PUBLIC)
   moderatorStatus BuildModeratorStatus @default(PENDING)
-  items           BaseItem[]
   videoUrl        String?
   imageUrl        String?
   thumbnailUrl    String?
