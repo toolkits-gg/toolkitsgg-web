@@ -6,12 +6,12 @@ import { signInPath } from '@/paths';
 
 const SignUpPage = () => {
   return (
-    <PageLayout gameId={undefined}>
+    <PageLayout gameId={undefined} headerImage={undefined}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="Sign Up"
           description="Create an account to get started"
-          className="animate-fade-from-top w-full max-w-[420px]"
+          className="motion-safe:animate-fade-from-top w-full max-w-[420px]"
           content={<SignUpForm />}
           footer={
             <Link className="text-muted-foreground text-sm" href={signInPath()}>

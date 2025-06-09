@@ -13,25 +13,77 @@ enum COE33ItemCategory {
 }
 
 enum COE33ItemTag {
+  CRITICAL_RATE
+  DEFENSE
   HEALTH
   SPEED
+}
+
+enum COE33Element {
+  DARK
+  EARTH
+  FIRE
+  ICE
+  LIGHT
+  LIGHTNING
+  PHYSICAL
+  VOID
+}
+
+enum COE33Attribute {
+  AGILITY
   DEFENSE
-  CRITICAL_RATE
+  LUCK
+  MIGHT
+  VITALITY
+}
+
+enum COE33Character {
+  GUSTAVE
+  LUNE
+  MAELLE
+  MONOCO
+  SCIEL
+  VERSO
 }
 
 model COE33Item {
-  baseItem   BaseItem          @relation(fields: [baseItemId], references: [id], onDelete: Cascade)
-  baseItemId String            @unique
+  baseItem           BaseItem          @relation(fields: [baseItemId], references: [id], onDelete: Cascade)
+  baseItemId         String            @unique
   // COE33 specific fields
-  category   COE33ItemCategory
-  tags       COE33ItemTag[]
-  build      COE33Build?       @relation(fields: [buildId], references: [baseBuildId])
-  buildId    String?
+  category           COE33ItemCategory
+  tags               COE33ItemTag[]
+  element            COE33Element
+  primaryAttribute   COE33Attribute
+  secondaryAttribute COE33Attribute?
+  buildItems         COE33BuildItem[]
 }
 
 model COE33Build {
-  baseBuild   BaseBuild   @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
-  baseBuildId String      @unique
+  baseBuild      BaseBuild        @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
+  baseBuildId    String           @unique
   // COE33 specific fields
-  items       COE33Item[]
+  items          COE33BuildItem[]
+  character      COE33Character
+  characterLevel Int
+  vitality       Int
+  might          Int
+  agility        Int
+  defense        Int
+  luck           Int
+
+  @@index([baseBuildId])
+}
+
+model COE33BuildItem {
+  id          String      @id @default(cuid())
+  level       Int         @default(1)
+  amount      Int?
+  coe33Item   COE33Item   @relation(fields: [coe33ItemId], references: [baseItemId], onDelete: Cascade)
+  coe33ItemId String
+  build       COE33Build? @relation(fields: [buildId], references: [baseBuildId])
+  buildId     String?
+
+  @@index([coe33ItemId])
+  @@index([buildId])
 }

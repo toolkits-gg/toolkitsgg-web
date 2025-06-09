@@ -1,11 +1,12 @@
 import { gameConfigs } from '@/features/game/constants';
 
-export type GameConfig<GameItemType> = {
+export type GameConfig<ItemType> = {
   id: GameId;
   name: string;
+  description: string | undefined;
   label: string;
   path: string;
-  items: GameItemType[] | undefined;
+  items: ItemType[] | undefined;
   logo: React.ReactElement<HTMLElement>;
   themeCSSClass: string;
 };

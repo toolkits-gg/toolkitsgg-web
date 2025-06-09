@@ -6,7 +6,7 @@ export const gameConfigs = {
   none: noGameConfig,
   coe33: clairObscurConfig,
   // Add more game configs here as needed
-} as const satisfies Record<string, GameConfig>;
+} as const satisfies Record<string, GameConfig<unknown>>;
 
 export const allGameConfigs = (
   Object.keys(gameConfigs) as Array<keyof typeof gameConfigs>

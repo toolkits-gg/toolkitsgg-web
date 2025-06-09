@@ -1,9 +1,10 @@
 import { Logo } from '@/components/logo';
 import type { GameConfig } from '@/features/game/types';
 
-export const noGameConfig: GameConfig = {
+export const noGameConfig: GameConfig<unknown> = {
   id: 'none',
   name: 'Select a game',
+  description: undefined,
   label: 'Default',
   path: '/',
   logo: <Logo gameId="none" size={128} />,

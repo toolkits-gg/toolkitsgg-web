@@ -3,7 +3,7 @@ import type { GameId } from '@/features/game/types';
 import { logosPath } from '@/paths';
 
 type LogoProps = {
-  gameId: GameId;
+  gameId: GameId | 'animated';
   size?: 64 | 128 | 256 | 512 | 1024;
 };
 
@@ -15,6 +15,10 @@ const Logo = ({ gameId, size = 128 }: LogoProps) => {
     case 'none':
       logoPath = `${logosPath()}/LogoToxicGreen.png`;
       altText = 'Logo of a purple and yellow toolbox.';
+      break;
+    case 'animated':
+      logoPath = `${logosPath()}/${size === 64 ? 64 : 128}GradientTK.gif`;
+      altText = 'Animated logo of a purple and yellow toolbox.';
       break;
     case 'coe33':
       logoPath = `${logosPath()}/${size}C33.png`;

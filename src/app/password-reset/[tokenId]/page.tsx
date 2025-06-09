@@ -12,12 +12,12 @@ const PasswordResetPage = async ({ params }: PasswordResetPageProps) => {
   const { tokenId } = await params;
 
   return (
-    <PageLayout gameId={undefined}>
+    <PageLayout gameId={undefined} headerImage={undefined}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="New Password"
           description="Enter a new password for your account"
-          className="animate-fade-from-top w-full max-w-[420px]"
+          className="motion-safe:animate-fade-from-top w-full max-w-[420px]"
           content={<PasswordResetForm tokenId={tokenId} />}
         />
       </div>

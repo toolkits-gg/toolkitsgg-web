@@ -1,5 +1,9 @@
 import { PageLayout } from '@/app/_navigation/page-layout';
 
 export default function HomePage() {
-  return <PageLayout gameId={undefined}>test</PageLayout>;
+  return (
+    <PageLayout gameId={undefined} headerImage={undefined}>
+      test
+    </PageLayout>
+  );
 }
