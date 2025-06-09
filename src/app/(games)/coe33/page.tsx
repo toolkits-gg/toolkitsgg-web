@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { allGameConfigs } from '@/features/game/constants';
-import { imagePath } from '@/features/game/games/coe33/paths';
+import { getImageUrl } from '@/utils/url';
 
 export default async function GamePage() {
   const gameConfig = allGameConfigs.find((config) => config.id === 'coe33');
@@ -23,14 +23,17 @@ export default async function GamePage() {
       gameId={gameConfig?.id}
       headerImage={
         <Image
-          src={imagePath(`backgrounds/T_UI_Level_Lumiere.webp`)}
-          alt="Background"
+          src={getImageUrl(
+            `backgrounds/T_UI_Level_Lumiere.webp`,
+            gameConfig.id
+          )}
+          alt="Background of Lumiere from Clair Obscur: Expedition 33"
           width={1500}
           height={810}
         />
       }
     >
-      <Card className="col-span-1 w-[420px]">
+      <Card className="col-span-1 w-full sm:w-[420px]">
         <CardHeader>
           <CardTitle>{gameConfig?.name}</CardTitle>
           <CardDescription>

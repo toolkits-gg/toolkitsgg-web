@@ -1,13 +1,14 @@
-import {
-  LucideBookOpen,
-  LucideBoxes,
-  LucideChevronRight,
-  LucideHelpCircle,
-  LucideSettings2,
-} from 'lucide-react';
+import { LucideChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
 import { GameSwitcher } from '@/app/_navigation/game-switcher';
+import {
+  buildsNavLink,
+  helpNavLink,
+  itemsNavLink,
+  type NavLink,
+  resourcesNavLink,
+} from '@/app/_navigation/nav-links';
 import {
   Collapsible,
   CollapsibleContent,
@@ -29,79 +30,10 @@ import {
   SidebarMenuSubItem as BaseSidebarMenuSubItem,
   SidebarRail as BaseSidebarRail,
 } from '@/components/ui/sidebar';
+import { allGameConfigs } from '@/features/game/constants';
 import type { GameId } from '@/features/game/types';
 import { ThemeModeToggle } from '@/features/theme/components/theme-mode-toggle';
 import { ThemeSwitcher } from '@/features/theme/components/theme-switcher';
-
-const data = {
-  nav: [
-    {
-      title: 'Builds',
-      url: '#',
-      icon: LucideSettings2,
-      isActive: true,
-      items: [
-        {
-          title: 'Featured Builds',
-          url: '#',
-        },
-        {
-          title: 'Community Builds',
-          url: '#',
-        },
-        {
-          title: 'Beginner Builds',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Items',
-      url: '#',
-      icon: LucideBoxes,
-      items: [
-        {
-          title: 'Item Lookup',
-          url: '#',
-        },
-        {
-          title: 'Item Tracker',
-          url: '#',
-        },
-        {
-          title: 'Item Quiz',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Resources',
-      url: '#',
-      icon: LucideBookOpen,
-      items: [
-        {
-          title: 'Wiki',
-          url: '#',
-        },
-        {
-          title: 'Changelog',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Help',
-      url: '#',
-      icon: LucideHelpCircle,
-      items: [
-        {
-          title: 'Get Started',
-          url: '#',
-        },
-      ],
-    },
-  ],
-};
 
 interface AppSidebarProps extends React.ComponentProps<typeof BaseSidebar> {
   gameId: GameId | undefined;
@@ -109,50 +41,70 @@ interface AppSidebarProps extends React.ComponentProps<typeof BaseSidebar> {
 }
 
 const AppSidebar = ({ gameId, userMenu, ...props }: AppSidebarProps) => {
+  const gameConfig = allGameConfigs.find((config) => config.id === gameId);
+
+  let navLinks: NavLink[] = [helpNavLink];
+
+  if (gameConfig) {
+    navLinks = [];
+    if (gameConfig.items && gameConfig.items.length > 0) {
+      navLinks.push(
+        itemsNavLink({
+          itemLookupPath: gameConfig.itemLookupPath,
+          itemTrackerPath: gameConfig.itemTrackerPath,
+          itemQuizPath: gameConfig.itemQuizPath,
+        })
+      );
+    }
+    if (!!gameConfig.buildsEnabled) {
+      navLinks.push(buildsNavLink);
+    }
+
+    navLinks.push(resourcesNavLink, helpNavLink);
+  }
+
   return (
     <BaseSidebar collapsible="offcanvas" {...props}>
       <BaseSidebarHeader>
         <GameSwitcher gameId={gameId} />
       </BaseSidebarHeader>
       <BaseSidebarContent>
-        {gameId && (
-          <BaseSidebarGroup>
-            <BaseSidebarGroupLabel>Toolkit</BaseSidebarGroupLabel>
-            <BaseSidebarMenu>
-              {data.nav.map((item) => (
-                <Collapsible
-                  key={item.title}
-                  asChild
-                  defaultOpen={item.isActive}
-                  className="group/collapsible"
-                >
-                  <BaseSidebarMenuItem>
-                    <CollapsibleTrigger asChild>
-                      <BaseSidebarMenuButton tooltip={item.title}>
-                        {item.icon && <item.icon />}
-                        <span>{item.title}</span>
-                        <LucideChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                      </BaseSidebarMenuButton>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <BaseSidebarMenuSub>
-                        {item.items?.map((subItem) => (
-                          <BaseSidebarMenuSubItem key={subItem.title}>
-                            <BaseSidebarMenuSubButton asChild>
-                              <Link href={subItem.url}>
-                                <span>{subItem.title}</span>
-                              </Link>
-                            </BaseSidebarMenuSubButton>
-                          </BaseSidebarMenuSubItem>
-                        ))}
-                      </BaseSidebarMenuSub>
-                    </CollapsibleContent>
-                  </BaseSidebarMenuItem>
-                </Collapsible>
-              ))}
-            </BaseSidebarMenu>
-          </BaseSidebarGroup>
-        )}
+        <BaseSidebarGroup>
+          <BaseSidebarGroupLabel>Toolkit</BaseSidebarGroupLabel>
+          <BaseSidebarMenu>
+            {navLinks.map((item) => (
+              <Collapsible
+                key={item.title}
+                asChild
+                defaultOpen={item.isActive}
+                className="group/collapsible"
+              >
+                <BaseSidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <BaseSidebarMenuButton tooltip={item.title}>
+                      {item.icon && <item.icon />}
+                      <span>{item.title}</span>
+                      <LucideChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                    </BaseSidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <BaseSidebarMenuSub>
+                      {item.items?.map((subItem) => (
+                        <BaseSidebarMenuSubItem key={subItem.title}>
+                          <BaseSidebarMenuSubButton asChild>
+                            <Link href={subItem.url}>
+                              <span>{subItem.title}</span>
+                            </Link>
+                          </BaseSidebarMenuSubButton>
+                        </BaseSidebarMenuSubItem>
+                      ))}
+                    </BaseSidebarMenuSub>
+                  </CollapsibleContent>
+                </BaseSidebarMenuItem>
+              </Collapsible>
+            ))}
+          </BaseSidebarMenu>
+        </BaseSidebarGroup>
       </BaseSidebarContent>
       <BaseSidebarFooter>
         <BaseSidebarGroup>

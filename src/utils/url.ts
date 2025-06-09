@@ -1,3 +1,5 @@
+import type { GameId } from '@/features/game/types';
+
 export const getBaseUrl = () => {
   const environment = process.env.NODE_ENV;
 
@@ -9,8 +11,15 @@ export const getBaseUrl = () => {
   return baseUrl;
 };
 
-export const getImageUrl = (imagePath: string) => {
-  const imageUrl = `${process.env.NEXT_PUBLIC_CLOUDFRONT_URL}/${imagePath}`;
+export const getImageUrl = (imagePath: string, gameId?: GameId) => {
+  if (!imagePath) {
+    return '';
+  }
+
+  let imageUrl = process.env.NEXT_PUBLIC_CLOUDFRONT_URL;
+  imageUrl = gameId
+    ? `${imageUrl}/games/${gameId}/${imagePath}`
+    : `${imageUrl}/${imagePath}`;
 
   return imageUrl;
 };

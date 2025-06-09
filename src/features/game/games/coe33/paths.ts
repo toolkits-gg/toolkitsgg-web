@@ -1,4 +1,5 @@
-import { getImageUrl } from '@/utils/url';
+export const coe33Path = () => `/coe33`;
 
-export const imagePath = (imagePath: string) =>
-  getImageUrl(`games/coe33/${imagePath}`);
+export const itemLookupPath = () => `/coe33/item-lookup`;
+export const itemTrackerPath = () => `/coe33/item-tracker`;
+export const itemQuizPath = () => `/coe33/item-quiz`;

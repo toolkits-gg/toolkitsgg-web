@@ -6,9 +6,15 @@ export type GameConfig<ItemType> = {
   description: string | undefined;
   label: string;
   path: string;
-  items: ItemType[] | undefined;
   logo: React.ReactElement<HTMLElement>;
   themeCSSClass: string;
+
+  items: ItemType[] | undefined;
+  itemLookupPath?: string;
+  itemTrackerPath?: string;
+  itemQuizPath?: string;
+
+  buildsEnabled?: boolean;
 };
 
 export type GameId = keyof typeof gameConfigs;
