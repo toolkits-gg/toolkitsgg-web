@@ -4,6 +4,7 @@ import type { GameId } from '@prisma/client';
 import { ChevronsUpDown } from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
+import { Typography } from '@/components/typography';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -45,16 +46,16 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
                 {activeGameConfig.logo}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">
+                <Typography className="truncate font-bold">
                   {activeGameConfig.path === noGameConfig.path
                     ? activeGameConfig.name
                     : activeGameConfig.label}
-                </span>
-                <span className="truncate text-xs">
+                </Typography>
+                <Typography variant="muted" className="truncate text-xs">
                   {activeGameConfig.path === noGameConfig.path
                     ? '---'
-                    : activeGameConfig.path}
-                </span>
+                    : `toolkits.gg${activeGameConfig.path}`}
+                </Typography>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
