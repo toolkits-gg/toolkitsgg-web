@@ -22,7 +22,8 @@
     "prisma-force-push": "prisma db push --force-reset",
     "prisma-studio": "pnpm dlx prisma studio",
     "email": "email dev --dir src/emails",
-    "inngest": "pnpm dlx inngest-cli@latest dev"
+    "inngest": "pnpm dlx inngest-cli@latest dev",
+    "coe33-extract-picto-info": "tsx ./src/features/game/games/coe33/scripts/extract-picto-info/index.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",
