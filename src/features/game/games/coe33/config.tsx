@@ -8,6 +8,7 @@ import {
   itemLookupPath,
   itemQuizPath,
   itemTrackerPath,
+  resourcesPath,
 } from '@/features/game/games/coe33/paths';
 import type { GameConfig } from '@/features/game/types';
 
@@ -26,4 +27,12 @@ export const clairObscurConfig: GameConfig<COE33ItemType> = {
   itemLookupPath: itemLookupPath(),
   itemTrackerPath: itemTrackerPath(),
   itemQuizPath: itemQuizPath(),
+
+  resourcesPath: resourcesPath(),
+  resources: [
+    {
+      title: 'Official Wiki',
+      url: '#',
+    },
+  ],
 };

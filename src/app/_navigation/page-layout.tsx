@@ -6,7 +6,7 @@ import type { GameId } from '@/features/game/types';
 type PageLayoutProps = {
   children: React.ReactNode;
   gameId: GameId | undefined;
-  heroImage: React.ReactElement<HTMLImageElement>;
+  heroImage: React.ReactElement<HTMLImageElement> | undefined;
 };
 
 const PageLayout = ({ gameId, children, heroImage }: PageLayoutProps) => {

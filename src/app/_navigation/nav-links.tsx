@@ -4,6 +4,7 @@ import {
   LucideHelpCircle,
   LucideSettings2,
 } from 'lucide-react';
+import { changeLogPath } from '@/paths';
 
 type NavItem = {
   title: string;
@@ -68,21 +69,26 @@ export const itemsNavLink = ({
   };
 };
 
-export const resourcesNavLink: NavLink = {
-  title: 'Resources',
-  url: '#',
-  icon: LucideBookOpen,
-  isActive: true,
-  items: [
-    {
-      title: 'Wiki',
-      url: '#',
-    },
-    {
-      title: 'Changelog',
-      url: '#',
-    },
-  ],
+export const resourcesNavLink = (
+  resources: Array<{
+    title: string;
+    url: string;
+  }>,
+  resourcesPath: string
+): NavLink => {
+  return {
+    title: 'Resources',
+    url: resourcesPath,
+    icon: LucideBookOpen,
+    isActive: true,
+    items: [
+      ...resources,
+      {
+        title: 'Changelog',
+        url: changeLogPath(),
+      },
+    ],
+  };
 };
 
 export const helpNavLink: NavLink = {

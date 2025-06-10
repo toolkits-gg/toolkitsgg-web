@@ -59,8 +59,13 @@ const AppSidebar = ({ gameId, userMenu, ...props }: AppSidebarProps) => {
     if (!!gameConfig.buildsEnabled) {
       navLinks.push(buildsNavLink);
     }
+    if (gameConfig.resourcesPath) {
+      navLinks.push(
+        resourcesNavLink(gameConfig.resources, gameConfig.resourcesPath)
+      );
+    }
 
-    navLinks.push(resourcesNavLink, helpNavLink);
+    navLinks.push(helpNavLink);
   }
 
   return (

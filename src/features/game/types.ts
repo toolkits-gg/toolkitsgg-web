@@ -16,6 +16,19 @@ type ItemsArgs<ItemType> =
       itemQuizPath?: undefined;
     };
 
+type ResourcesArgs =
+  | {
+      resources: Array<{
+        title: string;
+        url: string;
+      }>;
+      resourcesPath: string;
+    }
+  | {
+      resources?: undefined;
+      resourcesPath?: undefined;
+    };
+
 export type GameConfig<ItemType> = {
   id: GameId;
   name: string;
@@ -26,7 +39,8 @@ export type GameConfig<ItemType> = {
   themeCSSClass: string;
 
   buildsEnabled?: boolean;
-} & ItemsArgs<ItemType>;
+} & ItemsArgs<ItemType> &
+  ResourcesArgs;
 
 export function isGameId(id: string): id is GameId {
   return Object.keys(gameConfigs).includes(id);
