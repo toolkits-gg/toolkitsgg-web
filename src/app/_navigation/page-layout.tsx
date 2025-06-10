@@ -1,4 +1,4 @@
-import { PageHeader } from '@/app/_navigation/page-header';
+import { HeroImage } from '@/app/_navigation/hero-image';
 import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
 import { allGameConfigs } from '@/features/game/constants';
 import type { GameId } from '@/features/game/types';
@@ -6,17 +6,17 @@ import type { GameId } from '@/features/game/types';
 type PageLayoutProps = {
   children: React.ReactNode;
   gameId: GameId | undefined;
-  headerImage: React.ReactElement<HTMLImageElement>;
+  heroImage: React.ReactElement<HTMLImageElement>;
 };
 
-const PageLayout = ({ gameId, children, headerImage }: PageLayoutProps) => {
+const PageLayout = ({ gameId, children, heroImage }: PageLayoutProps) => {
   const gameConfig = allGameConfigs.find((config) => config.id === gameId);
 
   return (
     <SidebarProvider gameId={gameId}>
-      {headerImage && (
-        <PageHeader
-          headerImage={headerImage}
+      {heroImage && (
+        <HeroImage
+          image={heroImage}
           title={gameConfig?.name}
           text={gameConfig?.description}
         />

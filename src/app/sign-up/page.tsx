@@ -6,7 +6,7 @@ import { signInPath } from '@/paths';
 
 const SignUpPage = () => {
   return (
-    <PageLayout gameId={undefined} headerImage={undefined}>
+    <PageLayout gameId={undefined} heroImage={undefined}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="Sign Up"

@@ -21,7 +21,7 @@ export default async function GamePage() {
   return (
     <PageLayout
       gameId={gameConfig?.id}
-      headerImage={
+      heroImage={
         <Image
           src={getImageUrl(
             `backgrounds/T_UI_Level_Lumiere.webp`,

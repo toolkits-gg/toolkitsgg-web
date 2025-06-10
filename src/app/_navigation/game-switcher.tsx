@@ -3,7 +3,6 @@
 import { ChevronsUpDown } from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
-import { useIsClient } from 'usehooks-ts';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +16,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { Skeleton } from '@/components/ui/skeleton';
 import { allGameConfigs } from '@/features/game/constants';
 import { noGameConfig } from '@/features/game/games/no-game-config';
 import { useActiveGameConfig } from '@/features/game/hooks/use-active-game-config';
@@ -33,11 +31,6 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
   });
 
   const { isMobile } = useSidebar();
-  const isClient = useIsClient();
-
-  if (!isClient) {
-    return <Skeleton className="h-12 w-full" />;
-  }
 
   return (
     <SidebarMenu>

@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Toggle } from '@/components/ui/toggle';
 import { allGameConfigs } from '@/features/game/constants';
 import { useAppTheme } from '@/features/theme/hooks/use-theme';
@@ -31,11 +32,11 @@ const ThemeSwitcher = () => {
     useAppTheme();
 
   if (!theme) {
-    return null;
+    return <Skeleton className="h-9 w-9" />;
   }
 
   if (!isClient) {
-    return null;
+    return <Skeleton className="h-9 w-9" />;
   }
 
   return (

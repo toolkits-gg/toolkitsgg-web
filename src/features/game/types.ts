@@ -1,5 +1,21 @@
 import { gameConfigs } from '@/features/game/constants';
 
+export type GameId = 'none' | 'coe33';
+
+type ItemsArgs<ItemType> =
+  | {
+      items: ItemType[];
+      itemLookupPath: string;
+      itemTrackerPath: string;
+      itemQuizPath: string;
+    }
+  | {
+      items?: undefined;
+      itemLookupPath?: undefined;
+      itemTrackerPath?: undefined;
+      itemQuizPath?: undefined;
+    };
+
 export type GameConfig<ItemType> = {
   id: GameId;
   name: string;
@@ -9,15 +25,8 @@ export type GameConfig<ItemType> = {
   logo: React.ReactElement<HTMLElement>;
   themeCSSClass: string;
 
-  items: ItemType[] | undefined;
-  itemLookupPath?: string;
-  itemTrackerPath?: string;
-  itemQuizPath?: string;
-
   buildsEnabled?: boolean;
-};
-
-export type GameId = keyof typeof gameConfigs;
+} & ItemsArgs<ItemType>;
 
 export function isGameId(id: string): id is GameId {
   return Object.keys(gameConfigs).includes(id);

@@ -4,7 +4,7 @@ import { PasswordForgotForm } from '@/features/password/components/password-forg
 
 const PasswordForgotPage = () => {
   return (
-    <PageLayout gameId={undefined} headerImage={undefined}>
+    <PageLayout gameId={undefined} heroImage={undefined}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="Forgot Password"

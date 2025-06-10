@@ -5,7 +5,7 @@ import { EmailVerificationResendForm } from '@/features/auth/components/email-ve
 
 const EmailVerificationPage = () => {
   return (
-    <PageLayout gameId={undefined} headerImage={undefined}>
+    <PageLayout gameId={undefined} heroImage={undefined}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="Verify Email"
