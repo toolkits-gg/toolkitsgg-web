@@ -1,6 +1,5 @@
+import type { GameId } from '@prisma/client';
 import { gameConfigs } from '@/features/game/constants';
-
-export type GameId = 'none' | 'coe33';
 
 type ItemsArgs<ItemType> =
   | {

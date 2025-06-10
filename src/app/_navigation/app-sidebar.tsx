@@ -1,3 +1,4 @@
+import type { GameId } from '@prisma/client';
 import { LucideChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
@@ -31,7 +32,6 @@ import {
   SidebarRail as BaseSidebarRail,
 } from '@/components/ui/sidebar';
 import { allGameConfigs } from '@/features/game/constants';
-import type { GameId } from '@/features/game/types';
 import { ThemeModeToggle } from '@/features/theme/components/theme-mode-toggle';
 import { ThemeSwitcher } from '@/features/theme/components/theme-switcher';
 

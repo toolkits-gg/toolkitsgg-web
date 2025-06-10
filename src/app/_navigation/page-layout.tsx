@@ -1,7 +1,7 @@
+import type { GameId } from '@prisma/client';
 import { HeroImage } from '@/app/_navigation/hero-image';
 import { SidebarProvider } from '@/app/_navigation/sidebar-provider';
 import { allGameConfigs } from '@/features/game/constants';
-import type { GameId } from '@/features/game/types';
 
 type PageLayoutProps = {
   children: React.ReactNode;

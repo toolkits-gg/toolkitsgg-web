@@ -1,5 +1,6 @@
 'use client';
 
+import type { GameId } from '@prisma/client';
 import { ChevronsUpDown } from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
@@ -19,7 +20,6 @@ import {
 import { allGameConfigs } from '@/features/game/constants';
 import { noGameConfig } from '@/features/game/games/no-game-config';
 import { useActiveGameConfig } from '@/features/game/hooks/use-active-game-config';
-import type { GameId } from '@/features/game/types';
 
 type GameSwitcherProps = {
   gameId: GameId | undefined;

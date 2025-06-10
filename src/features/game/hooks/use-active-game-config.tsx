@@ -1,8 +1,8 @@
+import type { GameId } from '@prisma/client';
 import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useRef } from 'react';
 import { allGameConfigs } from '@/features/game/constants';
 import { noGameConfig } from '@/features/game/games/no-game-config';
-import type { GameId } from '@/features/game/types';
 import { useAppTheme } from '@/features/theme/hooks/use-theme';
 
 type UseActiveGameConfigArgs = {

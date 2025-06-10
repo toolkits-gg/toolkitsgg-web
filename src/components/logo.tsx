@@ -1,5 +1,5 @@
+import type { GameId } from '@prisma/client';
 import Image from 'next/image';
-import type { GameId } from '@/features/game/types';
 import { logosPath } from '@/paths';
 
 type LogoProps = {

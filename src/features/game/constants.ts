@@ -1,6 +1,7 @@
+import type { GameId } from '@prisma/client';
 import { clairObscurConfig } from '@/features/game/games/coe33/config';
 import { noGameConfig } from '@/features/game/games/no-game-config';
-import type { GameConfig, GameId } from '@/features/game/types';
+import type { GameConfig } from '@/features/game/types';
 
 export const gameConfigs: Record<GameId, GameConfig<unknown>> = {
   none: noGameConfig,

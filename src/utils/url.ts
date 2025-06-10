@@ -1,4 +1,4 @@
-import type { GameId } from '@/features/game/types';
+import type { GameId } from '@prisma/client';
 
 export const getBaseUrl = () => {
   const environment = process.env.NODE_ENV;

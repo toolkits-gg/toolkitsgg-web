@@ -9,6 +9,11 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum GameId {
+  none
+  coe33
+}
+
 model User {
   id                      String                   @id @default(cuid())
   username                String                   @unique
@@ -21,6 +26,7 @@ model User {
   userProfile             UserProfile?
   userCollectedItems      UserCollectedItem[]
   baseBuilds              BaseBuild[]
+  userFavoriteGames       UserFavoriteGame[]
 }
 
 model Session {
@@ -62,6 +68,17 @@ model UserProfile {
   avatarUrl   String?
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String   @unique
+
+  @@index([userId])
+}
+
+model UserFavoriteGame {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  game      GameId
 
   @@index([userId])
 }

@@ -1,9 +1,9 @@
 'use client';
 
+import type { GameId } from '@prisma/client';
 import Link from 'next/link';
 import { Logo } from '@/components/logo';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import type { GameId } from '@/features/game/types';
 import { homePath } from '@/paths';
 
 type HeaderProps = {
