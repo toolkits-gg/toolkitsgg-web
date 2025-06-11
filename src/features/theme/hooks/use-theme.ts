@@ -7,7 +7,7 @@ const useAppTheme = () => {
 
   const [gameThemeEnabled, setGameThemeEnabled] = useLocalStorage(
     'gameThemeEnabled',
-    true
+    false
   );
 
   const handleLightMode = () => {
