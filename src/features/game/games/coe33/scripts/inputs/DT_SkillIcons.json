@@ -1,0 +1,1072 @@
+[
+  {
+    "Type": "DataTable",
+    "Name": "DT_SkillIcons",
+    "Class": "UScriptClass'DataTable'",
+    "Flags": "RF_Public | RF_Standalone | RF_Transactional | RF_WasLoaded | RF_LoadCompleted",
+    "Properties": {
+      "RowStruct": {
+        "ObjectName": "UserDefinedStruct'S_SkillIconsDataRow'",
+        "ObjectPath": "/Game/UI/Resources/DataTables/SkillIcons/S_SkillIconsDataRow.0"
+      }
+    },
+    "Rows": {
+      "FromFire_Gustave": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Gustave/T_UI_Skill_Gustave_FromFire.T_UI_Skill_Gustave_FromFire",
+          "SubPathString": ""
+        }
+      },
+      "Combo1_Gustave": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Gustave/T_UI_Skill_Gustave_LumiereAssault.T_UI_Skill_Gustave_LumiereAssault",
+          "SubPathString": ""
+        }
+      },
+      "MarkingShot_Gustave": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Gustave/T_UI_Skill_Gustave_MarkingShot.T_UI_Skill_Gustave_MarkingShot",
+          "SubPathString": ""
+        }
+      },
+      "PerfectRecovery_Gustave": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Gustave/T_UI_Skill_Gustave_PerfectRecovery.T_UI_Skill_Gustave_PerfectRecovery",
+          "SubPathString": ""
+        }
+      },
+      "Powerful_Gustave": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Gustave/T_UI_Skill_Gustave_Powerful.T_UI_Skill_Gustave_Powerful",
+          "SubPathString": ""
+        }
+      },
+      "PerfectBreak_Gustave": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Gustave/T_UI_Skill_Gustave_Shatter.T_UI_Skill_Gustave_Shatter",
+          "SubPathString": ""
+        }
+      },
+      "StrikeStorm_Gustave": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Gustave/T_UI_Skill_Gustave_StrikeStorm.T_UI_Skill_Gustave_StrikeStorm",
+          "SubPathString": ""
+        }
+      },
+      "UnleashCharge": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Gustave/T_UI_Skill_Gustave_UnleashedCharge.T_UI_Skill_Gustave_UnleashedCharge",
+          "SubPathString": ""
+        }
+      },
+      "CripplingTsunami": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_CripplingTsunami.T_UI_Skill_Lune_CripplingTsunami",
+          "SubPathString": ""
+        }
+      },
+      "CrustalCrush": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_CrustalCrush.T_UI_Skill_Lune_CrustalCrush",
+          "SubPathString": ""
+        }
+      },
+      "Cure": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_Cure.T_UI_Skill_Lune_Cure",
+          "SubPathString": ""
+        }
+      },
+      "Earthquake": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_EarthRising.T_UI_Skill_Lune_EarthRising",
+          "SubPathString": ""
+        }
+      },
+      "Electrify": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_Electrify.T_UI_Skill_Lune_Electrify",
+          "SubPathString": ""
+        }
+      },
+      "ElementalGenesis": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_ElementalGenesis.T_UI_Skill_Lune_ElementalGenesis",
+          "SubPathString": ""
+        }
+      },
+      "ElementalTrick": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_ElementalTrick.T_UI_Skill_Lune_ElementalTrick",
+          "SubPathString": ""
+        }
+      },
+      "FireRage": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_FireRage.T_UI_Skill_Lune_FireRage",
+          "SubPathString": ""
+        }
+      },
+      "HealingLight": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_HealingLight.T_UI_Skill_Lune_HealingLight",
+          "SubPathString": ""
+        }
+      },
+      "Hell": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_Hell.T_UI_Skill_Lune_Hell",
+          "SubPathString": ""
+        }
+      },
+      "IceGust": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_IceGust.T_UI_Skill_Lune_IceGust",
+          "SubPathString": ""
+        }
+      },
+      "Immolation": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_Immolation.T_UI_Skill_Lune_Immolation",
+          "SubPathString": ""
+        }
+      },
+      "LightningDance": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_LightningStrike.T_UI_Skill_Lune_LightningStrike",
+          "SubPathString": ""
+        }
+      },
+      "Mayhem": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_Mayhem.T_UI_Skill_Lune_Mayhem",
+          "SubPathString": ""
+        }
+      },
+      "Rebirth": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_Rebirth.T_UI_Skill_Lune_Rebirth",
+          "SubPathString": ""
+        }
+      },
+      "Revitalization": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_Regeneration.T_UI_Skill_Lune_Regeneration",
+          "SubPathString": ""
+        }
+      },
+      "RockSlide": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_RockSlide.T_UI_Skill_Lune_RockSlide",
+          "SubPathString": ""
+        }
+      },
+      "SkyBreak": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_SkyBreak.T_UI_Skill_Lune_SkyBreak",
+          "SubPathString": ""
+        }
+      },
+      "StormCaller": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_StormCaller.T_UI_Skill_Lune_StormCaller",
+          "SubPathString": ""
+        }
+      },
+      "TerraQuake": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_TerraQuake.T_UI_Skill_Lune_TerraQuake",
+          "SubPathString": ""
+        }
+      },
+      "ThermalTransfer": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_ThermalTransfer.T_UI_Skill_Lune_ThermalTransfer",
+          "SubPathString": ""
+        }
+      },
+      "Thunderfall": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_Thunderfall.T_UI_Skill_Lune_Thunderfall",
+          "SubPathString": ""
+        }
+      },
+      "TreeOfLife": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_TreeOfLife.T_UI_Skill_Lune_TreeOfLife",
+          "SubPathString": ""
+        }
+      },
+      "Tremor": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_Tremor.T_UI_Skill_Lune_Tremor",
+          "SubPathString": ""
+        }
+      },
+      "Typhoon": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_Typhoon.T_UI_Skill_Lune_Typhoon",
+          "SubPathString": ""
+        }
+      },
+      "Wildfire": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Lune/T_UI_Skill_Lune_Wildfire.T_UI_Skill_Lune_Wildfire",
+          "SubPathString": ""
+        }
+      },
+      "Assault": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_Assault.T_UI_Skill_Maelle_Assault",
+          "SubPathString": ""
+        }
+      },
+      "BreakingRules": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_BreakingRules.T_UI_Skill_Maelle_BreakingRules",
+          "SubPathString": ""
+        }
+      },
+      "Degagement": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_Degagement.T_UI_Skill_Maelle_Degagement",
+          "SubPathString": ""
+        }
+      },
+      "Egide": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_Egide.T_UI_Skill_Maelle_Egide",
+          "SubPathString": ""
+        }
+      },
+      "FencersFlurry": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_FencersFlurry.T_UI_Skill_Maelle_FencersFlurry",
+          "SubPathString": ""
+        }
+      },
+      "FencesFlourish": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_FencesFlourish.T_UI_Skill_Maelle_FencesFlourish",
+          "SubPathString": ""
+        }
+      },
+      "FireRise": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_FireRise.T_UI_Skill_Maelle_FireRise",
+          "SubPathString": ""
+        }
+      },
+      "FleuretFury": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_FleuretFury.T_UI_Skill_Maelle_FleuretFury",
+          "SubPathString": ""
+        }
+      },
+      "Gommage": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_Gommage.T_UI_Skill_Maelle_Gommage",
+          "SubPathString": ""
+        }
+      },
+      "GuardDown": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_GuardDown.T_UI_Skill_Maelle_GuardDown",
+          "SubPathString": ""
+        }
+      },
+      "GuardUp": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_GuardUp.T_UI_Skill_Maelle_GuardUp",
+          "SubPathString": ""
+        }
+      },
+      "GustavesMemoire": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_GustaveMemoires.T_UI_Skill_Maelle_GustaveMemoires",
+          "SubPathString": ""
+        }
+      },
+      "InvigoratingFire": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_InvigoratingFire.T_UI_Skill_Maelle_InvigoratingFire",
+          "SubPathString": ""
+        }
+      },
+      "LastChance": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_LastChance.T_UI_Skill_Maelle_LastChance",
+          "SubPathString": ""
+        }
+      },
+      "MezzoForte": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_MezzoForte.T_UI_Skill_Maelle_MezzoForte",
+          "SubPathString": ""
+        }
+      },
+      "MomentumStrike": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_MomentumStrike.T_UI_Skill_Maelle_MomentumStrike",
+          "SubPathString": ""
+        }
+      },
+      "OffensiveSwitch": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_OffensiveSwitch.T_UI_Skill_Maelle_OffensiveSwitch",
+          "SubPathString": ""
+        }
+      },
+      "PainterSwitch": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_PainterSwitch.T_UI_Skill_Maelle_PainterSwitch",
+          "SubPathString": ""
+        }
+      },
+      "Payback": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_Payback.T_UI_Skill_Maelle_Payback",
+          "SubPathString": ""
+        }
+      },
+      "Percee": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_Percee.T_UI_Skill_Maelle_Percee",
+          "SubPathString": ""
+        }
+      },
+      "PhantomStrike": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_PhantomStrike.T_UI_Skill_Maelle_PhantomStrike",
+          "SubPathString": ""
+        }
+      },
+      "PhoenixFlame": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_PhoenixFlame.T_UI_Skill_Maelle_PhoenixFlame",
+          "SubPathString": ""
+        }
+      },
+      "Pyrolyse": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_Pyrolyse.T_UI_Skill_Maelle_Pyrolyse",
+          "SubPathString": ""
+        }
+      },
+      "RainOfFire": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_ReignOfFire.T_UI_Skill_Maelle_ReignOfFire",
+          "SubPathString": ""
+        }
+      },
+      "Revenge": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_Revenge.T_UI_Skill_Maelle_Revenge",
+          "SubPathString": ""
+        }
+      },
+      "BurningCanvas": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_RunningCanvas.T_UI_Skill_Maelle_RunningCanvas",
+          "SubPathString": ""
+        }
+      },
+      "Spark": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_Spark.T_UI_Skill_Maelle_Spark",
+          "SubPathString": ""
+        }
+      },
+      "Stendhal": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_Stendhal.T_UI_Skill_Maelle_Stendhal",
+          "SubPathString": ""
+        }
+      },
+      "SwordBallet": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_SwordBallet.T_UI_Skill_Maelle_SwordBallet",
+          "SubPathString": ""
+        }
+      },
+      "VirtuoseStrike": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_VirtuoseStrike.T_UI_Skill_Maelle_VirtuoseStrike",
+          "SubPathString": ""
+        }
+      },
+      "WeAreMe": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Maelle/T_UI_Skill_Maelle_WeAreMe.T_UI_Skill_Maelle_WeAreMe",
+          "SubPathString": ""
+        }
+      },
+      "AllSet": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_AllSet.T_UI_Skill_Sciel_AllSet",
+          "SubPathString": ""
+        }
+      },
+      "BadOmen": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_BadOmen.T_UI_Skill_Sciel_BadOmen",
+          "SubPathString": ""
+        }
+      },
+      "CardWeaver": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_CardWeaver.T_UI_Skill_Sciel_CardWeaver",
+          "SubPathString": ""
+        }
+      },
+      "DarkAbsorption": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_DarkAbsorbtion.T_UI_Skill_Sciel_DarkAbsorbtion",
+          "SubPathString": ""
+        }
+      },
+      "DarkCleansing": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_DarkCleansing.T_UI_Skill_Sciel_DarkCleansing",
+          "SubPathString": ""
+        }
+      },
+      "DarkWave": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_DarkWave.T_UI_Skill_Sciel_DarkWave",
+          "SubPathString": ""
+        }
+      },
+      "Doom": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_Doom.T_UI_Skill_Sciel_Doom",
+          "SubPathString": ""
+        }
+      },
+      "EndSlice": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_EndSlice.T_UI_Skill_Sciel_EndSlice",
+          "SubPathString": ""
+        }
+      },
+      "FinalPath": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_FinalPath.T_UI_Skill_Sciel_FinalPath",
+          "SubPathString": ""
+        }
+      },
+      "FiringShadow": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_FiringShadow.T_UI_Skill_Sciel_FiringShadow",
+          "SubPathString": ""
+        }
+      },
+      "Foretelling2": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_FocusedForetell.T_UI_Skill_Sciel_FocusedForetell",
+          "SubPathString": ""
+        }
+      },
+      "ForetellingSouls": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_ForetellingSouls.T_UI_Skill_Sciel_ForetellingSouls",
+          "SubPathString": ""
+        }
+      },
+      "FortunesFury": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_FortunesFury.T_UI_Skill_Sciel_FortunesFury",
+          "SubPathString": ""
+        }
+      },
+      "GrimPrediction": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_GrimPrediction.T_UI_Skill_Sciel_GrimPrediction",
+          "SubPathString": ""
+        }
+      },
+      "Harvest": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_Harvest.T_UI_Skill_Sciel_Harvest",
+          "SubPathString": ""
+        }
+      },
+      "Intervention": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_Intervention.T_UI_Skill_Sciel_Intervention",
+          "SubPathString": ""
+        }
+      },
+      "OurSacrifice": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_OurSacrifice.T_UI_Skill_Sciel_OurSacrifice",
+          "SubPathString": ""
+        }
+      },
+      "ShadowDrop": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_PhantomBlade.T_UI_Skill_Sciel_PhantomBlade",
+          "SubPathString": ""
+        }
+      },
+      "PlentifulHarvest": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_PlentifulHarvest.T_UI_Skill_Sciel_PlentifulHarvest",
+          "SubPathString": ""
+        }
+      },
+      "Postponed": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_Postponed.T_UI_Skill_Sciel_Postponed",
+          "SubPathString": ""
+        }
+      },
+      "RiggedDistribution": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_RiggedDistribution.T_UI_Skill_Sciel_RiggedDistribution",
+          "SubPathString": ""
+        }
+      },
+      "SealedFate": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_SealedFate.T_UI_Skill_Sciel_SealedFate",
+          "SubPathString": ""
+        }
+      },
+      "SearingBond": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_SearingBond.T_UI_Skill_Sciel_SearingBond",
+          "SubPathString": ""
+        }
+      },
+      "ShadowBringer": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_ShadowBringer.T_UI_Skill_Sciel_ShadowBringer",
+          "SubPathString": ""
+        }
+      },
+      "ShadowTargeting": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_ShadowTargeting.T_UI_Skill_Sciel_ShadowTargeting",
+          "SubPathString": ""
+        }
+      },
+      "SharedBlessing": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_SharedBlessings.T_UI_Skill_Sciel_SharedBlessings",
+          "SubPathString": ""
+        }
+      },
+      "SpectralSweep": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_SpectralSweep.T_UI_Skill_Sciel_SpectralSweep",
+          "SubPathString": ""
+        }
+      },
+      "SpeedUp": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_SpeedUp.T_UI_Skill_Sciel_SpeedUp",
+          "SubPathString": ""
+        }
+      },
+      "AbbestMelee": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Abbest.T_UI_Skill_Monoco_Abbest",
+          "SubPathString": ""
+        }
+      },
+      "BenisseurMortar": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Benisseur.T_UI_Skill_Monoco_Benisseur",
+          "SubPathString": ""
+        }
+      },
+      "PotatobagBossFireShots": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_BossPotatobagA.T_UI_Skill_Monoco_BossPotatobagA",
+          "SubPathString": ""
+        }
+      },
+      "ShieldPunch": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_BossPotatobagB.T_UI_Skill_Monoco_BossPotatobagB",
+          "SubPathString": ""
+        }
+      },
+      "BoucheclierShield": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Bouchclier.T_UI_Skill_Monoco_Bouchclier",
+          "SubPathString": ""
+        }
+      },
+      "BourgeonHeadCrush": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Bourgeon.T_UI_Skill_Monoco_Bourgeon",
+          "SubPathString": ""
+        }
+      },
+      "HammerSmash": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Braseleur.T_UI_Skill_Monoco_Braseleur",
+          "SubPathString": ""
+        }
+      },
+      "BreakPoint": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Breakpoint.T_UI_Skill_Monoco_Breakpoint",
+          "SubPathString": ""
+        }
+      },
+      "BrulerAnchorSmash": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Bruler.T_UI_Skill_Monoco_Bruler",
+          "SubPathString": ""
+        }
+      },
+      "AberrationBurningLight": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_BurningLight.T_UI_Skill_Monoco_BurningLight",
+          "SubPathString": ""
+        }
+      },
+      "ChalierRelentlessSword": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Chalier.T_UI_Skill_Monoco_Chalier",
+          "SubPathString": ""
+        }
+      },
+      "ChapelierAxeSlash": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Chapelier.T_UI_Skill_Monoco_Chapelier",
+          "SubPathString": ""
+        }
+      },
+      "ChevaliereCAC": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_ChevaliereA.T_UI_Skill_Monoco_ChevaliereA",
+          "SubPathString": ""
+        }
+      },
+      "ChevaliereBAoECombo": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_ChevaliereC.T_UI_Skill_Monoco_ChevaliereC",
+          "SubPathString": ""
+        }
+      },
+      "ChevaliereCAOECombo": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_ChevaliereB.T_UI_Skill_Monoco_ChevaliereB",
+          "SubPathString": ""
+        }
+      },
+      "ContorsionnisteAngryBlast": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Contortioniste.T_UI_Skill_Monoco_Contortioniste",
+          "SubPathString": ""
+        }
+      },
+      "CrulerShield": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Cruler.T_UI_Skill_Monoco_Cruler",
+          "SubPathString": ""
+        }
+      },
+      "CultistDualCombo": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_CultistFighter.T_UI_Skill_Monoco_CultistFighter",
+          "SubPathString": ""
+        }
+      },
+      "HeavyCultistBloodSword": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_CultistHeavy.T_UI_Skill_Monoco_CultistHeavy",
+          "SubPathString": ""
+        }
+      },
+      "FlyingSlashes": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_CultistMage.T_UI_Skill_Monoco_CultistMage",
+          "SubPathString": ""
+        }
+      },
+      "DanseuseWingDance": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Danseuse.T_UI_Skill_Monoco_Danseuse",
+          "SubPathString": ""
+        }
+      },
+      "ObscurCombo": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_DarkSlashes.T_UI_Skill_Monoco_DarkSlashes",
+          "SubPathString": ""
+        }
+      },
+      "DemineurThunderStrike": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Demineur.T_UI_Skill_Monoco_Demineur",
+          "SubPathString": ""
+        }
+      },
+      "EchassierCombo": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_DoubleStab.T_UI_Skill_Monoco_DoubleStab",
+          "SubPathString": ""
+        }
+      },
+      "StormBlood": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Duelliste.T_UI_Skill_Monoco_Duelliste",
+          "SubPathString": ""
+        }
+      },
+      "ClairEnfeeble": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Enfeeble.T_UI_Skill_Monoco_Enfeeble",
+          "SubPathString": ""
+        }
+      },
+      "EvequeSpear": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Eveque.T_UI_Skill_Monoco_Eveque",
+          "SubPathString": ""
+        }
+      },
+      "CreationFromTheVoid": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_FromTheVoid.T_UI_Skill_Monoco_FromTheVoid",
+          "SubPathString": ""
+        }
+      },
+      "GaultCombo": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Gault.T_UI_Skill_Monoco_Gault",
+          "SubPathString": ""
+        }
+      },
+      "GlaiseEarthquakes": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Glaise.T_UI_Skill_Monoco_Glaise",
+          "SubPathString": ""
+        }
+      },
+      "Goblu": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Goblu.T_UI_Skill_Monoco_Goblu",
+          "SubPathString": ""
+        }
+      },
+      "RocherHammering": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Hammering.T_UI_Skill_Monoco_Hammering",
+          "SubPathString": ""
+        }
+      },
+      "HexgaCombo": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Hexga.T_UI_Skill_Monoco_Hexga",
+          "SubPathString": ""
+        }
+      },
+      "JarCombo": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Jar.T_UI_Skill_Monoco_Jar",
+          "SubPathString": ""
+        }
+      },
+      "LancelierEstoc": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Lancelier.T_UI_Skill_Monoco_Lancelier",
+          "SubPathString": ""
+        }
+      },
+      "LusterCombo": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Luster.T_UI_Skill_Monoco_Luster",
+          "SubPathString": ""
+        }
+      },
+      "MightyStrike": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_MightyStrike.T_UI_Skill_Monoco_MightyStrike",
+          "SubPathString": ""
+        }
+      },
+      "MoissonneuseVendange": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Moissoneuse.T_UI_Skill_Monoco_Moissoneuse",
+          "SubPathString": ""
+        }
+      },
+      "OrphelinBuff": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Orphelin.T_UI_Skill_Monoco_Orphelin",
+          "SubPathString": ""
+        }
+      },
+      "PelerinFreshAir": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Pelerin.T_UI_Skill_Monoco_Pelerin",
+          "SubPathString": ""
+        }
+      },
+      "PortierCrashingDown": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Portier.T_UI_Skill_Monoco_Portier",
+          "SubPathString": ""
+        }
+      },
+      "ThunderEstoc": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_PotatoBagFighter.T_UI_Skill_Monoco_PotatoBagFighter",
+          "SubPathString": ""
+        }
+      },
+      "PotatobagSlam": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_PotatoBagHeavy.T_UI_Skill_Monoco_PotatoBagHeavy",
+          "SubPathString": ""
+        }
+      },
+      "ThunderThrows": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_PotatoBagMage.T_UI_Skill_Monoco_PotatoBagMage",
+          "SubPathString": ""
+        }
+      },
+      "PotierBuff": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Potier.T_UI_Skill_Monoco_Potier",
+          "SubPathString": ""
+        }
+      },
+      "RamasseurBonk": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Ramasseur.T_UI_Skill_Monoco_Ramasseur",
+          "SubPathString": ""
+        }
+      },
+      "Sanctuary": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Sanctuary.T_UI_Skill_Monoco_Sanctuary",
+          "SubPathString": ""
+        }
+      },
+      "SaplingAbsorption": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Sapling.T_UI_Skill_Monoco_Sapling",
+          "SubPathString": ""
+        }
+      },
+      "BalletCharm": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Servante.T_UI_Skill_Monoco_Servante",
+          "SubPathString": ""
+        }
+      },
+      "StalactCombo": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_StalactA.T_UI_Skill_Monoco_StalactA",
+          "SubPathString": ""
+        }
+      },
+      "StalactKaboom": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_StalactB.T_UI_Skill_Monoco_StalactB",
+          "SubPathString": ""
+        }
+      },
+      "LampmasterSwordOfLight": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_SwordOfLight.T_UI_Skill_Monoco_SwordOfLight",
+          "SubPathString": ""
+        }
+      },
+      "Trumpet": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Troubadour.T_UI_Skill_Monoco_Troubadour",
+          "SubPathString": ""
+        }
+      },
+      "GrosseTeteWrecking": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Monoco/T_UI_Skill_Monoco_Wrecking.T_UI_Skill_Monoco_Wrecking",
+          "SubPathString": ""
+        }
+      },
+      "AngelsEyes": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_AngelEyes.T_UI_Skill_Verso_AngelEyes",
+          "SubPathString": ""
+        }
+      },
+      "AscendingAssault": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_AscendingAssault.T_UI_Skill_Verso_AscendingAssault",
+          "SubPathString": ""
+        }
+      },
+      "BerserkSlash": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_BerserkSlash.T_UI_Skill_Verso_BerserkSlash",
+          "SubPathString": ""
+        }
+      },
+      "Blitz": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_Blitz.T_UI_Skill_Verso_Blitz",
+          "SubPathString": ""
+        }
+      },
+      "Burden": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_Burden.T_UI_Skill_Verso_Burden",
+          "SubPathString": ""
+        }
+      },
+      "DefiantStrike": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_DefiantStrike.T_UI_Skill_Verso_DefiantStrike",
+          "SubPathString": ""
+        }
+      },
+      "EndBringer": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_EndBringer.T_UI_Skill_Verso_EndBringer",
+          "SubPathString": ""
+        }
+      },
+      "FollowUp": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_FollowUp.T_UI_Skill_Verso_FollowUp",
+          "SubPathString": ""
+        }
+      },
+      "FromFire": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_FromFire.T_UI_Skill_Verso_FromFire",
+          "SubPathString": ""
+        }
+      },
+      "GuardiansGift": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_GuardiansGift.T_UI_Skill_Verso_GuardiansGift",
+          "SubPathString": ""
+        }
+      },
+      "Leadership": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_Leadership.T_UI_Skill_Verso_Leadership",
+          "SubPathString": ""
+        }
+      },
+      "LightHolder": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_LightHolder.T_UI_Skill_Verso_LightHolder",
+          "SubPathString": ""
+        }
+      },
+      "Combo1": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_LumiereAssault.T_UI_Skill_Verso_LumiereAssault",
+          "SubPathString": ""
+        }
+      },
+      "MarkingShot": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_MarkingShot.T_UI_Skill_Verso_MarkingShot",
+          "SubPathString": ""
+        }
+      },
+      "Overcharge": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_Overcharge.T_UI_Skill_Verso_Overcharge",
+          "SubPathString": ""
+        }
+      },
+      "ParadigmShift": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_ParadigmShift.T_UI_Skill_Verso_ParadigmShift",
+          "SubPathString": ""
+        }
+      },
+      "PerfectBreak": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_PerfectBreak.T_UI_Skill_Verso_PerfectBreak",
+          "SubPathString": ""
+        }
+      },
+      "PerfectRecovery": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_PerfectRecovery.T_UI_Skill_Verso_PerfectRecovery",
+          "SubPathString": ""
+        }
+      },
+      "PhantomStars": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_PhantomStars.T_UI_Skill_Verso_PhantomStars",
+          "SubPathString": ""
+        }
+      },
+      "Powerful": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_Powerful.T_UI_Skill_Verso_Powerful",
+          "SubPathString": ""
+        }
+      },
+      "Purification": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_Purification.T_UI_Skill_Verso_Purification",
+          "SubPathString": ""
+        }
+      },
+      "QuickStrike": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_QuickStrike.T_UI_Skill_Verso_QuickStrike",
+          "SubPathString": ""
+        }
+      },
+      "RadiantSlash": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_RadiantSlash.T_UI_Skill_Verso_RadiantSlash",
+          "SubPathString": ""
+        }
+      },
+      "Sabotage": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_Sabotage.T_UI_Skill_Verso_Sabotage",
+          "SubPathString": ""
+        }
+      },
+      "SpeedBurst": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_SpeedBurst.T_UI_Skill_Verso_SpeedBurst",
+          "SubPathString": ""
+        }
+      },
+      "SteeledStrike": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_SteeledStrike.T_UI_Skill_Verso_SteeledStrike",
+          "SubPathString": ""
+        }
+      },
+      "Striker": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_Striker.T_UI_Skill_Verso_Striker",
+          "SubPathString": ""
+        }
+      },
+      "StrikeStorm": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Verso/T_UI_Skill_Verso_StrikeStorm.T_UI_Skill_Verso_StrikeStorm",
+          "SubPathString": ""
+        }
+      },
+      "TwilightDance": {
+        "SkillIcon_5_C2B893194F2A3AB688720BAB2A52EF04": {
+          "AssetPathName": "/Game/UI/Resources/Textures/Icons/Skills/Sciel/T_UI_Skill_Sciel_TwilightDance.T_UI_Skill_Sciel_TwilightDance",
+          "SubPathString": ""
+        }
+      }
+    }
+  }
+]

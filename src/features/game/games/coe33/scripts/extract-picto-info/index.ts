@@ -4,9 +4,9 @@ import {
   coe33Items,
   type COE33ItemType,
 } from '@/features/game/games/coe33/items';
-import { internalSlugs } from '@/features/game/games/coe33/scripts/extract-picto-info/inputs/internal-slugs';
-import PictoIconsData from './inputs/DT_PictoIcons.json';
-import GameData from './inputs/Game.json';
+import { internalSlugs } from '@/features/game/games/coe33/scripts/inputs/internal-slugs';
+import PictoIconsData from '../inputs/DT_PictoIcons.json';
+import GameData from '../inputs/Game.json';
 
 const parseGameData = (internalSlug: string) => {
   const targetKey = 'ST_PassiveEffects';
