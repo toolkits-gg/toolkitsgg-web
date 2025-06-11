@@ -1,211 +1,104 @@
 import { writeFileSync } from 'fs';
 import path from 'path';
-import type { COE33ItemType } from '@/features/game/games/coe33/items';
-import PictoIconsData from './DT_PictoIcons.json';
-import GameData from './Game.json';
+import {
+  coe33Items,
+  type COE33ItemType,
+} from '@/features/game/games/coe33/items';
+import { internalSlugs } from '@/features/game/games/coe33/scripts/extract-picto-info/inputs/internal-slugs';
+import PictoIconsData from './inputs/DT_PictoIcons.json';
+import GameData from './inputs/Game.json';
 
-const TARGET_KEY = 'ST_PassiveEffects';
-const pictoBaseData = GameData[TARGET_KEY] as Record<string, string>;
-const pictoTextureData = PictoIconsData[0]['Rows'] as Record<string, any>;
+const parseGameData = (internalSlug: string) => {
+  const targetKey = 'ST_PassiveEffects';
+  const data = GameData[targetKey] as Record<string, string>;
 
-if (!pictoBaseData) {
-  throw new Error(`Data for key ${TARGET_KEY} not found in GameData.`);
-}
+  // * Need an exemptions for some items that differ
+  // * between the PictoIcons.json and Game.json files.
+  if (internalSlug === 'AugmentedCounterB') {
+    return {
+      name: 'Augmented Counter II',
+      description: '50% increased Counterattack damage.',
+    };
+  }
 
-const internalSlugs = [
-  'AcceleratorHeal',
-  'APOnBurn',
-  'APOnPowerful',
-  'APOnRush',
-  'APOnShell',
-  'AutoDispelEnergy',
-  'BaseShield',
-  'BeneficialContamination',
-  'BigEnergyTint',
-  'BigHealingTint',
-  'BreakDamageOnBurn',
-  'BreakDamageOnCrit',
-  'BreakDamageOnSlow',
-  'Breaker',
-  'BreakingCounter',
-  'BreakingDeath',
-  'BreakingStrong',
-  'BreakMomentum',
-  'BreakShot',
-  'BreakSpecialist',
-  'BurnDurationIncrease',
-  'BurningBreak',
-  'BurningDeath',
-  'BurningMark',
-  'CharybdeToScylla',
-  'Cheater',
-  'CleansingTint',
-  'ConfidentFighter',
-  'CritChanceOnBurn',
-  'CritChanceOnDefenseless',
-  'CritChanceOnStunned',
-  'CritChanceOnWeak',
-  'CriticalBreak',
-  'CriticalCursedPower',
-  'CriticalHavoc',
-  'CriticalMoment',
-  'CursedPower',
-  'DeadEnergy',
-  'DefenselessOnBreak',
-  'DefensiveMode',
-  'DefenslessStrike',
-  'DispelOnAPConsume',
-  'DoubleBurn',
-  'DoubleMark',
-  'EffectiveHeal',
-  'EffectivSupport',
-  'EnergizingHeal',
-  'Energy',
-  'EnergyBreak',
-  'EvasiveHealer',
-  'FasterThanStrong',
-  'firstOffensive',
-  'FreeAimBurnShot',
-  'FreeAimEnergy',
-  'FreeAimInvertedShot',
-  'FreeAimMarkingShot',
-  'FreeAimPowerful',
-  'FreeAimPrecision',
-  'FreeAimShell',
-  'FreeAimSpeed',
-  'FromBehind',
-  'FullEnergyAttack',
-  'GlassCanon',
-  'GradientBreak',
-  'GradientBreaker',
-  'GradientCounterCharge',
-  'GradientCure',
-  'GradientEnergy',
-  'GradientFighter',
-  'GradientHeal',
-  'GradientMark',
-  'GradientStacker',
-  'GradientTint',
-  'GradientWeakness',
-  'GreaterDefenseless',
-  'GreaterPowerful',
-  'GreaterPowerless',
-  'GreaterPrecision',
-  'GreaterShell',
-  'GreaterSlow',
-  'GreaterSpeed',
-  'GreatFireBreak',
-  'GreatHealingTint',
-  'HealingCounter',
-  'HealingFire',
-  'HealingMark',
-  'HealingShare',
-  'HealingStun',
-  'HealingTintEnergy',
-  'HealOnBuff',
-  'IDontNeedShield',
-  'Immaculate',
-  'InMediasRes',
-  'JumpRecovery',
-  'LastStandCritical',
-  'LastStandPowerful',
-  'LastStandShell',
-  'LastStandSpeed',
-  'LongerPowerful',
-  'LongerRush',
-  'LongerShell',
-  'MarkOnBreak',
-  'Painter',
-  'ParryHelper',
-  'PatientFighter',
-  'perfectHeal',
-  'PerfectReward',
-  'PhysicalFighter',
-  'PierceDefense',
-  'PostGradient',
-  'PowerDodgeCombo',
-  'PowerfulHeal',
-  'PowerfulMark',
-  'PowerfulOnShell',
-  'PowerfulShield',
-  'PowerfulStrike',
-  'PowerfulTint',
-  'PowerlessStrike',
-  'PowerOfPain',
-  'ProBlocker',
-  'ProRetreat',
-  'ProtectingFire',
-  'ProtectingHeal',
-  'ProtectionSpirit',
-  'RandomDefense',
-  'reinforcementParade',
-  'ReviveParadox',
-  'ReviveTintEnergy',
-  'RewardingMark',
-  'Roulette',
-  'RushOnPowerful',
-  'SharedCare',
-  'ShellOnRush',
-  'ShellStrike',
-  'ShellTint',
-  'ShieldBreaker',
-  'ShieldingTint',
-  'Shortcut',
-  'SimpleBreaker',
-  'SlowOnBreak',
-  'Sniper',
-  'SoulEater',
-  'SpeedTint',
-  'StayMarked',
-  'StunBoost',
-  'StunEnergy',
-  'Tainted',
-  'TimeTint',
-  'Versatile',
-  'VersatileHealer',
-  'Warming',
-  'WeakeningMark',
-  'WeaknessGain',
-];
+  const nameKey = `PASSIVE_${internalSlug}_Name`;
+  const descriptionKey = `PASSIVE_${internalSlug}_Description`;
 
-function getAssetPathForSlug(internalSlug: string): string {
+  if (!data[nameKey]) {
+    console.warn(`Name for ${internalSlug} not found.`);
+    return {
+      name: '',
+      description: '',
+    };
+  }
+
+  if (!data[descriptionKey]) {
+    console.warn(`Description for ${internalSlug} not found.`);
+    return {
+      name: '',
+      description: '',
+    };
+  }
+
+  return {
+    name: data[nameKey],
+    description: data[descriptionKey],
+  };
+};
+
+const getAssetPathForSlug = (internalSlug: string): string => {
+  const data = PictoIconsData[0]['Rows'] as Record<string, any>;
+
+  // * Need an exemptions for some items that differ
+  // * between the PictoIcons.json and Game.json files.
+  if (internalSlug === 'CritChanceOnBurn') {
+    internalSlug = 'CritChanceBurn';
+  }
+  if (internalSlug === 'AntiStunned') {
+    internalSlug = 'AntiStun';
+  }
+  if (internalSlug === 'AugmentedCounter') {
+    internalSlug = 'CounterUpdragdeA';
+  }
+  if (internalSlug === 'AugmentedCounterB') {
+    internalSlug = 'CounterUpdragdeB';
+  }
+  if (internalSlug === 'AugmentedCounterC') {
+    internalSlug = 'CounterUpdragdeC';
+  }
+  if (internalSlug === 'DeathBomb') {
+    internalSlug = 'DeathBombPhysical';
+  }
+  if (internalSlug === 'InitialApA') {
+    internalSlug = 'InitialAp+1A';
+  }
+  if (internalSlug === 'InitialApB') {
+    internalSlug = 'InitialAp+1B';
+  }
+  if (internalSlug === 'InitialApC') {
+    internalSlug = 'InitialAp+1C';
+  }
+  if (internalSlug === 'InitialApD') {
+    internalSlug = 'InitialAp+1D';
+  }
+
   // Check if the internal slug exists as a key in the Rows object
-  if (pictoTextureData[internalSlug]) {
+  if (data[internalSlug]) {
     // There are now three keys to check. I need the key that starts with `PictoIcon_`
     // that key will then have the AssetPathName key
-    const assetKey = Object.keys(pictoTextureData[internalSlug]).find((key) =>
+    const assetKey = Object.keys(data[internalSlug]).find((key) =>
       key.startsWith('PictoIcon_')
     );
-    if (assetKey && pictoTextureData[internalSlug][assetKey]) {
-      return (
-        pictoTextureData[internalSlug][assetKey]['AssetPathName'].split(
-          '.'
-        )[1] || ''
-      );
+
+    if (assetKey && data[internalSlug][assetKey]) {
+      return data[internalSlug][assetKey]['AssetPathName'].split('.')[1] || '';
     }
   }
 
   return ''; // Return empty string if not found
-}
+};
 
-const pictoItems: COE33ItemType[] = [];
-for (const internalSlug of internalSlugs) {
-  const nameKey = `PASSIVE_${internalSlug}_Name`;
-  const descriptionKey = `PASSIVE_${internalSlug}_Description`;
-
-  if (!pictoBaseData[nameKey]) {
-    console.warn(`Name for ${internalSlug} not found.`);
-    continue;
-  }
-
-  if (!pictoBaseData[descriptionKey]) {
-    console.warn(`Description for ${internalSlug} not found.`);
-    continue;
-  }
-
-  const name = pictoBaseData[nameKey];
-  const description = pictoBaseData[descriptionKey];
-
+const generateSlug = (pictoItems: COE33ItemType[]): string => {
   // slug should be a unique randomized 4-letter string
   let slug = Math.random().toString(36).substring(2, 6);
   let slugExists = pictoItems.some((item) => item.slug === slug);
@@ -213,24 +106,41 @@ for (const internalSlug of internalSlugs) {
     slug = Math.random().toString(36).substring(2, 6);
     slugExists = pictoItems.some((item) => item.slug === slug);
   }
+  return slug;
+};
 
-  // TODO Parse asset name
+const main = () => {
+  const pictoItems: COE33ItemType[] = [];
 
-  pictoItems.push({
-    name,
-    description,
-    internalSlug,
-    slug,
-    imageUrl: `pictos/${getAssetPathForSlug(internalSlug)}.webp`,
-    category: 'PICTO',
-    tags: [],
-  });
-}
+  for (const internalSlug of internalSlugs) {
+    const { name, description } = parseGameData(internalSlug);
 
-// sort the items by name
-pictoItems.sort((a, b) => a.name.localeCompare(b.name));
+    const existingItem = coe33Items.find(
+      (item) => item.internalSlug === internalSlug
+    );
 
-const outputFilePath = path.join(__dirname, 'output.json');
+    const slug = existingItem ? existingItem.slug : generateSlug(pictoItems);
 
-writeFileSync(outputFilePath, JSON.stringify(pictoItems, null, 2), 'utf-8');
-console.log(`Picto items extracted and saved to ${outputFilePath}`);
+    const assetPath = getAssetPathForSlug(internalSlug);
+    const imageUrl = `pictos/${assetPath}.webp`;
+
+    pictoItems.push({
+      name,
+      description,
+      internalSlug,
+      slug,
+      imageUrl,
+      category: 'PICTO',
+      tags: [],
+    });
+  }
+
+  pictoItems.sort((a, b) => a.name.localeCompare(b.name));
+
+  const outputFilePath = path.join(__dirname, 'output.json');
+  writeFileSync(outputFilePath, JSON.stringify(pictoItems, null, 2), 'utf-8');
+
+  console.log(`Picto items extracted and saved to ${outputFilePath}`);
+};
+
+main();

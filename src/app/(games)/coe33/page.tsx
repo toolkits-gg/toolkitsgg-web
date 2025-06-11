@@ -1,16 +1,9 @@
 import Image from 'next/image';
 import { PageLayout } from '@/app/_navigation/page-layout';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import { allGameConfigs } from '@/features/game/constants';
 import type { COE33ItemType } from '@/features/game/games/coe33/items';
 import type { GameConfig } from '@/features/game/types';
+import { ItemCard } from '@/features/item/components/item-card';
 import { getImageUrl } from '@/utils/url';
 
 export default async function GamePage() {
@@ -37,25 +30,9 @@ export default async function GamePage() {
         />
       }
     >
-      <div className="col-span-full grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="col-span-full grid w-full grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
         {gameConfig?.items?.map((item) => (
-          <Card key={item.slug} className="w-full">
-            <CardHeader>
-              <CardTitle>{item.name}</CardTitle>
-              <CardDescription>{item.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Image
-                src={getImageUrl(item.imageUrl, gameConfig.id)}
-                alt={item.name}
-                width={200}
-                height={200}
-              />
-            </CardContent>
-            <CardFooter className="text-muted-foreground text-sm">
-              <p>Actions</p>
-            </CardFooter>
-          </Card>
+          <ItemCard key={item.slug} item={item} gameId={gameConfig.id} />
         ))}
       </div>
       {/* <Card className="col-span-1 w-full sm:w-[420px]">

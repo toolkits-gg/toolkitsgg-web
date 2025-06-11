@@ -3,7 +3,7 @@
     "name": "Accelerating Heal",
     "description": "Healing an ally also applies Rush for 1 turn.",
     "internalSlug": "AcceleratorHeal",
-    "slug": "cbm8",
+    "slug": "j53i",
     "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
@@ -12,7 +12,7 @@
     "name": "Accelerating Last Stand",
     "description": "Gain Rush if fighting alone.",
     "internalSlug": "LastStandSpeed",
-    "slug": "rhig",
+    "slug": "rj8p",
     "imageUrl": "pictos/T_Pictos4.webp",
     "category": "PICTO",
     "tags": []
@@ -21,7 +21,7 @@
     "name": "Accelerating Shots",
     "description": "20% chance to gain Rush on Free Aim shot.",
     "internalSlug": "FreeAimSpeed",
-    "slug": "608a",
+    "slug": "mmpo",
     "imageUrl": "pictos/T_Pictos5.webp",
     "category": "PICTO",
     "tags": []
@@ -30,8 +30,170 @@
     "name": "Accelerating Tint",
     "description": "Healing Tints also apply Rush.",
     "internalSlug": "SpeedTint",
-    "slug": "9uow",
+    "slug": "a829",
     "imageUrl": "pictos/T_Pictos2.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Aegis Revival",
+    "description": "+1 Shield on being revived.",
+    "internalSlug": "AegisRevival",
+    "slug": "jp41",
+    "imageUrl": "pictos/T_Pictos4.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Anti-Blight",
+    "description": "Immune to Blight.",
+    "internalSlug": "AntiBlight",
+    "slug": "mlsk",
+    "imageUrl": "pictos/T_Pictos6.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Anti-Burn",
+    "description": "Immune to Burn.",
+    "internalSlug": "AntiBurn",
+    "slug": "5acb",
+    "imageUrl": "pictos/T_Pictos1.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Anti-Charm",
+    "description": "Immune to Charm.",
+    "internalSlug": "AntiCharm",
+    "slug": "gisc",
+    "imageUrl": "pictos/T_Pictos1.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Anti-Freeze",
+    "description": "Immune to Freeze.",
+    "internalSlug": "AntiFrozen",
+    "slug": "psy7",
+    "imageUrl": "pictos/T_Pictos8.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Anti-Stun",
+    "description": "Immune to Stun.",
+    "internalSlug": "AntiStunned",
+    "slug": "5oxa",
+    "imageUrl": "pictos/T_Pictos4.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "At Death's Door",
+    "description": "Deal 50% more damage if Health is below 10%.",
+    "internalSlug": "LastStand",
+    "slug": "dmff",
+    "imageUrl": "pictos/T_Pictos3.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Augmented Aim",
+    "description": "50% increased Free Aim damage.",
+    "internalSlug": "AugmentedAim",
+    "slug": "m9nm",
+    "imageUrl": "pictos/T_Pictos5.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Augmented Attack",
+    "description": "50% increased Base Attack damage.",
+    "internalSlug": "AugmentedAttack",
+    "slug": "2dsf",
+    "imageUrl": "pictos/T_Pictos6.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Augmented Counter I",
+    "description": "50% increased Counterattack damage.",
+    "internalSlug": "AugmentedCounter",
+    "slug": "3dqx",
+    "imageUrl": "pictos/T_Pictos2.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Augmented Counter II",
+    "description": "50% increased Counterattack damage.",
+    "internalSlug": "AugmentedCounterB",
+    "slug": "q1t4",
+    "imageUrl": "pictos/T_Pictos10.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Augmented Counter III",
+    "description": "75% increased Counterattack damage.",
+    "internalSlug": "AugmentedCounterC",
+    "slug": "xo2c",
+    "imageUrl": "pictos/T_Pictos9.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Augmented First Strike",
+    "description": "50% increased damage on the first hit. Once per battle.",
+    "internalSlug": "Augmented1stStrike",
+    "slug": "dzgz",
+    "imageUrl": "pictos/T_Pictos9.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Auto Death",
+    "description": "Kill self on battle start.",
+    "internalSlug": "AutoDeath",
+    "slug": "aj72",
+    "imageUrl": "pictos/T_Pictos8.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Auto Powerful",
+    "description": "Apply Powerful for 3 turns on battle start.",
+    "internalSlug": "AutoPowerful",
+    "slug": "2fa3",
+    "imageUrl": "pictos/T_Pictos5.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Auto Regen",
+    "description": "Apply Regen for 3 turns on battle start.",
+    "internalSlug": "AutoRegen",
+    "slug": "tsit",
+    "imageUrl": "pictos/T_Pictos10.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Auto Rush",
+    "description": "Apply Rush for 3 turns on battle start.",
+    "internalSlug": "AutoRush",
+    "slug": "hou2",
+    "imageUrl": "pictos/T_Pictos3.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Auto Shell",
+    "description": "Apply Shell for 3 turns on battle start.",
+    "internalSlug": "AutoShell",
+    "slug": "t0m4",
+    "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -39,7 +201,7 @@
     "name": "Base Shield",
     "description": "+1 Shield if not affected by any Shield on turn start.",
     "internalSlug": "BaseShield",
-    "slug": "2ttj",
+    "slug": "d5no",
     "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
@@ -48,7 +210,7 @@
     "name": "Beneficial Contamination",
     "description": "+2 AP on applying a Status Effect. Once per turn.",
     "internalSlug": "BeneficialContamination",
-    "slug": "27wr",
+    "slug": "8lnj",
     "imageUrl": "pictos/T_Pictos8.webp",
     "category": "PICTO",
     "tags": []
@@ -57,7 +219,7 @@
     "name": "Better Healing Tint",
     "description": "Healing Tints have double the Healing effect.",
     "internalSlug": "GreatHealingTint",
-    "slug": "k20m",
+    "slug": "tdur",
     "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
@@ -66,7 +228,7 @@
     "name": "Break Specialist",
     "description": "Break damage is increased by 50%, but base damage is reduced by 20%.",
     "internalSlug": "BreakSpecialist",
-    "slug": "kgr4",
+    "slug": "pr1y",
     "imageUrl": "pictos/T_Pictos8.webp",
     "category": "PICTO",
     "tags": []
@@ -75,8 +237,26 @@
     "name": "Breaker",
     "description": "25% increased Break damage.",
     "internalSlug": "Breaker",
-    "slug": "56k8",
+    "slug": "0otu",
     "imageUrl": "pictos/T_Pictos8.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Breaker",
+    "description": "25% increased Break damage.",
+    "internalSlug": "Breaker",
+    "slug": "jd8x",
+    "imageUrl": "pictos/T_Pictos8.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Breaking Attack",
+    "description": "Base Attack can Break.",
+    "internalSlug": "BreakingAttack",
+    "slug": "4k8n",
+    "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -84,7 +264,7 @@
     "name": "Breaking Burn",
     "description": "25% increased Break damage on Burning enemies.",
     "internalSlug": "BreakDamageOnBurn",
-    "slug": "lfdw",
+    "slug": "e69b",
     "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
@@ -93,7 +273,7 @@
     "name": "Breaking Counter",
     "description": "50% increased Break damage on Counterattack.",
     "internalSlug": "BreakingCounter",
-    "slug": "4eko",
+    "slug": "8opd",
     "imageUrl": "pictos/T_Pictos5.webp",
     "category": "PICTO",
     "tags": []
@@ -102,7 +282,7 @@
     "name": "Breaking Death",
     "description": "Fully charge enemy's Break Bar on death.",
     "internalSlug": "BreakingDeath",
-    "slug": "dn3v",
+    "slug": "nt9b",
     "imageUrl": "pictos/T_Pictos5.webp",
     "category": "PICTO",
     "tags": []
@@ -111,7 +291,7 @@
     "name": "Breaking Shots",
     "description": "50% increased Break damage with Free Aim shots.",
     "internalSlug": "BreakShot",
-    "slug": "hya9",
+    "slug": "4vxw",
     "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
@@ -120,8 +300,17 @@
     "name": "Breaking Slow",
     "description": "25% increased Break damage against Slowed enemies.",
     "internalSlug": "BreakDamageOnSlow",
-    "slug": "zbw3",
+    "slug": "7vyx",
     "imageUrl": "pictos/T_Pictos5.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Burn Affinity",
+    "description": "25% increased damage on Burning targets.",
+    "internalSlug": "BurnAffinity",
+    "slug": "kn9f",
+    "imageUrl": "pictos/T_Pictos2.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -129,7 +318,7 @@
     "name": "Burning Break",
     "description": "Apply 3 Burn stacks on Breaking a target.",
     "internalSlug": "BurningBreak",
-    "slug": "b8fp",
+    "slug": "5ywn",
     "imageUrl": "pictos/T_Pictos11.webp",
     "category": "PICTO",
     "tags": []
@@ -138,7 +327,7 @@
     "name": "Burning Death",
     "description": "Apply 3 Burn to all enemies on Death.",
     "internalSlug": "BurningDeath",
-    "slug": "s5po",
+    "slug": "2iee",
     "imageUrl": "pictos/T_Pictos5.webp",
     "category": "PICTO",
     "tags": []
@@ -147,7 +336,7 @@
     "name": "Burning Mark",
     "description": "Apply Burn on hitting a Marked enemy.",
     "internalSlug": "BurningMark",
-    "slug": "95g4",
+    "slug": "g6rs",
     "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
@@ -156,8 +345,17 @@
     "name": "Burning Shots",
     "description": "20% chance to Burn on Free Aim shot.",
     "internalSlug": "FreeAimBurnShot",
-    "slug": "swry",
+    "slug": "47db",
     "imageUrl": "pictos/T_Pictos5.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Charging Alteration",
+    "description": "+10% of a Gradient Charge on applying a Buff. Once per turn.",
+    "internalSlug": "GradientOnBuff",
+    "slug": "e51p",
+    "imageUrl": "pictos/T_Pictos2.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -165,8 +363,17 @@
     "name": "Charging Attack",
     "description": "+15% of a Gradient Charge on Base Attack.",
     "internalSlug": "GradientStacker",
-    "slug": "jpv2",
+    "slug": "bwm1",
     "imageUrl": "pictos/T_Pictos1.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Charging Burn",
+    "description": "+20% of a Gradient Charge on applying Burn. Once per turn.",
+    "internalSlug": "GradientOnBurn",
+    "slug": "npqg",
+    "imageUrl": "pictos/T_Pictos8.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -174,8 +381,17 @@
     "name": "Charging Counter",
     "description": "+10% of a Gradient Charge on Counterattack.",
     "internalSlug": "GradientCounterCharge",
-    "slug": "r8ts",
+    "slug": "06bg",
     "imageUrl": "pictos/T_Pictos4.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Charging Critical",
+    "description": "+20% of a Gradient Charge on Critical Hit. Once per turn.",
+    "internalSlug": "GradientOnCrit",
+    "slug": "rcj0",
+    "imageUrl": "pictos/T_Pictos6.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -183,7 +399,7 @@
     "name": "Charging Mark",
     "description": "+20% of a Gradient Charge on hitting a Marked target. Once per turn.",
     "internalSlug": "GradientMark",
-    "slug": "s0zy",
+    "slug": "k8yy",
     "imageUrl": "pictos/T_Pictos8.webp",
     "category": "PICTO",
     "tags": []
@@ -192,8 +408,17 @@
     "name": "Charging Recovery",
     "description": "50% increased Gradient Generation with Healing Skills.",
     "internalSlug": "GradientCure",
-    "slug": "h7y7",
+    "slug": "lpmp",
     "imageUrl": "pictos/T_Pictos10.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Charging Stun",
+    "description": "+5% of a Gradient Charge on hitting a Stunned enemy.",
+    "internalSlug": "GradientOnStun",
+    "slug": "snsm",
+    "imageUrl": "pictos/T_Pictos1.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -201,7 +426,7 @@
     "name": "Charging Tint",
     "description": "+5% of a Gradient Charge on using an item.",
     "internalSlug": "GradientTint",
-    "slug": "yv39",
+    "slug": "r6xf",
     "imageUrl": "pictos/T_Pictos4.webp",
     "category": "PICTO",
     "tags": []
@@ -210,17 +435,8 @@
     "name": "Charging Weakness",
     "description": "+15% of a Gradient Charge on hitting a Weakness. Once per turn.",
     "internalSlug": "GradientWeakness",
-    "slug": "p14o",
+    "slug": "z1ea",
     "imageUrl": "pictos/T_Pictos2.webp",
-    "category": "PICTO",
-    "tags": []
-  },
-  {
-    "name": "Charybde To Scylla",
-    "description": "Apply Mark on Stun removed.",
-    "internalSlug": "CharybdeToScylla",
-    "slug": "k045",
-    "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -228,8 +444,17 @@
     "name": "Cheater",
     "description": "Always play twice in a row.",
     "internalSlug": "Cheater",
-    "slug": "yqwa",
+    "slug": "v4mj",
     "imageUrl": "pictos/T_Pictos2.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Clea's Life",
+    "description": "On turn start, if no damage taken since last turn, recover 100% Health.",
+    "internalSlug": "CleasLife",
+    "slug": "op3j",
+    "imageUrl": "pictos/T_Pictos1.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -237,8 +462,44 @@
     "name": "Cleansing Tint",
     "description": "Healing Tints also remove all Status Effects from the target.",
     "internalSlug": "CleansingTint",
-    "slug": "2isi",
+    "slug": "ykym",
     "imageUrl": "pictos/T_Pictos9.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Combo Attack I",
+    "description": "Base Attack has 1 extra hit.",
+    "internalSlug": "ComboAttack1",
+    "slug": "8ev9",
+    "imageUrl": "pictos/T_Pictos4.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Combo Attack II",
+    "description": "Base Attack has 1 extra hit.",
+    "internalSlug": "ComboAttack2",
+    "slug": "d4w7",
+    "imageUrl": "pictos/T_Pictos9.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Combo Attack III",
+    "description": "Base Attack has 1 extra hit.",
+    "internalSlug": "ComboAttack3",
+    "slug": "gn3t",
+    "imageUrl": "pictos/T_Pictos4.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Confident",
+    "description": "Take 50% less damage, but can't be Healed.",
+    "internalSlug": "Confident",
+    "slug": "q6j9",
+    "imageUrl": "pictos/T_Pictos4.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -246,7 +507,7 @@
     "name": "Confident Fighter",
     "description": "30% increased damage, but can't be Healed.",
     "internalSlug": "ConfidentFighter",
-    "slug": "tgfo",
+    "slug": "tlvq",
     "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
@@ -255,7 +516,7 @@
     "name": "Critical Break",
     "description": "25% increased Break damage on Critical hits.",
     "internalSlug": "BreakDamageOnCrit",
-    "slug": "ekn8",
+    "slug": "oi80",
     "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
@@ -264,8 +525,8 @@
     "name": "Critical Burn",
     "description": "25% increased Critical Chance on Burning enemies.",
     "internalSlug": "CritChanceOnBurn",
-    "slug": "fqh3",
-    "imageUrl": "pictos/.webp",
+    "slug": "tgxy",
+    "imageUrl": "pictos/T_Pictos4.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -273,7 +534,7 @@
     "name": "Critical Moment",
     "description": "50% increased Critical Chance if Health is below 30%.",
     "internalSlug": "CriticalMoment",
-    "slug": "zln2",
+    "slug": "hl2i",
     "imageUrl": "pictos/T_Pictos4.webp",
     "category": "PICTO",
     "tags": []
@@ -282,7 +543,7 @@
     "name": "Critical Stun",
     "description": "100% Critical Chance on hitting a Stunned target.",
     "internalSlug": "CriticalBreak",
-    "slug": "87n9",
+    "slug": "4f0e",
     "imageUrl": "pictos/T_Pictos9.webp",
     "category": "PICTO",
     "tags": []
@@ -291,8 +552,17 @@
     "name": "Critical Vulnerability",
     "description": "25% increased Critical Chance on Defenceless enemies.",
     "internalSlug": "CritChanceOnDefenseless",
-    "slug": "ih1g",
+    "slug": "6a27",
     "imageUrl": "pictos/T_Pictos4.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Critical Weakness",
+    "description": "25% increased Critical Chance on Weakness.",
+    "internalSlug": "CritCHanceOnWeak",
+    "slug": "zfdt",
+    "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -300,8 +570,26 @@
     "name": "Dead Energy I",
     "description": "+3 AP on killing an enemy.",
     "internalSlug": "DeadEnergy",
-    "slug": "ssvp",
+    "slug": "2oxz",
     "imageUrl": "pictos/T_Pictos4.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Dead Energy II",
+    "description": "+3 AP on killing an enemy.",
+    "internalSlug": "BootyHunter",
+    "slug": "gaf3",
+    "imageUrl": "pictos/T_Pictos5.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Death Bomb",
+    "description": "On Death, deal damage to all enemies.",
+    "internalSlug": "DeathBomb",
+    "slug": "vd63",
+    "imageUrl": "pictos/T_Pictos8.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -309,8 +597,17 @@
     "name": "Defensive Mode",
     "description": "On receiving damage, consume 1 AP to take 30% less damage, if possible.",
     "internalSlug": "DefensiveMode",
-    "slug": "uoa7",
+    "slug": "o6so",
     "imageUrl": "pictos/T_Pictos8.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Dodger",
+    "description": "Gain 1 AP on Perfect Dodge. Once per turn.",
+    "internalSlug": "Dodger",
+    "slug": "ywkl",
+    "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -318,7 +615,7 @@
     "name": "Double Burn",
     "description": "On applying a Burn stack, apply a second one.",
     "internalSlug": "DoubleBurn",
-    "slug": "pnmm",
+    "slug": "4l5v",
     "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
@@ -327,7 +624,7 @@
     "name": "Double Mark",
     "description": "Mark requires 1 more hit to be removed.",
     "internalSlug": "DoubleMark",
-    "slug": "pj3q",
+    "slug": "tsd3",
     "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
@@ -336,7 +633,7 @@
     "name": "Draining Cleanse",
     "description": "Consume 1 AP to prevent Status Effects application, if possible.",
     "internalSlug": "DispelOnAPConsume",
-    "slug": "0rb2",
+    "slug": "co9x",
     "imageUrl": "pictos/T_Pictos5.webp",
     "category": "PICTO",
     "tags": []
@@ -345,7 +642,7 @@
     "name": "Effective Heal",
     "description": "Double all Heals received.",
     "internalSlug": "EffectiveHeal",
-    "slug": "7sfo",
+    "slug": "m9y9",
     "imageUrl": "pictos/T_Pictos6.webp",
     "category": "PICTO",
     "tags": []
@@ -354,7 +651,7 @@
     "name": "Effective Support",
     "description": "+2 AP on using an item.",
     "internalSlug": "EffectivSupport",
-    "slug": "g4a7",
+    "slug": "b1nz",
     "imageUrl": "pictos/T_Pictos8.webp",
     "category": "PICTO",
     "tags": []
@@ -363,7 +660,7 @@
     "name": "Empowering Attack",
     "description": "Gain Powerful for 1 turn on Base Attack.",
     "internalSlug": "PowerfulStrike",
-    "slug": "fjdy",
+    "slug": "3l1d",
     "imageUrl": "pictos/T_Pictos4.webp",
     "category": "PICTO",
     "tags": []
@@ -372,7 +669,7 @@
     "name": "Empowering Break",
     "description": "Gain Powerful on Breaking a target.",
     "internalSlug": "BreakingStrong",
-    "slug": "h2bj",
+    "slug": "yyfi",
     "imageUrl": "pictos/T_Pictos8.webp",
     "category": "PICTO",
     "tags": []
@@ -381,7 +678,7 @@
     "name": "Empowering Dodge",
     "description": "5% increased damage for each consecutive successful Dodge. Can stack up to 10 times.",
     "internalSlug": "PowerDodgeCombo",
-    "slug": "a54s",
+    "slug": "kz7d",
     "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
@@ -390,8 +687,17 @@
     "name": "Empowering Last Stand",
     "description": "Gain Powerful if fighting alone.",
     "internalSlug": "LastStandPowerful",
-    "slug": "5g0u",
+    "slug": "w60u",
     "imageUrl": "pictos/T_Pictos2.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Empowering Parry",
+    "description": "Each successful Parry increases damage by 5% until end of the following turn.\nTaking any damage removes this buff.",
+    "internalSlug": "ReinforcementParade",
+    "slug": "wocj",
+    "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -399,7 +705,7 @@
     "name": "Empowering Tint",
     "description": "Healing Tints also apply Powerful.",
     "internalSlug": "PowerfulTint",
-    "slug": "763h",
+    "slug": "vq4n",
     "imageUrl": "pictos/T_Pictos5.webp",
     "category": "PICTO",
     "tags": []
@@ -408,8 +714,17 @@
     "name": "Energetic Healer",
     "description": "+2 AP on Healing an ally. Once per turn.",
     "internalSlug": "VersatileHealer",
-    "slug": "6cqz",
+    "slug": "zzeu",
     "imageUrl": "pictos/T_Pictos11.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Energising Attack I",
+    "description": "+1 AP on Base Attack.",
+    "internalSlug": "AP+1Attack",
+    "slug": "k0jj",
+    "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -417,7 +732,7 @@
     "name": "Energising Attack II",
     "description": "+1 AP on Base Attack.",
     "internalSlug": "Energy",
-    "slug": "t2tb",
+    "slug": "zn7h",
     "imageUrl": "pictos/T_Pictos11.webp",
     "category": "PICTO",
     "tags": []
@@ -426,7 +741,7 @@
     "name": "Energising Break",
     "description": "+3 AP on Breaking a target.",
     "internalSlug": "EnergyBreak",
-    "slug": "cw7g",
+    "slug": "agqi",
     "imageUrl": "pictos/T_Pictos1.webp",
     "category": "PICTO",
     "tags": []
@@ -435,7 +750,7 @@
     "name": "Energising Burn",
     "description": "+1 AP on applying Burn. Once per turn.",
     "internalSlug": "APOnBurn",
-    "slug": "5nvx",
+    "slug": "t75o",
     "imageUrl": "pictos/T_Pictos6.webp",
     "category": "PICTO",
     "tags": []
@@ -444,8 +759,17 @@
     "name": "Energising Cleanse",
     "description": "Dispel the first negative Status Effect received and gain 2 AP.",
     "internalSlug": "AutoDispelEnergy",
-    "slug": "7sxo",
+    "slug": "wzl3",
     "imageUrl": "pictos/T_Pictos3.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Energising Death",
+    "description": "On death, +4 AP to allies.",
+    "internalSlug": "EnergyDeath",
+    "slug": "d7sz",
+    "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -453,7 +777,7 @@
     "name": "Energising Gradient",
     "description": "+1 AP per Gradient Charge consumed.",
     "internalSlug": "GradientEnergy",
-    "slug": "z098",
+    "slug": "93au",
     "imageUrl": "pictos/T_Pictos2.webp",
     "category": "PICTO",
     "tags": []
@@ -462,7 +786,7 @@
     "name": "Energising Heal",
     "description": "On Healing an ally, also give 2 AP.",
     "internalSlug": "EnergizingHeal",
-    "slug": "1nxf",
+    "slug": "kkt0",
     "imageUrl": "pictos/T_Pictos2.webp",
     "category": "PICTO",
     "tags": []
@@ -471,7 +795,7 @@
     "name": "Energising Jump",
     "description": "+1 AP on Jump Counterattack.",
     "internalSlug": "JumpRecovery",
-    "slug": "zzdc",
+    "slug": "9ami",
     "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
@@ -480,8 +804,17 @@
     "name": "Energising Pain",
     "description": "No longer gain AP on Parry. +1 AP on getting hit.",
     "internalSlug": "PowerOfPain",
-    "slug": "splb",
+    "slug": "7x8c",
     "imageUrl": "pictos/T_Pictos3.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Energising Parry",
+    "description": "+1 AP on successful Parry.",
+    "internalSlug": "AP+1Parry",
+    "slug": "j3pi",
+    "imageUrl": "pictos/T_Pictos9.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -489,8 +822,17 @@
     "name": "Energising Powerful",
     "description": "Give 2 AP on applying Powerful.",
     "internalSlug": "APOnPowerful",
-    "slug": "g22x",
+    "slug": "zj8b",
     "imageUrl": "pictos/T_Pictos10.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Energising Revive",
+    "description": "+3 AP to all allies when revived.",
+    "internalSlug": "ReviveCheer",
+    "slug": "9sa5",
+    "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -498,7 +840,7 @@
     "name": "Energising Rush",
     "description": "Give 2 AP on applying Rush.",
     "internalSlug": "APOnRush",
-    "slug": "o84n",
+    "slug": "emvj",
     "imageUrl": "pictos/T_Pictos1.webp",
     "category": "PICTO",
     "tags": []
@@ -507,7 +849,7 @@
     "name": "Energising Shell",
     "description": "Give 2 AP on applying Shell.",
     "internalSlug": "APOnShell",
-    "slug": "196p",
+    "slug": "cpc1",
     "imageUrl": "pictos/T_Pictos9.webp",
     "category": "PICTO",
     "tags": []
@@ -516,8 +858,44 @@
     "name": "Energising Shots",
     "description": "20% chance to gain 1 AP on Free Aim shot.",
     "internalSlug": "FreeAimEnergy",
-    "slug": "fd8c",
+    "slug": "a843",
     "imageUrl": "pictos/T_Pictos10.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Energising Start I",
+    "description": "+1 AP on battle start.",
+    "internalSlug": "InitialApA",
+    "slug": "mu4l",
+    "imageUrl": "pictos/T_Pictos9.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Energising Start II",
+    "description": "+1 AP on battle start.",
+    "internalSlug": "InitialApB",
+    "slug": "yrq8",
+    "imageUrl": "pictos/T_Pictos11.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Energising Start III",
+    "description": "+1 AP on battle start.",
+    "internalSlug": "InitialApC",
+    "slug": "wsim",
+    "imageUrl": "pictos/T_Pictos2.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Energising Start IV",
+    "description": "+1 AP on battle start.",
+    "internalSlug": "InitialApD",
+    "slug": "6abl",
+    "imageUrl": "pictos/T_Pictos11.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -525,8 +903,26 @@
     "name": "Energising Stun",
     "description": "+1 AP on hitting a Stunned target with a Skill.",
     "internalSlug": "StunEnergy",
-    "slug": "j1jg",
+    "slug": "m4ui",
     "imageUrl": "pictos/T_Pictos4.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Energising Turn",
+    "description": "+1 AP on turn start.",
+    "internalSlug": "AP+1TurnStart",
+    "slug": "8f42",
+    "imageUrl": "pictos/T_Pictos10.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Energy Master",
+    "description": "Every AP gain is increased by 1.",
+    "internalSlug": "DoubleAP",
+    "slug": "j230",
+    "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -534,7 +930,7 @@
     "name": "Enfeebling Attack",
     "description": "Base Attack applies Powerless for 1 turn.",
     "internalSlug": "PowerlessStrike",
-    "slug": "pfis",
+    "slug": "tg0r",
     "imageUrl": "pictos/T_Pictos5.webp",
     "category": "PICTO",
     "tags": []
@@ -543,7 +939,7 @@
     "name": "Enfeebling Mark",
     "description": "Marked targets deal 30% less damage.",
     "internalSlug": "WeakeningMark",
-    "slug": "203x",
+    "slug": "uquo",
     "imageUrl": "pictos/T_Pictos6.webp",
     "category": "PICTO",
     "tags": []
@@ -552,8 +948,17 @@
     "name": "Evasive Healer",
     "description": "Heals provided are doubled until any damage is taken.",
     "internalSlug": "EvasiveHealer",
-    "slug": "11a7",
+    "slug": "gbbz",
     "imageUrl": "pictos/T_Pictos4.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Exhausting Power",
+    "description": "50% increased damage if Exhausted.",
+    "internalSlug": "ExhaustAffinity",
+    "slug": "nic2",
+    "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -561,7 +966,7 @@
     "name": "Exposing Attack",
     "description": "Base Attack applies Defenceless for 1 turn.",
     "internalSlug": "DefenslessStrike",
-    "slug": "gduw",
+    "slug": "it75",
     "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
@@ -570,7 +975,7 @@
     "name": "Exposing Break",
     "description": "Apply Defenceless on Break.",
     "internalSlug": "DefenselessOnBreak",
-    "slug": "d0y4",
+    "slug": "7bma",
     "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
@@ -579,8 +984,17 @@
     "name": "Faster Than Strong",
     "description": "Always play twice in a row, but deal 50% less damage.",
     "internalSlug": "FasterThanStrong",
-    "slug": "8rad",
+    "slug": "hvs0",
     "imageUrl": "pictos/T_Pictos10.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "First Offensive",
+    "description": "First hit dealt and taken deals 50% more damage.",
+    "internalSlug": "FirstOffensive",
+    "slug": "tjgh",
+    "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -588,8 +1002,17 @@
     "name": "Fueling Break",
     "description": "Breaking a target doubles its Burn amount.",
     "internalSlug": "GreatFireBreak",
-    "slug": "8aqd",
+    "slug": "x5b3",
     "imageUrl": "pictos/T_Pictos8.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Full Strength",
+    "description": "25% increased damage on full Health.",
+    "internalSlug": "Stand",
+    "slug": "ooyf",
+    "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -597,7 +1020,7 @@
     "name": "Glass Canon",
     "description": "Deal 25% more damage, but take 25% more damage.",
     "internalSlug": "GlassCanon",
-    "slug": "4q06",
+    "slug": "qvhq",
     "imageUrl": "pictos/T_Pictos4.webp",
     "category": "PICTO",
     "tags": []
@@ -606,7 +1029,7 @@
     "name": "Gradient Break",
     "description": "+50% of a Gradient Charge on Breaking a target.",
     "internalSlug": "GradientBreak",
-    "slug": "3jd6",
+    "slug": "z386",
     "imageUrl": "pictos/T_Pictos6.webp",
     "category": "PICTO",
     "tags": []
@@ -615,7 +1038,7 @@
     "name": "Gradient Breaker",
     "description": "50% increased Break damage with Gradient Attacks.",
     "internalSlug": "GradientBreaker",
-    "slug": "fwge",
+    "slug": "ec2t",
     "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
@@ -624,7 +1047,7 @@
     "name": "Gradient Fighter",
     "description": "25% increased damage with Gradient Attacks.",
     "internalSlug": "GradientFighter",
-    "slug": "2q3a",
+    "slug": "hj5l",
     "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
@@ -633,7 +1056,7 @@
     "name": "Gradient Recovery",
     "description": "Recover 10% Health on using a Gradient Charge.",
     "internalSlug": "GradientHeal",
-    "slug": "6xs8",
+    "slug": "n6px",
     "imageUrl": "pictos/T_Pictos5.webp",
     "category": "PICTO",
     "tags": []
@@ -642,7 +1065,7 @@
     "name": "Great Energy Tint",
     "description": "Energy Tints now affect the whole Expedition.",
     "internalSlug": "BigEnergyTint",
-    "slug": "7xvz",
+    "slug": "9qtx",
     "imageUrl": "pictos/T_Pictos2.webp",
     "category": "PICTO",
     "tags": []
@@ -651,7 +1074,7 @@
     "name": "Great Healing Tint",
     "description": "Healing Tints now affect the whole Expedition.",
     "internalSlug": "BigHealingTint",
-    "slug": "62nw",
+    "slug": "s0qn",
     "imageUrl": "pictos/T_Pictos6.webp",
     "category": "PICTO",
     "tags": []
@@ -660,7 +1083,7 @@
     "name": "Greater Defenceless",
     "description": "+15% to Defenceless damage amplification.",
     "internalSlug": "GreaterDefenseless",
-    "slug": "4495",
+    "slug": "uwae",
     "imageUrl": "pictos/T_Pictos1.webp",
     "category": "PICTO",
     "tags": []
@@ -669,7 +1092,7 @@
     "name": "Greater Powerful",
     "description": "+15% to Powerful damage increase.",
     "internalSlug": "GreaterPowerful",
-    "slug": "d37j",
+    "slug": "t6lg",
     "imageUrl": "pictos/T_Pictos2.webp",
     "category": "PICTO",
     "tags": []
@@ -678,7 +1101,7 @@
     "name": "Greater Powerless",
     "description": "+15% to Powerless damage reduction.",
     "internalSlug": "GreaterPowerless",
-    "slug": "cbzd",
+    "slug": "gngz",
     "imageUrl": "pictos/T_Pictos11.webp",
     "category": "PICTO",
     "tags": []
@@ -687,7 +1110,7 @@
     "name": "Greater Rush",
     "description": "+25% to Rush Speed increase.",
     "internalSlug": "GreaterSpeed",
-    "slug": "q2km",
+    "slug": "jn9r",
     "imageUrl": "pictos/T_Pictos6.webp",
     "category": "PICTO",
     "tags": []
@@ -696,7 +1119,7 @@
     "name": "Greater Shell",
     "description": "+10% to Shell damage reduction.",
     "internalSlug": "GreaterShell",
-    "slug": "myw6",
+    "slug": "14ti",
     "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
@@ -705,7 +1128,7 @@
     "name": "Greater Slow",
     "description": "+15% to Slow Speed reduction.",
     "internalSlug": "GreaterSlow",
-    "slug": "d3bd",
+    "slug": "ht56",
     "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
@@ -714,7 +1137,7 @@
     "name": "Healing Boon",
     "description": "Heal 15% HP on applying a buff.",
     "internalSlug": "HealOnBuff",
-    "slug": "3ikp",
+    "slug": "vrge",
     "imageUrl": "pictos/T_Pictos1.webp",
     "category": "PICTO",
     "tags": []
@@ -723,7 +1146,7 @@
     "name": "Healing Counter",
     "description": "Recover 25% Health on Counterattack.",
     "internalSlug": "HealingCounter",
-    "slug": "ugvy",
+    "slug": "0r3b",
     "imageUrl": "pictos/T_Pictos6.webp",
     "category": "PICTO",
     "tags": []
@@ -732,7 +1155,7 @@
     "name": "Healing Fire",
     "description": "Recover 25% Health when attacking a Burning target. Once per turn.",
     "internalSlug": "HealingFire",
-    "slug": "mprj",
+    "slug": "e000",
     "imageUrl": "pictos/T_Pictos2.webp",
     "category": "PICTO",
     "tags": []
@@ -741,8 +1164,17 @@
     "name": "Healing Mark",
     "description": "Recover 25% Health on hitting a Marked enemy. Once per turn.",
     "internalSlug": "HealingMark",
-    "slug": "8b5y",
+    "slug": "zadj",
     "imageUrl": "pictos/T_Pictos7.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Healing Parry",
+    "description": "Recover 3% Health on Parry.",
+    "internalSlug": "HealingParry",
+    "slug": "o234",
+    "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -750,7 +1182,7 @@
     "name": "Healing Share",
     "description": "Receive 15% of all Heals affecting other characters.",
     "internalSlug": "HealingShare",
-    "slug": "gk70",
+    "slug": "245w",
     "imageUrl": "pictos/T_Pictos9.webp",
     "category": "PICTO",
     "tags": []
@@ -759,7 +1191,7 @@
     "name": "Healing Stun",
     "description": "Recover 5% Health on hitting a Stunned target.",
     "internalSlug": "HealingStun",
-    "slug": "5z1a",
+    "slug": "nqqp",
     "imageUrl": "pictos/T_Pictos8.webp",
     "category": "PICTO",
     "tags": []
@@ -768,7 +1200,7 @@
     "name": "Healing Tint Energy",
     "description": "Healing Tints also give 1 AP.",
     "internalSlug": "HealingTintEnergy",
-    "slug": "ay6d",
+    "slug": "7ms3",
     "imageUrl": "pictos/T_Pictos2.webp",
     "category": "PICTO",
     "tags": []
@@ -777,7 +1209,7 @@
     "name": "Immaculate",
     "description": "30% increased damage until a hit is received.",
     "internalSlug": "Immaculate",
-    "slug": "iadv",
+    "slug": "4okh",
     "imageUrl": "pictos/T_Pictos11.webp",
     "category": "PICTO",
     "tags": []
@@ -786,8 +1218,17 @@
     "name": "In Medias Res",
     "description": "+3 Shields on Battle Start, but max Health is halved.",
     "internalSlug": "InMediasRes",
-    "slug": "xcxo",
+    "slug": "nttn",
     "imageUrl": "pictos/T_Pictos11.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Inverted Affinity",
+    "description": "Apply Inverted on self for 3 turns on battle start.\n50% increased damage while Inverted.",
+    "internalSlug": "InvertedAffinity",
+    "slug": "cgv4",
+    "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -795,7 +1236,7 @@
     "name": "Last Stand Critical",
     "description": "100% Critical Chance while fighting alone.",
     "internalSlug": "LastStandCritical",
-    "slug": "o3n7",
+    "slug": "sgn5",
     "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
@@ -804,7 +1245,7 @@
     "name": "Longer Burn",
     "description": "Burn duration is increased by 2.",
     "internalSlug": "BurnDurationIncrease",
-    "slug": "62pq",
+    "slug": "ekji",
     "imageUrl": "pictos/T_Pictos2.webp",
     "category": "PICTO",
     "tags": []
@@ -813,7 +1254,7 @@
     "name": "Longer Powerful",
     "description": "On applying Powerful, its duration is increased by 2.",
     "internalSlug": "LongerPowerful",
-    "slug": "ofwk",
+    "slug": "a6w5",
     "imageUrl": "pictos/T_Pictos2.webp",
     "category": "PICTO",
     "tags": []
@@ -822,7 +1263,7 @@
     "name": "Longer Rush",
     "description": "On applying Rush, its duration is increased by 2.",
     "internalSlug": "LongerRush",
-    "slug": "3ahb",
+    "slug": "mu8h",
     "imageUrl": "pictos/T_Pictos4.webp",
     "category": "PICTO",
     "tags": []
@@ -831,7 +1272,7 @@
     "name": "Longer Shell",
     "description": "On applying Shell, its duration is increased by 2.",
     "internalSlug": "LongerShell",
-    "slug": "8j5h",
+    "slug": "ejbb",
     "imageUrl": "pictos/T_Pictos11.webp",
     "category": "PICTO",
     "tags": []
@@ -840,7 +1281,7 @@
     "name": "Marking Break",
     "description": "Apply Mark on Break.",
     "internalSlug": "MarkOnBreak",
-    "slug": "kmhi",
+    "slug": "a5rr",
     "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
@@ -849,8 +1290,17 @@
     "name": "Marking Shots",
     "description": "20% chance to apply Mark on Free Aim shot.",
     "internalSlug": "FreeAimMarkingShot",
-    "slug": "skr8",
+    "slug": "0px3",
     "imageUrl": "pictos/T_Pictos6.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Painted Power",
+    "description": "Damage can exceed 9,999.",
+    "internalSlug": "OverPowered",
+    "slug": "mvt8",
+    "imageUrl": "pictos/T_Pictos1.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -858,7 +1308,7 @@
     "name": "Painter",
     "description": "Convert all Physical damage to Void damage.",
     "internalSlug": "Painter",
-    "slug": "zkvf",
+    "slug": "f2uj",
     "imageUrl": "pictos/T_Pictos1.webp",
     "category": "PICTO",
     "tags": []
@@ -867,7 +1317,16 @@
     "name": "Parry Helper",
     "description": "25% increased Parry window.",
     "internalSlug": "ParryHelper",
-    "slug": "siha",
+    "slug": "7imh",
+    "imageUrl": "pictos/T_Pictos6.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Perilous Parry",
+    "description": "+1 AP on Parry, but damage received is doubled.",
+    "internalSlug": "ManOfParry",
+    "slug": "p3ck",
     "imageUrl": "pictos/T_Pictos6.webp",
     "category": "PICTO",
     "tags": []
@@ -876,8 +1335,17 @@
     "name": "Physical Fighter",
     "description": "Convert all Skill damage to Physical damage.",
     "internalSlug": "PhysicalFighter",
-    "slug": "x20a",
+    "slug": "ojr7",
     "imageUrl": "pictos/T_Pictos4.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Piercing Shot",
+    "description": "25% increased Free Aim damage.\nFree Aim shots ignore Shields.",
+    "internalSlug": "PiercingShot",
+    "slug": "qezh",
+    "imageUrl": "pictos/T_Pictos8.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -885,7 +1353,7 @@
     "name": "Powered Attack",
     "description": "On every damage dealt, try to consume 1 AP.\nIf successful, increase damage by 20%.",
     "internalSlug": "FullEnergyAttack",
-    "slug": "8df6",
+    "slug": "m9ol",
     "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
@@ -894,7 +1362,7 @@
     "name": "Powerful Heal",
     "description": "Healing an ally also applies Powerful for 1 turn.",
     "internalSlug": "PowerfulHeal",
-    "slug": "gkod",
+    "slug": "qqu1",
     "imageUrl": "pictos/T_Pictos11.webp",
     "category": "PICTO",
     "tags": []
@@ -903,7 +1371,7 @@
     "name": "Powerful Mark",
     "description": "Gain Powerful on hitting a Marked enemy.",
     "internalSlug": "PowerfulMark",
-    "slug": "wx6j",
+    "slug": "749j",
     "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
@@ -912,8 +1380,17 @@
     "name": "Powerful On Shell",
     "description": "Apply Powerful on applying Shell.",
     "internalSlug": "PowerfulOnShell",
-    "slug": "wonx",
+    "slug": "s4m5",
     "imageUrl": "pictos/T_Pictos2.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Powerful Revive",
+    "description": "Apply Powerful for 3 turns when revived.",
+    "internalSlug": "ReviveWithPower",
+    "slug": "w3bl",
+    "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -921,7 +1398,7 @@
     "name": "Powerful Shield",
     "description": "10% increased damage per Shield Point on self.",
     "internalSlug": "PowerfulShield",
-    "slug": "ahen",
+    "slug": "kymy",
     "imageUrl": "pictos/T_Pictos9.webp",
     "category": "PICTO",
     "tags": []
@@ -930,7 +1407,7 @@
     "name": "Powerful Shots",
     "description": "20% chance to gain Powerful on Free Aim shot.",
     "internalSlug": "FreeAimPowerful",
-    "slug": "8dyd",
+    "slug": "fe45",
     "imageUrl": "pictos/T_Pictos9.webp",
     "category": "PICTO",
     "tags": []
@@ -939,7 +1416,7 @@
     "name": "Pro Retreat",
     "description": "Allows Flee to be instantaneous.",
     "internalSlug": "ProRetreat",
-    "slug": "cavb",
+    "slug": "5rzv",
     "imageUrl": "pictos/T_Pictos9.webp",
     "category": "PICTO",
     "tags": []
@@ -948,8 +1425,17 @@
     "name": "Protecting Attack",
     "description": "Gain Shell for 1 turn on Base Attack.",
     "internalSlug": "ShellStrike",
-    "slug": "78sq",
+    "slug": "feje",
     "imageUrl": "pictos/T_Pictos2.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Protecting Death",
+    "description": "On death, allies gain Shell.",
+    "internalSlug": "ProtectingDeath",
+    "slug": "h7mz",
+    "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -957,7 +1443,7 @@
     "name": "Protecting Heal",
     "description": "Healing an ally also applies Shell for 1 turn.",
     "internalSlug": "ProtectingHeal",
-    "slug": "4oku",
+    "slug": "aatl",
     "imageUrl": "pictos/T_Pictos6.webp",
     "category": "PICTO",
     "tags": []
@@ -966,7 +1452,7 @@
     "name": "Protecting Last Stand",
     "description": "Gain Shell if fighting alone.",
     "internalSlug": "LastStandShell",
-    "slug": "ye8x",
+    "slug": "ej7y",
     "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
@@ -975,7 +1461,7 @@
     "name": "Protecting Shots",
     "description": "20% chance to gain Shell on Free Aim shot.",
     "internalSlug": "FreeAimShell",
-    "slug": "a30z",
+    "slug": "695v",
     "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
@@ -984,7 +1470,7 @@
     "name": "Protecting Tint",
     "description": "Healing Tints also apply Shell.",
     "internalSlug": "ShellTint",
-    "slug": "6xb9",
+    "slug": "g6id",
     "imageUrl": "pictos/T_Pictos11.webp",
     "category": "PICTO",
     "tags": []
@@ -993,7 +1479,7 @@
     "name": "Quick Break",
     "description": "Play again on Breaking a target.",
     "internalSlug": "BreakMomentum",
-    "slug": "uo3m",
+    "slug": "sibe",
     "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
@@ -1002,8 +1488,26 @@
     "name": "Random Defense",
     "description": "Damage taken is randomly multiplied by a value between 50% and 200%.",
     "internalSlug": "RandomDefense",
-    "slug": "vynv",
+    "slug": "zu8d",
     "imageUrl": "pictos/T_Pictos2.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Recovery",
+    "description": "Recovers 10% Health on turn start.",
+    "internalSlug": "Recovery",
+    "slug": "4im8",
+    "imageUrl": "pictos/T_Pictos5.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Rejuvenating Revive",
+    "description": "Apply Regen for 3 turns when revived.",
+    "internalSlug": "ReviveWithRegen",
+    "slug": "kva5",
+    "imageUrl": "pictos/T_Pictos1.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -1011,7 +1515,7 @@
     "name": "Revive Paradox",
     "description": "Play immediately when revived.",
     "internalSlug": "ReviveParadox",
-    "slug": "o9g5",
+    "slug": "nwxr",
     "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
@@ -1020,7 +1524,7 @@
     "name": "Revive Tint Energy",
     "description": "Revive Tints also give 3 AP.",
     "internalSlug": "ReviveTintEnergy",
-    "slug": "44pc",
+    "slug": "d6k2",
     "imageUrl": "pictos/T_Pictos5.webp",
     "category": "PICTO",
     "tags": []
@@ -1029,7 +1533,7 @@
     "name": "Rewarding Mark",
     "description": "+2 AP on dealing damage to a Marked target. Once per turn.",
     "internalSlug": "RewardingMark",
-    "slug": "lczv",
+    "slug": "skmw",
     "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
@@ -1038,7 +1542,7 @@
     "name": "Roulette",
     "description": "Every hit has a 50% chance to deal either 50% or 200% of its damage.",
     "internalSlug": "Roulette",
-    "slug": "0kzo",
+    "slug": "a6e6",
     "imageUrl": "pictos/T_Pictos1.webp",
     "category": "PICTO",
     "tags": []
@@ -1047,8 +1551,17 @@
     "name": "Rush On Powerful",
     "description": "Apply Rush on applying Powerful.",
     "internalSlug": "RushOnPowerful",
-    "slug": "mr57",
+    "slug": "6izl",
     "imageUrl": "pictos/T_Pictos10.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Second Chance",
+    "description": "Revive with 100% Health. Once per battle.",
+    "internalSlug": "SecondChance",
+    "slug": "m36b",
+    "imageUrl": "pictos/T_Pictos8.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -1056,7 +1569,7 @@
     "name": "Shared Care",
     "description": "When Healing an ally, also Heal self for 50% of that value.",
     "internalSlug": "SharedCare",
-    "slug": "dzjy",
+    "slug": "djh2",
     "imageUrl": "pictos/T_Pictos6.webp",
     "category": "PICTO",
     "tags": []
@@ -1065,8 +1578,17 @@
     "name": "Shell On Rush",
     "description": "Apply Shell on applying Rush.",
     "internalSlug": "ShellOnRush",
-    "slug": "yra1",
+    "slug": "z0tf",
     "imageUrl": "pictos/T_Pictos10.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Shield Affinity",
+    "description": "30% increased damage while having Shields, but receiving any damage always removes all Shields.",
+    "internalSlug": "ShieldAffinity",
+    "slug": "3nzh",
+    "imageUrl": "pictos/T_Pictos4.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -1074,8 +1596,17 @@
     "name": "Shield Breaker",
     "description": "All hits break 1 more Shield.",
     "internalSlug": "ShieldBreaker",
-    "slug": "3mu2",
+    "slug": "vfpa",
     "imageUrl": "pictos/T_Pictos9.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Shielding Death",
+    "description": "On death, allies gain 3 Shield points.",
+    "internalSlug": "ShieldingDeath",
+    "slug": "6y03",
+    "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -1083,7 +1614,7 @@
     "name": "Shielding Tint",
     "description": "Healing Tints also add 2 Shields.",
     "internalSlug": "ShieldingTint",
-    "slug": "bzh6",
+    "slug": "fmq4",
     "imageUrl": "pictos/T_Pictos11.webp",
     "category": "PICTO",
     "tags": []
@@ -1092,7 +1623,7 @@
     "name": "Shortcut",
     "description": "Immediately play when falling below 30% Health. Once per battle.",
     "internalSlug": "Shortcut",
-    "slug": "bxan",
+    "slug": "1dbd",
     "imageUrl": "pictos/T_Pictos7.webp",
     "category": "PICTO",
     "tags": []
@@ -1101,7 +1632,7 @@
     "name": "Slowing Break",
     "description": "Apply Slow on Break.",
     "internalSlug": "SlowOnBreak",
-    "slug": "hsun",
+    "slug": "f41y",
     "imageUrl": "pictos/T_Pictos4.webp",
     "category": "PICTO",
     "tags": []
@@ -1110,8 +1641,53 @@
     "name": "Sniper",
     "description": "First Free Aim shot each turn deals 200% increased damage and can Break.",
     "internalSlug": "Sniper",
-    "slug": "33i1",
+    "slug": "kg3z",
     "imageUrl": "pictos/T_Pictos1.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Solidifying",
+    "description": "+2 Shields when the character's Health falls below 50%. Once per battle.",
+    "internalSlug": "Solidifying",
+    "slug": "qquz",
+    "imageUrl": "pictos/T_Pictos7.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Solo Fighter",
+    "description": "Deal 50% more damage if fighting alone.",
+    "internalSlug": "SoloFighter",
+    "slug": "nlgk",
+    "imageUrl": "pictos/T_Pictos11.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "SOS Power",
+    "description": "Apply Powerful when falling below 50% Health.",
+    "internalSlug": "SosPower",
+    "slug": "kyjx",
+    "imageUrl": "pictos/T_Pictos4.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "SOS Rush",
+    "description": "Apply Rush when falling below 50% Health.",
+    "internalSlug": "SosRush",
+    "slug": "4zw1",
+    "imageUrl": "pictos/T_Pictos2.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "SOS Shell",
+    "description": "Apply Shell when falling below 50% Health.",
+    "internalSlug": "SosShell",
+    "slug": "jznk",
+    "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -1119,7 +1695,7 @@
     "name": "Soul Eater",
     "description": "Deal 30% more damage, but lose 20% Health per turn.",
     "internalSlug": "SoulEater",
-    "slug": "joz0",
+    "slug": "hhix",
     "imageUrl": "pictos/T_Pictos10.webp",
     "category": "PICTO",
     "tags": []
@@ -1128,7 +1704,7 @@
     "name": "Staggering Attack",
     "description": "50% increased Break damage on Base Attack.",
     "internalSlug": "SimpleBreaker",
-    "slug": "j5pf",
+    "slug": "mgg8",
     "imageUrl": "pictos/T_Pictos5.webp",
     "category": "PICTO",
     "tags": []
@@ -1137,7 +1713,7 @@
     "name": "Stay Marked",
     "description": "50% chance to apply Mark when attacking a Marked target.",
     "internalSlug": "StayMarked",
-    "slug": "1zp1",
+    "slug": "plg5",
     "imageUrl": "pictos/T_Pictos2.webp",
     "category": "PICTO",
     "tags": []
@@ -1146,8 +1722,26 @@
     "name": "Stun Boost",
     "description": "30% increased damage on Stunned targets.",
     "internalSlug": "StunBoost",
-    "slug": "qyem",
+    "slug": "y1h4",
     "imageUrl": "pictos/T_Pictos5.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Survivor",
+    "description": "Survive fatal damage with 1 Health. Once per battle.",
+    "internalSlug": "Survivor",
+    "slug": "9cxc",
+    "imageUrl": "pictos/T_Pictos3.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Sweet Kill",
+    "description": "Recover 50% Health on killing an enemy.",
+    "internalSlug": "SweetKill",
+    "slug": "ozcu",
+    "imageUrl": "pictos/T_Pictos8.webp",
     "category": "PICTO",
     "tags": []
   },
@@ -1155,7 +1749,25 @@
     "name": "Tainted",
     "description": "15% increased damage for each Status Effect on self.",
     "internalSlug": "Tainted",
-    "slug": "85rm",
+    "slug": "vme1",
+    "imageUrl": "pictos/T_Pictos9.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "Teamwork",
+    "description": "10% increased damage while all allies are alive.",
+    "internalSlug": "Teamwork",
+    "slug": "5x6w",
+    "imageUrl": "pictos/T_Pictos3.webp",
+    "category": "PICTO",
+    "tags": []
+  },
+  {
+    "name": "The One",
+    "description": "Max Health is reduced to 1.",
+    "internalSlug": "TheOne",
+    "slug": "eeq2",
     "imageUrl": "pictos/T_Pictos9.webp",
     "category": "PICTO",
     "tags": []
@@ -1164,7 +1776,7 @@
     "name": "Time Tint",
     "description": "Energy Tints also apply Rush.",
     "internalSlug": "TimeTint",
-    "slug": "f72n",
+    "slug": "xsp2",
     "imageUrl": "pictos/T_Pictos6.webp",
     "category": "PICTO",
     "tags": []
@@ -1173,7 +1785,7 @@
     "name": "Versatile",
     "description": "After a Free Aim hit, Base Attack damage is increased by 50% for 1 turn.",
     "internalSlug": "Versatile",
-    "slug": "1lo9",
+    "slug": "zmtv",
     "imageUrl": "pictos/T_Pictos1.webp",
     "category": "PICTO",
     "tags": []
@@ -1182,7 +1794,7 @@
     "name": "Warming Up",
     "description": "5% increased damage per turn. Can stack up to 5 times.",
     "internalSlug": "Warming",
-    "slug": "s494",
+    "slug": "49s3",
     "imageUrl": "pictos/T_Pictos5.webp",
     "category": "PICTO",
     "tags": []
@@ -1191,7 +1803,7 @@
     "name": "Weakness Gain",
     "description": "+1 AP on hitting an enemy's Weakness. Once per turn.",
     "internalSlug": "WeaknessGain",
-    "slug": "rdc0",
+    "slug": "36lh",
     "imageUrl": "pictos/T_Pictos3.webp",
     "category": "PICTO",
     "tags": []

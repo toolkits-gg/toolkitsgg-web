@@ -9,6 +9,7 @@ type TypographyProps = {
     | 'h3'
     | 'h4'
     | 'p'
+    | 'body'
     | 'blockquote'
     | 'code'
     | 'lead'
@@ -31,6 +32,7 @@ const Typography = ({
     h3: 'scroll-m-20 text-2xl font-semibold tracking-tight',
     h4: 'scroll-m-20 text-xl font-semibold tracking-tight',
     p: 'leading-7 [&:not(:first-child)]:mt-6',
+    body: 'leading-7',
     blockquote: 'mt-6 border-l-2 pl-6 italic',
     code: 'bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
     lead: 'text-muted-foreground text-xl',
@@ -77,6 +79,8 @@ const Typography = ({
     case 'p':
       Tag = 'p';
       break;
+    case 'body':
+      Tag = 'p';
     case 'lead':
       Tag = 'p';
       break;
