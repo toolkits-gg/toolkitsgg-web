@@ -2,19 +2,10 @@ import type {
   COE33Character,
   COE33ItemCategory,
   COE33ItemTag,
+  COE33Stain,
 } from '@prisma/client';
 
-type COE33SkillItemType =
-  | {
-      category: 'SKILL';
-      character: COE33Character;
-    }
-  | {
-      category: Exclude<COE33ItemCategory, 'SKILL'>;
-      character?: never;
-    };
-
-export type COE33ItemType = {
+type COE33BaseItemType = {
   name: string;
   description: string;
   internalSlug: string;
@@ -22,7 +13,33 @@ export type COE33ItemType = {
   imageUrl: string;
   category: COE33ItemCategory;
   tags: COE33ItemTag[];
-} & COE33SkillItemType;
+};
+
+type COE33LuneSkillItem = COE33BaseItemType & {
+  category: 'SKILL';
+  character: 'LUNE';
+  stainGain: COE33Stain[];
+  stainConsume: COE33Stain[];
+};
+
+type COE33NonLuneSkillItem = COE33BaseItemType & {
+  category: 'SKILL';
+  character: Exclude<COE33Character, 'LUNE'>;
+  stainGain?: never;
+  stainConsume?: never;
+};
+
+type COE33NonSkillItem = COE33BaseItemType & {
+  category: Exclude<COE33ItemCategory, 'SKILL'>;
+  character?: never;
+  gains?: COE33Stain[];
+  consumes?: never;
+};
+
+export type COE33ItemType =
+  | COE33LuneSkillItem
+  | COE33NonLuneSkillItem
+  | COE33NonSkillItem;
 
 const pictoItems: COE33ItemType[] = [
   {
@@ -2176,6 +2193,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['ICE', 'LIGHT'],
+    stainConsume: ['EARTH', 'LIGHTNING', 'FIRE'],
   },
   {
     name: 'Cruler Barrier',
@@ -2198,6 +2217,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['EARTH', 'LIGHT'],
+    stainConsume: ['LIGHTNING', 'LIGHTNING'],
   },
   {
     name: 'Cultist Blood',
@@ -2330,6 +2351,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['EARTH'],
+    stainConsume: ['LIGHTNING'],
   },
   {
     name: 'Échassier Stabs',
@@ -2363,6 +2386,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['LIGHTNING', 'LIGHTNING'],
+    stainConsume: ['FIRE'],
   },
   {
     name: 'Elemental Genesis',
@@ -2374,6 +2399,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: [],
+    stainConsume: ['LIGHTNING', 'EARTH', 'FIRE', 'ICE'],
   },
   {
     name: 'Elemental Trick',
@@ -2385,6 +2412,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['ICE', 'FIRE', 'LIGHTNING', 'EARTH'],
+    stainConsume: [],
   },
   {
     name: 'End Bringer',
@@ -2451,6 +2480,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['FIRE', 'LIGHT'],
+    stainConsume: ['ICE', 'ICE'],
   },
   {
     name: 'Firing Shadow',
@@ -2637,6 +2668,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['LIGHT'],
+    stainConsume: ['EARTH', 'EARTH'],
   },
   {
     name: 'Hell',
@@ -2648,6 +2681,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['FIRE', 'LIGHT'],
+    stainConsume: ['ICE', 'EARTH', 'LIGHTNING'],
   },
   {
     name: 'Hexga Crush',
@@ -2670,6 +2705,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['ICE', 'LIGHT'],
+    stainConsume: ['EARTH'],
   },
   {
     name: 'Immolation',
@@ -2681,6 +2718,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['FIRE'],
+    stainConsume: ['ICE'],
   },
   {
     name: 'Intervention',
@@ -2769,6 +2808,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['LIGHTNING', 'LIGHT'],
+    stainConsume: ['EARTH', 'ICE', 'FIRE'],
   },
   {
     name: 'Lumière Assault',
@@ -2835,6 +2876,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: [],
+    stainConsume: ['FIRE', 'ICE', 'EARTH', 'LIGHTNING', 'LIGHT'],
   },
   {
     name: 'Mezzo Forte',
@@ -3187,6 +3230,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['LIGHT'],
+    stainConsume: ['LIGHTNING', 'LIGHTNING', 'LIGHTNING'],
   },
   {
     name: 'Recovery',
@@ -3220,6 +3265,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['LIGHT'],
+    stainConsume: ['FIRE', 'FIRE', 'FIRE'],
   },
   {
     name: 'Rocher Hammering',
@@ -3242,6 +3289,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['EARTH', 'LIGHT'],
+    stainConsume: ['LIGHTNING', 'ICE', 'FIRE'],
   },
   {
     name: 'Rush',
@@ -3385,6 +3434,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['LIGHT', 'LIGHT', 'LIGHT'],
+    stainConsume: ['FIRE', 'ICE', 'EARTH', 'LIGHTNING', 'LIGHT'],
   },
   {
     name: 'Spark',
@@ -3462,6 +3513,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['LIGHTNING', 'LIGHT'],
+    stainConsume: ['FIRE', 'FIRE'],
   },
   {
     name: 'Strike Storm',
@@ -3528,6 +3581,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['EARTH', 'LIGHT'],
+    stainConsume: ['LIGHTNING', 'LIGHTNING'],
   },
   {
     name: 'Thermal Transfer',
@@ -3539,6 +3594,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['ICE'],
+    stainConsume: ['EARTH', 'EARTH'],
   },
   {
     name: 'Thunderfall',
@@ -3550,6 +3607,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['LIGHTNING', 'LIGHT'],
+    stainConsume: ['FIRE'],
   },
   {
     name: 'Tree of Life',
@@ -3561,6 +3620,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['LIGHT', 'LIGHT'],
+    stainConsume: [],
   },
   {
     name: 'Tremor',
@@ -3572,6 +3633,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['LIGHT'],
+    stainConsume: [],
   },
   {
     name: 'Troubadour Trumpet',
@@ -3616,6 +3679,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['ICE', 'LIGHT'],
+    stainConsume: ['EARTH', 'EARTH'],
   },
   {
     name: 'Virtuose Strike',
@@ -3638,6 +3703,8 @@ const skillItems: COE33ItemType[] = [
     category: 'SKILL',
     tags: [],
     character: 'LUNE',
+    stainGain: ['FIRE', 'LIGHT'],
+    stainConsume: ['ICE', 'ICE'],
   },
 ];
 

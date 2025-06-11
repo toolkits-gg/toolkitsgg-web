@@ -30,6 +30,14 @@ enum COE33Element {
   VOID
 }
 
+enum COE33Stain {
+  EARTH
+  FIRE
+  ICE
+  LIGHT
+  LIGHTNING
+}
+
 enum COE33Attribute {
   AGILITY
   DEFENSE
