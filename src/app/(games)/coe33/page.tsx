@@ -30,27 +30,13 @@ export default async function GamePage() {
         />
       }
     >
-      <div className="col-span-full grid w-full grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+      <div className="col-span-full flex w-full flex-wrap items-center justify-between gap-2">
         {gameConfig?.items
           ?.filter((item) => item.category === 'SKILL')
           .map((item) => (
             <ItemCard key={item.slug} item={item} gameId={gameConfig.id} />
           ))}
       </div>
-      {/* <Card className="col-span-1 w-full sm:w-[420px]">
-        <CardHeader>
-          <CardTitle>{gameConfig?.name}</CardTitle>
-          <CardDescription>
-            Welcome to the {gameConfig?.name} page!
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Placeholder page</p>
-        </CardContent>
-        <CardFooter className="text-muted-foreground text-sm">
-          <p>More coming soon!</p>
-        </CardFooter>
-      </Card> */}
     </PageLayout>
   );
 }
