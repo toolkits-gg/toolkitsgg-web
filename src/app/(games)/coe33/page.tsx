@@ -31,9 +31,11 @@ export default async function GamePage() {
       }
     >
       <div className="col-span-full grid w-full grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-        {gameConfig?.items?.map((item) => (
-          <ItemCard key={item.slug} item={item} gameId={gameConfig.id} />
-        ))}
+        {gameConfig?.items
+          ?.filter((item) => item.category === 'SKILL')
+          .map((item) => (
+            <ItemCard key={item.slug} item={item} gameId={gameConfig.id} />
+          ))}
       </div>
       {/* <Card className="col-span-1 w-full sm:w-[420px]">
         <CardHeader>

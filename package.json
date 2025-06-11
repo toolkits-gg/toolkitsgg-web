@@ -17,13 +17,15 @@
     "lint": "next lint",
     "lint-fix": "next lint --fix",
     "type": "tsc --noEmit",
+    "jest": "jest",
     "prisma-seed": "tsx src/lib/prisma/seed.ts",
     "prisma-push": "prisma db push",
     "prisma-force-push": "prisma db push --force-reset",
     "prisma-studio": "pnpm dlx prisma studio",
     "email": "email dev --dir src/emails",
     "inngest": "pnpm dlx inngest-cli@latest dev",
-    "coe33-extract-picto-info": "tsx ./src/features/game/games/coe33/scripts/extract-picto-info/index.ts"
+    "coe33-extract-picto-info": "tsx ./src/features/game/games/coe33/scripts/extract-picto-info/index.ts",
+    "coe33-extract-skill-info": "tsx ./src/features/game/games/coe33/scripts/extract-skill-info/index.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",
@@ -67,7 +69,11 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/big.js": "^6.2.2",
+    "@types/jest": "^29.5.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -76,12 +82,16 @@
     "eslint-config-next": "15.3.2",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
+    "jest": "^30.0.0",
+    "jest-environment-jsdom": "^30.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "prisma": "^6.9.0",
     "react-email": "^4.0.14",
     "tailwindcss": "^4",
     "tailwindcss-animate": "^1.0.7",
+    "ts-jest": "^29.3.4",
+    "ts-node": "^10.9.2",
     "tsx": "^4.19.4",
     "typescript": "^5"
   }

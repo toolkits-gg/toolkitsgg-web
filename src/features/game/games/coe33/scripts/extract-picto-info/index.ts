@@ -4,7 +4,7 @@ import {
   coe33Items,
   type COE33ItemType,
 } from '@/features/game/games/coe33/items';
-import { internalSlugs } from '@/features/game/games/coe33/scripts/inputs/internal-slugs';
+import { pictoInternalSlugs } from '@/features/game/games/coe33/scripts/inputs/picto-internal-slugs';
 import PictoIconsData from '../inputs/DT_PictoIcons.json';
 import GameData from '../inputs/Game.json';
 
@@ -112,7 +112,7 @@ const generateSlug = (pictoItems: COE33ItemType[]): string => {
 const main = () => {
   const pictoItems: COE33ItemType[] = [];
 
-  for (const internalSlug of internalSlugs) {
+  for (const internalSlug of pictoInternalSlugs) {
     const { name, description } = parseGameData(internalSlug);
 
     const existingItem = coe33Items.find(

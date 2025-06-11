@@ -2,8 +2,12 @@ import type { GameId } from '@prisma/client';
 import { clairObscurConfig } from '@/features/game/games/coe33/config';
 import { noGameConfig } from '@/features/game/games/no-game-config';
 import type { GameConfig } from '@/features/game/types';
+import type { BaseItemType } from '@/features/item/types';
 
-export const gameConfigs: Record<GameId, GameConfig<unknown>> = {
+export const gameConfigs: Record<
+  GameId,
+  GameConfig<BaseItemType | undefined>
+> = {
   none: noGameConfig,
   coe33: clairObscurConfig,
   // Add more game configs here as needed

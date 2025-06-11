@@ -87,7 +87,6 @@ model BaseItem {
   id                 String              @id @default(cuid())
   name               String
   description        String?
-  slug               String
   imageUrl           String?
   disabled           Boolean             @default(false)
   coe33Item          COE33Item?

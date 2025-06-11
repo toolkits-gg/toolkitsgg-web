@@ -50,6 +50,7 @@ enum COE33Character {
 model COE33Item {
   baseItem           BaseItem          @relation(fields: [baseItemId], references: [id], onDelete: Cascade)
   baseItemId         String            @unique
+  slug               String            @unique
   // COE33 specific fields
   category           COE33ItemCategory
   tags               COE33ItemTag[]

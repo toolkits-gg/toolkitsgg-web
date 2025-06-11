@@ -1,0 +1,1622 @@
+[
+  {
+    "name": "Abbest Wind",
+    "description": "Deals low single target <keyword id=\"Element_Physical\">Physical</> damage. 1 hit.\nPlays a second turn.\n<keyword id=\"MonocoMask_Agile_Left\">Agile Mask</>: Costs 0 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "AbbestMelee",
+    "slug": "bmwp",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Abbest.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Aberration Light",
+    "description": "Deals high <keyword id=\"Element_Light\">Light</> damage to all enemies. 2 hits.\nApplies 4 <keyword id=\"StatusEffect_Burn\">Burn</> per hit.\n<keyword id=\"MonocoMask_Agile_Left\">Agile Mask</>: Applies 2 more <keyword id=\"StatusEffect_Burn\">Burn</> per hit.",
+    "internalSlug": "AberrationBurningLight",
+    "slug": "5ef8",
+    "imageUrl": "skills/T_UI_Skill_Monoco_BurningLight.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "All Set",
+    "description": "Applies <keyword id=\"Buff_Shell\">Shell</>, <keyword id=\"Buff_Powerful\">Powerful</>, and <keyword id=\"Buff_Rush\">Rush</> to all allies.",
+    "internalSlug": "AllSet",
+    "slug": "wr18",
+    "imageUrl": "skills/T_UI_Skill_Sciel_AllSet.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Angel's Eyes",
+    "description": "Deals extreme <keyword id=\"Element_Physical\">Physical</> Damage. 8 hits.\nGain 1 additional <keyword id=\"Perfection\">Perfection</> per hit.\nApplies Aureole to Verso, reviving him if he dies.",
+    "internalSlug": "AngelsEyes",
+    "slug": "7j02",
+    "imageUrl": "skills/T_UI_Skill_Verso_AngelEyes.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Ascending Assault",
+    "description": "Deals low single target damage. 1 hit.\nUses weapon's element.\nIncreased damage at each cast.\n<img id=\"Rank_S\"/>: Costs 2 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "AscendingAssault",
+    "slug": "a5w8",
+    "imageUrl": "skills/T_UI_Skill_Verso_AscendingAssault.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Assault Zero",
+    "description": "Deals low single target damage. 5 hits.\nUses weapon's element.\n<keyword id=\"CriticalHit\">Critical Hits</> generate 1 additional <keyword id=\"Perfection\">Perfection</>\n<img id=\"Rank_B\"/>: Increased damage.",
+    "internalSlug": "Combo1",
+    "slug": "wvc7",
+    "imageUrl": "skills/T_UI_Skill_Verso_LumiereAssault.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Bad Omen",
+    "description": "Deals low <keyword id=\"Element_Dark\">Dark</> damage to all enemies. 2 hits.\nApplies 2 <keyword id=\"Foretell\">Foretell</> per hit.",
+    "internalSlug": "BadOmen",
+    "slug": "dxjn",
+    "imageUrl": "skills/T_UI_Skill_Sciel_BadOmen.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Ballet Charm",
+    "description": "Deals low single target <keyword id=\"Element_Light\">Light</> damage. 1 hit.\nApplies <keyword id=\"Buff_Powerless\">Powerless</> to the target for 3 turns.\n<keyword id=\"MonocoMask_Caster_Left\">Caster Mask</>: Increased damage.",
+    "internalSlug": "BalletCharm",
+    "slug": "jd11",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Servante.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Bénisseur Mortar",
+    "description": "Deals medium single target <keyword id=\"Element_Ice\">Ice</> damage. 3 hits.\nChange to <keyword id=\"MonocoMask_Almighty\">Almighty Mask</> if target is <keyword id=\"StatusEffect_Mark\">Marked</>\n<keyword id=\"MonocoMask_Caster_Left\">Caster Mask</>: Increased damage.",
+    "internalSlug": "BenisseurMortar",
+    "slug": "753g",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Benisseur.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Berserk Slash",
+    "description": "Deals medium single target <keyword id=\"Element_Physical\">Physical</> damage. 3 hits.\nDamage is increased for each Health Verso is missing.\n<img id=\"Rank_C\"/>: Increased damage.",
+    "internalSlug": "BerserkSlash",
+    "slug": "c67r",
+    "imageUrl": "skills/T_UI_Skill_Verso_BerserkSlash.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Blitz",
+    "description": "Deals low single target <keyword id=\"Element_Physical\">Physical</> damage. 1 hit.\nPlays a second time. Kills non-boss enemies with less than 10% Health.\n<img id=\"Rank_B\"/>: Increased damage.",
+    "internalSlug": "Blitz",
+    "slug": "sdwx",
+    "imageUrl": "skills/T_UI_Skill_Verso_Blitz.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Boucheclier Fortify",
+    "description": "Applies <keyword id=\"Buff_Shell\">Shell</> to 1-3 allies for 3 turns.\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Also applies 1 <keyword id=\"Shield\">Shield</>",
+    "internalSlug": "BoucheclierShield",
+    "slug": "5np3",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Bouchclier.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Braseleur Smash",
+    "description": "Deals medium single target <keyword id=\"Element_Fire\">Fire</> damage and applies 3 <keyword id=\"StatusEffect_Burn\">Burn</>. 2 hits.\n<keyword id=\"MonocoMask_Balanced_Left\">Balanced Mask</>: Increased damage",
+    "internalSlug": "HammerSmash",
+    "slug": "dqa9",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Braseleur.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Break Point",
+    "description": "Deals extreme single target damage. 1 hit.\nUses weapon's element.\nFills the target's Break Bar and <keyword id=\"Break\">Breaks</> it.",
+    "internalSlug": "BreakPoint",
+    "slug": "j4cb",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Breakpoint.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Breaking Rules",
+    "description": "Deals low single target <keyword id=\"Element_Physical\">Physical</> damage. 2 hits.\nDestroys all target's <keyword id=\"Shield\">Shields</> Gains 1 <keyword id=\"APShard\">AP</> per Shield destroyed.\nIf target is <keyword id=\"Buff_Defenseless\">Defenceless</>, play a second turn.",
+    "internalSlug": "BreakingRules",
+    "slug": "4aoi",
+    "imageUrl": "skills/T_UI_Skill_Maelle_BreakingRules.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Bruler Bash",
+    "description": "Deals medium single target <keyword id=\"Element_Physical\">Physical</> damage. 3 hits.\nCan <keyword id=\"Break\">Break</>\n<keyword id=\"MonocoMask_Caster_Left\">Caster Mask</>: Increased damage.",
+    "internalSlug": "BrulerAnchorSmash",
+    "slug": "6uvi",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Bruler.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Burden",
+    "description": "Removes all Status Effects from all allies and applies them to Verso.\nGains 1 Rank.",
+    "internalSlug": "Burden",
+    "slug": "j2tz",
+    "imageUrl": "skills/T_UI_Skill_Verso_Burden.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Burning Canvas",
+    "description": "Deals high single target <keyword id=\"Element_Void\">Void</> damage. 5 hits.\nApplies 1 <keyword id=\"StatusEffect_Burn\">Burn</> per hit. Damage increased for each <keyword id=\"StatusEffect_Burn\">Burn</> on the target.",
+    "internalSlug": "BurningCanvas",
+    "slug": "71hj",
+    "imageUrl": "skills/T_UI_Skill_Maelle_RunningCanvas.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Card Weaver",
+    "description": "Deals low single target <keyword id=\"Element_Physical\">Physical</> damage. 1 hit.\nPropagates target's <keyword id=\"Foretell\">Foretell</> to all enemies.\nPlays a second turn.",
+    "internalSlug": "CardWeaver",
+    "slug": "yi3s",
+    "imageUrl": "skills/T_UI_Skill_Sciel_CardWeaver.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Chalier Combo",
+    "description": "Deals high single target <keyword id=\"Element_Physical\">Physical</> damage. 6 hits.\nInterrupted if failed.\n<keyword id=\"MonocoMask_Balanced_Left\">Balanced Mask</>: Increased damage.",
+    "internalSlug": "ChalierRelentlessSword",
+    "slug": "edg2",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Chalier.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Chapelier Slash",
+    "description": "Deals high <keyword id=\"Element_Physical\">Physical</> damage to all enemies. 3 hits.\nApplies <keyword id=\"StatusEffect_Mark\">Mark</>\n<keyword id=\"MonocoMask_Agile_Left\">Agile Mask</>: Increased damage.",
+    "internalSlug": "ChapelierAxeSlash",
+    "slug": "5bvx",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Chapelier.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Chevalière Ice",
+    "description": "Deals high <keyword id=\"Element_Ice\">Ice</> damage to all enemies. 3 hits.\nApplies <keyword id=\"Buff_Slow\">Slow</> to the targets for 3 turns.\n<keyword id=\"MonocoMask_Balanced_Left\">Balanced Mask</>: Increased damage.",
+    "internalSlug": "ChevaliereCAOECombo",
+    "slug": "xy4x",
+    "imageUrl": "skills/T_UI_Skill_Monoco_ChevaliereB.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Chevalière Piercing",
+    "description": "Deals single target <keyword id=\"Element_Physical\">Physical</> damage through <keyword id=\"Shield\">Shields</>. 6 hits.\nDamage increased for each <keyword id=\"Shield\">Shield</> on the target.\n<keyword id=\"MonocoMask_Agile_Left\">Agile Mask</>: Increased damage.",
+    "internalSlug": "ChevaliereCAC",
+    "slug": "velk",
+    "imageUrl": "skills/T_UI_Skill_Monoco_ChevaliereA.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Chevalière Thrusts",
+    "description": "Deals high <keyword id=\"Element_Physical\">Physical</> damage to all enemies. 3 hits.\n<keyword id=\"CriticalHit\">Critical Hits</> deal double damage.\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Increased damage.",
+    "internalSlug": "ChevaliereBAoECombo",
+    "slug": "wcof",
+    "imageUrl": "skills/T_UI_Skill_Monoco_ChevaliereC.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Clair Enfeeble",
+    "description": "Deals medium <keyword id=\"Element_Light\">Light</> damage to all enemies. 1 hit.\nApplies <keyword id=\"Buff_Powerless\">Powerless</> for 3 turns.\n<keyword id=\"MonocoMask_Balanced_Left\">Balanced Mask</>: Increased damage.",
+    "internalSlug": "ClairEnfeeble",
+    "slug": "iegs",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Enfeeble.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Combustion",
+    "description": "Deals medium single target <keyword id=\"Element_Physical\">Physical</> Damage. 2 hits.\nConsumes up to 10 <keyword id=\"StatusEffect_Burn\">Burn</> for increased damage.",
+    "internalSlug": "InvigoratingFire",
+    "slug": "9r9b",
+    "imageUrl": "skills/T_UI_Skill_Maelle_InvigoratingFire.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Contorsionniste Blast",
+    "description": "Deals medium <keyword id=\"Element_Physical\">Physical</> damage to all enemies. 1 hit.\n<keyword id=\"Heal\">Heals</> all allies by 10% Health for each enemy hit.\n<keyword id=\"MonocoMask_Balanced_Left\">Balanced Mask</>: Increased damage.",
+    "internalSlug": "ContorsionnisteAngryBlast",
+    "slug": "zrco",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Contortioniste.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Création Void",
+    "description": "Deals extreme <keyword id=\"Element_Void\">Void</> damage to random targets. 3 hits.\nMore damage if the same target is hit multiple times.\n<keyword id=\"MonocoMask_Caster_Left\">Caster Mask</>: Increased damage.",
+    "internalSlug": "CreationFromTheVoid",
+    "slug": "yybh",
+    "imageUrl": "skills/T_UI_Skill_Monoco_FromTheVoid.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Crippling Tsunami",
+    "description": "Deals medium <keyword id=\"Element_Ice\">Ice</> damage to all enemies. 1 hit.\nApplies <keyword id=\"Buff_Slow\">Slow</> for 3 turns.\n<keyword id=\"Consume_Generic\">Consumes</> <img id=\"Stain_Earth\"/><img id=\"Stain_Lightning\"/><img id=\"Stain_Fire\"/> for greatly increased damage.",
+    "internalSlug": "CripplingTsunami",
+    "slug": "3cys",
+    "imageUrl": "skills/T_UI_Skill_Lune_CripplingTsunami.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Cruler Barrier",
+    "description": "Applies 1-2 <keyword id=\"Shield\">Shields</> to the target.\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Gives 2 <keyword id=\"APShard\">AP</> to the target.",
+    "internalSlug": "CrulerShield",
+    "slug": "srvj",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Cruler.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Crustal Crush",
+    "description": "Deals high single target <keyword id=\"Element_Earth\">Earth</> and <keyword id=\"BreakDamage\">Break damage</> 5 hits.\n<keyword id=\"Consume_Lightning\">Consumes</> <img id=\"Stain_Lightning\"/><img id=\"Stain_Lightning\"/>: Increased damage.",
+    "internalSlug": "CrustalCrush",
+    "slug": "dbmr",
+    "imageUrl": "skills/T_UI_Skill_Lune_CrustalCrush.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Cultist Blood",
+    "description": "Deals medium <keyword id=\"Element_Dark\">Dark</> damage to all enemies. 3 hits.\nSacrifices 90% Health to increase damage.\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Increased damage.",
+    "internalSlug": "HeavyCultistBloodSword",
+    "slug": "ld2c",
+    "imageUrl": "skills/T_UI_Skill_Monoco_CultistHeavy.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Cultist Slashes",
+    "description": "Deals medium single target <keyword id=\"Element_Dark\">Dark</> damage. 3 hits.\nDeals more damage the less Health Monoco has.\n<keyword id=\"MonocoMask_Agile_Left\">Agile Mask</>: Increased damage.",
+    "internalSlug": "FlyingSlashes",
+    "slug": "fm5o",
+    "imageUrl": "skills/T_UI_Skill_Monoco_CultistMage.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Danseuse Waltz",
+    "description": "Deals high single target <keyword id=\"Element_Fire\">Fire</> damage. 3 hits.\nDeals more damage against <keyword id=\"StatusEffect_Burn\">Burning</> targets.\n<keyword id=\"MonocoMask_Balanced_Left\">Balanced Mask</>: Increased damage.",
+    "internalSlug": "DanseuseWingDance",
+    "slug": "0qjh",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Danseuse.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Dark Cleansing",
+    "description": "Cleanses an ally of their Status Effects and propagates the target's buff to all allies.",
+    "internalSlug": "DarkCleansing",
+    "slug": "bqop",
+    "imageUrl": "skills/T_UI_Skill_Sciel_DarkCleansing.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Dark Wave",
+    "description": "Deals high <keyword id=\"Element_Dark\">Dark</> damage to all enemies. 3 hits.\nConsumes all <keyword id=\"Foretell\">Foretell</> for increased damage.",
+    "internalSlug": "DarkWave",
+    "slug": "hsez",
+    "imageUrl": "skills/T_UI_Skill_Sciel_DarkWave.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Defiant Strike",
+    "description": "Deals high single target <keyword id=\"Element_Physical\">Physical</> damage that applies <keyword id=\"StatusEffect_Mark\">Mark</> 2 hits.\nCosts 30% of current Health.\n<img id=\"Rank_B\"/>: Increased damage.",
+    "internalSlug": "DefiantStrike",
+    "slug": "4o4b",
+    "imageUrl": "skills/T_UI_Skill_Verso_DefiantStrike.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Degagement",
+    "description": "Deals low single target <keyword id=\"Element_Fire\">Fire</> damage. 1 hit.\nTarget becomes weak to <keyword id=\"Element_Fire\">Fire</> damage for 2 turns",
+    "internalSlug": "Degagement",
+    "slug": "dod3",
+    "imageUrl": "skills/T_UI_Skill_Maelle_Degagement.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Delaying Slash",
+    "description": "Deals medium single target damage. 2 hits.\nUses weapon's element.\nConsumes <keyword id=\"Foretell\">Foretell</> to increase damage and delay target's turn.",
+    "internalSlug": "Postponed",
+    "slug": "b0ki",
+    "imageUrl": "skills/T_UI_Skill_Sciel_Postponed.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Démineur Thunder",
+    "description": "Deals low single target <keyword id=\"Element_Lightning\">Lightning</> damage. 1 hit.\nDeals extra <keyword id=\"BreakDamage\">Break Damage</>\n<keyword id=\"MonocoMask_Caster_Left\">Caster Mask</>: Increased Break damage.",
+    "internalSlug": "DemineurThunderStrike",
+    "slug": "o0eb",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Demineur.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Doom",
+    "description": "Deals very high single target <keyword id=\"Element_Dark\">Dark</> damage. 3 hits.\nApplies <keyword id=\"Buff_Powerless\">Powerless</>, <keyword id=\"Buff_Defenseless\">Defenceless</>, and <keyword id=\"Buff_Slow\">Slow</> for 3 turns.\nCan <keyword id=\"Break\">Break</>",
+    "internalSlug": "Doom",
+    "slug": "q44o",
+    "imageUrl": "skills/T_UI_Skill_Sciel_Doom.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Duallist Storm",
+    "description": "Deals extreme single target <keyword id=\"Element_Physical\">Physical</> damage. 4 hits.\nCan <keyword id=\"Break\">Break</>\n<keyword id=\"MonocoMask_Almighty_Left\">Almighty Mask</>: Increased damage.",
+    "internalSlug": "StormBlood",
+    "slug": "gp4g",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Duelliste.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Earth Rising",
+    "description": "Deals low <keyword id=\"Element_Earth\">Earth</> damage to all enemies. 1 hit.\n<keyword id=\"Consume_Lightning\">Consumes</> <img id=\"Stain_Lightning\"/> for increased damage.",
+    "internalSlug": "Earthquake",
+    "slug": "3j9x",
+    "imageUrl": "skills/T_UI_Skill_Lune_EarthRising.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Échassier Stabs",
+    "description": "Deals medium single target <keyword id=\"Element_Physical\">Physical</> damage. 2 hits.\nSecond hit applies <keyword id=\"StatusEffect_Mark\">Mark</> to the target.\n<keyword id=\"MonocoMask_Agile_Left\">Agile Mask</>: Increased damage",
+    "internalSlug": "EchassierCombo",
+    "slug": "4ly5",
+    "imageUrl": "skills/T_UI_Skill_Monoco_DoubleStab.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Égide",
+    "description": "Protects allies by taking damage in their place, for 2 turns.\nDuration is extended by 1 on gaining <keyword id=\"Buff_Shell\">Shell</>",
+    "internalSlug": "Egide",
+    "slug": "emso",
+    "imageUrl": "skills/T_UI_Skill_Maelle_Egide.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Electrify",
+    "description": "Deals low single target <keyword id=\"Element_Lightning\">Lightning</> damage. 3 hits.\n<keyword id=\"CriticalHit\">Critical Hits</> trigger an additional hit.\n<keyword id=\"Consume_Fire\">Consumes</> <img id=\"Stain_Fire\"/> to generate one Light Stain<img id=\"Stain_Light\"/>",
+    "internalSlug": "Electrify",
+    "slug": "ydez",
+    "imageUrl": "skills/T_UI_Skill_Lune_Electrify.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Elemental Genesis",
+    "description": "Deals extreme damage to all enemies. 8 hits.\nEach hit deals damage in a random element.\nCan only be cast with <img id=\"Stain_Lightning\"/><img id=\"Stain_Earth\"/><img id=\"Stain_Fire\"/><img id=\"Stain_Ice\"/>",
+    "internalSlug": "ElementalGenesis",
+    "slug": "8onj",
+    "imageUrl": "skills/T_UI_Skill_Lune_ElementalGenesis.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Elemental Trick",
+    "description": "Deals low single target <keyword id=\"Element_Ice\">Ice</>, <keyword id=\"Element_Fire\">Fire</>, <keyword id=\"Element_Lightning\">Lightning</>, and <keyword id=\"Element_Earth\">Earth</> damage. 4 hits.\n<keyword id=\"CriticalHit\">Critical Hits</> generate the corresponding Stain.",
+    "internalSlug": "ElementalTrick",
+    "slug": "gaux",
+    "imageUrl": "skills/T_UI_Skill_Lune_ElementalTrick.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "End Bringer",
+    "description": "Deals extreme single target <keyword id=\"Element_Physical\">Physical</> damage. 6 hits.\nIncreased damage if the target is <keyword id=\"StatusEffect_Stunned\">Stunned</>\n<img id=\"Rank_A\"/>: Can reapply <keyword id=\"StatusEffect_Stunned\">Stun</>",
+    "internalSlug": "EndBringer",
+    "slug": "tyky",
+    "imageUrl": "skills/T_UI_Skill_Verso_EndBringer.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "End Slice",
+    "description": "Deals extreme single target <keyword id=\"Element_Physical\">Physical</> damage. 1 hit.\nDamage is increased for each <keyword id=\"Foretell\">Foretell</> consumed since the beginning of the battle.",
+    "internalSlug": "EndSlice",
+    "slug": "4zo4",
+    "imageUrl": "skills/T_UI_Skill_Sciel_EndSlice.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Évêque Spear",
+    "description": "Deals high single target <keyword id=\"Element_Earth\">Earth</> damage and applies <keyword id=\"Buff_Powerless\">Powerless</> for 3 turns. 1 hit.\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Increased damage.",
+    "internalSlug": "EvequeSpear",
+    "slug": "obw7",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Eveque.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Fencer's Flurry",
+    "description": "Deals medium damage to all enemies. 1 hit.\nUses weapon's element.\nApplies <keyword id=\"Buff_Defenseless\">Defenceless</> for 1 turn.",
+    "internalSlug": "FencersFlurry",
+    "slug": "sofr",
+    "imageUrl": "skills/T_UI_Skill_Maelle_FencersFlurry.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Final Path",
+    "description": "Deals extreme single target <keyword id=\"Element_Dark\">Dark</> damage and applies 10 <keyword id=\"Foretell\">Foretell</> 1 hit.\nCan <keyword id=\"Break\">Break</>",
+    "internalSlug": "FinalPath",
+    "slug": "jkid",
+    "imageUrl": "skills/T_UI_Skill_Sciel_FinalPath.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Fire Rage",
+    "description": "Deals increasingly high <keyword id=\"Element_Fire\">Fire</> damage to all enemies every turn until Lune receives damage.\nStuns self if interrupted.\n<keyword id=\"Consume_Ice\">Consumes</> <img id=\"Stain_Ice\"/><img id=\"Stain_Ice\"/>: Increased damage.",
+    "internalSlug": "FireRage",
+    "slug": "7bjq",
+    "imageUrl": "skills/T_UI_Skill_Lune_FireRage.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Firing Shadow",
+    "description": "Deals low <keyword id=\"Element_Dark\">Dark</> damage to all enemies. 3 hits.\nConsumes 1 <keyword id=\"Foretell\">Foretell</> per hit for increased damage.",
+    "internalSlug": "FiringShadow",
+    "slug": "r5iy",
+    "imageUrl": "skills/T_UI_Skill_Sciel_FiringShadow.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Fleuret Fury",
+    "description": "Deals high single target <keyword id=\"Element_Physical\">Physical</> damage. 3 hits.\nIf in <keyword id=\"Stance_Virtuose\">Virtuose Stance</>, stay in <keyword id=\"Stance_Virtuose\">Virtuose Stance</>\nCan <keyword id=\"Break\">Break</>",
+    "internalSlug": "FleuretFury",
+    "slug": "uit9",
+    "imageUrl": "skills/T_UI_Skill_Maelle_FleuretFury.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Focused Foretell",
+    "description": "Deals medium single target <keyword id=\"Element_Physical\">Physical</> damage. 1 hit.\nApplies 2 <keyword id=\"Foretell\">Foretell</>\nApplies 3 additional <keyword id=\"Foretell\">Foretell</> if target has 0 <keyword id=\"Foretell\">Foretell</>",
+    "internalSlug": "Foretelling2",
+    "slug": "jk80",
+    "imageUrl": "skills/T_UI_Skill_Sciel_FocusedForetell.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Follow Up",
+    "description": "Deals medium single target <keyword id=\"Element_Light\">Light</> damage. 1 hit.\nDamage increased for each Free Aim shot this turn, up to 10 times.\n<img id=\"Rank_S\"/>: Costs 2 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "FollowUp",
+    "slug": "21d3",
+    "imageUrl": "skills/T_UI_Skill_Verso_FollowUp.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Fortune's Fury",
+    "description": "Targeted ally deals double damage for 1 turn.",
+    "internalSlug": "FortunesFury",
+    "slug": "ctnj",
+    "imageUrl": "skills/T_UI_Skill_Sciel_FortunesFury.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "From Fire",
+    "description": "Deals medium single target damage. 3 hits.\nUses weapon's element.\n<keyword id=\"Heal\">Heals</> self by 20% if the target <keyword id=\"StatusEffect_Burn\">Burns</>",
+    "internalSlug": "FromFire_Gustave",
+    "slug": "47f1",
+    "imageUrl": "skills/T_UI_Skill_Gustave_FromFire.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "GUSTAVE"
+  },
+  {
+    "name": "From Fire",
+    "description": "Deals medium single target damage. 3 hits.\nUses weapon's element.\n<keyword id=\"Heal\">Heals</> self by 20% Health if the target <keyword id=\"StatusEffect_Burn\">Burns</>\n<img id=\"Rank_B\"/>: Increased damage.",
+    "internalSlug": "FromFire",
+    "slug": "0cqn",
+    "imageUrl": "skills/T_UI_Skill_Verso_FromFire.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Gault Fury",
+    "description": "Deals low single target <keyword id=\"Element_Physical\">Physical</> damage. 4 hits.\nApplies <keyword id=\"StatusEffect_Mark\">Mark</>\n<keyword id=\"MonocoMask_Balanced_Left\">Balanced Mask</>: Increased damage.",
+    "internalSlug": "GaultCombo",
+    "slug": "m4be",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Gault.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Glaise Earthquakes",
+    "description": "Deals medium <keyword id=\"Element_Earth\">Earth</> damage to all enemies. 3 hits.\nApplies <keyword id=\"Buff_Powerful\">Powerful</> to self.\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: applies <keyword id=\"Buff_Powerful\">Powerful</> to all allies.",
+    "internalSlug": "GlaiseEarthquakes",
+    "slug": "wif4",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Glaise.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Gommage",
+    "description": "Kills weak targets.\nOtherwise deals extreme <keyword id=\"Element_Void\">Void</> damage. 1 hit.",
+    "internalSlug": "Gommage",
+    "slug": "thgu",
+    "imageUrl": "skills/T_UI_Skill_Maelle_Gommage.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Grim Harvest",
+    "description": "Deals medium single target <keyword id=\"Element_Dark\">Dark</> damage. 1 hit.\n<keyword id=\"Heal\">Heals</> all allies by 30% Health.\nConsumes <keyword id=\"Foretell\">Foretell</> to increase <keyword id=\"Heal\">Heal</> by 5% per <keyword id=\"Foretell\">Foretell</>",
+    "internalSlug": "DarkAbsorption",
+    "slug": "ea1g",
+    "imageUrl": "skills/T_UI_Skill_Sciel_DarkAbsorbtion.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Grosse Tête Whack",
+    "description": "Deals high single target <keyword id=\"Element_Physical\">Physical</> damage. 5 hits.\nApplies <keyword id=\"Buff_Defenseless\">Defenceless</> for 3 turns.\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Increased damage.",
+    "internalSlug": "GrosseTeteWrecking",
+    "slug": "i0uj",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Wrecking.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Guard Down",
+    "description": "Applies <keyword id=\"Buff_Defenseless\">Defenceless</> to all enemies for 3 turns.",
+    "internalSlug": "GuardDown",
+    "slug": "ou9n",
+    "imageUrl": "skills/T_UI_Skill_Maelle_GuardDown.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Guard Up",
+    "description": "Applies <keyword id=\"Buff_Shell\">Shell</>, reducing damage taken, to up to 3 allies for 3 turns.",
+    "internalSlug": "GuardUp",
+    "slug": "uuct",
+    "imageUrl": "skills/T_UI_Skill_Maelle_GuardUp.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Gustave's Homage",
+    "description": "Deals high single target <keyword id=\"Element_Lightning\">Lightning</> damage. 8 hits.\nIncreased damage to <keyword id=\"StatusEffect_Mark\">Marked</> targets.\nDoesn't remove Mark.",
+    "internalSlug": "GustavesMemoire",
+    "slug": "0u87",
+    "imageUrl": "skills/T_UI_Skill_Maelle_GustaveMemoires.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Harvest",
+    "description": "Deals medium single target damage. 1 hit.\nUses weapon's element.\n<keyword id=\"Heal\">Heals</> self by 40% Health.\nConsumes all <keyword id=\"Foretell\">Foretell</> to increase <keyword id=\"Heal\">Heal</> by 5% per <keyword id=\"Foretell\">Foretell</>",
+    "internalSlug": "Harvest",
+    "slug": "3p7y",
+    "imageUrl": "skills/T_UI_Skill_Sciel_Harvest.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Healing Light",
+    "description": "<keyword id=\"Heal\">Heals</> the targeted ally by 30-50% Health and dispels Status Effects.\n<keyword id=\"Consume_Earth\">Consumes</> <img id=\"Stain_Earth\"/> <img id=\"Stain_Earth\"/>: Costs 0 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "HealingLight",
+    "slug": "qubf",
+    "imageUrl": "skills/T_UI_Skill_Lune_HealingLight.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Hell",
+    "description": "Deals very high <keyword id=\"Element_Fire\">Fire</> damage that applies 5 <keyword id=\"StatusEffect_Burn\">Burn</> per hit to all enemies. 2 hits.\nDeals self-damage if failed.\n<keyword id=\"Consume_Generic\">Consumes</> <img id=\"Stain_Ice\"/><img id=\"Stain_Earth\"/><img id=\"Stain_Lightning\"/>: Greatly increased damage.",
+    "internalSlug": "Hell",
+    "slug": "1667",
+    "imageUrl": "skills/T_UI_Skill_Lune_Hell.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Hexga Crush",
+    "description": "Deals medium single target <keyword id=\"Element_Earth\">Earth</> damage. 2 hits.\nApplies <keyword id=\"Buff_Defenseless\">Defenceless</> to the target for 3 turns.\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Increases <keyword id=\"Buff_Defenseless\">Defenceless</> duration to 5 turns.",
+    "internalSlug": "HexgaCombo",
+    "slug": "lb6y",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Hexga.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Ice Lance",
+    "description": "Deals medium single target <keyword id=\"Element_Ice\">Ice</> damage that <keyword id=\"Buff_Slow\">Slows</> the target. 1 hit.\n<keyword id=\"Consume_Earth\">Consumes</> <img id=\"Stain_Earth\"/> to deal increased damage.",
+    "internalSlug": "IceGust",
+    "slug": "y0fh",
+    "imageUrl": "skills/T_UI_Skill_Lune_IceGust.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Immolation",
+    "description": "Deals low single target <keyword id=\"Element_Fire\">Fire</> damage and 3 <keyword id=\"StatusEffect_Burn\">Burn</>. 1 hit.\nApplies 2 more <keyword id=\"StatusEffect_Burn\">Burns</> if the target is <keyword id=\"StatusEffect_Mark\">Marked</>\n<keyword id=\"Consume_Ice\">Consumes</> <img id=\"Stain_Ice\"/> for increased damage.",
+    "internalSlug": "Immolation",
+    "slug": "xb49",
+    "imageUrl": "skills/T_UI_Skill_Lune_Immolation.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Intervention",
+    "description": "Targeted ally plays immediately and gains 4 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "Intervention",
+    "slug": "d58l",
+    "imageUrl": "skills/T_UI_Skill_Sciel_Intervention.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Jar Lampstorm",
+    "description": "Deals medium <keyword id=\"Element_Physical\">Physical</> damage to all enemies. 4 hits.\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Increased damage.",
+    "internalSlug": "JarCombo",
+    "slug": "o4fw",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Jar.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Lampmaster Light",
+    "description": "Deals high <keyword id=\"Element_Light\">Light</> damage to all enemies. 1 hit.\nIncreased damage at each cast.\n<keyword id=\"MonocoMask_Almighty_Left\">Almighty Mask</>: Increased damage.",
+    "internalSlug": "LampmasterSwordOfLight",
+    "slug": "ha8w",
+    "imageUrl": "skills/T_UI_Skill_Monoco_SwordOfLight.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Lancelier Impale",
+    "description": "Deals low single target <keyword id=\"Element_Ice\">Ice</> damage. 1 hit.\n<keyword id=\"Buff_Slow\">Slows</> the target for 3 turns.\n<keyword id=\"MonocoMask_Agile_Left\">Agile Mask</>: Increased damage.",
+    "internalSlug": "LancelierEstoc",
+    "slug": "z0ic",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Lancelier.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Last Chance",
+    "description": "Reduces self-Health to 1 but refills all <keyword id=\"APShard\">AP</>\nSwitches to <keyword id=\"Stance_Virtuose\">Virtuose Stance</>",
+    "internalSlug": "LastChance",
+    "slug": "k9g1",
+    "imageUrl": "skills/T_UI_Skill_Maelle_LastChance.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Leadership",
+    "description": "Reduces current Rank.\nGives 2-4 <keyword id=\"APShard\">AP</> to other allies.\n<img id=\"Rank_C\"/>: +1 more <keyword id=\"APShard\">AP</> to other allies.",
+    "internalSlug": "Leadership",
+    "slug": "7d41",
+    "imageUrl": "skills/T_UI_Skill_Verso_Leadership.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Light Holder",
+    "description": "Medium single target <keyword id=\"Element_Light\">Light</> damage. 5 hits.\nAt completion, gains 1 Rank.\n<img id=\"Rank_A\"/>: +2 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "LightHolder",
+    "slug": "lhb1",
+    "imageUrl": "skills/T_UI_Skill_Verso_LightHolder.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Lightning Dance",
+    "description": "Deals very high single target <keyword id=\"Element_Lightning\">Lightning</> damage. 6 hits.\n<keyword id=\"CriticalHit\">Critical Hits</> trigger an additional hit.\n<keyword id=\"Consume_Generic\">Consumes</> <img id=\"Stain_Earth\"/><img id=\"Stain_Ice\"/><img id=\"Stain_Fire\"/>: Greatly increased damage.",
+    "internalSlug": "LightningDance",
+    "slug": "wftl",
+    "imageUrl": "skills/T_UI_Skill_Lune_LightningStrike.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Lumière Assault",
+    "description": "Deals low single target damage. 5 hits.\nUses weapon's element.\n<keyword id=\"CriticalHit\">Critical Hits</> generate 1 additional <keyword id=\"Gustave_Charges\">Charge</>",
+    "internalSlug": "Combo1_Gustave",
+    "slug": "oxhj",
+    "imageUrl": "skills/T_UI_Skill_Gustave_LumiereAssault.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "GUSTAVE"
+  },
+  {
+    "name": "Luster Slices",
+    "description": "Deals low single target <keyword id=\"Element_Physical\">Physical</> damage. 3 hits.\nApplies <keyword id=\"Buff_Rush\">Rush</> to self for 3 turns.\n<keyword id=\"MonocoMask_Agile_Left\">Agile Mask</>: Increased damage.",
+    "internalSlug": "LusterCombo",
+    "slug": "tgxo",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Luster.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Marking Card",
+    "description": "Deals medium single target <keyword id=\"Element_Dark\">Dark</> damage. 2 hits.\nApplies <keyword id=\"StatusEffect_Mark\">Mark</> to the target.\nApplies 3 <keyword id=\"Foretell\">Foretell</>",
+    "internalSlug": "ShadowTargeting",
+    "slug": "q1mr",
+    "imageUrl": "skills/T_UI_Skill_Sciel_ShadowTargeting.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Marking Shot",
+    "description": "Deals low single target <keyword id=\"Element_Lightning\">Lightning</> damage. 1 hit.\nApplies <keyword id=\"StatusEffect_Mark\">Mark</>",
+    "internalSlug": "MarkingShot_Gustave",
+    "slug": "wz6e",
+    "imageUrl": "skills/T_UI_Skill_Gustave_MarkingShot.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "GUSTAVE"
+  },
+  {
+    "name": "Marking Shot",
+    "description": "Deals low single target damage. 1 hit.\nUses weapon's element.\nApplies <keyword id=\"StatusEffect_Mark\">Mark</>\n<img id=\"Rank_C\"/>: Increased damage.",
+    "internalSlug": "MarkingShot",
+    "slug": "4mcn",
+    "imageUrl": "skills/T_UI_Skill_Verso_MarkingShot.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Mayhem",
+    "description": "Consumes all Stains<img id=\"Stain_Generic\"/> to deal high elemental damage to the target.\nCan <keyword id=\"Break\">Break</> if 4 Stains are consumed.",
+    "internalSlug": "Mayhem",
+    "slug": "du3o",
+    "imageUrl": "skills/T_UI_Skill_Lune_Mayhem.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Mezzo Forte",
+    "description": "Reapplies current stance and gives 2-4 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "MezzoForte",
+    "slug": "m1q3",
+    "imageUrl": "skills/T_UI_Skill_Maelle_MezzoForte.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Mighty Strike",
+    "description": "Deals high single target damage. 2 hits.\nUses weapon's element.\nDeals double damage if the target is <keyword id=\"StatusEffect_Stunned\">Stunned</>\nGoes to <keyword id=\"MonocoMask_Almighty\">Almighty Mask</>.",
+    "internalSlug": "MightyStrike",
+    "slug": "qbfz",
+    "imageUrl": "skills/T_UI_Skill_Monoco_MightyStrike.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Moissonneuse Vendange",
+    "description": "Deals High single target <keyword id=\"Element_Physical\">Physical</> damage. 3 hits.\nCan <keyword id=\"Break\">Break</>\n<keyword id=\"MonocoMask_Balanced_Left\">Balanced Mask</>: Increased damage.",
+    "internalSlug": "MoissonneuseVendange",
+    "slug": "txit",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Moissoneuse.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Momentum Strike",
+    "description": "Deals high single target damage. 1 hit.\nUses weapon's element.\nIncreased damage to <keyword id=\"StatusEffect_Mark\">Marked</> targets.\n<keyword id=\"Stance_Virtuose\">Virtuose Stance</>: Costs 4 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "MomentumStrike",
+    "slug": "jt9l",
+    "imageUrl": "skills/T_UI_Skill_Maelle_MomentumStrike.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Obscur Sword",
+    "description": "Deals high single target <keyword id=\"Element_Dark\">Dark</> damage. 5 hits.\nDeals more damage against <keyword id=\"Buff_Powerless\">Powerless</> targets.\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Increased damage.",
+    "internalSlug": "ObscurCombo",
+    "slug": "q8su",
+    "imageUrl": "skills/T_UI_Skill_Monoco_DarkSlashes.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Offensive Switch",
+    "description": "Deals low single target damage and applies <keyword id=\"Buff_Defenseless\">Defenceless</> for 3 turns. 1 hit.\nUses weapon's element.",
+    "internalSlug": "OffensiveSwitch",
+    "slug": "y7jz",
+    "imageUrl": "skills/T_UI_Skill_Maelle_OffensiveSwitch.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Orphelin Cheers",
+    "description": "Applies <keyword id=\"Buff_Powerful\">Powerful</> to 1-3 allies.\n<keyword id=\"MonocoMask_Caster_Left\">Caster Mask</>: Also gives 3 <keyword id=\"APShard\">AP</> to targets.",
+    "internalSlug": "OrphelinBuff",
+    "slug": "85kg",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Orphelin.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Our Sacrifice",
+    "description": "Deals extreme <keyword id=\"Element_Dark\">Dark</> damage to all enemies. 1 hit.\nAbsorbs allies' Health and enemies' <keyword id=\"Foretell\">Foretell</> to deal increased damage.",
+    "internalSlug": "OurSacrifice",
+    "slug": "qpsd",
+    "imageUrl": "skills/T_UI_Skill_Sciel_OurSacrifice.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Overcharge",
+    "description": "Deals high single target <keyword id=\"Element_Lightning\">Lightning</> damage based on the amount of <keyword id=\"Gustave_Charges\">Charges</> 1 hit.\nCan <keyword id=\"Break\">Break</>\nResets <keyword id=\"Gustave_Charges\">Charges</>",
+    "internalSlug": "UnleashCharge",
+    "slug": "2vwd",
+    "imageUrl": "skills/T_UI_Skill_Gustave_UnleashedCharge.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "GUSTAVE"
+  },
+  {
+    "name": "Overload",
+    "description": "Increases Rank to <img id=\"Rank_A\"/> and refills all <keyword id=\"APShard\">AP</>, but sets self-Health to 1.",
+    "internalSlug": "Overcharge",
+    "slug": "zea8",
+    "imageUrl": "skills/T_UI_Skill_Verso_Overcharge.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Paradigm Shift",
+    "description": "Deals low <keyword id=\"Element_Physical\">Physical</> single target damage and gives 1-3 <keyword id=\"APShard\">AP</> back. 3 hits.\n<img id=\"Rank_C\"/>: +1 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "ParadigmShift",
+    "slug": "08kp",
+    "imageUrl": "skills/T_UI_Skill_Verso_ParadigmShift.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Payback",
+    "description": "Deals very high single target <keyword id=\"Element_Physical\">Physical</> damage. 1 hit.\nReduced <keyword id=\"APShard\">AP</> cost for each attack parried since last turn.\nCan <keyword id=\"Break\">Break</>",
+    "internalSlug": "Payback",
+    "slug": "0em3",
+    "imageUrl": "skills/T_UI_Skill_Maelle_Payback.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Pèlerin Heal",
+    "description": "Applies <keyword id=\"Buff_Regen\">Regen</> to all allies.\n<keyword id=\"MonocoMask_Caster_Left\">Caster Mask</>: also <keyword id=\"Heal\">Heals</> 40% Health.",
+    "internalSlug": "PelerinFreshAir",
+    "slug": "ey5k",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Pelerin.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Percée",
+    "description": "Deals medium single target <keyword id=\"Element_Physical\">Physical</> damage. 1 hit.\nIncreased damage to <keyword id=\"StatusEffect_Mark\">Marked</> targets.\n<keyword id=\"Stance_Virtuose\">Virtuose Stance</>: Costs 2 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "Percee",
+    "slug": "yo0d",
+    "imageUrl": "skills/T_UI_Skill_Maelle_Percee.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Perfect Break",
+    "description": "Deals very high single target <keyword id=\"Element_Light\">Light</> damage. 1 hit.\nCan <keyword id=\"Break\">Break</>\nRank <img id=\"Rank_S\"/> on <keyword id=\"Break\">Break</>\n<img id=\"Rank_B\"/>: Costs 5 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "PerfectBreak",
+    "slug": "w1ve",
+    "imageUrl": "skills/T_UI_Skill_Verso_PerfectBreak.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Perfect Recovery",
+    "description": "<keyword id=\"Heal\">Recovers</> 50% Health and dispels Status Effects.\nGives 0-2 <keyword id=\"Perfection\">Perfection</>\n<img id=\"Rank_C\"/>: Increased heal to 100% Health.",
+    "internalSlug": "PerfectRecovery",
+    "slug": "0tje",
+    "imageUrl": "skills/T_UI_Skill_Verso_PerfectRecovery.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Phantom Blade",
+    "description": "Deals high single target <keyword id=\"Element_Dark\">Dark</> damage. 1 hit.\nConsumes all <keyword id=\"Foretell\">Foretell</> to deal additional damage.\nCan <keyword id=\"Break\">Break</>",
+    "internalSlug": "ShadowDrop",
+    "slug": "ax5s",
+    "imageUrl": "skills/T_UI_Skill_Sciel_PhantomBlade.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Phantom Stars",
+    "description": "Deals extreme <keyword id=\"Element_Light\">Light</> damage to all enemies. 5 hits.\nCan <keyword id=\"Break\">Break</>\n<img id=\"Rank_S\"/>: Costs 5 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "PhantomStars",
+    "slug": "p101",
+    "imageUrl": "skills/T_UI_Skill_Verso_PhantomStars.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Phantom Strike",
+    "description": "Deals very high <keyword id=\"Element_Void\">Void</> damage to all enemies. 4 hits.\nAlso gives +35% of a Gradient Charge.",
+    "internalSlug": "PhantomStrike",
+    "slug": "vp1y",
+    "imageUrl": "skills/T_UI_Skill_Maelle_PhantomStrike.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Phoenix Flame",
+    "description": "Applies 10 <keyword id=\"StatusEffect_Burn\">Burn</> to all enemies and revives all allies with 50 to 70% Health.",
+    "internalSlug": "PhoenixFlame",
+    "slug": "148f",
+    "imageUrl": "skills/T_UI_Skill_Maelle_PhoenixFlame.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Plentiful Harvest",
+    "description": "Deals medium single target <keyword id=\"Element_Physical\">Physical</> damage. 2 hits.\nConsumes all <keyword id=\"Foretell\">Foretell</> on a target and gives 1 <keyword id=\"APShard\">AP</> to a party member for each <keyword id=\"Foretell\">Foretell</> consumed.",
+    "internalSlug": "PlentifulHarvest",
+    "slug": "26a5",
+    "imageUrl": "skills/T_UI_Skill_Sciel_PlentifulHarvest.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Portier Crash",
+    "description": "Deals high <keyword id=\"Element_Physical\">Physical</> damage to all enemies. 1 hit.\nCan <keyword id=\"Break\">Break</>\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Increased damage.",
+    "internalSlug": "PortierCrashingDown",
+    "slug": "4mfg",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Portier.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Potier Energy",
+    "description": "Gives 1-3 <keyword id=\"APShard\">AP</> to all allies.\n<keyword id=\"MonocoMask_Caster_Left\">Caster Mask</>: Gives 1 additional <keyword id=\"APShard\">AP</>",
+    "internalSlug": "PotierBuff",
+    "slug": "tw9s",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Potier.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Powerful",
+    "description": "Applies <keyword id=\"Buff_Powerful\">Powerful</> to 1-3 allies, increasing the damage they deal for 3 turns.\nGives 0 to 2 <keyword id=\"Gustave_Charges\">Charges</>",
+    "internalSlug": "Powerful_Gustave",
+    "slug": "8976",
+    "imageUrl": "skills/T_UI_Skill_Gustave_Powerful.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "GUSTAVE"
+  },
+  {
+    "name": "Powerful",
+    "description": "Applies <keyword id=\"Buff_Powerful\">Powerful</> to 1-3 allies, increasing damage they deal for 3 turns.\nGives 0-2 <keyword id=\"Perfection\">Perfection</>\n<img id=\"Rank_A\"/>: Duration increased to 5 turns.",
+    "internalSlug": "Powerful",
+    "slug": "0fjo",
+    "imageUrl": "skills/T_UI_Skill_Verso_Powerful.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Purification",
+    "description": "Deals single target medium <keyword id=\"Element_Light\">Light</> damage. 2 hits.\nDispels self status effects.\n<img id=\"Rank_B\"/>: Increased damage.",
+    "internalSlug": "Purification",
+    "slug": "7xpf",
+    "imageUrl": "skills/T_UI_Skill_Verso_Purification.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Pyrolyse",
+    "description": "Deals extreme single target <keyword id=\"Element_Fire\">Fire</> damage. 3 hits.\nApplies 5 <keyword id=\"StatusEffect_Burn\">Burn</> per hit.\n<keyword id=\"Stance_Offensive\">Offensive Stance</>: Applies 2 more <keyword id=\"StatusEffect_Burn\">Burn</> per hit.",
+    "internalSlug": "Pyrolyse",
+    "slug": "2zrx",
+    "imageUrl": "skills/T_UI_Skill_Maelle_Pyrolyse.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Quick Strike",
+    "description": "Deals low single target <keyword id=\"Element_Physical\">Physical</> damage. 1 hit.\n<img id=\"Rank_D\"/>: Gives more <keyword id=\"Perfection\">Perfection</>",
+    "internalSlug": "QuickStrike",
+    "slug": "ksvb",
+    "imageUrl": "skills/T_UI_Skill_Verso_QuickStrike.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Radiant Slash",
+    "description": "Deals low <keyword id=\"Element_Light\">Light</> damage to all enemies. 1 hit.\nCan <keyword id=\"Break\">Break</>\n<img id=\"Rank_C\"/>: Increased damage.",
+    "internalSlug": "RadiantSlash",
+    "slug": "pxop",
+    "imageUrl": "skills/T_UI_Skill_Verso_RadiantSlash.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Rain of Fire",
+    "description": "Deals medium single target <keyword id=\"Element_Fire\">Fire</> damage. 2 hits.\nApplies 3 <keyword id=\"StatusEffect_Burn\">Burn</> per hit.\n<keyword id=\"Stance_Defensive\">Defensive Stance</>: applies 2 more <keyword id=\"StatusEffect_Burn\">Burn</> per hit.",
+    "internalSlug": "RainOfFire",
+    "slug": "5kc4",
+    "imageUrl": "skills/T_UI_Skill_Maelle_ReignOfFire.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Ramasseur Bonk",
+    "description": "Deals low single target <keyword id=\"Element_Dark\">Dark</> damage. 1 hit.\nCan <keyword id=\"Break\">Break</>\n<keyword id=\"MonocoMask_Agile_Left\">Agile Mask</>: fills 20% of the target's Break Bar.",
+    "internalSlug": "RamasseurBonk",
+    "slug": "aczd",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Ramasseur.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Rebirth",
+    "description": "Revives an ally with 30-70% Health and 2 additional <keyword id=\"APShard\">AP</>\n<keyword id=\"Consume_Lightning\">Consumes</> <img id=\"Stain_Lightning\"/><img id=\"Stain_Lightning\"/><img id=\"Stain_Lightning\"/>: Costs 0 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "Rebirth",
+    "slug": "bvi4",
+    "imageUrl": "skills/T_UI_Skill_Lune_Rebirth.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Recovery",
+    "description": "<keyword id=\"Heal\">Recovers</> 50% Health and dispels Status Effects.\nGives 0-2 <keyword id=\"Gustave_Charges\">Charges</>",
+    "internalSlug": "PerfectRecovery_Gustave",
+    "slug": "d4y0",
+    "imageUrl": "skills/T_UI_Skill_Gustave_PerfectRecovery.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "GUSTAVE"
+  },
+  {
+    "name": "Revenge",
+    "description": "Deals high single target <keyword id=\"Element_Fire\">Fire</> damage. 1 hit.\nDamage increased for each hit received since the previous turn.\nCan <keyword id=\"Break\">Break</>",
+    "internalSlug": "Revenge",
+    "slug": "vl2u",
+    "imageUrl": "skills/T_UI_Skill_Maelle_Revenge.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Revitalization",
+    "description": "<keyword id=\"Heal\">Heals</> 1-3 allies by 40-60% Health.\n<keyword id=\"Consume_Fire\">Consumes</> <img id=\"Stain_Fire\"/><img id=\"Stain_Fire\"/><img id=\"Stain_Fire\"/> to also apply <keyword id=\"Buff_Regen\">Regen</> that heals on turn start for 3 turns.",
+    "internalSlug": "Revitalization",
+    "slug": "sdu4",
+    "imageUrl": "skills/T_UI_Skill_Lune_Regeneration.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Rocher Hammering",
+    "description": "Deals medium single target <keyword id=\"Element_Physical\">Physical</> damage. 4 hits.\nCan <keyword id=\"Break\">Break</>\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Increased damage.",
+    "internalSlug": "RocherHammering",
+    "slug": "wxaw",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Hammering.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Rockslide",
+    "description": "Deals medium single target <keyword id=\"Element_Earth\">Earth</> damage. 2 hits.\nCan <keyword id=\"Break\">Break</>\n<keyword id=\"Consume_Generic\">Consumes</> <img id=\"Stain_Lightning\"/><img id=\"Stain_Ice\"/><img id=\"Stain_Fire\"/> for greatly increased damage.",
+    "internalSlug": "RockSlide",
+    "slug": "dpnc",
+    "imageUrl": "skills/T_UI_Skill_Lune_RockSlide.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Rush",
+    "description": "Applies <keyword id=\"Buff_Rush\">Rush</> to 1-3 allies, increasing their speed for 3 turns.",
+    "internalSlug": "SpeedUp",
+    "slug": "n3zt",
+    "imageUrl": "skills/T_UI_Skill_Sciel_SpeedUp.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Sabotage",
+    "description": "Deals medium <keyword id=\"Element_Physical\">Physical</> damage to all enemies. 1 hit.\nApplies <keyword id=\"StatusEffect_Mark\">Mark</>",
+    "internalSlug": "Sabotage",
+    "slug": "y7va",
+    "imageUrl": "skills/T_UI_Skill_Verso_Sabotage.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Sakapatate Estoc",
+    "description": "Deals low single target <keyword id=\"Element_Lightning\">Lightning</> damage. 1 hit.\nDeals more damage if the target is <keyword id=\"StatusEffect_Stunned\">Stunned</>\n<keyword id=\"MonocoMask_Balanced_Left\">Balanced Mask</>: Increased damage.",
+    "internalSlug": "ThunderEstoc",
+    "slug": "m304",
+    "imageUrl": "skills/T_UI_Skill_Monoco_PotatoBagFighter.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Sakapatate Explosion",
+    "description": "Deals medium <keyword id=\"Element_Lightning\">Lightning</> damage to random enemies. 3 hits.\n<keyword id=\"CriticalHit\">Critical Hits</> trigger an additional hit.\n<keyword id=\"MonocoMask_Caster_Left\">Caster Mask</>: Increased damage.",
+    "internalSlug": "ThunderThrows",
+    "slug": "ikl5",
+    "imageUrl": "skills/T_UI_Skill_Monoco_PotatoBagMage.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Sakapatate Fire",
+    "description": "Deals extreme <keyword id=\"Element_Fire\">Fire</> to all enemies. 3 hits.\nApply 3 <keyword id=\"StatusEffect_Burn\">Burn</> per hit.\n<keyword id=\"MonocoMask_Almighty_Left\">Almighty Mask</>: Increased damage.",
+    "internalSlug": "PotatobagBossFireShots",
+    "slug": "z0sc",
+    "imageUrl": "skills/T_UI_Skill_Monoco_BossPotatobagA.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Sakapatate Slam",
+    "description": "Deals high <keyword id=\"Element_Physical\">Physical</> damage to all enemies. 1 hit.\nIncreased damage to <keyword id=\"StatusEffect_Mark\">Marked</> targets.\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Increased damage.",
+    "internalSlug": "PotatobagSlam",
+    "slug": "bc0a",
+    "imageUrl": "skills/T_UI_Skill_Monoco_PotatoBagHeavy.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Sanctuary",
+    "description": "Gives 2 <keyword id=\"Shield\">Shields</> and applies <keyword id=\"Buff_Regen\">Regen</> to all allies for 3 turns.",
+    "internalSlug": "Sanctuary",
+    "slug": "zle4",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Sanctuary.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Sapling Absorption",
+    "description": "Deals high <keyword id=\"Element_Dark\">Dark</> damage. 3 hits.\n<keyword id=\"Heal\">Recovers</> 5% Health on hit.\n<keyword id=\"MonocoMask_Caster_Left\">Caster Mask</>: Increased damage and double <keyword id=\"Heal\">Heal</>",
+    "internalSlug": "SaplingAbsorption",
+    "slug": "i7m1",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Sapling.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Sealed Fate",
+    "description": "Deals high single target damage. 5-7 hits.\nUses weapon's element.\nEach hit can consume 1 <keyword id=\"Foretell\">Foretell</> to deal 200% more damage.\n<keyword id=\"CriticalHit\">Critical Hits</> don't remove the <keyword id=\"Foretell\">Foretell</> but still gets the damage increase.",
+    "internalSlug": "SealedFate",
+    "slug": "a22m",
+    "imageUrl": "skills/T_UI_Skill_Sciel_SealedFate.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Searing Bond",
+    "description": "Deals medium single target <keyword id=\"Element_Dark\">Dark</> damage. 1 hit.\nApplies 5 <keyword id=\"Foretell\">Foretell</>\nAlso deals damage and applies <keyword id=\"Foretell\">Foretell</> to every other <keyword id=\"StatusEffect_Burn\">Burning</> enemies.",
+    "internalSlug": "SearingBond",
+    "slug": "luez",
+    "imageUrl": "skills/T_UI_Skill_Sciel_SearingBond.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Shadow Bringer",
+    "description": "Deals high single target <keyword id=\"Element_Dark\">Dark</> damage to random enemies. 10 hits.\nApplies 1 <keyword id=\"Foretell\">Foretell</> per hit.",
+    "internalSlug": "ShadowBringer",
+    "slug": "8f8z",
+    "imageUrl": "skills/T_UI_Skill_Sciel_ShadowBringer.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Shatter",
+    "description": "Deals High <keyword id=\"Element_Lightning\">Lightning</> damage to all enemies. 1 hit.\nCan <keyword id=\"Break\">Break</>\nIf a target is <keyword id=\"Break\">Broken</> by the hit, Overcharge is fully <keyword id=\"Gustave_Charges\">Charged</>",
+    "internalSlug": "PerfectBreak_Gustave",
+    "slug": "6ic5",
+    "imageUrl": "skills/T_UI_Skill_Gustave_Shatter.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "GUSTAVE"
+  },
+  {
+    "name": "Sky Break",
+    "description": "Deals extreme damage to all enemies. 1 hit.\nElement depends on which Stains Lune has the most.\nCan <keyword id=\"Break\">Break</>",
+    "internalSlug": "SkyBreak",
+    "slug": "pzyr",
+    "imageUrl": "skills/T_UI_Skill_Lune_SkyBreak.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Spark",
+    "description": "Deals low single target <keyword id=\"Element_Fire\">Fire</> damage. 1 hit.\nApplies 3 <keyword id=\"StatusEffect_Burn\">Burn</>\n<keyword id=\"Stance_Offensive\">Offensive Stance</>: Applies 2 more <keyword id=\"StatusEffect_Burn\">Burn</>",
+    "internalSlug": "Spark",
+    "slug": "88g2",
+    "imageUrl": "skills/T_UI_Skill_Maelle_Spark.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Spectral Sweep",
+    "description": "Deals medium single target damage. 2 to 6 hits. \nUses weapon's element.\nApplies 1 <keyword id=\"Foretell\">Foretell</> per hit.\n<keyword id=\"CriticalHit\">Critical Hits</> apply an additional <keyword id=\"Foretell\">Foretell</>",
+    "internalSlug": "SpectralSweep",
+    "slug": "532h",
+    "imageUrl": "skills/T_UI_Skill_Sciel_SpectralSweep.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Speed Burst",
+    "description": "Deals high single target <keyword id=\"Element_Light\">Light</> damage. 5 hits.\nDamage increased by Speed difference with the target.\n<img id=\"Rank_C\"/>: Increased damage",
+    "internalSlug": "SpeedBurst",
+    "slug": "g6i7",
+    "imageUrl": "skills/T_UI_Skill_Verso_SpeedBurst.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Stalact Punches",
+    "description": "Deals medium single target <keyword id=\"Element_Ice\">Ice</> damage. 4 hits.\nHigh <keyword id=\"BreakDamage\">Break damage</>\n<keyword id=\"MonocoMask_Heavy_Left\">Heavy Mask</>: Increased damage.",
+    "internalSlug": "StalactCombo",
+    "slug": "4q4r",
+    "imageUrl": "skills/T_UI_Skill_Monoco_StalactA.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Steeled Strike",
+    "description": "After 1 turn, deals extreme single target <keyword id=\"Element_Physical\">Physical</> damage. 13 hits.\nInterrupted if any damage taken.\n<img id=\"Rank_S\"/>: Increased damage.",
+    "internalSlug": "SteeledStrike",
+    "slug": "hmbd",
+    "imageUrl": "skills/T_UI_Skill_Verso_SteeledStrike.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Stendhal",
+    "description": "Deals extreme single target <keyword id=\"Element_Void\">Void</> damage. 1 hit.\nRemoves self-<keyword id=\"Shield\">Shields</> and self applies <keyword id=\"Buff_Defenseless\">Defenceless</>",
+    "internalSlug": "Stendhal",
+    "slug": "74vt",
+    "imageUrl": "skills/T_UI_Skill_Maelle_Stendhal.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Storm Caller",
+    "description": "All enemies receive medium <keyword id=\"Element_Lightning\">Lightning</> damage at the end of their turn, and low <keyword id=\"Element_Lightning\">Lightning</> damage when they receive damage.\nDuration: 3 turns.\n<keyword id=\"Consume_Fire\">Consumes</> <img id=\"Stain_Fire\"/><img id=\"Stain_Fire\"/> for double thunder strikes on turn end.",
+    "internalSlug": "StormCaller",
+    "slug": "w73j",
+    "imageUrl": "skills/T_UI_Skill_Lune_StormCaller.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Strike Storm",
+    "description": "Deals very high single target damage. 6 hits.\nUses weapon's element.\n<keyword id=\"CriticalHit\">Critical Hits</> generate 2 additional <keyword id=\"Gustave_Charges\">Charges</>",
+    "internalSlug": "StrikeStorm_Gustave",
+    "slug": "vaqd",
+    "imageUrl": "skills/T_UI_Skill_Gustave_StrikeStorm.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "GUSTAVE"
+  },
+  {
+    "name": "Strike Storm",
+    "description": "Deals very high single target damage. 5 hits.\nUses weapon's element.\n<keyword id=\"CriticalHit\">Critical Hits</> generate 2 additional <keyword id=\"Perfection\">Perfection</>\n<img id=\"Rank_C\"/>: Increased damage.",
+    "internalSlug": "StrikeStorm",
+    "slug": "em49",
+    "imageUrl": "skills/T_UI_Skill_Verso_StrikeStorm.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Striker",
+    "description": "Deals high single target <keyword id=\"Element_Physical\">Physical</> damage. 1 hit.\nCan <keyword id=\"Break\">Break</>",
+    "internalSlug": "Striker",
+    "slug": "6lmk",
+    "imageUrl": "skills/T_UI_Skill_Verso_Striker.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "VERSO"
+  },
+  {
+    "name": "Swift Stride",
+    "description": "Deals low single target <keyword id=\"Element_Physical\">Physical</> damage. 1 hit.\nSwitches to <keyword id=\"Stance_Virtuose\">Virtuose Stance</> if target is <keyword id=\"StatusEffect_Burn\">Burning</>\nRegains 0 to 2 <keyword id=\"APShard\">AP</>",
+    "internalSlug": "FireRise",
+    "slug": "ssmh",
+    "imageUrl": "skills/T_UI_Skill_Maelle_FireRise.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Sword Ballet",
+    "description": "Deals extreme single target damage. 5 hits.\nUses weapon's element.\n<keyword id=\"CriticalHit\">Critical Hits</> deal double damage.",
+    "internalSlug": "SwordBallet",
+    "slug": "o7z7",
+    "imageUrl": "skills/T_UI_Skill_Maelle_SwordBallet.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Terraquake",
+    "description": "Deals low <keyword id=\"Element_Earth\">Earth</> damage and <keyword id=\"BreakDamage\">Break damage</> to all enemies every turn.\nAlso increases all <keyword id=\"Break\">Break damage</> received by 50%.\nDuration: 3 turns.\n<keyword id=\"Consume_Lightning\">Consumes</> <img id=\"Stain_Lightning\"/><img id=\"Stain_Lightning\"/> to increase the Duration to 5 turns.",
+    "internalSlug": "TerraQuake",
+    "slug": "3dj9",
+    "imageUrl": "skills/T_UI_Skill_Lune_TerraQuake.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Thermal Transfer",
+    "description": "Deals low single target <keyword id=\"Element_Ice\">Ice</> damage. 2 hits.\nGains 4 <keyword id=\"APShard\">AP</> if target is <keyword id=\"StatusEffect_Burn\">Burning</>\n<keyword id=\"Consume_Earth\">Consumes</> <img id=\"Stain_Earth\"/><img id=\"Stain_Earth\"/>: Play a second turn.",
+    "internalSlug": "ThermalTransfer",
+    "slug": "ttky",
+    "imageUrl": "skills/T_UI_Skill_Lune_ThermalTransfer.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Thunderfall",
+    "description": "Deals medium <keyword id=\"Element_Lightning\">Lightning</> damage to random enemies. 2-6 hits.\n<keyword id=\"CriticalHit\">Critical Hits</> trigger an additional hit.\n<keyword id=\"Consume_Fire\">Consumes</> <img id=\"Stain_Fire\"/> for increased damage.",
+    "internalSlug": "Thunderfall",
+    "slug": "okbt",
+    "imageUrl": "skills/T_UI_Skill_Lune_Thunderfall.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Tree of Life",
+    "description": "Cleanses all status effects and <keyword id=\"Heal\">Heals</> all allies.",
+    "internalSlug": "TreeOfLife",
+    "slug": "3xy2",
+    "imageUrl": "skills/T_UI_Skill_Lune_TreeOfLife.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Tremor",
+    "description": "Deals high <keyword id=\"Element_Earth\">Earth</> damage to all enemies. 1 hit.\nRemoves all enemies' <keyword id=\"Shield\">Shields</>",
+    "internalSlug": "Tremor",
+    "slug": "nexg",
+    "imageUrl": "skills/T_UI_Skill_Lune_Tremor.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Troubadour Trumpet",
+    "description": "Applies a random buff to 1 to 3 allies.\n<keyword id=\"MonocoMask_Caster_Left\">Caster Mask</>: applies a second random buff.",
+    "internalSlug": "Trumpet",
+    "slug": "gqqe",
+    "imageUrl": "skills/T_UI_Skill_Monoco_Troubadour.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MONOCO"
+  },
+  {
+    "name": "Twilight Dance",
+    "description": "Deals extreme single target <keyword id=\"Element_Dark\">Dark</> damage. 4 hits.\nDuring <keyword id=\"Foretell_Twilight\">Twilight</>, extends <keyword id=\"Foretell_Twilight\">Twilight</> duration by 1 turn.\nConsumes all <keyword id=\"Foretell\">Foretell</> to deal additional damage.",
+    "internalSlug": "TwilightDance",
+    "slug": "rhnb",
+    "imageUrl": "skills/T_UI_Skill_Sciel_TwilightDance.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Twilight Slash",
+    "description": "Deals low single target <keyword id=\"Element_Dark\">Dark</> damage. 1 hit.\nConsumes all <keyword id=\"Foretell\">Foretell</> to deal additional damage.",
+    "internalSlug": "GrimPrediction",
+    "slug": "rgmf",
+    "imageUrl": "skills/T_UI_Skill_Sciel_GrimPrediction.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "SCIEL"
+  },
+  {
+    "name": "Typhoon",
+    "description": "On turn start, deals high <keyword id=\"Element_Ice\">Ice</> damage to all enemies and <keyword id=\"Heal\">Heals</> allies.\n<keyword id=\"Consume_Earth\">Consumes</> <img id=\"Stain_Earth\"/><img id=\"Stain_Earth\"/>: Duration increased from 3 to 5 turns.",
+    "internalSlug": "Typhoon",
+    "slug": "a88n",
+    "imageUrl": "skills/T_UI_Skill_Lune_Typhoon.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  },
+  {
+    "name": "Virtuose Strike",
+    "description": "Deals high single target <keyword id=\"Element_Physical\">Physical</> damage. 5 hits.",
+    "internalSlug": "VirtuoseStrike",
+    "slug": "ydry",
+    "imageUrl": "skills/T_UI_Skill_Maelle_VirtuoseStrike.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "MAELLE"
+  },
+  {
+    "name": "Wildfire",
+    "description": "Deals medium <keyword id=\"Element_Fire\">Fire</> damage to all enemies. 1 hit.\nApplies 3 <keyword id=\"StatusEffect_Burn\">Burn</>\n<keyword id=\"Consume_Ice\">Consumes</> <img id=\"Stain_Ice\"/><img id=\"Stain_Ice\"/>: Increased damage.",
+    "internalSlug": "Wildfire",
+    "slug": "yzv0",
+    "imageUrl": "skills/T_UI_Skill_Lune_Wildfire.webp",
+    "category": "SKILL",
+    "tags": [],
+    "character": "LUNE"
+  }
+]

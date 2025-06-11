@@ -1,4 +1,4 @@
-export const internalSlugs = [
+export const pictoInternalSlugs = [
   'AcceleratorHeal',
   'AegisRevival',
   'AntiBlight',
