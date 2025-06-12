@@ -39,6 +39,8 @@ const ThemeSwitcher = () => {
     return <Skeleton className="h-9 w-9" />;
   }
 
+  console.info('theme', theme);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
