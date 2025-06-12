@@ -12,6 +12,7 @@ datasource db {
 enum GameId {
   none
   coe33
+  rem2
 }
 
 model User {

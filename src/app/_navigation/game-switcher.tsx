@@ -70,6 +70,7 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
             </DropdownMenuLabel>
             {allGameConfigs
               .filter((gameConfig) => gameConfig.id !== noGameConfig.id)
+              .filter((gameConfig) => gameConfig.id !== 'rem2')
               .map((gameConfig) => (
                 <DropdownMenuItem key={gameConfig.name}>
                   <Link
