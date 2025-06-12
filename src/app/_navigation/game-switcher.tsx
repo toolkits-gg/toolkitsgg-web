@@ -18,8 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { allGameConfigs } from '@/features/game/constants';
-import { noGameConfig } from '@/features/game/games/no-game-config';
+import { allGameConfigs, noGameConfig } from '@/features/game/constants';
 import { useActiveGameConfig } from '@/features/game/hooks/use-active-game-config';
 
 type GameSwitcherProps = {
