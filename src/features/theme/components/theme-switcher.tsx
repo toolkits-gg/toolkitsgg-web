@@ -39,6 +39,8 @@ const ThemeSwitcher = () => {
     return <Skeleton className="h-9 w-9" />;
   }
 
+  console.info('theme', theme);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -65,7 +67,15 @@ const ThemeSwitcher = () => {
             Game-specific themes
           </Toggle>
 
-          <Select disabled={gameThemeEnabled} onValueChange={handleChangeTheme}>
+          <Select
+            disabled={gameThemeEnabled}
+            onValueChange={handleChangeTheme}
+            value={
+              theme.indexOf('default') !== -1
+                ? 'none'
+                : theme.replace(/-dark$/, '')
+            }
+          >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select a theme" />
             </SelectTrigger>

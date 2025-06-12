@@ -16,7 +16,7 @@ const ItemCard = <ItemType extends BaseItemType>({
   return (
     <div
       key={item.slug}
-      className="border-primary/85 flex h-[125px] w-full max-w-[125px] flex-col rounded-tl-xl rounded-tr-xl border bg-white text-center dark:bg-black"
+      className="flex h-[125px] w-full max-w-[125px] flex-col rounded-tl-xl rounded-tr-xl border bg-white text-center dark:bg-black"
     >
       <div className="flex h-[85px] w-full flex-1 items-center justify-center p-1">
         <Image
@@ -26,7 +26,7 @@ const ItemCard = <ItemType extends BaseItemType>({
           height={75}
         />
       </div>
-      <div className="bg-primary/85 text-primary-foreground flex h-full w-full flex-col items-center justify-center p-0.5">
+      <div className="bg-primary/75 text-primary-foreground flex h-full w-full flex-col items-center justify-center p-0.5">
         <Typography variant="body" className="text-xs font-medium">
           {item.name}
         </Typography>

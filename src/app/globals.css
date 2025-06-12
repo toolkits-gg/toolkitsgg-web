@@ -96,7 +96,7 @@
     --accent-foreground: oklch(1 0 0);
     --destructive: oklch(0.5771 0.2152 27.325);
     --destructive-foreground: oklch(1 0 0);
-    --border: oklch(0.8717 0.0093 258.3382);
+    --border: oklch(0.8651 0.0331 293.3441);
     --input: oklch(1 0 0);
     --ring: oklch(0.471 0.2545 297.4869);
     --chart-1: oklch(0.471 0.2545 297.4869);
@@ -292,5 +292,114 @@
     --shadow-xl:
       0px 2px 4px 0px hsl(0 0% 0% / 0.2), 0px 8px 10px -1px hsl(0 0% 0% / 0.2);
     --shadow-2xl: 0px 2px 4px 0px hsl(0 0% 0% / 0.5);
+  }
+
+  /* https://tweakcn.com/themes/cmbtiynzf000004l46sls10h7 */
+  html.rem2 {
+    --background: oklch(0.9401 0 0);
+    --foreground: oklch(0.2303 0.0125 264.2926);
+    --card: oklch(0.9911 0.0043 17.2295);
+    --card-foreground: oklch(0.2303 0.0125 264.2926);
+    --popover: oklch(0.9911 0.0043 17.2295);
+    --popover-foreground: oklch(0.2303 0.0125 264.2926);
+    --primary: oklch(0.5808 0.209 26.2672);
+    --primary-foreground: oklch(0.2303 0.0125 264.2926);
+    --secondary: oklch(0.1873 0.0102 52.8265);
+    --secondary-foreground: oklch(1 0 0);
+    --muted: oklch(0.8717 0.0093 258.3382);
+    --muted-foreground: oklch(0.2303 0.0125 264.2926);
+    --accent: oklch(0.5855 0.0318 51.5436);
+    --accent-foreground: oklch(0.2303 0.0125 264.2926);
+    --destructive: oklch(0.5771 0.2152 27.325);
+    --destructive-foreground: oklch(1 0 0);
+    --border: oklch(0.7615 0.0472 16.5563);
+    --input: oklch(1 0 0);
+    --ring: oklch(0.5808 0.209 26.2672);
+    --chart-1: oklch(0.5808 0.209 26.2672);
+    --chart-2: oklch(0.1873 0.0102 52.8265);
+    --chart-3: oklch(0.7303 0.1944 147.4439);
+    --chart-4: oklch(0.7253 0.1752 349.7607);
+    --chart-5: oklch(0.5771 0.2152 27.325);
+    --sidebar: oklch(0.9881 0 0);
+    --sidebar-foreground: oklch(0.2303 0.0125 264.2926);
+    --sidebar-primary: oklch(0.5808 0.209 26.2672);
+    --sidebar-primary-foreground: oklch(1 0 0);
+    --sidebar-accent: oklch(0.5855 0.0318 51.5436);
+    --sidebar-accent-foreground: oklch(1 0 0);
+    --sidebar-border: oklch(0.8717 0.0093 258.3382);
+    --sidebar-ring: oklch(0.5808 0.209 26.2672);
+    --font-sans: Geist, sans-serif;
+    --font-serif: Lora, serif;
+    --font-mono: Geist Mono, monospace;
+    --radius: 0.5rem;
+    --shadow-2xs: 0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.1);
+    --shadow-xs: 0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.1);
+    --shadow-sm:
+      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
+    --shadow:
+      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
+    --shadow-md:
+      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
+    --shadow-lg:
+      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 4px 6px -1px hsl(0 0% 0% / 0.2);
+    --shadow-xl:
+      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2),
+      0 8px 10px -1px hsl(0 0% 0% / 0.2);
+    --shadow-2xl: 0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.5);
+    --tracking-normal: 0;
+  }
+
+  /* https://tweakcn.com/themes/cmbtiynzf000004l46sls10h7 */
+  html.rem2-dark {
+    --background: oklch(0.0969 0 0);
+    --foreground: oklch(0.9761 0 0);
+    --card: oklch(0 0 0);
+    --card-foreground: oklch(0.9761 0 0);
+    --popover: oklch(0 0 0);
+    --popover-foreground: oklch(0.9761 0 0);
+    --primary: oklch(0.4429 0.1621 27.0113);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.1873 0.0102 52.8265);
+    --secondary-foreground: oklch(1 0 0);
+    --muted: oklch(0.551 0.0234 264.3637);
+    --muted-foreground: oklch(0.9761 0 0);
+    --accent: oklch(0.5855 0.0318 51.5436);
+    --accent-foreground: oklch(1 0 0);
+    --destructive: oklch(0.5771 0.2152 27.325);
+    --destructive-foreground: oklch(1 0 0);
+    --border: oklch(0.3168 0.0649 20.0104);
+    --input: oklch(0.1987 0.0488 20.5661);
+    --ring: oklch(0.7058 0.1303 27.1646);
+    --chart-1: oklch(0.5808 0.209 26.2672);
+    --chart-2: oklch(0.1873 0.0102 52.8265);
+    --chart-3: oklch(0.7303 0.1944 147.4439);
+    --chart-4: oklch(0.7253 0.1752 349.7607);
+    --chart-5: oklch(0.5771 0.2152 27.325);
+    --sidebar: oklch(0.1825 0.0431 19.8632);
+    --sidebar-foreground: oklch(0.9761 0 0);
+    --sidebar-primary: oklch(0.5808 0.209 26.2672);
+    --sidebar-primary-foreground: oklch(1 0 0);
+    --sidebar-accent: oklch(0.5855 0.0318 51.5436);
+    --sidebar-accent-foreground: oklch(1 0 0);
+    --sidebar-border: oklch(0.551 0.0234 264.3637);
+    --sidebar-ring: oklch(0.5808 0.209 26.2672);
+    --font-sans: Geist, sans-serif;
+    --font-serif: Lora, serif;
+    --font-mono: Geist Mono, monospace;
+    --radius: 0.5rem;
+    --shadow-2xs: 0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.1);
+    --shadow-xs: 0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.1);
+    --shadow-sm:
+      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
+    --shadow:
+      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
+    --shadow-md:
+      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
+    --shadow-lg:
+      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 4px 6px -1px hsl(0 0% 0% / 0.2);
+    --shadow-xl:
+      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2),
+      0 8px 10px -1px hsl(0 0% 0% / 0.2);
+    --shadow-2xl: 0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.5);
   }
 }

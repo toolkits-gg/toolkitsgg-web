@@ -24,6 +24,10 @@ const Logo = ({ gameId, size = 128 }: LogoProps) => {
       logoPath = `${logosPath()}/${size}C33.png`;
       altText = 'Logo of the Clair Obscur logo mixed with a toolbox.';
       break;
+    case 'rem2':
+      logoPath = `${logosPath()}/${size}R2.png`;
+      altText = 'Logo of Remnant 2 mixed with a toolbox.';
+      break;
     default:
       logoPath = `${logosPath()}/${size}Clean.png`;
       altText = 'Logo of a purple and yellow toolbox.';
