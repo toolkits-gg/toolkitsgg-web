@@ -1,6 +1,6 @@
 'use client';
 
-import { LucidePalette } from 'lucide-react';
+import { LucideCheck, LucidePalette, LucideX } from 'lucide-react';
 import { useIsClient } from 'usehooks-ts';
 import { Button } from '@/components/ui/button';
 import {
@@ -22,6 +22,11 @@ import {
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Toggle } from '@/components/ui/toggle';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { allGameConfigs } from '@/features/game/constants';
 import { useAppTheme } from '@/features/theme/hooks/use-theme';
 
@@ -39,7 +44,31 @@ const ThemeSwitcher = () => {
     return <Skeleton className="h-9 w-9" />;
   }
 
-  console.info('theme', theme);
+  const themeSelect = (
+    <Select
+      disabled={gameThemeEnabled}
+      onValueChange={handleChangeTheme}
+      value={
+        theme.indexOf('default') !== -1 ? 'none' : theme.replace(/-dark$/, '')
+      }
+    >
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a theme" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Game Theme</SelectLabel>
+          {allGameConfigs.map((gameConfig) => (
+            <SelectItem key={gameConfig.id} value={gameConfig.id}>
+              {gameConfig.id === 'none'
+                ? `Default Theme`
+                : `${gameConfig.name}`}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  );
 
   return (
     <Dialog>
@@ -55,46 +84,35 @@ const ThemeSwitcher = () => {
         </DialogHeader>
         <div className="flex flex-1 gap-x-2">
           <Toggle
-            variant="default"
+            variant="outline"
             aria-label={
               gameThemeEnabled
-                ? 'Game-specific themes: Enabled'
-                : 'Game-specific themes: Disabled'
+                ? 'Disable automatic game themes'
+                : 'Automatically apply game themes'
             }
             pressed={gameThemeEnabled}
             onPressedChange={setGameThemeEnabled}
           >
-            Game-specific themes
+            {gameThemeEnabled ? (
+              <LucideCheck className="h-4 w-4 text-green-500" />
+            ) : (
+              <LucideX className="h-4 w-4 text-red-500" />
+            )}
+            Automatically apply game themes
           </Toggle>
 
-          <Select
-            disabled={gameThemeEnabled}
-            onValueChange={handleChangeTheme}
-            value={
-              theme.indexOf('default') !== -1
-                ? 'none'
-                : theme.replace(/-dark$/, '')
-            }
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select a theme" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Game Theme</SelectLabel>
-                {allGameConfigs.map((gameConfig) => (
-                  <SelectItem key={gameConfig.id} value={gameConfig.id}>
-                    {gameConfig.id === 'none'
-                      ? `Default Theme`
-                      : `${gameConfig.name}`}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-              {/* <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="system">System</SelectItem> */}
-            </SelectContent>
-          </Select>
+          {gameThemeEnabled ? (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div>{themeSelect}</div>
+              </TooltipTrigger>
+              <TooltipContent>
+                Cannot pick a theme when automatic game themes are enabled.
+              </TooltipContent>
+            </Tooltip>
+          ) : (
+            themeSelect
+          )}
         </div>
       </DialogContent>
     </Dialog>
