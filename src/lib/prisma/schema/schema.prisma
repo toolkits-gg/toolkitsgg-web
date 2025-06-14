@@ -24,10 +24,16 @@ model User {
   sessions                Session[]
   passwordResetTokens     PasswordResetToken[]
   emailVerificationTokens EmailVerificationToken[]
-  userProfile             UserProfile?
-  userCollectedItems      UserCollectedItem[]
-  baseBuilds              BaseBuild[]
-  userFavoriteGames       UserFavoriteGame[]
+
+  userProfile        UserProfile?
+  userCollectedItems UserCollectedItem[]
+  userFavoriteGames  UserFavoriteGame[]
+
+  usersBeingFollowed UserFollowedUsers[] @relation("userBeingFollowed")
+  usersFollowed      UserFollowedUsers[] @relation("userFollowed")
+
+  baseBuilds       BaseBuild[]
+  buildCollections BuildCollection[]
 }
 
 model Session {
@@ -82,6 +88,19 @@ model UserFavoriteGame {
   game      GameId
 
   @@index([userId])
+}
+
+model UserFollowedUsers {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  user           User     @relation("userBeingFollowed", fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
+  followedUser   User     @relation("userFollowed", fields: [followedUserId], references: [id], onDelete: Cascade)
+  followedUserId String
+
+  @@index([userId])
+  @@index([followedUserId])
 }
 
 model BaseItem {
@@ -141,9 +160,23 @@ model BaseBuild {
   buildLikeCount       BuildLikeCount?
   buildViewCount       BuildViewCount?
 
-  cOE33Build COE33Build?
+  coe33Build       COE33Build?
+  buildCollections BuildCollection[]
 
   @@index([createdById])
+}
+
+model BuildCollection {
+  id              String               @id @default(cuid())
+  createdBy       User                 @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  createdById     String
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  name            String
+  description     String?              @db.Text
+  visibility      BuildVisibility      @default(PUBLIC)
+  moderatorStatus BuildModeratorStatus @default(PENDING)
+  baseBuilds      BaseBuild[]
 }
 
 model BuildCollectionCount {
@@ -151,6 +184,8 @@ model BuildCollectionCount {
   count       Int       @default(0)
   baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
   baseBuildId String    @unique
+
+  @@index([baseBuildId])
 }
 
 model BuildLikeCount {
@@ -158,6 +193,8 @@ model BuildLikeCount {
   count       Int       @default(0)
   baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
   baseBuildId String    @unique
+
+  @@index([baseBuildId])
 }
 
 model BuildDuplicateCount {
@@ -165,6 +202,8 @@ model BuildDuplicateCount {
   count       Int       @default(0)
   baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
   baseBuildId String    @unique
+
+  @@index([baseBuildId])
 }
 
 model BuildViewCount {
@@ -172,4 +211,6 @@ model BuildViewCount {
   count       Int       @default(0)
   baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
   baseBuildId String    @unique
+
+  @@index([baseBuildId])
 }
