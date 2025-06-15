@@ -72,7 +72,7 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
               .filter((gameConfig) => gameConfig.id !== noGameConfig.id)
               .filter((gameConfig) => gameConfig.id !== 'rem2')
               .map((gameConfig) => (
-                <DropdownMenuItem key={gameConfig.name}>
+                <DropdownMenuItem key={gameConfig.name} asChild>
                   <Link
                     href={`${gameConfig.path}`}
                     className="flex flex-1 items-center gap-2"

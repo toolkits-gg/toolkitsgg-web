@@ -1,6 +1,6 @@
-import { toast, ToastT } from "sonner";
-import { useActionFeedback } from "./hooks/use-action-feedback";
-import { ActionState } from "./utils/to-action-state";
+import { toast, ToastT } from 'sonner';
+import { useActionFeedback } from './hooks/use-action-feedback';
+import { ActionState } from './utils/to-action-state';
 
 type FormProps = {
   action: (payload: FormData) => void;
@@ -8,7 +8,7 @@ type FormProps = {
   children: React.ReactNode;
   onSuccess?: (actionState: ActionState) => void;
   onError?: (actionState: ActionState) => void;
-  toastOptions?: Omit<ToastT, "id"> | undefined;
+  toastOptions?: Omit<ToastT, 'id'> | undefined;
 };
 
 const Form = ({

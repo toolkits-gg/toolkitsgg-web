@@ -2,17 +2,24 @@ import type { Prisma, User } from '@prisma/client';
 import prisma from '@/lib/prisma';
 
 type ProfileInclude = { userProfile: true };
+type FavoriteGamesInclude = { userFavoriteGames: true };
 
 type Options = {
   includeUserProfile?: boolean;
+  includeFavoriteGames?: boolean;
   omitPasswordHash?: boolean;
 };
 
 type UserPayload<T extends Options> = T extends {
   includeUserProfile: true;
+  includeFavoriteGames: true;
 }
-  ? Prisma.UserGetPayload<{ include: ProfileInclude }>
-  : User;
+  ? Prisma.UserGetPayload<{ include: ProfileInclude & FavoriteGamesInclude }>
+  : T extends { includeUserProfile: true }
+    ? Prisma.UserGetPayload<{ include: ProfileInclude }>
+    : T extends { includeFavoriteGames: true }
+      ? Prisma.UserGetPayload<{ include: FavoriteGamesInclude }>
+      : User;
 
 type GetUserArgs =
   | {
@@ -33,6 +40,10 @@ export async function getUser<T extends Options>({
     userProfile: true,
   };
 
+  const includeFavoriteGames = options?.includeFavoriteGames && {
+    userFavoriteGames: true,
+  };
+
   if (!userId && !userEmail) {
     throw new Error('Either user id or user email must be provided');
   }
@@ -44,6 +55,7 @@ export async function getUser<T extends Options>({
       where: { id: userId },
       include: {
         ...includeUserProfile,
+        ...includeFavoriteGames,
       },
       omit: {
         passwordHash: options ? options.omitPasswordHash : true, // Omit password hash for security
@@ -54,6 +66,7 @@ export async function getUser<T extends Options>({
       where: { email: userEmail },
       include: {
         ...includeUserProfile,
+        ...includeFavoriteGames,
       },
       omit: {
         passwordHash: options ? options.omitPasswordHash : true, // Omit password hash for security

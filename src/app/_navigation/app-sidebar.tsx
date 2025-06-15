@@ -2,6 +2,7 @@ import type { GameId } from '@prisma/client';
 import { LucideChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
+import { GameActions } from '@/app/_navigation/game-actions';
 import { GameSwitcher } from '@/app/_navigation/game-switcher';
 import {
   buildsNavLink,
@@ -31,6 +32,7 @@ import {
   SidebarMenuSubItem as BaseSidebarMenuSubItem,
   SidebarRail as BaseSidebarRail,
 } from '@/components/ui/sidebar';
+import { getAuth } from '@/features/auth/queries/get-auth';
 import { allGameConfigs } from '@/features/game/constants';
 import { ThemeModeToggle } from '@/features/theme/components/theme-mode-toggle';
 import { ThemeSwitcher } from '@/features/theme/components/theme-switcher';
@@ -40,7 +42,8 @@ interface AppSidebarProps extends React.ComponentProps<typeof BaseSidebar> {
   userMenu: React.ReactNode | null;
 }
 
-const AppSidebar = ({ gameId, userMenu, ...props }: AppSidebarProps) => {
+const AppSidebar = async ({ gameId, userMenu, ...props }: AppSidebarProps) => {
+  const { user } = await getAuth();
   const gameConfig = allGameConfigs.find((config) => config.id === gameId);
 
   let navLinks: NavLink[] = [helpNavLink];
@@ -76,6 +79,7 @@ const AppSidebar = ({ gameId, userMenu, ...props }: AppSidebarProps) => {
       <BaseSidebarContent>
         <BaseSidebarGroup>
           <BaseSidebarGroupLabel>Toolkit</BaseSidebarGroupLabel>
+          {gameId && user && <GameActions gameId={gameId} />}
           <BaseSidebarMenu>
             {navLinks.map((item) => (
               <Collapsible

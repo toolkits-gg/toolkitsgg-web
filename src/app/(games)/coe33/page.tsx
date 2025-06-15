@@ -1,5 +1,7 @@
+import { LucideSailboat } from 'lucide-react';
 import Image from 'next/image';
 import { PageLayout } from '@/app/_navigation/page-layout';
+import { Button } from '@/components/ui/button';
 import { allGameConfigs } from '@/features/game/constants';
 import type { COE33ItemType } from '@/features/game/games/coe33/items';
 import type { GameConfig } from '@/features/game/types';
@@ -34,7 +36,16 @@ export default async function GamePage() {
         {gameConfig?.items
           ?.filter((item) => item.category === 'SKILL')
           .map((item) => (
-            <ItemCard key={item.slug} item={item} gameId={gameConfig.id} />
+            <ItemCard
+              key={item.slug}
+              item={item}
+              gameId={gameConfig.id}
+              actions={
+                <Button size="icon" variant="ghost">
+                  <LucideSailboat className="h-4 w-4" />
+                </Button>
+              }
+            />
           ))}
       </div>
     </PageLayout>

@@ -15,6 +15,7 @@ type TypographyProps = {
     | 'lead'
     | 'large'
     | 'small'
+    | 'xs'
     | 'muted';
   color?: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success';
 };
@@ -38,6 +39,7 @@ const Typography = ({
     lead: 'text-muted-foreground text-xl',
     large: 'text-lg font-semibold',
     small: 'text-sm leading-none font-medium',
+    xs: 'text-xs leading-none font-medium',
     muted: 'text-muted-foreground/70 text-sm',
   };
   const colorClasses = {
@@ -53,7 +55,7 @@ const Typography = ({
     baseClasses,
     variant && variantClasses[variant],
     color && colorClasses[color],
-    className && className,
+    className,
   ]);
 
   let Tag: React.ElementType = 'p';
@@ -88,6 +90,9 @@ const Typography = ({
       Tag = 'p';
       break;
     case 'small':
+      Tag = 'small';
+      break;
+    case 'xs':
       Tag = 'small';
       break;
     case 'muted':
