@@ -77,9 +77,14 @@ const AppSidebar = async ({ gameId, userMenu, ...props }: AppSidebarProps) => {
         <GameSwitcher gameId={gameId} />
       </BaseSidebarHeader>
       <BaseSidebarContent>
+        {gameConfig && user && (
+          <BaseSidebarGroup>
+            <BaseSidebarGroupLabel>Actions</BaseSidebarGroupLabel>
+            <GameActions gameId={gameConfig.id} />
+          </BaseSidebarGroup>
+        )}
         <BaseSidebarGroup>
           <BaseSidebarGroupLabel>Toolkit</BaseSidebarGroupLabel>
-          {gameId && user && <GameActions gameId={gameId} />}
           <BaseSidebarMenu>
             {navLinks.map((item) => (
               <Collapsible
@@ -118,7 +123,6 @@ const AppSidebar = async ({ gameId, userMenu, ...props }: AppSidebarProps) => {
       <BaseSidebarFooter>
         <BaseSidebarGroup>
           <div className="flex w-full flex-1 items-center justify-end gap-2">
-            <ThemeSwitcher />
             <ThemeModeToggle />
           </div>
           <Separator className="my-4" />

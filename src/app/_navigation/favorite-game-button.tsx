@@ -7,7 +7,6 @@ import { Form } from '@/components/form/form';
 import { SubmitButton } from '@/components/form/submit-button';
 import { EMPTY_ACTION_STATE } from '@/components/form/utils/to-action-state';
 import { toggleFavoriteGame } from '@/features/game/actions/toggle-favorite-game';
-import { cn } from '@/lib/utils';
 
 type FavoriteGameButtonProps = {
   gameId: GameId;
@@ -26,9 +25,8 @@ const FavoriteGameButton = ({
   return (
     <Form action={action} actionState={actionState}>
       <SubmitButton
-        variant="outline"
+        variant={isFavorite ? 'default' : 'outline'}
         size="sm"
-        className={cn(isFavorite ? 'text-red-500' : 'text-gray-500')}
         icon={
           isFavorite ? (
             <LucideHeart className="h-4 w-4" />
