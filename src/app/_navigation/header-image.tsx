@@ -1,7 +1,7 @@
 import { cloneElement } from 'react';
 import { Typography } from '@/components/typography';
 
-type HeroImageProps = {
+type HeaderImageProps = {
   image: React.ReactElement<HTMLImageElement>;
   title?: string;
   text?: string;
@@ -10,17 +10,22 @@ type HeroImageProps = {
   };
 };
 
-const HeroImage = ({ image, title, text, options = {} }: HeroImageProps) => {
+const HeaderImage = ({
+  image,
+  title,
+  text,
+  options = {},
+}: HeaderImageProps) => {
   const { imageOverlayOpacity = 85 } = options;
 
   return (
-    <div className="border-border relative isolate overflow-hidden rounded-xl border bg-black py-12 sm:py-16">
+    <div className="border-border relative isolate overflow-hidden rounded-xl border bg-white py-12 sm:py-16 dark:bg-black">
       {cloneElement(image, {
         className: 'absolute inset-0 -z-10 size-full object-cover',
       })}
       <div
         id="image-overlay"
-        className="absolute inset-0 -z-10 bg-black"
+        className="absolute inset-0 -z-10 bg-white dark:bg-black"
         style={{
           opacity: `${imageOverlayOpacity}%`,
         }}
@@ -50,7 +55,7 @@ const HeroImage = ({ image, title, text, options = {} }: HeroImageProps) => {
         />
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-white/90 lg:mx-0">
+        <div className="mx-auto max-w-2xl text-black/90 lg:mx-0 dark:text-white/90">
           {title && <Typography variant="h2">{title}</Typography>}
           {text && <Typography variant="p">{text}</Typography>}
         </div>
@@ -59,4 +64,4 @@ const HeroImage = ({ image, title, text, options = {} }: HeroImageProps) => {
   );
 };
 
-export { HeroImage };
+export { HeaderImage };

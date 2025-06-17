@@ -35,7 +35,6 @@ import {
 import { getAuth } from '@/features/auth/queries/get-auth';
 import { allGameConfigs } from '@/features/game/constants';
 import { ThemeModeToggle } from '@/features/theme/components/theme-mode-toggle';
-import { ThemeSwitcher } from '@/features/theme/components/theme-switcher';
 
 interface AppSidebarProps extends React.ComponentProps<typeof BaseSidebar> {
   gameId: GameId | undefined;
