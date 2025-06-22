@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { PageLayout } from '@/app/_navigation/page-layout';
-import { CardCompact } from '@/components/card-compact';
+import { CardCompact } from '@/components/ui/card-compact';
 import { SignUpForm } from '@/features/auth/components/sign-up-form';
 import { signInPath } from '@/paths';
 

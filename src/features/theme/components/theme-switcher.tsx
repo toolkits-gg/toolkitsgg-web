@@ -1,121 +1,106 @@
 'use client';
 
-import { LucideCheck, LucidePalette, LucideX } from 'lucide-react';
+import { LucidePalette } from 'lucide-react';
+import { useState } from 'react';
 import { useIsClient } from 'usehooks-ts';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/button';
+import { Dialog, DialogBody, DialogTitle } from '@/components/dialog';
+import { Field, Label } from '@/components/fieldset';
+import { Listbox, ListboxLabel, ListboxOption } from '@/components/listbox';
+import { Skeleton } from '@/components/skeleton';
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Toggle } from '@/components/ui/toggle';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { allGameConfigs } from '@/features/game/constants';
+  accentThemeDefinitions,
+  allThemeClassDefinitions,
+  themeModes,
+} from '@/features/theme/constants';
 import { useAppTheme } from '@/features/theme/hooks/use-theme';
 
 const ThemeSwitcher = () => {
+  const {
+    theme,
+    selectedMode,
+    handleChangeTheme,
+    handleChangeMode,
+    selectedAccent,
+    handleChangeAccent,
+  } = useAppTheme();
   const isClient = useIsClient();
 
-  const { theme, gameThemeEnabled, setGameThemeEnabled, handleChangeTheme } =
-    useAppTheme();
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   if (!theme) {
     return <Skeleton className="h-9 w-9" />;
   }
-
   if (!isClient) {
     return <Skeleton className="h-9 w-9" />;
   }
 
-  const themeSelect = (
-    <Select
-      disabled={gameThemeEnabled}
-      onValueChange={handleChangeTheme}
-      value={
-        theme.indexOf('default') !== -1 ? 'none' : theme.replace(/-dark$/, '')
-      }
-    >
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a theme" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Game Theme</SelectLabel>
-          {allGameConfigs.map((gameConfig) => (
-            <SelectItem key={gameConfig.id} value={gameConfig.id}>
-              {gameConfig.id === 'none'
-                ? `Default Theme`
-                : `${gameConfig.name}`}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-  );
-
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline" size="icon" aria-label="Change theme">
-          <LucidePalette />
-        </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Change theme</DialogTitle>
-          <DialogDescription>Choose your Toolkit experience.</DialogDescription>
-        </DialogHeader>
-        <div className="flex flex-1 gap-x-2">
-          <Toggle
-            variant="outline"
-            aria-label={
-              gameThemeEnabled
-                ? 'Disable automatic game themes'
-                : 'Automatically apply game themes'
-            }
-            pressed={gameThemeEnabled}
-            onPressedChange={setGameThemeEnabled}
-          >
-            {gameThemeEnabled ? (
-              <LucideCheck className="h-4 w-4 text-green-500" />
-            ) : (
-              <LucideX className="h-4 w-4 text-red-500" />
-            )}
-            Automatically apply game themes
-          </Toggle>
+    <>
+      <Button
+        color="dark/white"
+        onClick={() => {
+          setDialogOpen(!dialogOpen);
+        }}
+      >
+        <LucidePalette />
+      </Button>
+      <Dialog
+        onClose={() => {
+          setDialogOpen(false);
+        }}
+        open={dialogOpen}
+      >
+        <DialogTitle>Select Color Theme</DialogTitle>
+        <DialogBody className="ui-flex ui-flex-col ui-gap-y-4">
+          <Field>
+            <Label>Category</Label>
+            <Listbox
+              name="selectedMode"
+              onChange={handleChangeMode}
+              value={selectedMode}
+            >
+              {themeModes.map((selectedMode) => (
+                <ListboxOption key={selectedMode} value={selectedMode}>
+                  <ListboxLabel>{selectedMode}</ListboxLabel>
+                </ListboxOption>
+              ))}
+            </Listbox>
+          </Field>
 
-          {gameThemeEnabled ? (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <div>{themeSelect}</div>
-              </TooltipTrigger>
-              <TooltipContent>
-                Cannot pick a theme when automatic game themes are enabled.
-              </TooltipContent>
-            </Tooltip>
-          ) : (
-            themeSelect
-          )}
-        </div>
-      </DialogContent>
-    </Dialog>
+          <Field>
+            <Label>Accents</Label>
+            <Listbox
+              name="selectedAccent"
+              onChange={handleChangeAccent}
+              value={selectedAccent}
+            >
+              {accentThemeDefinitions.map((def) => (
+                <ListboxOption key={def.className} value={def.accentTheme}>
+                  <ListboxLabel>{def.label}</ListboxLabel>
+                </ListboxOption>
+              ))}
+            </Listbox>
+          </Field>
+
+          <Field>
+            <Label>Theme</Label>
+            <Listbox
+              name="colorTheme"
+              onChange={handleChangeTheme}
+              placeholder="Select a new theme"
+              value={theme}
+            >
+              {allThemeClassDefinitions.map((def) => (
+                <ListboxOption key={def.className} value={def.className}>
+                  <ListboxLabel>{def.label}</ListboxLabel>
+                </ListboxOption>
+              ))}
+            </Listbox>
+          </Field>
+        </DialogBody>
+      </Dialog>
+    </>
   );
 };
 

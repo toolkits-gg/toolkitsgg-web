@@ -1,5 +1,5 @@
 import { PageLayout } from '@/app/_navigation/page-layout';
-import { CardCompact } from '@/components/card-compact';
+import { CardCompact } from '@/components/ui/card-compact';
 import { PasswordResetForm } from '@/features/password/components/password-reset-form';
 
 type PasswordResetPageProps = {

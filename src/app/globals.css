@@ -1,9 +1,69 @@
 @import 'tailwindcss';
 @plugin 'tailwindcss-animate';
 
-@custom-variant dark (&:is([class$="-dark"] *));
+@custom-variant dark (&:is([data-theme*="-dark"] *));
 
 @theme inline {
+  --color-primary-50: var(--color-primary-50);
+  --color-primary-100: var(--color-primary-100);
+  --color-primary-200: var(--color-primary-200);
+  --color-primary-300: var(--color-primary-300);
+  --color-primary-400: var(--color-primary-400);
+  --color-primary-500: var(--color-primary-500);
+  --color-primary-600: var(--color-primary-600);
+  --color-primary-700: var(--color-primary-700);
+  --color-primary-800: var(--color-primary-800);
+  --color-primary-900: var(--color-primary-900);
+  --color-primary-950: var(--color-primary-950);
+
+  --color-secondary-50: var(--color-secondary-50);
+  --color-secondary-100: var(--color-secondary-100);
+  --color-secondary-200: var(--color-secondary-200);
+  --color-secondary-300: var(--color-secondary-300);
+  --color-secondary-400: var(--color-secondary-400);
+  --color-secondary-500: var(--color-secondary-500);
+  --color-secondary-600: var(--color-secondary-600);
+  --color-secondary-700: var(--color-secondary-700);
+  --color-secondary-800: var(--color-secondary-800);
+  --color-secondary-900: var(--color-secondary-900);
+  --color-secondary-950: var(--color-secondary-950);
+
+  --color-accent1-50: var(--color-accent1-50);
+  --color-accent1-100: var(--color-accent1-100);
+  --color-accent1-200: var(--color-accent1-200);
+  --color-accent1-300: var(--color-accent1-300);
+  --color-accent1-400: var(--color-accent1-400);
+  --color-accent1-500: var(--color-accent1-500);
+  --color-accent1-600: var(--color-accent1-600);
+  --color-accent1-700: var(--color-accent1-700);
+  --color-accent1-800: var(--color-accent1-800);
+  --color-accent1-900: var(--color-accent1-900);
+  --color-accent1-950: var(--color-accent1-950);
+
+  --color-accent2-50: var(--color-accent2-50);
+  --color-accent2-100: var(--color-accent2-100);
+  --color-accent2-200: var(--color-accent2-200);
+  --color-accent2-300: var(--color-accent2-300);
+  --color-accent2-400: var(--color-accent2-400);
+  --color-accent2-500: var(--color-accent2-500);
+  --color-accent2-600: var(--color-accent2-600);
+  --color-accent2-700: var(--color-accent2-700);
+  --color-accent2-800: var(--color-accent2-800);
+  --color-accent2-900: var(--color-accent2-900);
+  --color-accent2-950: var(--color-accent2-950);
+
+  --color-accent3-50: var(--color-accent3-50);
+  --color-accent3-100: var(--color-accent3-100);
+  --color-accent3-200: var(--color-accent3-200);
+  --color-accent3-300: var(--color-accent3-300);
+  --color-accent3-400: var(--color-accent3-400);
+  --color-accent3-500: var(--color-accent3-500);
+  --color-accent3-600: var(--color-accent3-600);
+  --color-accent3-700: var(--color-accent3-700);
+  --color-accent3-800: var(--color-accent3-800);
+  --color-accent3-900: var(--color-accent3-900);
+  --color-accent3-950: var(--color-accent3-950);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -61,6 +121,48 @@
   --tracking-wide: calc(var(--tracking-normal) + 0.025em);
   --tracking-wider: calc(var(--tracking-normal) + 0.05em);
   --tracking-widest: calc(var(--tracking-normal) + 0.1em);
+
+  /* 
+    Variables (and default values are sourced from:
+    https://fkhadra.github.io/react-toastify/how-to-style/ 
+    
+    Original colors:
+        --toastify-color-info: #3498db;
+        --toastify-color-success: #07bc0c;
+        --toastify-color-warning: #f1c40f;
+        --toastify-color-error: #e74c3c;
+    */
+  --toastify-color-info: rgb(var(--color-primary-500) / 1);
+  --toastify-color-success: #07bc0c;
+  --toastify-color-warning: rgb(var(--color-accent1-500) / 1);
+  --toastify-color-error: #e74c3c;
+  --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+
+  --toastify-icon-color-info: var(--toastify-color-info);
+  --toastify-icon-color-success: var(--toastify-color-success);
+  --toastify-icon-color-warning: var(--toastify-color-warning);
+  --toastify-icon-color-error: var(--toastify-color-error);
+
+  /* 
+    We are always using the "dark" theme 
+    "colored" = solid colored background (e.g. success is white-on-green)
+    */
+  --toastify-color-dark: rgb(var(--color-gray-900) / 1);
+  --toastify-text-color-dark: rgb(var(--color-surface-solid) / 1);
+
+  --toastify-toast-width: 320px;
+  --toastify-toast-background: var(--color-surface-solid);
+  --toastify-toast-min-height: 64px;
+  --toastify-toast-max-height: 800px;
+  --toastify-font-family: sans-serif;
+  --toastify-z-index: 9999;
+
+  --toastify-color-progress-info: var(--toastify-color-info);
+  --toastify-color-progress-success: var(--toastify-color-success);
+  --toastify-color-progress-warning: var(--toastify-color-warning);
+  --toastify-color-progress-error: var(--toastify-color-error);
+
+  --toastify-color-progress-bgo: 0.2;
 }
 
 @layer base {
@@ -68,18 +170,24 @@
     @apply border-border outline-ring/50;
   }
 
+  html,
+  body {
+    padding: 0 !important;
+    scrollbar-gutter: stable;
+  }
+
   body {
     @apply text-foreground;
     letter-spacing: var(--tracking-normal);
   }
 
-  /* *
-   * Themes courtesy of: https://tweakcn.com
-   * Fonts are Geist, Lora, and Geist Mono
-   * */
+  /* No var for this :( */
+  .Toastify__close-button {
+    color: rgb(var(--color-surface-solid));
+  }
 
-  /* https://tweakcn.com/themes/cmby7yr2t000504lec498eo09 */
-  html.default {
+  [data-theme='default-light'] {
+    color-scheme: light;
     --color-gray-50: oklch(0.12 0.007 264);
     --color-gray-100: oklch(0.17 0.01 265);
     --color-gray-200: oklch(0.23 0.012 264);
@@ -216,7 +324,8 @@
     --tracking-normal: 0;
   }
 
-  html.default-dark {
+  [default-theme='default-dark'] {
+    color-scheme: dark;
     --color-gray-50: oklch(0.98 0.002 264);
     --color-gray-100: oklch(0.96 0.004 264);
     --color-gray-200: oklch(0.91 0.007 264);
@@ -352,219 +461,19 @@
     --shadow-2xl: 0 0.125rem 5px 0 hsl(0 0% 0% / 0.5);
   }
 
-  /* https://tweakcn.com/themes/cmbk52f2x000904l4c7g472ov */
-  html.coe33 {
-    --background: var(--color-white);
-    --foreground: var(--color-black);
-    --card: oklch(0.9755 0.0045 258.3245);
-    --card-foreground: var(--color-black);
-    --popover: oklch(0.9755 0.0045 258.3245);
-    --popover-foreground: oklch(0.3248 0.0345 263.9137);
-    --primary: oklch(0.3248 0.0345 263.9137);
-    --primary-foreground: oklch(0.9581 0 0);
-    --secondary: oklch(0.8935 0.1005 80.0433);
-    --secondary-foreground: var(--color-black);
-    --muted: oklch(0.8234 0 0);
-    --muted-foreground: oklch(0.4446 0.0303 263.1254);
-    --accent: oklch(0.6487 0.1538 150.3071);
-    --accent-foreground: oklch(0.9581 0 0);
-    --destructive: oklch(0.652 0.234 26.6909);
-    --destructive-foreground: var(--color-white);
-    --border: oklch(0.8975 0 0);
-    --input: var(--color-white);
-    --ring: oklch(0.6487 0.1538 150.3071);
-    --chart-1: oklch(0.8935 0.1005 80.0433);
-    --chart-2: oklch(0.3248 0.0345 263.9137);
-    --chart-3: oklch(0.8234 0 0);
-    --chart-4: oklch(0.652 0.234 26.6909);
-    --chart-5: oklch(0.6487 0.1538 150.3071);
-    --sidebar: var(--color-white);
-    --sidebar-foreground: oklch(0.3248 0.0345 263.9137);
-    --sidebar-primary: oklch(0.8935 0.1005 80.0433);
-    --sidebar-primary-foreground: oklch(0.3248 0.0345 263.9137);
-    --sidebar-accent: oklch(0.6487 0.1538 150.3071);
-    --sidebar-accent-foreground: var(--color-white);
-    --sidebar-border: oklch(0.8975 0 0);
-    --sidebar-ring: oklch(0.6487 0.1538 150.3071);
-    --font-sans: Geist, sans-serif;
-    --font-serif: Lora, serif;
-    --font-mono: Geist Mono, monospace;
-    --radius: 8px;
-    --shadow-2xs: 0px 2px 4px 0px hsl(0 0% 0% / 0.1);
-    --shadow-xs: 0px 2px 4px 0px hsl(0 0% 0% / 0.1);
-    --shadow-sm:
-      0px 2px 4px 0px hsl(0 0% 0% / 0.2), 0px 1px 2px -1px hsl(0 0% 0% / 0.2);
-    --shadow:
-      0px 2px 4px 0px hsl(0 0% 0% / 0.2), 0px 1px 2px -1px hsl(0 0% 0% / 0.2);
-    --shadow-md:
-      0px 2px 4px 0px hsl(0 0% 0% / 0.2), 0px 2px 4px -1px hsl(0 0% 0% / 0.2);
-    --shadow-lg:
-      0px 2px 4px 0px hsl(0 0% 0% / 0.2), 0px 4px 6px -1px hsl(0 0% 0% / 0.2);
-    --shadow-xl:
-      0px 2px 4px 0px hsl(0 0% 0% / 0.2), 0px 8px 10px -1px hsl(0 0% 0% / 0.2);
-    --shadow-2xl: 0px 2px 4px 0px hsl(0 0% 0% / 0.5);
-    --tracking-normal: 0px;
+  html.coe33-light {
+    /* TODO */
   }
 
-  /* https://tweakcn.com/themes/cmbk52f2x000904l4c7g472ov */
   html.coe33-dark {
-    --background: oklch(0.1864 0.0088 264.3368);
-    --foreground: var(--color-white);
-    --card: oklch(0.2646 0.026 265.3688);
-    --card-foreground: var(--color-white);
-    --popover: var(--color-black);
-    --popover-foreground: var(--color-white);
-    --primary: oklch(0.8935 0.1005 80.0433);
-    --primary-foreground: oklch(0.3248 0.0345 263.9137);
-    --secondary: oklch(0.3248 0.0345 263.9137);
-    --secondary-foreground: var(--color-white);
-    --muted: oklch(0.4342 0.0056 258.3423);
-    --muted-foreground: oklch(0.8699 0 0);
-    --accent: oklch(0.8935 0.1005 80.0433);
-    --accent-foreground: oklch(0.3248 0.0345 263.9137);
-    --destructive: oklch(0.652 0.234 26.6909);
-    --destructive-foreground: var(--color-white);
-    --border: oklch(0.367 0.0393 263.0717);
-    --input: oklch(0.3248 0.0345 263.9137);
-    --ring: oklch(0.8935 0.1005 80.0433);
-    --chart-1: oklch(0.8935 0.1005 80.0433);
-    --chart-2: oklch(0.3248 0.0345 263.9137);
-    --chart-3: oklch(0.4342 0.0056 258.3423);
-    --chart-4: oklch(0.652 0.234 26.6909);
-    --chart-5: oklch(0.6487 0.1538 150.3071);
-    --sidebar: oklch(0.2164 0.0175 259.7355);
-    --sidebar-foreground: var(--color-white);
-    --sidebar-primary: oklch(0.8935 0.1005 80.0433);
-    --sidebar-primary-foreground: oklch(0.3248 0.0345 263.9137);
-    --sidebar-accent: oklch(0.8935 0.1005 80.0433);
-    --sidebar-accent-foreground: oklch(0.3248 0.0345 263.9137);
-    --sidebar-border: oklch(0.4342 0.0056 258.3423);
-    --sidebar-ring: oklch(0.8935 0.1005 80.0433);
-    --font-sans: Geist, sans-serif;
-    --font-serif: Lora, serif;
-    --font-mono: Geist Mono, monospace;
-    --radius: 8px;
-    --shadow-2xs: 0px 2px 4px 0px hsl(0 0% 0% / 0.1);
-    --shadow-xs: 0px 2px 4px 0px hsl(0 0% 0% / 0.1);
-    --shadow-sm:
-      0px 2px 4px 0px hsl(0 0% 0% / 0.2), 0px 1px 2px -1px hsl(0 0% 0% / 0.2);
-    --shadow:
-      0px 2px 4px 0px hsl(0 0% 0% / 0.2), 0px 1px 2px -1px hsl(0 0% 0% / 0.2);
-    --shadow-md:
-      0px 2px 4px 0px hsl(0 0% 0% / 0.2), 0px 2px 4px -1px hsl(0 0% 0% / 0.2);
-    --shadow-lg:
-      0px 2px 4px 0px hsl(0 0% 0% / 0.2), 0px 4px 6px -1px hsl(0 0% 0% / 0.2);
-    --shadow-xl:
-      0px 2px 4px 0px hsl(0 0% 0% / 0.2), 0px 8px 10px -1px hsl(0 0% 0% / 0.2);
-    --shadow-2xl: 0px 2px 4px 0px hsl(0 0% 0% / 0.5);
+    /* TODO */
   }
 
-  /* https://tweakcn.com/themes/cmbtiynzf000004l46sls10h7 */
-  html.rem2 {
-    --background: oklch(0.9741 0.0097 17.3227);
-    --foreground: var(--color-black);
-    --card: oklch(0.9579 0.0163 17.4413);
-    --card-foreground: var(--color-black);
-    --popover: oklch(0.9579 0.0163 17.4413);
-    --popover-foreground: var(--color-black);
-    --primary: oklch(0.5808 0.209 26.2672);
-    --primary-foreground: oklch(0.9581 0 0);
-    --secondary: oklch(0.1873 0.0102 52.8265);
-    --secondary-foreground: oklch(0.9581 0 0);
-    --muted: oklch(0.8717 0.0093 258.3382);
-    --muted-foreground: var(--color-black);
-    --accent: oklch(0.6871 0.202 24.1306);
-    --accent-foreground: oklch(0.9581 0 0);
-    --destructive: oklch(0.5771 0.2152 27.325);
-    --destructive-foreground: var(--color-white);
-    --border: oklch(0.7615 0.0472 16.5563);
-    --input: var(--color-white);
-    --ring: oklch(0.5808 0.209 26.2672);
-    --chart-1: oklch(0.5808 0.209 26.2672);
-    --chart-2: oklch(0.1873 0.0102 52.8265);
-    --chart-3: oklch(0.6475 0.0642 117.426);
-    --chart-4: oklch(0.7253 0.1752 349.7607);
-    --chart-5: oklch(0.5771 0.2152 27.325);
-    --sidebar: oklch(0.9881 0 0);
-    --sidebar-foreground: var(--color-black);
-    --sidebar-primary: oklch(0.5808 0.209 26.2672);
-    --sidebar-primary-foreground: var(--color-white);
-    --sidebar-accent: oklch(0.6051 0.1941 25.1124);
-    --sidebar-accent-foreground: var(--color-white);
-    --sidebar-border: oklch(0.8717 0.0093 258.3382);
-    --sidebar-ring: oklch(0.5808 0.209 26.2672);
-    --font-sans: Geist, sans-serif;
-    --font-serif: Lora, serif;
-    --font-mono: Geist Mono, monospace;
-    --radius: 0.5rem;
-    --shadow-2xs: 0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.1);
-    --shadow-xs: 0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.1);
-    --shadow-sm:
-      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
-    --shadow:
-      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
-    --shadow-md:
-      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
-    --shadow-lg:
-      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 4px 6px -1px hsl(0 0% 0% / 0.2);
-    --shadow-xl:
-      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2),
-      0 8px 10px -1px hsl(0 0% 0% / 0.2);
-    --shadow-2xl: 0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.5);
-    --tracking-normal: 0;
+  html.rem2-light {
+    /* TODO */
   }
 
-  /* https://tweakcn.com/themes/cmbtiynzf000004l46sls10h7 */
   html.rem2-dark {
-    --background: oklch(0.1135 0.0286 22.7507);
-    --foreground: var(--color-white);
-    --card: oklch(0.1407 0.0343 22.5053);
-    --card-foreground: var(--color-white);
-    --popover: oklch(0 0 0);
-    --popover-foreground: var(--color-white);
-    --primary: oklch(0.4429 0.1621 27.0113);
-    --primary-foreground: var(--color-white);
-    --secondary: oklch(0.3391 0.0257 49.5307);
-    --secondary-foreground: var(--color-white);
-    --muted: oklch(0.551 0.0234 264.3637);
-    --muted-foreground: var(--color-white);
-    --accent: oklch(0.6051 0.1941 25.1124);
-    --accent-foreground: oklch(0 0 0);
-    --destructive: oklch(0.5771 0.2152 27.325);
-    --destructive-foreground: var(--color-white);
-    --border: oklch(0.2532 0.0649 21.4942);
-    --input: oklch(0.2284 0.0614 21.8148);
-    --ring: oklch(0.7058 0.1303 27.1646);
-    --chart-1: oklch(0.5808 0.209 26.2672);
-    --chart-2: oklch(0.1873 0.0102 52.8265);
-    --chart-3: oklch(0.6475 0.0642 117.426);
-    --chart-4: oklch(0.7253 0.1752 349.7607);
-    --chart-5: oklch(0.5771 0.2152 27.325);
-    --sidebar: oklch(0.1825 0.0431 19.8632);
-    --sidebar-foreground: var(--color-white);
-    --sidebar-primary: oklch(0.5808 0.209 26.2672);
-    --sidebar-primary-foreground: var(--color-white);
-    --sidebar-accent: oklch(0.6051 0.1941 25.1124);
-    --sidebar-accent-foreground: oklch(0 0 0);
-    --sidebar-border: oklch(0.551 0.0234 264.3637);
-    --sidebar-ring: oklch(0.5808 0.209 26.2672);
-    --font-sans: Geist, sans-serif;
-    --font-serif: Lora, serif;
-    --font-mono: Geist Mono, monospace;
-    --radius: 0.5rem;
-    --shadow-2xs: 0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.1);
-    --shadow-xs: 0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.1);
-    --shadow-sm:
-      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
-    --shadow:
-      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
-    --shadow-md:
-      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
-    --shadow-lg:
-      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2), 0 4px 6px -1px hsl(0 0% 0% / 0.2);
-    --shadow-xl:
-      0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.2),
-      0 8px 10px -1px hsl(0 0% 0% / 0.2);
-    --shadow-2xl: 0 0.125rem 0.25rem 0 hsl(0 0% 0% / 0.5);
+    /* TODO */
   }
 }

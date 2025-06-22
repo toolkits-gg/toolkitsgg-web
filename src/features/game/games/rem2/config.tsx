@@ -7,7 +7,18 @@ export const remnant2Config: GameConfig<BaseItemType> = {
   label: 'Remnant II',
   description: `REMNANT II® pits survivors of humanity against new deadly creatures and god-like bosses across terrifying worlds. Play solo or co-op with two other friends to explore the depths of the unknown to stop an evil from destroying reality itself.`,
   id: 'rem2',
-  themeCSSClass: 'rem2',
+  themeDefinitions: [
+    {
+      label: 'Remnant 2 Light',
+      className: 'rem2-light',
+      mode: 'light',
+    },
+    {
+      label: 'Remnant 2 Dark',
+      className: 'rem2-dark',
+      mode: 'dark',
+    },
+  ],
   path: '/rem2',
   logo: <Logo gameId="rem2" size={128} />,
 

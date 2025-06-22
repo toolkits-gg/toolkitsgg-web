@@ -1,5 +1,5 @@
 import { PageLayout } from '@/app/_navigation/page-layout';
-import { CardCompact } from '@/components/card-compact';
+import { CardCompact } from '@/components/ui/card-compact';
 import { EmailVerificationForm } from '@/features/auth/components/email-verification-form';
 import { EmailVerificationResendForm } from '@/features/auth/components/email-verification-resend-form';
 

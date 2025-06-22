@@ -1,7 +1,8 @@
 import type { GameId } from '@prisma/client';
 import { usePathname } from 'next/navigation';
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { allGameConfigs, noGameConfig } from '@/features/game/constants';
+import { allThemeClassNames } from '@/features/theme/constants';
 import { useAppTheme } from '@/features/theme/hooks/use-theme';
 
 type UseActiveGameConfigArgs = {
@@ -9,7 +10,7 @@ type UseActiveGameConfigArgs = {
 };
 
 const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
-  const { theme, gameThemeEnabled, handleChangeTheme } = useAppTheme();
+  const { theme } = useAppTheme();
 
   const pathname = usePathname();
 
@@ -17,10 +18,10 @@ const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
 
   const activeGameConfig = useMemo(() => {
     if (!gameId && pathname !== '/') {
-      const themeName = theme?.replace(/-dark$/, '');
       validatedGameId.current =
-        allGameConfigs.find((config) => config.themeCSSClass === themeName)
-          ?.id || noGameConfig.id;
+        (allThemeClassNames.find(
+          (className) => theme === className
+        ) as GameId) || noGameConfig.id;
     }
 
     const gameConfig = allGameConfigs.find(
@@ -33,11 +34,6 @@ const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
 
     return gameConfig;
   }, [pathname, gameId, theme]);
-
-  useEffect(() => {
-    if (!gameThemeEnabled) return;
-    handleChangeTheme(activeGameConfig.id);
-  }, [activeGameConfig, handleChangeTheme, gameThemeEnabled]);
 
   return {
     activeGameConfig,

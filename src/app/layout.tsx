@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Lora } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { Toaster } from '@/components/ui/sonner';
+import { ToastContainer } from 'react-toastify';
 import { ThemeProvider } from '@/features/theme/components/theme-provider';
 import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
 
@@ -42,7 +42,7 @@ export default function RootLayout({
           <ThemeProvider>
             <ReactQueryProvider>
               {children}
-              <Toaster expand />
+              <ToastContainer pauseOnFocusLoss={false} theme="dark" />
             </ReactQueryProvider>
           </ThemeProvider>
         </NuqsAdapter>
