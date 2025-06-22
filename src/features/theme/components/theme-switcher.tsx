@@ -38,7 +38,7 @@ const ThemeSwitcher = () => {
   return (
     <>
       <Button
-        color="dark/white"
+        color="dark"
         onClick={() => {
           setDialogOpen(!dialogOpen);
         }}
