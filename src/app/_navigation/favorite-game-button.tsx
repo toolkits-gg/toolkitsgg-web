@@ -25,8 +25,6 @@ const FavoriteGameButton = ({
   return (
     <Form action={action} actionState={actionState}>
       <SubmitButton
-        variant={isFavorite ? 'default' : 'outline'}
-        size="sm"
         icon={
           isFavorite ? (
             <LucideHeart className="h-4 w-4" />

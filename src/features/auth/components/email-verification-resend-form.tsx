@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useActionState } from "react";
-import { Form } from "@/components/form/form";
-import { SubmitButton } from "@/components/form/submit-button";
-import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
-import { emailVerificationResend } from "../actions/email-verification-resend";
+import { useActionState } from 'react';
+import { Form } from '@/components/form/form';
+import { SubmitButton } from '@/components/form/submit-button';
+import { EMPTY_ACTION_STATE } from '@/components/form/utils/to-action-state';
+import { emailVerificationResend } from '../actions/email-verification-resend';
 
 const EmailVerificationResendForm = () => {
   const [actionState, action] = useActionState(

@@ -17,18 +17,16 @@ export const clairObscurConfig: GameConfig<COE33ItemType> = {
   label: 'Clair Obscur',
   description: `Lead the members of Expedition 33 on their quest to destroy the Paintress so that she can never paint death again. Explore a world of wonders inspired by Belle Époque France and battle unique enemies in this turn-based RPG with real-time mechanics.`,
   id: 'coe33',
-  themeDefinitions: [
-    {
-      label: 'Clair Obscur',
-      className: 'coe33-light',
-      mode: 'Light',
-    },
-    {
-      label: 'Clair Obscur',
-      className: 'coe33-dark',
-      mode: 'Dark',
-    },
-  ],
+  // themeDefinitions: [
+  //   {
+  //     label: 'Clair Obscur',
+  //     className: 'coe33-light',
+  //   },
+  //   {
+  //     label: 'Clair Obscur',
+  //     className: 'coe33-dark',
+  //   },
+  // ],
   path: coe33Path(),
   logo: <Logo gameId="coe33" size={128} />,
 

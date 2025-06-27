@@ -9,8 +9,8 @@ import {
   LucideSparkles,
 } from 'lucide-react';
 import Link from 'next/link';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { buttonVariants } from '@/components/ui/button';
+import { Avatar, AvatarFallback } from '@/components/avatar';
+import { buttonVariants } from '@/components/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,13 +19,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from '@/components/dropdown-menu';
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from '@/components/ui/sidebar';
+} from '@/components/sidebar';
 import { signOut } from '@/features/auth/actions/sign-out';
 import { signInPath, signUpPath } from '@/paths';
 

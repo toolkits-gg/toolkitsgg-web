@@ -1,6 +1,6 @@
 import type { GameId } from '@prisma/client';
 import Image from 'next/image';
-import { Typography } from '@/components/typography';
+import { Text } from '@/components/text';
 import type { BaseItemType } from '@/features/item/types';
 import { getImageUrl } from '@/utils/url';
 
@@ -30,12 +30,9 @@ const ItemCard = <ItemType extends BaseItemType>({
           />
         </div>
         <div className="bg-primary/75 text-primary-foreground flex h-full w-full flex-col items-center justify-center p-0.5">
-          <Typography
-            variant="body"
-            className="text-xs font-medium break-words whitespace-pre-wrap"
-          >
+          <Text className="text-xs font-medium break-words whitespace-pre-wrap">
             {item.name}
-          </Typography>
+          </Text>
         </div>
       </div>
       {actions && (

@@ -23,22 +23,25 @@ export const themeDefinitions: ThemeDefinition[] = [
     label: 'Default Dark',
     className: 'default-dark',
   },
-  {
-    label: 'Nord Polar',
-    className: 'nord-polar-dark',
-  },
-  {
-    label: 'Nord Snow',
-    className: 'nord-snow-light',
-  },
-  {
-    label: 'Solarized Dark',
-    className: 'solarized-dark',
-  },
-  {
-    label: 'Solarized Light',
-    className: 'solarized-light',
-  },
+  // TODO: Add all the shadcn specific variants for the below themes
+  // TODO: Things like --sidebar-background, etc. See Default Themes for reference.
+
+  // {
+  //   label: 'Nord Polar',
+  //   className: 'nord-polar-dark',
+  // },
+  // {
+  //   label: 'Nord Snow',
+  //   className: 'nord-snow-light',
+  // },
+  // {
+  //   label: 'Solarized Dark',
+  //   className: 'solarized-dark',
+  // },
+  // {
+  //   label: 'Solarized Light',
+  //   className: 'solarized-light',
+  // },
 ].sort((a, b) => a.label.localeCompare(b.label));
 
 const gameThemeDefinitions: ThemeDefinition[] = allGameConfigs
@@ -63,6 +66,11 @@ export const accentThemeDefinitions: AccentThemeDefinition[] = [
     className: 'accent-deuteranopic',
     accentTheme: 'deuteranopic',
   },
+  {
+    label: 'Protanopic',
+    className: 'accent-protanopic',
+    accentTheme: 'protanopic',
+  },
 ].sort((a, b) => a.label.localeCompare(b.label));
 
 export const allThemeClassDefinitions: Array<
@@ -74,6 +82,7 @@ export const allThemeClassNames = allThemeClassDefinitions
   .sort();
 
 export const accentThemeClassNames = accentThemeDefinitions
+  .filter((def) => def.label !== 'Default')
   .map((def) => def.className)
   .sort();
 

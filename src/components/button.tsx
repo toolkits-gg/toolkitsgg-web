@@ -155,6 +155,26 @@ const styles = {
       'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-rose-500)] [--btn-border:var(--color-rose-600)]/90',
       '[--btn-icon:var(--color-rose-300)] data-active:[--btn-icon:var(--color-rose-200)] data-hover:[--btn-icon:var(--color-rose-200)]',
     ],
+    primary: [
+      'text-primary-foreground [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-primary-500)] [--btn-border:var(--color-primary-600)]/90',
+      '[--btn-icon:var(--color-primary-300)] data-active:[--btn-icon:var(--color-primary-200)] data-hover:[--btn-icon:var(--color-primary-200)]',
+    ],
+    secondary: [
+      'text-secondary-foreground [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-secondary-500)] [--btn-border:var(--color-secondary-600)]/90',
+      '[--btn-icon:var(--color-secondary-300)] data-active:[--btn-icon:var(--color-secondary-200)] data-hover:[--btn-icon:var(--color-secondary-200)]',
+    ],
+    accent1: [
+      'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-accent1-500)] [--btn-border:var(--color-accent1-600)]/90',
+      '[--btn-icon:var(--color-accent1-300)] data-active:[--btn-icon:var(--color-accent1-200)] data-hover:[--btn-icon:var(--color-accent1-200)]',
+    ],
+    accent2: [
+      'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-accent2-500)] [--btn-border:var(--color-accent2-600)]/90',
+      '[--btn-icon:var(--color-accent2-300)] data-active:[--btn-icon:var(--color-accent2-200)] data-hover:[--btn-icon:var(--color-accent2-200)]',
+    ],
+    accent3: [
+      'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-accent3-500)] [--btn-border:var(--color-accent3-600)]/90',
+      '[--btn-icon:var(--color-accent3-300)] data-active:[--btn-icon:var(--color-accent3-200)] data-hover:[--btn-icon:var(--color-accent3-200)]',
+    ],
   },
 };
 

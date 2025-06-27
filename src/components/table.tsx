@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import type React from 'react';
 import { createContext, useContext, useState } from 'react';
-import { Link } from '../../link';
+import { Link } from './link';
 
 const TableContext = createContext<{
   bleed: boolean;
@@ -100,7 +100,7 @@ export function TableRow({
   target?: string;
   title?: string;
 } & React.ComponentPropsWithoutRef<'tr'>) {
-  let { striped } = useContext(TableContext);
+  const { striped } = useContext(TableContext);
 
   return (
     <TableRowContext.Provider
@@ -127,7 +127,7 @@ export function TableHeader({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'th'>) {
-  let { bleed, grid } = useContext(TableContext);
+  const { bleed, grid } = useContext(TableContext);
 
   return (
     <th
@@ -148,9 +148,9 @@ export function TableCell({
   children,
   ...props
 }: React.ComponentPropsWithoutRef<'td'>) {
-  let { bleed, dense, grid, striped } = useContext(TableContext);
-  let { href, target, title } = useContext(TableRowContext);
-  let [cellRef, setCellRef] = useState<HTMLElement | null>(null);
+  const { bleed, dense, grid, striped } = useContext(TableContext);
+  const { href, target, title } = useContext(TableRowContext);
+  const [cellRef, setCellRef] = useState<HTMLElement | null>(null);
 
   return (
     <td

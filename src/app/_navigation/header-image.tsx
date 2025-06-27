@@ -1,5 +1,6 @@
+import { Heading2 } from 'lucide-react';
 import { cloneElement } from 'react';
-import { Typography } from '@/components/typography';
+import { Text } from '@/components/text';
 
 type HeaderImageProps = {
   image: React.ReactElement<HTMLImageElement>;
@@ -56,8 +57,8 @@ const HeaderImage = ({
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-black/90 lg:mx-0 dark:text-white/90">
-          {title && <Typography variant="h2">{title}</Typography>}
-          {text && <Typography variant="p">{text}</Typography>}
+          {title && <Heading2>{title}</Heading2>}
+          {text && <Text>{text}</Text>}
         </div>
       </div>
     </div>

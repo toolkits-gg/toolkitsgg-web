@@ -38,7 +38,7 @@ const ThemeSwitcher = () => {
   return (
     <>
       <Button
-        color="dark"
+        color="primary"
         onClick={() => {
           setDialogOpen(!dialogOpen);
         }}
@@ -60,9 +60,9 @@ const ThemeSwitcher = () => {
               onChange={handleChangeMode}
               value={selectedMode}
             >
-              {themeModes.map((selectedMode) => (
-                <ListboxOption key={selectedMode} value={selectedMode}>
-                  <ListboxLabel>{selectedMode}</ListboxLabel>
+              {themeModes.map((themeMode) => (
+                <ListboxOption key={themeMode} value={themeMode.toLowerCase()}>
+                  <ListboxLabel>{themeMode}</ListboxLabel>
                 </ListboxOption>
               ))}
             </Listbox>
@@ -76,7 +76,7 @@ const ThemeSwitcher = () => {
               value={selectedAccent}
             >
               {accentThemeDefinitions.map((def) => (
-                <ListboxOption key={def.className} value={def.accentTheme}>
+                <ListboxOption key={def.className} value={def.className}>
                   <ListboxLabel>{def.label}</ListboxLabel>
                 </ListboxOption>
               ))}
