@@ -1,6 +1,5 @@
 # Now
 
-- Changing accent needs to adapt to the current theme.
 - Many pages and components need to convert to Catalyst components.
 
 # Later

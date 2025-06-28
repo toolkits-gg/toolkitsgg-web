@@ -1,58 +1,31 @@
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
-import { type ThemeMode } from '@/features/theme/constants';
-
-// TODO Theme and Category boxes need to follow the selected values
-
-const getThemeName = (
-  theme: string | undefined,
-  accent: string | undefined
-) => {
-  if (!theme || !accent) {
-    return '';
-  }
-
-  // Remove the accent if any exist
-  const cleanThemeName = theme.split('-accent')[0];
-  return accent === 'accent-default'
-    ? cleanThemeName
-    : `${cleanThemeName}-${accent}`;
-};
+import type { ThemeMode } from '@/features/theme/constants';
 
 const useAppTheme = () => {
   const { theme, setTheme } = useTheme();
 
-  const [selectedMode, setSelectedMode] = useState<ThemeMode>(
-    theme?.includes('-dark') ? 'dark' : 'light'
-  );
+  const mode: ThemeMode = theme?.includes('-light') ? 'light' : 'dark';
 
-  const handleChangeMode = (newMode: ThemeMode) => {
-    setSelectedMode(newMode);
-  };
+  const accent = theme?.includes('-accent')
+    ? theme.slice(theme.indexOf('-accent') + 1)
+    : 'accent-default';
 
-  const [selectedAccent, setSelectedAccent] = useState<string>(
-    theme?.includes('accent-')
-      ? theme.split('accent-')[1].split(' ')[0]
-      : 'accent-default'
-  );
+  const colorTheme = theme?.includes('-accent')
+    ? theme.split('-accent')[0]
+    : theme;
 
-  const handleChangeAccent = (newAccent: string | undefined) => {
-    const newTheme = getThemeName(theme, newAccent);
-    setTheme(newTheme);
-    setSelectedAccent(newAccent || 'accent-default');
-  };
-
-  const handleChangeTheme = (newTheme: string) => {
-    const newThemeWithAccent = getThemeName(newTheme, selectedAccent);
-    setTheme(newThemeWithAccent);
+  const handleChangeTheme = (newColorTheme: string, newAccent: string) => {
+    if (newAccent === 'accent-default') {
+      setTheme(newColorTheme.split('-accent-')[0]);
+    } else {
+      setTheme(`${newColorTheme}-${newAccent}`);
+    }
   };
 
   return {
-    theme,
-    selectedAccent,
-    selectedMode,
-    handleChangeAccent,
-    handleChangeMode,
+    colorTheme,
+    accent,
+    mode,
     handleChangeTheme,
   };
 };

@@ -1,4 +1,4 @@
-[data-theme~='default-light'] {
+[data-theme*='default-light'] {
   color-scheme: light;
   --color-gray-50: oklch(0.12 0.007 264);
   --color-gray-100: oklch(0.17 0.01 265);
@@ -108,7 +108,7 @@
   --sidebar-ring: var(--color-primary-700);
 }
 
-[data-theme~='light'][data-theme~='deuteranopic'] {
+[data-theme*='default-light'][data-theme*='deuteranopic'] {
   --color-accent2-50: oklch(0.124 0.054 259.6);
   --color-accent2-100: oklch(0.182 0.08 259.6);
   --color-accent2-200: oklch(0.249 0.102 259.6);
@@ -134,7 +134,7 @@
   --color-accent3-950: oklch(0.976 0.012 29.2);
 }
 
-[data-theme~='light'][data-theme~='protanopic'] {
+[data-theme*='default-light'][data-theme*='protanopic'] {
   --color-accent2-50: oklch(0.22 0.048 150);
   --color-accent2-100: oklch(0.33 0.069 149);
   --color-accent2-200: oklch(0.38 0.079 148);

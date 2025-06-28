@@ -16,24 +16,31 @@ import {
 import { useAppTheme } from '@/features/theme/hooks/use-theme';
 
 const ThemeSwitcher = () => {
-  const {
-    theme,
-    selectedMode,
-    handleChangeTheme,
-    handleChangeMode,
-    selectedAccent,
-    handleChangeAccent,
-  } = useAppTheme();
+  const { colorTheme, accent, handleChangeTheme } = useAppTheme();
   const isClient = useIsClient();
 
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  if (!theme) {
+  const [category, setCategory] = useState<(typeof themeModes)[number]>('All');
+
+  if (!colorTheme) {
     return <Skeleton className="h-9 w-9" />;
   }
   if (!isClient) {
     return <Skeleton className="h-9 w-9" />;
   }
+
+  const handleChangeColorTheme = (newColorTheme: string) => {
+    handleChangeTheme(newColorTheme, accent);
+  };
+
+  const handleChangeCategory = (value: typeof category) => {
+    setCategory(value);
+  };
+
+  const handleChangeAccent = (newAccent: string) => {
+    handleChangeTheme(colorTheme, newAccent);
+  };
 
   return (
     <>
@@ -56,12 +63,12 @@ const ThemeSwitcher = () => {
           <Field>
             <Label>Category</Label>
             <Listbox
-              name="selectedMode"
-              onChange={handleChangeMode}
-              value={selectedMode}
+              name="selectedCategory"
+              onChange={handleChangeCategory}
+              value={category}
             >
               {themeModes.map((themeMode) => (
-                <ListboxOption key={themeMode} value={themeMode.toLowerCase()}>
+                <ListboxOption key={themeMode} value={themeMode}>
                   <ListboxLabel>{themeMode}</ListboxLabel>
                 </ListboxOption>
               ))}
@@ -73,7 +80,7 @@ const ThemeSwitcher = () => {
             <Listbox
               name="selectedAccent"
               onChange={handleChangeAccent}
-              value={selectedAccent}
+              value={accent}
             >
               {accentThemeDefinitions.map((def) => (
                 <ListboxOption key={def.className} value={def.className}>
@@ -87,15 +94,28 @@ const ThemeSwitcher = () => {
             <Label>Theme</Label>
             <Listbox
               name="colorTheme"
-              onChange={handleChangeTheme}
+              onChange={handleChangeColorTheme}
               placeholder="Select a new theme"
-              value={theme}
+              value={colorTheme}
             >
-              {allThemeClassDefinitions.map((def) => (
-                <ListboxOption key={def.className} value={def.className}>
-                  <ListboxLabel>{def.label}</ListboxLabel>
-                </ListboxOption>
-              ))}
+              {allThemeClassDefinitions
+                .filter((def) => {
+                  switch (category) {
+                    case 'All':
+                      return true;
+                    case 'Light':
+                      return def.className.includes('light');
+                    case 'Dark':
+                      return def.className.includes('dark');
+                    default:
+                      return false;
+                  }
+                })
+                .map((def) => (
+                  <ListboxOption key={def.className} value={def.className}>
+                    <ListboxLabel>{def.label}</ListboxLabel>
+                  </ListboxOption>
+                ))}
             </Listbox>
           </Field>
         </DialogBody>

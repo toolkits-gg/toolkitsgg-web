@@ -16,6 +16,8 @@ type ThemeProviderProps = Parameters<typeof NextThemesProvider>[0];
 const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
   const themes = [...allThemeClassNames, ...accentThemes];
 
+  console.info('themes', themes);
+
   return (
     <NextThemesProvider
       {...props}
