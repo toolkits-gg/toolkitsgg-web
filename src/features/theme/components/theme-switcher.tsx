@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useIsClient } from 'usehooks-ts';
 import { Button } from '@/components/button';
 import { Dialog, DialogBody, DialogTitle } from '@/components/dialog';
+import { Divider } from '@/components/divider';
 import { Field, Label } from '@/components/fieldset';
 import { Listbox, ListboxLabel, ListboxOption } from '@/components/listbox';
 import { Skeleton } from '@/components/skeleton';
@@ -59,36 +60,39 @@ const ThemeSwitcher = () => {
         open={dialogOpen}
       >
         <DialogTitle>Select Color Theme</DialogTitle>
-        <DialogBody className="ui-flex ui-flex-col ui-gap-y-4">
-          <Field>
-            <Label>Category</Label>
-            <Listbox
-              name="selectedCategory"
-              onChange={handleChangeCategory}
-              value={category}
-            >
-              {themeModes.map((themeMode) => (
-                <ListboxOption key={themeMode} value={themeMode}>
-                  <ListboxLabel>{themeMode}</ListboxLabel>
-                </ListboxOption>
-              ))}
-            </Listbox>
-          </Field>
+        <DialogBody className="flex flex-col gap-y-4">
+          <div className="flex flex-1 items-center justify-between gap-x-2">
+            <Field className="w-full">
+              <Label>Category</Label>
+              <Listbox
+                name="selectedCategory"
+                onChange={handleChangeCategory}
+                value={category}
+              >
+                {themeModes.map((themeMode) => (
+                  <ListboxOption key={themeMode} value={themeMode}>
+                    <ListboxLabel>{themeMode}</ListboxLabel>
+                  </ListboxOption>
+                ))}
+              </Listbox>
+            </Field>
+            <Field className="w-full">
+              <Label>Accents</Label>
+              <Listbox
+                name="selectedAccent"
+                onChange={handleChangeAccent}
+                value={accent}
+              >
+                {accentThemeDefinitions.map((def) => (
+                  <ListboxOption key={def.className} value={def.className}>
+                    <ListboxLabel>{def.label}</ListboxLabel>
+                  </ListboxOption>
+                ))}
+              </Listbox>
+            </Field>
+          </div>
 
-          <Field>
-            <Label>Accents</Label>
-            <Listbox
-              name="selectedAccent"
-              onChange={handleChangeAccent}
-              value={accent}
-            >
-              {accentThemeDefinitions.map((def) => (
-                <ListboxOption key={def.className} value={def.className}>
-                  <ListboxLabel>{def.label}</ListboxLabel>
-                </ListboxOption>
-              ))}
-            </Listbox>
-          </Field>
+          <Divider />
 
           <Field>
             <Label>Theme</Label>
