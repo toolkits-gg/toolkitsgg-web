@@ -7,14 +7,14 @@ import { EMPTY_ACTION_STATE } from '@/components/form/utils/to-action-state';
 import { emailVerificationResend } from '../actions/email-verification-resend';
 
 const EmailVerificationResendForm = () => {
-  const [actionState, action] = useActionState(
+  const [actionState, action, isPending] = useActionState(
     emailVerificationResend,
     EMPTY_ACTION_STATE
   );
 
   return (
     <Form action={action} actionState={actionState}>
-      <SubmitButton label="Resend Code" />
+      <SubmitButton label="Resend Code" isPending={isPending} />
     </Form>
   );
 };

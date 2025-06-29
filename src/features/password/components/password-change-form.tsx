@@ -9,7 +9,7 @@ import { Input } from '@/components/input';
 import { passwordChange } from '../actions/password-change';
 
 const PasswordChangeForm = () => {
-  const [actionState, action] = useActionState(
+  const [actionState, action, isPending] = useActionState(
     passwordChange,
     EMPTY_ACTION_STATE
   );
@@ -24,7 +24,7 @@ const PasswordChangeForm = () => {
       />
       <FieldError actionState={actionState} name="password" />
 
-      <SubmitButton label="Send Email" />
+      <SubmitButton label="Send Email" isPending={isPending} />
     </Form>
   );
 };

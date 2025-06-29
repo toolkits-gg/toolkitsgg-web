@@ -13,7 +13,7 @@ type PasswordResetFormProps = {
 };
 
 const PasswordResetForm = ({ tokenId }: PasswordResetFormProps) => {
-  const [actionState, action] = useActionState(
+  const [actionState, action, isPending] = useActionState(
     passwordReset.bind(null, tokenId),
     EMPTY_ACTION_STATE
   );
@@ -36,7 +36,7 @@ const PasswordResetForm = ({ tokenId }: PasswordResetFormProps) => {
       />
       <FieldError actionState={actionState} name="confirmPassword" />
 
-      <SubmitButton label="Reset Password" />
+      <SubmitButton label="Reset Password" isPending={isPending} />
     </Form>
   );
 };

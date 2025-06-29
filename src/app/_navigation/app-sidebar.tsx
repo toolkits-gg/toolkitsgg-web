@@ -1,6 +1,7 @@
 import type { GameId } from '@prisma/client';
 import { LucideInbox, LucideSearch } from 'lucide-react';
 import { Fragment } from 'react';
+import { FavoriteGameButton } from '@/app/_navigation/favorite-game-button';
 import { GameSwitcher } from '@/app/_navigation/game-switcher';
 import {
   buildsNavLink,
@@ -10,6 +11,7 @@ import {
   resourcesNavLink,
 } from '@/app/_navigation/nav-links';
 import { UserMenu } from '@/app/_navigation/user-menu';
+import { Divider } from '@/components/divider';
 import {
   Sidebar,
   SidebarBody,
@@ -20,6 +22,7 @@ import {
   SidebarSection,
 } from '@/components/sidebar';
 import { getAuth } from '@/features/auth/queries/get-auth';
+import { getFavoriteGameIds } from '@/features/game/actions/get-favorite-game-ids';
 import { allGameConfigs } from '@/features/game/constants';
 import { ThemeSwitcher } from '@/features/theme/components/theme-switcher';
 
@@ -28,7 +31,17 @@ type SidebarProps = {
 };
 
 const AppSidebar = async ({ gameId }: SidebarProps) => {
-  const { user } = await getAuth();
+  const [authResult, favoriteGameIds] = await Promise.all([
+    getAuth(),
+    getFavoriteGameIds(),
+  ]);
+
+  const user = authResult.user;
+
+  const isGameFavorited = favoriteGameIds.some(
+    (favoriteGameId) => favoriteGameId === gameId
+  );
+
   const gameConfig = allGameConfigs.find((config) => config.id === gameId);
 
   let navLinks: NavLink[] = [helpNavLink];
@@ -60,6 +73,17 @@ const AppSidebar = async ({ gameId }: SidebarProps) => {
     <Sidebar>
       <SidebarHeader>
         <GameSwitcher gameId={gameId} />
+        {gameId && (
+          <div className="mb-4 flex flex-1 flex-col gap-2">
+            <div className="flex flex-1 items-center justify-start gap-2">
+              <FavoriteGameButton
+                gameId={gameId}
+                isFavorite={isGameFavorited}
+              />
+            </div>
+            <Divider />
+          </div>
+        )}
         {gameConfig && user && (
           <SidebarSection>
             <SidebarItem href="/search">

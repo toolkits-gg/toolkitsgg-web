@@ -9,7 +9,10 @@ import { Input } from '@/components/input';
 import { signUp } from '../actions/sign-up';
 
 const SignUpForm = () => {
-  const [actionState, action] = useActionState(signUp, EMPTY_ACTION_STATE);
+  const [actionState, action, isPending] = useActionState(
+    signUp,
+    EMPTY_ACTION_STATE
+  );
 
   return (
     <Form action={action} actionState={actionState}>
@@ -43,7 +46,7 @@ const SignUpForm = () => {
       />
       <FieldError actionState={actionState} name="confirmPassword" />
 
-      <SubmitButton label="Sign Up" />
+      <SubmitButton label="Sign Up" isPending={isPending} />
     </Form>
   );
 };

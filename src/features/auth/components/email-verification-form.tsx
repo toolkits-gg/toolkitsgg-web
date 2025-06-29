@@ -9,7 +9,7 @@ import { Input } from '@/components/input';
 import { emailVerification } from '../actions/email-verification';
 
 const EmailVerificationForm = () => {
-  const [actionState, action] = useActionState(
+  const [actionState, action, isPending] = useActionState(
     emailVerification,
     EMPTY_ACTION_STATE
   );
@@ -19,7 +19,7 @@ const EmailVerificationForm = () => {
       <Input type="code" name="code" placeholder="Code" />
       <FieldError actionState={actionState} name="code" />
 
-      <SubmitButton label="Verify Email" />
+      <SubmitButton label="Verify Email" isPending={isPending} />
     </Form>
   );
 };

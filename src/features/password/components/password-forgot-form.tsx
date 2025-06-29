@@ -9,7 +9,7 @@ import { Input } from '@/components/input';
 import { passwordForgot } from '../actions/password-forgot';
 
 const PasswordForgotForm = () => {
-  const [actionState, action] = useActionState(
+  const [actionState, action, isPending] = useActionState(
     passwordForgot,
     EMPTY_ACTION_STATE
   );
@@ -23,7 +23,7 @@ const PasswordForgotForm = () => {
       />
       <FieldError actionState={actionState} name="email" />
 
-      <SubmitButton label="Send Email" />
+      <SubmitButton label="Send Email" isPending={isPending} />
     </Form>
   );
 };

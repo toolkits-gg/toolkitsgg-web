@@ -7,8 +7,10 @@ type GameActionsProps = {
 };
 
 const GameActions = async ({ gameId }: GameActionsProps) => {
-  const favoriteGames = await gameData.getFavoriteGames();
-  const isFavorite = favoriteGames.some((game) => game === gameId);
+  const favoriteGameIds = await gameData.getFavoriteGameIds();
+  const isFavorite = favoriteGameIds.some(
+    (favoriteGameId) => favoriteGameId === gameId
+  );
 
   return (
     <div className="ml-1 flex w-full flex-1 items-center justify-start gap-1">
