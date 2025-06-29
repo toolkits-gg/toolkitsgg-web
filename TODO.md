@@ -1,6 +1,7 @@
 # Now
 
 - Many pages and components need to convert to Catalyst components.
+- Replace generic <Navbar> on pages with mobile navigation
 
 # Later
 

@@ -46,12 +46,12 @@ const ThemeSwitcher = () => {
   return (
     <>
       <Button
-        color="primary"
+        plain
         onClick={() => {
           setDialogOpen(!dialogOpen);
         }}
       >
-        <LucidePalette />
+        <LucidePalette className="h-5 w-5" />
       </Button>
       <Dialog
         onClose={() => {

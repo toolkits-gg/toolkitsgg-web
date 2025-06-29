@@ -14,7 +14,7 @@ const EmailVerificationResendForm = () => {
 
   return (
     <Form action={action} actionState={actionState}>
-      <SubmitButton label="Resend Code" variant="ghost" />
+      <SubmitButton label="Resend Code" />
     </Form>
   );
 };

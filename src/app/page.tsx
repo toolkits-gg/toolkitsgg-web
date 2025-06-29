@@ -1,15 +1,15 @@
-import { Sidebar } from '@/app/_navigation/sidebar';
+import { AppSidebar } from '@/app/_navigation/app-sidebar';
+import { Heading } from '@/components/heading';
 import { Navbar } from '@/components/navbar';
 import { SidebarLayout } from '@/components/sidebar-layout';
-import { ThemeSwitcher } from '@/features/theme/components/theme-switcher';
 
 export default function HomePage() {
   return (
     <SidebarLayout
-      sidebar={<Sidebar gameId={'coe33'} />}
+      sidebar={<AppSidebar gameId={undefined} />}
       navbar={<Navbar>Navigation</Navbar>}
     >
-      <ThemeSwitcher />
+      <Heading>Home Page</Heading>
     </SidebarLayout>
   );
 }

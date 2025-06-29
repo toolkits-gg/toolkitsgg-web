@@ -1,14 +1,5 @@
 import type { GameId } from '@prisma/client';
-import {
-  LucideChevronUp,
-  LucideCog,
-  LucideInbox,
-  LucideLightbulb,
-  LucideLogOut,
-  LucideSearch,
-  LucideShieldCheck,
-  LucideUser,
-} from 'lucide-react';
+import { LucideInbox, LucideSearch } from 'lucide-react';
 import { Fragment } from 'react';
 import { GameSwitcher } from '@/app/_navigation/game-switcher';
 import {
@@ -18,17 +9,9 @@ import {
   type NavLink,
   resourcesNavLink,
 } from '@/app/_navigation/nav-links';
-import { Avatar } from '@/components/avatar';
+import { UserMenu } from '@/app/_navigation/user-menu';
 import {
-  Dropdown,
-  DropdownButton,
-  DropdownDivider,
-  DropdownItem,
-  DropdownLabel,
-  DropdownMenu,
-} from '@/components/dropdown';
-import {
-  Sidebar as CatalystSidebar,
+  Sidebar,
   SidebarBody,
   SidebarFooter,
   SidebarHeader,
@@ -38,12 +21,13 @@ import {
 } from '@/components/sidebar';
 import { getAuth } from '@/features/auth/queries/get-auth';
 import { allGameConfigs } from '@/features/game/constants';
+import { ThemeSwitcher } from '@/features/theme/components/theme-switcher';
 
 type SidebarProps = {
   gameId: GameId | undefined;
 };
 
-const Sidebar = async ({ gameId }: SidebarProps) => {
+const AppSidebar = async ({ gameId }: SidebarProps) => {
   const { user } = await getAuth();
   const gameConfig = allGameConfigs.find((config) => config.id === gameId);
 
@@ -73,9 +57,9 @@ const Sidebar = async ({ gameId }: SidebarProps) => {
   }
 
   return (
-    <CatalystSidebar>
+    <Sidebar>
       <SidebarHeader>
-        <GameSwitcher gameId={undefined} />
+        <GameSwitcher gameId={gameId} />
         {gameConfig && user && (
           <SidebarSection>
             <SidebarItem href="/search">
@@ -111,55 +95,15 @@ const Sidebar = async ({ gameId }: SidebarProps) => {
         </SidebarSection>
       </SidebarBody>
       <SidebarFooter>
-        <Dropdown>
-          <DropdownButton as={SidebarItem}>
-            <span className="flex min-w-0 items-center gap-3">
-              <Avatar
-                src="/profile-photo.jpg"
-                className="size-10"
-                square
-                alt=""
-              />
-              <span className="min-w-0">
-                <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">
-                  Erica
-                </span>
-                <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
-                  erica@example.com
-                </span>
-              </span>
-            </span>
-
-            <LucideChevronUp />
-          </DropdownButton>
-          <DropdownMenu className="min-w-64" anchor="top start">
-            <DropdownItem href="/my-profile">
-              <LucideUser />
-              <DropdownLabel>My profile</DropdownLabel>
-            </DropdownItem>
-            <DropdownItem href="/settings">
-              <LucideCog />
-              <DropdownLabel>Settings</DropdownLabel>
-            </DropdownItem>
-            <DropdownDivider />
-            <DropdownItem href="/privacy-policy">
-              <LucideShieldCheck />
-              <DropdownLabel>Privacy policy</DropdownLabel>
-            </DropdownItem>
-            <DropdownItem href="/share-feedback">
-              <LucideLightbulb />
-              <DropdownLabel>Share feedback</DropdownLabel>
-            </DropdownItem>
-            <DropdownDivider />
-            <DropdownItem href="/logout">
-              <LucideLogOut />
-              <DropdownLabel>Sign out</DropdownLabel>
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+        <div className="flex flex-1 flex-col gap-2">
+          <div className="flex flex-1 items-center justify-end gap-2">
+            <ThemeSwitcher />
+          </div>
+          <UserMenu user={user ?? undefined} />
+        </div>
       </SidebarFooter>
-    </CatalystSidebar>
+    </Sidebar>
   );
 };
 
-export { Sidebar };
+export { AppSidebar };

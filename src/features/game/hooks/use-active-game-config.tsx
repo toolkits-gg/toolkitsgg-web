@@ -10,7 +10,7 @@ type UseActiveGameConfigArgs = {
 };
 
 const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
-  const { theme } = useAppTheme();
+  const { colorTheme } = useAppTheme();
 
   const pathname = usePathname();
 
@@ -20,7 +20,7 @@ const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
     if (!gameId && pathname !== '/') {
       validatedGameId.current =
         (allThemeClassNames.find(
-          (className) => theme === className
+          (className) => colorTheme === className
         ) as GameId) || noGameConfig.id;
     }
 
@@ -33,7 +33,7 @@ const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
     }
 
     return gameConfig;
-  }, [pathname, gameId, theme]);
+  }, [pathname, gameId, colorTheme]);
 
   return {
     activeGameConfig,

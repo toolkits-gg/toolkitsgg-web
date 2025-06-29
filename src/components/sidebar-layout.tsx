@@ -2,7 +2,10 @@
 
 import * as Headless from '@headlessui/react';
 import React, { useState } from 'react';
+import { Link } from '@/components/link';
+import { Logo } from '@/components/logo';
 import { NavbarItem } from '@/components/navbar';
+import { homePath } from '@/paths';
 
 function OpenMenuIcon() {
   return (
@@ -82,8 +85,15 @@ export function SidebarLayout({
       </header>
 
       {/* Content */}
-      <main className="flex flex-1 flex-col pb-2 lg:min-w-0 lg:pt-2 lg:pr-2 lg:pl-64">
-        <div className="bg-background ring-ring dark:ring-ring/50 grow p-6 lg:rounded-lg lg:p-10 lg:shadow-xs lg:ring-1">
+      <main className="flex flex-1 flex-col gap-y-2 pb-2 lg:min-w-0 lg:pt-2 lg:pr-2 lg:pl-64">
+        <div className="flex items-center justify-end">
+          <div className="w-12">
+            <Link href={homePath()}>
+              <Logo gameId="none" />
+            </Link>
+          </div>
+        </div>
+        <div className="bg-background ring-ring dark:ring-ring/50 grow p-6 lg:rounded-lg lg:p-8 lg:shadow-xs lg:ring-1">
           <div className="mx-auto max-w-6xl">{children}</div>
         </div>
       </main>
