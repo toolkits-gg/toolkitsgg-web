@@ -25,7 +25,7 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
 
   return (
     <Dropdown>
-      <DropdownButton as={SidebarItem} className="mb-2.5">
+      <DropdownButton as={SidebarItem}>
         <div className="flex aspect-square size-14 items-center justify-center rounded-lg">
           {activeGameConfig.logo}
         </div>

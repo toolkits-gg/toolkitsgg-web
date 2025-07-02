@@ -72,30 +72,17 @@ const AppSidebar = async ({ gameId }: SidebarProps) => {
   return (
     <Sidebar>
       <SidebarHeader>
-        <GameSwitcher gameId={gameId} />
-        {gameId && (
-          <div className="mb-4 flex flex-1 flex-col gap-2">
-            <div className="flex flex-1 items-center justify-start gap-2">
+        <div className="flex flex-col gap-1">
+          <GameSwitcher gameId={gameId} />
+          {gameId && gameConfig && user && (
+            <div className="flex flex-1 items-center justify-between gap-x-2">
               <FavoriteGameButton
                 gameId={gameId}
                 isFavorite={isGameFavorited}
               />
             </div>
-            <Divider />
-          </div>
-        )}
-        {gameConfig && user && (
-          <SidebarSection>
-            <SidebarItem href="/search">
-              <LucideSearch />
-              <SidebarLabel>Search</SidebarLabel>
-            </SidebarItem>
-            <SidebarItem href="/inbox">
-              <LucideInbox />
-              <SidebarLabel>Inbox</SidebarLabel>
-            </SidebarItem>
-          </SidebarSection>
-        )}
+          )}
+        </div>
       </SidebarHeader>
       <SidebarBody>
         <SidebarSection>
