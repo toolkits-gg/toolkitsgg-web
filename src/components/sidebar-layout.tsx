@@ -93,7 +93,7 @@ export function SidebarLayout({
             </Link>
           </div>
         </div>
-        <div className="bg-background ring-ring dark:ring-ring/50 grow p-6 lg:rounded-lg lg:p-8 lg:shadow-xs lg:ring-1">
+        <div className="bg-background ring-sidebar-ring grow p-6 lg:rounded-lg lg:p-8 lg:shadow-xs lg:ring-1">
           <div className="mx-auto max-w-6xl">{children}</div>
         </div>
       </main>
