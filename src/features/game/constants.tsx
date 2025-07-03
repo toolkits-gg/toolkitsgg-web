@@ -12,7 +12,7 @@ export const noGameConfig: GameConfig<undefined> = {
   label: 'Default',
   path: '/',
   logo: <Logo gameId="none" size={128} />,
-  themeCSSClass: 'default',
+  themeDefinitions: undefined,
   items: undefined,
 };
 

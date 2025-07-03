@@ -1,8 +1,7 @@
 import type { GameId } from '@prisma/client';
-import { LucideChevronRight } from 'lucide-react';
-import Link from 'next/link';
-import * as React from 'react';
-import { GameActions } from '@/app/_navigation/game-actions';
+import { LucideInbox, LucideSearch } from 'lucide-react';
+import { Fragment } from 'react';
+import { FavoriteGameButton } from '@/app/_navigation/favorite-game-button';
 import { GameSwitcher } from '@/app/_navigation/game-switcher';
 import {
   buildsNavLink,
@@ -11,38 +10,38 @@ import {
   type NavLink,
   resourcesNavLink,
 } from '@/app/_navigation/nav-links';
+import { UserMenu } from '@/app/_navigation/user-menu';
+import { Divider } from '@/components/divider';
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import { Separator } from '@/components/ui/separator';
-import {
-  Sidebar as BaseSidebar,
-  SidebarContent as BaseSidebarContent,
-  SidebarFooter as BaseSidebarFooter,
-  SidebarGroup as BaseSidebarGroup,
-  SidebarGroupLabel as BaseSidebarGroupLabel,
-  SidebarHeader as BaseSidebarHeader,
-  SidebarMenu as BaseSidebarMenu,
-  SidebarMenuButton as BaseSidebarMenuButton,
-  SidebarMenuItem as BaseSidebarMenuItem,
-  SidebarMenuSub as BaseSidebarMenuSub,
-  SidebarMenuSubButton as BaseSidebarMenuSubButton,
-  SidebarMenuSubItem as BaseSidebarMenuSubItem,
-  SidebarRail as BaseSidebarRail,
-} from '@/components/ui/sidebar';
+  Sidebar,
+  SidebarBody,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarItem,
+  SidebarLabel,
+  SidebarSection,
+} from '@/components/sidebar';
 import { getAuth } from '@/features/auth/queries/get-auth';
+import { getFavoriteGameIds } from '@/features/game/actions/get-favorite-game-ids';
 import { allGameConfigs } from '@/features/game/constants';
-import { ThemeModeToggle } from '@/features/theme/components/theme-mode-toggle';
+import { ThemeSwitcher } from '@/features/theme/components/theme-switcher';
 
-interface AppSidebarProps extends React.ComponentProps<typeof BaseSidebar> {
+type SidebarProps = {
   gameId: GameId | undefined;
-  userMenu: React.ReactNode | null;
-}
+};
 
-const AppSidebar = async ({ gameId, userMenu, ...props }: AppSidebarProps) => {
-  const { user } = await getAuth();
+const AppSidebar = async ({ gameId }: SidebarProps) => {
+  const [authResult, favoriteGameIds] = await Promise.all([
+    getAuth(),
+    getFavoriteGameIds(),
+  ]);
+
+  const user = authResult.user;
+
+  const isGameFavorited = favoriteGameIds.some(
+    (favoriteGameId) => favoriteGameId === gameId
+  );
+
   const gameConfig = allGameConfigs.find((config) => config.id === gameId);
 
   let navLinks: NavLink[] = [helpNavLink];
@@ -71,65 +70,50 @@ const AppSidebar = async ({ gameId, userMenu, ...props }: AppSidebarProps) => {
   }
 
   return (
-    <BaseSidebar collapsible="offcanvas" {...props}>
-      <BaseSidebarHeader>
-        <GameSwitcher gameId={gameId} />
-      </BaseSidebarHeader>
-      <BaseSidebarContent>
-        {gameConfig && user && (
-          <BaseSidebarGroup>
-            <BaseSidebarGroupLabel>Actions</BaseSidebarGroupLabel>
-            <GameActions gameId={gameConfig.id} />
-          </BaseSidebarGroup>
-        )}
-        <BaseSidebarGroup>
-          <BaseSidebarGroupLabel>Toolkit</BaseSidebarGroupLabel>
-          <BaseSidebarMenu>
-            {navLinks.map((item) => (
-              <Collapsible
-                key={item.title}
-                asChild
-                defaultOpen={item.isActive}
-                className="group/collapsible"
-              >
-                <BaseSidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <BaseSidebarMenuButton tooltip={item.title}>
-                      {item.icon && <item.icon />}
-                      <span>{item.title}</span>
-                      <LucideChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                    </BaseSidebarMenuButton>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <BaseSidebarMenuSub>
-                      {item.items?.map((subItem) => (
-                        <BaseSidebarMenuSubItem key={subItem.title}>
-                          <BaseSidebarMenuSubButton asChild>
-                            <Link href={subItem.url}>
-                              <span>{subItem.title}</span>
-                            </Link>
-                          </BaseSidebarMenuSubButton>
-                        </BaseSidebarMenuSubItem>
-                      ))}
-                    </BaseSidebarMenuSub>
-                  </CollapsibleContent>
-                </BaseSidebarMenuItem>
-              </Collapsible>
-            ))}
-          </BaseSidebarMenu>
-        </BaseSidebarGroup>
-      </BaseSidebarContent>
-      <BaseSidebarFooter>
-        <BaseSidebarGroup>
-          <div className="flex w-full flex-1 items-center justify-end gap-2">
-            <ThemeModeToggle />
+    <Sidebar>
+      <SidebarHeader>
+        <div className="flex flex-col gap-1">
+          <GameSwitcher gameId={gameId} />
+          {gameId && gameConfig && user && (
+            <div className="flex flex-1 items-center justify-between gap-x-2">
+              <FavoriteGameButton
+                gameId={gameId}
+                isFavorite={isGameFavorited}
+              />
+            </div>
+          )}
+        </div>
+      </SidebarHeader>
+      <SidebarBody>
+        <SidebarSection>
+          {navLinks.map((navLink) => (
+            <Fragment key={navLink.title}>
+              <SidebarItem href={navLink.url}>
+                <navLink.icon />
+                <SidebarLabel>{navLink.title}</SidebarLabel>
+              </SidebarItem>
+              {navLink.items && navLink.items.length > 0 && (
+                <div className="dark:border-primary-700 ml-2 border-l border-zinc-200 pl-2">
+                  {navLink.items?.map((item) => (
+                    <SidebarItem key={item.title} href={item.url}>
+                      <SidebarLabel>{item.title}</SidebarLabel>
+                    </SidebarItem>
+                  ))}
+                </div>
+              )}
+            </Fragment>
+          ))}
+        </SidebarSection>
+      </SidebarBody>
+      <SidebarFooter>
+        <div className="flex flex-1 flex-col gap-2">
+          <div className="flex flex-1 items-center justify-end gap-2">
+            <ThemeSwitcher />
           </div>
-          <Separator className="my-4" />
-          {userMenu}
-        </BaseSidebarGroup>
-      </BaseSidebarFooter>
-      <BaseSidebarRail />
-    </BaseSidebar>
+          <UserMenu user={user ?? undefined} />
+        </div>
+      </SidebarFooter>
+    </Sidebar>
   );
 };
 

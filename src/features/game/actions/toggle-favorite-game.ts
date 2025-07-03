@@ -17,6 +17,7 @@ export const toggleFavoriteGame = async (
   if (!user) {
     throw new Error('User not authenticated');
   }
+
   try {
     const isCurrentlyFavorite = await prisma.userFavoriteGame.findFirst({
       where: {

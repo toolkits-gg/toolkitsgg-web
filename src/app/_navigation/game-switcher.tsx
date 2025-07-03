@@ -1,23 +1,16 @@
 'use client';
 
 import type { GameId } from '@prisma/client';
-import { ChevronsUpDown } from 'lucide-react';
-import Link from 'next/link';
+import { LucideChevronDown } from 'lucide-react';
 import * as React from 'react';
-import { Typography } from '@/components/typography';
 import {
+  Dropdown,
+  DropdownButton,
+  DropdownItem,
+  DropdownLabel,
   DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from '@/components/ui/sidebar';
+} from '@/components/dropdown';
+import { SidebarItem, SidebarLabel } from '@/components/sidebar';
 import { allGameConfigs, noGameConfig } from '@/features/game/constants';
 import { useActiveGameConfig } from '@/features/game/hooks/use-active-game-config';
 
@@ -30,66 +23,33 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
     gameId,
   });
 
-  const { isMobile } = useSidebar();
-
   return (
-    <SidebarMenu>
-      <SidebarMenuItem>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground flex flex-1"
-            >
-              <div className="text-sidebar-primary-foreground flex aspect-square size-14 items-center justify-center rounded-lg">
-                {activeGameConfig.logo}
+    <Dropdown>
+      <DropdownButton as={SidebarItem}>
+        <div className="flex aspect-square size-14 items-center justify-center rounded-lg">
+          {activeGameConfig.logo}
+        </div>
+        <SidebarLabel>
+          {activeGameConfig.path === noGameConfig.path
+            ? activeGameConfig.name
+            : activeGameConfig.label}
+        </SidebarLabel>
+        <LucideChevronDown />
+      </DropdownButton>
+      <DropdownMenu className="min-w-64" anchor="bottom start">
+        {allGameConfigs
+          .filter((gameConfig) => gameConfig.id !== noGameConfig.id)
+          .filter((gameConfig) => gameConfig.id !== 'rem2')
+          .map((gameConfig) => (
+            <DropdownItem key={gameConfig.name} href={gameConfig.path}>
+              <div className="text-primary-foreground mr-2 flex size-10 items-center justify-center">
+                {gameConfig.logo}
               </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <Typography className="truncate font-bold">
-                  {activeGameConfig.path === noGameConfig.path
-                    ? activeGameConfig.name
-                    : activeGameConfig.label}
-                </Typography>
-                <Typography variant="muted" className="truncate text-xs">
-                  {activeGameConfig.path === noGameConfig.path
-                    ? '---'
-                    : `toolkits.gg${activeGameConfig.path}`}
-                </Typography>
-              </div>
-              <ChevronsUpDown className="ml-auto" />
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-(--radix-dropdown-menu-trigger-width) min-w-64 rounded-lg"
-            align="start"
-            side={isMobile ? 'bottom' : 'right'}
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="text-muted-foreground text-xs">
-              Games
-            </DropdownMenuLabel>
-            {allGameConfigs
-              .filter((gameConfig) => gameConfig.id !== noGameConfig.id)
-              .filter((gameConfig) => gameConfig.id !== 'rem2')
-              .map((gameConfig) => (
-                <DropdownMenuItem key={gameConfig.name} asChild>
-                  <Link
-                    href={`${gameConfig.path}`}
-                    className="flex flex-1 items-center gap-2"
-                  >
-                    <div className="text-primary-foreground flex size-10 items-center justify-center">
-                      {gameConfig.logo}
-                    </div>
-                    <span className="text-md font-medium">
-                      {gameConfig.name}
-                    </span>
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </SidebarMenuItem>
-    </SidebarMenu>
+              <DropdownLabel>{gameConfig.name}</DropdownLabel>
+            </DropdownItem>
+          ))}
+      </DropdownMenu>
+    </Dropdown>
   );
 };
 

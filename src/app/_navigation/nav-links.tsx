@@ -2,6 +2,7 @@ import {
   LucideBookOpen,
   LucideBoxes,
   LucideHelpCircle,
+  type LucideIcon,
   LucideSettings2,
 } from 'lucide-react';
 import { changeLogPath } from '@/paths';
@@ -14,7 +15,7 @@ type NavItem = {
 export type NavLink = {
   title: string;
   url: string;
-  icon: React.ComponentType<any>;
+  icon: LucideIcon;
   isActive: boolean;
   items?: NavItem[];
 };

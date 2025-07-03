@@ -1,11 +1,16 @@
-import { PageLayout } from '@/app/_navigation/page-layout';
+import { AppSidebar } from '@/app/_navigation/app-sidebar';
 import { CardCompact } from '@/components/card-compact';
+import { Navbar } from '@/components/navbar';
+import { SidebarLayout } from '@/components/sidebar-layout';
 import { EmailVerificationForm } from '@/features/auth/components/email-verification-form';
 import { EmailVerificationResendForm } from '@/features/auth/components/email-verification-resend-form';
 
 const EmailVerificationPage = () => {
   return (
-    <PageLayout gameId={undefined} heroImage={undefined}>
+    <SidebarLayout
+      sidebar={<AppSidebar gameId={undefined} />}
+      navbar={<Navbar>Navigation</Navbar>}
+    >
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="Verify Email"
@@ -19,7 +24,7 @@ const EmailVerificationPage = () => {
           }
         />
       </div>
-    </PageLayout>
+    </SidebarLayout>
   );
 };
 

@@ -2,9 +2,9 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Lora } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/features/theme/components/theme-provider';
 import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
+import { ToastProvider } from '@/lib/react-toastify/toast-provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -42,7 +42,7 @@ export default function RootLayout({
           <ThemeProvider>
             <ReactQueryProvider>
               {children}
-              <Toaster expand />
+              <ToastProvider />
             </ReactQueryProvider>
           </ThemeProvider>
         </NuqsAdapter>

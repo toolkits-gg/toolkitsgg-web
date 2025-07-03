@@ -17,24 +17,22 @@ const FavoriteGameButton = ({
   gameId,
   isFavorite,
 }: FavoriteGameButtonProps) => {
-  const [actionState, action] = useActionState(
+  const [actionState, action, isPending] = useActionState(
     toggleFavoriteGame.bind(null, gameId),
     EMPTY_ACTION_STATE
   );
 
   return (
     <Form action={action} actionState={actionState}>
-      <SubmitButton
-        variant={isFavorite ? 'default' : 'outline'}
-        size="sm"
-        icon={
-          isFavorite ? (
-            <LucideHeart className="h-4 w-4" />
-          ) : (
-            <LucideHeartPlus className="h-4 w-4" />
-          )
-        }
-      />
+      {isFavorite ? (
+        <SubmitButton
+          icon={<LucideHeart fill="white" />}
+          color="accent2"
+          isPending={isPending}
+        />
+      ) : (
+        <SubmitButton icon={<LucideHeartPlus />} isPending={isPending} />
+      )}
     </Form>
   );
 };
