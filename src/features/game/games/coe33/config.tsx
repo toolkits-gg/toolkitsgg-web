@@ -1,4 +1,4 @@
-import { Logo } from '@/components/logo';
+import { COE33Logo } from '@/features/game/games/coe33/components/logo';
 import {
   coe33Items,
   type COE33ItemType,
@@ -28,7 +28,7 @@ export const clairObscurConfig: GameConfig<COE33ItemType> = {
   //   },
   // ],
   path: coe33Path(),
-  logo: <Logo gameId="coe33" size={128} />,
+  logo: <COE33Logo size={128} />,
 
   buildsEnabled: false,
 

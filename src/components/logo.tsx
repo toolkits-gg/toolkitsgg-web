@@ -1,43 +1,20 @@
-import type { GameId } from '@prisma/client';
 import Image from 'next/image';
 import { logosPath } from '@/paths';
 
+export type LogoSize = 64 | 128 | 256 | 512 | 1024;
+export const defaultLogoSize: LogoSize = 128;
+
 type LogoProps = {
-  gameId: GameId | 'animated';
-  size?: 64 | 128 | 256 | 512 | 1024;
+  path: string;
+  alt: string;
+  size?: LogoSize;
 };
 
-const Logo = ({ gameId, size = 128 }: LogoProps) => {
-  let logoPath = `${logosPath()}/${size}Clean.png`;
-  let altText = 'Logo of a purple and yellow toolbox.';
-
-  switch (gameId) {
-    case 'none':
-      logoPath = `${logosPath()}/LogoToxicGreen.png`;
-      altText = 'Logo of a purple and yellow toolbox.';
-      break;
-    case 'animated':
-      logoPath = `${logosPath()}/${size === 64 ? 64 : 128}GradientTK.gif`;
-      altText = 'Animated logo of a purple and yellow toolbox.';
-      break;
-    case 'coe33':
-      logoPath = `${logosPath()}/${size}C33.png`;
-      altText = 'Logo of the Clair Obscur logo mixed with a toolbox.';
-      break;
-    case 'rem2':
-      logoPath = `${logosPath()}/${size}R2.png`;
-      altText = 'Logo of Remnant 2 mixed with a toolbox.';
-      break;
-    default:
-      logoPath = `${logosPath()}/${size}Clean.png`;
-      altText = 'Logo of a purple and yellow toolbox.';
-      break;
-  }
-
+const Logo = ({ path, size = defaultLogoSize, alt }: LogoProps) => {
   return (
     <Image
-      src={logoPath}
-      alt={altText}
+      src={path}
+      alt={alt}
       width={size}
       height={size}
       loading="eager"
@@ -46,4 +23,46 @@ const Logo = ({ gameId, size = 128 }: LogoProps) => {
   );
 };
 
-export { Logo };
+const CleanLogo = ({
+  size = defaultLogoSize,
+}: {
+  size?: LogoProps['size'];
+}) => {
+  return (
+    <Logo
+      path={`${logosPath()}/128Clean.png`}
+      size={size}
+      alt="Logo of a purple and yellow toolbox."
+    />
+  );
+};
+
+const DefaultLogo = ({
+  size = defaultLogoSize,
+}: {
+  size?: LogoProps['size'];
+}) => {
+  return (
+    <Logo
+      path={`${logosPath()}/LogoToxicGreen.png`}
+      size={size}
+      alt="Logo of a purple and yellow toolbox."
+    />
+  );
+};
+
+const AnimatedLogo = ({
+  size = defaultLogoSize,
+}: {
+  size?: LogoProps['size'];
+}) => {
+  return (
+    <Logo
+      path={`${logosPath()}/${size === 64 ? 64 : 128}GradientTK.gif`}
+      size={size}
+      alt="Animated logo of a purple and yellow toolbox."
+    />
+  );
+};
+
+export { Logo, CleanLogo, DefaultLogo, AnimatedLogo };

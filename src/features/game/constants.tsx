@@ -1,5 +1,5 @@
 import type { GameId } from '@prisma/client';
-import { Logo } from '@/components/logo';
+import { DefaultLogo } from '@/components/logo';
 import { clairObscurConfig } from '@/features/game/games/coe33/config';
 import { remnant2Config } from '@/features/game/games/rem2/config';
 import type { GameConfig } from '@/features/game/types';
@@ -11,7 +11,7 @@ export const noGameConfig: GameConfig<undefined> = {
   description: undefined,
   label: 'Default',
   path: '/',
-  logo: <Logo gameId="none" size={128} />,
+  logo: <DefaultLogo />,
   themeDefinitions: undefined,
   items: undefined,
 };

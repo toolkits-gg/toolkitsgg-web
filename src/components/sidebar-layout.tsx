@@ -3,7 +3,7 @@
 import * as Headless from '@headlessui/react';
 import React, { useState } from 'react';
 import { Link } from '@/components/link';
-import { Logo } from '@/components/logo';
+import { DefaultLogo, Logo } from '@/components/logo';
 import { NavbarItem } from '@/components/navbar';
 import { homePath } from '@/paths';
 
@@ -89,7 +89,7 @@ export function SidebarLayout({
         <div className="flex items-center justify-end">
           <div className="w-12">
             <Link href={homePath()}>
-              <Logo gameId="none" />
+              <DefaultLogo />
             </Link>
           </div>
         </div>

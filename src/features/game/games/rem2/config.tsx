@@ -1,4 +1,4 @@
-import { Logo } from '@/components/logo';
+import { Remnant2Logo } from '@/features/game/games/rem2/components/logo';
 import type { GameConfig } from '@/features/game/types';
 import type { BaseItemType } from '@/features/item/types';
 
@@ -18,7 +18,7 @@ export const remnant2Config: GameConfig<BaseItemType> = {
   //   },
   // ],
   path: '/rem2',
-  logo: <Logo gameId="rem2" size={128} />,
+  logo: <Remnant2Logo size={128} />,
 
   buildsEnabled: false,
   items: undefined,
