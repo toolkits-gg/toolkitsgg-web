@@ -25,8 +25,8 @@ export default async function GamePage() {
       sidebar={<AppSidebar gameId="coe33" />}
       navbar={<Navbar>Navigation</Navbar>}
     >
-      <div className="flex w-full flex-1 flex-col gap-y-2">
-        <div className="flex w-full flex-1 items-center justify-start">
+      <div className="flex w-full flex-col gap-x-0 gap-y-4 xl:flex-row xl:items-start xl:justify-center xl:gap-x-4 xl:gap-y-0">
+        <div className="flex items-center justify-start xl:w-[250px] xl:min-w-[250px]">
           <HeaderImage
             image={
               <Image
@@ -43,20 +43,11 @@ export default async function GamePage() {
             text={gameConfig?.description}
           />
         </div>
-        <div className="col-span-full flex w-full flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           {gameConfig?.items
             ?.filter((item) => item.category === 'SKILL')
             .map((item) => (
-              <ItemCard
-                key={item.slug}
-                item={item}
-                gameId={gameConfig.id}
-                actions={
-                  <Button plain>
-                    <LucideSailboat className="h-4 w-4" />
-                  </Button>
-                }
-              />
+              <ItemCard key={item.slug} item={item} gameId={gameConfig.id} />
             ))}
         </div>
       </div>

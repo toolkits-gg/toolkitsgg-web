@@ -20,7 +20,7 @@ const HeaderImage = ({
   const { imageOverlayOpacity = 85 } = options;
 
   return (
-    <div className="border-border relative isolate overflow-hidden rounded-xl border bg-white py-12 sm:py-16 dark:bg-black">
+    <div className="border-border relative isolate w-full overflow-hidden rounded-xl border bg-white py-12 sm:py-16 dark:bg-black">
       {cloneElement(image, {
         className: 'absolute inset-0 -z-10 size-full object-cover',
       })}
