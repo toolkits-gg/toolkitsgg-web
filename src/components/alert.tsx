@@ -1,7 +1,7 @@
 import * as Headless from '@headlessui/react';
-import clsx from 'clsx';
 import type React from 'react';
 import { Text } from './text';
+import { cn } from '@/lib/shadcn/utils';
 
 const sizes = {
   xs: 'sm:max-w-xs',
@@ -36,7 +36,7 @@ export function Alert({
         <div className="grid min-h-full grid-rows-[1fr_auto_1fr] justify-items-center p-8 sm:grid-rows-[1fr_auto_3fr] sm:p-4">
           <Headless.DialogPanel
             transition
-            className={clsx(
+            className={cn(
               className,
               sizes[size],
               'row-start-2 w-full rounded-2xl bg-white p-8 shadow-lg ring-1 ring-zinc-950/10 sm:rounded-2xl sm:p-6 dark:bg-zinc-900 dark:ring-white/10 forced-colors:outline',
@@ -61,7 +61,7 @@ export function AlertTitle({
   return (
     <Headless.DialogTitle
       {...props}
-      className={clsx(
+      className={cn(
         className,
         'text-center text-base/6 font-semibold text-balance text-zinc-950 sm:text-left sm:text-sm/6 sm:text-wrap dark:text-white'
       )}
@@ -80,7 +80,7 @@ export function AlertDescription({
     <Headless.Description
       as={Text}
       {...props}
-      className={clsx(className, 'mt-2 text-center text-pretty sm:text-left')}
+      className={cn(className, 'mt-2 text-center text-pretty sm:text-left')}
     />
   );
 }
@@ -89,7 +89,7 @@ export function AlertBody({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
-  return <div {...props} className={clsx(className, 'mt-4')} />;
+  return <div {...props} className={cn(className, 'mt-4')} />;
 }
 
 export function AlertActions({
@@ -99,7 +99,7 @@ export function AlertActions({
   return (
     <div
       {...props}
-      className={clsx(
+      className={cn(
         className,
         'mt-6 flex flex-col-reverse items-center justify-end gap-3 *:w-full sm:mt-4 sm:flex-row sm:*:w-auto'
       )}

@@ -56,9 +56,9 @@ const HeaderImage = ({
         />
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-black/90 lg:mx-0 dark:text-white/90">
+        <div className="mx-auto max-w-3xl lg:mx-0">
           {title && <Heading>{title}</Heading>}
-          {text && <Text>{text}</Text>}
+          {text && <Text className="text-foreground/70">{text}</Text>}
         </div>
       </div>
     </div>

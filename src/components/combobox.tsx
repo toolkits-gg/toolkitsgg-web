@@ -1,7 +1,7 @@
 'use client';
 
+import { cn } from '@/lib/shadcn/utils';
 import * as Headless from '@headlessui/react';
-import clsx from 'clsx';
 import { useState } from 'react';
 
 export function Combobox<T>({
@@ -47,7 +47,7 @@ export function Combobox<T>({
     >
       <span
         data-slot="control"
-        className={clsx([
+        className={cn([
           className,
           // Basic layout
           'relative block w-full',
@@ -70,7 +70,7 @@ export function Combobox<T>({
           displayValue={(option: T) => displayValue(option) ?? ''}
           onChange={(event) => setQuery(event.target.value)}
           placeholder={placeholder}
-          className={clsx([
+          className={cn([
             className,
             // Basic layout
             'relative block w-full appearance-none rounded-lg py-[calc(--spacing(2.5)-1px)] sm:py-[calc(--spacing(1.5)-1px)]',
@@ -117,7 +117,7 @@ export function Combobox<T>({
       <Headless.ComboboxOptions
         transition
         anchor={anchor}
-        className={clsx(
+        className={cn(
           // Anchor positioning
           '[--anchor-gap:--spacing(2)] [--anchor-padding:--spacing(4)] sm:data-[anchor~=start]:[--anchor-offset:-4px]',
           // Base styles,
@@ -148,7 +148,7 @@ export function ComboboxOption<T>({
   Headless.ComboboxOptionProps<'div', T>,
   'as' | 'className'
 >) {
-  const sharedClasses = clsx(
+  const sharedClasses = cn(
     // Base
     'flex min-w-0 items-center',
     // Icons
@@ -162,7 +162,7 @@ export function ComboboxOption<T>({
   return (
     <Headless.ComboboxOption
       {...props}
-      className={clsx(
+      className={cn(
         // Basic layout
         'group/option grid w-full cursor-default grid-cols-[1fr_--spacing(5)] items-baseline gap-x-2 rounded-lg py-2.5 pr-2 pl-3.5 sm:grid-cols-[1fr_--spacing(4)] sm:py-1.5 sm:pr-2 sm:pl-3',
         // Typography
@@ -175,7 +175,7 @@ export function ComboboxOption<T>({
         'data-disabled:opacity-50'
       )}
     >
-      <span className={clsx(className, sharedClasses)}>{children}</span>
+      <span className={cn(className, sharedClasses)}>{children}</span>
       <svg
         className="relative col-start-2 hidden size-5 self-center stroke-current group-data-selected/option:inline sm:size-4"
         viewBox="0 0 16 16"
@@ -200,7 +200,7 @@ export function ComboboxLabel({
   return (
     <span
       {...props}
-      className={clsx(
+      className={cn(
         className,
         'ml-2.5 truncate first:ml-0 sm:ml-2 sm:first:ml-0'
       )}
@@ -216,7 +216,7 @@ export function ComboboxDescription({
   return (
     <span
       {...props}
-      className={clsx(
+      className={cn(
         className,
         'flex flex-1 overflow-hidden text-zinc-500 group-data-focus/option:text-white before:w-2 before:min-w-0 before:shrink dark:text-zinc-400'
       )}

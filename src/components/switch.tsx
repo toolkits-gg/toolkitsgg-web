@@ -1,5 +1,5 @@
+import { cn } from '@/lib/shadcn/utils';
 import * as Headless from '@headlessui/react';
-import clsx from 'clsx';
 import type React from 'react';
 
 export function SwitchGroup({
@@ -10,7 +10,7 @@ export function SwitchGroup({
     <div
       data-slot="control"
       {...props}
-      className={clsx(
+      className={cn(
         className,
         // Basic groups
         'space-y-3 **:data-[slot=label]:font-normal',
@@ -29,7 +29,7 @@ export function SwitchField({
     <Headless.Field
       data-slot="field"
       {...props}
-      className={clsx(
+      className={cn(
         className,
         // Base layout
         'grid grid-cols-[1fr_auto] gap-x-8 gap-y-1 sm:grid-cols-[1fr_auto]',
@@ -151,7 +151,7 @@ export function Switch({
     <Headless.Switch
       data-slot="control"
       {...props}
-      className={clsx(
+      className={cn(
         className,
         // Base styles
         'group relative isolate inline-flex h-6 w-10 cursor-default rounded-full p-[3px] sm:h-5 sm:w-8',
@@ -177,7 +177,7 @@ export function Switch({
     >
       <span
         aria-hidden="true"
-        className={clsx(
+        className={cn(
           // Basic layout
           'pointer-events-none relative inline-block size-4.5 rounded-full sm:size-3.5',
           // Transition

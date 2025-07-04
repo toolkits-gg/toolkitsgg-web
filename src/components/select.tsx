@@ -1,5 +1,5 @@
+import { cn } from '@/lib/shadcn/utils';
 import * as Headless from '@headlessui/react';
-import clsx from 'clsx';
 import React, { forwardRef } from 'react';
 
 export const Select = forwardRef(function Select(
@@ -13,7 +13,7 @@ export const Select = forwardRef(function Select(
   return (
     <span
       data-slot="control"
-      className={clsx([
+      className={cn([
         className,
         // Basic layout
         'group relative block w-full',
@@ -31,7 +31,7 @@ export const Select = forwardRef(function Select(
         ref={ref}
         multiple={multiple}
         {...props}
-        className={clsx([
+        className={cn([
           // Basic layout
           'relative block w-full appearance-none rounded-lg py-[calc(--spacing(2.5)-1px)] sm:py-[calc(--spacing(1.5)-1px)]',
           // Horizontal padding
