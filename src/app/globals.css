@@ -133,10 +133,8 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-background-solid: oklch(
-    var(--color-background-solid) / <alpha-value>
-  );
-  --color-surface-solid: oklch(var(--surface-solid) / <alpha-value>);
+  --color-background-solid: var(--background-solid);
+  --color-surface-solid: var(--surface-solid);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);

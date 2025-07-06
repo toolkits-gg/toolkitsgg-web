@@ -9,6 +9,7 @@ import {
 } from '@/components/form/utils/to-action-state';
 import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
 import prisma from '@/lib/prisma';
+import { validateGameId } from '@/features/game/utils/validate-game-id';
 
 export const toggleFavoriteGame = async (
   gameId: GameId
@@ -16,6 +17,10 @@ export const toggleFavoriteGame = async (
   const { user } = await getAuthOrRedirect();
   if (!user) {
     throw new Error('User not authenticated');
+  }
+
+  if (!validateGameId(gameId)) {
+    throw new Error(`Invalid GameId: ${gameId}`);
   }
 
   try {

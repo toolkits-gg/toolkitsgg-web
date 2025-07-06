@@ -6,6 +6,7 @@ import { Link } from '@/components/link';
 import { DefaultLogo, Logo } from '@/components/logo';
 import { NavbarItem } from '@/components/navbar';
 import { homePath } from '@/paths';
+import { AppNavbar } from '@/app/_navigation/components/app-navbar';
 
 function OpenMenuIcon() {
   return (
@@ -52,17 +53,17 @@ function MobileSidebar({
 }
 
 export function SidebarLayout({
-  navbar,
+  navbar = <AppNavbar />,
   sidebar,
   children,
 }: React.PropsWithChildren<{
-  navbar: React.ReactNode;
+  navbar?: React.ReactNode;
   sidebar: React.ReactNode;
 }>) {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <div className="bg-sidebar text-sidebar-foreground relative isolate flex min-h-svh w-full">
+    <div className="bg-sidebar text-sidebar-foreground relative isolate flex min-h-svh w-full max-lg:flex-col">
       {/* Sidebar on desktop */}
       <div className="fixed inset-y-0 left-0 w-64 max-lg:hidden">{sidebar}</div>
 
@@ -86,15 +87,15 @@ export function SidebarLayout({
 
       {/* Content */}
       <main className="flex flex-1 flex-col gap-y-2 pb-2 lg:min-w-0 lg:pt-2 lg:pr-2 lg:pl-64">
-        <div className="flex items-center justify-end">
+        <div className="hidden max-h-10 lg:flex lg:flex-1 lg:items-center lg:justify-end">
           <div className="w-12">
             <Link href={homePath()}>
               <DefaultLogo />
             </Link>
           </div>
         </div>
-        <div className="bg-background ring-sidebar-ring grow p-6 lg:rounded-lg lg:p-8 lg:shadow-xs lg:ring-1">
-          {children}
+        <div className="bg-background ring-sidebar-ring grow p-2 lg:rounded-lg lg:p-8 lg:shadow-xs lg:ring-1">
+          <div className="mx-auto">{children}</div>
         </div>
       </main>
     </div>

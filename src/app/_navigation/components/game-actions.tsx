@@ -1,5 +1,5 @@
 import type { GameId } from '@prisma/client';
-import { FavoriteGameButton } from '@/app/_navigation/favorite-game-button';
+import { FavoriteGameButton } from '@/app/_navigation/components/favorite-game-button';
 import { gameData } from '@/features/game/data';
 
 type GameActionsProps = {

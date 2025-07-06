@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["typedSql", "relationJoins", "driverAdapters"]
+  previewFeatures = ["typedSql", "driverAdapters"]
 }
 
 datasource db {
@@ -104,11 +104,13 @@ model UserFollowedUsers {
 }
 
 model BaseItem {
-  id                 String              @id @default(cuid())
-  name               String
-  description        String?
-  imageUrl           String?
-  disabled           Boolean             @default(false)
+  id          String  @id @default(cuid())
+  name        String
+  description String?
+  imageUrl    String?
+  disabled    Boolean @default(false)
+  optional    Boolean @default(false)
+
   coe33Item          COE33Item?
   userCollectedItems UserCollectedItem[]
 }

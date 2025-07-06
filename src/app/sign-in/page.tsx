@@ -1,17 +1,13 @@
 import Link from 'next/link';
-import { AppSidebar } from '@/app/_navigation/app-sidebar';
+import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
 import { CardCompact } from '@/components/card-compact';
-import { Navbar } from '@/components/navbar';
 import { SidebarLayout } from '@/components/sidebar-layout';
 import { SignInForm } from '@/features/auth/components/sign-in-form';
 import { passwordForgotPath, signUpPath } from '@/paths';
 
 const SignInPage = () => {
   return (
-    <SidebarLayout
-      sidebar={<AppSidebar gameId={undefined} />}
-      navbar={<Navbar>Navigation</Navbar>}
-    >
+    <SidebarLayout sidebar={<AppSidebar gameConfig={undefined} />}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="Sign In"

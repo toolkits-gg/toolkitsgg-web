@@ -1,17 +1,8 @@
 import type { GameId } from '@prisma/client';
-import { LucideInbox, LucideSearch } from 'lucide-react';
 import { Fragment } from 'react';
-import { FavoriteGameButton } from '@/app/_navigation/favorite-game-button';
-import { GameSwitcher } from '@/app/_navigation/game-switcher';
-import {
-  buildsNavLink,
-  helpNavLink,
-  itemsNavLink,
-  type NavLink,
-  resourcesNavLink,
-} from '@/app/_navigation/nav-links';
-import { UserMenu } from '@/app/_navigation/user-menu';
-import { Divider } from '@/components/divider';
+import { FavoriteGameButton } from '@/app/_navigation/components/favorite-game-button';
+import { GameSwitcher } from '@/app/_navigation/components/game-switcher';
+import { UserMenu } from '@/app/_navigation/components/user-menu';
 import {
   Sidebar,
   SidebarBody,
@@ -23,14 +14,15 @@ import {
 } from '@/components/sidebar';
 import { getAuth } from '@/features/auth/queries/get-auth';
 import { getFavoriteGameIds } from '@/features/game/actions/get-favorite-game-ids';
-import { allGameConfigs } from '@/features/game/constants';
 import { ThemeSwitcher } from '@/features/theme/components/theme-switcher';
+import { buildNavLinks } from '@/app/_navigation/utils/build-nav-links';
+import type { GameConfig } from '@/features/game/types';
 
-type SidebarProps = {
-  gameId: GameId | undefined;
+type AppSidebarProps = {
+  gameConfig: GameConfig<unknown> | undefined;
 };
 
-const AppSidebar = async ({ gameId }: SidebarProps) => {
+const AppSidebar = async ({ gameConfig }: AppSidebarProps) => {
   const [authResult, favoriteGameIds] = await Promise.all([
     getAuth(),
     getFavoriteGameIds(),
@@ -38,36 +30,13 @@ const AppSidebar = async ({ gameId }: SidebarProps) => {
 
   const user = authResult.user;
 
+  const gameId = gameConfig?.id as GameId | undefined;
+
   const isGameFavorited = favoriteGameIds.some(
     (favoriteGameId) => favoriteGameId === gameId
   );
 
-  const gameConfig = allGameConfigs.find((config) => config.id === gameId);
-
-  let navLinks: NavLink[] = [helpNavLink];
-
-  if (gameConfig) {
-    navLinks = [];
-    if (gameConfig.items && gameConfig.items.length > 0) {
-      navLinks.push(
-        itemsNavLink({
-          itemLookupPath: gameConfig.itemLookupPath,
-          itemTrackerPath: gameConfig.itemTrackerPath,
-          itemQuizPath: gameConfig.itemQuizPath,
-        })
-      );
-    }
-    if (!!gameConfig.buildsEnabled) {
-      navLinks.push(buildsNavLink);
-    }
-    if (gameConfig.resourcesPath) {
-      navLinks.push(
-        resourcesNavLink(gameConfig.resources, gameConfig.resourcesPath)
-      );
-    }
-
-    navLinks.push(helpNavLink);
-  }
+  const navLinks = buildNavLinks(gameConfig);
 
   return (
     <Sidebar>
