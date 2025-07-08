@@ -1,5 +1,6 @@
 import type { GameId } from '@prisma/client';
 import { gameConfigs } from '@/features/game/constants';
+import type { ThemeDefinition } from '@/features/theme/constants';
 
 type ItemsArgs<ItemType> =
   | {
@@ -35,7 +36,7 @@ export type GameConfig<ItemType> = {
   label: string;
   path: string;
   logo: React.ReactElement<HTMLElement>;
-  themeCSSClass: string;
+  themeDefinitions?: ThemeDefinition[];
 
   buildsEnabled?: boolean;
 } & ItemsArgs<ItemType> &

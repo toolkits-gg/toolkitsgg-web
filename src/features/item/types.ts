@@ -1,9 +1,9 @@
-export type BaseItemType = {
+export type BaseItemType<ItemCategory = string, ItemTag = string> = {
   name: string;
   description: string;
-  slug: string;
   internalSlug: string;
+  slug: string;
   imageUrl: string;
-  category: string;
-  tags: string[];
+  category: ItemCategory;
+  tags: ItemTag[];
 };

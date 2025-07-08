@@ -1,60 +1,31 @@
 import { useTheme } from 'next-themes';
-import { useLocalStorage } from 'usehooks-ts';
-import { allGameConfigs } from '@/features/game/constants';
+import type { ThemeMode } from '@/features/theme/constants';
 
 const useAppTheme = () => {
   const { theme, setTheme } = useTheme();
 
-  const [gameThemeEnabled, setGameThemeEnabled] = useLocalStorage(
-    'gameThemeEnabled',
-    false
-  );
+  const mode: ThemeMode = theme?.includes('-light') ? 'light' : 'dark';
 
-  const handleLightMode = () => {
-    if (!theme) return;
-    setTheme(theme.replace('-dark', ''));
-  };
+  const accent = theme?.includes('-accent')
+    ? theme.slice(theme.indexOf('-accent') + 1)
+    : 'accent-default';
 
-  const handleDarkMode = () => {
-    if (!theme) return;
-    if (theme.indexOf('-dark') === -1) {
-      setTheme(`${theme}-dark`);
-    }
-  };
+  const colorTheme = theme?.includes('-accent')
+    ? theme.split('-accent')[0]
+    : theme;
 
-  const handleToggleTheme = () => {
-    if (!theme) return;
-
-    if (theme.indexOf('-dark') === -1) {
-      handleDarkMode();
+  const handleChangeTheme = (newColorTheme: string, newAccent: string) => {
+    if (newAccent === 'accent-default') {
+      setTheme(newColorTheme.split('-accent-')[0]);
     } else {
-      handleLightMode();
-    }
-  };
-
-  const handleChangeTheme = (gameId: string) => {
-    const gameConfig = allGameConfigs.find((config) => config.id === gameId);
-    if (!gameConfig) {
-      throw new Error(`Game config not found for id: ${gameId}`);
-    }
-    const isDarkMode = theme?.indexOf('-dark') !== -1;
-
-    const newTheme = isDarkMode
-      ? `${gameConfig.themeCSSClass}-dark`
-      : gameConfig.themeCSSClass;
-
-    if (theme !== newTheme) {
-      setTheme(newTheme);
+      setTheme(`${newColorTheme}-${newAccent}`);
     }
   };
 
   return {
-    theme,
-    gameThemeEnabled,
-    setGameThemeEnabled,
-    handleLightMode,
-    handleDarkMode,
-    handleToggleTheme,
+    colorTheme,
+    accent,
+    mode,
     handleChangeTheme,
   };
 };

@@ -1,9 +1,11 @@
-import { PageLayout } from '@/app/_navigation/page-layout';
+import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
+import { Heading } from '@/components/heading';
+import { SidebarLayout } from '@/components/sidebar-layout';
 
 export default function HomePage() {
   return (
-    <PageLayout gameId={undefined} heroImage={undefined}>
-      test
-    </PageLayout>
+    <SidebarLayout sidebar={<AppSidebar gameConfig={undefined} />}>
+      <Heading>Home Page</Heading>
+    </SidebarLayout>
   );
 }

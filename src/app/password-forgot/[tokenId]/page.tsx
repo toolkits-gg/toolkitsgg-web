@@ -1,5 +1,6 @@
-import { PageLayout } from '@/app/_navigation/page-layout';
+import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
 import { CardCompact } from '@/components/card-compact';
+import { SidebarLayout } from '@/components/sidebar-layout';
 import { PasswordResetForm } from '@/features/password/components/password-reset-form';
 
 type PasswordResetPageProps = {
@@ -12,7 +13,7 @@ const PasswordResetPage = async ({ params }: PasswordResetPageProps) => {
   const { tokenId } = await params;
 
   return (
-    <PageLayout gameId={undefined} heroImage={undefined}>
+    <SidebarLayout sidebar={<AppSidebar gameConfig={undefined} />}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="New Password"
@@ -21,7 +22,7 @@ const PasswordResetPage = async ({ params }: PasswordResetPageProps) => {
           content={<PasswordResetForm tokenId={tokenId} />}
         />
       </div>
-    </PageLayout>
+    </SidebarLayout>
   );
 };
 

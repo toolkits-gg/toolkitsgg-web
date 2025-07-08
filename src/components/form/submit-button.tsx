@@ -2,35 +2,37 @@
 
 import { LucideLoaderCircle } from 'lucide-react';
 import { cloneElement } from 'react';
-import { useFormStatus } from 'react-dom';
-import { Button, ButtonProps } from '../ui/button';
+import { Button, type ButtonProps } from '@/components/button';
 
 type SubmitButtonProps = {
   label?: string;
   icon?: React.ReactElement<HTMLElement>;
-  variant?: ButtonProps['variant'];
-  size?: ButtonProps['size'];
   className?: ButtonProps['className'];
+  color?: ButtonProps['color'];
+  isPending: boolean;
 };
 
 const SubmitButton = ({
+  color,
   label,
   icon,
-  variant = 'default',
-  size = 'default',
+  isPending,
   className,
 }: SubmitButtonProps) => {
-  const { pending } = useFormStatus();
+  // ! Cannot get pending from useFormStatus() because a bug currently
+  // ! makes it reset when a child component updates its state
+  // ! This results in the loader circle not showing correctly.
+  // ! Until there is a fix, we pass in isPending from the actionState.
+  // const { pending } = useFormStatus();
 
   return (
     <Button
-      disabled={pending}
+      color={color}
+      disabled={isPending}
       type="submit"
-      variant={variant}
-      size={size}
       className={className}
     >
-      {pending ? (
+      {isPending ? (
         <LucideLoaderCircle className="h-4 w-4 animate-spin" />
       ) : icon ? (
         <>

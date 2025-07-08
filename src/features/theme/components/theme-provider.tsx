@@ -1,24 +1,29 @@
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import { allGameConfigs } from '@/features/game/constants';
+import {
+  accentThemeClassNames,
+  allThemeClassNames,
+  defaultTheme,
+} from '@/features/theme/constants';
+
+const accentThemes = allThemeClassNames
+  .map((themeName) =>
+    accentThemeClassNames.map((accent) => `${themeName}-${accent}`)
+  )
+  .flat();
 
 type ThemeProviderProps = Parameters<typeof NextThemesProvider>[0];
 
 const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
-  const allThemes = [
-    'default',
-    'default-dark',
-    ...allGameConfigs.map((gameConfig) => gameConfig.themeCSSClass),
-    ...allGameConfigs.map((gameConfig) => `${gameConfig.themeCSSClass}-dark`),
-  ];
+  const themes = [...allThemeClassNames, ...accentThemes];
 
   return (
     <NextThemesProvider
       {...props}
-      attribute="class"
       enableSystem
-      defaultTheme="default-dark"
+      enableColorScheme={false} // not playing nice with the extra themes
+      defaultTheme={defaultTheme}
       disableTransitionOnChange
-      themes={allThemes}
+      themes={themes}
     >
       {children}
     </NextThemesProvider>

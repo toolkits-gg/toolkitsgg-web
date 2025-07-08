@@ -1,12 +1,13 @@
 import Link from 'next/link';
-import { PageLayout } from '@/app/_navigation/page-layout';
+import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
 import { CardCompact } from '@/components/card-compact';
+import { SidebarLayout } from '@/components/sidebar-layout';
 import { SignInForm } from '@/features/auth/components/sign-in-form';
 import { passwordForgotPath, signUpPath } from '@/paths';
 
 const SignInPage = () => {
   return (
-    <PageLayout gameId={undefined} heroImage={undefined}>
+    <SidebarLayout sidebar={<AppSidebar gameConfig={undefined} />}>
       <div className="flex flex-1 flex-col items-center justify-center">
         <CardCompact
           title="Sign In"
@@ -32,7 +33,7 @@ const SignInPage = () => {
           }
         />
       </div>
-    </PageLayout>
+    </SidebarLayout>
   );
 };
 

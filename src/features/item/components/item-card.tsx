@@ -1,48 +1,50 @@
-import type { GameId } from '@prisma/client';
 import Image from 'next/image';
-import { Typography } from '@/components/typography';
 import type { BaseItemType } from '@/features/item/types';
-import { getImageUrl } from '@/utils/url';
+import { OptionalItemIndicator } from '@/features/item/components/optional-item-indicator';
 
 type ItemCardProps<ItemType> = {
   item: ItemType;
-  gameId: GameId;
-  actions: React.ReactNode;
-};
+} & (
+  | {
+      imageSrc: string;
+      imageContent?: never;
+    }
+  | {
+      imageSrc?: never;
+      imageContent: React.ReactNode;
+    }
+);
 
-const ItemCard = <ItemType extends BaseItemType>({
+// TODO: `optional` should be coming from a BuildItem that can be passed in, ie BaseBuildItemType
+
+const ItemCard = <ItemType extends BaseItemType & { optional?: boolean }>({
   item,
-  gameId,
-  actions,
+  imageSrc,
+  imageContent,
 }: ItemCardProps<ItemType>) => {
   return (
-    <div className="flex items-start justify-center gap-0.5">
-      <div
-        key={item.slug}
-        className="flex h-[125px] w-[125px] max-w-[125px] flex-col rounded-tl-xl rounded-tr-xl border bg-white text-center dark:bg-black"
-      >
-        <div className="flex h-[85px] w-full flex-1 items-center justify-center p-1">
-          <Image
-            src={getImageUrl(item.imageUrl, gameId)}
-            alt={item.name}
-            width={75}
-            height={75}
-          />
-        </div>
-        <div className="bg-primary/75 text-primary-foreground flex h-full w-full flex-col items-center justify-center p-0.5">
-          <Typography
-            variant="body"
-            className="text-xs font-medium break-words whitespace-pre-wrap"
-          >
-            {item.name}
-          </Typography>
-        </div>
-      </div>
-      {actions && (
-        <div className="flex h-[125px] w-9 min-w-9 items-start justify-center rounded-tl-xl rounded-tr-xl border bg-white dark:bg-black">
-          {actions}
+    <div className="relative flex h-[150px] w-[125px] max-w-[125px] items-start justify-center gap-0.5">
+      {item.optional && (
+        <div className="absolute top-3 -left-3">
+          <OptionalItemIndicator />
         </div>
       )}
+      <div
+        key={item.slug}
+        className="flex h-full w-full flex-col rounded-tl-xl rounded-tr-xl border bg-white text-center dark:bg-black"
+      >
+        <div className="flex h-full max-h-[110px] w-full flex-1 items-center justify-center p-1">
+          {imageSrc && (
+            <Image src={imageSrc} alt={item.name} width={90} height={90} />
+          )}
+          {imageContent}
+        </div>
+        <div className="bg-primary/75 text-primary-foreground flex h-10 w-full flex-col items-center justify-center">
+          <span className="text-xs font-medium break-words whitespace-pre-wrap">
+            {item.name}
+          </span>
+        </div>
+      </div>
     </div>
   );
 };
