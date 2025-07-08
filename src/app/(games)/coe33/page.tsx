@@ -44,7 +44,7 @@ export default async function GamePage() {
               <ItemCard
                 key={item.slug}
                 item={item}
-                src={getImageUrl(item.imageUrl, 'coe33')}
+                imageSrc={getImageUrl(item.imageUrl, 'coe33')}
               />
             ))}
         </div>

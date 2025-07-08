@@ -1,3 +1,4 @@
+import type { BaseItemType } from '@/features/item/types';
 import type {
   COE33Character,
   COE33ItemCategory,
@@ -5,15 +6,7 @@ import type {
   COE33Stain,
 } from '@prisma/client';
 
-type COE33BaseItemType = {
-  name: string;
-  description: string;
-  internalSlug: string;
-  slug: string;
-  imageUrl: string;
-  category: COE33ItemCategory;
-  tags: COE33ItemTag[];
-};
+type COE33BaseItemType = BaseItemType<COE33ItemCategory, COE33ItemTag>;
 
 type COE33LuneSkillItem = COE33BaseItemType & {
   category: 'SKILL';

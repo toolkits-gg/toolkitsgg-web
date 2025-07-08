@@ -4,12 +4,23 @@ import { OptionalItemIndicator } from '@/features/item/components/optional-item-
 
 type ItemCardProps<ItemType> = {
   item: ItemType;
-  src: string;
-};
+} & (
+  | {
+      imageSrc: string;
+      imageContent?: never;
+    }
+  | {
+      imageSrc?: never;
+      imageContent: React.ReactNode;
+    }
+);
+
+// TODO: `optional` should be coming from a BuildItem that can be passed in, ie BaseBuildItemType
 
 const ItemCard = <ItemType extends BaseItemType & { optional?: boolean }>({
   item,
-  src,
+  imageSrc,
+  imageContent,
 }: ItemCardProps<ItemType>) => {
   return (
     <div className="relative flex h-[150px] w-[125px] max-w-[125px] items-start justify-center gap-0.5">
@@ -22,8 +33,11 @@ const ItemCard = <ItemType extends BaseItemType & { optional?: boolean }>({
         key={item.slug}
         className="flex h-full w-full flex-col rounded-tl-xl rounded-tr-xl border bg-white text-center dark:bg-black"
       >
-        <div className="flex h-full w-full flex-1 items-center justify-center p-1">
-          <Image src={src} alt={item.name} width={90} height={90} />
+        <div className="flex h-full max-h-[110px] w-full flex-1 items-center justify-center p-1">
+          {imageSrc && (
+            <Image src={imageSrc} alt={item.name} width={90} height={90} />
+          )}
+          {imageContent}
         </div>
         <div className="bg-primary/75 text-primary-foreground flex h-10 w-full flex-col items-center justify-center">
           <span className="text-xs font-medium break-words whitespace-pre-wrap">
