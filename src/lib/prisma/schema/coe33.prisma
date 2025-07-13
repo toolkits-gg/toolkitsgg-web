@@ -56,21 +56,61 @@ enum COE33Character {
 }
 
 model COE33Item {
-  baseItem           BaseItem          @relation(fields: [baseItemId], references: [id], onDelete: Cascade)
-  baseItemId         String            @unique
+  id                 String            @id @default(cuid())
+  name               String
+  description        String
+  imageUrl           String
+  internalSlug       String
   slug               String            @unique
+  disabled           Boolean           @default(false)
   // COE33 specific fields
   category           COE33ItemCategory
   tags               COE33ItemTag[]
   element            COE33Element
   primaryAttribute   COE33Attribute
   secondaryAttribute COE33Attribute?
+
   buildItems         COE33BuildItem[]
+  coe33CollectedItem COE33CollectedItem[]
+}
+
+model COE33CollectedItem {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  coe33Item   COE33Item @relation(fields: [coe33ItemId], references: [id], onDelete: Cascade)
+  coe33ItemId String
+
+  @@index([userId])
+  @@index([coe33ItemId])
 }
 
 model COE33Build {
-  baseBuild      BaseBuild        @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
-  baseBuildId    String           @unique
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   User?    @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  createdById String?
+
+  name            String
+  description     String?              @db.Text
+  visibility      BuildVisibility      @default(PUBLIC)
+  moderatorStatus BuildModeratorStatus @default(PENDING)
+  videoUrl        String?
+  imageUrl        String?
+  thumbnailUrl    String?
+  referenceUrl    String?
+
+  buildCollectionCount COE33BuildCollectionCount?
+  buildDuplicateCount  COE33BuildDuplicateCount?
+  buildLikeCount       COE33BuildLikeCount?
+  buildViewCount       COE33BuildViewCount?
+  buildCollections     COE33BuildCollection[]
+
   // COE33 specific fields
   items          COE33BuildItem[]
   character      COE33Character
@@ -81,17 +121,69 @@ model COE33Build {
   defense        Int
   luck           Int
 
-  @@index([baseBuildId])
+  @@index([createdById])
+}
+
+model COE33BuildCollection {
+  id              String               @id @default(cuid())
+  createdBy       User                 @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  createdById     String
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  name            String
+  description     String?              @db.Text
+  visibility      BuildVisibility      @default(PUBLIC)
+  moderatorStatus BuildModeratorStatus @default(PENDING)
+  builds          COE33Build[]
+}
+
+model COE33BuildCollectionCount {
+  id      String     @id @default(cuid())
+  count   Int        @default(0)
+  build   COE33Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  buildId String     @unique
+
+  @@index([buildId])
+}
+
+model COE33BuildLikeCount {
+  id      String     @id @default(cuid())
+  count   Int        @default(0)
+  build   COE33Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  buildId String     @unique
+
+  @@index([buildId])
+}
+
+model COE33BuildDuplicateCount {
+  id      String     @id @default(cuid())
+  count   Int        @default(0)
+  build   COE33Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  buildId String     @unique
+
+  @@index([buildId])
+}
+
+model COE33BuildViewCount {
+  id      String     @id @default(cuid())
+  count   Int        @default(0)
+  build   COE33Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  buildId String     @unique
+
+  @@index([buildId])
 }
 
 model COE33BuildItem {
-  id          String      @id @default(cuid())
-  level       Int         @default(1)
-  amount      Int?
-  coe33Item   COE33Item   @relation(fields: [coe33ItemId], references: [baseItemId], onDelete: Cascade)
+  id       String  @id @default(cuid())
+  level    Int     @default(1)
+  amount   Int?
+  optional Boolean @default(false)
+
+  coe33Item   COE33Item @relation(fields: [coe33ItemId], references: [id], onDelete: Cascade)
   coe33ItemId String
-  build       COE33Build? @relation(fields: [buildId], references: [baseBuildId])
-  buildId     String?
+
+  build   COE33Build? @relation(fields: [buildId], references: [id])
+  buildId String?
 
   @@index([coe33ItemId])
   @@index([buildId])

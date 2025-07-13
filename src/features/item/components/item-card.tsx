@@ -2,26 +2,29 @@ import Image from 'next/image';
 import type { BaseItemType } from '@/features/item/types';
 import { OptionalItemIndicator } from '@/features/item/components/optional-item-indicator';
 
-type ItemCardProps<ItemType> = {
-  item: ItemType;
-} & (
+// Can either provide a url or a ReactNode
+type ImageProps =
   | {
       imageSrc: string;
-      imageContent?: never;
+      imageContent?: undefined;
     }
   | {
-      imageSrc?: never;
+      imageSrc?: undefined;
       imageContent: React.ReactNode;
-    }
-);
+    };
 
-// TODO: `optional` should be coming from a BuildItem that can be passed in, ie BaseBuildItemType
+// TODO: This should be defined with the build logic when implemented
+type BuildItemType = {
+  optional?: boolean;
+};
 
-const ItemCard = <ItemType extends BaseItemType & { optional?: boolean }>({
-  item,
-  imageSrc,
-  imageContent,
-}: ItemCardProps<ItemType>) => {
+export type ItemCardItemType = BaseItemType & BuildItemType;
+
+export type ItemCardProps = {
+  item: ItemCardItemType;
+} & ImageProps;
+
+const ItemCard = ({ item, imageSrc, imageContent }: ItemCardProps) => {
   return (
     <div className="relative flex h-[150px] w-[125px] max-w-[125px] items-start justify-center gap-0.5">
       {item.optional && (

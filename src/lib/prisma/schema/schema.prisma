@@ -25,15 +25,15 @@ model User {
   passwordResetTokens     PasswordResetToken[]
   emailVerificationTokens EmailVerificationToken[]
 
-  userProfile        UserProfile?
-  userCollectedItems UserCollectedItem[]
-  userFavoriteGames  UserFavoriteGame[]
+  userProfile       UserProfile?
+  userFavoriteGames UserFavoriteGame[]
 
   usersBeingFollowed UserFollowedUsers[] @relation("userBeingFollowed")
   usersFollowed      UserFollowedUsers[] @relation("userFollowed")
 
-  baseBuilds       BaseBuild[]
-  buildCollections BuildCollection[]
+  coe33CollectedItems   COE33CollectedItem[]
+  coe33Builds           COE33Build[]
+  coe33BuildCollections COE33BuildCollection[]
 }
 
 model Session {
@@ -103,32 +103,6 @@ model UserFollowedUsers {
   @@index([followedUserId])
 }
 
-model BaseItem {
-  id          String  @id @default(cuid())
-  name        String
-  description String?
-  imageUrl    String?
-  disabled    Boolean @default(false)
-  optional    Boolean @default(false)
-
-  coe33Item          COE33Item?
-  userCollectedItems UserCollectedItem[]
-}
-
-model UserCollectedItem {
-  id         String   @id @default(cuid())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId     String
-  baseItem   BaseItem @relation(fields: [baseItemId], references: [id], onDelete: Cascade)
-  baseItemId String
-  quantity   Int      @default(1)
-
-  @@index([userId])
-  @@index([baseItemId])
-}
-
 enum BuildVisibility {
   PUBLIC
   UNLISTED
@@ -140,79 +114,4 @@ enum BuildModeratorStatus {
   APPROVED
   REJECTED
   LOCKED
-}
-
-model BaseBuild {
-  id              String               @id @default(cuid())
-  createdAt       DateTime             @default(now())
-  updatedAt       DateTime             @updatedAt
-  createdBy       User?                @relation(fields: [createdById], references: [id], onDelete: SetNull)
-  createdById     String?
-  name            String
-  description     String?              @db.Text
-  visibility      BuildVisibility      @default(PUBLIC)
-  moderatorStatus BuildModeratorStatus @default(PENDING)
-  videoUrl        String?
-  imageUrl        String?
-  thumbnailUrl    String?
-  referenceUrl    String?
-
-  buildCollectionCount BuildCollectionCount?
-  buildDuplicateCount  BuildDuplicateCount?
-  buildLikeCount       BuildLikeCount?
-  buildViewCount       BuildViewCount?
-
-  coe33Build       COE33Build?
-  buildCollections BuildCollection[]
-
-  @@index([createdById])
-}
-
-model BuildCollection {
-  id              String               @id @default(cuid())
-  createdBy       User                 @relation(fields: [createdById], references: [id], onDelete: Cascade)
-  createdById     String
-  createdAt       DateTime             @default(now())
-  updatedAt       DateTime             @updatedAt
-  name            String
-  description     String?              @db.Text
-  visibility      BuildVisibility      @default(PUBLIC)
-  moderatorStatus BuildModeratorStatus @default(PENDING)
-  baseBuilds      BaseBuild[]
-}
-
-model BuildCollectionCount {
-  id          String    @id @default(cuid())
-  count       Int       @default(0)
-  baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
-  baseBuildId String    @unique
-
-  @@index([baseBuildId])
-}
-
-model BuildLikeCount {
-  id          String    @id @default(cuid())
-  count       Int       @default(0)
-  baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
-  baseBuildId String    @unique
-
-  @@index([baseBuildId])
-}
-
-model BuildDuplicateCount {
-  id          String    @id @default(cuid())
-  count       Int       @default(0)
-  baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
-  baseBuildId String    @unique
-
-  @@index([baseBuildId])
-}
-
-model BuildViewCount {
-  id          String    @id @default(cuid())
-  count       Int       @default(0)
-  baseBuild   BaseBuild @relation(fields: [baseBuildId], references: [id], onDelete: Cascade)
-  baseBuildId String    @unique
-
-  @@index([baseBuildId])
 }

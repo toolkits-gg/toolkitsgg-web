@@ -4,11 +4,13 @@ import { SidebarLayout } from '@/components/sidebar-layout';
 import { allGameConfigs } from '@/features/game/constants';
 import type { COE33ItemType } from '@/features/game/games/coe33/items';
 import type { GameConfig } from '@/features/game/types';
-import { ItemCard } from '@/features/item/components/item-card';
+import { TrackableItemCard } from '@/features/item/components/trackable-item-card';
 import { getImageUrl } from '@/utils/url';
 import Image from 'next/image';
 
-export default async function GamePage() {
+// TODO: Need to fetch the user's tracked items
+
+export default async function ItemTrackerPage() {
   const gameConfig = allGameConfigs.find((config) => config.id === 'coe33') as
     | GameConfig<COE33ItemType>
     | undefined;
@@ -41,9 +43,12 @@ export default async function GamePage() {
           {gameConfig.items
             ?.filter((item) => item.category === 'SKILL')
             .map((item) => (
-              <ItemCard
+              <TrackableItemCard
                 key={item.slug}
-                item={item}
+                item={{
+                  ...item,
+                  collected: false,
+                }}
                 imageSrc={getImageUrl(item.imageUrl, 'coe33')}
               />
             ))}
