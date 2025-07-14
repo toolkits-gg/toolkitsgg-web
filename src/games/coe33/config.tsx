@@ -1,16 +1,13 @@
-import { COE33Logo } from '@/features/game/games/coe33/components/logo';
-import { coe33Data } from '@/features/game/games/coe33/data';
-import {
-  coe33Items,
-  type COE33ItemType,
-} from '@/features/game/games/coe33/items';
+import { COE33Logo } from '@/games/coe33/components/logo';
+import { coe33Data } from '@/games/coe33/data';
+import { coe33Items, type COE33ItemType } from '@/games/coe33/items';
 import {
   coe33Path,
   itemLookupPath,
   itemQuizPath,
   itemTrackerPath,
   resourcesPath,
-} from '@/features/game/games/coe33/paths';
+} from '@/games/coe33/paths';
 import type { GameConfig } from '@/features/game/types';
 
 export const clairObscurConfig: GameConfig<COE33ItemType> = {

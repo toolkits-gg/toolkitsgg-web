@@ -1,4 +1,4 @@
-import * as getCollectedItemSlugs from '@/features/game/games/coe33/data/get-collected-item-slugs';
+import * as getCollectedItemSlugs from '@/games/coe33/data/get-collected-item-slugs';
 import * as toggleCollectedItem from './toggle-collected-item';
 import type { GameData } from '@/features/game/types';
 

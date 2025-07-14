@@ -39,7 +39,6 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
       <DropdownMenu className="min-w-64" anchor="bottom start">
         {allGameConfigs
           .filter((gameConfig) => gameConfig.id !== noGameConfig.id)
-          .filter((gameConfig) => gameConfig.id !== 'rem2')
           .map((gameConfig) => (
             <DropdownItem key={gameConfig.name} href={gameConfig.path}>
               <div className="text-primary-foreground mr-2 flex size-10 items-center justify-center">

@@ -3,7 +3,7 @@ import { HeaderImage } from '@/app/_navigation/components/header-image';
 import { SidebarLayout } from '@/components/sidebar-layout';
 import { getCollectedItemSlugs } from '@/features/collection/actions/get-collected-item-slugs';
 import { allGameConfigs } from '@/features/game/constants';
-import type { COE33ItemType } from '@/features/game/games/coe33/items';
+import type { COE33ItemType } from '@/games/coe33/items';
 import type { GameConfig } from '@/features/game/types';
 import { TrackableItemCard } from '@/features/item/components/trackable-item-card';
 import { getImageUrl } from '@/utils/url';

@@ -1,8 +1,8 @@
 import { writeFileSync } from 'fs';
 import path from 'path';
-import { coe33Characters } from '@/features/game/games/coe33/constants';
-import { type COE33ItemType } from '@/features/game/games/coe33/items';
-import { generateSlugs } from '@/features/game/games/coe33/scripts/utils';
+import { coe33Characters } from '@/games/coe33/constants';
+import { type COE33ItemType } from '@/games/coe33/items';
+import { generateSlugs } from '@/games/coe33/scripts/utils';
 import SkillData from '../inputs/DT_SkillIcons.json';
 import GameData from '../inputs/Game.json';
 

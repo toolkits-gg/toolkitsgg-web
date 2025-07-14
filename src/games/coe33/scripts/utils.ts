@@ -1,7 +1,4 @@
-import {
-  coe33Items,
-  type COE33ItemType,
-} from '@/features/game/games/coe33/items';
+import { coe33Items, type COE33ItemType } from '@/games/coe33/items';
 
 export const generateSlugs = (skillItems: COE33ItemType[]): COE33ItemType[] => {
   const results = skillItems.map((item) => {
