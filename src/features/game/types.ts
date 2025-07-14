@@ -38,6 +38,8 @@ export type GameConfig<ItemType> = {
   logo: React.ReactElement<HTMLElement>;
   themeDefinitions?: ThemeDefinition[];
 
+  gameData: GameData | undefined;
+
   buildsEnabled?: boolean;
 } & ItemsArgs<ItemType> &
   ResourcesArgs;
@@ -52,3 +54,10 @@ export function toGameId(id: string | undefined): GameId {
   }
   return isGameId(id) ? (id as GameId) : 'none';
 }
+
+export type GameData = {
+  toggleCollectedItem: (itemSlug: string) => Promise<{
+    currentlyCollected: boolean;
+  }>;
+  getCollectedItemSlugs: () => Promise<string[]>;
+};

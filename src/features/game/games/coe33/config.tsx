@@ -1,4 +1,5 @@
 import { COE33Logo } from '@/features/game/games/coe33/components/logo';
+import { coe33Data } from '@/features/game/games/coe33/data';
 import {
   coe33Items,
   type COE33ItemType,
@@ -31,6 +32,8 @@ export const clairObscurConfig: GameConfig<COE33ItemType> = {
   logo: <COE33Logo size={128} />,
 
   buildsEnabled: false,
+
+  gameData: coe33Data,
 
   items: coe33Items,
   itemLookupPath: itemLookupPath(),

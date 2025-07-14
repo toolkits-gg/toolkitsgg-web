@@ -15,6 +15,19 @@ enum GameId {
   rem2
 }
 
+enum BuildVisibility {
+  PUBLIC
+  UNLISTED
+  PRIVATE
+}
+
+enum BuildModeratorStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  LOCKED
+}
+
 model User {
   id                      String                   @id @default(cuid())
   username                String                   @unique
@@ -82,16 +95,16 @@ model UserProfile {
 model UserFavoriteGame {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
   gameId    GameId
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
   @@id(name: "id", [userId, gameId])
   @@index([userId])
 }
 
 model UserFollowedUsers {
-  id             String   @id @default(cuid())
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   user           User     @relation("userBeingFollowed", fields: [userId], references: [id], onDelete: Cascade)
@@ -99,19 +112,7 @@ model UserFollowedUsers {
   followedUser   User     @relation("userFollowed", fields: [followedUserId], references: [id], onDelete: Cascade)
   followedUserId String
 
+  @@id(name: "id", [userId, followedUserId])
   @@index([userId])
   @@index([followedUserId])
-}
-
-enum BuildVisibility {
-  PUBLIC
-  UNLISTED
-  PRIVATE
-}
-
-enum BuildModeratorStatus {
-  PENDING
-  APPROVED
-  REJECTED
-  LOCKED
 }
