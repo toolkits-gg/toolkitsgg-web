@@ -1,9 +1,10 @@
 import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
+import type { GameData } from '@/features/game/types';
 import prisma from '@/lib/prisma';
 
 export const toggleCollectedItem = async (
   itemSlug: string
-): Promise<{ currentlyCollected: boolean }> => {
+): ReturnType<GameData['toggleCollectedItem']> => {
   const { user } = await getAuthOrRedirect();
   if (!user) {
     throw new Error('User not authenticated');
@@ -37,7 +38,7 @@ export const toggleCollectedItem = async (
     });
 
     return {
-      currentlyCollected: true,
+      isCollected: false,
     };
   }
 
@@ -59,6 +60,6 @@ export const toggleCollectedItem = async (
   });
 
   return {
-    currentlyCollected: false,
+    isCollected: true,
   };
 };

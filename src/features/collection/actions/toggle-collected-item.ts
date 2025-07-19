@@ -29,16 +29,14 @@ export const toggleCollectedItem = async (
   }
 
   try {
-    const currentlyCollected =
+    const { isCollected } =
       await gameConfig.gameData.toggleCollectedItem(itemSlug);
 
     revalidatePath(`/${gameConfig.id}`);
 
     return toActionState(
       'SUCCESS',
-      currentlyCollected
-        ? 'Item marked as uncollected'
-        : 'Item marked as collected'
+      isCollected ? 'Item marked as collected' : 'Item marked as uncollected'
     );
   } catch (error) {
     return fromErrorToActionState(error);

@@ -8,8 +8,8 @@ import {
   toActionState,
 } from '@/components/form/utils/to-action-state';
 import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
-import { validateGameId } from '@/features/game/utils/validate-game-id';
 import { gameData } from '@/features/game/data';
+import { isGameId } from '@/features/game/utils/game-id';
 
 export const toggleFavoriteGame = async (
   gameId: GameId
@@ -19,7 +19,7 @@ export const toggleFavoriteGame = async (
     throw new Error('User not authenticated');
   }
 
-  if (!validateGameId(gameId)) {
+  if (!isGameId(gameId)) {
     throw new Error(`Invalid GameId: ${gameId}`);
   }
 

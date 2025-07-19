@@ -2,27 +2,22 @@ import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
 import { HeaderImage } from '@/app/_navigation/components/header-image';
 import { SidebarLayout } from '@/components/sidebar-layout';
 import { getCollectedItemSlugs } from '@/features/collection/actions/get-collected-item-slugs';
-import { allGameConfigs } from '@/features/game/constants';
-import type { COE33ItemType } from '@/games/coe33/items';
-import type { GameConfig } from '@/features/game/types';
 import { TrackableItemCard } from '@/features/item/components/trackable-item-card';
 import { getImageUrl } from '@/utils/url';
 import Image from 'next/image';
+import { configFromGameId } from '@/features/game/utils/game-id';
+import type { COE33ItemType } from '@/games/coe33/items';
 
 // TODO: Need to fetch the user's tracked items
 
 export default async function ItemTrackerPage() {
-  const gameConfig = allGameConfigs.find((config) => config.id === 'coe33') as
-    | GameConfig<COE33ItemType>
-    | undefined;
+  const gameConfig = configFromGameId<COE33ItemType>('coe33');
 
   if (!gameConfig) {
     throw new Error('Game configuration not found');
   }
 
-  const { items } = gameConfig;
-
-  if (!items) {
+  if (!gameConfig.items) {
     throw new Error('No items found for the game configuration');
   }
 
@@ -49,7 +44,7 @@ export default async function ItemTrackerPage() {
           />
         </div>
         <div className="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-4 p-6 sm:justify-between lg:p-2">
-          {items
+          {gameConfig.items
             .filter((item) => item.category === 'SKILL')
             .map((item) => (
               <TrackableItemCard
