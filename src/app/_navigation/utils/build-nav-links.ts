@@ -18,7 +18,7 @@ export const buildNavLinks = (gameConfig: GameConfig<unknown> | undefined) => {
     navLinks.push(
       itemsNavLink({
         itemLookupPath: gameConfig.itemLookupPath,
-        itemTrackerPath: gameConfig.itemTrackerPath,
+        itemCollectorPath: gameConfig.itemCollectorPath,
         itemQuizPath: gameConfig.itemQuizPath,
       })
     );

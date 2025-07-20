@@ -43,19 +43,19 @@ export const buildsNavLink: NavLink = {
 
 export const itemsNavLink = ({
   itemLookupPath,
-  itemTrackerPath,
+  itemCollectorPath,
   itemQuizPath,
 }: {
   itemLookupPath?: string;
-  itemTrackerPath?: string;
+  itemCollectorPath?: string;
   itemQuizPath?: string;
 }): NavLink => {
   const items: NavItem[] = [];
   if (itemLookupPath) {
     items.push({ title: 'Item Lookup', url: itemLookupPath });
   }
-  if (itemTrackerPath) {
-    items.push({ title: 'Item Tracker', url: itemTrackerPath });
+  if (itemCollectorPath) {
+    items.push({ title: 'Item Collector', url: itemCollectorPath });
   }
   if (itemQuizPath) {
     items.push({ title: 'Item Quiz', url: itemQuizPath });

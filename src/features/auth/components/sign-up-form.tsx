@@ -46,7 +46,7 @@ const SignUpForm = () => {
       />
       <FieldError actionState={actionState} name="confirmPassword" />
 
-      <SubmitButton label="Sign Up" isPending={isPending} />
+      <SubmitButton isPending={isPending}>Sign Up</SubmitButton>
     </Form>
   );
 };

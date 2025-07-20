@@ -12,12 +12,12 @@ export const getCollectedItemSlugs = async (
     return [];
   }
 
-  if (!gameConfig.gameData) {
+  if (!gameConfig.dataHelpers) {
     throw new Error('Game data not found for the provided game configuration');
   }
 
   try {
-    return await gameConfig.gameData.getCollectedItemSlugs();
+    return await gameConfig.dataHelpers.getCollectedItemSlugs();
   } catch (error) {
     fromErrorToActionState(error);
     return [];

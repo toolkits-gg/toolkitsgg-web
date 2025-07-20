@@ -31,7 +31,7 @@ const SignInForm = () => {
       />
       <FieldError actionState={actionState} name="password" />
 
-      <SubmitButton label="Sign In" isPending={isPending} />
+      <SubmitButton isPending={isPending}>Sign In</SubmitButton>
     </Form>
   );
 };

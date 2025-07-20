@@ -23,7 +23,7 @@ const PasswordForgotForm = () => {
       />
       <FieldError actionState={actionState} name="email" />
 
-      <SubmitButton label="Send Email" isPending={isPending} />
+      <SubmitButton isPending={isPending}>Send Email</SubmitButton>
     </Form>
   );
 };

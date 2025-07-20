@@ -1,1 +1,13 @@
+# Dependency directories
 node_modules
+
+# Logs
+logs
+*.log
+
+# Documentation
+docs/
+
+# Misc.
+.vscode/
+build/

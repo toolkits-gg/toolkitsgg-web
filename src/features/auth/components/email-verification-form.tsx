@@ -19,7 +19,7 @@ const EmailVerificationForm = () => {
       <Input type="code" name="code" placeholder="Code" />
       <FieldError actionState={actionState} name="code" />
 
-      <SubmitButton label="Verify Email" isPending={isPending} />
+      <SubmitButton isPending={isPending}>Verify Email</SubmitButton>
     </Form>
   );
 };

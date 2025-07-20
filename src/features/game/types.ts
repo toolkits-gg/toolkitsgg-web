@@ -5,13 +5,13 @@ type ItemsArgs<ItemType> =
   | {
       items: ItemType[];
       itemLookupPath: string;
-      itemTrackerPath: string;
+      itemCollectorPath: string;
       itemQuizPath: string;
     }
   | {
       items?: undefined;
       itemLookupPath?: undefined;
-      itemTrackerPath?: undefined;
+      itemCollectorPath?: undefined;
       itemQuizPath?: undefined;
     };
 
@@ -28,7 +28,7 @@ type ResourcesArgs =
       resourcesPath?: undefined;
     };
 
-export type GameData = {
+export type GameDataHelpers = {
   toggleCollectedItem: (itemSlug: string) => Promise<{
     isCollected: boolean;
   }>;
@@ -44,7 +44,7 @@ export type GameConfig<ItemType> = {
   logo: React.ReactElement<HTMLElement>;
   themeDefinitions?: ThemeDefinition[];
 
-  gameData: GameData | undefined;
+  dataHelpers: GameDataHelpers | undefined;
 
   buildsEnabled?: boolean;
 } & ItemsArgs<ItemType> &

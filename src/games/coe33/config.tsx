@@ -1,11 +1,11 @@
 import { COE33Logo } from '@/games/coe33/components/logo';
-import { coe33Data } from '@/games/coe33/data';
+import { coe33DataHelpers } from '@/games/coe33/data';
 import { coe33Items, type COE33ItemType } from '@/games/coe33/items';
 import {
   coe33Path,
+  itemCollectorPath,
   itemLookupPath,
   itemQuizPath,
-  itemTrackerPath,
   resourcesPath,
 } from '@/games/coe33/paths';
 import type { GameConfig } from '@/features/game/types';
@@ -30,11 +30,11 @@ export const clairObscurConfig: GameConfig<COE33ItemType> = {
 
   buildsEnabled: false,
 
-  gameData: coe33Data,
+  dataHelpers: coe33DataHelpers,
 
   items: coe33Items,
   itemLookupPath: itemLookupPath(),
-  itemTrackerPath: itemTrackerPath(),
+  itemCollectorPath: itemCollectorPath(),
   itemQuizPath: itemQuizPath(),
 
   resourcesPath: resourcesPath(),

@@ -11,9 +11,11 @@ export function middleware(request: NextRequest) {
   // This will redirect subdomains to their respective game paths
   // e.g. game1.toolkits.gg -> toolkits.gg/game1
   if (hostname !== mainDomain && hostname.endsWith(`.${mainDomain}`)) {
+    const allowedSubdomains = allGameConfigs.map(
+      (gameConfig) => gameConfig.path
+    );
     const subdomain = hostname.replace(`.${mainDomain}`, '');
 
-    const allowedSubdomains = allGameConfigs.map((game) => game.path);
     if (allowedSubdomains.includes(subdomain)) {
       url.hostname = mainDomain;
       url.pathname = `/${subdomain}${url.pathname === '/' ? '' : url.pathname}`;

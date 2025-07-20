@@ -2,11 +2,12 @@ import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
 import { HeaderImage } from '@/app/_navigation/components/header-image';
 import { SidebarLayout } from '@/components/sidebar-layout';
 import { getCollectedItemSlugs } from '@/features/collection/actions/get-collected-item-slugs';
-import { TrackableItemCard } from '@/features/item/components/trackable-item-card';
 import { getImageUrl } from '@/utils/url';
 import Image from 'next/image';
 import { configFromGameId } from '@/features/game/utils/game-id';
 import type { COE33ItemType } from '@/games/coe33/items';
+import { CollectibleItemCard } from '@/features/item/components/collectible-item-card';
+import { toggleCollectedItem } from '@/features/collection/actions/toggle-collected-item';
 
 // TODO: Need to fetch the user's tracked items
 
@@ -47,7 +48,7 @@ export default async function ItemTrackerPage() {
           {gameConfig.items
             .filter((item) => item.category === 'SKILL')
             .map((item) => (
-              <TrackableItemCard
+              <CollectibleItemCard
                 key={item.slug}
                 item={{
                   ...item,
@@ -56,6 +57,7 @@ export default async function ItemTrackerPage() {
                   ),
                 }}
                 imageSrc={getImageUrl(item.imageUrl, 'coe33')}
+                gameId={gameConfig.id}
               />
             ))}
         </div>

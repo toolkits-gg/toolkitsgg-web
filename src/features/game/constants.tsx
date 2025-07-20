@@ -13,7 +13,7 @@ export const noGameConfig: GameConfig<undefined> = {
   logo: <DefaultLogo />,
   themeDefinitions: undefined,
   items: undefined,
-  gameData: undefined,
+  dataHelpers: undefined,
 };
 
 export const gameConfigs: Record<
