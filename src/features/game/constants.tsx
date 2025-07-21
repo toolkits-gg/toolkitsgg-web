@@ -1,6 +1,6 @@
 import type { GameId } from '@prisma/client';
 import { DefaultLogo } from '@/components/logo';
-import { clairObscurConfig } from '@/games/coe33/config';
+import { coe33Config } from '@/games/coe33/config';
 import type { GameConfig } from '@/features/game/types';
 import type { BaseItemType } from '@/features/item/types';
 
@@ -13,7 +13,7 @@ export const noGameConfig: GameConfig<undefined> = {
   logo: <DefaultLogo />,
   themeDefinitions: undefined,
   items: undefined,
-  dataHelpers: undefined,
+  dataUtils: undefined,
 };
 
 export const gameConfigs: Record<
@@ -21,7 +21,7 @@ export const gameConfigs: Record<
   GameConfig<BaseItemType | undefined>
 > = {
   none: noGameConfig,
-  coe33: clairObscurConfig,
+  coe33: coe33Config,
   // Add more game configs here as needed
 };
 

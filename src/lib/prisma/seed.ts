@@ -1,3 +1,5 @@
+import { coe33Items } from '@/games/coe33/items/all-items';
+import type { COE33ItemType } from '@/games/coe33/items/types';
 import { hash } from '@node-rs/argon2';
 import { PrismaClient } from '@prisma/client';
 
@@ -33,8 +35,11 @@ const seed = async () => {
   const t0 = performance.now();
   console.log('DB Seed: Started ...');
 
+  // Clear existing tables of data
   await prisma.user.deleteMany();
+  await prisma.cOE33Item.deleteMany();
 
+  // Password for the seeded user accounts
   const passwordHash = await hash('useruser!');
 
   const createdUsers = await prisma.user.createManyAndReturn({
@@ -51,6 +56,22 @@ const seed = async () => {
     })),
   });
 
+  // Create items for each gam
+
+  await Promise.all([
+    prisma.cOE33Item.createMany({
+      data: (coe33Items as COE33ItemType[]).map((item) => ({
+        slug: item.slug,
+        name: item.name,
+        description: item.description,
+        imageUrl: item.imageUrl,
+        category: item.category,
+        internalSlug: item.internalSlug,
+      })),
+    }),
+  ]);
+
+  // Wrapping up
   const t1 = performance.now();
   console.log(`DB Seed: Finished (${t1 - t0}ms)`);
 };

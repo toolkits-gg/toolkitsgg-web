@@ -5,9 +5,8 @@ import { getCollectedItemSlugs } from '@/features/collection/actions/get-collect
 import { getImageUrl } from '@/utils/url';
 import Image from 'next/image';
 import { configFromGameId } from '@/features/game/utils/game-id';
-import type { COE33ItemType } from '@/games/coe33/items';
 import { CollectibleItemCard } from '@/features/item/components/collectible-item-card';
-import { toggleCollectedItem } from '@/features/collection/actions/toggle-collected-item';
+import type { COE33ItemType } from '@/games/coe33/items/types';
 
 // TODO: Need to fetch the user's tracked items
 

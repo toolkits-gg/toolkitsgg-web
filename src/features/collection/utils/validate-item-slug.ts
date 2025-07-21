@@ -1,6 +1,7 @@
-import { allGameConfigs } from '@/features/game/constants';
+import { configFromGameId } from '@/features/game/utils/game-id';
+import type { GameId } from '@prisma/client';
 
-export const validateItemSlug = (gameId: string, itemSlug: string) => {
-  const gameConfig = allGameConfigs.find((game) => game.id === gameId);
+export const validateItemSlug = (gameId: GameId, itemSlug: string) => {
+  const gameConfig = configFromGameId(gameId);
   return !!gameConfig?.items?.find((item) => item?.slug === itemSlug);
 };

@@ -1,11 +1,11 @@
 import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
 import { HeaderImage } from '@/app/_navigation/components/header-image';
 import { SidebarLayout } from '@/components/sidebar-layout';
-import type { COE33ItemType } from '@/games/coe33/items';
 import { ItemCard } from '@/features/item/components/item-card';
 import { getImageUrl } from '@/utils/url';
 import Image from 'next/image';
 import { configFromGameId } from '@/features/game/utils/game-id';
+import type { COE33ItemType } from '@/games/coe33/items/types';
 
 export default async function GamePage() {
   const gameConfig = configFromGameId<COE33ItemType>('coe33');

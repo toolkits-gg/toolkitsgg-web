@@ -56,18 +56,19 @@ enum COE33Character {
 }
 
 model COE33Item {
-  id                 String            @id @default(cuid())
-  name               String
-  description        String
-  imageUrl           String
-  internalSlug       String
-  slug               String            @unique
-  disabled           Boolean           @default(false)
+  id           String  @id @default(cuid())
+  slug         String  @unique
+  name         String
+  description  String
+  imageUrl     String
+  internalSlug String
+  disabled     Boolean @default(false)
+
   // COE33 specific fields
   category           COE33ItemCategory
   tags               COE33ItemTag[]
-  element            COE33Element
-  primaryAttribute   COE33Attribute
+  element            COE33Element?
+  primaryAttribute   COE33Attribute?
   secondaryAttribute COE33Attribute?
 
   buildItems         COE33BuildItem[]

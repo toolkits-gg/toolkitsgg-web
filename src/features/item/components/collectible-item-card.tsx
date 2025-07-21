@@ -27,7 +27,7 @@ const CollectibleItemCard = ({
   imageSrc,
 }: CollectibleItemCardProps) => {
   const [actionState, action, isPending] = useActionState(
-    toggleCollectedItem.bind(null, gameId, item.internalSlug),
+    toggleCollectedItem.bind(null, gameId, item.slug),
     EMPTY_ACTION_STATE
   );
 

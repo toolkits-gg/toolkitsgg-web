@@ -1,10 +1,10 @@
 import { writeFileSync } from 'fs';
 import path from 'path';
 import { coe33Characters } from '@/games/coe33/constants';
-import { type COE33ItemType } from '@/games/coe33/items';
 import { generateSlugs } from '@/games/coe33/scripts/utils';
 import SkillData from '../inputs/DT_SkillIcons.json';
 import GameData from '../inputs/Game.json';
+import type { COE33ItemType } from '@/games/coe33/items/types';
 
 const parseSkillData = (): COE33ItemType[] => {
   const excludedInternalSlugs = [

@@ -28,7 +28,7 @@ type ResourcesArgs =
       resourcesPath?: undefined;
     };
 
-export type GameDataHelpers = {
+export type GameDataUtils = {
   toggleCollectedItem: (itemSlug: string) => Promise<{
     isCollected: boolean;
   }>;
@@ -44,8 +44,10 @@ export type GameConfig<ItemType> = {
   logo: React.ReactElement<HTMLElement>;
   themeDefinitions?: ThemeDefinition[];
 
-  dataHelpers: GameDataHelpers | undefined;
+  /* Utility functions for interacting with the data layer **/
+  dataUtils: GameDataUtils | undefined;
 
+  // TODO: Enable builds a different way, like with items
   buildsEnabled?: boolean;
 } & ItemsArgs<ItemType> &
   ResourcesArgs;

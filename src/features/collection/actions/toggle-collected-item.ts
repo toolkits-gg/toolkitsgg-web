@@ -10,7 +10,7 @@ import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect'
 
 import { validateItemSlug } from '@/features/collection/utils/validate-item-slug';
 import type { GameId } from '@prisma/client';
-import { allGameConfigs } from '@/features/game/constants';
+import { configFromGameId } from '@/features/game/utils/game-id';
 
 export const toggleCollectedItem = async (
   gameId: GameId,
@@ -25,15 +25,13 @@ export const toggleCollectedItem = async (
     throw new Error(`Invalid item slug: ${itemSlug}`);
   }
 
-  const gameConfig = allGameConfigs.find(
-    (gameConfig) => gameConfig.id === gameId
-  );
+  const gameConfig = configFromGameId(gameId);
 
   if (!gameConfig) {
     throw new Error(`Game configuration not found for gameId: ${gameId}`);
   }
 
-  if (!gameConfig.dataHelpers) {
+  if (!gameConfig.dataUtils) {
     throw new Error(
       `Data helpers not found for game configuration: ${gameConfig.id}`
     );
@@ -41,7 +39,7 @@ export const toggleCollectedItem = async (
 
   try {
     const { isCollected } =
-      await gameConfig.dataHelpers.toggleCollectedItem(itemSlug);
+      await gameConfig.dataUtils.toggleCollectedItem(itemSlug);
 
     revalidatePath(`/${gameConfig.id}`);
 

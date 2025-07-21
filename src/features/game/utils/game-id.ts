@@ -15,9 +15,13 @@ export function toGameId(id: string | undefined): GameId {
 }
 
 export function configFromGameId<ItemType extends BaseItemType>(
-  gameId: GameId
+  gameId: GameId | undefined
 ): GameConfig<ItemType> | undefined {
-  return allGameConfigs.find((config) => config.id === 'coe33') as
+  if (!gameId) {
+    return undefined;
+  }
+
+  return allGameConfigs.find((config) => config.id === gameId) as
     | GameConfig<ItemType>
     | undefined;
 }
