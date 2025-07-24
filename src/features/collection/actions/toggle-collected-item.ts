@@ -43,11 +43,14 @@ export const toggleCollectedItem = async (
 
     revalidatePath(`/${gameConfig.id}`);
 
-    return toActionState(
-      'SUCCESS',
-      isCollected ? 'Item marked as collected' : 'Item marked as uncollected'
-    );
+    return toActionState({
+      status: 'SUCCESS',
+      message: isCollected
+        ? 'Item marked as collected'
+        : 'Item marked as uncollected',
+      showToast: false,
+    });
   } catch (error) {
-    return fromErrorToActionState(error);
+    return fromErrorToActionState({ error });
   }
 };

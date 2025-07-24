@@ -1,9 +1,9 @@
-import { ZodError } from "zod";
+import { ZodError } from 'zod';
 
- 
 export type ActionState<T = any> = {
-  status?: "SUCCESS" | "ERROR";
+  status?: 'SUCCESS' | 'ERROR';
   message: string;
+  showToast?: boolean;
   payload?: FormData;
   fieldErrors: Record<string, string[] | undefined>;
   timestamp: number;
@@ -11,35 +11,43 @@ export type ActionState<T = any> = {
 };
 
 export const EMPTY_ACTION_STATE: ActionState = {
-  message: "",
+  message: '',
+  showToast: true,
   fieldErrors: {},
   timestamp: Date.now(),
 };
 
-export const fromErrorToActionState = (
-  error: unknown,
-  formData?: FormData
-): ActionState => {
+export const fromErrorToActionState = ({
+  error,
+  formData,
+  showToast = true,
+}: {
+  error: unknown;
+  formData?: FormData;
+  showToast?: boolean;
+}): ActionState => {
   if (error instanceof ZodError) {
     return {
-      status: "ERROR",
-      message: "",
+      status: 'ERROR',
+      message: '',
+      showToast,
       payload: formData,
       fieldErrors: error.flatten().fieldErrors,
       timestamp: Date.now(),
     };
   } else if (error instanceof Error) {
     return {
-      status: "ERROR",
+      status: 'ERROR',
       message: error.message,
+      showToast,
       payload: formData,
       fieldErrors: {},
       timestamp: Date.now(),
     };
   } else {
     return {
-      status: "ERROR",
-      message: "An unknown error occurred",
+      status: 'ERROR',
+      message: 'An unknown error occurred',
       payload: formData,
       fieldErrors: {},
       timestamp: Date.now(),
@@ -47,15 +55,23 @@ export const fromErrorToActionState = (
   }
 };
 
-export const toActionState = (
-  status: ActionState["status"],
-  message: string,
-  formData?: FormData,
-  data?: unknown
-): ActionState => {
+export const toActionState = ({
+  status = 'SUCCESS',
+  message = '',
+  showToast = true,
+  formData,
+  data,
+}: {
+  status: ActionState['status'];
+  message: string;
+  showToast?: boolean;
+  formData?: FormData;
+  data?: unknown;
+}): ActionState => {
   return {
     status,
     message,
+    showToast,
     fieldErrors: {},
     payload: formData,
     timestamp: Date.now(),

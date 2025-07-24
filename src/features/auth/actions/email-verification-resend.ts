@@ -17,10 +17,11 @@ export const emailVerificationResend = async () => {
   try {
     const canResend = await canResendVerificationEmail(user.id);
     if (!canResend) {
-      return toActionState(
-        'ERROR',
-        'You can only resend the verification email once every minute.'
-      );
+      return toActionState({
+        status: 'ERROR',
+        message:
+          'You can only resend the verification email once every minute.',
+      });
     }
 
     const verificationCode = await generateEmailVerificationCode(
@@ -35,11 +36,17 @@ export const emailVerificationResend = async () => {
     );
 
     if (result.error) {
-      return toActionState('ERROR', 'Failed to send verification email');
+      return toActionState({
+        status: 'ERROR',
+        message: 'Failed to send verification email',
+      });
     }
   } catch (error) {
-    return fromErrorToActionState(error);
+    return fromErrorToActionState({ error });
   }
 
-  return toActionState('SUCCESS', 'Verification email has been sent');
+  return toActionState({
+    status: 'SUCCESS',
+    message: 'Verification email has been sent',
+  });
 };

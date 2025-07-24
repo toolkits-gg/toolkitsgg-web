@@ -21,7 +21,7 @@ export const getCollectedItemSlugs = async (
   try {
     return await gameConfig.dataUtils.getCollectedItemSlugs();
   } catch (error) {
-    fromErrorToActionState(error);
+    fromErrorToActionState({ error });
     return [];
   }
 };

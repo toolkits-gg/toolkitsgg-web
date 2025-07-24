@@ -21,14 +21,14 @@ const Form = ({
 }: FormProps) => {
   useActionFeedback(actionState, {
     onSuccess: ({ actionState }) => {
-      if (actionState.message) {
+      if (actionState.message && actionState.showToast) {
         toast.success(actionState.message, toastOptions);
       }
 
       onSuccess?.(actionState);
     },
     onError: ({ actionState }) => {
-      if (actionState.message) {
+      if (actionState.message && actionState.showToast) {
         toast.error(actionState.message, toastOptions);
       }
 

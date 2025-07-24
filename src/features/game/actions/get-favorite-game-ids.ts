@@ -13,7 +13,7 @@ export const getFavoriteGameIds = async (): Promise<string[]> => {
   try {
     return await gameData.getFavoriteGameIds();
   } catch (error) {
-    fromErrorToActionState(error);
+    fromErrorToActionState({ error });
     return [];
   }
 };

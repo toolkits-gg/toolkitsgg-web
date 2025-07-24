@@ -40,7 +40,10 @@ export const emailVerification = async (
     );
 
     if (!validCode) {
-      return toActionState('ERROR', 'Invalid or expired code');
+      return toActionState({
+        status: 'ERROR',
+        message: 'Invalid or expired code',
+      });
     }
 
     await authData.deleteUserSessions({ userId: user.id });
@@ -55,7 +58,7 @@ export const emailVerification = async (
 
     await setSessionCookie(sessionToken, session.expiresAt);
   } catch (error) {
-    return fromErrorToActionState(error);
+    return fromErrorToActionState({ error });
   }
 
   await setCookieByKey('toast', 'Email verified');

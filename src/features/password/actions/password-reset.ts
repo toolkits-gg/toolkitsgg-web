@@ -55,11 +55,11 @@ export const passwordReset = async (
       !passwordResetToken ||
       Date.now() > passwordResetToken.expiresAt.getTime()
     ) {
-      return toActionState(
-        'ERROR',
-        'Expired or invalid verification token',
-        formData
-      );
+      return toActionState({
+        status: 'ERROR',
+        message: 'Expired or invalid verification token',
+        formData,
+      });
     }
 
     await authData.deleteUserSessions({
@@ -75,7 +75,7 @@ export const passwordReset = async (
       },
     });
   } catch (error) {
-    return fromErrorToActionState(error, formData);
+    return fromErrorToActionState({ error, formData });
   }
 
   await setCookieByKey('toast', 'Successfully reset password');

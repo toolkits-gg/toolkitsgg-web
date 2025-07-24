@@ -27,13 +27,13 @@ export const toggleFavoriteGame = async (
     const { existingFavorite } = await gameData.toggleFavoriteGame(gameId);
 
     revalidatePath(`/${gameId}`);
-    return toActionState(
-      'SUCCESS',
-      existingFavorite
+    return toActionState({
+      status: 'SUCCESS',
+      message: existingFavorite
         ? 'Game removed from favorites'
-        : 'Game added to favorites'
-    );
+        : 'Game added to favorites',
+    });
   } catch (error) {
-    return fromErrorToActionState(error);
+    return fromErrorToActionState({ error });
   }
 };

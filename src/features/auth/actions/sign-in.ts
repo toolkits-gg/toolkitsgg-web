@@ -38,7 +38,11 @@ export const signIn = async (_actionState: ActionState, formData: FormData) => {
     );
 
     if (!user || !validPassword) {
-      return toActionState('ERROR', 'Incorrect email or password', formData);
+      return toActionState({
+        status: 'ERROR',
+        message: 'Incorrect email or password',
+        formData,
+      });
     }
 
     const sessionToken = generateRandomToken();
@@ -46,7 +50,7 @@ export const signIn = async (_actionState: ActionState, formData: FormData) => {
 
     await setSessionCookie(sessionToken, session.expiresAt);
   } catch (error) {
-    return fromErrorToActionState(error, formData);
+    return fromErrorToActionState({ error, formData });
   }
 
   redirect(homePath());

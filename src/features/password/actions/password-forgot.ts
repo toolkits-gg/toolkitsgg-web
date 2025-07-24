@@ -27,7 +27,10 @@ export const passwordForgot = async (
     });
 
     if (!user) {
-      return toActionState('SUCCESS', 'Check your email for a reset link');
+      return toActionState({
+        status: 'SUCCESS',
+        message: 'Check your email for a reset link',
+      });
     }
 
     await inngest.send({
@@ -37,8 +40,11 @@ export const passwordForgot = async (
       },
     });
   } catch (error) {
-    return fromErrorToActionState(error, formData);
+    return fromErrorToActionState({ error, formData });
   }
 
-  return toActionState('SUCCESS', 'Check your email for a reset link');
+  return toActionState({
+    status: 'SUCCESS',
+    message: 'Check your email for a reset link',
+  });
 };
