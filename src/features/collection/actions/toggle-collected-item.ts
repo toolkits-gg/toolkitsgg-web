@@ -10,7 +10,7 @@ import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect'
 
 import { validateItemSlug } from '@/features/collection/utils/validate-item-slug';
 import type { GameId } from '@prisma/client';
-import { configFromGameId } from '@/features/game/utils/game-id';
+import { toGameConfig } from '@/features/game/utils/game-id';
 
 export const toggleCollectedItem = async (
   gameId: GameId,
@@ -25,7 +25,7 @@ export const toggleCollectedItem = async (
     throw new Error(`Invalid item slug: ${itemSlug}`);
   }
 
-  const gameConfig = configFromGameId(gameId);
+  const gameConfig = toGameConfig(gameId);
 
   if (!gameConfig) {
     throw new Error(`Game configuration not found for gameId: ${gameId}`);

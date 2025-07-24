@@ -4,14 +4,14 @@ import { SidebarLayout } from '@/components/sidebar-layout';
 import { getCollectedItemSlugs } from '@/features/collection/actions/get-collected-item-slugs';
 import { getImageUrl } from '@/utils/url';
 import Image from 'next/image';
-import { configFromGameId } from '@/features/game/utils/game-id';
+import { toGameConfig } from '@/features/game/utils/game-id';
 import { CollectibleItemCard } from '@/features/item/components/collectible-item-card';
 import type { COE33ItemType } from '@/games/coe33/items/types';
 
 // TODO: Need to fetch the user's tracked items
 
 export default async function ItemTrackerPage() {
-  const gameConfig = configFromGameId<COE33ItemType>('coe33');
+  const gameConfig = toGameConfig<COE33ItemType>('coe33');
 
   if (!gameConfig) {
     throw new Error('Game configuration not found');

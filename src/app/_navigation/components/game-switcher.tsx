@@ -15,7 +15,7 @@ import { allGameConfigs, noGameConfig } from '@/features/game/constants';
 import { useAppTheme } from '@/features/theme/hooks/use-theme';
 import { usePathname } from 'next/navigation';
 import { allThemeClassNames } from '@/features/theme/constants';
-import { configFromGameId } from '@/features/game/utils/game-id';
+import { toGameConfig } from '@/features/game/utils/game-id';
 
 type UseActiveGameConfigArgs = {
   gameId: GameId | undefined;
@@ -34,7 +34,7 @@ const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
         ) as GameId) || noGameConfig.id;
     }
 
-    const gameConfig = configFromGameId(validatedGameId.current);
+    const gameConfig = toGameConfig(validatedGameId.current);
 
     if (!gameConfig) {
       return noGameConfig;
