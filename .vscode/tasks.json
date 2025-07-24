@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "web",
+      "type": "shell",
+      "command": "pwsh.exe",
+      "args": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "split",
+        "clear": true
+      },
+      "detail": "Launches and watches the toolkits.gg web app"
+    },
+    {
+      "label": "prisma-studio",
+      "type": "shell",
+      "command": "pwsh.exe",
+      "args": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "split",
+        "clear": true
+      },
+      "detail": "Launches and watches the Prisma Studio web app."
+    }
+  ]
+}
