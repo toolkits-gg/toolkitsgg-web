@@ -63,7 +63,10 @@ const seed = async () => {
       data: (coe33Items as COE33ItemType[]).map((item) => ({
         slug: item.slug,
         name: item.name,
-        description: item.description,
+        description:
+          typeof item.description === 'string'
+            ? item.description
+            : item.description.join(' '),
         imageUrl: item.imageUrl,
         category: item.category,
         internalSlug: item.internalSlug,

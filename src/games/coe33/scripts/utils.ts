@@ -1,7 +1,9 @@
 import { coe33Items } from '@/games/coe33/items/all-items';
 import type { COE33ItemType } from '@/games/coe33/items/types';
 
-export const generateSlugs = (skillItems: COE33ItemType[]): COE33ItemType[] => {
+export const generateSlugs = <T extends COE33ItemType = COE33ItemType>(
+  skillItems: T[]
+): T[] => {
   const results = skillItems.map((item) => {
     const existingItem = coe33Items.find(
       (existing) => existing.internalSlug === item.internalSlug
@@ -16,7 +18,9 @@ export const generateSlugs = (skillItems: COE33ItemType[]): COE33ItemType[] => {
   return results;
 };
 
-const generateSlug = (skillItems: COE33ItemType[]): string => {
+const generateSlug = <T extends COE33ItemType = COE33ItemType>(
+  skillItems: T[]
+): string => {
   // slug should be a unique randomized 4-letter string
   let slug = Math.random().toString(36).substring(2, 6);
   let slugExists =
