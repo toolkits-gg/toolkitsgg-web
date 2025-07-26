@@ -7,7 +7,20 @@ import type { COE33ItemType } from '@/games/coe33/items/types';
 import { coe33Characters } from '@/games/coe33/constants';
 
 const parseWeaponData = (): COE33ItemType[] => {
-  const excludedInternalSlugs: string[] = [];
+  const excludedInternalSlugs: string[] = [
+    'GDC_Weapon_Sciel',
+    'GDC_Weapon_Maelle',
+    'GDC_Weapon_Lune',
+    'GDC_Weapon_Verso',
+    'GDC_Weapon_Monoco',
+    '03_Weapon_Placeholder',
+    'MitigatedPerfection',
+    'DebugSciel',
+    'DebugLune',
+    'DebugVerso',
+    'DebugMaelle',
+    'DebugMonoco',
+  ];
 
   const data = WeaponData[0]['Rows'] as Record<string, any>;
 
@@ -80,34 +93,19 @@ const parseGameData = (weaponItems: COE33ItemType[]): COE33ItemType[] => {
       (key) => key.indexOf(nameKeySearch) !== -1
     );
 
-    const descriptionKey = Object.keys(data).find(
-      (key) => key.indexOf(`_${internalSlug}_Description_Long`) !== -1
-    );
-
     if (!nameKey) {
       console.warn(`Name for ${internalSlug} not found.`);
       results.push({
         ...item,
         name: '',
-        description: descriptionKey ? data[descriptionKey] : '',
-      });
-      continue;
-    }
-
-    if (!descriptionKey) {
-      console.warn(`Description for ${internalSlug} not found.`);
-      results.push({
-        ...item,
-        name: incorrectNames[internalSlug] || data[nameKey],
         description: '',
       });
       continue;
     }
-
     results.push({
       ...item,
       name: incorrectNames[internalSlug] || data[nameKey],
-      description: data[descriptionKey],
+      description: '',
     });
   }
 
