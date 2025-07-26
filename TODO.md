@@ -1,6 +1,6 @@
 # Now
 
-- ItemCard needs a button to open dialog for toggle optional, alternate items, etc.
+- Finish the weapon items extraction script
 
 # Later
 
