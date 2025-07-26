@@ -1,18 +1,17 @@
 import type { GameId } from '@prisma/client';
-import { gameConfigs } from '@/features/game/constants';
 import type { ThemeDefinition } from '@/features/theme/constants';
 
 type ItemsArgs<ItemType> =
   | {
       items: ItemType[];
       itemLookupPath: string;
-      itemTrackerPath: string;
+      itemCollectorPath: string;
       itemQuizPath: string;
     }
   | {
       items?: undefined;
       itemLookupPath?: undefined;
-      itemTrackerPath?: undefined;
+      itemCollectorPath?: undefined;
       itemQuizPath?: undefined;
     };
 
@@ -29,6 +28,13 @@ type ResourcesArgs =
       resourcesPath?: undefined;
     };
 
+export type GameDataUtils = {
+  toggleCollectedItem: (itemSlug: string) => Promise<{
+    isCollected: boolean;
+  }>;
+  getCollectedItemSlugs: () => Promise<string[]>;
+};
+
 export type GameConfig<ItemType> = {
   id: GameId;
   name: string;
@@ -38,17 +44,10 @@ export type GameConfig<ItemType> = {
   logo: React.ReactElement<HTMLElement>;
   themeDefinitions?: ThemeDefinition[];
 
+  /* Utility functions for interacting with the data layer **/
+  dataUtils: GameDataUtils | undefined;
+
+  // TODO: Enable builds a different way, like with items
   buildsEnabled?: boolean;
 } & ItemsArgs<ItemType> &
   ResourcesArgs;
-
-export function isGameId(id: string): id is GameId {
-  return Object.keys(gameConfigs).includes(id);
-}
-
-export function toGameId(id: string | undefined): GameId {
-  if (!id) {
-    return 'none';
-  }
-  return isGameId(id) ? (id as GameId) : 'none';
-}

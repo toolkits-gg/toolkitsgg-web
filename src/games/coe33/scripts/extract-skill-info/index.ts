@@ -1,10 +1,10 @@
 import { writeFileSync } from 'fs';
 import path from 'path';
-import { coe33Characters } from '@/features/game/games/coe33/constants';
-import { type COE33ItemType } from '@/features/game/games/coe33/items';
-import { generateSlugs } from '@/features/game/games/coe33/scripts/utils';
+import { coe33Characters } from '@/games/coe33/constants';
+import { generateSlugs } from '@/games/coe33/scripts/utils';
 import SkillData from '../inputs/DT_SkillIcons.json';
 import GameData from '../inputs/Game.json';
+import type { COE33ItemType } from '@/games/coe33/items/types';
 
 const parseSkillData = (): COE33ItemType[] => {
   const excludedInternalSlugs = [
@@ -43,6 +43,9 @@ const parseSkillData = (): COE33ItemType[] => {
     if (assetKey && data[internalSlug][assetKey]) {
       const assetPath = data[internalSlug][assetKey];
 
+      const imageName = assetPath['AssetPathName'].split('.')[1] || '';
+      const imageUrl = `skills/${imageName}.webp`;
+
       const character =
         assetPath['AssetPathName'].split('.')[0].split('_')[3].toUpperCase() ||
         '';
@@ -53,9 +56,6 @@ const parseSkillData = (): COE33ItemType[] => {
         );
         continue;
       }
-
-      const imageName = assetPath['AssetPathName'].split('.')[1] || '';
-      const imageUrl = `skills/${imageName}.webp`;
 
       const skillItem: COE33ItemType = {
         name: '',
@@ -75,6 +75,7 @@ const parseSkillData = (): COE33ItemType[] => {
 
 const parseGameData = (skillItems: COE33ItemType[]): COE33ItemType[] => {
   // Maps the DT_SkillIcons internal slugs to the Game.json data
+  // in the cases where they don't match
   const incorrectInternalSlugs: { [key: string]: string } = {
     GustavesMemoire: 'GustaveSMemoire',
     FollowUp: 'Followup',
@@ -97,13 +98,13 @@ const parseGameData = (skillItems: COE33ItemType[]): COE33ItemType[] => {
     Trumpet: 'TroubadourBuff',
   };
 
+  // Maps the DT_WeaponIcons names to the Game.json data
+  // in the cases where they don't match
   const incorrectNames: { [key: string]: string } = {
     Combo1: `Assault Zero`,
   };
 
   const data = GameData['ST_MainCharacters_Skills'] as Record<string, string>;
-
-  // * Exemptions for some items that have different internal slugs between files
 
   const results: COE33ItemType[] = [];
 

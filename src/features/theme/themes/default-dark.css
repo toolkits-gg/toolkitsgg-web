@@ -102,9 +102,9 @@
   --accent-foreground: var(--color-white);
   --destructive: var(--color-red-500);
   --destructive-foreground: var(--color-white);
-  --border: var(--color-primary-500);
+  --border: var(--color-primary-700);
   --input: var(--color-black);
-  --ring: var(--color-primary-300);
+  --ring: var(--color-primary-500);
   --chart-1: var(--color-primary-700);
   --chart-2: var(--color-secondary-700);
   --chart-3: var(--color-accent1-700);

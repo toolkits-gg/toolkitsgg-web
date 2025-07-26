@@ -1,17 +1,14 @@
 import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
 import { HeaderImage } from '@/app/_navigation/components/header-image';
 import { SidebarLayout } from '@/components/sidebar-layout';
-import { allGameConfigs } from '@/features/game/constants';
-import type { COE33ItemType } from '@/features/game/games/coe33/items';
-import type { GameConfig } from '@/features/game/types';
 import { ItemCard } from '@/features/item/components/item-card';
 import { getImageUrl } from '@/utils/url';
 import Image from 'next/image';
+import { toGameConfig } from '@/features/game/utils/game-id';
+import type { COE33ItemType } from '@/games/coe33/items/types';
 
 export default async function GamePage() {
-  const gameConfig = allGameConfigs.find((config) => config.id === 'coe33') as
-    | GameConfig<COE33ItemType>
-    | undefined;
+  const gameConfig = toGameConfig<COE33ItemType>('coe33');
 
   if (!gameConfig) {
     throw new Error('Game configuration not found');
@@ -38,13 +35,14 @@ export default async function GamePage() {
           />
         </div>
         <div className="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-4 p-6 sm:justify-between lg:p-2">
-          {gameConfig?.items
-            ?.filter((item) => item.category === 'SKILL')
+          {gameConfig.items
+            ?.filter((item) => item.category === 'WEAPON')
             .map((item) => (
               <ItemCard
                 key={item.slug}
                 item={item}
                 imageSrc={getImageUrl(item.imageUrl, 'coe33')}
+                size="tall"
               />
             ))}
         </div>

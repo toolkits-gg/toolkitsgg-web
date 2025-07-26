@@ -33,13 +33,21 @@ export const passwordChange = async (
     if (!user) {
       // we should never reach this return statement
       // but it's here just in case
-      return toActionState('ERROR', 'Invalid request', formData);
+      return toActionState({
+        status: 'ERROR',
+        message: 'Invalid request',
+        formData,
+      });
     }
 
     const validPassword = await verifyPasswordHash(user.passwordHash, password);
 
     if (!validPassword) {
-      return toActionState('ERROR', 'Incorrect password', formData);
+      return toActionState({
+        status: 'ERROR',
+        message: 'Incorrect password',
+        formData,
+      });
     }
 
     await inngest.send({
@@ -49,8 +57,11 @@ export const passwordChange = async (
       },
     });
   } catch (error) {
-    return fromErrorToActionState(error, formData);
+    return fromErrorToActionState({ error, formData });
   }
 
-  return toActionState('SUCCESS', 'Check your email for a reset link');
+  return toActionState({
+    status: 'SUCCESS',
+    message: 'Check your email for a reset link',
+  });
 };

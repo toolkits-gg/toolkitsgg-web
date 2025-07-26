@@ -8,8 +8,8 @@ import {
   toActionState,
 } from '@/components/form/utils/to-action-state';
 import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
-import prisma from '@/lib/prisma';
-import { validateGameId } from '@/features/game/utils/validate-game-id';
+import { gameData } from '@/features/game/data';
+import { isGameId } from '@/features/game/utils/game-id';
 
 export const toggleFavoriteGame = async (
   gameId: GameId
@@ -19,43 +19,21 @@ export const toggleFavoriteGame = async (
     throw new Error('User not authenticated');
   }
 
-  if (!validateGameId(gameId)) {
+  if (!isGameId(gameId)) {
     throw new Error(`Invalid GameId: ${gameId}`);
   }
 
   try {
-    const isCurrentlyFavorite = await prisma.userFavoriteGame.findFirst({
-      where: {
-        userId: user.id,
-        gameId: gameId,
-      },
+    const { existingFavorite } = await gameData.toggleFavoriteGame(gameId);
+
+    revalidatePath(`/${gameId}`);
+    return toActionState({
+      status: 'SUCCESS',
+      message: existingFavorite
+        ? 'Game removed from favorites'
+        : 'Game added to favorites',
     });
-
-    if (isCurrentlyFavorite) {
-      // Remove from favorites
-      await prisma.userFavoriteGame.delete({
-        where: {
-          id: {
-            userId: user.id,
-            gameId: gameId,
-          },
-        },
-      });
-      revalidatePath(`/${gameId}`);
-      return toActionState('SUCCESS', 'Game removed from favorites');
-    } else {
-      // Add to favorites
-      await prisma.userFavoriteGame.create({
-        data: {
-          userId: user.id,
-          gameId: gameId,
-        },
-      });
-
-      revalidatePath(`/${gameId}`);
-      return toActionState('SUCCESS', 'Game added to favorites');
-    }
   } catch (error) {
-    return fromErrorToActionState(error);
+    return fromErrorToActionState({ error });
   }
 };

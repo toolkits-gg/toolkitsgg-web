@@ -25,13 +25,13 @@ const FavoriteGameButton = ({
   return (
     <Form action={action} actionState={actionState}>
       {isFavorite ? (
-        <SubmitButton
-          icon={<LucideHeart fill="white" />}
-          color="accent2"
-          isPending={isPending}
-        />
+        <SubmitButton color="accent2" isPending={isPending}>
+          <LucideHeart fill="white" className="h-4 w-4" />
+        </SubmitButton>
       ) : (
-        <SubmitButton icon={<LucideHeartPlus />} isPending={isPending} />
+        <SubmitButton isPending={isPending}>
+          <LucideHeartPlus className="h-4 w-4" />
+        </SubmitButton>
       )}
     </Form>
   );

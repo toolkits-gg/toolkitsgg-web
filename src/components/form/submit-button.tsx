@@ -4,20 +4,16 @@ import { LucideLoaderCircle } from 'lucide-react';
 import { cloneElement } from 'react';
 import { Button, type ButtonProps } from '@/components/button';
 
-type SubmitButtonProps = {
-  label?: string;
+type SubmitButtonProps = Omit<ButtonProps, 'disabled' | 'type'> & {
   icon?: React.ReactElement<HTMLElement>;
-  className?: ButtonProps['className'];
-  color?: ButtonProps['color'];
   isPending: boolean;
 };
 
 const SubmitButton = ({
-  color,
-  label,
   icon,
   isPending,
-  className,
+  children,
+  ...buttonProps
 }: SubmitButtonProps) => {
   // ! Cannot get pending from useFormStatus() because a bug currently
   // ! makes it reset when a child component updates its state
@@ -25,13 +21,14 @@ const SubmitButton = ({
   // ! Until there is a fix, we pass in isPending from the actionState.
   // const { pending } = useFormStatus();
 
+  // Remove color prop if plain is true to satisfy ButtonProps requirements
+  const { plain, color, ...restButtonProps } = buttonProps as any;
+  const safeButtonProps = plain
+    ? { ...restButtonProps, plain: true }
+    : { ...restButtonProps, color };
+
   return (
-    <Button
-      color={color}
-      disabled={isPending}
-      type="submit"
-      className={className}
-    >
+    <Button {...safeButtonProps} disabled={isPending} type="submit">
       {isPending ? (
         <LucideLoaderCircle className="h-4 w-4 animate-spin" />
       ) : icon ? (
@@ -40,8 +37,9 @@ const SubmitButton = ({
             className: 'w-4 h-4',
           })}
         </>
-      ) : null}
-      {label}
+      ) : (
+        children
+      )}
     </Button>
   );
 };

@@ -2,7 +2,9 @@ import type { GameId } from '@prisma/client';
 import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
 import prisma from '@/lib/prisma';
 
-export const toggleFavoriteGame = async (gameId: GameId) => {
+export const toggleFavoriteGame = async (
+  gameId: GameId
+): Promise<{ existingFavorite: boolean }> => {
   const { user } = await getAuthOrRedirect();
   if (!user) {
     throw new Error('User not authenticated');
@@ -18,7 +20,7 @@ export const toggleFavoriteGame = async (gameId: GameId) => {
   });
 
   if (existingFavorite) {
-    return await prisma.userFavoriteGame.delete({
+    await prisma.userFavoriteGame.delete({
       where: {
         id: {
           userId: user.id,
@@ -26,12 +28,19 @@ export const toggleFavoriteGame = async (gameId: GameId) => {
         },
       },
     });
+    return {
+      existingFavorite: true,
+    };
   }
 
-  return await prisma.userFavoriteGame.create({
+  await prisma.userFavoriteGame.create({
     data: {
       userId: user.id,
       gameId,
     },
   });
+
+  return {
+    existingFavorite: false,
+  };
 };

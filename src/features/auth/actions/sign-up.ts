@@ -70,14 +70,14 @@ export const signUp = async (_actionState: ActionState, formData: FormData) => {
       error instanceof Prisma.PrismaClientKnownRequestError &&
       error.code === 'P2002'
     ) {
-      return toActionState(
-        'ERROR',
-        'Either email or username is already in use',
-        formData
-      );
+      return toActionState({
+        status: 'ERROR',
+        message: 'Either email or username is already in use',
+        formData,
+      });
     }
 
-    return fromErrorToActionState(error, formData);
+    return fromErrorToActionState({ error, formData });
   }
 
   redirect(homePath());

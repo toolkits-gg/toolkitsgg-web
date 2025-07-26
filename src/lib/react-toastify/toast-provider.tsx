@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 const ToastProvider = () => {
   const { mode } = useAppTheme();
 
-  return <ToastContainer pauseOnFocusLoss={false} theme={mode} />;
+  return <ToastContainer pauseOnFocusLoss={false} theme={mode} limit={2} />;
 };
 
 export { ToastProvider };
