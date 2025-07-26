@@ -36,12 +36,13 @@ export default async function GamePage() {
         </div>
         <div className="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-4 p-6 sm:justify-between lg:p-2">
           {gameConfig.items
-            ?.filter((item) => item.category === 'SKILL')
+            ?.filter((item) => item.category === 'WEAPON')
             .map((item) => (
               <ItemCard
                 key={item.slug}
                 item={item}
                 imageSrc={getImageUrl(item.imageUrl, 'coe33')}
+                size="tall"
               />
             ))}
         </div>

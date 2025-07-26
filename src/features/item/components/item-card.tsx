@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import type { BaseItemType } from '@/features/item/types';
 import { OptionalItemIndicator } from '@/features/item/components/optional-item-indicator';
+import { cn } from '@/lib/shadcn/utils';
 
 // Can either provide a url or a ReactNode
 type ImageProps =
@@ -13,32 +14,73 @@ type ImageProps =
       imageContent: React.ReactNode;
     };
 
-// TODO: This should be defined with the build logic when implemented
-type BuildItemType = {
-  optional?: boolean;
-};
-
-export type ItemCardItemType = BaseItemType & BuildItemType;
+export type ItemCardItemType = BaseItemType;
 
 export type ItemCardProps = {
   item: ItemCardItemType;
+  size?: 'standard' | 'tall';
 } & ImageProps;
 
-const ItemCard = ({ item, imageSrc, imageContent }: ItemCardProps) => {
+const ItemCard = ({
+  item,
+  imageSrc,
+  imageContent,
+  size = 'standard',
+}: ItemCardProps) => {
+  const standardCardClasses = {
+    container: 'h-[150px] w-[125px] max-w-[125px]',
+    imageContainer: 'h-full max-h-[110px]',
+    imageWidth: 90,
+    imageHeight: 90,
+  };
+  const tallCardClasses = {
+    container: 'h-[300px] w-[125px] max-w-[125px]',
+    imageContainer: 'h-full max-h-[260px]',
+    imageWidth: 90,
+    imageHeight: 180,
+  };
+
   return (
-    <div className="relative flex h-[150px] w-[125px] max-w-[125px] items-start justify-center gap-0.5">
-      {item.optional && (
+    <div
+      className={cn(
+        'relative flex items-start justify-center gap-0.5',
+
+        size === 'standard' && standardCardClasses.container,
+        size === 'tall' && tallCardClasses.container
+      )}
+    >
+      {/* {item.optional && (
         <div className="absolute top-3 -left-3">
           <OptionalItemIndicator />
         </div>
-      )}
+      )} */}
       <div
         key={item.slug}
         className="flex h-full w-full flex-col rounded-tl-xl rounded-tr-xl border bg-white text-center dark:bg-black"
       >
-        <div className="flex h-full max-h-[110px] w-full flex-1 items-center justify-center p-1">
+        <div
+          className={cn(
+            'flex flex-1 items-center justify-center p-1',
+            size === 'standard' && standardCardClasses.imageContainer,
+            size === 'tall' && tallCardClasses.imageContainer
+          )}
+        >
           {imageSrc && (
-            <Image src={imageSrc} alt={item.name} width={90} height={90} />
+            <Image
+              src={imageSrc}
+              alt={item.name}
+              width={
+                size === 'standard'
+                  ? standardCardClasses.imageWidth
+                  : tallCardClasses.imageWidth
+              }
+              height={
+                size === 'standard'
+                  ? standardCardClasses.imageHeight
+                  : tallCardClasses.imageHeight
+              }
+              className="max-h-full max-w-full"
+            />
           )}
           {imageContent}
         </div>

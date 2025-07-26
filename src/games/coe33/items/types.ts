@@ -8,28 +8,30 @@ import type {
 
 export type COE33BaseItemType = BaseItemType<COE33ItemCategory, COE33ItemTag>;
 
-export type COE33LuneSkillItem = COE33BaseItemType & {
+type COE33SkillItem_Lune = COE33BaseItemType & {
   category: 'SKILL';
   character: 'LUNE';
   stainGain: COE33Stain[];
   stainConsume: COE33Stain[];
 };
 
-export type COE33NonLuneSkillItem = COE33BaseItemType & {
+type COE33SkillItem_NotLune = COE33BaseItemType & {
   category: 'SKILL';
   character: Exclude<COE33Character, 'LUNE'>;
   stainGain?: never;
   stainConsume?: never;
 };
 
-export type COE33NonSkillItem = COE33BaseItemType & {
+type COE33SkillItem = COE33SkillItem_Lune | COE33SkillItem_NotLune;
+
+type COE33Item_NotSkill = COE33BaseItemType & {
   category: Exclude<COE33ItemCategory, 'SKILL'>;
-  character?: never;
+  character?: COE33Character;
   gains?: COE33Stain[];
   consumes?: never;
 };
 
-export type COE33ItemType =
-  | COE33LuneSkillItem
-  | COE33NonLuneSkillItem
-  | COE33NonSkillItem;
+type COE33PictoItem = COE33Item_NotSkill;
+type COE33WeaponItem = COE33Item_NotSkill;
+
+export type COE33ItemType = COE33SkillItem | COE33PictoItem | COE33WeaponItem;

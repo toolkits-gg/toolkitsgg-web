@@ -25,8 +25,9 @@
     "prisma-studio": "pnpm dlx prisma studio",
     "email": "email dev --dir src/emails",
     "inngest": "pnpm dlx inngest-cli@latest dev",
-    "coe33-extract-picto-info": "tsx ./src/features/game/games/coe33/scripts/extract-picto-info/index.ts",
-    "coe33-extract-skill-info": "tsx ./src/features/game/games/coe33/scripts/extract-skill-info/index.ts"
+    "coe33-extract-picto-info": "tsx ./src/games/coe33/scripts/extract-picto-info/index.ts",
+    "coe33-extract-skill-info": "tsx ./src/games/coe33/scripts/extract-skill-info/index.ts",
+    "coe33-extract-weapon-info": "tsx ./src/games/coe33/scripts/extract-weapon-info/index.ts"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",
