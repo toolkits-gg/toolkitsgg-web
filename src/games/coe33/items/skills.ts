@@ -1,6 +1,6 @@
-import type { COE33ItemType } from '@/games/coe33/items/types';
+import type { COE33SkillItem } from '@/games/coe33/items/types';
 
-export const skillItems: COE33ItemType[] = [
+export const skillItems: COE33SkillItem[] = [
   {
     name: 'Abbest Wind',
     description:

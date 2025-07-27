@@ -42,7 +42,6 @@ export default async function GamePage() {
                 key={item.slug}
                 item={item}
                 imageSrc={getImageUrl(item.imageUrl, 'coe33')}
-                size="tall"
               />
             ))}
         </div>

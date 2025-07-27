@@ -1,9 +1,11 @@
 import type { BaseItemType } from '@/features/item/types';
 import type {
   COE33Character,
+  COE33Element,
   COE33ItemCategory,
   COE33ItemTag,
   COE33Stain,
+  COE33WeaponGrade,
 } from '@prisma/client';
 
 export type COE33BaseItemType = BaseItemType<COE33ItemCategory, COE33ItemTag>;
@@ -22,7 +24,7 @@ type COE33SkillItem_NotLune = COE33BaseItemType & {
   stainConsume?: never;
 };
 
-type COE33SkillItem = COE33SkillItem_Lune | COE33SkillItem_NotLune;
+export type COE33SkillItem = COE33SkillItem_Lune | COE33SkillItem_NotLune;
 
 type COE33Item_NotSkill = COE33BaseItemType & {
   category: Exclude<COE33ItemCategory, 'SKILL'>;
@@ -31,7 +33,16 @@ type COE33Item_NotSkill = COE33BaseItemType & {
   consumes?: never;
 };
 
-type COE33PictoItem = COE33Item_NotSkill;
-type COE33WeaponItem = COE33Item_NotSkill;
+export type COE33PictoItem = COE33Item_NotSkill;
+
+export type COE33WeaponItem = COE33Item_NotSkill & {
+  element: COE33Element | undefined;
+  power: number;
+  agility: COE33WeaponGrade | undefined;
+  defense: COE33WeaponGrade | undefined;
+  luck: COE33WeaponGrade | undefined;
+  might: COE33WeaponGrade | undefined;
+  vitality: COE33WeaponGrade | undefined;
+};
 
 export type COE33ItemType = COE33SkillItem | COE33PictoItem | COE33WeaponItem;

@@ -1,0 +1,9 @@
+# This file configures funding links for your project.
+
+github: toolkits.gg
+patreon: JoshPayette # TODO: Update with toolkits.gg specific account
+ko_fi: remnant2toolkit # TODO: Update to toolkits.gg specific account
+open_collective: # TODO
+custom:
+  - url: https://toolkits.gg/support # Replace with a custom support page URL
+    label: Support toolkits.gg
