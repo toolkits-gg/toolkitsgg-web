@@ -47,3 +47,7 @@ This document was adapted from the [probot contributing guide](https://github.co
 ## Get started
 
 To get started, you will want to set up the project locally. You can find the instructions in the [Local Setup Guide][local-setup].
+
+## Join the toolkits.gg Discord
+
+If you'd like to interact with the community, ask for help, or whatever, use the following link: https://discord.gg/kgVaU3zAQ7
