@@ -1,125 +1,5 @@
 [
   {
-    "name": "",
-    "description": "",
-    "internalSlug": "GDC_Weapon_Sciel",
-    "slug": "barp",
-    "imageUrl": "weapons/T_UI_Sciel_Weapon_Default.webp",
-    "category": "WEAPON",
-    "tags": [],
-    "character": "SCIEL"
-  },
-  {
-    "name": "",
-    "description": "",
-    "internalSlug": "GDC_Weapon_Maelle",
-    "slug": "br8r",
-    "imageUrl": "weapons/T_UI_Maelle_Weapon_Default.webp",
-    "category": "WEAPON",
-    "tags": [],
-    "character": "MAELLE"
-  },
-  {
-    "name": "",
-    "description": "",
-    "internalSlug": "GDC_Weapon_Lune",
-    "slug": "66jb",
-    "imageUrl": "weapons/T_UI_Lune_Weapon_Default.webp",
-    "category": "WEAPON",
-    "tags": [],
-    "character": "LUNE"
-  },
-  {
-    "name": "",
-    "description": "",
-    "internalSlug": "GDC_Weapon_Verso",
-    "slug": "7cig",
-    "imageUrl": "weapons/T_UI_Verso_Weapon_Default.webp",
-    "category": "WEAPON",
-    "tags": [],
-    "character": "VERSO"
-  },
-  {
-    "name": "",
-    "description": "",
-    "internalSlug": "GDC_Weapon_Monoco",
-    "slug": "xg1q",
-    "imageUrl": "weapons/T_UI_Monoco_Weapon_Default.webp",
-    "category": "WEAPON",
-    "tags": [],
-    "character": "MONOCO"
-  },
-  {
-    "name": "",
-    "description": "",
-    "internalSlug": "MitigatedPerfection",
-    "slug": "az72",
-    "imageUrl": "weapons/T_UI_Verso_Weapon_Default.webp",
-    "category": "WEAPON",
-    "tags": [],
-    "character": "VERSO"
-  },
-  {
-    "name": "",
-    "description": "",
-    "internalSlug": "03_Weapon_Placeholder",
-    "slug": "cjbb",
-    "imageUrl": "weapons/T_UI_Verso_Weapon_Default.webp",
-    "category": "WEAPON",
-    "tags": [],
-    "character": "VERSO"
-  },
-  {
-    "name": "",
-    "description": "",
-    "internalSlug": "DebugSciel",
-    "slug": "lmp8",
-    "imageUrl": "weapons/T_UI_Sciel_Weapon_Debug.webp",
-    "category": "WEAPON",
-    "tags": [],
-    "character": "SCIEL"
-  },
-  {
-    "name": "",
-    "description": "",
-    "internalSlug": "DebugLune",
-    "slug": "ac8i",
-    "imageUrl": "weapons/T_UI_Sciel_Weapon_Debug.webp",
-    "category": "WEAPON",
-    "tags": [],
-    "character": "SCIEL"
-  },
-  {
-    "name": "",
-    "description": "",
-    "internalSlug": "DebugVerso",
-    "slug": "7iun",
-    "imageUrl": "weapons/T_UI_Sciel_Weapon_Debug.webp",
-    "category": "WEAPON",
-    "tags": [],
-    "character": "SCIEL"
-  },
-  {
-    "name": "",
-    "description": "",
-    "internalSlug": "DebugMaelle",
-    "slug": "8uzp",
-    "imageUrl": "weapons/T_UI_Sciel_Weapon_Debug.webp",
-    "category": "WEAPON",
-    "tags": [],
-    "character": "SCIEL"
-  },
-  {
-    "name": "",
-    "description": "",
-    "internalSlug": "DebugMonoco",
-    "slug": "nt1x",
-    "imageUrl": "weapons/T_UI_Sciel_Weapon_Debug.webp",
-    "category": "WEAPON",
-    "tags": [],
-    "character": "SCIEL"
-  },
-  {
     "name": "Abysseram",
     "description": "",
     "internalSlug": "Abysseram",
@@ -127,7 +7,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Abyseram.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Algueron",
@@ -137,7 +24,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Algueron.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Angerim",
@@ -147,7 +41,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Angerim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Ballaro",
@@ -157,7 +58,14 @@
     "imageUrl": "weapons/T_UI_Monoco_Weapon_Sirenaro_1.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MONOCO"
+    "character": "MONOCO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Barrier Breaker",
@@ -167,7 +75,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_BarrierBreaker.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Battlum",
@@ -177,7 +92,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Battlum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Benisim",
@@ -187,7 +109,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Benesim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Beselbum",
@@ -197,7 +126,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Default.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Betelim",
@@ -207,7 +143,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Betelim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Blizzon",
@@ -217,7 +160,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Blizzon.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Blodam",
@@ -227,7 +177,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Blodam.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Boucharo",
@@ -237,7 +194,14 @@
     "imageUrl": "weapons/T_UI_Monoco_Weapon_Chapero.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MONOCO"
+    "character": "MONOCO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Bourgelon",
@@ -247,7 +211,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Bourgelon.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Braselim",
@@ -257,7 +228,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Braselim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Brulerum",
@@ -267,7 +245,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Brulerum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Brumaro",
@@ -277,7 +262,14 @@
     "imageUrl": "weapons/T_UI_Monoco_Weapon_Brumaro.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MONOCO"
+    "character": "MONOCO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Chalium",
@@ -287,7 +279,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Dualim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Chantenum",
@@ -297,7 +296,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Sirenum_2.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Chapelim",
@@ -307,7 +313,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Boucharim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Charnon",
@@ -317,7 +330,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Charnon.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Chation",
@@ -327,7 +347,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Chation.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Chevalam",
@@ -337,7 +364,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Chevalam.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Choralim",
@@ -347,7 +381,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Sirenim_1.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Chromaro",
@@ -357,7 +398,14 @@
     "imageUrl": "weapons/T_UI_Monoco_Weapon_Chromaro.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MONOCO"
+    "character": "MONOCO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Clierum",
@@ -367,7 +415,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Clierum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Coldum",
@@ -377,7 +432,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Coldum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Colim",
@@ -387,7 +449,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Sirenim_2.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Confuso",
@@ -397,7 +466,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Confuso.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Contorso",
@@ -407,7 +483,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Contorson.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Coralim",
@@ -417,7 +500,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Coralim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Corderon",
@@ -427,7 +517,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Corderon.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Corpeso",
@@ -437,7 +534,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Corpeso.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Cruleram",
@@ -447,7 +551,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Crueleram.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Cultam",
@@ -457,7 +568,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Cultam.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Danseso",
@@ -467,7 +585,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Danseso.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Delaram",
@@ -477,7 +602,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Delaram.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Deminerim",
@@ -487,7 +619,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Deminerim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Demonam",
@@ -497,7 +636,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Demonam.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Direton",
@@ -507,7 +653,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Direton.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Dreameso",
@@ -517,7 +670,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Sireso_2.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Dualiso",
@@ -527,7 +687,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Troubadim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Duenum",
@@ -537,7 +704,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Duenum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Elerim",
@@ -547,7 +721,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Elerim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Facesum",
@@ -557,7 +738,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Facesum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Fragaro",
@@ -567,7 +755,14 @@
     "imageUrl": "weapons/T_UI_Monoco_Weapon_Reacharo_2.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MONOCO"
+    "character": "MONOCO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Garganon",
@@ -577,7 +772,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Garganon.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Gaulteram",
@@ -587,7 +789,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Gaulteram.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Gelerim",
@@ -597,7 +806,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Default.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Gesam",
@@ -607,7 +823,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Gesam.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Glaceso",
@@ -617,7 +840,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Glaceso.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Glaisum",
@@ -627,7 +857,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Glaisum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Gobluson",
@@ -637,7 +874,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Gobluson.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Grandaro",
@@ -647,7 +891,14 @@
     "imageUrl": "weapons/T_UI_Monoco_Weapon_Grandaro.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MONOCO"
+    "character": "MONOCO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Guleson",
@@ -657,7 +908,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Reacheron_1.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Hevason",
@@ -667,7 +925,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Hevasson.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Jarum",
@@ -677,7 +942,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Jarum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Joyaro",
@@ -687,7 +959,14 @@
     "imageUrl": "weapons/T_UI_Monoco_Weapon_Joyaro.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MONOCO"
+    "character": "MONOCO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Kralim",
@@ -697,7 +976,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Reacherim_2.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Lanceram",
@@ -707,7 +993,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Lanceram.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Lighterim",
@@ -717,7 +1010,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Lighterim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Liteso",
@@ -727,7 +1027,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Reacheaso.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Lithelim",
@@ -737,7 +1044,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Reacherim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Litheson",
@@ -747,7 +1061,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Reacheanon_2.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Lithum",
@@ -757,7 +1078,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Reachum_1.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Lunerim",
@@ -767,7 +1095,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Default.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Lusteson",
@@ -777,7 +1112,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Lusteson.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Maellum",
@@ -787,7 +1129,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Default.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Martenon",
@@ -797,7 +1146,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Sirenon_2.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Medalum",
@@ -807,7 +1163,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Medalum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Melarum",
@@ -817,7 +1180,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Melarum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Milerim",
@@ -827,7 +1197,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Default.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Minason",
@@ -837,7 +1214,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Minason.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Moisson",
@@ -847,7 +1231,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Moissoson.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Monocaro",
@@ -857,7 +1248,14 @@
     "imageUrl": "weapons/T_UI_Monoco_Weapon_Default.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MONOCO"
+    "character": "MONOCO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Nibalum",
@@ -867,7 +1265,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Default.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Noahram",
@@ -877,7 +1282,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Default.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Nosaram",
@@ -887,7 +1299,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Nosaram.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Nusaro",
@@ -897,7 +1316,14 @@
     "imageUrl": "weapons/T_UI_Monoco_Weapon_Reachearo_1.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MONOCO"
+    "character": "MONOCO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Painerim",
@@ -907,7 +1333,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Painerim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Plenum",
@@ -917,7 +1350,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Reachum_2.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Potierim",
@@ -927,7 +1367,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Potierim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Ramasson",
@@ -937,7 +1384,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Ramasson.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Rangeson",
@@ -947,7 +1401,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Rangeson.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Redalim",
@@ -957,7 +1418,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Redalim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Sadon",
@@ -967,7 +1435,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Sadon.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Sakaram",
@@ -977,7 +1452,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Sakaram.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Saperim",
@@ -987,7 +1469,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Saperim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Scaverim",
@@ -997,7 +1486,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Scaverim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Scieleson",
@@ -1007,7 +1503,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Default.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Seashelum",
@@ -1017,7 +1520,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Seashellum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Seeram",
@@ -1027,7 +1537,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Seeram.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Sekarum",
@@ -1037,7 +1554,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Sekarum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Sidaro",
@@ -1047,7 +1571,14 @@
     "imageUrl": "weapons/T_UI_Monoco_Weapon_Sidaro.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MONOCO"
+    "character": "MONOCO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Simoso",
@@ -1057,7 +1588,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Simoso.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Sireso",
@@ -1067,7 +1605,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Sireso_1.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Snowim",
@@ -1077,7 +1622,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Snowim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Stalum",
@@ -1087,7 +1639,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Stallum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Telarim",
@@ -1097,7 +1656,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Default.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Tireso",
@@ -1107,7 +1673,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Reacheaso_1.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Tissenum",
@@ -1117,7 +1690,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Sirenum_1.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Tisseron",
@@ -1127,7 +1707,14 @@
     "imageUrl": "weapons/T_UI_Sciel_Weapon_Sirenon_1.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "SCIEL"
+    "character": "SCIEL",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Trebuchim",
@@ -1137,7 +1724,14 @@
     "imageUrl": "weapons/T_UI_Lune_Weapon_Trebuchim.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "LUNE"
+    "character": "LUNE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Troubadim",
@@ -1147,7 +1741,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Chalisum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Urnaro",
@@ -1157,7 +1758,14 @@
     "imageUrl": "weapons/T_UI_Monoco_Weapon_Sirenaro_2.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MONOCO"
+    "character": "MONOCO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Velokan",
@@ -1167,7 +1775,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Default.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Veremum",
@@ -1177,7 +1792,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Veremum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Verleso",
@@ -1187,7 +1809,14 @@
     "imageUrl": "weapons/T_UI_Verso_Weapon_Default.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "VERSO"
+    "character": "VERSO",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Volesterum",
@@ -1197,7 +1826,14 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Volesterum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   },
   {
     "name": "Yeverum",
@@ -1207,6 +1843,13 @@
     "imageUrl": "weapons/T_UI_Maelle_Weapon_Chainebum.webp",
     "category": "WEAPON",
     "tags": [],
-    "character": "MAELLE"
+    "character": "MAELLE",
+    "element": null,
+    "power": -1,
+    "agility": null,
+    "defense": null,
+    "luck": null,
+    "might": null,
+    "vitality": null
   }
 ]

@@ -1,6 +1,6 @@
 # Now
 
-- Finish the weapon items extraction script
+- For weapon items, need elements, descriptions, and grades.
 
 # Later
 

@@ -1,6 +1,6 @@
-import type { COE33ItemType } from '@/games/coe33/items/types';
+import type { COE33PictoItem } from '@/games/coe33/items/types';
 
-export const pictoItems: COE33ItemType[] = [
+export const pictoItems: COE33PictoItem[] = [
   {
     name: 'Accelerating Heal',
     description: 'Healing an ally also applies Rush for 1 turn.',

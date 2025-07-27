@@ -2,10 +2,6 @@
   "name": "toolkits.gg",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": ">=20.12.2 <23",
-    "pnpm": ">=10.9.0"
-  },
   "prisma": {
     "schema": "src/lib/prisma"
   },
@@ -16,9 +12,8 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "lint-fix": "next lint --fix",
-    "type": "tsc --noEmit",
+    "type-check": "tsc --noEmit",
     "test": "vitest",
-    "db-start": "docker-compose up -d",
     "db-seed": "tsx src/lib/prisma/seed.ts",
     "prisma-push": "prisma db push",
     "prisma-push-force": "prisma db push --force-reset",

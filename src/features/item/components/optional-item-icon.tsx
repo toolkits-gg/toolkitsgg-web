@@ -1,7 +1,7 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/tooltip';
-import { LucideBadge, LucideBolt, LucideTicketSlash } from 'lucide-react';
+import { LucideBolt } from 'lucide-react';
 
-const OptionalItemIndicator = () => {
+const OptionalItemIcon = () => {
   return (
     <div className="bg-background-solid border-accent1-600 rounded-xl border border-dashed p-1">
       <Tooltip>
@@ -15,4 +15,4 @@ const OptionalItemIndicator = () => {
     </div>
   );
 };
-export { OptionalItemIndicator };
+export { OptionalItemIcon };

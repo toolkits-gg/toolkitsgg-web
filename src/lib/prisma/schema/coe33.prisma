@@ -55,6 +55,14 @@ enum COE33Character {
   VERSO
 }
 
+enum COE33WeaponGrade {
+  A
+  B
+  C
+  D
+  E
+}
+
 model COE33Item {
   id           String  @id @default(cuid())
   slug         String  @unique
