@@ -1,7 +1,5 @@
 import Image from 'next/image';
 import type { BaseItemType } from '@/features/item/types';
-import { OptionalItemIndicator } from '@/features/item/components/optional-item-indicator';
-import { cn } from '@/lib/shadcn/utils';
 
 // Can either provide a url or a ReactNode
 type ImageProps =
