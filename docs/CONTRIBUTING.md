@@ -1,19 +1,17 @@
-## Contributing
+# Contributing
 
 [fork]: /fork
-[pr]: /compare
-[style]: https://standardjs.com/
-[code-of-conduct]: CODE_OF_CONDUCT.md
+[pr]: /pr
+[code-of-conduct]: ../CODE_OF_CONDUCT.md
+[local-setup]: ./LOCALSETUP.md
 
-Welcome to the team! We're stoked that you want to participate, as this project's success depends on the contributions of people like you.
+Welcome to the team! We're stoked that you want to participate, as this project's success depends on the contributions of people like you. One of the primary motivations behind the project is to encourage more developers to make their first contributions to open source!
 
-Please note that this project is released with a [Contributor Code of Conduct][code-of-conduct].
-By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct][code-of-conduct]. By participating in this project you agree to abide by its terms.
 
 ## Issues and PRs
 
-If you have suggestions for how this project could be improved, or want to report a bug, open an
-issue! We'd love all and any contributions. If you have any questions, we'd love to hear them too!
+If you have suggestions for how this project could be improved, or want to report a bug, open an issue! We'd love all and any contributions. If you have any questions, we'd love to hear them too!
 
 We'd also love PRs. If you're thinking of a large PR, we advise opening up an issue first to
 talk about it! Look at the links below if you're not sure how to open a PR.
@@ -30,6 +28,7 @@ talk about it! Look at the links below if you're not sure how to open a PR.
 Here are a few things you can do that will increase the likelihood of your pull request being accepted:
 
 - Ensure linting errors are resolved. Any linting errors should be shown when running `pnpm lint`.
+- Ensure Typescript errors are resolved. Any TypeScript errors should be shown when running `pnpm type-check`.
 - Keep your changes as focused as possible. If there are multiple changes you would like to make that are not dependent upon each other, consider submitting them as separate pull requests.
 - Write a [good commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 
@@ -44,3 +43,7 @@ Work in Progress pull requests are also welcome to get feedback early on, or if 
 ## Attribution
 
 This document was adapted from the [probot contributing guide](https://github.com/probot/template/blob/master/CONTRIBUTING.md), which is licensed under the [ISC License](https://opensource.org/licenses/ISC).
+
+## Get started
+
+To get started, you will want to set up the project locally. You can find the instructions in the [Local Setup Guide][local-setup].
