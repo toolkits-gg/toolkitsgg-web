@@ -29,3 +29,7 @@ Spread the word! Share our site and tools with your friends, colleagues, and on 
 ---
 
 Thank you for your support! If you have any questions or need assistance, feel free to reach out to us.
+
+## 5. Participate in the community
+
+You can join our Discord and interact with the community at https://discord.gg/kgVaU3zAQ7
