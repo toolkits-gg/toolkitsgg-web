@@ -2,10 +2,6 @@
   "name": "toolkits.gg",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": ">=20.12.2 <23",
-    "pnpm": ">=10.9.0"
-  },
   "prisma": {
     "schema": "src/lib/prisma"
   },
