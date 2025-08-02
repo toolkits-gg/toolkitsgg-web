@@ -10,7 +10,7 @@ export function Text({
       data-slot="text"
       {...props}
       className={cn(
-        'text-zinc-500 dark:text-zinc-400',
+        'text-surface-solid',
         className,
         'text-base/6 sm:text-sm/6'
       )}
