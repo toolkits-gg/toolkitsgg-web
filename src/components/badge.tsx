@@ -1,6 +1,6 @@
 import * as Headless from '@headlessui/react';
 import React, { forwardRef } from 'react';
-import { TouchTarget } from './button';
+import { TouchTarget } from './catalyst-button';
 import { Link } from './link';
 import { cn } from '@/lib/shadcn/utils';
 

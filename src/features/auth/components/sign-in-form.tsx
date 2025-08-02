@@ -31,7 +31,13 @@ const SignInForm = () => {
       />
       <FieldError actionState={actionState} name="password" />
 
-      <SubmitButton isPending={isPending}>Sign In</SubmitButton>
+      <SubmitButton
+        isPending={isPending}
+        tooltipContent="Sign in"
+        aria-label="Sign in"
+      >
+        Sign In
+      </SubmitButton>
     </Form>
   );
 };

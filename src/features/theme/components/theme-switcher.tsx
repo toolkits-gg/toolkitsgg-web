@@ -3,7 +3,6 @@
 import { LucidePalette } from 'lucide-react';
 import { useState } from 'react';
 import { useIsClient } from 'usehooks-ts';
-import { Button } from '@/components/button';
 import { Dialog, DialogBody, DialogTitle } from '@/components/dialog';
 import { Divider } from '@/components/divider';
 import { Field, Label } from '@/components/fieldset';
@@ -15,6 +14,7 @@ import {
   themeModes,
 } from '@/features/theme/constants';
 import { useAppTheme } from '@/features/theme/hooks/use-theme';
+import { Button } from '@/components/button';
 
 const ThemeSwitcher = () => {
   const { colorTheme, accent, handleChangeTheme } = useAppTheme();
@@ -50,6 +50,8 @@ const ThemeSwitcher = () => {
         onClick={() => {
           setDialogOpen(!dialogOpen);
         }}
+        tooltipContent="Theme settings"
+        aria-label="Theme settings"
       >
         <LucidePalette className="h-5 w-5" />
       </Button>

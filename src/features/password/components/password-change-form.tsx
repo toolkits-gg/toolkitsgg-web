@@ -24,7 +24,13 @@ const PasswordChangeForm = () => {
       />
       <FieldError actionState={actionState} name="password" />
 
-      <SubmitButton isPending={isPending}>Send Email</SubmitButton>
+      <SubmitButton
+        isPending={isPending}
+        tooltipContent="Send email"
+        aria-labe="Send email"
+      >
+        Send Email
+      </SubmitButton>
     </Form>
   );
 };

@@ -36,7 +36,13 @@ const PasswordResetForm = ({ tokenId }: PasswordResetFormProps) => {
       />
       <FieldError actionState={actionState} name="confirmPassword" />
 
-      <SubmitButton isPending={isPending}>Reset Password</SubmitButton>
+      <SubmitButton
+        isPending={isPending}
+        tooltipContent="Reset password"
+        aria-label="Reset password"
+      >
+        Reset Password
+      </SubmitButton>
     </Form>
   );
 };

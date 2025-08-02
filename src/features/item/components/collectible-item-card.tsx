@@ -33,7 +33,12 @@ const CollectibleItemCard = ({
 
   const imageContent = (
     <Form action={action} actionState={actionState}>
-      <SubmitButton plain isPending={isPending}>
+      <SubmitButton
+        plain
+        isPending={isPending}
+        tooltipContent={`Toggle ${item.name} collected status`}
+        aria-label={`Toggle ${item.name} collected status`}
+      >
         <Image src={imageSrc} alt={item.name} width={90} height={90} />
       </SubmitButton>
     </Form>

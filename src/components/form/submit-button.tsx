@@ -2,16 +2,19 @@
 
 import { LucideLoaderCircle } from 'lucide-react';
 import { cloneElement } from 'react';
-import { Button, type ButtonProps } from '@/components/button';
+import { type CatalystButtonProps } from '@/components/catalyst-button';
+import { Button } from '@/components/button';
 
-type SubmitButtonProps = Omit<ButtonProps, 'disabled' | 'type'> & {
+type SubmitButtonProps = Omit<CatalystButtonProps, 'disabled' | 'type'> & {
   icon?: React.ReactElement<HTMLElement>;
   isPending: boolean;
+  tooltipContent: React.ReactNode | undefined;
 };
 
 const SubmitButton = ({
   icon,
   isPending,
+  tooltipContent,
   children,
   ...buttonProps
 }: SubmitButtonProps) => {
@@ -28,7 +31,12 @@ const SubmitButton = ({
     : { ...restButtonProps, color };
 
   return (
-    <Button {...safeButtonProps} disabled={isPending} type="submit">
+    <Button
+      {...safeButtonProps}
+      disabled={isPending}
+      type="submit"
+      tooltipContent={tooltipContent}
+    >
       {isPending ? (
         <LucideLoaderCircle className="h-4 w-4 animate-spin" />
       ) : icon ? (

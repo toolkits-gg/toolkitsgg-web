@@ -14,7 +14,13 @@ const EmailVerificationResendForm = () => {
 
   return (
     <Form action={action} actionState={actionState}>
-      <SubmitButton isPending={isPending}>Resend Code</SubmitButton>
+      <SubmitButton
+        isPending={isPending}
+        tooltipContent="Resend code"
+        aria-label="Resend code"
+      >
+        Resend Code
+      </SubmitButton>
     </Form>
   );
 };

@@ -9,7 +9,6 @@ import {
   LucideUser,
 } from 'lucide-react';
 import { Avatar } from '@/components/avatar';
-import { Button } from '@/components/button';
 import {
   Dropdown,
   DropdownButton,
@@ -21,6 +20,7 @@ import {
 import { SidebarItem } from '@/components/sidebar';
 import { signOut } from '@/features/auth/actions/sign-out';
 import { signInPath, signUpPath } from '@/paths';
+import { Button } from '@/components/button';
 
 type UserMenuProps = {
   user?: {
@@ -33,8 +33,12 @@ const UserMenu = ({ user }: UserMenuProps) => {
   if (!user) {
     return (
       <div className="flex w-full flex-1 items-center justify-between">
-        <Button href={signUpPath()}>Sign Up</Button>
-        <Button href={signInPath()}>Sign In</Button>
+        <Button href={signUpPath()} tooltipContent="Sign up">
+          Sign Up
+        </Button>
+        <Button href={signInPath()} tooltipContent="Sign in">
+          Sign In
+        </Button>
       </div>
     );
   }

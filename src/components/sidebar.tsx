@@ -3,7 +3,7 @@
 import * as Headless from '@headlessui/react';
 import { LayoutGroup, motion } from 'framer-motion';
 import React, { forwardRef, useId } from 'react';
-import { TouchTarget } from './button';
+import { TouchTarget } from './catalyst-button';
 import { Link } from './link';
 import { cn } from '@/lib/shadcn/utils';
 

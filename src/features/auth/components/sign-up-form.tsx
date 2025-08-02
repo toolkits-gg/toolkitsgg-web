@@ -46,7 +46,13 @@ const SignUpForm = () => {
       />
       <FieldError actionState={actionState} name="confirmPassword" />
 
-      <SubmitButton isPending={isPending}>Sign Up</SubmitButton>
+      <SubmitButton
+        isPending={isPending}
+        tooltipContent="Sign up"
+        aria-label="Sign up"
+      >
+        Sign Up
+      </SubmitButton>
     </Form>
   );
 };

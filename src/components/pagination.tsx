@@ -1,6 +1,6 @@
 import type React from 'react';
-import { Button } from './button';
 import { cn } from '@/lib/shadcn/utils';
+import { Button } from '@/components/button';
 
 export function Pagination({
   'aria-label': ariaLabel = 'Page navigation',
@@ -27,6 +27,7 @@ export function PaginationPrevious({
         {...(href === null ? { disabled: true } : { href })}
         plain
         aria-label="Previous page"
+        tooltipContent="Previous page"
       >
         <svg
           className="stroke-current"
@@ -59,6 +60,7 @@ export function PaginationNext({
         {...(href === null ? { disabled: true } : { href })}
         plain
         aria-label="Next page"
+        tooltipContent="Next page"
       >
         {children}
         <svg
@@ -108,6 +110,7 @@ export function PaginationPage({
       plain
       aria-label={`Page ${children}`}
       aria-current={current ? 'page' : undefined}
+      tooltipContent={`Page ${children}`}
       className={cn(
         className,
         'min-w-9 before:absolute before:-inset-px before:rounded-lg',
