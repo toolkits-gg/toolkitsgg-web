@@ -42,7 +42,7 @@ export const coe33Config: GameConfig<COE33ItemType> = {
   resources: [
     {
       title: 'Official Wiki',
-      url: '#',
+      url: '#', // TODO: maru please
     },
   ],
 };

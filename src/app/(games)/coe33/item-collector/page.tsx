@@ -26,7 +26,7 @@ export default async function ItemTrackerPage() {
   return (
     <SidebarLayout sidebar={<AppSidebar gameConfig={gameConfig} />}>
       <div className="flex w-full flex-col gap-x-0 gap-y-4 xl:flex-row xl:items-start xl:justify-center xl:gap-x-4 xl:gap-y-0">
-        <div className="flex w-full items-center justify-start xl:order-2 xl:w-[250px] xl:min-w-[250px] xl:pt-2">
+        <div className="flex w-full items-center justify-between xl:order-2 xl:w-[250px] xl:min-w-[250px] xl:pt-2">
           <HeaderImage
             image={
               <Image
@@ -43,7 +43,7 @@ export default async function ItemTrackerPage() {
             text={gameConfig?.description}
           />
         </div>
-        <div className="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-4 p-6 sm:justify-between lg:p-2">
+        <div className="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-4 sm:justify-between lg:p-2">
           {gameConfig.items
             .filter((item) => item.category === 'SKILL')
             .map((item) => (
