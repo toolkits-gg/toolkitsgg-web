@@ -1,8 +1,12 @@
-import './globals.css';
+import '@mantine/core/styles.css';
+import {
+  ColorSchemeScript,
+  MantineProvider,
+  mantineHtmlProps,
+} from '@mantine/core';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Lora } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { ThemeProvider } from '@/features/theme/components/theme-provider';
 import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
 import { ToastProvider } from '@/lib/react-toastify/toast-provider';
 
@@ -34,17 +38,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html lang="en" {...mantineHtmlProps}>
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${loraSerif.variable} antialiased`}
       >
         <NuqsAdapter>
-          <ThemeProvider>
+          <MantineProvider>
             <ReactQueryProvider>
               {children}
               <ToastProvider />
             </ReactQueryProvider>
-          </ThemeProvider>
+          </MantineProvider>
         </NuqsAdapter>
       </body>
     </html>
