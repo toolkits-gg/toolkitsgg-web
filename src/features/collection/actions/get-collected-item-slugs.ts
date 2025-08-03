@@ -1,6 +1,6 @@
 'use server';
 
-import { fromErrorToActionState } from '@/components/form/utils/to-action-state';
+import { fromErrorToActionState } from '@/components/form (deprecated)/utils/to-action-state';
 import { getAuth } from '@/features/auth/queries/get-auth';
 import type { GameConfig } from '@/features/game/types';
 

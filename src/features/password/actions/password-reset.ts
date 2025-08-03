@@ -7,7 +7,7 @@ import {
   ActionState,
   fromErrorToActionState,
   toActionState,
-} from '@/components/form/utils/to-action-state';
+} from '@/components/form (deprecated)/utils/to-action-state';
 import { authData } from '@/features/auth/data';
 import { signInPath } from '@/paths';
 import { hashToken } from '@/utils/crypto';

@@ -1,10 +1,10 @@
 'use client';
 
 import { useActionState } from 'react';
-import { FieldError } from '@/components/form/field-error';
-import { Form } from '@/components/form/form';
-import { SubmitButton } from '@/components/form/submit-button';
-import { EMPTY_ACTION_STATE } from '@/components/form/utils/to-action-state';
+import { FieldError } from '@/components/form (deprecated)/field-error';
+import { Form } from '@/components/form (deprecated)/form';
+import { SubmitButton } from '@/components/form (deprecated)/submit-button';
+import { EMPTY_ACTION_STATE } from '@/components/form (deprecated)/utils/to-action-state';
 import { Input } from '@/components/input';
 import { signUp } from '../actions/sign-up';
 

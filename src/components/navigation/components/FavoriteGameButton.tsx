@@ -1,12 +1,12 @@
 'use client';
 
 import type { GameId } from '@prisma/client';
-import { LucideHeart, LucideHeartPlus } from 'lucide-react';
 import { useActionState } from 'react';
+import { toggleFavoriteGame } from '@/features/game/actions/toggle-favorite-game';
+import { IconHeart, IconHeartPlus } from '@tabler/icons-react';
+import { EMPTY_ACTION_STATE } from '@/components/form/utils/to-action-state';
 import { Form } from '@/components/form/form';
 import { SubmitButton } from '@/components/form/submit-button';
-import { EMPTY_ACTION_STATE } from '@/components/form/utils/to-action-state';
-import { toggleFavoriteGame } from '@/features/game/actions/toggle-favorite-game';
 
 type FavoriteGameButtonProps = {
   gameId: GameId;
@@ -28,10 +28,10 @@ const FavoriteGameButton = ({
         <SubmitButton
           color="accent2"
           isPending={isPending}
-          tooltipContent="Unfavorite game"
+          tooltip="Unfavorite game"
           aria-label="Unfavorite game"
         >
-          <LucideHeart fill="white" className="h-4 w-4" />
+          <IconHeart fill="white" />
         </SubmitButton>
       </Form>
     );
@@ -39,8 +39,8 @@ const FavoriteGameButton = ({
 
   return (
     <Form action={action} actionState={actionState}>
-      <SubmitButton isPending={isPending} tooltipContent="Favorite game">
-        <LucideHeartPlus className="h-4 w-4" />
+      <SubmitButton isPending={isPending} tooltip="Favorite game">
+        <IconHeartPlus />
       </SubmitButton>
     </Form>
   );

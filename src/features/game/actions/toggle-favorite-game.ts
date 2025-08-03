@@ -2,14 +2,14 @@
 
 import type { GameId } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
-import {
-  type ActionState,
-  fromErrorToActionState,
-  toActionState,
-} from '@/components/form/utils/to-action-state';
 import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
 import { gameData } from '@/features/game/data';
 import { isGameId } from '@/features/game/utils/game-id';
+import {
+  fromErrorToActionState,
+  toActionState,
+  type ActionState,
+} from '@/components/form/utils/to-action-state';
 
 export const toggleFavoriteGame = async (
   gameId: GameId

@@ -5,7 +5,7 @@ import {
   type ActionState,
   fromErrorToActionState,
   toActionState,
-} from '@/components/form/utils/to-action-state';
+} from '@/components/form (deprecated)/utils/to-action-state';
 import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
 
 import { validateItemSlug } from '@/features/collection/utils/validate-item-slug';

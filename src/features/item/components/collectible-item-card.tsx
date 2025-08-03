@@ -1,8 +1,8 @@
 'use client';
 
-import { Form } from '@/components/form/form';
-import { SubmitButton } from '@/components/form/submit-button';
-import { EMPTY_ACTION_STATE } from '@/components/form/utils/to-action-state';
+import { Form } from '@/components/form (deprecated)/form';
+import { SubmitButton } from '@/components/form (deprecated)/submit-button';
+import { EMPTY_ACTION_STATE } from '@/components/form (deprecated)/utils/to-action-state';
 import { toggleCollectedItem } from '@/features/collection/actions/toggle-collected-item';
 import {
   ItemCard,

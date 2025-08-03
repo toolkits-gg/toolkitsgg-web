@@ -1,5 +1,7 @@
 import type { GameId } from '@prisma/client';
 import type { ThemeDefinition } from '@/features/theme/constants';
+import type { LogoSize } from '@/components/Logo';
+import type { JSX } from 'react';
 
 type ItemsArgs<ItemType> =
   | {
@@ -18,8 +20,8 @@ type ItemsArgs<ItemType> =
 type ResourcesArgs =
   | {
       resources: Array<{
-        title: string;
-        url: string;
+        label: string;
+        link: string;
       }>;
       resourcesPath: string;
     }
@@ -41,7 +43,7 @@ export type GameConfig<ItemType> = {
   description: string | undefined;
   label: string;
   path: string;
-  logo: React.ReactElement<HTMLElement>;
+  logo: (size: LogoSize) => React.ReactNode;
   themeDefinitions?: ThemeDefinition[];
 
   /* Utility functions for interacting with the data layer **/

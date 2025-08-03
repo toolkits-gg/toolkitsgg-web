@@ -1,5 +1,7 @@
 import '@mantine/core/styles.css';
 import {
+  AppShell,
+  Burger,
   ColorSchemeScript,
   MantineProvider,
   mantineHtmlProps,

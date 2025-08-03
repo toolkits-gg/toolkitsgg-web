@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppTheme } from '@/features/theme/hooks/use-theme';
+import { useAppTheme } from '@/features/theme/hooks/use-app-theme';
 import { ToastContainer } from 'react-toastify';
 
 const ToastProvider = () => {

@@ -1,4 +1,4 @@
-import { defaultLogoSize, Logo, type LogoSize } from '@/components/logo';
+import { defaultLogoSize, Logo, type LogoSize } from '@/components/Logo';
 import { logosPath } from '@/paths';
 
 type COE33LogoProps = {

@@ -1,4 +1,4 @@
-import { ActionState } from '@/components/form/utils/to-action-state';
+import { ActionState } from '@/components/form (deprecated)/utils/to-action-state';
 
 type FieldErrorProps = {
   actionState: ActionState;

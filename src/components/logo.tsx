@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { logosPath } from '@/paths';
 
-export type LogoSize = 64 | 128 | 256 | 512 | 1024;
-export const defaultLogoSize: LogoSize = 128;
+export type LogoSize = 36 | 48 | 64 | 128 | 256 | 512 | 1024;
+export const defaultLogoSize: LogoSize = 36;
 
 type LogoProps = {
   path: string;

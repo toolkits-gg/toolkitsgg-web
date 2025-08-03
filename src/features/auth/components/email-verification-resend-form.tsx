@@ -1,9 +1,9 @@
 'use client';
 
 import { useActionState } from 'react';
-import { Form } from '@/components/form/form';
-import { SubmitButton } from '@/components/form/submit-button';
-import { EMPTY_ACTION_STATE } from '@/components/form/utils/to-action-state';
+import { Form } from '@/components/form (deprecated)/form';
+import { SubmitButton } from '@/components/form (deprecated)/submit-button';
+import { EMPTY_ACTION_STATE } from '@/components/form (deprecated)/utils/to-action-state';
 import { emailVerificationResend } from '../actions/email-verification-resend';
 
 const EmailVerificationResendForm = () => {
