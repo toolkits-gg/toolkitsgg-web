@@ -1,5 +1,5 @@
 .navbar {
-  background-color: var(--mantine-color-sidebar-5);
+  background-color: var(--mantine-color-sidebar-bg-5);
   height: 800px;
   width: 300px;
   padding: var(--mantine-spacing-md);

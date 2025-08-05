@@ -21,6 +21,18 @@ const CONTAINER_SIZES: Record<string, string> = {
 
 export const defaultTheme: MantineThemeOverride = createTheme({
   colors: {
+    primary: [
+      '#7201d3',
+      '#7201d3',
+      '#7201d3',
+      '#7201d3',
+      '#7201d3',
+      '#7201d3',
+      '#7201d3',
+      '#7201d3',
+      '#7201d3',
+      '#7201d3',
+    ],
     secondary: [
       '#ff9e01',
       '#ff9e01',
@@ -58,7 +70,7 @@ export const defaultTheme: MantineThemeOverride = createTheme({
       '#fbfbfb',
     ],
     sidebarBg: virtualColor({
-      name: 'sidebar',
+      name: 'sidebar-bg',
       dark: 'sidebar-bg-dark',
       light: 'sidebar-bg-light',
     }),
@@ -86,7 +98,7 @@ export const defaultTheme: MantineThemeOverride = createTheme({
     '2xl': rem('28px'),
     '3xl': rem('32px'),
   },
-  primaryColor: 'violet',
+  primaryColor: 'primary',
   components: {
     /** Put your mantine component override here */
     Container: Container.extend({
