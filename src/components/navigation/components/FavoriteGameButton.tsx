@@ -26,7 +26,6 @@ const FavoriteGameButton = ({
     return (
       <Form action={action} actionState={actionState}>
         <SubmitButton
-          color="accent2"
           isPending={isPending}
           tooltip="Unfavorite game"
           aria-label="Unfavorite game"

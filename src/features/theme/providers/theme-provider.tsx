@@ -1,9 +1,10 @@
-import { ThemeProvider as NextThemesProvider } from 'next-themes';
+'use client';
+
 import {
   accentThemeClassNames,
   allThemeClassNames,
-  defaultTheme,
 } from '@/features/theme/constants';
+import { defaultTheme } from '@/features/theme/theme';
 import { MantineProvider } from '@mantine/core';
 
 const accentThemes = allThemeClassNames
@@ -12,22 +13,15 @@ const accentThemes = allThemeClassNames
   )
   .flat();
 
-type ThemeProviderProps = Parameters<typeof NextThemesProvider>[0];
+type ThemeProviderProps = React.PropsWithChildren;
 
-const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
+const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const themes = [...allThemeClassNames, ...accentThemes];
 
   return (
-    <NextThemesProvider
-      {...props}
-      enableSystem
-      enableColorScheme={false} // not playing nice with the extra themes
-      defaultTheme={defaultTheme}
-      disableTransitionOnChange
-      themes={themes}
-    >
-      <MantineProvider>{children}</MantineProvider>
-    </NextThemesProvider>
+    <MantineProvider theme={defaultTheme} defaultColorScheme="dark">
+      {children}
+    </MantineProvider>
   );
 };
 

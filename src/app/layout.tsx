@@ -1,16 +1,11 @@
 import '@mantine/core/styles.css';
-import {
-  AppShell,
-  Burger,
-  ColorSchemeScript,
-  MantineProvider,
-  mantineHtmlProps,
-} from '@mantine/core';
+import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Lora } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
 import { ToastProvider } from '@/lib/react-toastify/toast-provider';
+import { ThemeProvider } from '@/features/theme/providers/theme-provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -48,12 +43,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${loraSerif.variable} antialiased`}
       >
         <NuqsAdapter>
-          <MantineProvider>
+          <ThemeProvider>
             <ReactQueryProvider>
               {children}
               <ToastProvider />
             </ReactQueryProvider>
-          </MantineProvider>
+          </ThemeProvider>
         </NuqsAdapter>
       </body>
     </html>

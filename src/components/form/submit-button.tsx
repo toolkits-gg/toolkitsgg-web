@@ -1,7 +1,6 @@
 'use client';
 
-import { Button, Tooltip, type ButtonProps } from '@mantine/core';
-import { IconLoader } from '@tabler/icons-react';
+import { Button, Loader, Tooltip, type ButtonProps } from '@mantine/core';
 
 type SubmitButtonProps = Omit<ButtonProps, 'disabled' | 'type'> & {
   icon?: React.ReactElement<HTMLElement>;
@@ -25,11 +24,7 @@ const SubmitButton = ({
   return (
     <Tooltip label={tooltip ?? null}>
       <Button {...buttonProps} disabled={isPending} type="submit">
-        {isPending ? (
-          <IconLoader className="h-4 w-4 animate-spin" />
-        ) : (
-          icon || children
-        )}
+        {isPending ? <Loader size={16} /> : icon || children}
       </Button>
     </Tooltip>
   );
