@@ -21,7 +21,7 @@ const CONTAINER_SIZES: Record<string, string> = {
 
 export const defaultTheme: MantineThemeOverride = createTheme({
   colors: {
-    primary: [
+    primaryDark: [
       '#7201d3',
       '#7201d3',
       '#7201d3',
@@ -33,7 +33,15 @@ export const defaultTheme: MantineThemeOverride = createTheme({
       '#7201d3',
       '#7201d3',
     ],
-    secondary: [
+    // TODO
+    primaryLight: ['', '', '', '', '', '', '', '', '', ''],
+    primary: virtualColor({
+      name: 'primary',
+      dark: 'primaryDark',
+      light: 'primaryLight',
+    }),
+
+    secondaryDark: [
       '#ff9e01',
       '#ff9e01',
       '#ff9e01',
@@ -45,7 +53,34 @@ export const defaultTheme: MantineThemeOverride = createTheme({
       '#ff9e01',
       '#ff9e01',
     ],
-    'sidebar-bg-dark': [
+    // TODO
+    secondaryLight: ['', '', '', '', '', '', '', '', '', ''],
+    secondary: virtualColor({
+      name: 'secondary',
+      dark: 'secondaryDark',
+      light: 'secondaryLight',
+    }),
+
+    accent1Dark: [
+      '#4a86e8',
+      '#4a86e8',
+      '#4a86e8',
+      '#4a86e8',
+      '#4a86e8',
+      '#4a86e8',
+      '#4a86e8',
+      '#4a86e8',
+      '#4a86e8',
+      '#4a86e8',
+    ],
+    accent1Light: ['', '', '', '', '', '', '', '', '', ''],
+    accent1: virtualColor({
+      name: 'accent1',
+      dark: 'accent1Dark',
+      light: 'accent1Light',
+    }),
+
+    sidebarBgDark: [
       '#171221',
       '#171221',
       '#171221',
@@ -57,7 +92,7 @@ export const defaultTheme: MantineThemeOverride = createTheme({
       '#171221',
       '#171221',
     ],
-    'sidebar-bg-light': [
+    sidebarBgLight: [
       '#fbfbfb',
       '#fbfbfb',
       '#fbfbfb',
@@ -71,8 +106,8 @@ export const defaultTheme: MantineThemeOverride = createTheme({
     ],
     sidebarBg: virtualColor({
       name: 'sidebar-bg',
-      dark: 'sidebar-bg-dark',
-      light: 'sidebar-bg-light',
+      dark: 'sidebarBgDark',
+      light: 'sidebarBgLight',
     }),
   },
   /** Put your mantine theme override here */
