@@ -9,8 +9,8 @@ import {
 import type { GameConfig } from '@/features/game/types';
 import type { COE33ItemType } from '@/games/coe33/items/types';
 import { coe33Items } from '@/games/coe33/items/all-items';
-import { COE33Logo } from '@/games/coe33/components/Logo';
 import type { LogoSize } from '@/components/Logo';
+import { COE33Logo } from '@/games/coe33/components/logo';
 
 export const coe33Config: GameConfig<COE33ItemType> = {
   name: 'Clair Obscur: Expedition 33',
