@@ -1,4 +1,4 @@
-import { Group, ScrollArea } from '@mantine/core';
+import { Box, Group, ScrollArea } from '@mantine/core';
 import classes from './AppNavbar.module.css';
 import { useAuth } from '@/features/auth/hooks/use-auth';
 import type { GameId } from '@prisma/client';
@@ -44,9 +44,9 @@ const AppNavbar = ({ gameConfig }: AppNavbarProps) => {
         </div>
       </ScrollArea>
 
-      <div className={classes.footer}>
+      <Box className={classes.footer} p={4}>
         <UserMenu />
-      </div>
+      </Box>
     </nav>
   );
 };

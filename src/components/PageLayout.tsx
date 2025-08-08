@@ -18,6 +18,7 @@ const PageLayout = ({ children }: PageLayoutProps) => {
   return (
     <AppShell
       padding="md"
+      layout="alt"
       header={{ height: 60 }}
       navbar={{
         width: 300,
@@ -25,8 +26,8 @@ const PageLayout = ({ children }: PageLayoutProps) => {
         collapsed: { mobile: !opened },
       }}
     >
-      <AppShell.Header>
-        <Group h="100%" px="md">
+      <AppShell.Header className={classes.header}>
+        <Group h="100%">
           <Flex justify="start" align="center">
             <Burger
               opened={opened}
@@ -41,13 +42,13 @@ const PageLayout = ({ children }: PageLayoutProps) => {
         </Group>
       </AppShell.Header>
 
-      <AppShell.Navbar>
+      <AppShell.Navbar h="100%">
         <AppNavbar gameConfig={undefined} />
       </AppShell.Navbar>
 
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main className={classes.main}>{children}</AppShell.Main>
 
-      <AppShell.Footer>
+      <AppShell.Footer className={classes.footer} p={4}>
         © {new Date().getFullYear()} Toolkits.gg
       </AppShell.Footer>
     </AppShell>

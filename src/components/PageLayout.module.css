@@ -1,3 +1,18 @@
+.header {
+  background-color: var(--mantine-color-sidebar-bg-5);
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+  border-color: var(--mantine-color-border-5);
+}
+
+.footer {
+  background-color: var(--mantine-color-sidebar-bg-5);
+}
+
+.main {
+  background-color: var(--mantine-color-bg-5);
+}
+
 .logoContainer {
   flex: 1;
   align-items: center;
