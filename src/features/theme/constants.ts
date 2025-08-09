@@ -1,89 +1,84 @@
-import { allGameConfigs } from '@/features/game/constants';
+import {
+  Card,
+  Container,
+  createTheme,
+  Paper,
+  rem,
+  Select,
+} from '@mantine/core';
+import type { MantineThemeOverride } from '@mantine/core';
 
-export const themeModes = ['All', 'Dark', 'Light'] as const;
-export type ThemeMode = 'dark' | 'light';
-
-export type ThemeDefinition = {
-  label: string;
-  className: string;
+const CONTAINER_SIZES: Record<string, string> = {
+  xxs: rem('200px'),
+  xs: rem('300px'),
+  sm: rem('400px'),
+  md: rem('500px'),
+  lg: rem('600px'),
+  xl: rem('1400px'),
+  xxl: rem('1600px'),
 };
 
-export type AccentThemeDefinition = {
-  label: string;
-  className: string;
-  accentTheme: string | undefined;
-};
-
-export const themeDefinitions: ThemeDefinition[] = [
-  {
-    label: 'Default Light',
-    className: 'default-light',
+export const _baseTheme: MantineThemeOverride = createTheme({
+  fontSizes: {
+    xs: rem('12px'),
+    sm: rem('14px'),
+    md: rem('16px'),
+    lg: rem('18px'),
+    xl: rem('20px'),
+    '2xl': rem('24px'),
+    '3xl': rem('30px'),
+    '4xl': rem('36px'),
+    '5xl': rem('48px'),
   },
-  {
-    label: 'Default Dark',
-    className: 'default-dark',
+  spacing: {
+    '3xs': rem('4px'),
+    '2xs': rem('8px'),
+    xs: rem('10px'),
+    sm: rem('12px'),
+    md: rem('16px'),
+    lg: rem('20px'),
+    xl: rem('24px'),
+    '2xl': rem('28px'),
+    '3xl': rem('32px'),
   },
-  // TODO: Add all the shadcn specific variants for the below themes
-  // TODO: Things like --sidebar-background, etc. See Default Themes for reference.
+  primaryColor: 'primary',
+  components: {
+    /** Put your mantine component override here */
+    Container: Container.extend({
+      vars: (_, { size, fluid }) => ({
+        root: {
+          '--container-size': fluid
+            ? '100%'
+            : size !== undefined && size in CONTAINER_SIZES
+              ? CONTAINER_SIZES[size]
+              : rem(size),
+        },
+      }),
+    }),
+    Paper: Paper.extend({
+      defaultProps: {
+        p: 'md',
+        shadow: 'xl',
+        radius: 'md',
+        withBorder: true,
+      },
+    }),
 
-  // {
-  //   label: 'Nord Polar',
-  //   className: 'nord-polar-dark',
-  // },
-  // {
-  //   label: 'Nord Snow',
-  //   className: 'nord-snow-light',
-  // },
-  // {
-  //   label: 'Solarized Dark',
-  //   className: 'solarized-dark',
-  // },
-  // {
-  //   label: 'Solarized Light',
-  //   className: 'solarized-light',
-  // },
-].sort((a, b) => a.label.localeCompare(b.label));
-
-const gameThemeDefinitions: ThemeDefinition[] = allGameConfigs
-  .filter((gameConfig) => gameConfig.themeDefinitions)
-  .flatMap(
-    (gameConfig) =>
-      gameConfig.themeDefinitions?.map((def) => ({
-        label: def.label,
-        className: def.className,
-      })) ?? []
-  )
-  .sort((a, b) => a.label.localeCompare(b.label));
-
-export const accentThemeDefinitions: AccentThemeDefinition[] = [
-  {
-    label: 'Default',
-    className: 'accent-default',
-    accentTheme: undefined,
+    Card: Card.extend({
+      defaultProps: {
+        p: 'xl',
+        shadow: 'xl',
+        radius: 'var(--mantine-radius-default)',
+        withBorder: true,
+      },
+    }),
+    Select: Select.extend({
+      defaultProps: {
+        checkIconPosition: 'right',
+      },
+    }),
   },
-  {
-    label: 'Deuteranopic',
-    className: 'accent-deuteranopic',
-    accentTheme: 'deuteranopic',
+  other: {
+    style: 'mantine',
   },
-  {
-    label: 'Protanopic',
-    className: 'accent-protanopic',
-    accentTheme: 'protanopic',
-  },
-].sort((a, b) => a.label.localeCompare(b.label));
-
-export const allThemeClassDefinitions: Array<
-  ThemeDefinition | AccentThemeDefinition
-> = [...themeDefinitions, ...gameThemeDefinitions].sort();
-
-export const allThemeClassNames = allThemeClassDefinitions
-  .map((def) => def.className)
-  .sort();
-
-export const accentThemeClassNames = accentThemeDefinitions
-  .filter((def) => def.label !== 'Default')
-  .map((def) => def.className)
-  .sort();
-
-export const defaultTheme = 'default-dark';
+});
