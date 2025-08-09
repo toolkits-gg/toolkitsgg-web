@@ -2,6 +2,8 @@ const config = {
   plugins: {
     'postcss-preset-mantine': {},
     'postcss-simple-vars': {
+      //! Any changes to these breakpoints must also be made to the `BREAKPOINTS` variable
+      //! in `themes/constants.ts`.
       variables: {
         'mantine-breakpoint-xs': '36em',
         'mantine-breakpoint-sm': '48em',

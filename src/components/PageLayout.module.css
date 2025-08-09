@@ -25,7 +25,7 @@
   align-items: center;
   justify-content: flex-end;
 
-  @media (min-width: 48em) {
+  @media (min-width: $mantine-breakpoint-sm) {
     align-items: center;
     justify-content: center;
   }

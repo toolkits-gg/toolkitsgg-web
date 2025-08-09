@@ -18,6 +18,16 @@ const CONTAINER_SIZES: Record<string, string> = {
   xxl: rem('1600px'),
 };
 
+//! Any changes to `BREAKPOINTS` should also be made to `postcss.config.mjs`
+//! This will ensure responsive media queries work correctly
+const BREAKPOINTS = {
+  xs: '36em',
+  sm: '48em',
+  md: '62em',
+  lg: '75em',
+  xl: '88em',
+};
+
 export const _baseTheme: MantineThemeOverride = createTheme({
   fontFamily: 'Geist, sans-serif',
   fontFamilyMonospace: 'Geist Mono, monospace',
@@ -44,6 +54,7 @@ export const _baseTheme: MantineThemeOverride = createTheme({
     '2xl': rem('28px'),
     '3xl': rem('32px'),
   },
+  breakpoints: BREAKPOINTS,
   primaryColor: 'primary',
   components: {
     /** Put your mantine component override here */
