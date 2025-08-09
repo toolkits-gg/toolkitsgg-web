@@ -38,7 +38,11 @@ const FavoriteGameButton = ({
 
   return (
     <Form action={action} actionState={actionState}>
-      <SubmitButton isPending={isPending} tooltip="Favorite game">
+      <SubmitButton
+        isPending={isPending}
+        tooltip="Favorite game"
+        color="primary.5"
+      >
         <IconHeartPlus />
       </SubmitButton>
     </Form>

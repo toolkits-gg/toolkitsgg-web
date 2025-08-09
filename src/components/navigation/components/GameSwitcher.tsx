@@ -4,10 +4,9 @@ import type { GameId } from '@prisma/client';
 import { noGameConfig } from '@/features/game/constants';
 import { useAppTheme } from '@/features/theme/hooks/use-app-theme';
 import { usePathname } from 'next/navigation';
-import { allThemeClassNames } from '@/features/theme/constants';
 import { toGameConfig } from '@/features/game/utils/game-id';
 import React from 'react';
-import { Avatar, Flex, Group, UnstyledButton } from '@mantine/core';
+import { Group, UnstyledButton } from '@mantine/core';
 import classes from './GameSwitcher.module.css';
 import { IconChevronRight } from '@tabler/icons-react';
 
@@ -21,12 +20,12 @@ const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
   const validatedGameId = React.useRef<GameId | undefined>(gameId);
 
   const activeGameConfig = React.useMemo(() => {
-    if (!gameId && pathname !== '/') {
-      validatedGameId.current =
-        (allThemeClassNames.find(
-          (className) => colorTheme === className
-        ) as GameId) || noGameConfig.id;
-    }
+    // if (!gameId && pathname !== '/') {
+    //   validatedGameId.current =
+    //     (allThemeClassNames.find(
+    //       (className) => colorTheme === className
+    //     ) as GameId) || noGameConfig.id;
+    // }
 
     const gameConfig = toGameConfig(validatedGameId.current);
 
