@@ -19,6 +19,9 @@ const CONTAINER_SIZES: Record<string, string> = {
 };
 
 export const _baseTheme: MantineThemeOverride = createTheme({
+  fontFamily: 'Geist, sans-serif',
+  fontFamilyMonospace: 'Geist Mono, monospace',
+  headings: { fontFamily: 'Lora, serif' },
   fontSizes: {
     xs: rem('12px'),
     sm: rem('14px'),
