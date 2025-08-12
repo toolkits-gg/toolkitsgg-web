@@ -11,6 +11,7 @@ import type { COE33ItemType } from '@/games/coe33/items/types';
 import { coe33Items } from '@/games/coe33/items/all-items';
 import type { LogoSize } from '@/components/Logo';
 import { COE33Logo } from '@/games/coe33/components/Logo';
+import { defaultTheme } from '@/features/theme/themes/default-theme';
 
 export const coe33Config: GameConfig<COE33ItemType> = {
   name: 'Clair Obscur: Expedition 33',
@@ -35,4 +36,10 @@ export const coe33Config: GameConfig<COE33ItemType> = {
       link: '#', // TODO: maru please
     },
   ],
+
+  themeDefinition: {
+    label: 'Clair Obscur',
+    className: 'coe33',
+    theme: defaultTheme,
+  },
 };

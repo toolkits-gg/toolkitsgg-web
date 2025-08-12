@@ -8,6 +8,7 @@ import { GameSwitcher } from '@/components/navigation/components/GameSwitcher';
 import { UserMenu } from '@/components/navigation/components/UserMenu';
 import { NavbarLinksGroup } from '@/components/navigation/components/NavbarLinksGroup';
 import { GameActions } from '@/components/navigation/components/GameActions';
+import { ThemeChanger } from '@/features/theme/components/ThemeChanger';
 
 type AppNavbarProps = {
   gameConfig: GameConfig<unknown> | undefined;
@@ -43,6 +44,10 @@ const AppNavbar = ({ gameConfig }: AppNavbarProps) => {
           ))}
         </div>
       </ScrollArea>
+
+      <Box className={classes.themeActions} p={4}>
+        <ThemeChanger />
+      </Box>
 
       <Box className={classes.footer} p={4}>
         <UserMenu />

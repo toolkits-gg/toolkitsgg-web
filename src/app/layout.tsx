@@ -4,7 +4,6 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Lora } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
-import { ToastProvider } from '@/lib/react-toastify/toast-provider';
 import { ThemeProvider } from '@/features/theme/providers/ThemeProvider';
 
 const geistSans = Geist({
@@ -44,10 +43,7 @@ export default function RootLayout({
       >
         <NuqsAdapter>
           <ThemeProvider>
-            <ReactQueryProvider>
-              {children}
-              <ToastProvider />
-            </ReactQueryProvider>
+            <ReactQueryProvider>{children}</ReactQueryProvider>
           </ThemeProvider>
         </NuqsAdapter>
       </body>

@@ -1,4 +1,4 @@
-import { _baseTheme } from '@/features/theme/constants';
+import { _baseTheme } from '@/features/theme/themes/_base-theme';
 import type { ThemeCustomColors } from '@/features/theme/types';
 import { virtualColor } from '@mantine/core';
 

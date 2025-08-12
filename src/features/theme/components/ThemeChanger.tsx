@@ -8,20 +8,23 @@ import {
   themeModes,
 } from '@/features/theme/constants';
 import { useAppTheme } from '@/features/theme/hooks/use-app-theme';
+import { Button, Dialog, Skeleton } from '@mantine/core';
+import { IconPalette } from '@tabler/icons-react';
+import { useDisclosure } from '@mantine/hooks';
 
 const ThemeChanger = () => {
   const { colorTheme, accent, handleChangeTheme } = useAppTheme();
   const isClient = useIsClient();
 
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOpen, { toggle, close }] = useDisclosure(false);
 
   const [category, setCategory] = useState<(typeof themeModes)[number]>('All');
 
   if (!colorTheme) {
-    return <Skeleton className="h-9 w-9" />;
+    return <Skeleton height={36} />;
   }
   if (!isClient) {
-    return <Skeleton className="h-9 w-9" />;
+    return <Skeleton height={36} />;
   }
 
   const handleChangeColorTheme = (newColorTheme: string) => {
@@ -38,17 +41,19 @@ const ThemeChanger = () => {
 
   return (
     <>
-      <Button
-        plain
-        onClick={() => {
-          setDialogOpen(!dialogOpen);
-        }}
-        tooltipContent="Theme settings"
-        aria-label="Theme settings"
-      >
-        <LucidePalette className="h-5 w-5" />
+      <Button onClick={toggle} aria-label="Theme settings">
+        <IconPalette />
       </Button>
       <Dialog
+        opened={dialogOpen}
+        withCloseButton
+        onClose={close}
+        size="lg"
+        radius="md"
+      >
+        Test
+      </Dialog>
+      {/* <Dialog
         onClose={() => {
           setDialogOpen(false);
         }}
@@ -118,7 +123,7 @@ const ThemeChanger = () => {
             </Listbox>
           </Field>
         </DialogBody>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 };
