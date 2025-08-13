@@ -1,4 +1,4 @@
-import { useMantineColorScheme } from '@mantine/core';
+import { useMantineColorScheme, type MantineColorScheme } from '@mantine/core';
 import { useTheme } from 'next-themes';
 
 const useAppTheme = () => {
@@ -19,10 +19,15 @@ const useAppTheme = () => {
     ? colorScheme.split('-accent')[0]
     : colorScheme;
 
-  const handleChangeTheme = (newTheme: string, newAccent: string) => {
+  const handleChangeTheme = (
+    newThemeClass: string,
+    newMantineTheme: MantineColorScheme,
+    newAccent: string
+  ) => {
     if (newAccent === 'accent-default') {
-      const newThemeName = newTheme.split('-accent-')[0];
+      const newThemeName = newThemeClass.split('-accent-')[0];
       setTheme(newThemeName);
+      setColorScheme(newMantineTheme);
     } else {
       // TODO: setColorScheme(`${newColorTheme}-${newAccent}`);
     }
