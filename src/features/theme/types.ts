@@ -1,6 +1,24 @@
 import type { MantineColorsTuple, MantineThemeOverride } from '@mantine/core';
 
+/**
+ * For custom colors, Mantine providers a feature called a virtual color.
+ * You pass in a light color and a dark color, and it will adjust accordingly.
+ *
+ * However, the light color and dark color passed in need to be an existing
+ * Mantine color.
+ *
+ * For this reason, we define three values for a custom color:
+ *  - The dark color
+ *  - The light color
+ *  - The virtual color (this is the only value that ends up in use)
+ */
 export type ThemeCustomColors = {
+  /**
+   * ! IMPORTANT !
+   * ! Any new custom colors must also be added to mantine.d.ts for !
+   * ! Typescript completions !
+   */
+
   /**
    * Colors
    */
