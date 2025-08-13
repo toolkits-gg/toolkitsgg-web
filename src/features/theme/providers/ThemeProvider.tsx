@@ -1,3 +1,5 @@
+'use client';
+
 import { defaultTheme } from '@/features/theme/themes/default-theme';
 import { MantineProvider } from '@mantine/core';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
