@@ -18,6 +18,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--mantine-color-gray-2);
+  background-color: var(--mantine-color-primary-9);
   border-radius: var(--mantine-radius-lg);
+}
+
+.menu {
+  background-color: var(--mantine-color-card-bg-6);
+  border-color: var(--mantine-color-border-5);
+}
+
+.menuItem {
+  background-color: var(--mantine-color-card-bg-6);
+}
+
+.link {
+  color: var(--mantine-color-primary-3);
 }
