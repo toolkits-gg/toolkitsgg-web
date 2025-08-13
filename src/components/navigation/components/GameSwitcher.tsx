@@ -20,12 +20,12 @@ const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
   const validatedGameId = React.useRef<GameId | undefined>(gameId);
 
   const activeGameConfig = React.useMemo(() => {
-    // if (!gameId && pathname !== '/') {
-    //   validatedGameId.current =
-    //     (allThemeClassNames.find(
-    //       (className) => colorTheme === className
-    //     ) as GameId) || noGameConfig.id;
-    // }
+    if (!gameId && pathname !== '/') {
+      validatedGameId.current =
+        (allThemeClassNames.find(
+          (className) => colorTheme === className
+        ) as GameId) || noGameConfig.id;
+    }
 
     const gameConfig = toGameConfig(validatedGameId.current);
 
@@ -34,7 +34,7 @@ const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
     }
 
     return gameConfig;
-  }, [pathname, gameId, colorTheme]);
+  }, [pathname, gameId]);
 
   return {
     activeGameConfig,
