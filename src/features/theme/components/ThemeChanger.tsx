@@ -2,11 +2,7 @@
 
 import { useState } from 'react';
 import { useIsClient } from 'usehooks-ts';
-import {
-  accentThemeDefinitions,
-  allThemeClassDefinitions,
-  themeModes,
-} from '@/features/theme/constants';
+import { themeModes } from '@/features/theme/constants';
 import { useAppTheme } from '@/features/theme/hooks/use-app-theme';
 import { Button, Dialog, Skeleton } from '@mantine/core';
 import { IconPalette } from '@tabler/icons-react';
@@ -28,7 +24,7 @@ const ThemeChanger = () => {
   }
 
   const handleChangeColorTheme = (newColorTheme: string) => {
-    handleChangeTheme(newColorTheme, accent);
+    //handleChangeTheme(newColorTheme, accent);
   };
 
   const handleChangeCategory = (value: typeof category) => {
@@ -36,12 +32,12 @@ const ThemeChanger = () => {
   };
 
   const handleChangeAccent = (newAccent: string) => {
-    handleChangeTheme(colorTheme, newAccent);
+    //handleChangeTheme(colorTheme, newAccent);
   };
 
   return (
     <>
-      <Button onClick={toggle} aria-label="Theme settings">
+      <Button onClick={toggle} aria-label="Theme settings" color="primary.5">
         <IconPalette />
       </Button>
       <Dialog
