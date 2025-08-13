@@ -12,14 +12,17 @@
   }
 }
 
+.logoContainer {
+  border: 2px solid transparent;
+
+  &:hover {
+    border: 2px solid var(--mantine-color-primary-4);
+  }
+}
+
 .logo {
   object-fit: contain;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--mantine-color-primary-9);
-  border-radius: var(--mantine-radius-lg);
 }
 
 .menu {
@@ -29,8 +32,8 @@
 
 .menuItem {
   background-color: var(--mantine-color-card-bg-6);
-}
 
-.link {
-  color: var(--mantine-color-primary-3);
+  &:hover {
+    background-color: var(--mantine-color-primary-7);
+  }
 }
