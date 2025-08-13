@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   border-right: 1px solid
-    light-dark(var(--mantine-color-border-5), var(--mantine-color-border-5));
+    light-dark(var(--mantine-color-border-7), var(--mantine-color-border-7));
 }
 
 .header {
@@ -17,7 +17,7 @@
   margin-right: calc(var(--mantine-spacing-md) * -1);
   color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
   border-bottom: 1px solid
-    light-dark(var(--mantine-color-border-5), var(--mantine-color-border-5));
+    light-dark(var(--mantine-color-border-7), var(--mantine-color-border-7));
 }
 
 .links {
@@ -35,5 +35,5 @@
   margin-left: calc(var(--mantine-spacing-md) * -1);
   margin-right: calc(var(--mantine-spacing-md) * -1);
   border-top: 1px solid
-    light-dark(var(--mantine-color-border-5), var(--mantine-color-border-5));
+    light-dark(var(--mantine-color-border-7), var(--mantine-color-border-7));
 }

@@ -3,16 +3,16 @@
   border-width: 0px 0px 1px 0px;
   border-style: solid;
   border-color: light-dark(
-    var(--mantine-color-border-5),
-    var(--mantine-color-border-5)
+    var(--mantine-color-border-7),
+    var(--mantine-color-border-7)
   );
 }
 
 .footer {
   background-color: var(--mantine-color-sidebar-bg-5);
   border-color: light-dark(
-    var(--mantine-color-border-5),
-    var(--mantine-color-border-5)
+    var(--mantine-color-border-7),
+    var(--mantine-color-border-7)
   );
 }
 
