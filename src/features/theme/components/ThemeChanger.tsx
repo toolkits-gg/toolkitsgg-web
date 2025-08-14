@@ -2,37 +2,84 @@
 
 import { useState } from 'react';
 import { useIsClient } from 'usehooks-ts';
-import { themeModes } from '@/features/theme/constants';
-import { useAppTheme } from '@/features/theme/hooks/use-app-theme';
-import { Button, Dialog, Skeleton } from '@mantine/core';
+import {
+  accentThemeDefinitions,
+  allThemeClassDefinitions,
+  themeModes,
+} from '@/features/theme/constants';
+import {
+  Button,
+  Dialog,
+  Flex,
+  Group,
+  Select,
+  Skeleton,
+  useMantineColorScheme,
+  type MantineColorScheme,
+} from '@mantine/core';
 import { IconPalette } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
+import { useTheme as useNextTheme } from 'next-themes';
+import { capitalize } from '@/utils/capitalize';
 
 const ThemeChanger = () => {
-  const { colorTheme, accent, handleChangeTheme } = useAppTheme();
+  const [dialogOpen, { toggle, close }] = useDisclosure(false);
   const isClient = useIsClient();
 
-  const [dialogOpen, { toggle, close }] = useDisclosure(false);
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const { theme: nextTheme, setTheme: setNextTheme } = useNextTheme();
+  const [mode, setMode] = useState<MantineColorScheme>('auto');
 
-  const [category, setCategory] = useState<(typeof themeModes)[number]>('All');
-
-  if (!colorTheme) {
+  if (!colorScheme) {
     return <Skeleton height={36} />;
   }
   if (!isClient) {
     return <Skeleton height={36} />;
   }
 
-  const handleChangeColorTheme = (newColorTheme: string) => {
-    //handleChangeTheme(newColorTheme, accent);
+  const accent = nextTheme?.includes('-accent')
+    ? nextTheme.slice(nextTheme.indexOf('-accent') + 1)
+    : 'accent-default';
+
+  const handleChangeNextTheme = (value: string | null) => {
+    let newNextTheme = value ?? 'default-dark';
+    if (accent !== 'accent-default') {
+      newNextTheme = `${newNextTheme}-${accent}`;
+    }
+
+    setNextTheme(newNextTheme);
+    // TODO Set Mantine theme
   };
 
-  const handleChangeCategory = (value: typeof category) => {
-    setCategory(value);
+  const handleChangeMode = (value: string | null) => {
+    if (!value) return;
+    if (!nextTheme) return;
+
+    const assertedValue = value as MantineColorScheme;
+
+    setMode(assertedValue);
+    setColorScheme(assertedValue);
+
+    if (assertedValue === 'light') {
+      setNextTheme(nextTheme?.replace('-dark', '-light'));
+    }
+    if (assertedValue === 'dark') {
+      setNextTheme(nextTheme?.replace('-light', '-dark'));
+    }
   };
 
-  const handleChangeAccent = (newAccent: string) => {
-    //handleChangeTheme(colorTheme, newAccent);
+  const handleChangeAccent = (value: string | null) => {
+    if (!value) return;
+    if (!nextTheme) return;
+
+    if (value === 'accent-default') {
+      const newNextTheme = nextTheme.split('-accent-')[0];
+      setNextTheme(newNextTheme);
+      // TODO Set Mantine Theme
+    } else {
+      setNextTheme(`${nextTheme}-${value}`);
+      // TODO Set Mantine Theme
+    }
   };
 
   return (
@@ -46,80 +93,61 @@ const ThemeChanger = () => {
         onClose={close}
         size="lg"
         radius="md"
+        bg="var(--mantine-color-card-bg-5)"
+        bd="1px solid var(--mantine-color-border-6)"
       >
-        Test
-      </Dialog>
-      {/* <Dialog
-        onClose={() => {
-          setDialogOpen(false);
-        }}
-        open={dialogOpen}
-      >
-        <DialogTitle>Select Color Theme</DialogTitle>
-        <DialogBody className="flex flex-col gap-y-4">
-          <div className="flex flex-1 items-center justify-between gap-x-2">
-            <Field className="w-full">
-              <Label>Category</Label>
-              <Listbox
-                name="selectedCategory"
-                onChange={handleChangeCategory}
-                value={category}
-              >
-                {themeModes.map((themeMode) => (
-                  <ListboxOption key={themeMode} value={themeMode}>
-                    <ListboxLabel>{themeMode}</ListboxLabel>
-                  </ListboxOption>
-                ))}
-              </Listbox>
-            </Field>
-            <Field className="w-full">
-              <Label>Accents</Label>
-              <Listbox
-                name="selectedAccent"
-                onChange={handleChangeAccent}
-                value={accent}
-              >
-                {accentThemeDefinitions.map((def) => (
-                  <ListboxOption key={def.className} value={def.className}>
-                    <ListboxLabel>{def.label}</ListboxLabel>
-                  </ListboxOption>
-                ))}
-              </Listbox>
-            </Field>
-          </div>
-
-          <Divider />
-
-          <Field>
-            <Label>Theme</Label>
-            <Listbox
-              name="colorTheme"
-              onChange={handleChangeColorTheme}
-              placeholder="Select a new theme"
-              value={colorTheme}
-            >
-              {allThemeClassDefinitions
+        <Flex
+          align="center"
+          justify="space-between"
+          gap="md"
+          direction="column"
+        >
+          <Flex gap="md" align="center" justify="space-between">
+            <Select
+              label="Select mode"
+              data={themeModes.map((tm) => ({
+                label: tm === 'auto' ? 'All' : capitalize(tm),
+                value: tm,
+              }))}
+              value={mode}
+              onChange={handleChangeMode}
+            />
+            <Select
+              label="Select accent"
+              value={accent}
+              data={accentThemeDefinitions.map((def) => ({
+                label: def.label,
+                value: def.className,
+              }))}
+              onChange={handleChangeAccent}
+            />
+          </Flex>
+          <Flex w="100%" align="center" justify="center">
+            <Select
+              label="Select theme"
+              value={nextTheme?.split('-accent')[0]}
+              data={allThemeClassDefinitions
                 .filter((def) => {
-                  switch (category) {
-                    case 'All':
+                  switch (mode) {
+                    case 'auto':
                       return true;
-                    case 'Light':
+                    case 'light':
                       return def.className.includes('light');
-                    case 'Dark':
+                    case 'dark':
                       return def.className.includes('dark');
                     default:
                       return false;
                   }
                 })
-                .map((def) => (
-                  <ListboxOption key={def.className} value={def.className}>
-                    <ListboxLabel>{def.label}</ListboxLabel>
-                  </ListboxOption>
-                ))}
-            </Listbox>
-          </Field>
-        </DialogBody>
-      </Dialog> */}
+                .map((def) => ({
+                  label: def.label,
+                  value: def.className,
+                }))}
+              onChange={handleChangeNextTheme}
+            />
+          </Flex>
+        </Flex>
+      </Dialog>
     </>
   );
 };
