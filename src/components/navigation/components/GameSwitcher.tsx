@@ -2,22 +2,18 @@
 
 import type { GameId } from '@prisma/client';
 import { allGameConfigs, noGameConfig } from '@/features/game/constants';
-import { useAppTheme } from '@/features/theme/hooks/use-app-theme';
 import { usePathname } from 'next/navigation';
 import { toGameConfig } from '@/features/game/utils/game-id';
 import React from 'react';
 import {
-  Anchor,
-  Box,
-  Button,
   Flex,
-  Group,
   Menu,
   Text,
   UnstyledButton,
+  useMantineColorScheme,
 } from '@mantine/core';
 import classes from './GameSwitcher.module.css';
-import { IconChevronDown, IconChevronRight } from '@tabler/icons-react';
+import { IconChevronDown } from '@tabler/icons-react';
 import { allThemeClassNames } from '@/features/theme/constants';
 import Link from 'next/link';
 
@@ -26,9 +22,14 @@ type UseActiveGameConfigArgs = {
 };
 
 const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
-  const { colorTheme } = useAppTheme();
   const pathname = usePathname();
   const validatedGameId = React.useRef<GameId | undefined>(gameId);
+
+  const { colorScheme } = useMantineColorScheme();
+
+  const colorTheme = colorScheme?.includes('-accent')
+    ? colorScheme.split('-accent')[0]
+    : colorScheme;
 
   const activeGameConfig = React.useMemo(() => {
     if (!gameId && pathname !== '/') {
@@ -81,11 +82,18 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
             <Flex
               className={classes.logo}
               align="center"
-              justify="center"
+              justify="space-between"
               p={2}
               bdrs="lg"
+              w="100%"
+              gap={4}
             >
               {activeGameConfig.logo(48)}
+              <Text size="sm">
+                {activeGameConfig.label === 'Default'
+                  ? 'Select a game'
+                  : activeGameConfig.label}
+              </Text>
             </Flex>
             <IconChevronDown size={14} stroke={1.5} />
           </Flex>

@@ -4,8 +4,9 @@ import type {
   ToolkitAccentThemeDefinition,
   ToolkitThemeDefinition,
 } from '@/features/theme/types';
+import type { MantineColorScheme } from '@mantine/core';
 
-export const themeModes = ['All', 'Dark', 'Light'] as const;
+export const themeModes: MantineColorScheme[] = ['auto', 'dark', 'light'];
 
 export const themeDefinitions: ToolkitThemeDefinition[] = [
   {
