@@ -2,10 +2,12 @@
 
 import { DefaultLogo } from '@/components/Logo';
 import { AppNavbar } from '@/components/navigation/components/AppNavbar';
-import { AppShell, Burger, Flex, Group } from '@mantine/core';
+import { Anchor, AppShell, Burger, Flex, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import type React from 'react';
 import classes from './PageLayout.module.css';
+import Link from 'next/link';
+import { homePath } from '@/paths';
 
 type PageLayoutProps = React.PropsWithChildren<{
   navbar?: React.ReactNode;
@@ -37,7 +39,9 @@ const PageLayout = ({ children }: PageLayoutProps) => {
             />
           </Flex>
           <Flex className={classes.logoContainer}>
-            <DefaultLogo size={64} />
+            <Anchor href={homePath()} component={Link}>
+              <DefaultLogo size={64} />
+            </Anchor>
           </Flex>
         </Group>
       </AppShell.Header>
