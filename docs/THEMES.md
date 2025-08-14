@@ -5,7 +5,8 @@
 ## Resources
 
 [tweakcn](https://tweakcn.com) - Generate themes
-[tailcolor](https://tailcolor.com) - Convert single color into 10-color palette
+[tints.dev](https://www.tints.dev/?output=hex) - Convert single color into 10-color palette
+[archived -tailcolor](https://tailcolor.com) - Convert single color into 10-color palette
 
 ## Custom colors
 
