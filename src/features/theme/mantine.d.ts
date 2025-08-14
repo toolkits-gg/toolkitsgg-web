@@ -9,6 +9,7 @@ type ExtendedCustomColors =
   | 'sidebarBg'
   | 'border'
   | 'ring'
+  | 'input'
   | DefaultMantineColor;
 
 declare module '@mantine/core' {

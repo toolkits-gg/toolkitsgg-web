@@ -59,6 +59,13 @@ export type ThemeCustomColors = {
   ringDark: MantineColorsTuple;
   ringLight: MantineColorsTuple;
   ring: MantineColorsTuple;
+
+  /**
+   * Inputs
+   */
+  inputDark: MantineColorsTuple;
+  inputLight: MantineColorsTuple;
+  input: MantineColorsTuple;
 };
 
 export type ToolkitThemeDefinition = {

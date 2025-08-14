@@ -252,6 +252,39 @@ const defaultThemeColors: ThemeCustomColors = {
     dark: 'ringDark',
     light: 'ringLight',
   }),
+
+  /**
+   * Inputs
+   */
+  inputDark: [
+    '#edecf3',
+    '#dcd9e6',
+    '#b8b3ce',
+    '#958eb5',
+    '#71689d',
+    '#4e4284',
+    '#3e356a',
+    '#2f284f',
+    '#1f1a35',
+    '#100d1a',
+  ],
+  inputLight: [
+    '#fff',
+    '#fff',
+    '#fff',
+    '#fff',
+    '#fff',
+    '#fff',
+    '#fff',
+    '#fff',
+    '#fff',
+    '#fff',
+  ],
+  input: virtualColor({
+    name: 'input',
+    dark: 'inputDark',
+    light: 'inputLight',
+  }),
 };
 
 export const defaultTheme = {
