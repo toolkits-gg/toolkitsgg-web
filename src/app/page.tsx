@@ -1,5 +1,13 @@
+'use client';
+
+import { AppNavbar } from '@/components/navigation/components/AppNavbar';
 import { PageLayout } from '@/components/PageLayout';
+import { noGameConfig } from '@/features/game/constants';
 
 export default function HomePage() {
-  return <PageLayout>Home Page</PageLayout>;
+  return (
+    <PageLayout appNavbar={<AppNavbar gameConfig={noGameConfig} />}>
+      Home Page
+    </PageLayout>
+  );
 }

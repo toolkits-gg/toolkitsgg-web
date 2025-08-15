@@ -16,6 +16,8 @@ import classes from './GameSwitcher.module.css';
 import { IconChevronDown } from '@tabler/icons-react';
 import { allThemeClassNames } from '@/features/theme/constants';
 import Link from 'next/link';
+import type { GameConfig } from '@/features/game/types';
+import type { COE33ItemType } from '@/games/coe33/items/types';
 
 type UseActiveGameConfigArgs = {
   gameId: GameId | undefined;
@@ -55,14 +57,10 @@ const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
 };
 
 type GameSwitcherProps = {
-  gameId: GameId | undefined;
+  gameConfig: GameConfig<unknown>;
 };
 
-const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
-  const { activeGameConfig } = useActiveGameConfig({
-    gameId,
-  });
-
+const GameSwitcher = ({ gameConfig }: GameSwitcherProps) => {
   return (
     <Menu
       width={300}
@@ -88,11 +86,11 @@ const GameSwitcher = ({ gameId }: GameSwitcherProps) => {
               w="100%"
               gap={4}
             >
-              {activeGameConfig.logo(48)}
+              {gameConfig?.logo(48)}
               <Text size="sm">
-                {activeGameConfig.label === 'Default'
+                {gameConfig?.label === 'Default'
                   ? 'Select a game'
-                  : activeGameConfig.label}
+                  : gameConfig?.label}
               </Text>
             </Flex>
             <IconChevronDown size={14} stroke={1.5} />

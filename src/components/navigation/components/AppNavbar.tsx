@@ -1,3 +1,5 @@
+'use client';
+
 import { Flex, Group, ScrollArea } from '@mantine/core';
 import classes from './AppNavbar.module.css';
 import { useAuth } from '@/features/auth/hooks/use-auth';
@@ -11,10 +13,10 @@ import { GameActions } from '@/components/navigation/components/GameActions';
 import { ThemeChanger } from '@/features/theme/components/ThemeChanger';
 
 type AppNavbarProps = {
-  gameConfig: GameConfig<unknown> | undefined;
+  gameConfig: GameConfig<unknown>;
 };
 
-const AppNavbar = ({ gameConfig }: AppNavbarProps) => {
+function AppNavbar<ConfigType>({ gameConfig }: AppNavbarProps) {
   // TODO Get user favorite games
   const favoriteGameIds: string[] = [];
 
@@ -32,7 +34,7 @@ const AppNavbar = ({ gameConfig }: AppNavbarProps) => {
     <nav className={classes.navbar}>
       <div className={classes.header}>
         <Group justify="space-between" wrap="nowrap">
-          <GameSwitcher gameId="none" />
+          <GameSwitcher gameConfig={gameConfig} />
           <GameActions gameId="none" />
         </Group>
       </div>
@@ -54,6 +56,6 @@ const AppNavbar = ({ gameConfig }: AppNavbarProps) => {
       </Flex>
     </nav>
   );
-};
+}
 
 export { AppNavbar };

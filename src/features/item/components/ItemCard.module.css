@@ -1,0 +1,31 @@
+.card {
+  background-color: var(--mantine-color-card-bg-5);
+  border-color: var(--mantine-color-border-5);
+  width: 225px;
+}
+
+.title {
+  font-family: Outfit, var(--mantine-font-family);
+  font-weight: 500;
+  line-height: 1;
+  font-size: var(--mantine-font-size-sm);
+}
+
+.imageContainer {
+  height: 125px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.image {
+  object-fit: contain;
+  padding: var(--mantine-spacing-xs);
+}

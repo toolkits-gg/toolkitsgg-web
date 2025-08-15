@@ -1,5 +1,7 @@
+'use client';
+
 import { useState } from 'react';
-import { IconCalendarStats, IconChevronRight } from '@tabler/icons-react';
+import { IconChevronRight } from '@tabler/icons-react';
 import {
   Box,
   Collapse,

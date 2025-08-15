@@ -1,7 +1,6 @@
 'use client';
 
 import { DefaultLogo } from '@/components/Logo';
-import { AppNavbar } from '@/components/navigation/components/AppNavbar';
 import { Anchor, AppShell, Burger, Flex, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import type React from 'react';
@@ -10,11 +9,10 @@ import Link from 'next/link';
 import { homePath } from '@/paths';
 
 type PageLayoutProps = React.PropsWithChildren<{
-  navbar?: React.ReactNode;
-  sidebar?: React.ReactNode;
+  appNavbar: React.ReactNode;
 }>;
 
-const PageLayout = ({ children }: PageLayoutProps) => {
+const PageLayout = ({ children, appNavbar }: PageLayoutProps) => {
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -46,9 +44,7 @@ const PageLayout = ({ children }: PageLayoutProps) => {
         </Group>
       </AppShell.Header>
 
-      <AppShell.Navbar h="100%">
-        <AppNavbar gameConfig={undefined} />
-      </AppShell.Navbar>
+      {appNavbar && <AppShell.Navbar h="100%">{appNavbar}</AppShell.Navbar>}
 
       <AppShell.Main className={classes.main}>{children}</AppShell.Main>
 

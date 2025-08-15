@@ -1,7 +1,7 @@
 import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
 import { HeaderImage } from '@/app/_navigation/components/header-image';
 import { SidebarLayout } from '@/components/sidebar-layout';
-import { ItemCard } from '@/features/item/components/item-card';
+import { ItemCard } from '@/features/item/components/ItemCard';
 import { getImageUrl } from '@/utils/url';
 import Image from 'next/image';
 import { toGameConfig } from '@/features/game/utils/game-id';
