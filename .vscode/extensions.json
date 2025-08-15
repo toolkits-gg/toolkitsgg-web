@@ -2,11 +2,9 @@
   "recommendations": [
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "shd101wyy.markdown-preview-enhanced",
     "yoavbls.pretty-ts-errors",
     "prisma.prisma",
     "vunguyentuan.vscode-postcss", // for mantine autocomplete
-    "vunguyentuan.vscode-css-variables", // for mantine variables
-    "johnpapa.vscode-peacock" // changes vscode border colors
+    "vunguyentuan.vscode-css-variables" // for mantine variables
   ]
 }
