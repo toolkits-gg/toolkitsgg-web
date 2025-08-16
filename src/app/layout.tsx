@@ -3,8 +3,9 @@ import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Lora } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
+import { ReactQueryProvider } from '@/lib/react-query/ReactQueryProvider';
 import { ThemeProvider } from '@/features/theme/providers/ThemeProvider';
+import { ReactToastifyProvider } from '@/lib/react-toastify/ReactToastifyProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -43,7 +44,10 @@ export default function RootLayout({
       >
         <NuqsAdapter>
           <ThemeProvider>
-            <ReactQueryProvider>{children}</ReactQueryProvider>
+            <ReactQueryProvider>
+              <ReactToastifyProvider />
+              {children}
+            </ReactQueryProvider>
           </ThemeProvider>
         </NuqsAdapter>
       </body>
