@@ -1,4 +1,4 @@
-import { gameUtils } from '@/features/game/utils/game-utils';
+import { gameUtils } from '@/features/game/utils';
 
 type ItemCollectorPageProps = {
   params: Promise<{ gameId: string }>;

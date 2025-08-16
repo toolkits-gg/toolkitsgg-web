@@ -11,7 +11,7 @@ export const noGameConfig: GameConfig<undefined> = {
   label: 'Default',
   path: '/',
   logo: (size: LogoSize) => <DefaultLogo size={size} />,
-  themeDefinition: undefined,
+  themeDefinitions: undefined,
   items: undefined,
   dataUtils: undefined,
   pages: undefined,

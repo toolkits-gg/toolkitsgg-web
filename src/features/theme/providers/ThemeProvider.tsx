@@ -1,13 +1,17 @@
 'use client';
 
 import { defaultTheme } from '@/features/theme/themes/default-theme';
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider, type MantineThemeOverride } from '@mantine/core';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import {
   accentThemeClassNames,
   allThemeClassNames,
   nextThemesDefaultTheme,
 } from '@/features/theme/constants';
+import { usePathname } from 'next/navigation';
+import { allGameConfigs } from '@/features/game/constants';
+import { useAtom } from 'jotai';
+import { mantineThemeAtom } from '@/features/theme/atoms';
 
 const accentThemes = allThemeClassNames
   .map((themeName) =>
@@ -18,6 +22,18 @@ const accentThemes = allThemeClassNames
 type ThemeProviderProps = React.PropsWithChildren;
 
 const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
+  const pathname = usePathname();
+
+  const gameConfig = allGameConfigs.find((gameConfig) =>
+    pathname.includes(gameConfig.id)
+  );
+
+  const [mantineTheme, setMantineTheme] = useAtom(mantineThemeAtom);
+
+  if (gameConfig && gameConfig.themeDefinition) {
+    setMantineTheme(gameConfig.themeDefinition.theme);
+  }
+
   const themes = [...allThemeClassNames, ...accentThemes];
 
   return (
@@ -29,7 +45,7 @@ const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
       disableTransitionOnChange
       themes={themes}
     >
-      <MantineProvider theme={defaultTheme} defaultColorScheme="dark">
+      <MantineProvider theme={mantineTheme} defaultColorScheme="dark">
         {children}
       </MantineProvider>
     </NextThemesProvider>

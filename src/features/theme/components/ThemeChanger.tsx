@@ -1,17 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useIsClient } from 'usehooks-ts';
 import {
   accentThemeDefinitions,
-  allThemeClassDefinitions,
+  allThemeDefinitions,
   themeModes,
 } from '@/features/theme/constants';
 import {
   Button,
   Dialog,
   Flex,
-  Group,
   Select,
   Skeleton,
   useMantineColorScheme,
@@ -21,14 +20,32 @@ import { IconPalette } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { useTheme as useNextTheme } from 'next-themes';
 import { capitalize } from '@/utils/capitalize';
+import { allGameConfigs } from '@/features/game/constants';
+import { useAtom } from 'jotai';
+import { mantineThemeAtom } from '@/features/theme/atoms';
+import { defaultTheme } from '@/features/theme/themes/default-theme';
 
 const ThemeChanger = () => {
   const [dialogOpen, { toggle, close }] = useDisclosure(false);
   const isClient = useIsClient();
 
   const { colorScheme, setColorScheme } = useMantineColorScheme();
+
   const { theme: nextTheme, setTheme: setNextTheme } = useNextTheme();
   const [mode, setMode] = useState<MantineColorScheme>('auto');
+
+  const [mantineTheme, setMantineTheme] = useAtom(mantineThemeAtom);
+
+  useEffect(() => {
+    const gameConfig = allGameConfigs.find(
+      (config) =>
+        config.themeDefinition &&
+        nextTheme?.includes(config.themeDefinition.className)
+    );
+    if (gameConfig?.themeDefinition) {
+      setMantineTheme(gameConfig.themeDefinition.theme);
+    }
+  }, [nextTheme]);
 
   if (!colorScheme) {
     return <Skeleton height={36} />;
@@ -47,8 +64,24 @@ const ThemeChanger = () => {
       newNextTheme = `${newNextTheme}-${accent}`;
     }
 
+    const newColorScheme = newNextTheme.includes('-light') ? 'light' : 'dark';
+    if (mode !== newColorScheme) {
+      newNextTheme = newNextTheme.replace(mode, newColorScheme);
+      setColorScheme(newColorScheme);
+    }
+
     setNextTheme(newNextTheme);
-    // TODO Set Mantine theme
+
+    const gameConfig = allGameConfigs.find(
+      (gameConfig) => gameConfig.themeDefinition?.className === newNextTheme
+    );
+
+    if (!gameConfig || !gameConfig.themeDefinition?.theme) {
+      setMantineTheme(defaultTheme);
+      return;
+    }
+
+    setMantineTheme(gameConfig.themeDefinition.theme);
   };
 
   const handleChangeMode = (value: string | null) => {
@@ -126,23 +159,10 @@ const ThemeChanger = () => {
             <Select
               label="Select theme"
               value={nextTheme?.split('-accent')[0]}
-              data={allThemeClassDefinitions
-                .filter((def) => {
-                  switch (mode) {
-                    case 'auto':
-                      return true;
-                    case 'light':
-                      return def.className.includes('light');
-                    case 'dark':
-                      return def.className.includes('dark');
-                    default:
-                      return false;
-                  }
-                })
-                .map((def) => ({
-                  label: def.label,
-                  value: def.className,
-                }))}
+              data={allThemeDefinitions.map((def) => ({
+                label: def.label,
+                value: def.className,
+              }))}
               onChange={handleChangeNextTheme}
             />
           </Flex>

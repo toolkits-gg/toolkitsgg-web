@@ -9,7 +9,7 @@ import { UserMenu } from '@/components/navigation/UserMenu';
 import { NavbarLinksGroup } from '@/components/navigation/NavbarLinksGroup';
 import { GameActions } from '@/components/navigation/GameActions';
 import { ThemeChanger } from '@/features/theme/components/ThemeChanger';
-import { navUtils } from '@/components/navigation/utils/build-nav-links';
+import { navUtils } from '@/components/navigation/utils';
 
 type AppNavbarProps = {
   gameConfig: GameConfig<unknown>;

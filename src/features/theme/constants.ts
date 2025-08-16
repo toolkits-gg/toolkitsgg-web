@@ -23,7 +23,19 @@ export const themeDefinitions: ToolkitThemeDefinition[] = [
 
 const gameThemeDefinitions: ToolkitThemeDefinition[] = allGameConfigs
   .filter((gameConfig) => gameConfig.themeDefinition !== undefined)
-  .map((gameConfig) => ({ ...gameConfig.themeDefinition! }))
+  .map((gameConfig) => [
+    {
+      label: `${gameConfig.themeDefinition?.label} - Light`,
+      className: `${gameConfig.themeDefinition?.className}-light`,
+      theme: gameConfig.themeDefinition!!.theme,
+    },
+    {
+      label: `${gameConfig.themeDefinition?.label} - Dark`,
+      className: `${gameConfig.themeDefinition?.className}-dark`,
+      theme: gameConfig.themeDefinition!!.theme,
+    },
+  ])
+  .flat()
   .sort((a, b) => a.label.localeCompare(b.label));
 
 export const accentThemeDefinitions: ToolkitAccentThemeDefinition[] = [
@@ -44,12 +56,19 @@ export const accentThemeDefinitions: ToolkitAccentThemeDefinition[] = [
   },
 ].sort((a, b) => a.label.localeCompare(b.label));
 
-export const allThemeClassDefinitions: Array<
-  ToolkitThemeDefinition | ToolkitAccentThemeDefinition
-> = [...themeDefinitions, ...gameThemeDefinitions].sort();
+export const allThemeDefinitions = [
+  ...themeDefinitions,
+  ...gameThemeDefinitions,
+];
 
-export const allThemeClassNames = allThemeClassDefinitions
-  .map((def) => def.className)
+export const allThemeClassNames = [
+  ...themeDefinitions.map((def) => def.className),
+  ...gameThemeDefinitions.map((def) => [
+    `${def.className}-dark`,
+    `${def.className}-light`,
+  ]),
+]
+  .flat()
   .sort();
 
 export const accentThemeClassNames = accentThemeDefinitions
