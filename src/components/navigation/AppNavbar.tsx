@@ -3,14 +3,13 @@
 import { Flex, Group, ScrollArea } from '@mantine/core';
 import classes from './AppNavbar.module.css';
 import { useAuth } from '@/features/auth/hooks/use-auth';
-import type { GameId } from '@prisma/client';
 import type { GameConfig } from '@/features/game/types';
-import { buildNavLinks } from '@/components/navigation/build-nav-links';
 import { GameSwitcher } from '@/components/navigation/GameSwitcher';
 import { UserMenu } from '@/components/navigation/UserMenu';
 import { NavbarLinksGroup } from '@/components/navigation/NavbarLinksGroup';
 import { GameActions } from '@/components/navigation/GameActions';
 import { ThemeChanger } from '@/features/theme/components/ThemeChanger';
+import { navUtils } from '@/components/navigation/utils/build-nav-links';
 
 type AppNavbarProps = {
   gameConfig: GameConfig<unknown>;
@@ -28,7 +27,7 @@ function AppNavbar({ gameConfig }: AppNavbarProps) {
     (favoriteGameId) => favoriteGameId === gameId
   );
 
-  const navLinks = buildNavLinks(gameConfig);
+  const navLinks = navUtils.buildNavLinks(gameConfig);
 
   return (
     <nav className={classes.navbar}>

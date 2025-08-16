@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { useActionFeedback } from './hooks/use-action-feedback';
 import { ActionState } from './utils/action-state';
 
@@ -22,14 +23,14 @@ const Form = ({
   useActionFeedback(actionState, {
     onSuccess: ({ actionState }) => {
       if (actionState.message && actionState.showToast) {
-        // TODO toast.success(actionState.message, toastOptions);
+        toast.success(actionState.message, toastOptions);
       }
 
       onSuccess?.(actionState);
     },
     onError: ({ actionState }) => {
       if (actionState.message && actionState.showToast) {
-        // TODO toast.error(actionState.message, toastOptions);
+        toast.error(actionState.message, toastOptions);
       }
 
       onError?.(actionState);

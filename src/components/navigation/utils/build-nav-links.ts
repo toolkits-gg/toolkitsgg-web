@@ -14,7 +14,7 @@ const helpNavLink: NavLink = {
   ],
 };
 
-export const buildNavLinks = (
+const buildNavLinks = (
   gameConfig: GameConfig<unknown> | undefined
 ): NavLink[] => {
   if (!gameConfig) {
@@ -98,4 +98,8 @@ export const buildNavLinks = (
   navLinks.push(helpNavLink);
 
   return navLinks;
+};
+
+export const navUtils = {
+  buildNavLinks,
 };
