@@ -1,11 +1,12 @@
 import '@mantine/core/styles.css';
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
-import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Lora } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { ReactQueryProvider } from '@/lib/react-query/ReactQueryProvider';
 import { ThemeProvider } from '@/features/theme/providers/ThemeProvider';
 import { ReactToastifyProvider } from '@/lib/react-toastify/ReactToastifyProvider';
+
+export { metadata } from './metadata';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -22,12 +23,6 @@ const loraSerif = Lora({
   subsets: ['latin'],
   weight: ['400', '700'],
 });
-
-export const metadata: Metadata = {
-  title: 'Toolkits.gg',
-  description:
-    'A site dedicated to toolkits and quality of life features for a variety of games.',
-};
 
 export default function RootLayout({
   children,
