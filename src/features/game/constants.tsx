@@ -14,6 +14,7 @@ export const noGameConfig: GameConfig<undefined> = {
   themeDefinition: undefined,
   items: undefined,
   dataUtils: undefined,
+  pages: undefined,
 };
 
 export const gameConfigs: Record<

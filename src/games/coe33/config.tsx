@@ -3,7 +3,6 @@ import {
   coe33Path,
   itemCollectorPath,
   itemLookupPath,
-  itemQuizPath,
   resourcesPath,
 } from '@/games/coe33/paths';
 import type { GameConfig } from '@/features/game/types';
@@ -12,6 +11,9 @@ import { coe33Items } from '@/games/coe33/items/all-items';
 import type { LogoSize } from '@/components/Logo';
 import { COE33Logo } from '@/games/coe33/components/Logo';
 import { defaultTheme } from '@/features/theme/themes/default-theme';
+import { HomePage } from '@/games/coe33/components/HomePage';
+import { ItemLookupPage } from '@/games/coe33/components/ItemLookupPage';
+import { ItemCollectorPage } from '@/games/coe33/components/ItemCollectorPage';
 
 export const coe33Config: GameConfig<COE33ItemType> = {
   name: 'Clair Obscur: Expedition 33',
@@ -22,12 +24,24 @@ export const coe33Config: GameConfig<COE33ItemType> = {
 
   dataUtils: coe33DataUtils,
 
-  logo: (size: LogoSize) => <COE33Logo size={size} />,
+  pages: {
+    home: {
+      component: <HomePage />,
+      path: coe33Path(),
+    },
+    itemLookup: {
+      component: <ItemLookupPage />,
+      path: itemLookupPath(),
+    },
+    itemCollector: {
+      component: <ItemCollectorPage />,
+      path: itemCollectorPath(),
+    },
+    itemQuiz: undefined,
+  },
 
+  logo: (size: LogoSize) => <COE33Logo size={size} />,
   items: coe33Items,
-  itemLookupPath: itemLookupPath(),
-  itemCollectorPath: itemCollectorPath(),
-  itemQuizPath: itemQuizPath(),
 
   resourcesPath: resourcesPath(),
   resources: [

@@ -11,6 +11,7 @@ import {
   UnstyledButton,
 } from '@mantine/core';
 import classes from './NavbarLinksGroup.module.css';
+import Link from 'next/link';
 
 interface NavbarLinksGroupProps {
   icon: React.FC<any> | undefined;
@@ -28,12 +29,11 @@ const NavbarLinksGroup = ({
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
   const items = (hasLinks ? links : []).map((link) => (
-    <Text<'a'>
-      component="a"
+    <Text
+      component={Link}
       className={classes.link}
       href={link.link}
       key={link.label}
-      onClick={(event) => event.preventDefault()}
     >
       {link.label}
     </Text>

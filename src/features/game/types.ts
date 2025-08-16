@@ -1,20 +1,7 @@
 import type { GameId } from '@prisma/client';
 import type { LogoSize } from '@/components/Logo';
 import type { ToolkitThemeDefinition } from '@/features/theme/types';
-
-type ItemsArgs<ItemType> =
-  | {
-      items: ItemType[];
-      itemLookupPath: string;
-      itemCollectorPath: string;
-      itemQuizPath: string;
-    }
-  | {
-      items?: undefined;
-      itemLookupPath?: undefined;
-      itemCollectorPath?: undefined;
-      itemQuizPath?: undefined;
-    };
+import type React from 'react';
 
 type ResourcesArgs =
   | {
@@ -36,6 +23,11 @@ export type GameDataUtils = {
   getCollectedItemSlugs: () => Promise<string[]>;
 };
 
+type GameConfigPage = {
+  component: React.ReactNode;
+  path: string;
+};
+
 export type GameConfig<ItemType> = {
   id: GameId;
   name: string;
@@ -43,12 +35,21 @@ export type GameConfig<ItemType> = {
   label: string;
   path: string;
   logo: (size: LogoSize) => React.ReactNode;
+  items: ItemType[] | undefined;
   themeDefinition?: ToolkitThemeDefinition;
+
+  pages:
+    | {
+        home: GameConfigPage | undefined;
+        itemLookup: GameConfigPage | undefined;
+        itemCollector: GameConfigPage | undefined;
+        itemQuiz: GameConfigPage | undefined;
+      }
+    | undefined;
 
   /* Utility functions for interacting with the data layer **/
   dataUtils: GameDataUtils | undefined;
 
   // TODO: Enable builds a different way, like with items
   buildsEnabled?: boolean;
-} & ItemsArgs<ItemType> &
-  ResourcesArgs;
+} & ResourcesArgs;

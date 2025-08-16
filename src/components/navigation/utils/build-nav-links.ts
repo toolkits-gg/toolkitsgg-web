@@ -28,17 +28,20 @@ export const buildNavLinks = (
   if (gameConfig.items && gameConfig.items.length > 0) {
     const links: NavLinkLinks = [];
 
-    if (gameConfig.itemLookupPath) {
-      links.push({ label: 'Item Lookup', link: gameConfig.itemLookupPath });
-    }
-    if (gameConfig.itemCollectorPath) {
+    if (gameConfig.pages?.itemLookup) {
       links.push({
-        label: 'Item Collector',
-        link: gameConfig.itemCollectorPath,
+        label: 'Item Lookup',
+        link: gameConfig.pages.itemLookup.path,
       });
     }
-    if (gameConfig.itemQuizPath) {
-      links.push({ label: 'Item Quiz', link: gameConfig.itemQuizPath });
+    if (gameConfig.pages?.itemCollector) {
+      links.push({
+        label: 'Item Collector',
+        link: gameConfig.pages.itemCollector.path,
+      });
+    }
+    if (gameConfig.pages?.itemQuiz) {
+      links.push({ label: 'Item Quiz', link: gameConfig.pages.itemQuiz.path });
     }
 
     if (links) {

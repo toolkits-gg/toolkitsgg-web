@@ -14,7 +14,7 @@ export function toGameId(id: string | undefined): GameId {
   return isGameId(id) ? (id as GameId) : 'none';
 }
 
-export function toGameConfig<ItemType extends BaseItemType>(
+export function toGameConfig<ItemType extends BaseItemType = BaseItemType>(
   gameId: GameId | undefined
 ): GameConfig<ItemType> | undefined {
   if (!gameId) {
