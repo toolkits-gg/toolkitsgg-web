@@ -1,31 +1,74 @@
 .card {
   background-color: var(--mantine-color-card-bg-5);
   border-color: var(--mantine-color-border-5);
-  width: 225px;
-}
+  box-shadow:
+    0 4px 24px 0 rgba(0, 0, 0, 0.18),
+    0 1.5px 6px 0 rgba(187, 180, 201, 0.1);
+  transition:
+    transform 0.15s cubic-bezier(0.4, 2, 0.6, 1),
+    box-shadow 0.15s,
+    border-color 0.15s;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px !important;
 
-.title {
-  font-family: Outfit, var(--mantine-font-family);
-  font-weight: 500;
-  line-height: 1;
-  font-size: var(--mantine-font-size-sm);
+  &:hover,
+  &:focus-visible {
+    transform: scale(1.03) translateY(-2px);
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.22),
+      0 3px 12px 0 rgba(187, 180, 201, 0.18);
+    border-color: var(--mantine-color-secondary-5);
+    z-index: 1;
+  }
 }
 
 .imageContainer {
-  height: 125px;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(
-    180deg,
+    90deg,
     rgba(0, 0, 0, 0.6) 0%,
     rgba(0, 0, 0, 0.4) 50%,
     rgba(0, 0, 0, 0) 100%
   );
+  padding: 0;
+  margin: 0;
 }
 
 .image {
   object-fit: contain;
   padding: var(--mantine-spacing-xs);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: var(--mantine-spacing-md) 0px;
+}
+
+.title {
+  text-align: left;
+  background: linear-gradient(
+    to bottom,
+    var(--mantine-color-primary-5) 0%,
+    var(--mantine-color-secondary-5) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 2px 8px rgba(255, 99, 132, 0.25),
+    0 1px 2px rgba(0, 0, 0, 0.18);
+  letter-spacing: 0.5px;
+}
+
+.category {
+  color: var(--mantine-color-text);
+  text-transform: uppercase;
 }

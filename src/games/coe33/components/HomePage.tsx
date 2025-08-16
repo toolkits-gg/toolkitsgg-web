@@ -20,7 +20,7 @@ const HomePage = () => {
 
   return (
     <PageLayout appNavbar={<AppNavbar gameConfig={gameConfig} />}>
-      <Flex wrap="wrap" align="center" justify="space-between" gap="sm">
+      <Flex wrap="wrap" align="center" justify="center" gap="sm">
         {gameConfig.items
           ?.filter((item) => item.category === 'WEAPON')
           .map((item) => (
