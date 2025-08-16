@@ -1,4 +1,4 @@
-import { FavoriteGameButton } from '@/components/navigation/components/FavoriteGameButton';
+import { FavoriteGameButton } from '@/components/navigation/FavoriteGameButton';
 import { Group } from '@mantine/core';
 import type { GameId } from '@prisma/client';
 

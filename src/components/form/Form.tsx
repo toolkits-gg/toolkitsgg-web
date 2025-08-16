@@ -1,5 +1,5 @@
 import { useActionFeedback } from './hooks/use-action-feedback';
-import { ActionState } from './utils/to-action-state';
+import { ActionState } from './utils/action-state';
 
 type FormProps = {
   action: (payload: FormData) => void;
@@ -36,11 +36,7 @@ const Form = ({
     },
   });
 
-  return (
-    <form action={action} className="flex flex-col gap-y-2">
-      {children}
-    </form>
-  );
+  return <form action={action}>{children}</form>;
 };
 
 export { Form };

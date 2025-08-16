@@ -1,6 +1,6 @@
 'use client';
 
-import { AppNavbar } from '@/components/navigation/components/AppNavbar';
+import { AppNavbar } from '@/components/navigation/AppNavbar';
 import { PageLayout } from '@/components/PageLayout';
 import { allGameConfigs } from '@/features/game/constants';
 import type { GameConfig } from '@/features/game/types';

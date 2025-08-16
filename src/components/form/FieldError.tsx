@@ -1,4 +1,4 @@
-import { ActionState } from '@/components/form (deprecated)/utils/to-action-state';
+import type { ActionState } from '@/components/form/utils/action-state';
 
 type FieldErrorProps = {
   actionState: ActionState;
@@ -10,7 +10,7 @@ const FieldError = ({ actionState, name }: FieldErrorProps) => {
 
   if (!message) return null;
 
-  return <span className="text-xs text-red-500">{message}</span>;
+  return <span>{message}</span>;
 };
 
 export { FieldError };

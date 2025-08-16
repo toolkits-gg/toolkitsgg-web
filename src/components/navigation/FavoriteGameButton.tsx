@@ -4,9 +4,9 @@ import type { GameId } from '@prisma/client';
 import { useActionState } from 'react';
 import { toggleFavoriteGame } from '@/features/game/actions/toggle-favorite-game';
 import { IconHeart, IconHeartPlus } from '@tabler/icons-react';
-import { EMPTY_ACTION_STATE } from '@/components/form/utils/to-action-state';
-import { Form } from '@/components/form/form';
-import { SubmitButton } from '@/components/form/submit-button';
+import { EMPTY_ACTION_STATE } from '@/components/form/utils/action-state';
+import { Form } from '@/components/form/Form';
+import { SubmitButton } from '@/components/form/SubmitButton';
 
 type FavoriteGameButtonProps = {
   gameId: GameId;

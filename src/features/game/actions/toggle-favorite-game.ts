@@ -9,7 +9,7 @@ import {
   fromErrorToActionState,
   toActionState,
   type ActionState,
-} from '@/components/form/utils/to-action-state';
+} from '@/components/form/utils/action-state';
 
 export const toggleFavoriteGame = async (
   gameId: GameId

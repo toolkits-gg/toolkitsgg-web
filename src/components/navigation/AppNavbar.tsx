@@ -5,11 +5,11 @@ import classes from './AppNavbar.module.css';
 import { useAuth } from '@/features/auth/hooks/use-auth';
 import type { GameId } from '@prisma/client';
 import type { GameConfig } from '@/features/game/types';
-import { buildNavLinks } from '@/components/navigation/utils/build-nav-links';
-import { GameSwitcher } from '@/components/navigation/components/GameSwitcher';
-import { UserMenu } from '@/components/navigation/components/UserMenu';
-import { NavbarLinksGroup } from '@/components/navigation/components/NavbarLinksGroup';
-import { GameActions } from '@/components/navigation/components/GameActions';
+import { buildNavLinks } from '@/components/navigation/build-nav-links';
+import { GameSwitcher } from '@/components/navigation/GameSwitcher';
+import { UserMenu } from '@/components/navigation/UserMenu';
+import { NavbarLinksGroup } from '@/components/navigation/NavbarLinksGroup';
+import { GameActions } from '@/components/navigation/GameActions';
 import { ThemeChanger } from '@/features/theme/components/ThemeChanger';
 
 type AppNavbarProps = {
