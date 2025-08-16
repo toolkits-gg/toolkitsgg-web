@@ -4,12 +4,12 @@ import type { GameId } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
 import { gameData } from '@/features/game/data';
-import { isGameId } from '@/features/game/utils/game-utils';
 import {
   fromErrorToActionState,
   toActionState,
   type ActionState,
 } from '@/components/form/utils/action-state';
+import { gameUtils } from '@/features/game/utils/game-utils';
 
 export const toggleFavoriteGame = async (
   gameId: GameId
@@ -19,7 +19,7 @@ export const toggleFavoriteGame = async (
     throw new Error('User not authenticated');
   }
 
-  if (!isGameId(gameId)) {
+  if (!gameUtils.isGameId(gameId)) {
     throw new Error(`Invalid GameId: ${gameId}`);
   }
 
