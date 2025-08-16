@@ -16,13 +16,13 @@ type AppNavbarProps = {
   gameConfig: GameConfig<unknown>;
 };
 
-function AppNavbar<ConfigType>({ gameConfig }: AppNavbarProps) {
+function AppNavbar({ gameConfig }: AppNavbarProps) {
   // TODO Get user favorite games
   const favoriteGameIds: string[] = [];
 
   const { user } = useAuth();
 
-  const gameId = gameConfig?.id as GameId | undefined;
+  const gameId = gameConfig?.id;
 
   const isGameFavorited = favoriteGameIds.some(
     (favoriteGameId) => favoriteGameId === gameId
@@ -35,7 +35,7 @@ function AppNavbar<ConfigType>({ gameConfig }: AppNavbarProps) {
       <div className={classes.header}>
         <Group justify="space-between" wrap="nowrap">
           <GameSwitcher gameConfig={gameConfig} />
-          <GameActions gameId="none" />
+          <GameActions gameId={gameId} />
         </Group>
       </div>
 
