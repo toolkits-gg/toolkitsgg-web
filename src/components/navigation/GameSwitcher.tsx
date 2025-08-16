@@ -1,60 +1,12 @@
 'use client';
 
-import type { GameId } from '@prisma/client';
 import { allGameConfigs, noGameConfig } from '@/features/game/constants';
-import { usePathname } from 'next/navigation';
-import { toGameConfig } from '@/features/game/utils/game-id';
 import React from 'react';
-import {
-  Flex,
-  Menu,
-  Text,
-  UnstyledButton,
-  useMantineColorScheme,
-} from '@mantine/core';
+import { Flex, Menu, Text, UnstyledButton } from '@mantine/core';
 import classes from './GameSwitcher.module.css';
 import { IconChevronDown } from '@tabler/icons-react';
-import { allThemeClassNames } from '@/features/theme/constants';
 import Link from 'next/link';
 import type { GameConfig } from '@/features/game/types';
-import type { COE33ItemType } from '@/games/coe33/items/types';
-
-type UseActiveGameConfigArgs = {
-  gameId: GameId | undefined;
-};
-
-const useActiveGameConfig = ({ gameId }: UseActiveGameConfigArgs) => {
-  const pathname = usePathname();
-  const validatedGameId = React.useRef<GameId | undefined>(gameId);
-
-  const { colorScheme } = useMantineColorScheme();
-
-  const colorTheme = colorScheme?.includes('-accent')
-    ? colorScheme.split('-accent')[0]
-    : colorScheme;
-
-  const activeGameConfig = React.useMemo(() => {
-    if (!gameId && pathname !== '/') {
-      validatedGameId.current =
-        (allThemeClassNames.find(
-          (className) => colorTheme === className
-        ) as GameId) || noGameConfig.id;
-    }
-
-    const gameConfig = toGameConfig(validatedGameId.current);
-
-    if (!gameConfig) {
-      return noGameConfig;
-    }
-
-    return gameConfig;
-  }, [pathname, gameId]);
-
-  return {
-    activeGameConfig,
-    validatedGameId,
-  };
-};
 
 type GameSwitcherProps = {
   gameConfig: GameConfig<unknown>;

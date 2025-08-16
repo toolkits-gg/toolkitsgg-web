@@ -1,4 +1,4 @@
-import { isGameId, toGameConfig } from '@/features/game/utils/game-id';
+import { gameUtils } from '@/features/game/utils/game-utils';
 
 type GameHomePageProps = {
   params: Promise<{ gameId: string }>;
@@ -8,13 +8,13 @@ type GameHomePageProps = {
 
 export default async function GameHomePage({ params }: GameHomePageProps) {
   const { gameId } = await params;
-  const isGameIdValid = isGameId(gameId);
+  const isGameIdValid = gameUtils.isGameId(gameId);
 
   if (!isGameIdValid) {
     throw new Error(`Invalid game id: ${gameId}`);
   }
 
-  const gameConfig = toGameConfig(gameId);
+  const gameConfig = gameUtils.toGameConfig(gameId);
 
   if (!gameConfig) {
     throw new Error(`Game configuration not found for game id ${gameId}!`);

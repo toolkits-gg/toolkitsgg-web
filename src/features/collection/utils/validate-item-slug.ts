@@ -1,4 +1,4 @@
-import { toGameConfig } from '@/features/game/utils/game-id';
+import { toGameConfig } from '@/features/game/utils/game-utils';
 import type { GameId } from '@prisma/client';
 
 export const validateItemSlug = (gameId: GameId, itemSlug: string) => {
