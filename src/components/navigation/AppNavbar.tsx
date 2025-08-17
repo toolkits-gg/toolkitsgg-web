@@ -21,7 +21,7 @@ function AppNavbar({ gameConfig }: AppNavbarProps) {
 
   const { user } = useAuth();
 
-  const gameId = gameConfig?.id;
+  const gameId = gameConfig.id;
 
   const isGameFavorited = favoriteGameIds.some(
     (favoriteGameId) => favoriteGameId === gameId
@@ -42,9 +42,11 @@ function AppNavbar({ gameConfig }: AppNavbarProps) {
         <Box style={{ flexGrow: 1 }}>
           <GameSwitcher gameConfig={gameConfig} />
         </Box>
-        <Box style={{ flexGrow: 0 }}>
-          <GameActions gameId={gameId} />
-        </Box>
+        {gameId !== 'none' && (
+          <Box style={{ flexGrow: 0 }}>
+            <GameActions gameId={gameId} />
+          </Box>
+        )}
       </Flex>
 
       <ScrollArea className={classes.links}>
