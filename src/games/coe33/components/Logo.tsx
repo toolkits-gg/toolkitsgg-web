@@ -6,8 +6,6 @@ type COE33LogoProps = {
 };
 
 const COE33Logo = ({ size = defaultLogoSize }: COE33LogoProps) => {
-  console.log(`${logosPath()}/${size}C33.png`);
-
   // Logo sizes don't go lower than 64
   // The image path needs a safe size
   const safeSize = size < 64 ? 64 : size;
