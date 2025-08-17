@@ -52,7 +52,9 @@ const NavbarLinksGroup = ({
                 <Icon size={18} />
               </ThemeIcon>
             )}
-            <Box ml="md">{label}</Box>
+            <Box ml="md" className={classes.label}>
+              {label}
+            </Box>
           </Box>
           {hasLinks && (
             <IconChevronRight

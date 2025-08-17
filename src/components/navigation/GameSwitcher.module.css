@@ -9,14 +9,14 @@
   border: 2px solid transparent;
   background-color: transparent;
 
-  &:hover {
+  @mixin hover {
     border: 2px solid
       light-dark(var(--mantine-color-primary-2), var(--mantine-color-primary-5));
     background-color: light-dark(
-      var(--mantine-color-primary-4),
+      var(--mantine-color-primary-0),
       var(--mantine-color-primary-7)
     );
-    color: light-dark(var(--mantine-color-white), var(--mantine-color-white));
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-dark-0));
   }
 }
 
@@ -37,13 +37,13 @@
   border: 2px solid transparent;
   background-color: transparent;
 
-  &:hover {
+  @mixin hover {
     border: 2px solid
       light-dark(var(--mantine-color-primary-2), var(--mantine-color-primary-5));
     background-color: light-dark(
-      var(--mantine-color-primary-4),
+      var(--mantine-color-primary-0),
       var(--mantine-color-primary-7)
     );
-    color: light-dark(var(--mantine-color-white), var(--mantine-color-white));
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-dark-0));
   }
 }
