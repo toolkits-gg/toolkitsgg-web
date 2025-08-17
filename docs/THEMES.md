@@ -54,3 +54,21 @@ Ex.
     })
 }
 ```
+
+## Accessibility
+
+All themes should account for Deuteranopia and Protanopia color blindness.
+
+### Deuteranopia
+
+Deuteranopia is a type of red-green color blindness where the green cones in the eye are absent.
+This results in difficulty distinguishing between reds and greens.
+
+**If your theme uses the colors red and green**, you should provide a color override for green in the deuteranopia specific theme.
+
+### Protanopia
+
+Protanopia is another type of red-green color blindness where the red cones in the eye are absent.
+This results in difficulty distinguishing between reds and greens.
+
+**If your theme uses the colors red and green**, you should provide a color override for red in the protanopia specific theme.
