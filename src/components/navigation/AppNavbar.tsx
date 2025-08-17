@@ -29,6 +29,8 @@ function AppNavbar({ gameConfig }: AppNavbarProps) {
 
   const navLinks = navUtils.buildNavLinks(gameConfig);
 
+  const gameActionsVisible = gameId !== 'none' && user;
+
   return (
     <nav className={classes.navbar}>
       <Flex
@@ -42,7 +44,7 @@ function AppNavbar({ gameConfig }: AppNavbarProps) {
         <Box style={{ flexGrow: 1 }}>
           <GameSwitcher gameConfig={gameConfig} />
         </Box>
-        {gameId !== 'none' && (
+        {gameActionsVisible && (
           <Box style={{ flexGrow: 0 }}>
             <GameActions gameId={gameId} />
           </Box>
