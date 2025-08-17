@@ -28,11 +28,12 @@ const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
     pathname.includes(gameConfig.id)
   );
 
-  const [mantineTheme, setMantineTheme] = useAtom(mantineThemeAtom);
+  const [mantineTheme] = useAtom(mantineThemeAtom);
 
-  if (gameConfig && gameConfig.themeDefinition) {
-    setMantineTheme(gameConfig.themeDefinition.theme);
-  }
+  // const computedMantineTheme =
+  //   gameConfig && gameConfig.themeDefinition
+  //     ? gameConfig.themeDefinition.theme
+  //     : mantineTheme;
 
   const themes = [...allThemeClassNames, ...accentThemes];
 

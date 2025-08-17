@@ -37,11 +37,22 @@ const ThemeChanger = () => {
   const [mantineTheme, setMantineTheme] = useAtom(mantineThemeAtom);
 
   useEffect(() => {
+    if (!nextTheme) return;
+
+    console.info(nextTheme);
+
+    if (nextTheme === 'default-dark' || nextTheme === 'default-light') {
+      console.info('Using default theme');
+      setMantineTheme(defaultTheme);
+      return;
+    }
+
     const gameConfig = allGameConfigs.find(
       (config) =>
         config.themeDefinition &&
-        nextTheme?.includes(config.themeDefinition.className)
+        nextTheme.includes(config.themeDefinition.className)
     );
+
     if (gameConfig?.themeDefinition) {
       setMantineTheme(gameConfig.themeDefinition.theme);
     }
