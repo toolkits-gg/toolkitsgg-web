@@ -1,5 +1,5 @@
 import { FavoriteGameButton } from '@/components/navigation/FavoriteGameButton';
-import { Group } from '@mantine/core';
+import { Flex } from '@mantine/core';
 import type { GameId } from '@prisma/client';
 
 type GameActionsProps = {
@@ -15,9 +15,9 @@ const GameActions = ({ gameId }: GameActionsProps) => {
   // );
 
   return (
-    <Group>
+    <Flex justify="flex-end" align="center" w="100%">
       <FavoriteGameButton gameId={gameId} isFavorite={false} />
-    </Group>
+    </Flex>
   );
 };
 

@@ -29,7 +29,9 @@ const FavoriteGameButton = ({
           isPending={isPending}
           tooltip="Unfavorite game"
           aria-label="Unfavorite game"
-          color="accent1.5"
+          color="primary.4"
+          variant="filled"
+          size="compact-md"
         >
           <IconHeart fill="white" />
         </SubmitButton>
@@ -42,7 +44,9 @@ const FavoriteGameButton = ({
       <SubmitButton
         isPending={isPending}
         tooltip="Favorite game"
-        color="accent1.5"
+        color="primary.4"
+        variant="outline"
+        size="compact-md"
       >
         <IconHeartPlus />
       </SubmitButton>

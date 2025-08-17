@@ -13,6 +13,7 @@ import {
   Flex,
   Select,
   Skeleton,
+  Tooltip,
   useMantineColorScheme,
   type MantineColorScheme,
 } from '@mantine/core';
@@ -128,9 +129,17 @@ const ThemeChanger = () => {
 
   return (
     <>
-      <Button onClick={toggle} aria-label="Theme settings" color="primary.5">
-        <IconPalette />
-      </Button>
+      <Tooltip label="Change theme settings">
+        <Button
+          onClick={toggle}
+          aria-label="Theme settings"
+          color="primary.5"
+          variant="filled"
+          size="compact-md"
+        >
+          <IconPalette />
+        </Button>
+      </Tooltip>
       <Dialog
         opened={dialogOpen}
         withCloseButton

@@ -1,6 +1,6 @@
 'use client';
 
-import { Flex, Group, ScrollArea } from '@mantine/core';
+import { Box, Flex, Group, ScrollArea } from '@mantine/core';
 import classes from './AppNavbar.module.css';
 import { useAuth } from '@/features/auth/hooks/use-auth';
 import type { GameConfig } from '@/features/game/types';
@@ -31,12 +31,21 @@ function AppNavbar({ gameConfig }: AppNavbarProps) {
 
   return (
     <nav className={classes.navbar}>
-      <div className={classes.header}>
-        <Group justify="space-between" wrap="nowrap">
+      <Flex
+        justify="start"
+        align="center"
+        dir="column"
+        wrap="nowrap"
+        className={classes.header}
+        gap="sm"
+      >
+        <Box style={{ flexGrow: 1 }}>
           <GameSwitcher gameConfig={gameConfig} />
+        </Box>
+        <Box style={{ flexGrow: 0 }}>
           <GameActions gameId={gameId} />
-        </Group>
-      </div>
+        </Box>
+      </Flex>
 
       <ScrollArea className={classes.links}>
         <div className={classes.linksInner}>
@@ -46,11 +55,15 @@ function AppNavbar({ gameConfig }: AppNavbarProps) {
         </div>
       </ScrollArea>
 
-      <Flex align="center" justify="end" p={4}>
+      <Flex
+        className={classes.secondaryActions}
+        justify="flex-end"
+        align="center"
+      >
         <ThemeChanger />
       </Flex>
 
-      <Flex className={classes.footer} p={4}>
+      <Flex className={classes.footer} justify="flex-start" align="center">
         <UserMenu />
       </Flex>
     </nav>

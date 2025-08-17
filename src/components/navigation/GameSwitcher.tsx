@@ -32,14 +32,14 @@ const GameSwitcher = ({ gameConfig }: GameSwitcherProps) => {
             <Flex
               className={classes.logo}
               align="center"
-              justify="space-between"
+              justify="flex-start"
               p={2}
               bdrs="lg"
               w="100%"
-              gap={4}
+              gap="md"
             >
               {gameConfig?.logo(48)}
-              <Text size="sm">
+              <Text size="sm" fw="bolder">
                 {gameConfig?.label === 'Default'
                   ? 'Select a game'
                   : gameConfig?.label}
