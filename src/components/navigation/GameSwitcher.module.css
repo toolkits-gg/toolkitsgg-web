@@ -10,8 +10,13 @@
   background-color: transparent;
 
   &:hover {
-    border: 2px solid var(--mantine-color-primary-5);
-    background-color: var(--mantine-color-primary-7);
+    border: 2px solid
+      light-dark(var(--mantine-color-primary-2), var(--mantine-color-primary-5));
+    background-color: light-dark(
+      var(--mantine-color-primary-4),
+      var(--mantine-color-primary-7)
+    );
+    color: light-dark(var(--mantine-color-white), var(--mantine-color-white));
   }
 }
 
@@ -21,7 +26,10 @@
 }
 
 .menu {
-  background-color: var(--mantine-color-card-bg-6);
+  background-color: light-dark(
+    var(--mantine-color-card-bg-5),
+    var(--mantine-color-card-bg-6)
+  );
   border-color: var(--mantine-color-border-5);
 }
 
@@ -30,7 +38,12 @@
   background-color: transparent;
 
   &:hover {
-    border: 2px solid var(--mantine-color-primary-5);
-    background-color: var(--mantine-color-primary-7);
+    border: 2px solid
+      light-dark(var(--mantine-color-primary-2), var(--mantine-color-primary-5));
+    background-color: light-dark(
+      var(--mantine-color-primary-4),
+      var(--mantine-color-primary-7)
+    );
+    color: light-dark(var(--mantine-color-white), var(--mantine-color-white));
   }
 }

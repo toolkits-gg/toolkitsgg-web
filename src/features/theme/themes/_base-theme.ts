@@ -58,6 +58,7 @@ export const _baseTheme: MantineThemeOverride = createTheme({
   },
   breakpoints: BREAKPOINTS,
   primaryColor: 'primary',
+  primaryShade: { light: 5, dark: 5 },
   components: {
     /** Put your mantine component override here */
     Container: Container.extend({

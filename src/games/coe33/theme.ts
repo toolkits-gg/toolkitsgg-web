@@ -7,16 +7,16 @@ const coe33ThemeColors: ThemeCustomColors = {
    * Colors
    */
   primaryDark: [
-    '#fffcf8',
-    '#fff5e9',
-    '#ffeed9',
-    '#ffe4be',
-    '#ffdeab',
-    '#ffd58e',
-    '#d7a300',
-    '#9d7600',
-    '#694e00',
-    '#372800',
+    '#fef8f4',
+    '#fdf1e9',
+    '#fce0cd',
+    '#fad3b3',
+    '#f9c597',
+    '#f8b46d',
+    '#cc8b39',
+    '#966527',
+    '#644217',
+    '#382309',
   ],
   primaryLight: [
     '#e5e8f1',
