@@ -1,4 +1,4 @@
-import type { ActionState } from '@/components/form/utils/action-state';
+import type { ActionState } from '@/components/form/utils';
 import { useEffect, useRef } from 'react';
 
 type OnArgs = {

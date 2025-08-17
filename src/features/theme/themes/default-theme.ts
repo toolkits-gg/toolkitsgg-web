@@ -268,6 +268,7 @@ const defaultThemeColors: ThemeCustomColors = {
     '#1f1a35',
     '#100d1a',
   ],
+
   inputLight: [
     '#ffffff',
     '#fcfcfc',
@@ -285,6 +286,22 @@ const defaultThemeColors: ThemeCustomColors = {
     dark: 'inputDark',
     light: 'inputLight',
   }),
+
+  /**
+   * Text
+   */
+  error: [
+    '#fff5f5',
+    '#ffe3e3',
+    '#ffc9c9',
+    '#ffa8a8',
+    '#ff8787',
+    '#ff6b6b',
+    '#fa5252',
+    '#f03e3e',
+    '#e03131',
+    '#c92a2a',
+  ],
 };
 
 export const defaultTheme = {

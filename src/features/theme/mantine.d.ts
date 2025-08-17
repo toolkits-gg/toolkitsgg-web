@@ -10,6 +10,7 @@ type ExtendedCustomColors =
   | 'border'
   | 'ring'
   | 'input'
+  | 'error'
   | DefaultMantineColor;
 
 declare module '@mantine/core' {

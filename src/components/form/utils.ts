@@ -1,23 +1,7 @@
+import type { ActionState } from '@/components/form/types';
 import { ZodError } from 'zod';
 
-export type ActionState<T = any> = {
-  status?: 'SUCCESS' | 'ERROR';
-  message: string;
-  showToast?: boolean;
-  payload?: FormData;
-  fieldErrors: Record<string, string[] | undefined>;
-  timestamp: number;
-  data?: T;
-};
-
-export const EMPTY_ACTION_STATE: ActionState = {
-  message: '',
-  showToast: true,
-  fieldErrors: {},
-  timestamp: Date.now(),
-};
-
-export const fromErrorToActionState = ({
+const fromErrorToActionState = ({
   error,
   formData,
   showToast = true,
@@ -55,7 +39,7 @@ export const fromErrorToActionState = ({
   }
 };
 
-export const toActionState = ({
+const toActionState = ({
   status = 'SUCCESS',
   message = '',
   showToast = true,
@@ -77,4 +61,9 @@ export const toActionState = ({
     timestamp: Date.now(),
     data,
   };
+};
+
+export const formUtils = {
+  fromErrorToActionState,
+  toActionState,
 };

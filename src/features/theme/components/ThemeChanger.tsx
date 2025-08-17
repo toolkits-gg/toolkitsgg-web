@@ -18,9 +18,8 @@ import {
   type MantineColorScheme,
 } from '@mantine/core';
 import { IconPalette } from '@tabler/icons-react';
-import { useDisclosure } from '@mantine/hooks';
+import { upperFirst, useDisclosure } from '@mantine/hooks';
 import { useTheme as useNextTheme } from 'next-themes';
-import { capitalize } from '@/utils/capitalize';
 import { allGameConfigs } from '@/features/game/constants';
 import { useAtom } from 'jotai';
 import { mantineThemeAtom } from '@/features/theme/atoms';
@@ -159,7 +158,7 @@ const ThemeChanger = () => {
             <Select
               label="Select mode"
               data={themeModes.map((tm) => ({
-                label: tm === 'auto' ? 'All' : capitalize(tm),
+                label: tm === 'auto' ? 'All' : upperFirst(tm),
                 value: tm,
               }))}
               value={mode}

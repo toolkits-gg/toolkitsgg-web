@@ -1,4 +1,5 @@
-import type { ActionState } from '@/components/form/utils/action-state';
+import type { ActionState } from '@/components/form/types';
+import { Text } from '@mantine/core';
 
 type FieldErrorProps = {
   actionState: ActionState;
@@ -10,7 +11,11 @@ const FieldError = ({ actionState, name }: FieldErrorProps) => {
 
   if (!message) return null;
 
-  return <span>{message}</span>;
+  return (
+    <Text size="sm" c="error">
+      {message}
+    </Text>
+  );
 };
 
 export { FieldError };
