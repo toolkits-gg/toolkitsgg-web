@@ -5,6 +5,7 @@
     "yoavbls.pretty-ts-errors",
     "prisma.prisma",
     "vunguyentuan.vscode-postcss", // for mantine autocomplete
-    "vunguyentuan.vscode-css-variables" // for mantine variables
+    "vunguyentuan.vscode-css-variables", // for mantine variables
+    "kamikillerto.vscode-colorize" // optional, colorizes hex codes inline
   ]
 }

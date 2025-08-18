@@ -25,5 +25,6 @@
     "**/*.sass",
     "**/*.less",
     "node_modules/@mantine/core/styles.css"
-  ]
+  ],
+  "colorize.languages": ["javascript", "typescript", "markdown"]
 }
