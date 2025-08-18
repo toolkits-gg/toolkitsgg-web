@@ -1,5 +1,6 @@
 'use client';
 
+import type { MantineThemeOverride } from '@mantine/core';
 import {
   Card,
   Container,
@@ -8,7 +9,6 @@ import {
   rem,
   Select,
 } from '@mantine/core';
-import type { MantineThemeOverride } from '@mantine/core';
 
 const CONTAINER_SIZES: Record<string, string> = {
   xxs: rem('200px'),

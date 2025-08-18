@@ -1,10 +1,10 @@
+import { type MantineThemeOverride, virtualColor } from '@mantine/core';
 import {
   _baseTheme,
   _baseThemeDeuteranopia,
   _baseThemeProtanopia,
 } from '@/features/theme/themes/_base-theme';
 import type { ThemeCustomColors } from '@/features/theme/types';
-import { virtualColor, type MantineThemeOverride } from '@mantine/core';
 
 const coe33ThemeColors: ThemeCustomColors = {
   /**

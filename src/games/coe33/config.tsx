@@ -1,18 +1,18 @@
+import type { LogoSize } from '@/components/Logo';
+import type { GameConfig } from '@/features/game/types';
+import { HomePage } from '@/games/coe33/components/HomePage';
+import { ItemCollectorPage } from '@/games/coe33/components/ItemCollectorPage';
+import { ItemLookupPage } from '@/games/coe33/components/ItemLookupPage';
+import { COE33Logo } from '@/games/coe33/components/Logo';
 import { coe33DataUtils } from '@/games/coe33/data';
+import { coe33Items } from '@/games/coe33/items/all-items';
+import type { COE33ItemType } from '@/games/coe33/items/types';
 import {
   coe33Path,
   itemCollectorPath,
   itemLookupPath,
   resourcesPath,
 } from '@/games/coe33/paths';
-import type { GameConfig } from '@/features/game/types';
-import type { COE33ItemType } from '@/games/coe33/items/types';
-import { coe33Items } from '@/games/coe33/items/all-items';
-import type { LogoSize } from '@/components/Logo';
-import { COE33Logo } from '@/games/coe33/components/Logo';
-import { HomePage } from '@/games/coe33/components/HomePage';
-import { ItemLookupPage } from '@/games/coe33/components/ItemLookupPage';
-import { ItemCollectorPage } from '@/games/coe33/components/ItemCollectorPage';
 import {
   coe33Theme,
   coe33ThemeDeuteranopia,

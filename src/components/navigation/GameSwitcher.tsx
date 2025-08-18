@@ -1,12 +1,12 @@
 'use client';
 
-import { allGameConfigs, noGameConfig } from '@/features/game/constants';
-import React from 'react';
 import { Flex, Menu, Text, UnstyledButton } from '@mantine/core';
-import classes from './GameSwitcher.module.css';
 import { IconChevronDown } from '@tabler/icons-react';
 import Link from 'next/link';
+import React from 'react';
+import { allGameConfigs, noGameConfig } from '@/features/game/constants';
 import type { GameConfig } from '@/features/game/types';
+import classes from './GameSwitcher.module.css';
 
 type GameSwitcherProps = {
   gameConfig: GameConfig<unknown>;

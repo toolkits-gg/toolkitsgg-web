@@ -13,23 +13,14 @@ import { upperFirst, useDisclosure } from '@mantine/hooks';
 import { IconPalette } from '@tabler/icons-react';
 import { useAtom } from 'jotai';
 import { useTheme as useNextTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { allGameConfigs } from '@/features/game/constants';
+import { useEffect, useMemo, useState } from 'react';
 import { mantineThemeAtom } from '@/features/theme/atoms';
 import {
   accentThemeDefinitions,
   allThemeDefinitions,
   themeModes,
 } from '@/features/theme/constants';
-import {
-  defaultTheme,
-  defaultThemeDeuteranopia,
-  defaultThemeProtanopia,
-} from '@/features/theme/themes/default-theme';
-
-// TODO currently the default accent is not applied on page load
-// TODO additionally, changing the accent theme from default to accent does not work the first time
-// TODO it works changing from accent to accent though
+import { themeUtils } from '@/features/theme/utils';
 
 const ThemeChanger = () => {
   const [dialogOpen, { toggle, close }] = useDisclosure(false);
@@ -39,70 +30,27 @@ const ThemeChanger = () => {
   const { theme: nextTheme, setTheme: setNextTheme } = useNextTheme();
   const [mode, setMode] = useState<MantineColorScheme>('auto');
 
+  const accent = useMemo(
+    () => themeUtils.parseAccent({ nextTheme }),
+    [nextTheme]
+  );
+
   const [_mantineTheme, setMantineTheme] = useAtom(mantineThemeAtom);
 
-  const accent = nextTheme?.includes('-accent')
-    ? nextTheme.slice(nextTheme.indexOf('-accent') + 1)
-    : 'accent-default';
+  // We compute the mantine theme ourselves based on the next-theme,
+  // since the mantineThemeAtom cannot be initialized automatically
+  // with this value.
+  // We then watch for changes to the nextTheme or accent and update
+  // the Mantine theme accordingly.
+  const mantineTheme = useMemo(
+    () => themeUtils.chooseMantineTheme({ nextTheme, accent }),
+    [accent, nextTheme]
+  );
 
+  // Sync the mantineTheme atom with the next-themes value
   useEffect(() => {
-    if (!nextTheme) {
-      console.info(`No nextTheme set, defaulting}`);
-      return;
-    }
-
-    if (nextTheme === 'default-dark' || nextTheme === 'default-light') {
-      if (accent === 'accent-deuteranopic') {
-        console.info(`settingTheme to default deuteranopia`);
-        setMantineTheme(defaultThemeDeuteranopia);
-        return;
-      }
-
-      if (accent === 'accent-protanopic') {
-        console.info(`settingTheme to default protanopia`);
-        setMantineTheme(defaultThemeProtanopia);
-        return;
-      }
-
-      console.info(`settingTheme to default`);
-      setMantineTheme(defaultTheme);
-      return;
-    }
-
-    const gameConfig = allGameConfigs.find(
-      (config) =>
-        config.themeDefinition &&
-        nextTheme.includes(config.themeDefinition.className)
-    );
-
-    if (gameConfig?.themeDefinition) {
-      if (accent === 'accent-deuteranopic') {
-        console.info(
-          `settingTheme to ${gameConfig.themeDefinition.className} deuteranopia`
-        );
-        setMantineTheme(gameConfig.themeDefinition.themeDeuteranopia);
-        return;
-      }
-
-      if (accent === 'accent-protanopic') {
-        console.info(
-          `settingTheme to ${gameConfig.themeDefinition.className} protanopia`
-        );
-        setMantineTheme(gameConfig.themeDefinition.themeProtanopia);
-        return;
-      }
-
-      console.info(`settingTheme to ${gameConfig.themeDefinition.className}`);
-      setMantineTheme(gameConfig.themeDefinition.theme);
-    }
-  }, [nextTheme, accent, setMantineTheme]);
-
-  // if (!colorScheme) {
-  //   return <Skeleton height={36} />;
-  // }
-  // if (!isClient) {
-  //   return <Skeleton height={36} />;
-  // }
+    setMantineTheme(mantineTheme);
+  }, [mantineTheme, setMantineTheme]);
 
   const handleChangeNextTheme = (value: string | null) => {
     let newNextTheme = value ?? 'default-dark';
@@ -115,39 +63,7 @@ const ThemeChanger = () => {
       newNextTheme = newNextTheme.replace(mode, newColorScheme);
       setColorScheme(newColorScheme);
     }
-
     setNextTheme(newNextTheme);
-
-    const gameConfig = allGameConfigs.find(
-      (gameConfig) => gameConfig.themeDefinition?.className === newNextTheme
-    );
-
-    if (!gameConfig || !gameConfig.themeDefinition?.theme) {
-      if (accent === 'accent-deuteranopic') {
-        setMantineTheme(defaultThemeDeuteranopia);
-        return;
-      }
-
-      if (accent === 'accent-protanopic') {
-        setMantineTheme(defaultThemeProtanopia);
-        return;
-      }
-
-      setMantineTheme(defaultTheme);
-      return;
-    }
-
-    if (accent === 'accent-deuteranopic') {
-      setMantineTheme(gameConfig.themeDefinition.themeDeuteranopia);
-      return;
-    }
-
-    if (accent === 'accent-protanopic') {
-      setMantineTheme(gameConfig.themeDefinition.themeProtanopia);
-      return;
-    }
-
-    setMantineTheme(gameConfig.themeDefinition.theme);
   };
 
   const handleChangeMode = (value: string | null) => {
@@ -182,37 +98,6 @@ const ThemeChanger = () => {
       }
 
       setNextTheme(`${newNextTheme}-${value}`);
-
-      const gameConfig = allGameConfigs.find(
-        (gameConfig) => gameConfig.themeDefinition?.className === newNextTheme
-      );
-
-      if (!gameConfig || !gameConfig.themeDefinition?.theme) {
-        if (accent === 'accent-deuteranopic') {
-          setMantineTheme(defaultThemeDeuteranopia);
-          return;
-        }
-
-        if (accent === 'accent-protanopic') {
-          setMantineTheme(defaultThemeProtanopia);
-          return;
-        }
-
-        setMantineTheme(defaultTheme);
-        return;
-      }
-
-      if (accent === 'accent-deuteranopic') {
-        setMantineTheme(gameConfig.themeDefinition.themeDeuteranopia);
-        return;
-      }
-
-      if (accent === 'accent-protanopic') {
-        setMantineTheme(gameConfig.themeDefinition.themeProtanopia);
-        return;
-      }
-
-      setMantineTheme(gameConfig.themeDefinition.theme);
     }
   };
 
