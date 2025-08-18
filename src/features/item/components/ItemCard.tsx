@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Group, Image, Stack, Text } from '@mantine/core';
+import { Card, Image, Stack, Text } from '@mantine/core';
 import NextImage from 'next/image';
 import type { BaseItemType } from '@/features/item/types';
 import classes from './ItemCard.module.css';
@@ -34,7 +34,7 @@ const ItemDescription = ({
   return itemDescription
     .filter((desc) => desc !== '')
     .map((desc) => (
-      <Text mt="sm" mb="md" fz="sm">
+      <Text mt="sm" mb="md" fz="sm" key={desc}>
         {desc}
       </Text>
     ));

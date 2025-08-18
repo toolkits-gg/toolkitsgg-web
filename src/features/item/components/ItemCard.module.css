@@ -1,5 +1,18 @@
 .card {
-  background-color: var(--mantine-color-card-bg-5);
+  background: light-dark(
+    linear-gradient(
+      90deg,
+      var(--mantine-color-primary-1) 0%,
+      var(--mantine-color-primary-0) 25%,
+      rgba(255, 255, 255, 1) 100%
+    ),
+    linear-gradient(
+      90deg,
+      var(--mantine-color-primary-7) 0%,
+      var(--mantine-color-primary-8) 25%,
+      rgba(0, 0, 0, 0.95) 100%
+    )
+  );
   border-color: var(--mantine-color-border-5);
   box-shadow:
     0 4px 24px 0 rgba(0, 0, 0, 0.18),
@@ -64,8 +77,8 @@
   text-align: left;
   background: linear-gradient(
     90deg,
-    var(--mantine-color-primary-5) 0%,
-    var(--mantine-color-accent1-5) 100%
+    var(--mantine-color-secondary-5) 0%,
+    var(--mantine-color-primary-3) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
