@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Flex, Group, ScrollArea } from '@mantine/core';
+import { Box, Button, Flex, Group, ScrollArea } from '@mantine/core';
 import classes from './AppNavbar.module.css';
 import { useAuth } from '@/features/auth/hooks/use-auth';
 import type { GameConfig } from '@/features/game/types';
@@ -64,6 +64,8 @@ function AppNavbar({ gameConfig }: AppNavbarProps) {
         justify="flex-end"
         align="center"
       >
+        <Button color="error.5">Error</Button>
+        <Button color="success.5">Success</Button>
         <ThemeChanger />
       </Flex>
 

@@ -66,17 +66,14 @@ export type ThemeCustomColors = {
   inputDark: MantineColorsTuple;
   inputLight: MantineColorsTuple;
   input: MantineColorsTuple;
-
-  /**
-   * Text
-   */
-  error: MantineColorsTuple;
 };
 
 export type ToolkitThemeDefinition = {
   label: string;
   className: string;
   theme: MantineThemeOverride;
+  themeDeuteranopia: MantineThemeOverride;
+  themeProtanopia: MantineThemeOverride;
 };
 
 export type ToolkitAccentThemeDefinition = {

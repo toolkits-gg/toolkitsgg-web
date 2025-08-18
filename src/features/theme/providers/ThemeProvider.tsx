@@ -1,15 +1,12 @@
 'use client';
 
-import { defaultTheme } from '@/features/theme/themes/default-theme';
-import { MantineProvider, type MantineThemeOverride } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import {
   accentThemeClassNames,
   allThemeClassNames,
   nextThemesDefaultTheme,
 } from '@/features/theme/constants';
-import { usePathname } from 'next/navigation';
-import { allGameConfigs } from '@/features/game/constants';
 import { useAtom } from 'jotai';
 import { mantineThemeAtom } from '@/features/theme/atoms';
 
@@ -22,18 +19,7 @@ const accentThemes = allThemeClassNames
 type ThemeProviderProps = React.PropsWithChildren;
 
 const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
-  const pathname = usePathname();
-
-  const gameConfig = allGameConfigs.find((gameConfig) =>
-    pathname.includes(gameConfig.id)
-  );
-
   const [mantineTheme] = useAtom(mantineThemeAtom);
-
-  // const computedMantineTheme =
-  //   gameConfig && gameConfig.themeDefinition
-  //     ? gameConfig.themeDefinition.theme
-  //     : mantineTheme;
 
   const themes = [...allThemeClassNames, ...accentThemes];
 

@@ -1,5 +1,9 @@
 import { allGameConfigs } from '@/features/game/constants';
-import { defaultTheme } from '@/features/theme/themes/default-theme';
+import {
+  defaultTheme,
+  defaultThemeDeuteranopia,
+  defaultThemeProtanopia,
+} from '@/features/theme/themes/default-theme';
 import type {
   ToolkitAccentThemeDefinition,
   ToolkitThemeDefinition,
@@ -13,11 +17,15 @@ export const themeDefinitions: ToolkitThemeDefinition[] = [
     label: 'Default Light',
     className: 'default-light',
     theme: defaultTheme,
+    themeDeuteranopia: defaultThemeDeuteranopia,
+    themeProtanopia: defaultThemeProtanopia,
   },
   {
     label: 'Default Dark',
     className: 'default-dark',
     theme: defaultTheme,
+    themeDeuteranopia: defaultThemeDeuteranopia,
+    themeProtanopia: defaultThemeProtanopia,
   },
 ].sort((a, b) => a.label.localeCompare(b.label));
 
@@ -28,11 +36,15 @@ const gameThemeDefinitions: ToolkitThemeDefinition[] = allGameConfigs
       label: `${gameConfig.themeDefinition?.label} - Light`,
       className: `${gameConfig.themeDefinition?.className}-light`,
       theme: gameConfig.themeDefinition!!.theme,
+      themeDeuteranopia: defaultThemeDeuteranopia,
+      themeProtanopia: defaultThemeProtanopia,
     },
     {
       label: `${gameConfig.themeDefinition?.label} - Dark`,
       className: `${gameConfig.themeDefinition?.className}-dark`,
       theme: gameConfig.themeDefinition!!.theme,
+      themeDeuteranopia: defaultThemeDeuteranopia,
+      themeProtanopia: defaultThemeProtanopia,
     },
   ])
   .flat()
@@ -63,13 +75,8 @@ export const allThemeDefinitions = [
 
 export const allThemeClassNames = [
   ...themeDefinitions.map((def) => def.className),
-  ...gameThemeDefinitions.map((def) => [
-    `${def.className}-dark`,
-    `${def.className}-light`,
-  ]),
-]
-  .flat()
-  .sort();
+  ...gameThemeDefinitions.map((def) => def.className),
+].sort();
 
 export const accentThemeClassNames = accentThemeDefinitions
   .filter((def) => def.label !== 'Default')

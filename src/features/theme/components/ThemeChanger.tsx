@@ -1,48 +1,70 @@
 'use client';
 
+import {
+  Button,
+  Dialog,
+  Flex,
+  type MantineColorScheme,
+  Select,
+  Tooltip,
+  useMantineColorScheme,
+} from '@mantine/core';
+import { upperFirst, useDisclosure } from '@mantine/hooks';
+import { IconPalette } from '@tabler/icons-react';
+import { useAtom } from 'jotai';
+import { useTheme as useNextTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { useIsClient } from 'usehooks-ts';
+import { allGameConfigs } from '@/features/game/constants';
+import { mantineThemeAtom } from '@/features/theme/atoms';
 import {
   accentThemeDefinitions,
   allThemeDefinitions,
   themeModes,
 } from '@/features/theme/constants';
 import {
-  Button,
-  Dialog,
-  Flex,
-  Select,
-  Skeleton,
-  Tooltip,
-  useMantineColorScheme,
-  type MantineColorScheme,
-} from '@mantine/core';
-import { IconPalette } from '@tabler/icons-react';
-import { upperFirst, useDisclosure } from '@mantine/hooks';
-import { useTheme as useNextTheme } from 'next-themes';
-import { allGameConfigs } from '@/features/game/constants';
-import { useAtom } from 'jotai';
-import { mantineThemeAtom } from '@/features/theme/atoms';
-import { defaultTheme } from '@/features/theme/themes/default-theme';
+  defaultTheme,
+  defaultThemeDeuteranopia,
+  defaultThemeProtanopia,
+} from '@/features/theme/themes/default-theme';
+
+// TODO currently the default accent is not applied on page load
+// TODO additionally, changing the accent theme from default to accent does not work the first time
+// TODO it works changing from accent to accent though
 
 const ThemeChanger = () => {
   const [dialogOpen, { toggle, close }] = useDisclosure(false);
-  const isClient = useIsClient();
 
-  const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const { colorScheme: _colorScheme, setColorScheme } = useMantineColorScheme();
 
   const { theme: nextTheme, setTheme: setNextTheme } = useNextTheme();
   const [mode, setMode] = useState<MantineColorScheme>('auto');
 
-  const [mantineTheme, setMantineTheme] = useAtom(mantineThemeAtom);
+  const [_mantineTheme, setMantineTheme] = useAtom(mantineThemeAtom);
+
+  const accent = nextTheme?.includes('-accent')
+    ? nextTheme.slice(nextTheme.indexOf('-accent') + 1)
+    : 'accent-default';
 
   useEffect(() => {
-    if (!nextTheme) return;
-
-    console.info(nextTheme);
+    if (!nextTheme) {
+      console.info(`No nextTheme set, defaulting}`);
+      return;
+    }
 
     if (nextTheme === 'default-dark' || nextTheme === 'default-light') {
-      console.info('Using default theme');
+      if (accent === 'accent-deuteranopic') {
+        console.info(`settingTheme to default deuteranopia`);
+        setMantineTheme(defaultThemeDeuteranopia);
+        return;
+      }
+
+      if (accent === 'accent-protanopic') {
+        console.info(`settingTheme to default protanopia`);
+        setMantineTheme(defaultThemeProtanopia);
+        return;
+      }
+
+      console.info(`settingTheme to default`);
       setMantineTheme(defaultTheme);
       return;
     }
@@ -54,20 +76,33 @@ const ThemeChanger = () => {
     );
 
     if (gameConfig?.themeDefinition) {
+      if (accent === 'accent-deuteranopic') {
+        console.info(
+          `settingTheme to ${gameConfig.themeDefinition.className} deuteranopia`
+        );
+        setMantineTheme(gameConfig.themeDefinition.themeDeuteranopia);
+        return;
+      }
+
+      if (accent === 'accent-protanopic') {
+        console.info(
+          `settingTheme to ${gameConfig.themeDefinition.className} protanopia`
+        );
+        setMantineTheme(gameConfig.themeDefinition.themeProtanopia);
+        return;
+      }
+
+      console.info(`settingTheme to ${gameConfig.themeDefinition.className}`);
       setMantineTheme(gameConfig.themeDefinition.theme);
     }
-  }, [nextTheme]);
+  }, [nextTheme, accent, setMantineTheme]);
 
-  if (!colorScheme) {
-    return <Skeleton height={36} />;
-  }
-  if (!isClient) {
-    return <Skeleton height={36} />;
-  }
-
-  const accent = nextTheme?.includes('-accent')
-    ? nextTheme.slice(nextTheme.indexOf('-accent') + 1)
-    : 'accent-default';
+  // if (!colorScheme) {
+  //   return <Skeleton height={36} />;
+  // }
+  // if (!isClient) {
+  //   return <Skeleton height={36} />;
+  // }
 
   const handleChangeNextTheme = (value: string | null) => {
     let newNextTheme = value ?? 'default-dark';
@@ -88,7 +123,27 @@ const ThemeChanger = () => {
     );
 
     if (!gameConfig || !gameConfig.themeDefinition?.theme) {
+      if (accent === 'accent-deuteranopic') {
+        setMantineTheme(defaultThemeDeuteranopia);
+        return;
+      }
+
+      if (accent === 'accent-protanopic') {
+        setMantineTheme(defaultThemeProtanopia);
+        return;
+      }
+
       setMantineTheme(defaultTheme);
+      return;
+    }
+
+    if (accent === 'accent-deuteranopic') {
+      setMantineTheme(gameConfig.themeDefinition.themeDeuteranopia);
+      return;
+    }
+
+    if (accent === 'accent-protanopic') {
+      setMantineTheme(gameConfig.themeDefinition.themeProtanopia);
       return;
     }
 
@@ -119,10 +174,45 @@ const ThemeChanger = () => {
     if (value === 'accent-default') {
       const newNextTheme = nextTheme.split('-accent-')[0];
       setNextTheme(newNextTheme);
-      // TODO Set Mantine Theme
     } else {
-      setNextTheme(`${nextTheme}-${value}`);
-      // TODO Set Mantine Theme
+      // Remove all existing accent values
+      let newNextTheme = nextTheme;
+      for (const def of accentThemeDefinitions) {
+        newNextTheme = newNextTheme.replace(`-${def.className}`, '');
+      }
+
+      setNextTheme(`${newNextTheme}-${value}`);
+
+      const gameConfig = allGameConfigs.find(
+        (gameConfig) => gameConfig.themeDefinition?.className === newNextTheme
+      );
+
+      if (!gameConfig || !gameConfig.themeDefinition?.theme) {
+        if (accent === 'accent-deuteranopic') {
+          setMantineTheme(defaultThemeDeuteranopia);
+          return;
+        }
+
+        if (accent === 'accent-protanopic') {
+          setMantineTheme(defaultThemeProtanopia);
+          return;
+        }
+
+        setMantineTheme(defaultTheme);
+        return;
+      }
+
+      if (accent === 'accent-deuteranopic') {
+        setMantineTheme(gameConfig.themeDefinition.themeDeuteranopia);
+        return;
+      }
+
+      if (accent === 'accent-protanopic') {
+        setMantineTheme(gameConfig.themeDefinition.themeProtanopia);
+        return;
+      }
+
+      setMantineTheme(gameConfig.themeDefinition.theme);
     }
   };
 

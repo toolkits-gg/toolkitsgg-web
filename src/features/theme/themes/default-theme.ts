@@ -1,6 +1,10 @@
-import { _baseTheme } from '@/features/theme/themes/_base-theme';
+import {
+  _baseTheme,
+  _baseThemeDeuteranopia,
+  _baseThemeProtanopia,
+} from '@/features/theme/themes/_base-theme';
 import type { ThemeCustomColors } from '@/features/theme/types';
-import { virtualColor } from '@mantine/core';
+import { virtualColor, type MantineThemeOverride } from '@mantine/core';
 
 const defaultThemeColors: ThemeCustomColors = {
   /**
@@ -286,28 +290,30 @@ const defaultThemeColors: ThemeCustomColors = {
     dark: 'inputDark',
     light: 'inputLight',
   }),
-
-  /**
-   * Text
-   */
-  error: [
-    '#fff5f5',
-    '#ffe3e3',
-    '#ffc9c9',
-    '#ffa8a8',
-    '#ff8787',
-    '#ff6b6b',
-    '#fa5252',
-    '#f03e3e',
-    '#e03131',
-    '#c92a2a',
-  ],
 };
 
-export const defaultTheme = {
+export const defaultTheme: MantineThemeOverride = {
   ..._baseTheme,
   colors: {
     ..._baseTheme.colors,
     ...defaultThemeColors,
+  },
+};
+
+export const defaultThemeDeuteranopia: MantineThemeOverride = {
+  ..._baseThemeDeuteranopia,
+  colors: {
+    ..._baseThemeDeuteranopia.colors,
+    ...defaultThemeColors,
+    // Other overrides here
+  },
+};
+
+export const defaultThemeProtanopia: MantineThemeOverride = {
+  ..._baseThemeProtanopia,
+  colors: {
+    ..._baseThemeProtanopia.colors,
+    ...defaultThemeColors,
+    // Other overrides here
   },
 };

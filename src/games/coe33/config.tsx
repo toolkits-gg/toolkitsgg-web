@@ -13,7 +13,11 @@ import { COE33Logo } from '@/games/coe33/components/Logo';
 import { HomePage } from '@/games/coe33/components/HomePage';
 import { ItemLookupPage } from '@/games/coe33/components/ItemLookupPage';
 import { ItemCollectorPage } from '@/games/coe33/components/ItemCollectorPage';
-import { coe33Theme } from '@/games/coe33/theme';
+import {
+  coe33Theme,
+  coe33ThemeDeuteranopia,
+  coe33ThemeProtanopia,
+} from '@/games/coe33/theme';
 
 export const coe33Config: GameConfig<COE33ItemType> = {
   name: 'Clair Obscur: Expedition 33',
@@ -55,5 +59,7 @@ export const coe33Config: GameConfig<COE33ItemType> = {
     label: 'Clair Obscur',
     className: 'coe33',
     theme: coe33Theme,
+    themeDeuteranopia: coe33ThemeDeuteranopia,
+    themeProtanopia: coe33ThemeProtanopia,
   },
 };

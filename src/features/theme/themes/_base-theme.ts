@@ -59,6 +59,32 @@ export const _baseTheme: MantineThemeOverride = createTheme({
   breakpoints: BREAKPOINTS,
   primaryColor: 'primary',
   primaryShade: { light: 5, dark: 5 },
+  colors: {
+    error: [
+      '#fff5f5',
+      '#ffe3e3',
+      '#ffc9c9',
+      '#ffa8a8',
+      '#ff8787',
+      '#ff6b6b',
+      '#fa5252',
+      '#f03e3e',
+      '#e03131',
+      '#c92a2a',
+    ],
+    success: [
+      '#ebfbee',
+      '#d3f9d8',
+      '#b2f2bb',
+      '#8ce99a',
+      '#69db7c',
+      '#51cf66',
+      '#40c057',
+      '#37b24d',
+      '#2f9e44',
+      '#2b8a3e',
+    ],
+  },
   components: {
     /** Put your mantine component override here */
     Container: Container.extend({
@@ -97,5 +123,51 @@ export const _baseTheme: MantineThemeOverride = createTheme({
   },
   other: {
     style: 'mantine',
+  },
+});
+
+/**
+ * Deuteranopia requires the color `green` to be distinct from `red`.
+ */
+export const _baseThemeDeuteranopia: MantineThemeOverride = createTheme({
+  ..._baseTheme,
+  colors: {
+    ..._baseTheme.colors,
+    // Override green with blue
+    success: [
+      '#e7f5ff',
+      '#d0ebff',
+      '#a5d8ff',
+      '#74c0fc',
+      '#4dabf7',
+      '#339af0',
+      '#228be6',
+      '#1c7ed6',
+      '#1971c2',
+      '#1864ab',
+    ],
+  },
+});
+
+/**
+ * Protanopia requires the color `red` to be distinct from `green`
+ */
+export const _baseThemeProtanopia: MantineThemeOverride = createTheme({
+  ..._baseTheme,
+  colors: {
+    ..._baseTheme.colors,
+    // Override red with blue
+    error: [
+      '#e7f5ff',
+      '#d0ebff',
+      '#a5d8ff',
+      '#74c0fc',
+      '#4dabf7',
+      '#339af0',
+      '#228be6',
+      '#1c7ed6',
+      '#1971c2',
+      '#1864ab',
+    ],
   },
 });

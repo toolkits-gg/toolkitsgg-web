@@ -1,6 +1,10 @@
-import { _baseTheme } from '@/features/theme/themes/_base-theme';
+import {
+  _baseTheme,
+  _baseThemeDeuteranopia,
+  _baseThemeProtanopia,
+} from '@/features/theme/themes/_base-theme';
 import type { ThemeCustomColors } from '@/features/theme/types';
-import { virtualColor } from '@mantine/core';
+import { virtualColor, type MantineThemeOverride } from '@mantine/core';
 
 const coe33ThemeColors: ThemeCustomColors = {
   /**
@@ -285,28 +289,89 @@ const coe33ThemeColors: ThemeCustomColors = {
     dark: 'inputDark',
     light: 'inputLight',
   }),
-
-  /**
-   * Text
-   */
-  error: [
-    '#fff5f5',
-    '#ffe3e3',
-    '#ffc9c9',
-    '#ffa8a8',
-    '#ff8787',
-    '#ff6b6b',
-    '#fa5252',
-    '#f03e3e',
-    '#e03131',
-    '#c92a2a',
-  ],
 };
 
-export const coe33Theme = {
+export const coe33Theme: MantineThemeOverride = {
   ..._baseTheme,
   colors: {
     ..._baseTheme.colors,
     ...coe33ThemeColors,
+  },
+};
+
+export const coe33ThemeDeuteranopia: MantineThemeOverride = {
+  ..._baseThemeDeuteranopia,
+  colors: {
+    ..._baseThemeDeuteranopia.colors,
+    ...coe33ThemeColors,
+    // Other overrides here
+    accent1Dark: [
+      '#e3fafc',
+      '#c5f6fa',
+      '#99e9f2',
+      '#66d9e8',
+      '#3bc9db',
+      '#22b8cf',
+      '#15aabf',
+      '#1098ad',
+      '#0c8599',
+      '#0b7285',
+    ],
+    accent1Light: [
+      '#e3fafc',
+      '#c5f6fa',
+      '#99e9f2',
+      '#66d9e8',
+      '#3bc9db',
+      '#22b8cf',
+      '#15aabf',
+      '#1098ad',
+      '#0c8599',
+      '#0b7285',
+    ],
+    accent1: virtualColor({
+      name: 'accent1',
+      dark: 'accent1Dark',
+      light: 'accent1Light',
+    }),
+
+    ringDark: [
+      '#e3fafc',
+      '#c5f6fa',
+      '#99e9f2',
+      '#66d9e8',
+      '#3bc9db',
+      '#22b8cf',
+      '#15aabf',
+      '#1098ad',
+      '#0c8599',
+      '#0b7285',
+    ],
+    ringLight: [
+      '#e3fafc',
+      '#c5f6fa',
+      '#99e9f2',
+      '#66d9e8',
+      '#3bc9db',
+      '#22b8cf',
+      '#15aabf',
+      '#1098ad',
+      '#0c8599',
+      '#0b7285',
+    ],
+    ring: virtualColor({
+      name: 'ring',
+      dark: 'ringDark',
+      light: 'ringLight',
+    }),
+  },
+};
+
+export const coe33ThemeProtanopia: MantineThemeOverride = {
+  ..._baseThemeProtanopia,
+  colors: {
+    ..._baseThemeProtanopia.colors,
+    ...coe33ThemeColors,
+    // Other overrides here
   },
 };
