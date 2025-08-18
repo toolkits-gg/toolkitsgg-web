@@ -46,8 +46,6 @@ const ThemeChanger = () => {
     () => themeUtils.chooseMantineTheme({ nextTheme, accent }),
     [accent, nextTheme]
   );
-
-  // Sync the mantineTheme atom with the next-themes value
   useEffect(() => {
     setMantineTheme(mantineTheme);
   }, [mantineTheme, setMantineTheme]);
@@ -153,10 +151,23 @@ const ThemeChanger = () => {
             <Select
               label="Select theme"
               value={nextTheme?.split('-accent')[0]}
-              data={allThemeDefinitions.map((def) => ({
-                label: def.label,
-                value: def.className,
-              }))}
+              data={allThemeDefinitions
+                .filter((def) => {
+                  if (mode === 'auto') {
+                    return true;
+                  }
+                  if (mode === 'dark' && def.label.includes('Dark')) {
+                    return true;
+                  }
+                  if (mode === 'light' && def.label.includes('Light')) {
+                    return true;
+                  }
+                  return false;
+                })
+                .map((def) => ({
+                  label: def.label,
+                  value: def.className,
+                }))}
               onChange={handleChangeNextTheme}
             />
           </Flex>
