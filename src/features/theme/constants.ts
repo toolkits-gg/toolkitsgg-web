@@ -1,3 +1,4 @@
+import type { MantineColorScheme } from '@mantine/core';
 import { allGameConfigs } from '@/features/game/constants';
 import {
   defaultTheme,
@@ -8,7 +9,6 @@ import type {
   ToolkitAccentThemeDefinition,
   ToolkitThemeDefinition,
 } from '@/features/theme/types';
-import type { MantineColorScheme } from '@mantine/core';
 
 export const themeModes: MantineColorScheme[] = ['auto', 'dark', 'light'];
 
@@ -16,16 +16,20 @@ export const themeDefinitions: ToolkitThemeDefinition[] = [
   {
     label: 'Default Light',
     className: 'default-light',
-    theme: defaultTheme,
-    themeDeuteranopia: defaultThemeDeuteranopia,
-    themeProtanopia: defaultThemeProtanopia,
+    theme: {
+      'accent-default': defaultTheme,
+      'accent-deuteranopic': defaultThemeDeuteranopia,
+      'accent-protanopic': defaultThemeProtanopia,
+    },
   },
   {
     label: 'Default Dark',
     className: 'default-dark',
-    theme: defaultTheme,
-    themeDeuteranopia: defaultThemeDeuteranopia,
-    themeProtanopia: defaultThemeProtanopia,
+    theme: {
+      'accent-default': defaultTheme,
+      'accent-deuteranopic': defaultThemeDeuteranopia,
+      'accent-protanopic': defaultThemeProtanopia,
+    },
   },
 ].sort((a, b) => a.label.localeCompare(b.label));
 
@@ -35,14 +39,14 @@ const gameThemeDefinitions: ToolkitThemeDefinition[] = allGameConfigs
     {
       label: `${gameConfig.themeDefinition?.label} - Light`,
       className: `${gameConfig.themeDefinition?.className}-light`,
-      theme: gameConfig.themeDefinition!!.theme,
+      theme: gameConfig.themeDefinition!.theme,
       themeDeuteranopia: defaultThemeDeuteranopia,
       themeProtanopia: defaultThemeProtanopia,
     },
     {
       label: `${gameConfig.themeDefinition?.label} - Dark`,
       className: `${gameConfig.themeDefinition?.className}-dark`,
-      theme: gameConfig.themeDefinition!!.theme,
+      theme: gameConfig.themeDefinition!.theme,
       themeDeuteranopia: defaultThemeDeuteranopia,
       themeProtanopia: defaultThemeProtanopia,
     },
@@ -53,17 +57,17 @@ const gameThemeDefinitions: ToolkitThemeDefinition[] = allGameConfigs
 export const accentThemeDefinitions: ToolkitAccentThemeDefinition[] = [
   {
     label: 'Default',
-    className: 'accent-default',
+    className: 'accent-default' as const,
     accentTheme: undefined,
   },
   {
     label: 'Deuteranopic',
-    className: 'accent-deuteranopic',
+    className: 'accent-deuteranopic' as const,
     accentTheme: 'deuteranopic',
   },
   {
     label: 'Protanopic',
-    className: 'accent-protanopic',
+    className: 'accent-protanopic' as const,
     accentTheme: 'protanopic',
   },
 ].sort((a, b) => a.label.localeCompare(b.label));

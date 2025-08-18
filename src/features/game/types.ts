@@ -1,7 +1,7 @@
 import type { GameId } from '@prisma/client';
+import type React from 'react';
 import type { LogoSize } from '@/components/Logo';
 import type { ToolkitThemeDefinition } from '@/features/theme/types';
-import type React from 'react';
 
 type ResourcesArgs =
   | {
@@ -36,7 +36,7 @@ export type GameConfig<ItemType> = {
   path: string;
   logo: (size: LogoSize) => React.ReactNode;
   items: ItemType[] | undefined;
-  themeDefinition?: ToolkitThemeDefinition;
+  themeDefinition: ToolkitThemeDefinition | undefined;
 
   pages:
     | {

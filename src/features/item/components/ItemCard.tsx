@@ -1,9 +1,9 @@
 'use client';
 
-import type { BaseItemType } from '@/features/item/types';
-import classes from './ItemCard.module.css';
 import { Card, Group, Image, Stack, Text } from '@mantine/core';
 import NextImage from 'next/image';
+import type { BaseItemType } from '@/features/item/types';
+import classes from './ItemCard.module.css';
 
 // Can either provide a url or a ReactNode
 type ImageProps =

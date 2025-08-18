@@ -68,6 +68,11 @@ export type ThemeCustomColors = {
   input: MantineColorsTuple;
 };
 
+export type ToolkitAccentThemeClassName =
+  | 'accent-default'
+  | 'accent-deuteranopic'
+  | 'accent-protanopic';
+
 export type ToolkitThemeDefinition = {
   label: string;
   className: string;
@@ -78,6 +83,6 @@ export type ToolkitThemeDefinition = {
 
 export type ToolkitAccentThemeDefinition = {
   label: string;
-  className: string;
+  className: ToolkitAccentThemeClassName;
   accentTheme: string | undefined;
 };

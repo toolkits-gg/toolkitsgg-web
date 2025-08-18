@@ -1,15 +1,15 @@
 'use client';
 
-import { Box, Button, Flex, Group, ScrollArea } from '@mantine/core';
-import classes from './AppNavbar.module.css';
+import { Box, Flex, ScrollArea } from '@mantine/core';
+import { GameActions } from '@/components/navigation/GameActions';
+import { GameSwitcher } from '@/components/navigation/GameSwitcher';
+import { NavbarLinksGroup } from '@/components/navigation/NavbarLinksGroup';
+import { UserMenu } from '@/components/navigation/UserMenu';
+import { navUtils } from '@/components/navigation/utils';
 import { useAuth } from '@/features/auth/hooks/use-auth';
 import type { GameConfig } from '@/features/game/types';
-import { GameSwitcher } from '@/components/navigation/GameSwitcher';
-import { UserMenu } from '@/components/navigation/UserMenu';
-import { NavbarLinksGroup } from '@/components/navigation/NavbarLinksGroup';
-import { GameActions } from '@/components/navigation/GameActions';
 import { ThemeChanger } from '@/features/theme/components/ThemeChanger';
-import { navUtils } from '@/components/navigation/utils';
+import classes from './AppNavbar.module.css';
 
 type AppNavbarProps = {
   gameConfig: GameConfig<unknown>;
@@ -17,15 +17,15 @@ type AppNavbarProps = {
 
 function AppNavbar({ gameConfig }: AppNavbarProps) {
   // TODO Get user favorite games
-  const favoriteGameIds: string[] = [];
+  // const favoriteGameIds: string[] = [];
 
   const { user } = useAuth();
 
   const gameId = gameConfig.id;
 
-  const isGameFavorited = favoriteGameIds.some(
-    (favoriteGameId) => favoriteGameId === gameId
-  );
+  // const isGameFavorited = favoriteGameIds.some(
+  //   (favoriteGameId) => favoriteGameId === gameId
+  // );
 
   const navLinks = navUtils.buildNavLinks(gameConfig);
 
@@ -64,8 +64,6 @@ function AppNavbar({ gameConfig }: AppNavbarProps) {
         justify="flex-end"
         align="center"
       >
-        <Button color="error.5">Error</Button>
-        <Button color="success.5">Success</Button>
         <ThemeChanger />
       </Flex>
 

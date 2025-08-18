@@ -1,10 +1,10 @@
+import { type MantineThemeOverride, virtualColor } from '@mantine/core';
 import {
   _baseTheme,
   _baseThemeDeuteranopia,
   _baseThemeProtanopia,
 } from '@/features/theme/themes/_base-theme';
 import type { ThemeCustomColors } from '@/features/theme/types';
-import { virtualColor, type MantineThemeOverride } from '@mantine/core';
 
 const defaultThemeColors: ThemeCustomColors = {
   /**
@@ -178,15 +178,15 @@ const defaultThemeColors: ThemeCustomColors = {
   ],
   sidebarBgLight: [
     '#ffffff',
-    '#fefefe',
-    '#fdfdfd',
-    '#fdfdfd',
     '#fcfcfc',
-    '#fbfbfb',
-    '#c9c9c9',
-    '#979797',
-    '#646464',
-    '#323232',
+    '#fcfcfc',
+    '#f9f9f9',
+    '#f9f9f9',
+    '#f7f7f7',
+    '#c1c1c1',
+    '#8b8b8b',
+    '#5c5c5c',
+    '#2e2e2e',
   ],
   sidebarBg: virtualColor({
     name: 'sidebar-bg',
