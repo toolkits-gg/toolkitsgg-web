@@ -3,7 +3,7 @@
 import { Card, Image, Stack, Text } from '@mantine/core';
 import NextImage from 'next/image';
 import type { BaseItemType } from '@/features/item/types';
-import classes from './ItemCard.module.css';
+import classes from './WideItemCard.module.css';
 
 // Can either provide a url or a ReactNode
 type ImageProps =
@@ -44,7 +44,7 @@ export type ItemCardProps = {
   item: ItemCardItemType;
 } & ImageProps;
 
-const ItemCard = ({ item, imageSrc, imageContent }: ItemCardProps) => {
+const WideItemCard = ({ item, imageSrc, imageContent }: ItemCardProps) => {
   return (
     <Card withBorder radius="md" w="400px" h="175px" className={classes.card}>
       <Card.Section
@@ -66,17 +66,19 @@ const ItemCard = ({ item, imageSrc, imageContent }: ItemCardProps) => {
         {imageContent}
       </Card.Section>
       <Stack
-        className={classes.content}
         h="100%"
         w="100%"
+        display="flex"
         justify="flex-start"
         align="flex-start"
-        gap="xs"
+        px="xs"
+        py="sm"
+        gap={4}
       >
-        <Text fz="h2" fw="bolder" className={classes.title}>
+        <Text fz="h2" fw="bolder" lineClamp={2} className={classes.itemName}>
           {item.name}
         </Text>
-        <Text fz="xs" fw="bold" className={classes.category}>
+        <Text fz="xs" fw="bold" tt="uppercase" className={classes.itemCategory}>
           {item.category}
         </Text>
         <ItemDescription itemDescription={item.description} />
@@ -85,4 +87,4 @@ const ItemCard = ({ item, imageSrc, imageContent }: ItemCardProps) => {
   );
 };
 
-export { ItemCard };
+export { WideItemCard };

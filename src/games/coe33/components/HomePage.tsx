@@ -1,13 +1,15 @@
 'use client';
 
+import { Flex } from '@mantine/core';
+import { Fragment } from 'react';
 import { AppNavbar } from '@/components/navigation/AppNavbar';
 import { PageLayout } from '@/components/PageLayout';
 import { allGameConfigs } from '@/features/game/constants';
 import type { GameConfig } from '@/features/game/types';
-import { ItemCard } from '@/features/item/components/ItemCard';
+import { CompactItemCard } from '@/features/item/components/CompactItemCard';
+import { WideItemCard } from '@/features/item/components/WideItemCard';
 import type { COE33ItemType } from '@/games/coe33/items/types';
 import { getImageUrl } from '@/utils/url';
-import { Flex } from '@mantine/core';
 
 const HomePage = () => {
   const gameConfig = allGameConfigs.find(
@@ -24,11 +26,16 @@ const HomePage = () => {
         {gameConfig.items
           ?.filter((item) => item.category === 'WEAPON')
           .map((item) => (
-            <ItemCard
-              key={item.slug}
-              item={item}
-              imageSrc={getImageUrl(item.imageUrl, 'coe33')}
-            />
+            <Fragment key={item.slug}>
+              <CompactItemCard
+                item={item}
+                imageSrc={getImageUrl(item.imageUrl, 'coe33')}
+              />
+              <WideItemCard
+                item={item}
+                imageSrc={getImageUrl(item.imageUrl, 'coe33')}
+              />
+            </Fragment>
           ))}
       </Flex>
     </PageLayout>

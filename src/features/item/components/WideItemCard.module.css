@@ -1,16 +1,16 @@
 .card {
   background: light-dark(
     linear-gradient(
-      90deg,
+      0deg,
       var(--mantine-color-primary-1) 0%,
-      var(--mantine-color-primary-0) 25%,
-      rgba(255, 255, 255, 1) 100%
+      var(--mantine-color-primary-0) 15%,
+      var(--mantine-color-white) 100%
     ),
     linear-gradient(
-      90deg,
-      var(--mantine-color-primary-7) 0%,
-      var(--mantine-color-primary-8) 25%,
-      rgba(0, 0, 0, 0.95) 100%
+      0deg,
+      var(--mantine-color-primary-4) 0%,
+      var(--mantine-color-black) 25%,
+      var(--mantine-color-black) 100%
     )
   );
   border-color: var(--mantine-color-border-5);
@@ -34,7 +34,6 @@
       0 8px 32px 0 rgba(0, 0, 0, 0.22),
       0 3px 12px 0 rgba(187, 180, 201, 0.18);
     border-color: var(--mantine-color-secondary-5);
-    z-index: 1;
   }
 }
 
@@ -45,9 +44,9 @@
   background: light-dark(
     linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.1) 0%,
-      rgba(0, 0, 0, 0.05) 50%,
-      rgba(0, 0, 0, 0) 100%
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 100%
     ),
     linear-gradient(
       90deg,
@@ -65,31 +64,15 @@
   padding: var(--mantine-spacing-xs);
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: var(--mantine-spacing-md) 0px;
+.itemName {
+  color: light-dark(
+    var(--mantine-color-secondary-6),
+    var(--mantine-color-secondary-5)
+  );
+  line-height: 1;
 }
 
-.title {
-  text-align: left;
-  background: linear-gradient(
-    90deg,
-    var(--mantine-color-secondary-5) 0%,
-    var(--mantine-color-primary-3) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: light-dark(
-    drop-shadow(0 0 0px #fff) drop-shadow(0 0 1px #fff),
-    drop-shadow(0 0 0px #000) drop-shadow(0 0 1px #000)
-  );
-}
-
-.category {
-  color: var(--mantine-color-text);
-  text-transform: uppercase;
+.itemCategory {
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  line-height: 1;
 }
