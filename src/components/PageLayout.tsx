@@ -1,19 +1,24 @@
 'use client';
 
-import { DefaultLogo } from '@/components/Logo';
 import { Anchor, AppShell, Burger, Flex, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import type React from 'react';
-import classes from './PageLayout.module.css';
+import type { GameId } from '@prisma/client';
 import Link from 'next/link';
+import type React from 'react';
+import { DefaultLogo } from '@/components/Logo';
+import { AppNavbar } from '@/components/navigation/AppNavbar';
+import { allGameConfigs, noGameConfig } from '@/features/game/constants';
 import { homePath } from '@/paths';
+import classes from './PageLayout.module.css';
 
 type PageLayoutProps = React.PropsWithChildren<{
-  appNavbar: React.ReactNode;
+  gameId: GameId | undefined;
 }>;
 
-const PageLayout = ({ children, appNavbar }: PageLayoutProps) => {
+const PageLayout = ({ children, gameId }: PageLayoutProps) => {
   const [opened, { toggle }] = useDisclosure();
+
+  const gameConfig = allGameConfigs.find((config) => config.id === gameId);
 
   return (
     <AppShell
@@ -44,7 +49,9 @@ const PageLayout = ({ children, appNavbar }: PageLayoutProps) => {
         </Group>
       </AppShell.Header>
 
-      {appNavbar && <AppShell.Navbar h="100%">{appNavbar}</AppShell.Navbar>}
+      <AppShell.Navbar h="100%">
+        <AppNavbar gameConfig={gameConfig || noGameConfig} />
+      </AppShell.Navbar>
 
       <AppShell.Main className={classes.main}>{children}</AppShell.Main>
 

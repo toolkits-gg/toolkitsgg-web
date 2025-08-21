@@ -8,11 +8,12 @@ import { UserMenu } from '@/components/navigation/UserMenu';
 import { navUtils } from '@/components/navigation/utils';
 import { useAuth } from '@/features/auth/hooks/use-auth';
 import type { GameConfig } from '@/features/game/types';
+import type { BaseItemType } from '@/features/item/types';
 import { ThemeChanger } from '@/features/theme/components/ThemeChanger';
 import classes from './AppNavbar.module.css';
 
 type AppNavbarProps = {
-  gameConfig: GameConfig<unknown>;
+  gameConfig: GameConfig<BaseItemType | undefined>;
 };
 
 function AppNavbar({ gameConfig }: AppNavbarProps) {

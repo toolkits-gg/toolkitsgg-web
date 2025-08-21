@@ -1,15 +1,11 @@
-'use client';
-
-import { AppNavbar } from '@/components/navigation/AppNavbar';
+import { Flex, Paper } from '@mantine/core';
 import { PageLayout } from '@/components/PageLayout';
 import { SignInForm } from '@/features/auth/components/SignInForm';
-import { noGameConfig } from '@/features/game/constants';
 import classes from './Page.module.css';
-import { Flex, Paper } from '@mantine/core';
 
 export default function SignInPage() {
   return (
-    <PageLayout appNavbar={<AppNavbar gameConfig={noGameConfig} />}>
+    <PageLayout gameId={undefined}>
       <Flex align="center" justify="center" p="xl">
         <Paper
           radius="md"
