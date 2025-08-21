@@ -1,4 +1,7 @@
+'use client';
+
 import { Flex } from '@mantine/core';
+import { motion } from 'framer-motion';
 import { PageLayout } from '@/components/PageLayout';
 import { allGameConfigs } from '@/features/game/constants';
 import type { GameConfig } from '@/features/game/types';
@@ -21,11 +24,16 @@ const ItemLookupPage = () => {
         {gameConfig.items
           ?.filter((item) => item.category === 'WEAPON')
           .map((item) => (
-            <WideItemCard
+            <motion.div
               key={item.slug}
-              item={item}
-              imageSrc={getImageUrl(item.imageUrl, 'coe33')}
-            />
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <WideItemCard
+                item={item}
+                imageSrc={getImageUrl(item.imageUrl, 'coe33')}
+              />
+            </motion.div>
           ))}
       </Flex>
     </PageLayout>
