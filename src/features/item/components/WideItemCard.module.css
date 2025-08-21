@@ -2,8 +2,8 @@
   background: light-dark(
     linear-gradient(
       0deg,
-      var(--mantine-color-primary-1) 0%,
-      var(--mantine-color-primary-0) 15%,
+      var(--mantine-color-primary-6) 0%,
+      var(--mantine-color-white) 25%,
       var(--mantine-color-white) 100%
     ),
     linear-gradient(
@@ -44,14 +44,13 @@
   background: light-dark(
     linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.6) 0%,
-      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.2) 0%,
       rgba(255, 255, 255, 0) 100%
     ),
     linear-gradient(
       90deg,
       rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.2) 30%,
       rgba(0, 0, 0, 0) 100%
     )
   );

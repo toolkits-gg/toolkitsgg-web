@@ -47,8 +47,8 @@
   background: light-dark(
     linear-gradient(
       180deg,
-      var(--mantine-color-primary-0) 0%,
-      rgba(255, 255, 255, 0.2) 50%,
+      var(--mantine-color-primary-1) 0%,
+      rgba(255, 255, 255, 0.8) 30%,
       rgba(255, 255, 255, 0) 100%
     ),
     linear-gradient(
