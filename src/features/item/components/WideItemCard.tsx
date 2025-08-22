@@ -46,13 +46,8 @@ export type ItemCardProps = {
 
 const WideItemCard = ({ item, imageSrc, imageContent }: ItemCardProps) => {
   return (
-    <Card withBorder radius="md" w="400px" h="175px" className={classes.card}>
-      <Card.Section
-        className={classes.imageContainer}
-        w="175px"
-        miw="175px"
-        h="175px"
-      >
+    <Card withBorder radius="md" className={classes.card}>
+      <Card.Section className={classes.imageContainer}>
         {imageSrc && (
           <Image
             src={imageSrc}
@@ -65,24 +60,22 @@ const WideItemCard = ({ item, imageSrc, imageContent }: ItemCardProps) => {
         )}
         {imageContent}
       </Card.Section>
-      <Stack
-        h="100%"
-        w="100%"
-        display="flex"
-        justify="flex-start"
-        align="flex-start"
-        px="xs"
-        py="sm"
-        gap={4}
-      >
-        <Text fz="h2" fw="bolder" lineClamp={2} className={classes.itemName}>
-          {item.name}
-        </Text>
-        <Text fz="xs" fw="bold" tt="uppercase" className={classes.itemCategory}>
-          {item.category}
-        </Text>
-        <ItemDescription itemDescription={item.description} />
-      </Stack>
+      <Card.Section className={classes.contentContainer}>
+        <Stack gap={4}>
+          <Text fz="h2" fw="bolder" lineClamp={2} className={classes.itemName}>
+            {item.name}
+          </Text>
+          <Text
+            fz="xs"
+            fw="bold"
+            tt="uppercase"
+            className={classes.itemCategory}
+          >
+            {item.category}
+          </Text>
+          <ItemDescription itemDescription={item.description} />
+        </Stack>
+      </Card.Section>
     </Card>
   );
 };

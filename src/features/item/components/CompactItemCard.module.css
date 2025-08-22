@@ -28,7 +28,7 @@
   align-items: stretch;
   justify-content: flex-start;
   padding: 0 !important;
-  max-width: 180px;
+  max-width: 150px;
 }
 
 .card:hover,

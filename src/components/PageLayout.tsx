@@ -31,7 +31,7 @@ const PageLayout = ({ children, gameId }: PageLayoutProps) => {
         collapsed: { mobile: !opened },
       }}
     >
-      <AppShell.Header className={classes.header}>
+      <AppShell.Header className={classes.header} px="sm">
         <Group h="100%">
           <Flex justify="start" align="center">
             <Burger
