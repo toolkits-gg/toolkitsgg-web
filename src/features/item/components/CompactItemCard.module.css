@@ -60,12 +60,14 @@
   );
   padding: 0;
   margin: 0;
-  min-height: 120px;
+  height: 120px;
 }
 
 .image {
   object-fit: contain;
   padding: var(--mantine-spacing-xs);
+  width: 120px;
+  height: 120px;
 }
 
 .itemName {

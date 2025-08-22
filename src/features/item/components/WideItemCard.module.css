@@ -59,13 +59,14 @@
   );
   padding: 0;
   margin: 0;
-  width: 175px;
   height: 175px;
 }
 
 .image {
   object-fit: contain;
   padding: var(--mantine-spacing-xs);
+  width: 175px;
+  height: 175px;
 }
 
 .contentContainer {
