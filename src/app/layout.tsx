@@ -2,8 +2,8 @@ import '@mantine/core/styles.css';
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 import { Geist, Geist_Mono, Lora } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { ReactQueryProvider } from '@/lib/react-query/ReactQueryProvider';
 import { ThemeProvider } from '@/features/theme/providers/ThemeProvider';
+import { ReactQueryProvider } from '@/lib/react-query/ReactQueryProvider';
 import { ReactToastifyProvider } from '@/lib/react-toastify/ReactToastifyProvider';
 
 export { metadata } from './metadata';

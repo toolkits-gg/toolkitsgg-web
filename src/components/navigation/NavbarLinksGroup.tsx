@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-import { IconChevronRight } from '@tabler/icons-react';
 import {
   Box,
   Collapse,
@@ -10,8 +8,10 @@ import {
   ThemeIcon,
   UnstyledButton,
 } from '@mantine/core';
-import classes from './NavbarLinksGroup.module.css';
+import { IconChevronRight } from '@tabler/icons-react';
 import Link from 'next/link';
+import { useState } from 'react';
+import classes from './NavbarLinksGroup.module.css';
 
 interface NavbarLinksGroupProps {
   icon: React.FC<any> | undefined;

@@ -1,6 +1,6 @@
 'use server';
 
-import { fromErrorToActionState } from '@/components/form (deprecated)/utils/to-action-state';
+import { formUtils } from '@/components/form/utils';
 import { getAuth } from '@/features/auth/queries/get-auth';
 import { gameData } from '@/features/game/data';
 
@@ -13,7 +13,7 @@ export const getFavoriteGameIds = async (): Promise<string[]> => {
   try {
     return await gameData.getFavoriteGameIds();
   } catch (error) {
-    fromErrorToActionState({ error });
+    formUtils.fromErrorToActionState({ error });
     return [];
   }
 };

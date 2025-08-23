@@ -1,14 +1,14 @@
 'use client';
 
 import { MantineProvider } from '@mantine/core';
+import { useAtom } from 'jotai';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { mantineThemeAtom } from '@/features/theme/atoms';
 import {
   accentThemeClassNames,
   allThemeClassNames,
   nextThemesDefaultTheme,
 } from '@/features/theme/constants';
-import { useAtom } from 'jotai';
-import { mantineThemeAtom } from '@/features/theme/atoms';
 
 const accentThemes = allThemeClassNames
   .map((themeName) =>

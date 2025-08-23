@@ -1,11 +1,11 @@
 'use client';
 
+import { TextInput } from '@mantine/core';
 import { useActionState } from 'react';
-import { FieldError } from '@/components/form (deprecated)/field-error';
-import { Form } from '@/components/form (deprecated)/form';
-import { SubmitButton } from '@/components/form (deprecated)/submit-button';
-import { EMPTY_ACTION_STATE } from '@/components/form (deprecated)/utils/to-action-state';
-import { Input } from '@/components/input';
+import { EMPTY_ACTION_STATE } from '@/components/form/constants';
+import { FieldError } from '@/components/form/FieldError';
+import { Form } from '@/components/form/Form';
+import { SubmitButton } from '@/components/form/SubmitButton';
 import { passwordReset } from '../actions/password-reset';
 
 type PasswordResetFormProps = {
@@ -20,7 +20,7 @@ const PasswordResetForm = ({ tokenId }: PasswordResetFormProps) => {
 
   return (
     <Form action={action} actionState={actionState}>
-      <Input
+      <TextInput
         type="password"
         name="password"
         placeholder="Password"
@@ -28,7 +28,7 @@ const PasswordResetForm = ({ tokenId }: PasswordResetFormProps) => {
       />
       <FieldError actionState={actionState} name="password" />
 
-      <Input
+      <TextInput
         type="password"
         name="confirmPassword"
         placeholder="Confirm Password"
@@ -38,7 +38,7 @@ const PasswordResetForm = ({ tokenId }: PasswordResetFormProps) => {
 
       <SubmitButton
         isPending={isPending}
-        tooltipContent="Reset password"
+        tooltip="Reset password"
         aria-label="Reset password"
       >
         Reset Password

@@ -1,5 +1,5 @@
-import type { ActionState } from '@/components/form/types';
 import { ZodError } from 'zod';
+import type { ActionState } from '@/components/form/types';
 
 const fromErrorToActionState = ({
   error,

@@ -16,20 +16,16 @@ export const themeDefinitions: ToolkitThemeDefinition[] = [
   {
     label: 'Default Light',
     className: 'default-light',
-    theme: {
-      'accent-default': defaultTheme,
-      'accent-deuteranopic': defaultThemeDeuteranopia,
-      'accent-protanopic': defaultThemeProtanopia,
-    },
+    theme: defaultTheme,
+    themeDeuteranopia: defaultThemeDeuteranopia,
+    themeProtanopia: defaultThemeProtanopia,
   },
   {
     label: 'Default Dark',
     className: 'default-dark',
-    theme: {
-      'accent-default': defaultTheme,
-      'accent-deuteranopic': defaultThemeDeuteranopia,
-      'accent-protanopic': defaultThemeProtanopia,
-    },
+    theme: defaultTheme,
+    themeDeuteranopia: defaultThemeDeuteranopia,
+    themeProtanopia: defaultThemeProtanopia,
   },
 ].sort((a, b) => a.label.localeCompare(b.label));
 

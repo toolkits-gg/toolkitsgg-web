@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
+import type { ActionState } from '@/components/form/types';
 import { useActionFeedback } from './hooks/use-action-feedback';
-import { ActionState } from './utils';
 
 type FormProps = {
   action: (payload: FormData) => void;

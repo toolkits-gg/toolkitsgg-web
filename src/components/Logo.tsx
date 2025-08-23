@@ -65,4 +65,4 @@ const AnimatedLogo = ({
   );
 };
 
-export { Logo, CleanLogo, DefaultLogo, AnimatedLogo };
+export { AnimatedLogo,CleanLogo, DefaultLogo, Logo };

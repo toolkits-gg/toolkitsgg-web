@@ -1,11 +1,8 @@
 'use server';
 
 import { z } from 'zod';
-import {
-  ActionState,
-  fromErrorToActionState,
-  toActionState,
-} from '@/components/form (deprecated)/utils/to-action-state';
+import type { ActionState } from '@/components/form/types';
+import { formUtils } from '@/components/form/utils';
 import { authData } from '@/features/auth/data';
 import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
 import { inngest } from '@/lib/inngest';
@@ -33,7 +30,7 @@ export const passwordChange = async (
     if (!user) {
       // we should never reach this return statement
       // but it's here just in case
-      return toActionState({
+      return formUtils.toActionState({
         status: 'ERROR',
         message: 'Invalid request',
         formData,
@@ -43,7 +40,7 @@ export const passwordChange = async (
     const validPassword = await verifyPasswordHash(user.passwordHash, password);
 
     if (!validPassword) {
-      return toActionState({
+      return formUtils.toActionState({
         status: 'ERROR',
         message: 'Incorrect password',
         formData,
@@ -57,10 +54,10 @@ export const passwordChange = async (
       },
     });
   } catch (error) {
-    return fromErrorToActionState({ error, formData });
+    return formUtils.fromErrorToActionState({ error, formData });
   }
 
-  return toActionState({
+  return formUtils.toActionState({
     status: 'SUCCESS',
     message: 'Check your email for a reset link',
   });

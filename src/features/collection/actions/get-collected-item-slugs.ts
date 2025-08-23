@@ -1,6 +1,6 @@
 'use server';
 
-import { fromErrorToActionState } from '@/components/form (deprecated)/utils/to-action-state';
+import { formUtils } from '@/components/form/utils';
 import { getAuth } from '@/features/auth/queries/get-auth';
 import type { GameConfig } from '@/features/game/types';
 
@@ -21,7 +21,7 @@ export const getCollectedItemSlugs = async (
   try {
     return await gameConfig.dataUtils.getCollectedItemSlugs();
   } catch (error) {
-    fromErrorToActionState({ error });
+    formUtils.fromErrorToActionState({ error });
     return [];
   }
 };

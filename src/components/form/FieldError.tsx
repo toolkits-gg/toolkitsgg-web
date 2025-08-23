@@ -1,5 +1,5 @@
-import type { ActionState } from '@/components/form/types';
 import { Text } from '@mantine/core';
+import type { ActionState } from '@/components/form/types';
 
 type FieldErrorProps = {
   actionState: ActionState;

@@ -1,9 +1,9 @@
 'use client';
 
-import { IconChevronRight } from '@tabler/icons-react';
 import { Avatar, Group, Text, UnstyledButton } from '@mantine/core';
-import classes from './UserMenu.module.css';
+import { IconChevronRight } from '@tabler/icons-react';
 import { useAuth } from '@/features/auth/hooks/use-auth';
+import classes from './UserMenu.module.css';
 
 const UserMenu = () => {
   const { user } = useAuth();

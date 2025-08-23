@@ -1,6 +1,6 @@
-import { FavoriteGameButton } from '@/components/navigation/FavoriteGameButton';
 import { Flex } from '@mantine/core';
 import type { GameId } from '@prisma/client';
+import { FavoriteGameButton } from '@/components/navigation/FavoriteGameButton';
 
 type GameActionsProps = {
   gameId: GameId;

@@ -3,11 +3,8 @@
 import { Prisma } from '@prisma/client';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
-import {
-  ActionState,
-  fromErrorToActionState,
-  toActionState,
-} from '@/components/form (deprecated)/utils/to-action-state';
+import type { ActionState } from '@/components/form/types';
+import { formUtils } from '@/components/form/utils';
 import { authData } from '@/features/auth/data';
 import { hashPassword } from '@/features/password/utils/hash-and-verify';
 import { inngest } from '@/lib/inngest';
@@ -70,14 +67,14 @@ export const signUp = async (_actionState: ActionState, formData: FormData) => {
       error instanceof Prisma.PrismaClientKnownRequestError &&
       error.code === 'P2002'
     ) {
-      return toActionState({
+      return formUtils.toActionState({
         status: 'ERROR',
         message: 'Either email or username is already in use',
         formData,
       });
     }
 
-    return fromErrorToActionState({ error, formData });
+    return formUtils.fromErrorToActionState({ error, formData });
   }
 
   redirect(homePath());

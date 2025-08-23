@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Loader, Tooltip, type ButtonProps } from '@mantine/core';
+import { Button, type ButtonProps,Loader, Tooltip } from '@mantine/core';
 
 type SubmitButtonProps = Omit<ButtonProps, 'disabled' | 'type'> & {
   icon?: React.ReactElement<HTMLElement>;

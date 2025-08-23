@@ -8,11 +8,11 @@ import { FieldError } from '@/components/form/FieldError';
 import { Form } from '@/components/form/Form';
 import { SubmitButton } from '@/components/form/SubmitButton';
 import { signUpPath } from '@/paths';
-import { signIn } from '../actions/sign-in';
+import { signUp } from '../actions/sign-up';
 
-const SignInForm = () => {
+const SignUpForm = () => {
   const [actionState, action, isPending] = useActionState(
-    signIn,
+    signUp,
     EMPTY_ACTION_STATE
   );
 
@@ -29,6 +29,16 @@ const SignInForm = () => {
         />
         <FieldError actionState={actionState} name="email" />
 
+        <TextInput
+          required
+          name="username"
+          placeholder="Username"
+          label="Username"
+          defaultValue={actionState.payload?.get('username') as string}
+          radius="md"
+        />
+        <FieldError actionState={actionState} name="username" />
+
         <PasswordInput
           required
           label="Password"
@@ -38,6 +48,16 @@ const SignInForm = () => {
           radius="md"
         />
         <FieldError actionState={actionState} name="password" />
+
+        <PasswordInput
+          required
+          label="Confirm Password"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          defaultValue={actionState.payload?.get('confirmPassword') as string}
+          radius="md"
+        />
+        <FieldError actionState={actionState} name="confirmPassword" />
       </Stack>
 
       <Group justify="space-between" mt="xl">
@@ -46,8 +66,8 @@ const SignInForm = () => {
         </Anchor>
         <SubmitButton
           isPending={isPending}
-          tooltip="Sign in"
-          aria-label="Sign in"
+          tooltip="Sign up"
+          aria-label="Sign up"
         >
           Submit
         </SubmitButton>
@@ -56,4 +76,4 @@ const SignInForm = () => {
   );
 };
 
-export { SignInForm };
+export { SignUpForm };

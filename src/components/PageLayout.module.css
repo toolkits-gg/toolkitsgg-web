@@ -18,6 +18,7 @@
 
 .main {
   background-color: var(--mantine-color-bg-5);
+  padding-bottom: calc(var(--mantine-spacing-xl) * 2);
 }
 
 .logoContainer {

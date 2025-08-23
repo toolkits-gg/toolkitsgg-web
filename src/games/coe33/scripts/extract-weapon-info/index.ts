@@ -1,10 +1,10 @@
 import { writeFileSync } from 'fs';
 import path from 'path';
+import { coe33Characters } from '@/games/coe33/constants';
+import type { COE33WeaponItem } from '@/games/coe33/items/types';
 import { generateSlugs } from '@/games/coe33/scripts/utils';
 import WeaponData from '../inputs/DT_WeaponIcons.json';
 import GameData from '../inputs/Game.json';
-import type { COE33WeaponItem } from '@/games/coe33/items/types';
-import { coe33Characters } from '@/games/coe33/constants';
 
 const parseWeaponData = (): COE33WeaponItem[] => {
   const excludedInternalSlugs: string[] = [

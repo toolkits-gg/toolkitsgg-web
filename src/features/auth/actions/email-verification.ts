@@ -3,11 +3,8 @@
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { setCookieByKey } from '@/actions/cookies';
-import {
-  ActionState,
-  fromErrorToActionState,
-  toActionState,
-} from '@/components/form (deprecated)/utils/to-action-state';
+import type { ActionState } from '@/components/form/types';
+import { formUtils } from '@/components/form/utils';
 import { authData } from '@/features/auth/data';
 import { createSession } from '@/lib/lucia';
 import { homePath } from '@/paths';
@@ -40,7 +37,7 @@ export const emailVerification = async (
     );
 
     if (!validCode) {
-      return toActionState({
+      return formUtils.toActionState({
         status: 'ERROR',
         message: 'Invalid or expired code',
       });
@@ -58,7 +55,7 @@ export const emailVerification = async (
 
     await setSessionCookie(sessionToken, session.expiresAt);
   } catch (error) {
-    return fromErrorToActionState({ error });
+    return formUtils.fromErrorToActionState({ error });
   }
 
   await setCookieByKey('toast', 'Email verified');

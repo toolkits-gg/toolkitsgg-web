@@ -1,11 +1,11 @@
 'use client';
 
+import { TextInput } from '@mantine/core';
 import { useActionState } from 'react';
-import { FieldError } from '@/components/form (deprecated)/field-error';
-import { Form } from '@/components/form (deprecated)/form';
-import { SubmitButton } from '@/components/form (deprecated)/submit-button';
-import { EMPTY_ACTION_STATE } from '@/components/form (deprecated)/utils/to-action-state';
-import { Input } from '@/components/input';
+import { EMPTY_ACTION_STATE } from '@/components/form/constants';
+import { FieldError } from '@/components/form/FieldError';
+import { Form } from '@/components/form/Form';
+import { SubmitButton } from '@/components/form/SubmitButton';
 import { passwordChange } from '../actions/password-change';
 
 const PasswordChangeForm = () => {
@@ -16,7 +16,7 @@ const PasswordChangeForm = () => {
 
   return (
     <Form action={action} actionState={actionState}>
-      <Input
+      <TextInput
         type="password"
         name="password"
         placeholder="Password"
@@ -26,8 +26,8 @@ const PasswordChangeForm = () => {
 
       <SubmitButton
         isPending={isPending}
-        tooltipContent="Send email"
-        aria-labe="Send email"
+        tooltip="Send email"
+        aria-label="Send email"
       >
         Send Email
       </SubmitButton>

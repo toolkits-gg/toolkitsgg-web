@@ -1,7 +1,7 @@
-import { coe33Items } from '@/games/coe33/items/all-items';
-import type { COE33ItemType } from '@/games/coe33/items/types';
 import { hash } from '@node-rs/argon2';
 import { PrismaClient } from '@prisma/client';
+import { coe33Items } from '@/games/coe33/items/all-items';
+import type { COE33ItemType } from '@/games/coe33/items/types';
 
 const prisma = new PrismaClient();
 

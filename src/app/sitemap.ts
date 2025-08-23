@@ -1,5 +1,5 @@
-import { allGameConfigs } from '@/features/game/constants';
 import { type MetadataRoute } from 'next';
+import { allGameConfigs } from '@/features/game/constants';
 
 const baseUrl = 'https://toolkits.gg';
 const currentDate = new Date().toISOString().split('T')[0];
@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const gameRoutes: MetadataRoute.Sitemap = [];
 
   for (const gameConfig of allGameConfigs) {
-    const { pages, id } = gameConfig;
+    const { pages } = gameConfig;
     if (!pages) {
       continue;
     }
