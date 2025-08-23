@@ -31,3 +31,54 @@
     justify-content: center;
   }
 }
+
+.appshellNavbar {
+  background-color: var(--mantine-color-sidebar-bg-7);
+}
+
+.navbar {
+  background-color: var(--mantine-color-sidebar-bg-5);
+  width: 300px;
+  height: 100%;
+  padding: var(--mantine-spacing-md);
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid
+    light-dark(var(--mantine-color-border-7), var(--mantine-color-border-7));
+}
+
+.navbarHeader {
+  padding: var(--mantine-spacing-md);
+  padding-top: 0;
+  margin-left: calc(var(--mantine-spacing-md) * -1);
+  margin-right: calc(var(--mantine-spacing-md) * -1);
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  border-bottom: 1px solid
+    light-dark(var(--mantine-color-border-7), var(--mantine-color-border-7));
+}
+
+.navbarLinks {
+  flex: 1;
+  margin-left: calc(var(--mantine-spacing-md) * -1);
+  margin-right: calc(var(--mantine-spacing-md) * -1);
+}
+
+.navbarLinksInner {
+  padding-top: var(--mantine-spacing-xl);
+  padding-bottom: var(--mantine-spacing-xl);
+}
+
+.navbarSecondaryActions {
+  margin-left: calc(var(--mantine-spacing-md) * -1);
+  margin-right: calc(var(--mantine-spacing-md) * -1);
+  padding: var(--mantine-spacing-md);
+}
+
+.navbarFooter {
+  margin-left: calc(var(--mantine-spacing-md) * -1);
+  margin-right: calc(var(--mantine-spacing-md) * -1);
+  padding: var(--mantine-spacing-md);
+  border-top: 1px solid
+    light-dark(var(--mantine-color-border-7), var(--mantine-color-border-7));
+}

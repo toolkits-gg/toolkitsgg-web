@@ -1,13 +1,26 @@
 'use client';
 
-import { Anchor, AppShell, Burger, Flex, Group } from '@mantine/core';
+import {
+  Anchor,
+  AppShell,
+  Box,
+  Burger,
+  Flex,
+  Group,
+  ScrollArea,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import type { GameId } from '@prisma/client';
 import Link from 'next/link';
 import type React from 'react';
 import { DefaultLogo } from '@/components/Logo';
-import { AppNavbar } from '@/components/navigation/AppNavbar';
+import { GameActions } from '@/components/navigation/GameActions';
+import { GameSwitcher } from '@/components/navigation/GameSwitcher';
+import { NavbarLinksGroup } from '@/components/navigation/NavbarLinksGroup';
+import { UserMenu } from '@/components/navigation/UserMenu';
+import { navUtils } from '@/components/navigation/utils';
 import { allGameConfigs, noGameConfig } from '@/features/game/constants';
+import { ThemeChanger } from '@/features/theme/components/ThemeChanger';
 import { homePath } from '@/paths';
 import classes from './PageLayout.module.css';
 
@@ -18,13 +31,17 @@ type PageLayoutProps = React.PropsWithChildren<{
 const PageLayout = ({ children, gameId }: PageLayoutProps) => {
   const [opened, { toggle }] = useDisclosure();
 
-  const gameConfig = allGameConfigs.find((config) => config.id === gameId);
+  const gameConfig =
+    allGameConfigs.find((config) => config.id === gameId) ?? noGameConfig;
+
+  const navLinks = navUtils.buildNavLinks(gameConfig);
 
   return (
     <AppShell
       padding="md"
       layout="alt"
       header={{ height: 60 }}
+      withBorder={false}
       navbar={{
         width: 300,
         breakpoint: 'sm',
@@ -49,8 +66,52 @@ const PageLayout = ({ children, gameId }: PageLayoutProps) => {
         </Group>
       </AppShell.Header>
 
-      <AppShell.Navbar h="100%">
-        <AppNavbar gameConfig={gameConfig || noGameConfig} />
+      <AppShell.Navbar h="100%" className={classes.appshellNavbar}>
+        <nav className={classes.navbar}>
+          <Flex
+            justify="space-between"
+            align="center"
+            dir="column"
+            wrap="nowrap"
+            className={classes.navbarHeader}
+            gap="sm"
+          >
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              size="sm"
+              hiddenFrom="sm"
+            />
+            <Box style={{ flexGrow: 1 }}>
+              <GameSwitcher gameConfig={gameConfig} />
+            </Box>
+            {gameId && <GameActions gameId={gameId} />}
+          </Flex>
+
+          <ScrollArea className={classes.navbarLinks}>
+            <div className={classes.navbarLinksInner}>
+              {navLinks.map((navLink) => (
+                <NavbarLinksGroup {...navLink} key={navLink.label} />
+              ))}
+            </div>
+          </ScrollArea>
+
+          <Flex
+            className={classes.navbarSecondaryActions}
+            justify="flex-end"
+            align="center"
+          >
+            <ThemeChanger />
+          </Flex>
+
+          <Flex
+            className={classes.navbarFooter}
+            justify="flex-start"
+            align="center"
+          >
+            <UserMenu />
+          </Flex>
+        </nav>
       </AppShell.Navbar>
 
       <AppShell.Main className={classes.main}>{children}</AppShell.Main>
