@@ -16,13 +16,14 @@ When you see a command like this, this is instructing you to run the command in 
 pnpm run dev
 ```
 
-## Requirements
+## Required installs
 
-### Installing Software
-
-- [Git](https://git-scm.com/downloads) - Allows you to run `git` commands in your terminal.
-- [NVM for Windows](https://github.com/coreybutler/nvm-windows/releases) - Allows you to install and swap between different versions of Node.js. If you are not on Windows, use [NVM](https://github.com/nvm-sh/nvm).
-- [VSCode](https://code.visualstudio.com/download) is what I use, but you can use whatever code editor you want.
+- [Git](https://git-scm.com/downloads) - Version control. Allows you to run `git` commands in your terminal.
+- [NVM for Windows](https://github.com/coreybutler/nvm-windows/releases) - Enables you to install and swap between different versions of Node.js. If you are not on Windows, use [NVM](https://github.com/nvm-sh/nvm).
+- [PNPM](https://pnpm.io/installation) - Package manager of choice for the project.
+- [VSCode](https://code.visualstudio.com/download)- Code Editor. Use whatever you prefer, but I recommend VSCode.
+- [Docker](https://www.docker.com/get-started) - Enables you to quickly spin up a local Postgres database.
+- [Docker Compose](https://docs.docker.com/compose/install/) - Enables you to quickly spin up a local Postgres database.
 
 #### NVM for Windows
 
@@ -66,15 +67,39 @@ pnpm install
 cp .env.example .env
 ```
 
-### Create a free NeonDB database
+### Local database setup
 
-1. Go to [NeonDB](https://neon.tech/) and create a free account.
-2. Create a new project and database.
-3. Copy the connection strings from the dashboard to your `.env` file.
-   a. The DATABASE_URL should be the connection string with the connection pooling toggle disabled.
-   b. The DIRECT_URL should be the connection string with the connection pooling toggle enabled.
+#### Update the .env file
 
-### Create a free Resend account (optional, for email)
+Ensure the `DATABASE_URL` and `DIRECT_URL` in your `.env` match the default value in `.env.example`.
+
+### Start the Docker container
+
+```bash
+pnpm db-start
+```
+
+#### Generate Prisma Typescript types
+
+```bash
+pnpm prisma-push
+```
+
+Once complete, the updated Typescript types will be generated automatically. In the event you are still getting Typescript errors, you can restart the Typescript server in VSCode by opening the Command Palette (`Ctrl + Shift + P` or `Cmd + Shift + P` on macOS) and typing `TypeScript: Restart TS Server`.
+
+#### Run the seed script
+
+To make it easier to develop, you can seed the database with some initial data. Run the following command:
+
+```bash
+pnpm db-seed
+```
+
+This will populate your database via the [seed script](../src/lib/prisma/seed.ts).
+
+### Create a free Resend account (optional)
+
+Resend is used for sending emails. For local development, you only need this if you intend to test sending emails. Creating and previewing emails **DOES NOT** require a Resend account and can be done locally.
 
 1. Go to [Resend](https://resend.com/) and create a free account.
 2. Create a new API key and copy it to your `.env` file as `RESEND_KEY`.
@@ -133,7 +158,7 @@ pnpm run type-check
 
 **TODO**: surely....
 
-### Interacting with the database (Prisma Studio)
+### Interacting with the database
 
 Prisma Studio is a locally hosted application that allows you to view and interact with your database.
 
@@ -164,3 +189,17 @@ pnpm db-seed
 ```
 
 This will populate your database via the [seed script](../src/lib/prisma/seed.ts)
+
+## Managing Docker Containers
+
+Run the following commands from the project directory:
+
+- `docker-compose up` to start the docker containers and build the dist files
+- `docker-compose up -d` to start the containers and build the dist files in detached mode
+- `docker-compose stop` to stop detached mode
+- `docker-compose down` to stop the container and purge its containers and networks
+- `ctrl+c` to stop
+
+## Tips and Troubleshooting
+
+TODO

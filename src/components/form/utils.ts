@@ -1,0 +1,69 @@
+import { ZodError } from 'zod';
+import type { ActionState } from '@/components/form/types';
+
+const fromErrorToActionState = ({
+  error,
+  formData,
+  showToast = true,
+}: {
+  error: unknown;
+  formData?: FormData;
+  showToast?: boolean;
+}): ActionState => {
+  if (error instanceof ZodError) {
+    return {
+      status: 'ERROR',
+      message: '',
+      showToast,
+      payload: formData,
+      fieldErrors: error.flatten().fieldErrors,
+      timestamp: Date.now(),
+    };
+  } else if (error instanceof Error) {
+    return {
+      status: 'ERROR',
+      message: error.message,
+      showToast,
+      payload: formData,
+      fieldErrors: {},
+      timestamp: Date.now(),
+    };
+  } else {
+    return {
+      status: 'ERROR',
+      message: 'An unknown error occurred',
+      payload: formData,
+      fieldErrors: {},
+      timestamp: Date.now(),
+    };
+  }
+};
+
+const toActionState = ({
+  status = 'SUCCESS',
+  message = '',
+  showToast = true,
+  formData,
+  data,
+}: {
+  status: ActionState['status'];
+  message: string;
+  showToast?: boolean;
+  formData?: FormData;
+  data?: unknown;
+}): ActionState => {
+  return {
+    status,
+    message,
+    showToast,
+    fieldErrors: {},
+    payload: formData,
+    timestamp: Date.now(),
+    data,
+  };
+};
+
+export const formUtils = {
+  fromErrorToActionState,
+  toActionState,
+};

@@ -1,4 +1,3 @@
-import type { BaseItemType } from '@/features/item/types';
 import type {
   COE33Character,
   COE33Element,
@@ -7,6 +6,7 @@ import type {
   COE33Stain,
   COE33WeaponGrade,
 } from '@prisma/client';
+import type { BaseItemType } from '@/features/item/types';
 
 export type COE33BaseItemType = BaseItemType<COE33ItemCategory, COE33ItemTag>;
 

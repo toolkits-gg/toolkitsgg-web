@@ -1,0 +1,319 @@
+import { type MantineThemeOverride, virtualColor } from '@mantine/core';
+import {
+  _baseTheme,
+  _baseThemeDeuteranopia,
+  _baseThemeProtanopia,
+} from '@/features/theme/themes/_base-theme';
+import type { ThemeCustomColors } from '@/features/theme/types';
+
+const defaultThemeColors: ThemeCustomColors = {
+  /**
+   * Colors
+   */
+  primaryDark: [
+    '#f1e1ff',
+    '#e3c2ff',
+    '#c98afe',
+    '#ac4dfe',
+    '#9010fe',
+    '#7201d3',
+    '#5b01a8',
+    '#45017f',
+    '#2f0056',
+    '#160029',
+  ],
+  primaryLight: [
+    '#f1e1ff',
+    '#e3c2ff',
+    '#c98afe',
+    '#ac4dfe',
+    '#9010fe',
+    '#7201d3',
+    '#5b01a8',
+    '#45017f',
+    '#2f0056',
+    '#160029',
+  ],
+  primary: virtualColor({
+    name: 'primary',
+    dark: 'primaryDark',
+    light: 'primaryLight',
+  }),
+
+  secondaryDark: [
+    '#fff5e5',
+    '#ffeccc',
+    '#ffd899',
+    '#ffc566',
+    '#ffb133',
+    '#ff9e01',
+    '#cc7e00',
+    '#995f00',
+    '#663f00',
+    '#332000',
+  ],
+  secondaryLight: [
+    '#fff5e5',
+    '#ffeccc',
+    '#ffd899',
+    '#ffc566',
+    '#ffb133',
+    '#ff9e01',
+    '#cc7e00',
+    '#995f00',
+    '#663f00',
+    '#332000',
+  ],
+  secondary: virtualColor({
+    name: 'secondary',
+    dark: 'secondaryDark',
+    light: 'secondaryLight',
+  }),
+
+  accent1Dark: [
+    '#edf3fd',
+    '#dbe7fa',
+    '#b7cff6',
+    '#92b6f1',
+    '#6e9eed',
+    '#4a86e8',
+    '#3b6bba',
+    '#2c508b',
+    '#1e365d',
+    '#0f1b2e',
+  ],
+  accent1Light: [
+    '#edf3fd',
+    '#dbe7fa',
+    '#b7cff6',
+    '#92b6f1',
+    '#6e9eed',
+    '#4a86e8',
+    '#3b6bba',
+    '#2c508b',
+    '#1e365d',
+    '#0f1b2e',
+  ],
+  accent1: virtualColor({
+    name: 'accent1',
+    dark: 'accent1Dark',
+    light: 'accent1Light',
+  }),
+
+  /**
+   * Surfaces
+   */
+
+  bgDark: [
+    '#e5e7eb',
+    '#cbced7',
+    '#979eb0',
+    '#656e85',
+    '#3e4351',
+    '#16181d',
+    '#121317',
+    '#0d0e11',
+    '#090a0c',
+    '#040506',
+  ],
+  bgLight: [
+    '#ffffff',
+    '#ffffff',
+    '#ffffff',
+    '#ffffff',
+    '#ffffff',
+    '#ffffff',
+    '#cccccc',
+    '#999999',
+    '#666666',
+    '#333333',
+  ],
+  bg: virtualColor({
+    name: 'bg',
+    dark: 'bgDark',
+    light: 'bgLight',
+  }),
+
+  cardBgDark: [
+    '#e6e4ed',
+    '#ccc7d9',
+    '#9e93b7',
+    '#706091',
+    '#413656',
+    '#171221',
+    '#130f1c',
+    '#100c18',
+    '#0d0914',
+    '#040308',
+  ],
+  cardBgLight: [
+    '#ffffff',
+    '#fbfcfd',
+    '#fbfcfd',
+    '#f8f9fb',
+    '#f8f9fb',
+    '#f5f7fa',
+    '#b1c3da',
+    '#738ead',
+    '#4b5d73',
+    '#252f3b',
+  ],
+  cardBg: virtualColor({
+    name: 'card-bg',
+    dark: 'cardBgDark',
+    light: 'cardBgLight',
+  }),
+
+  sidebarBgDark: [
+    '#e6e4ed',
+    '#ccc7d9',
+    '#9e93b7',
+    '#706091',
+    '#413656',
+    '#171221',
+    '#130f1c',
+    '#100c18',
+    '#0d0914',
+    '#040308',
+  ],
+  sidebarBgLight: [
+    '#ffffff',
+    '#fcfcfc',
+    '#fcfcfc',
+    '#f9f9f9',
+    '#f9f9f9',
+    '#f7f7f7',
+    '#c1c1c1',
+    '#8b8b8b',
+    '#5c5c5c',
+    '#2e2e2e',
+  ],
+  sidebarBg: virtualColor({
+    name: 'sidebar-bg',
+    dark: 'sidebarBgDark',
+    light: 'sidebarBgLight',
+  }),
+
+  /**
+   * Borders
+   */
+  borderDark: [
+    '#ebeaef',
+    '#d8d6e0',
+    '#b0adc0',
+    '#8983a1',
+    '#615a81',
+    '#3a3162',
+    '#2e274e',
+    '#231d3b',
+    '#171427',
+    '#0c0a14',
+  ],
+  borderLight: [
+    '#fbfaff',
+    '#f6f4ff',
+    '#ede9ff',
+    '#e4deff',
+    '#dbd3ff',
+    '#d2c8ff',
+    '#a8a0cc',
+    '#7e7899',
+    '#545066',
+    '#2a2833',
+  ],
+  border: virtualColor({
+    name: 'border',
+    dark: 'borderDark',
+    light: 'borderLight',
+  }),
+
+  ringDark: [
+    '#f2f0f8',
+    '#e4e1f0',
+    '#c9c4e2',
+    '#aea6d3',
+    '#9389c5',
+    '#786bb6',
+    '#605692',
+    '#48406d',
+    '#302b49',
+    '#181524',
+  ],
+  ringLight: [
+    '#f1e6fb',
+    '#e3ccf6',
+    '#c799ed',
+    '#aa67e5',
+    '#8e34dc',
+    '#7201d3',
+    '#5b01a9',
+    '#44017f',
+    '#2e0054',
+    '#17002a',
+  ],
+  ring: virtualColor({
+    name: 'ring',
+    dark: 'ringDark',
+    light: 'ringLight',
+  }),
+
+  /**
+   * Inputs
+   */
+  inputDark: [
+    '#edecf3',
+    '#dcd9e6',
+    '#b8b3ce',
+    '#958eb5',
+    '#71689d',
+    '#4e4284',
+    '#3e356a',
+    '#2f284f',
+    '#1f1a35',
+    '#100d1a',
+  ],
+
+  inputLight: [
+    '#ffffff',
+    '#fcfcfc',
+    '#fcfcfc',
+    '#f9f9f9',
+    '#f9f9f9',
+    '#f7f7f7',
+    '#c1c1c1',
+    '#8b8b8b',
+    '#5c5c5c',
+    '#2e2e2e',
+  ],
+  input: virtualColor({
+    name: 'input',
+    dark: 'inputDark',
+    light: 'inputLight',
+  }),
+};
+
+export const defaultTheme: MantineThemeOverride = {
+  ..._baseTheme,
+  colors: {
+    ..._baseTheme.colors,
+    ...defaultThemeColors,
+  },
+};
+
+export const defaultThemeDeuteranopia: MantineThemeOverride = {
+  ..._baseThemeDeuteranopia,
+  colors: {
+    ..._baseThemeDeuteranopia.colors,
+    ...defaultThemeColors,
+    // Other overrides here
+  },
+};
+
+export const defaultThemeProtanopia: MantineThemeOverride = {
+  ..._baseThemeProtanopia,
+  colors: {
+    ..._baseThemeProtanopia.colors,
+    ...defaultThemeColors,
+    // Other overrides here
+  },
+};

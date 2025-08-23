@@ -1,89 +1,86 @@
+import type { MantineColorScheme } from '@mantine/core';
 import { allGameConfigs } from '@/features/game/constants';
+import {
+  defaultTheme,
+  defaultThemeDeuteranopia,
+  defaultThemeProtanopia,
+} from '@/features/theme/themes/default-theme';
+import type {
+  ToolkitAccentThemeDefinition,
+  ToolkitThemeDefinition,
+} from '@/features/theme/types';
 
-export const themeModes = ['All', 'Dark', 'Light'] as const;
-export type ThemeMode = 'dark' | 'light';
+export const themeModes: MantineColorScheme[] = ['auto', 'dark', 'light'];
 
-export type ThemeDefinition = {
-  label: string;
-  className: string;
-};
-
-export type AccentThemeDefinition = {
-  label: string;
-  className: string;
-  accentTheme: string | undefined;
-};
-
-export const themeDefinitions: ThemeDefinition[] = [
+export const themeDefinitions: ToolkitThemeDefinition[] = [
   {
     label: 'Default Light',
     className: 'default-light',
+    theme: defaultTheme,
+    themeDeuteranopia: defaultThemeDeuteranopia,
+    themeProtanopia: defaultThemeProtanopia,
   },
   {
     label: 'Default Dark',
     className: 'default-dark',
+    theme: defaultTheme,
+    themeDeuteranopia: defaultThemeDeuteranopia,
+    themeProtanopia: defaultThemeProtanopia,
   },
-  // TODO: Add all the shadcn specific variants for the below themes
-  // TODO: Things like --sidebar-background, etc. See Default Themes for reference.
-
-  // {
-  //   label: 'Nord Polar',
-  //   className: 'nord-polar-dark',
-  // },
-  // {
-  //   label: 'Nord Snow',
-  //   className: 'nord-snow-light',
-  // },
-  // {
-  //   label: 'Solarized Dark',
-  //   className: 'solarized-dark',
-  // },
-  // {
-  //   label: 'Solarized Light',
-  //   className: 'solarized-light',
-  // },
 ].sort((a, b) => a.label.localeCompare(b.label));
 
-const gameThemeDefinitions: ThemeDefinition[] = allGameConfigs
-  .filter((gameConfig) => gameConfig.themeDefinitions)
-  .flatMap(
-    (gameConfig) =>
-      gameConfig.themeDefinitions?.map((def) => ({
-        label: def.label,
-        className: def.className,
-      })) ?? []
-  )
+const gameThemeDefinitions: ToolkitThemeDefinition[] = allGameConfigs
+  .filter((gameConfig) => gameConfig.themeDefinition !== undefined)
+  .map((gameConfig) => [
+    {
+      label: `${gameConfig.themeDefinition?.label} - Light`,
+      className: `${gameConfig.themeDefinition?.className}-light`,
+      theme: gameConfig.themeDefinition!.theme,
+      themeDeuteranopia: defaultThemeDeuteranopia,
+      themeProtanopia: defaultThemeProtanopia,
+    },
+    {
+      label: `${gameConfig.themeDefinition?.label} - Dark`,
+      className: `${gameConfig.themeDefinition?.className}-dark`,
+      theme: gameConfig.themeDefinition!.theme,
+      themeDeuteranopia: defaultThemeDeuteranopia,
+      themeProtanopia: defaultThemeProtanopia,
+    },
+  ])
+  .flat()
   .sort((a, b) => a.label.localeCompare(b.label));
 
-export const accentThemeDefinitions: AccentThemeDefinition[] = [
+export const accentThemeDefinitions: ToolkitAccentThemeDefinition[] = [
   {
     label: 'Default',
-    className: 'accent-default',
+    className: 'accent-default' as const,
     accentTheme: undefined,
   },
   {
     label: 'Deuteranopic',
-    className: 'accent-deuteranopic',
+    className: 'accent-deuteranopic' as const,
     accentTheme: 'deuteranopic',
   },
   {
     label: 'Protanopic',
-    className: 'accent-protanopic',
+    className: 'accent-protanopic' as const,
     accentTheme: 'protanopic',
   },
 ].sort((a, b) => a.label.localeCompare(b.label));
 
-export const allThemeClassDefinitions: Array<
-  ThemeDefinition | AccentThemeDefinition
-> = [...themeDefinitions, ...gameThemeDefinitions].sort();
+export const allThemeDefinitions = [
+  ...themeDefinitions,
+  ...gameThemeDefinitions,
+];
 
-export const allThemeClassNames = allThemeClassDefinitions
-  .map((def) => def.className)
-  .sort();
+export const allThemeClassNames = [
+  ...themeDefinitions.map((def) => def.className),
+  ...gameThemeDefinitions.map((def) => def.className),
+].sort();
 
 export const accentThemeClassNames = accentThemeDefinitions
   .filter((def) => def.label !== 'Default')
   .map((def) => def.className)
   .sort();
 
-export const defaultTheme = 'default-dark';
+export const nextThemesDefaultTheme = 'default-dark';
