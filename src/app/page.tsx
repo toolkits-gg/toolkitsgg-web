@@ -1,11 +1,5 @@
-import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
-import { Heading } from '@/components/heading';
-import { SidebarLayout } from '@/components/sidebar-layout';
+import { PageLayout } from '@/components/PageLayout';
 
 export default function HomePage() {
-  return (
-    <SidebarLayout sidebar={<AppSidebar gameConfig={undefined} />}>
-      <Heading>Home Page</Heading>
-    </SidebarLayout>
-  );
+  return <PageLayout gameId={undefined}>Home Page</PageLayout>;
 }

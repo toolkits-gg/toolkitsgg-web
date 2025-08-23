@@ -1,0 +1,377 @@
+import { type MantineThemeOverride, virtualColor } from '@mantine/core';
+import {
+  _baseTheme,
+  _baseThemeDeuteranopia,
+  _baseThemeProtanopia,
+} from '@/features/theme/themes/_base-theme';
+import type { ThemeCustomColors } from '@/features/theme/types';
+
+const coe33ThemeColors: ThemeCustomColors = {
+  /**
+   * Colors
+   */
+  primaryDark: [
+    '#e5e8f1',
+    '#cbd2e3',
+    '#9aa9ca',
+    '#6c7fa5',
+    '#495773',
+    '#2b3446',
+    '#222a39',
+    '#1b222f',
+    '#141a24',
+    '#0a0e16',
+  ],
+  primaryLight: [
+    '#e5e8f1',
+    '#cbd2e3',
+    '#9aa9ca',
+    '#6c7fa5',
+    '#495773',
+    '#2b3446',
+    '#222a39',
+    '#1b222f',
+    '#141a24',
+    '#0a0e16',
+  ],
+  primary: virtualColor({
+    name: 'primary',
+    dark: 'primaryDark',
+    light: 'primaryLight',
+  }),
+
+  secondaryDark: [
+    '#fef8f4',
+    '#fdf1e9',
+    '#fce0cd',
+    '#fad3b3',
+    '#f9c597',
+    '#f8b46d',
+    '#cc8b39',
+    '#966527',
+    '#644217',
+    '#382309',
+  ],
+  secondaryLight: [
+    '#fef8f4',
+    '#fdf1e9',
+    '#fce0cd',
+    '#fad3b3',
+    '#f9c597',
+    '#f8b46d',
+    '#cc8b39',
+    '#966527',
+    '#644217',
+    '#382309',
+  ],
+  secondary: virtualColor({
+    name: 'secondary',
+    dark: 'secondaryDark',
+    light: 'secondaryLight',
+  }),
+
+  accent1Dark: [
+    '#d5fedd',
+    '#a0fcb6',
+    '#4dee82',
+    '#45d875',
+    '#3cbf67',
+    '#34a85a',
+    '#278546',
+    '#1b6433',
+    '#0f4220',
+    '#05250f',
+  ],
+  accent1Light: [
+    '#d5fedd',
+    '#a0fcb6',
+    '#4dee82',
+    '#45d875',
+    '#3cbf67',
+    '#34a85a',
+    '#278546',
+    '#1b6433',
+    '#0f4220',
+    '#05250f',
+  ],
+  accent1: virtualColor({
+    name: 'accent1',
+    dark: 'accent1Dark',
+    light: 'accent1Light',
+  }),
+
+  /**
+   * Surfaces
+   */
+
+  bgDark: [
+    '#e3e5ea',
+    '#c5c9d3',
+    '#8d96a9',
+    '#616877',
+    '#373c44',
+    '#111317',
+    '#0f1115',
+    '#0c0e12',
+    '#06070a',
+    '#030405',
+  ],
+  bgLight: [
+    '#ffffff',
+    '#ffffff',
+    '#ffffff',
+    '#ffffff',
+    '#ffffff',
+    '#ffffff',
+    '#cccccc',
+    '#999999',
+    '#666666',
+    '#333333',
+  ],
+  bg: virtualColor({
+    name: 'bg',
+    dark: 'bgDark',
+    light: 'bgLight',
+  }),
+
+  cardBgDark: [
+    '#e2e5ed',
+    '#c6ccdc',
+    '#8a98ba',
+    '#5d6b88',
+    '#353e50',
+    '#131720',
+    '#10131b',
+    '#0e1118',
+    '#080b11',
+    '#06070c',
+  ],
+  cardBgLight: [
+    '#ffffff',
+    '#fbfcfd',
+    '#fbfcfd',
+    '#f8f9fb',
+    '#f8f9fb',
+    '#f5f7fa',
+    '#b1c3da',
+    '#738ead',
+    '#4b5d73',
+    '#252f3b',
+  ],
+  cardBg: virtualColor({
+    name: 'card-bg',
+    dark: 'cardBgDark',
+    light: 'cardBgLight',
+  }),
+
+  sidebarBgDark: [
+    '#e1e5ee',
+    '#c4ccdd',
+    '#889cbc',
+    '#5c6b84',
+    '#374050',
+    '#151a22',
+    '#11161d',
+    '#0d1117',
+    '#0b0e14',
+    '#05070b',
+  ],
+  sidebarBgLight: [
+    '#ffffff',
+    '#fcfcfc',
+    '#fcfcfc',
+    '#f9f9f9',
+    '#f9f9f9',
+    '#f7f7f7',
+    '#c1c1c1',
+    '#8b8b8b',
+    '#5c5c5c',
+    '#2e2e2e',
+  ],
+  sidebarBg: virtualColor({
+    name: 'sidebar-bg',
+    dark: 'sidebarBgDark',
+    light: 'sidebarBgLight',
+  }),
+
+  /**
+   * Borders
+   */
+  borderDark: [
+    '#e8ebf3',
+    '#cdd4e5',
+    '#9faece',
+    '#7287af',
+    '#51617f',
+    '#343f54',
+    '#293344',
+    '#202837',
+    '#171e2a',
+    '#0d1119',
+  ],
+  borderLight: [
+    '#fcfcfc',
+    '#f9f9f9',
+    '#f1f1f1',
+    '#ebebeb',
+    '#e2e2e2',
+    '#dddddd',
+    '#ababab',
+    '#7f7f7f',
+    '#525252',
+    '#2c2c2c',
+  ],
+  border: virtualColor({
+    name: 'border',
+    dark: 'borderDark',
+    light: 'borderLight',
+  }),
+
+  ringDark: [
+    '#d5fedd',
+    '#a0fcb6',
+    '#4dee82',
+    '#45d875',
+    '#3cbf67',
+    '#34a85a',
+    '#278546',
+    '#1b6433',
+    '#0f4220',
+    '#05250f',
+  ],
+  ringLight: [
+    '#d5fedd',
+    '#a0fcb6',
+    '#4dee82',
+    '#45d875',
+    '#3cbf67',
+    '#34a85a',
+    '#278546',
+    '#1b6433',
+    '#0f4220',
+    '#05250f',
+  ],
+  ring: virtualColor({
+    name: 'ring',
+    dark: 'ringDark',
+    light: 'ringLight',
+  }),
+
+  /**
+   * Inputs
+   */
+  inputDark: [
+    '#e5e8f1',
+    '#cbd2e3',
+    '#9aa9ca',
+    '#6c7fa5',
+    '#495773',
+    '#2b3446',
+    '#222a39',
+    '#1b222f',
+    '#141a24',
+    '#0a0e16',
+  ],
+  inputLight: [
+    '#ffffff',
+    '#fcfcfc',
+    '#fcfcfc',
+    '#f9f9f9',
+    '#f9f9f9',
+    '#f7f7f7',
+    '#c1c1c1',
+    '#8b8b8b',
+    '#5c5c5c',
+    '#2e2e2e',
+  ],
+  input: virtualColor({
+    name: 'input',
+    dark: 'inputDark',
+    light: 'inputLight',
+  }),
+};
+
+export const coe33Theme: MantineThemeOverride = {
+  ..._baseTheme,
+  colors: {
+    ..._baseTheme.colors,
+    ...coe33ThemeColors,
+  },
+};
+
+export const coe33ThemeDeuteranopia: MantineThemeOverride = {
+  ..._baseThemeDeuteranopia,
+  colors: {
+    ..._baseThemeDeuteranopia.colors,
+    ...coe33ThemeColors,
+    // Other overrides here
+    accent1Dark: [
+      '#e3fafc',
+      '#c5f6fa',
+      '#99e9f2',
+      '#66d9e8',
+      '#3bc9db',
+      '#22b8cf',
+      '#15aabf',
+      '#1098ad',
+      '#0c8599',
+      '#0b7285',
+    ],
+    accent1Light: [
+      '#e3fafc',
+      '#c5f6fa',
+      '#99e9f2',
+      '#66d9e8',
+      '#3bc9db',
+      '#22b8cf',
+      '#15aabf',
+      '#1098ad',
+      '#0c8599',
+      '#0b7285',
+    ],
+    accent1: virtualColor({
+      name: 'accent1',
+      dark: 'accent1Dark',
+      light: 'accent1Light',
+    }),
+
+    ringDark: [
+      '#e3fafc',
+      '#c5f6fa',
+      '#99e9f2',
+      '#66d9e8',
+      '#3bc9db',
+      '#22b8cf',
+      '#15aabf',
+      '#1098ad',
+      '#0c8599',
+      '#0b7285',
+    ],
+    ringLight: [
+      '#e3fafc',
+      '#c5f6fa',
+      '#99e9f2',
+      '#66d9e8',
+      '#3bc9db',
+      '#22b8cf',
+      '#15aabf',
+      '#1098ad',
+      '#0c8599',
+      '#0b7285',
+    ],
+    ring: virtualColor({
+      name: 'ring',
+      dark: 'ringDark',
+      light: 'ringLight',
+    }),
+  },
+};
+
+export const coe33ThemeProtanopia: MantineThemeOverride = {
+  ..._baseThemeProtanopia,
+  colors: {
+    ..._baseThemeProtanopia.colors,
+    ...coe33ThemeColors,
+    // Other overrides here
+  },
+};

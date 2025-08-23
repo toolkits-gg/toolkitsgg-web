@@ -1,10 +1,12 @@
-import './globals.css';
-import type { Metadata } from 'next';
+import '@mantine/core/styles.css';
+import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 import { Geist, Geist_Mono, Lora } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { ThemeProvider } from '@/features/theme/components/theme-provider';
-import { ReactQueryProvider } from '@/lib/react-query/react-query-provider';
-import { ToastProvider } from '@/lib/react-toastify/toast-provider';
+import { ThemeProvider } from '@/features/theme/providers/ThemeProvider';
+import { ReactQueryProvider } from '@/lib/react-query/ReactQueryProvider';
+import { ReactToastifyProvider } from '@/lib/react-toastify/ReactToastifyProvider';
+
+export { metadata } from './metadata';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -22,27 +24,24 @@ const loraSerif = Lora({
   weight: ['400', '700'],
 });
 
-export const metadata: Metadata = {
-  title: 'Toolkits.gg',
-  description:
-    'A site dedicated to toolkits and quality of life features for a variety of games.',
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html lang="en" {...mantineHtmlProps}>
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${loraSerif.variable} antialiased`}
       >
         <NuqsAdapter>
           <ThemeProvider>
             <ReactQueryProvider>
+              <ReactToastifyProvider />
               {children}
-              <ToastProvider />
             </ReactQueryProvider>
           </ThemeProvider>
         </NuqsAdapter>

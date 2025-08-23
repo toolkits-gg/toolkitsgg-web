@@ -1,26 +1,26 @@
-import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
-import { CardCompact } from '@/components/card-compact';
-import { SidebarLayout } from '@/components/sidebar-layout';
-import { EmailVerificationForm } from '@/features/auth/components/email-verification-form';
-import { EmailVerificationResendForm } from '@/features/auth/components/email-verification-resend-form';
+import { Flex, Paper } from '@mantine/core';
+import { PageLayout } from '@/components/PageLayout';
+import { EmailVerificationForm } from '@/features/auth/components/EmailVerificationForm';
+import { EmailVerificationResendForm } from '@/features/auth/components/EmailVerificationResendForm';
+import classes from './Page.module.css';
 
 const EmailVerificationPage = () => {
   return (
-    <SidebarLayout sidebar={<AppSidebar gameConfig={undefined} />}>
-      <div className="flex flex-1 flex-col items-center justify-center">
-        <CardCompact
-          title="Verify Email"
-          description="Please verify your email to continue"
-          className="motion-safe:animate-fade-from-top w-full max-w-[420px]"
-          content={
-            <div className="flex flex-col gap-y-2">
-              <EmailVerificationForm />
-              <EmailVerificationResendForm />
-            </div>
-          }
-        />
-      </div>
-    </SidebarLayout>
+    <PageLayout gameId={undefined}>
+      <Flex align="center" justify="center" p="xl">
+        <Paper
+          radius="md"
+          p="lg"
+          withBorder
+          className={classes.paper}
+          w="100%"
+          maw="400px"
+        >
+          <EmailVerificationForm />
+          <EmailVerificationResendForm />
+        </Paper>
+      </Flex>
+    </PageLayout>
   );
 };
 

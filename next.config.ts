@@ -2,7 +2,8 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   experimental: {
-    browserDebugInfoInTerminal: true,
+    browserDebugInfoInTerminal: false,
+    optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
   eslint: {
     ignoreDuringBuilds: true,

@@ -2,14 +2,11 @@
 
 import type { GameId } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
-import {
-  type ActionState,
-  fromErrorToActionState,
-  toActionState,
-} from '@/components/form/utils/to-action-state';
+import type { ActionState } from '@/components/form/types';
+import { formUtils } from '@/components/form/utils';
 import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
 import { gameData } from '@/features/game/data';
-import { isGameId } from '@/features/game/utils/game-id';
+import { gameUtils } from '@/features/game/utils';
 
 export const toggleFavoriteGame = async (
   gameId: GameId
@@ -19,7 +16,7 @@ export const toggleFavoriteGame = async (
     throw new Error('User not authenticated');
   }
 
-  if (!isGameId(gameId)) {
+  if (!gameUtils.isGameId(gameId)) {
     throw new Error(`Invalid GameId: ${gameId}`);
   }
 
@@ -27,13 +24,13 @@ export const toggleFavoriteGame = async (
     const { existingFavorite } = await gameData.toggleFavoriteGame(gameId);
 
     revalidatePath(`/${gameId}`);
-    return toActionState({
+    return formUtils.toActionState({
       status: 'SUCCESS',
       message: existingFavorite
         ? 'Game removed from favorites'
         : 'Game added to favorites',
     });
   } catch (error) {
-    return fromErrorToActionState({ error });
+    return formUtils.fromErrorToActionState({ error });
   }
 };

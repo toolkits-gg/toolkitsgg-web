@@ -1,7 +1,7 @@
-import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
-import { CardCompact } from '@/components/card-compact';
-import { SidebarLayout } from '@/components/sidebar-layout';
-import { PasswordResetForm } from '@/features/password/components/password-reset-form';
+import { Flex, Paper } from '@mantine/core';
+import { PageLayout } from '@/components/PageLayout';
+import { PasswordResetForm } from '@/features/password/components/PasswordResetForm';
+import classes from './Page.module.css';
 
 type PasswordResetPageProps = {
   params: Promise<{
@@ -13,16 +13,20 @@ const PasswordResetPage = async ({ params }: PasswordResetPageProps) => {
   const { tokenId } = await params;
 
   return (
-    <SidebarLayout sidebar={<AppSidebar gameConfig={undefined} />}>
-      <div className="flex flex-1 flex-col items-center justify-center">
-        <CardCompact
-          title="New Password"
-          description="Enter a new password for your account"
-          className="motion-safe:animate-fade-from-top w-full max-w-[420px]"
-          content={<PasswordResetForm tokenId={tokenId} />}
-        />
-      </div>
-    </SidebarLayout>
+    <PageLayout gameId={undefined}>
+      <Flex align="center" justify="center" p="xl">
+        <Paper
+          radius="md"
+          p="lg"
+          withBorder
+          className={classes.paper}
+          w="100%"
+          maw="400px"
+        >
+          <PasswordResetForm tokenId={tokenId} />
+        </Paper>
+      </Flex>
+    </PageLayout>
   );
 };
 
