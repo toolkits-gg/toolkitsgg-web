@@ -1,28 +1,23 @@
-import Link from 'next/link';
-import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
-import { CardCompact } from '@/components/card-compact';
-import { SidebarLayout } from '@/components/sidebar-layout';
-import { SignUpForm } from '@/features/auth/components/sign-up-form';
-import { signInPath } from '@/paths';
+import { Flex, Paper } from '@mantine/core';
+import { PageLayout } from '@/components/PageLayout';
+import { SignUpForm } from '@/features/auth/components/SignUpForm';
+import classes from './Page.module.css';
 
-const SignUpPage = () => {
+export default function SignUpPage() {
   return (
-    <SidebarLayout sidebar={<AppSidebar gameConfig={undefined} />}>
-      <div className="flex flex-1 flex-col items-center justify-center">
-        <CardCompact
-          title="Sign Up"
-          description="Create an account to get started"
-          className="motion-safe:animate-fade-from-top w-full max-w-[420px]"
-          content={<SignUpForm />}
-          footer={
-            <Link className="text-muted-foreground text-sm" href={signInPath()}>
-              Have an account? Sign In now.
-            </Link>
-          }
-        />
-      </div>
-    </SidebarLayout>
+    <PageLayout gameId={undefined}>
+      <Flex align="center" justify="center" p="xl">
+        <Paper
+          radius="md"
+          p="lg"
+          withBorder
+          className={classes.paper}
+          w="100%"
+          maw="400px"
+        >
+          <SignUpForm />
+        </Paper>
+      </Flex>
+    </PageLayout>
   );
-};
-
-export default SignUpPage;
+}

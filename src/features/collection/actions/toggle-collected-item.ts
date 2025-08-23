@@ -1,16 +1,12 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-import {
-  type ActionState,
-  fromErrorToActionState,
-  toActionState,
-} from '@/components/form/utils/to-action-state';
-import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
-
-import { validateItemSlug } from '@/features/collection/utils/validate-item-slug';
 import type { GameId } from '@prisma/client';
-import { toGameConfig } from '@/features/game/utils/game-id';
+import { revalidatePath } from 'next/cache';
+import type { ActionState } from '@/components/form/types';
+import { formUtils } from '@/components/form/utils';
+import { getAuthOrRedirect } from '@/features/auth/queries/get-auth-or-redirect';
+import { validateItemSlug } from '@/features/collection/utils/validate-item-slug';
+import { gameUtils } from '@/features/game/utils';
 
 export const toggleCollectedItem = async (
   gameId: GameId,
@@ -25,7 +21,7 @@ export const toggleCollectedItem = async (
     throw new Error(`Invalid item slug: ${itemSlug}`);
   }
 
-  const gameConfig = toGameConfig(gameId);
+  const gameConfig = gameUtils.toGameConfig(gameId);
 
   if (!gameConfig) {
     throw new Error(`Game configuration not found for gameId: ${gameId}`);
@@ -43,7 +39,7 @@ export const toggleCollectedItem = async (
 
     revalidatePath(`/${gameConfig.id}`);
 
-    return toActionState({
+    return formUtils.toActionState({
       status: 'SUCCESS',
       message: isCollected
         ? 'Item marked as collected'
@@ -51,6 +47,6 @@ export const toggleCollectedItem = async (
       showToast: false,
     });
   } catch (error) {
-    return fromErrorToActionState({ error });
+    return formUtils.fromErrorToActionState({ error });
   }
 };

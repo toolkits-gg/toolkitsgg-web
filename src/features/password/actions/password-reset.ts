@@ -3,11 +3,8 @@
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { setCookieByKey } from '@/actions/cookies';
-import {
-  ActionState,
-  fromErrorToActionState,
-  toActionState,
-} from '@/components/form/utils/to-action-state';
+import type { ActionState } from '@/components/form/types';
+import { formUtils } from '@/components/form/utils';
 import { authData } from '@/features/auth/data';
 import { signInPath } from '@/paths';
 import { hashToken } from '@/utils/crypto';
@@ -55,7 +52,7 @@ export const passwordReset = async (
       !passwordResetToken ||
       Date.now() > passwordResetToken.expiresAt.getTime()
     ) {
-      return toActionState({
+      return formUtils.toActionState({
         status: 'ERROR',
         message: 'Expired or invalid verification token',
         formData,
@@ -75,7 +72,7 @@ export const passwordReset = async (
       },
     });
   } catch (error) {
-    return fromErrorToActionState({ error, formData });
+    return formUtils.fromErrorToActionState({ error, formData });
   }
 
   await setCookieByKey('toast', 'Successfully reset password');
