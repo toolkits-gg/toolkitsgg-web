@@ -3,7 +3,7 @@
 [fork]: /fork
 [pr]: /pr
 [code-of-conduct]: ../CODE_OF_CONDUCT.md
-[local-setup]: ./LOCALSETUP.md
+[local-setup]: ../docs/LOCALSETUP.md
 
 Welcome to the team! We're stoked that you want to participate, as this project's success depends on the contributions of people like you. One of the primary motivations behind the project is to encourage more developers to make their first contributions to open source!
 
