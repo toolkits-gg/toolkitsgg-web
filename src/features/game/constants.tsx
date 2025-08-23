@@ -1,8 +1,8 @@
 import type { GameId } from '@prisma/client';
-import { DefaultLogo } from '@/components/logo';
-import { coe33Config } from '@/games/coe33/config';
+import { DefaultLogo, type LogoSize } from '@/components/Logo';
 import type { GameConfig } from '@/features/game/types';
 import type { BaseItemType } from '@/features/item/types';
+import { coe33Config } from '@/games/coe33/config';
 
 export const noGameConfig: GameConfig<undefined> = {
   id: 'none',
@@ -10,10 +10,11 @@ export const noGameConfig: GameConfig<undefined> = {
   description: undefined,
   label: 'Default',
   path: '/',
-  logo: <DefaultLogo />,
-  themeDefinitions: undefined,
+  logo: (size: LogoSize) => <DefaultLogo size={size} />,
+  themeDefinition: undefined,
   items: undefined,
   dataUtils: undefined,
+  pages: undefined,
 };
 
 export const gameConfigs: Record<

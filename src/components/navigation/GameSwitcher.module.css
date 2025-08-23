@@ -1,0 +1,49 @@
+.game {
+  display: block;
+  width: 100%;
+  padding: var(--mantine-spacing-md);
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-dark-0));
+}
+
+.logoContainer {
+  border: 2px solid transparent;
+  background-color: transparent;
+
+  @mixin hover {
+    border: 2px solid
+      light-dark(var(--mantine-color-primary-2), var(--mantine-color-primary-5));
+    background-color: light-dark(
+      var(--mantine-color-primary-0),
+      var(--mantine-color-primary-7)
+    );
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-dark-0));
+  }
+}
+
+.logo {
+  object-fit: contain;
+  overflow: hidden;
+}
+
+.menu {
+  background-color: light-dark(
+    var(--mantine-color-card-bg-5),
+    var(--mantine-color-card-bg-6)
+  );
+  border-color: var(--mantine-color-border-5);
+}
+
+.menuItem {
+  border: 2px solid transparent;
+  background-color: transparent;
+
+  @mixin hover {
+    border: 2px solid
+      light-dark(var(--mantine-color-primary-2), var(--mantine-color-primary-5));
+    background-color: light-dark(
+      var(--mantine-color-primary-0),
+      var(--mantine-color-primary-7)
+    );
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-dark-0));
+  }
+}

@@ -13,8 +13,8 @@ describe('Item slug uniqueness tests', () => {
     }
 
     test(`testing unique item slugs for: ${config.id}`, () => {
-      const uniqueItems = new Set(config.items.map((item) => item?.slug));
-      expect(uniqueItems.size).toBe(config.items.length);
+      const uniqueItems = new Set(config.items?.map((item) => item?.slug));
+      expect(uniqueItems.size).toBe(config.items?.length);
     });
   }
 });

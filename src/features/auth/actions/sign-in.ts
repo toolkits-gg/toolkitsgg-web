@@ -2,11 +2,8 @@
 
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
-import {
-  ActionState,
-  fromErrorToActionState,
-  toActionState,
-} from '@/components/form/utils/to-action-state';
+import type { ActionState } from '@/components/form/types';
+import { formUtils } from '@/components/form/utils';
 import { authData } from '@/features/auth/data';
 import { verifyPasswordHash } from '@/features/password/utils/hash-and-verify';
 import { createSession } from '@/lib/lucia';
@@ -38,7 +35,7 @@ export const signIn = async (_actionState: ActionState, formData: FormData) => {
     );
 
     if (!user || !validPassword) {
-      return toActionState({
+      return formUtils.toActionState({
         status: 'ERROR',
         message: 'Incorrect email or password',
         formData,
@@ -50,7 +47,7 @@ export const signIn = async (_actionState: ActionState, formData: FormData) => {
 
     await setSessionCookie(sessionToken, session.expiresAt);
   } catch (error) {
-    return fromErrorToActionState({ error, formData });
+    return formUtils.fromErrorToActionState({ error, formData });
   }
 
   redirect(homePath());

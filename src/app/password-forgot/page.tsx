@@ -1,20 +1,24 @@
-import { AppSidebar } from '@/app/_navigation/components/app-sidebar';
-import { CardCompact } from '@/components/card-compact';
-import { SidebarLayout } from '@/components/sidebar-layout';
-import { PasswordForgotForm } from '@/features/password/components/password-forgot-form';
+import { Flex, Paper } from '@mantine/core';
+import { PageLayout } from '@/components/PageLayout';
+import { PasswordForgotForm } from '@/features/password/components/PasswordForgotForm';
+import classes from './Page.module.css';
 
 const PasswordForgotPage = () => {
   return (
-    <SidebarLayout sidebar={<AppSidebar gameConfig={undefined} />}>
-      <div className="flex flex-1 flex-col items-center justify-center">
-        <CardCompact
-          title="Forgot Password"
-          description="Enter your email address to reset your password."
-          className="motion-safe:animate-fade-from-top w-full max-w-[420px]"
-          content={<PasswordForgotForm />}
-        />
-      </div>
-    </SidebarLayout>
+    <PageLayout gameId={undefined}>
+      <Flex align="center" justify="center" p="xl">
+        <Paper
+          radius="md"
+          p="lg"
+          withBorder
+          className={classes.paper}
+          w="100%"
+          maw="400px"
+        >
+          <PasswordForgotForm />
+        </Paper>
+      </Flex>
+    </PageLayout>
   );
 };
 

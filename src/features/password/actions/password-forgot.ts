@@ -1,11 +1,8 @@
 'use server';
 
 import { z } from 'zod';
-import {
-  ActionState,
-  fromErrorToActionState,
-  toActionState,
-} from '@/components/form/utils/to-action-state';
+import type { ActionState } from '@/components/form/types';
+import { formUtils } from '@/components/form/utils';
 import { authData } from '@/features/auth/data';
 import { inngest } from '@/lib/inngest';
 
@@ -27,7 +24,7 @@ export const passwordForgot = async (
     });
 
     if (!user) {
-      return toActionState({
+      return formUtils.toActionState({
         status: 'SUCCESS',
         message: 'Check your email for a reset link',
       });
@@ -40,10 +37,10 @@ export const passwordForgot = async (
       },
     });
   } catch (error) {
-    return fromErrorToActionState({ error, formData });
+    return formUtils.fromErrorToActionState({ error, formData });
   }
 
-  return toActionState({
+  return formUtils.toActionState({
     status: 'SUCCESS',
     message: 'Check your email for a reset link',
   });

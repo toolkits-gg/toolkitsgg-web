@@ -1,10 +1,10 @@
 import { writeFileSync } from 'fs';
 import path from 'path';
+import { coe33Items } from '@/games/coe33/items/all-items';
+import type { COE33ItemType } from '@/games/coe33/items/types';
 import { pictoInternalSlugs } from '@/games/coe33/scripts/extract-picto-info/picto-internal-slugs';
 import PictoIconsData from '../inputs/DT_PictoIcons.json';
 import GameData from '../inputs/Game.json';
-import type { COE33ItemType } from '@/games/coe33/items/types';
-import { coe33Items } from '@/games/coe33/items/all-items';
 
 const parseGameData = (internalSlug: string) => {
   const targetKey = 'ST_PassiveEffects';
