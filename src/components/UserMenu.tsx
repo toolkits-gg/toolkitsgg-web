@@ -30,10 +30,15 @@ const UserMenu = () => {
         position="bottom"
         transitionProps={{ transition: 'pop' }}
         withinPortal
+        classNames={{
+          dropdown: classes.menuDropdown,
+          item: classes.menuItem,
+          divider: classes.menuDivider,
+        }}
       >
         <Menu.Target>
           <UnstyledButton className={classes.user}>
-            <Group>
+            <Group wrap="nowrap">
               <Avatar
                 src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
                 radius="xl"
