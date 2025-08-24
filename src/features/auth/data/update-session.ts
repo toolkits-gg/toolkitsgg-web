@@ -9,9 +9,9 @@ type UpdateSessionArgs = {
   }>;
 };
 
-export async function updateSession({ sessionId, data }: UpdateSessionArgs) {
+export const updateSession = async ({ sessionId, data }: UpdateSessionArgs) => {
   return await prisma.session.update({
     where: { id: sessionId },
     data,
   });
-}
+};

@@ -11,11 +11,11 @@ type DeletePasswordResetTokenArgs =
       userId?: string;
     };
 
-export async function deletePasswordResetToken({
+export const deletePasswordResetToken = async ({
   tokenHash,
   userId,
-}: DeletePasswordResetTokenArgs) {
+}: DeletePasswordResetTokenArgs) => {
   await prisma.passwordResetToken.deleteMany({
     where: { tokenHash, userId },
   });
-}
+};

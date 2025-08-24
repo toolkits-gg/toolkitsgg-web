@@ -5,8 +5,10 @@ type DeleteUserSessionsArgs = {
   userId: string;
 };
 
-export async function deleteUserSessions({ userId }: DeleteUserSessionsArgs) {
+export const deleteUserSessions = async ({
+  userId,
+}: DeleteUserSessionsArgs) => {
   await prisma.session.deleteMany({
     where: { userId },
   });
-}
+};

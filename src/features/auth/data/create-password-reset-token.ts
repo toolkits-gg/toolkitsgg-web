@@ -7,11 +7,11 @@ type CreatePasswordResetTokenArgs = {
   expiresAt: Date;
 };
 
-export async function createPasswordResetToken({
+export const createPasswordResetToken = async ({
   tokenHash,
   userId,
   expiresAt,
-}: CreatePasswordResetTokenArgs) {
+}: CreatePasswordResetTokenArgs) => {
   return await prisma.passwordResetToken.create({
     data: {
       tokenHash,
@@ -19,4 +19,4 @@ export async function createPasswordResetToken({
       expiresAt,
     },
   });
-}
+};

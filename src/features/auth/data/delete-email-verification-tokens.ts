@@ -11,11 +11,11 @@ type DeleteEmailVerificationTokensArgs =
       id?: string;
     };
 
-export async function deleteEmailVerificationTokens({
+export const deleteEmailVerificationTokens = async ({
   userId,
   id,
-}: DeleteEmailVerificationTokensArgs) {
+}: DeleteEmailVerificationTokensArgs) => {
   await prisma.emailVerificationToken.deleteMany({
     where: { userId, id },
   });
-}
+};

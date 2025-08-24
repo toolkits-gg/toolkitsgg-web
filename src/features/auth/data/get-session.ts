@@ -1,5 +1,6 @@
 import 'server-only';
 import type { Prisma, Session } from '@prisma/client';
+import { cache } from 'react';
 import prisma from '@/lib/prisma';
 
 type UserInclude = { user: true };
@@ -19,26 +20,28 @@ type GetSessionArgs = {
   sessionId: string;
 };
 
-export async function getSession<T extends Options>({
-  sessionId,
-  options,
-}: GetSessionArgs & { options?: T }): Promise<SessionPayload<T> | null> {
-  const includeUser = options?.includeUser && { user: true };
+export const getSession = cache(
+  async <T extends Options>({
+    sessionId,
+    options,
+  }: GetSessionArgs & { options?: T }): Promise<SessionPayload<T> | null> => {
+    const includeUser = options?.includeUser && { user: true };
 
-  const session = await prisma.session.findUnique({
-    where: { id: sessionId },
-    include: {
-      ...includeUser,
-      user: options?.omitPasswordHash
-        ? { select: { id: true, email: true, userProfile: true } }
-        : true,
-    },
-  });
+    const session = await prisma.session.findUnique({
+      where: { id: sessionId },
+      include: {
+        ...includeUser,
+        user: options?.omitPasswordHash
+          ? { select: { id: true, email: true, userProfile: true } }
+          : true,
+      },
+    });
 
-  if (!session) {
-    console.error('Session not found');
-    return null;
+    if (!session) {
+      console.error('Session not found');
+      return null;
+    }
+
+    return session as SessionPayload<T>;
   }
-
-  return session as SessionPayload<T>;
-}
+);

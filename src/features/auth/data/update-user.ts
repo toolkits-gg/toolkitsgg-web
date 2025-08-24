@@ -7,10 +7,10 @@ type UpdateUserArgs = {
   data: Partial<Omit<User, 'id' | 'createdAt' | 'updatedAt'>>;
 };
 
-export async function updateUser({
+export const updateUser = async ({
   userId,
   data,
-}: UpdateUserArgs): Promise<Omit<User, 'passwordHash'>> {
+}: UpdateUserArgs): Promise<Omit<User, 'passwordHash'>> => {
   const userResult = await prisma.user.update({
     where: { id: userId },
     data,
@@ -19,4 +19,4 @@ export async function updateUser({
   const { passwordHash: _passwordHash, ...updatedUser } = userResult;
 
   return updatedUser;
-}
+};

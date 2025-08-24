@@ -7,11 +7,11 @@ type CreateUserArgs = {
   passwordHash: string;
 };
 
-export async function createUser({
+export const createUser = async ({
   username,
   email,
   passwordHash,
-}: CreateUserArgs) {
+}: CreateUserArgs) => {
   return await prisma.user.create({
     data: {
       username,
@@ -19,4 +19,4 @@ export async function createUser({
       passwordHash,
     },
   });
-}
+};

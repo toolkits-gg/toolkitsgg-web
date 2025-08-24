@@ -5,8 +5,8 @@ type DeleteUserArgs = {
   userId: string;
 };
 
-export async function deleteUser({ userId }: DeleteUserArgs) {
+export const deleteUser = async ({ userId }: DeleteUserArgs) => {
   await prisma.user.delete({
     where: { id: userId },
   });
-}
+};

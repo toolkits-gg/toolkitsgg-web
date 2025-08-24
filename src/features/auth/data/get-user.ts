@@ -1,5 +1,6 @@
 import 'server-only';
 import type { Prisma, User } from '@prisma/client';
+import { cache } from 'react';
 import prisma from '@/lib/prisma';
 
 type ProfileInclude = { userProfile: true };
@@ -32,48 +33,50 @@ type GetUserArgs =
       userEmail: string;
     };
 
-export async function getUser<T extends Options>({
-  userId,
-  userEmail,
-  options,
-}: GetUserArgs & { options?: T }): Promise<UserPayload<T>> {
-  const includeUserProfile = options?.includeUserProfile && {
-    userProfile: true,
-  };
+export const getUser = cache(
+  async <T extends Options>({
+    userId,
+    userEmail,
+    options,
+  }: GetUserArgs & { options?: T }): Promise<UserPayload<T>> => {
+    const includeUserProfile = options?.includeUserProfile && {
+      userProfile: true,
+    };
 
-  const includeFavoriteGames = options?.includeFavoriteGames && {
-    userFavoriteGames: true,
-  };
+    const includeFavoriteGames = options?.includeFavoriteGames && {
+      userFavoriteGames: true,
+    };
 
-  if (!userId && !userEmail) {
-    throw new Error('Either user id or user email must be provided');
+    if (!userId && !userEmail) {
+      throw new Error('Either user id or user email must be provided');
+    }
+
+    let user;
+
+    if (userId) {
+      user = await prisma.user.findUnique({
+        where: { id: userId },
+        include: {
+          ...includeUserProfile,
+          ...includeFavoriteGames,
+        },
+        omit: {
+          passwordHash: options ? options.omitPasswordHash : true, // Omit password hash for security
+        },
+      });
+    } else if (userEmail) {
+      user = await prisma.user.findUnique({
+        where: { email: userEmail },
+        include: {
+          ...includeUserProfile,
+          ...includeFavoriteGames,
+        },
+        omit: {
+          passwordHash: options ? options.omitPasswordHash : true, // Omit password hash for security
+        },
+      });
+    }
+
+    return user as UserPayload<T>;
   }
-
-  let user;
-
-  if (userId) {
-    user = await prisma.user.findUnique({
-      where: { id: userId },
-      include: {
-        ...includeUserProfile,
-        ...includeFavoriteGames,
-      },
-      omit: {
-        passwordHash: options ? options.omitPasswordHash : true, // Omit password hash for security
-      },
-    });
-  } else if (userEmail) {
-    user = await prisma.user.findUnique({
-      where: { email: userEmail },
-      include: {
-        ...includeUserProfile,
-        ...includeFavoriteGames,
-      },
-      omit: {
-        passwordHash: options ? options.omitPasswordHash : true, // Omit password hash for security
-      },
-    });
-  }
-
-  return user as UserPayload<T>;
-}
+);

@@ -7,12 +7,12 @@ type CreateEmailVerificationTokenArgs = {
   code: string;
   expiresAt: Date;
 };
-export async function createEmailVerificationToken({
+export const createEmailVerificationToken = async ({
   userId,
   email,
   code,
   expiresAt,
-}: CreateEmailVerificationTokenArgs) {
+}: CreateEmailVerificationTokenArgs) => {
   return await prisma.emailVerificationToken.create({
     data: {
       userId,
@@ -21,4 +21,4 @@ export async function createEmailVerificationToken({
       expiresAt,
     },
   });
-}
+};
