@@ -4,7 +4,6 @@ import {
   Flex,
   Group,
   Menu,
-  Skeleton,
   Text,
   UnstyledButton,
   useMantineTheme,
@@ -21,22 +20,16 @@ import {
   IconTrash,
 } from '@tabler/icons-react';
 import Link from 'next/link';
-import { useAuth } from '@/features/auth/hooks/use-auth';
+import type { UserWithProfile } from '@/features/auth/types';
 import { signInPath, signUpPath } from '@/paths';
 import classes from './UserMenu.module.css';
 
-const UserMenu = () => {
+type UserMenuProps = {
+  user: UserWithProfile;
+};
+
+const UserMenu = ({ user }: UserMenuProps) => {
   const theme = useMantineTheme();
-
-  const { user, isFetched } = useAuth();
-
-  if (!isFetched) {
-    return (
-      <Flex align="center" justify="center" w="100%" mih={74}>
-        <Skeleton width={40} height={40} w="100%" />
-      </Flex>
-    );
-  }
 
   if (!user || !user.userProfile) {
     return (

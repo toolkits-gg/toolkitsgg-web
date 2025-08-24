@@ -1,11 +1,15 @@
 import { Flex, Paper } from '@mantine/core';
 import { PageLayout } from '@/components/PageLayout';
+import { getAuth } from '@/features/auth/queries/get-auth';
 import { PasswordForgotForm } from '@/features/password/components/PasswordForgotForm';
 import classes from './Page.module.css';
 
-const PasswordForgotPage = () => {
+export default async function PasswordForgotPage() {
+  const session = await getAuth();
+  const user = session?.user;
+
   return (
-    <PageLayout gameId={undefined}>
+    <PageLayout user={user} gameId={undefined}>
       <Flex align="center" justify="center" p="xl">
         <Paper
           radius="md"
@@ -20,6 +24,4 @@ const PasswordForgotPage = () => {
       </Flex>
     </PageLayout>
   );
-};
-
-export default PasswordForgotPage;
+}

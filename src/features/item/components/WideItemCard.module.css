@@ -28,6 +28,7 @@
   padding: 0px !important;
   width: calc(100vw - var(--mantine-spacing-lg));
   min-width: 100%;
+  max-width: 350px;
   height: 175px;
 
   &:hover,

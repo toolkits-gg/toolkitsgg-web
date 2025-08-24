@@ -20,6 +20,7 @@ import { GameSwitcher } from '@/components/navigation/GameSwitcher';
 import { NavbarLinksGroup } from '@/components/navigation/NavbarLinksGroup';
 import { navUtils } from '@/components/navigation/utils';
 import { UserMenu } from '@/components/UserMenu';
+import type { UserWithProfile } from '@/features/auth/types';
 import { allGameConfigs, noGameConfig } from '@/features/game/constants';
 import { ThemeChanger } from '@/features/theme/components/ThemeChanger';
 import { homePath } from '@/paths';
@@ -27,9 +28,10 @@ import classes from './PageLayout.module.css';
 
 type PageLayoutProps = React.PropsWithChildren<{
   gameId: GameId | undefined;
+  user: UserWithProfile;
 }>;
 
-const PageLayout = ({ children, gameId }: PageLayoutProps) => {
+const PageLayout = ({ children, gameId, user }: PageLayoutProps) => {
   const [opened, { toggle }] = useDisclosure();
 
   const gameConfig =
@@ -88,7 +90,7 @@ const PageLayout = ({ children, gameId }: PageLayoutProps) => {
             </Box>
             {gameId && (
               <Box style={{ flexGrow: 0 }}>
-                <GameActions gameId={gameId} />
+                <GameActions gameId={gameId} user={user} />
               </Box>
             )}
           </Flex>
@@ -114,7 +116,7 @@ const PageLayout = ({ children, gameId }: PageLayoutProps) => {
             justify="flex-start"
             align="center"
           >
-            <UserMenu />
+            <UserMenu user={user} />
           </Flex>
         </nav>
       </AppShell.Navbar>

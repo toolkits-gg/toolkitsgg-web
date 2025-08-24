@@ -4,16 +4,15 @@ import { Button, Flex, Loader } from '@mantine/core';
 import type { GameId } from '@prisma/client';
 import { useEffect, useRef, useState } from 'react';
 import { FavoriteGameButton } from '@/components/navigation/FavoriteGameButton';
-import { useAuth } from '@/features/auth/hooks/use-auth';
+import type { UserWithProfile } from '@/features/auth/types';
 import { getFavoriteGameIds } from '@/features/game/actions/get-favorite-game-ids';
 
 type GameActionsProps = {
   gameId: GameId;
+  user: UserWithProfile;
 };
 
-const GameActions = ({ gameId }: GameActionsProps) => {
-  const { user } = useAuth();
-
+const GameActions = ({ gameId, user }: GameActionsProps) => {
   const [favoriteGameIds, setFavoriteGameIds] = useState<GameId[]>([]);
   const gameIdsInitialized = useRef(false);
 

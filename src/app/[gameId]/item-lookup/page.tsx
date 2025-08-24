@@ -1,3 +1,5 @@
+import { PageLayout } from '@/components/PageLayout';
+import { getAuth } from '@/features/auth/queries/get-auth';
 import { gameUtils } from '@/features/game/utils';
 
 type ItemLookupPageProps = {
@@ -9,6 +11,9 @@ export default async function ItemCollectorPage({
 }: ItemLookupPageProps) {
   const { gameId } = await params;
   const isGameIdValid = gameUtils.isGameId(gameId);
+
+  const session = await getAuth();
+  const user = session?.user;
 
   if (!isGameIdValid) {
     throw new Error(`Invalid game id: ${gameId}`);
@@ -26,5 +31,9 @@ export default async function ItemCollectorPage({
     );
   }
 
-  return gameConfig.pages.itemLookup.component;
+  return (
+    <PageLayout user={user} gameId={gameId}>
+      {gameConfig.pages.itemLookup.component}
+    </PageLayout>
+  );
 }
