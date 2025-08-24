@@ -102,13 +102,7 @@ const ThemeChanger = () => {
   return (
     <>
       <Tooltip label="Change theme settings">
-        <Button
-          onClick={toggle}
-          aria-label="Theme settings"
-          color="primary.5"
-          variant="filled"
-          size="compact-md"
-        >
+        <Button onClick={toggle} aria-label="Theme settings" variant="light">
           <IconPalette />
         </Button>
       </Tooltip>

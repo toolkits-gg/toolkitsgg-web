@@ -1,5 +1,7 @@
 import {
   Avatar,
+  Button,
+  Flex,
   Group,
   Menu,
   Text,
@@ -17,10 +19,27 @@ import {
   IconSwitchHorizontal,
   IconTrash,
 } from '@tabler/icons-react';
+import Link from 'next/link';
+import { useAuth } from '@/features/auth/hooks/use-auth';
+import { signInPath, signUpPath } from '@/paths';
 import classes from './UserMenu.module.css';
 
 const UserMenu = () => {
   const theme = useMantineTheme();
+
+  const { user } = useAuth();
+  if (!user) {
+    return (
+      <Flex align="center" justify="space-between" w="100%" gap="md">
+        <Button component={Link} href={signUpPath()} w="100%" variant="subtle">
+          Sign up
+        </Button>
+        <Button component={Link} href={signInPath()} w="100%" variant="filled">
+          Sign in
+        </Button>
+      </Flex>
+    );
+  }
 
   return (
     <Group justify="center">
