@@ -1,7 +1,7 @@
 .game {
   display: block;
   width: 100%;
-  padding: var(--mantine-spacing-md);
+  padding: 4px;
   color: light-dark(var(--mantine-color-black), var(--mantine-color-dark-0));
   border: 2px solid transparent;
   background-color: transparent;

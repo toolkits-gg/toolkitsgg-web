@@ -59,7 +59,7 @@ const UserMenu = () => {
           </UnstyledButton>
         </Menu.Target>
         <Menu.Dropdown>
-          <Menu.Item rightSection={<IconChevronRight size={16} stroke={1.5} />}>
+          <Menu.Item>
             <Group>
               <Avatar
                 radius="xl"

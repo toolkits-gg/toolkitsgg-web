@@ -1,7 +1,7 @@
 'use client';
 
 import { Flex, Group, Menu, Text, UnstyledButton } from '@mantine/core';
-import { IconChevronDown } from '@tabler/icons-react';
+import { IconChevronRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import React from 'react';
 import { allGameConfigs, noGameConfig } from '@/features/game/constants';
@@ -26,7 +26,6 @@ const GameSwitcher = ({ gameConfig }: GameSwitcherProps) => {
               className={classes.logo}
               align="center"
               justify="flex-start"
-              p={2}
               w="100%"
               gap="md"
             >
@@ -37,7 +36,7 @@ const GameSwitcher = ({ gameConfig }: GameSwitcherProps) => {
                   : gameConfig?.label}
               </Text>
             </Flex>
-            <IconChevronDown size={14} stroke={1.5} />
+            <IconChevronRight size={14} stroke={1.5} />
           </Group>
         </UnstyledButton>
       </Menu.Target>

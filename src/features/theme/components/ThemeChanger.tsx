@@ -120,6 +120,7 @@ const ThemeChanger = () => {
         radius="md"
         bg="var(--mantine-color-card-bg-5)"
         bd="1px solid var(--mantine-color-border-6)"
+        position={{ bottom: 0, left: 0 }}
       >
         <Flex
           align="center"
