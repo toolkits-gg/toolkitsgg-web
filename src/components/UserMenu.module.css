@@ -23,6 +23,8 @@
 }
 
 .menuItem {
+  color: var(--mantine-color-text);
+
   @mixin hover {
     background-color: light-dark(
       var(--mantine-color-primary-0),

@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Avatar,
   Button,
@@ -12,23 +14,33 @@ import {
   IconChevronRight,
   IconHeart,
   IconLogout,
-  IconMessage,
-  IconPlayerPause,
+  IconRectangleRoundedTop,
   IconSettings,
   IconStar,
   IconSwitchHorizontal,
-  IconTrash,
 } from '@tabler/icons-react';
 import Link from 'next/link';
+import { useActionState } from 'react';
+import { EMPTY_ACTION_STATE } from '@/components/form/constants';
+import { Form } from '@/components/form/Form';
+import { SubmitButton } from '@/components/form/SubmitButton';
+import { signOut } from '@/features/auth/actions/sign-out';
 import type { UserWithProfile } from '@/features/auth/types';
 import { signInPath, signUpPath } from '@/paths';
 import classes from './UserMenu.module.css';
+
+// TODO: Add paths to the user items
 
 type UserMenuProps = {
   user: UserWithProfile;
 };
 
 const UserMenu = ({ user }: UserMenuProps) => {
+  const [actionState, action, isPending] = useActionState(
+    signOut,
+    EMPTY_ACTION_STATE
+  );
+
   const theme = useMantineTheme();
 
   if (!user || !user.userProfile) {
@@ -98,25 +110,25 @@ const UserMenu = ({ user }: UserMenuProps) => {
               <IconHeart size={16} stroke={1.5} color={theme.colors.red[6]} />
             }
           >
-            Liked posts
+            Liked builds
           </Menu.Item>
           <Menu.Item
             leftSection={
               <IconStar size={16} stroke={1.5} color={theme.colors.yellow[6]} />
             }
           >
-            Saved posts
+            Saved builds
           </Menu.Item>
           <Menu.Item
             leftSection={
-              <IconMessage
+              <IconRectangleRoundedTop
                 size={16}
                 stroke={1.5}
                 color={theme.colors.blue[6]}
               />
             }
           >
-            Your comments
+            Your collections
           </Menu.Item>
 
           <Menu.Label>Settings</Menu.Label>
@@ -128,10 +140,26 @@ const UserMenu = ({ user }: UserMenuProps) => {
           >
             Change account
           </Menu.Item>
-          <Menu.Item leftSection={<IconLogout size={16} stroke={1.5} />}>
-            Logout
+
+          <Menu.Item
+            leftSection={<IconLogout size={16} stroke={1.5} />}
+            component="div"
+          >
+            <Form action={action} actionState={actionState}>
+              <SubmitButton
+                tooltip="Log out of your account"
+                isPending={isPending}
+                variant="transparent"
+                p={0}
+                fw={400}
+                className={classes.menuItem}
+              >
+                Log out
+              </SubmitButton>
+            </Form>
           </Menu.Item>
 
+          {/* 
           <Menu.Divider />
 
           <Menu.Label>Danger zone</Menu.Label>
@@ -143,7 +171,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
             leftSection={<IconTrash size={16} stroke={1.5} />}
           >
             Delete account
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu.Dropdown>
       </Menu>
     </Group>
