@@ -4,6 +4,7 @@ import {
   Flex,
   Group,
   Menu,
+  Skeleton,
   Text,
   UnstyledButton,
   useMantineTheme,
@@ -27,8 +28,17 @@ import classes from './UserMenu.module.css';
 const UserMenu = () => {
   const theme = useMantineTheme();
 
-  const { user } = useAuth();
-  if (!user) {
+  const { user, isFetched } = useAuth();
+
+  if (!isFetched) {
+    return (
+      <Flex align="center" justify="center" w="100%" mih={74}>
+        <Skeleton width={40} height={40} w="100%" />
+      </Flex>
+    );
+  }
+
+  if (!user || !user.userProfile) {
     return (
       <Flex align="center" justify="space-between" w="100%" gap="md">
         <Button component={Link} href={signUpPath()} w="100%" variant="subtle">
@@ -42,7 +52,7 @@ const UserMenu = () => {
   }
 
   return (
-    <Group justify="center">
+    <Group justify="center" w="100%">
       <Menu
         withArrow
         width={300}
@@ -58,18 +68,15 @@ const UserMenu = () => {
         <Menu.Target>
           <UnstyledButton className={classes.user}>
             <Group wrap="nowrap">
-              <Avatar
-                src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
-                radius="xl"
-              />
+              <Avatar src={user.userProfile.avatarUrl} radius="xl" />
 
               <div style={{ flex: 1 }}>
                 <Text size="sm" fw={500}>
-                  Harriette Spoonlicker
+                  {user.userProfile.displayName}
                 </Text>
 
                 <Text c="dimmed" size="xs">
-                  hspoonlicker@outlook.com
+                  {user.email}
                 </Text>
               </div>
 
@@ -80,15 +87,12 @@ const UserMenu = () => {
         <Menu.Dropdown>
           <Menu.Item>
             <Group>
-              <Avatar
-                radius="xl"
-                src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-7.png"
-              />
+              <Avatar radius="xl" src={user.userProfile.avatarUrl} />
 
               <div>
-                <Text fw={500}>Nancy Eggshacker</Text>
+                <Text fw={500}>{user.userProfile.displayName}</Text>
                 <Text size="xs" c="dimmed">
-                  neggshaker@mantine.dev
+                  {user.email}
                 </Text>
               </div>
             </Group>

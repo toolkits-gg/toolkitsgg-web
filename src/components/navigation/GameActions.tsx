@@ -1,9 +1,11 @@
 'use client';
 
-import { Flex } from '@mantine/core';
+import { Button, Flex, Loader } from '@mantine/core';
 import type { GameId } from '@prisma/client';
+import { useEffect, useRef, useState } from 'react';
 import { FavoriteGameButton } from '@/components/navigation/FavoriteGameButton';
 import { useAuth } from '@/features/auth/hooks/use-auth';
+import { getFavoriteGameIds } from '@/features/game/actions/get-favorite-game-ids';
 
 type GameActionsProps = {
   gameId: GameId;
@@ -12,21 +14,50 @@ type GameActionsProps = {
 const GameActions = ({ gameId }: GameActionsProps) => {
   const { user } = useAuth();
 
-  // TODO: Get user favorite games for the state of the game actions button
+  const [favoriteGameIds, setFavoriteGameIds] = useState<GameId[]>([]);
+  const gameIdsInitialized = useRef(false);
 
-  // const favoriteGameIds = await gameData.getFavoriteGameIds();
-  // const isFavorite = favoriteGameIds.some(
-  //   (favoriteGameId) => favoriteGameId === gameId
-  // );
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    async function getData() {
+      const favoriteGameIds = await getFavoriteGameIds();
+      setFavoriteGameIds(favoriteGameIds);
+      gameIdsInitialized.current = true;
+    }
+    getData();
+  }, [user]);
 
-  const gameActionsVisible = gameId !== 'none' && user;
-  if (!gameActionsVisible) {
-    return null;
+  const isFavorite = favoriteGameIds.some(
+    (favoriteGameId) => favoriteGameId === gameId
+  );
+
+  const handleFavoriteChange = (gameId: GameId, isFavorite: boolean) => {
+    setFavoriteGameIds((prevFavoriteGameIds) => {
+      if (isFavorite) {
+        return [...prevFavoriteGameIds, gameId];
+      }
+      return prevFavoriteGameIds.filter((id) => id !== gameId);
+    });
+  };
+
+  if (!gameIdsInitialized.current) {
+    return (
+      <Flex justify="flex-end" align="center" w="100%">
+        <Button variant="outline" disabled size="sm">
+          <Loader size={20} />
+        </Button>
+      </Flex>
+    );
   }
-
   return (
     <Flex justify="flex-end" align="center" w="100%">
-      <FavoriteGameButton gameId={gameId} isFavorite={false} />
+      <FavoriteGameButton
+        gameId={gameId}
+        isFavorite={isFavorite}
+        onChange={handleFavoriteChange}
+      />
     </Flex>
   );
 };

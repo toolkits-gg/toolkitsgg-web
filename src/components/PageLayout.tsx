@@ -8,6 +8,7 @@ import {
   Flex,
   Group,
   ScrollArea,
+  Text,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import type { GameId } from '@prisma/client';
@@ -85,7 +86,11 @@ const PageLayout = ({ children, gameId }: PageLayoutProps) => {
             <Box style={{ flexGrow: 1 }}>
               <GameSwitcher gameConfig={gameConfig} />
             </Box>
-            {gameId && <GameActions gameId={gameId} />}
+            {gameId && (
+              <Box style={{ flexGrow: 0 }}>
+                <GameActions gameId={gameId} />
+              </Box>
+            )}
           </Flex>
 
           <ScrollArea className={classes.navbarLinks}>
@@ -116,8 +121,10 @@ const PageLayout = ({ children, gameId }: PageLayoutProps) => {
 
       <AppShell.Main className={classes.main}>{children}</AppShell.Main>
 
-      <AppShell.Footer className={classes.footer} p={4}>
-        © {new Date().getFullYear()} Toolkits.gg
+      <AppShell.Footer className={classes.footer}>
+        <Text size="xs" c="dimmed">
+          © {new Date().getFullYear()} Toolkits.gg
+        </Text>
       </AppShell.Footer>
     </AppShell>
   );
