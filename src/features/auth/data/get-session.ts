@@ -1,3 +1,4 @@
+import 'server-only';
 import type { Prisma, Session } from '@prisma/client';
 import prisma from '@/lib/prisma';
 

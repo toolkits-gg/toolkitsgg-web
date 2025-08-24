@@ -1,3 +1,4 @@
+import 'server-only';
 import * as createEmailVerificationToken from './create-email-verification-token';
 import * as createPasswordResetToken from './create-password-reset-token';
 import * as createUser from './create-user';

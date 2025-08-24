@@ -1,3 +1,4 @@
+import 'server-only';
 import type { GameId } from '@prisma/client';
 import { getAuth } from '@/features/auth/queries/get-auth';
 import prisma from '@/lib/prisma';

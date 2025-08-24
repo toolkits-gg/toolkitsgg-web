@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   experimental: {
     browserDebugInfoInTerminal: false,
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
+    taint: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
