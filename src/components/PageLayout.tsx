@@ -8,6 +8,7 @@ import {
   Flex,
   Group,
   ScrollArea,
+  Text,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import type { GameId } from '@prisma/client';
@@ -17,8 +18,9 @@ import { DefaultLogo } from '@/components/Logo';
 import { GameActions } from '@/components/navigation/GameActions';
 import { GameSwitcher } from '@/components/navigation/GameSwitcher';
 import { NavbarLinksGroup } from '@/components/navigation/NavbarLinksGroup';
-import { UserMenu } from '@/components/navigation/UserMenu';
 import { navUtils } from '@/components/navigation/utils';
+import { UserMenu } from '@/components/UserMenu';
+import type { UserWithProfile } from '@/features/auth/types';
 import { allGameConfigs, noGameConfig } from '@/features/game/constants';
 import { ThemeChanger } from '@/features/theme/components/ThemeChanger';
 import { homePath } from '@/paths';
@@ -26,9 +28,10 @@ import classes from './PageLayout.module.css';
 
 type PageLayoutProps = React.PropsWithChildren<{
   gameId: GameId | undefined;
+  user: UserWithProfile;
 }>;
 
-const PageLayout = ({ children, gameId }: PageLayoutProps) => {
+const PageLayout = ({ children, gameId, user }: PageLayoutProps) => {
   const [opened, { toggle }] = useDisclosure();
 
   const gameConfig =
@@ -85,7 +88,11 @@ const PageLayout = ({ children, gameId }: PageLayoutProps) => {
             <Box style={{ flexGrow: 1 }}>
               <GameSwitcher gameConfig={gameConfig} />
             </Box>
-            {gameId && <GameActions gameId={gameId} />}
+            {gameId && (
+              <Box style={{ flexGrow: 0 }}>
+                <GameActions gameId={gameId} user={user} />
+              </Box>
+            )}
           </Flex>
 
           <ScrollArea className={classes.navbarLinks}>
@@ -109,15 +116,17 @@ const PageLayout = ({ children, gameId }: PageLayoutProps) => {
             justify="flex-start"
             align="center"
           >
-            <UserMenu />
+            <UserMenu user={user} />
           </Flex>
         </nav>
       </AppShell.Navbar>
 
       <AppShell.Main className={classes.main}>{children}</AppShell.Main>
 
-      <AppShell.Footer className={classes.footer} p={4}>
-        © {new Date().getFullYear()} Toolkits.gg
+      <AppShell.Footer className={classes.footer}>
+        <Text size="xs" c="dimmed">
+          © {new Date().getFullYear()} Toolkits.gg
+        </Text>
       </AppShell.Footer>
     </AppShell>
   );

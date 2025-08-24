@@ -1,7 +1,7 @@
 'use client';
 
-import { Flex, Menu, Text, UnstyledButton } from '@mantine/core';
-import { IconChevronDown } from '@tabler/icons-react';
+import { Flex, Group, Menu, Text, UnstyledButton } from '@mantine/core';
+import { IconChevronRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import React from 'react';
 import { allGameConfigs, noGameConfig } from '@/features/game/constants';
@@ -20,21 +20,12 @@ const GameSwitcher = ({ gameConfig }: GameSwitcherProps) => {
       transitionProps={{ transition: 'fade-down', duration: 150 }}
     >
       <Menu.Target>
-        <UnstyledButton w="100%" bg="sidebarBg">
-          <Flex
-            className={classes.logoContainer}
-            align="center"
-            justify="space-between"
-            gap="md"
-            bdrs="lg"
-            p={2}
-          >
+        <UnstyledButton className={classes.game}>
+          <Group wrap="nowrap">
             <Flex
               className={classes.logo}
               align="center"
               justify="flex-start"
-              p={2}
-              bdrs="lg"
               w="100%"
               gap="md"
             >
@@ -45,8 +36,8 @@ const GameSwitcher = ({ gameConfig }: GameSwitcherProps) => {
                   : gameConfig?.label}
               </Text>
             </Flex>
-            <IconChevronDown size={14} stroke={1.5} />
-          </Flex>
+            <IconChevronRight size={14} stroke={1.5} />
+          </Group>
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown className={classes.menu}>

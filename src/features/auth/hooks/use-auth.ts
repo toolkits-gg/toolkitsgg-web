@@ -2,11 +2,11 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import type { UserWithoutPasswordHash } from '@/features/auth/types';
+import type { UserWithProfile } from '@/features/auth/types';
 import { getAuth } from '../queries/get-auth';
 
 const useAuth = () => {
-  const [user, setUser] = useState<UserWithoutPasswordHash | null>(null);
+  const [user, setUser] = useState<UserWithProfile>(null);
   const [isFetched, setFetched] = useState(false);
 
   const pathname = usePathname();

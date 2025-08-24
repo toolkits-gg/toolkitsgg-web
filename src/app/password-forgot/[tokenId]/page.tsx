@@ -1,5 +1,6 @@
 import { Flex, Paper } from '@mantine/core';
 import { PageLayout } from '@/components/PageLayout';
+import { getAuth } from '@/features/auth/queries/get-auth';
 import { PasswordResetForm } from '@/features/password/components/PasswordResetForm';
 import classes from './Page.module.css';
 
@@ -9,11 +10,16 @@ type PasswordResetPageProps = {
   }>;
 };
 
-const PasswordResetPage = async ({ params }: PasswordResetPageProps) => {
+export default async function PasswordResetPage({
+  params,
+}: PasswordResetPageProps) {
+  const session = await getAuth();
+  const user = session?.user;
+
   const { tokenId } = await params;
 
   return (
-    <PageLayout gameId={undefined}>
+    <PageLayout user={user} gameId={undefined}>
       <Flex align="center" justify="center" p="xl">
         <Paper
           radius="md"
@@ -28,6 +34,4 @@ const PasswordResetPage = async ({ params }: PasswordResetPageProps) => {
       </Flex>
     </PageLayout>
   );
-};
-
-export default PasswordResetPage;
+}

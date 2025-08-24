@@ -10,10 +10,12 @@
 
 .footer {
   background-color: var(--mantine-color-sidebar-bg-5);
-  border-color: light-dark(
-    var(--mantine-color-border-7),
-    var(--mantine-color-border-7)
-  );
+  padding: var(--mantine-spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid
+    light-dark(var(--mantine-color-border-7), var(--mantine-color-border-7));
 }
 
 .main {

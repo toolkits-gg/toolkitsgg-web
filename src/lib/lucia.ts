@@ -34,6 +34,13 @@ export const validateSession = async (sessionToken: string) => {
 
   const { user, ...session } = result;
 
+  const userProfileResult = await authData.getUser({
+    userId: user.id,
+    options: { includeUserProfile: true },
+  });
+
+  const userProfile = userProfileResult?.userProfile;
+
   // if the session is expired, delete it
   if (Date.now() >= session.expiresAt.getTime()) {
     await authData.deleteSession({ sessionId });
@@ -58,6 +65,7 @@ export const validateSession = async (sessionToken: string) => {
     user: {
       ...user,
       passwordHash: undefined, // Omit password hash for security
+      userProfile,
     },
   };
 };

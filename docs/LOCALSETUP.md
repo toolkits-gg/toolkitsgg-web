@@ -22,8 +22,7 @@ pnpm run dev
 - [NVM for Windows](https://github.com/coreybutler/nvm-windows/releases) - Enables you to install and swap between different versions of Node.js. If you are not on Windows, use [NVM](https://github.com/nvm-sh/nvm).
 - [PNPM](https://pnpm.io/installation) - Package manager of choice for the project.
 - [VSCode](https://code.visualstudio.com/download)- Code Editor. Use whatever you prefer, but I recommend VSCode.
-- [Docker](https://www.docker.com/get-started) - Enables you to quickly spin up a local Postgres database.
-- [Docker Compose](https://docs.docker.com/compose/install/) - Enables you to quickly spin up a local Postgres database.
+- [NeonDB Account](https://neon.tech/) - Free serverless Postgres database.
 
 #### NVM for Windows
 
@@ -67,17 +66,18 @@ pnpm install
 cp .env.example .env
 ```
 
-### Local database setup
+### Database setup
 
-#### Update the .env file
+It is recommended you set up a free [NeonDB account](https://neon.tech/) and create a database.
 
-Ensure the `DATABASE_URL` and `DIRECT_URL` in your `.env` match the default value in `.env.example`.
+#### Adding the NeonDB connection strings
 
-### Start the Docker container
+1. Go to the [Neon dashboard](https://console.neon.tech/).
+2. Select your project and database.
+3. Click on the "Connect" tab.
+4. Copy the "Connection string" for both the `DATABASE_URL` and `DATABASE_URL_UNPOOLED` into your `.env` file.
 
-```bash
-pnpm db-start
-```
+**Note**: Toggle connection pooling ON for `DATABASE_URL` and OFF for `DATABASE_URL_UNPOOLED`.
 
 #### Generate Prisma Typescript types
 
@@ -189,16 +189,6 @@ pnpm db-seed
 ```
 
 This will populate your database via the [seed script](../src/lib/prisma/seed.ts)
-
-## Managing Docker Containers
-
-Run the following commands from the project directory:
-
-- `docker-compose up` to start the docker containers and build the dist files
-- `docker-compose up -d` to start the containers and build the dist files in detached mode
-- `docker-compose stop` to stop detached mode
-- `docker-compose down` to stop the container and purge its containers and networks
-- `ctrl+c` to stop
 
 ## Tips and Troubleshooting
 

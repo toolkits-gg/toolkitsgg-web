@@ -102,13 +102,7 @@ const ThemeChanger = () => {
   return (
     <>
       <Tooltip label="Change theme settings">
-        <Button
-          onClick={toggle}
-          aria-label="Theme settings"
-          color="primary.5"
-          variant="filled"
-          size="compact-md"
-        >
+        <Button onClick={toggle} aria-label="Theme settings" variant="light">
           <IconPalette />
         </Button>
       </Tooltip>
@@ -120,6 +114,7 @@ const ThemeChanger = () => {
         radius="md"
         bg="var(--mantine-color-card-bg-5)"
         bd="1px solid var(--mantine-color-border-6)"
+        position={{ bottom: 0, left: 0 }}
       >
         <Flex
           align="center"
