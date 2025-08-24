@@ -14,7 +14,6 @@
     "lint-fix": "next lint --fix",
     "type-check": "tsc --noEmit",
     "test": "vitest",
-    "db-start": "docker compose up -d",
     "db-seed": "tsx src/lib/prisma/seed.ts",
     "prisma-push": "prisma db push",
     "prisma-push-force": "prisma db push --force-reset",

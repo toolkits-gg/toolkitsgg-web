@@ -47,6 +47,7 @@ export const signIn = async (_actionState: ActionState, formData: FormData) => {
 
     await setSessionCookie(sessionToken, session.expiresAt);
   } catch (error) {
+    console.error(error);
     return formUtils.fromErrorToActionState({ error, formData });
   }
 
