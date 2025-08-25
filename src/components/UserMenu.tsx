@@ -105,10 +105,12 @@ const UserMenu = ({ user }: UserMenuProps) => {
 
           <Menu.Divider />
 
+          <Menu.Label>Builds</Menu.Label>
           <Menu.Item
             leftSection={
               <IconHeart size={16} stroke={1.5} color={theme.colors.red[6]} />
             }
+            disabled
           >
             Liked builds
           </Menu.Item>
@@ -116,6 +118,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
             leftSection={
               <IconStar size={16} stroke={1.5} color={theme.colors.yellow[6]} />
             }
+            disabled
           >
             Saved builds
           </Menu.Item>
@@ -127,19 +130,28 @@ const UserMenu = ({ user }: UserMenuProps) => {
                 color={theme.colors.blue[6]}
               />
             }
+            disabled
           >
-            Your collections
+            Your build collections
           </Menu.Item>
 
+          <Menu.Divider />
+
           <Menu.Label>Settings</Menu.Label>
-          <Menu.Item leftSection={<IconSettings size={16} stroke={1.5} />}>
+          <Menu.Item
+            leftSection={<IconSettings size={16} stroke={1.5} />}
+            disabled
+          >
             Account settings
           </Menu.Item>
           <Menu.Item
             leftSection={<IconSwitchHorizontal size={16} stroke={1.5} />}
+            disabled
           >
             Change account
           </Menu.Item>
+
+          <Menu.Divider />
 
           <Menu.Item
             leftSection={<IconLogout size={16} stroke={1.5} />}
