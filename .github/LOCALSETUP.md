@@ -28,11 +28,10 @@ node --version   # should print v22.x.x or newer
 
 pnpm is a package manager (similar to npm and yarn) that we use to install dependencies. You need pnpm specifically — running `npm install` or `yarn install` won't work here, because the lockfile is in pnpm's format.
 
-The easiest way to install pnpm is via [Corepack](https://nodejs.org/api/corepack.html), which ships with Node:
+The easiest way to install pnpm is via NPM:
 
 ```bash
-corepack enable
-corepack prepare pnpm@latest --activate
+npm install -g pnpm@latest-11
 ```
 
 If that doesn't work for any reason, follow the standalone installer at [pnpm.io/installation](https://pnpm.io/installation).
