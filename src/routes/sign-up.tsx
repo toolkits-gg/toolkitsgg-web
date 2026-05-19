@@ -93,9 +93,7 @@ const SignUpPage = () => {
 						onSubmit={(e) => {
 							e.preventDefault();
 							e.stopPropagation();
-							form.handleSubmit().then(() => {
-								// placeholder - no action needed
-							});
+							void form.handleSubmit();
 						}}
 					>
 						<Stack>

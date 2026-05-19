@@ -10,10 +10,10 @@ type ProfileEditFormProps = {
 	initialBio: string;
 };
 
-export function ProfileEditForm({
+const ProfileEditForm = ({
 	initialDisplayName,
 	initialBio,
-}: ProfileEditFormProps) {
+}: ProfileEditFormProps) => {
 	const [serverError, setServerError] = useState<string | null>(null);
 	const mutation = useDalMutation(userProfileActions.updateProfile);
 
@@ -38,9 +38,7 @@ export function ProfileEditForm({
 			onSubmit={(e) => {
 				e.preventDefault();
 				e.stopPropagation();
-				form.handleSubmit().then(() => {
-					// placeholder - no action required
-				});
+				void form.handleSubmit(); // no action needed
 			}}
 		>
 			<Stack>
@@ -127,4 +125,6 @@ export function ProfileEditForm({
 			</Stack>
 		</form>
 	);
-}
+};
+
+export { ProfileEditForm };

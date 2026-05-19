@@ -18,10 +18,7 @@ import { SiDiscord } from "react-icons/si";
 import { z } from "zod";
 import { authClient } from "#/integrations/better-auth/auth-client";
 
-const emailSchema = z
-	.string()
-	.min(1, "Email is required")
-	.email("Enter a valid email");
+const emailSchema = z.email("Enter a valid email").min(1, "Email is required");
 
 const passwordSchema = z.string().min(1, "Password is required");
 
@@ -82,9 +79,7 @@ const SignInPage = () => {
 						onSubmit={(e) => {
 							e.preventDefault();
 							e.stopPropagation();
-							form.handleSubmit().then(() => {
-								// placeholder - no action needed
-							});
+							void form.handleSubmit();
 						}}
 					>
 						<Stack>
