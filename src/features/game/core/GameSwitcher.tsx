@@ -176,7 +176,7 @@ function GameSwitcher() {
 			onChange={(isOpen) => {
 				if (!isOpen) handleClose();
 			}}
-			zIndex={1002}
+			zIndex="var(--mantine-z-index-popover)"
 			trapFocus
 		>
 			<Popover.Target>

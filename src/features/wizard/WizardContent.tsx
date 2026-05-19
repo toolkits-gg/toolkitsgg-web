@@ -59,7 +59,7 @@ const WizardContent = ({
 			style={{
 				position: "fixed",
 				...getPositionStyles(),
-				zIndex: 1003,
+				zIndex: "calc(var(--mantine-z-index-overlay) + 1)",
 				maxWidth: "600px",
 				width: "calc(100% - 32px)",
 			}}
