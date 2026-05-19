@@ -11,11 +11,7 @@ import {
 	UnstyledButton,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import {
-	ClientOnly,
-	useNavigate,
-	useRouterState,
-} from "@tanstack/react-router";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import {
 	LuChevronRight,
@@ -31,6 +27,7 @@ import { useDalMutation } from "#/features/dal/hooks/use-dal-mutation";
 import { useDalQuery } from "#/features/dal/hooks/use-dal-query";
 import { setGame } from "#/features/game/core/store";
 import { useGameId } from "#/features/game/core/use-game-id";
+import { setActiveGameCookie } from "#/features/game/core/utils";
 import {
 	getGameConfig,
 	getGameLogo,
@@ -132,7 +129,8 @@ function GameSwitcher() {
 	};
 
 	const handleGoHome = async () => {
-		setGame("none", "toggle");
+		setActiveGameCookie(null);
+		setGame(null);
 		await navigate({ to: "/" });
 		handleClose();
 	};
@@ -143,7 +141,8 @@ function GameSwitcher() {
 	};
 
 	const handleSelectGame = (id: GameId) => {
-		setGame(id, "toggle");
+		setActiveGameCookie(id);
+		setGame(id);
 
 		// If on a game-scoped route, navigate to the same sub-path under the new game
 		const segments = location.pathname.split("/").filter(Boolean);
@@ -189,11 +188,9 @@ function GameSwitcher() {
 				>
 					<Group wrap="nowrap" gap="xs" justify="space-between">
 						<Flex align="center" gap="sm">
-							<ClientOnly fallback={<DefaultLogo />}>
-								{getGameLogo(activeGameId) || <DefaultLogo />}
-							</ClientOnly>
+							{getGameLogo(activeGameId) || <DefaultLogo />}
 							<Text size="sm" fw={600}>
-								<ClientOnly fallback="Toolkits.gg">{activeLabel}</ClientOnly>
+								{activeLabel}
 							</Text>
 						</Flex>
 						<LuChevronRight size={18} />

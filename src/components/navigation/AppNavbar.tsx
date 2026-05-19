@@ -25,15 +25,13 @@ const AppNavbar = ({ onGettingStartedWizard }: AppNavbarProps) => {
 			w={{ base: 350, sm: 300 }}
 			className={classes.navbarInner}
 		>
-			<ClientOnly fallback={<div>Loading...</div>}>
-				<ScrollArea className={classes.scrollArea}>
-					<div className={classes.scrollAreaContent}>
-						{navLinks.map((navLink) => (
-							<NavbarLinksGroup {...navLink} key={navLink.label} />
-						))}
-					</div>
-				</ScrollArea>
-			</ClientOnly>
+			<ScrollArea className={classes.scrollArea}>
+				<div className={classes.scrollAreaContent}>
+					{navLinks.map((navLink) => (
+						<NavbarLinksGroup {...navLink} key={navLink.label} />
+					))}
+				</div>
+			</ScrollArea>
 
 			<Flex className={classes.themeChangerWrapper}>
 				<ChangeThemeButton gameId="none" />

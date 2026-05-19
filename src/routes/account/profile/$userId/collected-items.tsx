@@ -1,11 +1,10 @@
 import { createFileRoute, getRouteApi } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import {
 	buildTabHead,
 	loadProfileTabData,
 } from "#/features/auth/core/profile-tab-head";
-import { gameStore, setGame } from "#/features/game/core/store";
-import { useGameState } from "#/features/game/core/use-game-id";
+import { useGameId } from "#/features/game/core/use-game-id";
 import {
 	getGameConfig,
 	getGameMetadata,
@@ -24,44 +23,20 @@ const CollectedItems = () => {
 	const { isOwner } = parentRouteApi.useLoaderData();
 	const { gameId: urlGameId } = Route.useSearch();
 	const navigate = Route.useNavigate();
-	const { gameId: storeGameIdRaw, source } = useGameState();
-	const storeGameId: GameId = storeGameIdRaw ?? "none";
+	const gameId = useGameId();
 
-	// Render off url gameId to prevent hydration error.
-	// Store reads from localstorage, which causes the issue since it is null on server.
-	// Effects will still handle the needed sync after hydration.
-	const config = urlGameId ? getGameConfig(urlGameId) : undefined;
-	const initializedRef = useRef(false);
-
+	// Mirror the active gameId back to the URL so the page state is shareable
+	// and so picking a different game via GameSwitcher keeps the URL in sync.
 	useEffect(() => {
-		if (!urlGameId) return;
-		// Read the store fresh here so a store update cannot retrigger this
-		// effect and revert a GameSwitcher (toggle-source) write.
-		const current = gameStore.state.gameId ?? "none";
-		if (urlGameId !== current) {
-			setGame(urlGameId, "route");
-		}
-	}, [urlGameId]);
-
-	useEffect(() => {
-		const firstRun = !initializedRef.current;
-		initializedRef.current = true;
-		// On mount, skip the store -> URL write if the URL already has a value (URL wins).
-		// Exception: subdomain has authority over the URL, so we still need to sync
-		// the URL to the subdomain game.
-		if (firstRun && urlGameId && source !== "subdomain") return;
-		if (storeGameId === "none") return;
-		if (storeGameId === urlGameId) return;
-		// Don't write back to URL if the store change was caused by our own
-		// URL -> store sync above, but only when the URL already carries a gameId.
-		// If we landed here from a `/$gameId/*` page, the store has source="route"
-		// but the new URL has no gameId, so it still requires a sync.
-		if (urlGameId && source === "route") return;
+		if (gameId === "none") return;
+		if (urlGameId === gameId) return;
 		void navigate({
-			search: (prev) => ({ ...prev, gameId: storeGameId }),
+			search: (prev) => ({ ...prev, gameId }),
 			replace: true,
 		});
-	}, [storeGameId, source, urlGameId, navigate]);
+	}, [gameId, urlGameId, navigate]);
+
+	const config = gameId !== "none" ? getGameConfig(gameId) : undefined;
 
 	return (
 		<>

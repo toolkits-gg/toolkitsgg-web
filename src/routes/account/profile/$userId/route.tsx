@@ -1,6 +1,10 @@
 import { Box, Stack, Text, Title } from "@mantine/core";
 import { createFileRoute, notFound, Outlet } from "@tanstack/react-router";
-import { FALLBACK_DISPLAY_NAME, OG_IMAGE } from "#/constants.ts";
+import {
+	FALLBACK_DISPLAY_NAME,
+	OG_IMAGE,
+	SERVER_GAME_INPUTS_QUERY_KEY,
+} from "#/constants.ts";
 import { ProfileHeader } from "#/features/auth/core/ProfileHeader";
 import { ProfileTabNav } from "#/features/auth/core/ProfileTabNav";
 import { resolveAvatar } from "#/features/auth/core/utils";
@@ -10,7 +14,7 @@ import {
 	getViewerUserIdServerFn,
 	mapUserToProfileData,
 } from "#/features/auth/dal/user-profile/user-profile.actions";
-import { getSubdomainGameIdServerFn } from "#/features/game/dal/active-game";
+import { getServerResolvedGameInputsServerFn } from "#/features/game/dal/active-game";
 import { getValidatedGameId } from "#/features/game/registry/game-registry";
 import type { GameId } from "@/prisma";
 
@@ -35,28 +39,35 @@ const ProfileLayout = () => {
 const Route = createFileRoute("/account/profile/$userId")({
 	loader: async ({ params, context, location }) => {
 		const { queryClient } = context;
-		const [profile, viewerUserId, subdomainGameId] = await Promise.all([
-			queryClient.ensureQueryData({
-				queryKey: buildGetProfileQueryKey(params.userId),
-				queryFn: async () => {
-					const user = await getPublicUserProfileServerFn({
-						data: { userId: params.userId },
-					});
-					return mapUserToProfileData(user);
-				},
-			}),
-			getViewerUserIdServerFn(),
-			getSubdomainGameIdServerFn(),
-		]);
+		const [profile, viewerUserId, { subdomainGameId, cookieGameId }] =
+			await Promise.all([
+				queryClient.ensureQueryData({
+					queryKey: buildGetProfileQueryKey(params.userId),
+					queryFn: async () => {
+						const user = await getPublicUserProfileServerFn({
+							data: { userId: params.userId },
+						});
+						return mapUserToProfileData(user);
+					},
+				}),
+				getViewerUserIdServerFn(),
+				queryClient.ensureQueryData({
+					queryKey: SERVER_GAME_INPUTS_QUERY_KEY,
+					queryFn: () => getServerResolvedGameInputsServerFn(),
+					staleTime: Number.POSITIVE_INFINITY,
+					gcTime: Number.POSITIVE_INFINITY,
+				}),
+			]);
 		if (!profile) throw notFound();
 
-		// Mirror the gameStore source priority for the inputs we can read here:
-		// subdomain (Host header, server-only) > route (?gameId= from the URL,
-		// universal via the loader's `location`). toggle/session live in
-		// localStorage and are client-only, so they can't influence SSR.
+		// Subdomain > ?gameId= > cookie.
+		// The cookie reflects the owner's current switcher selection,
+		// so SSR'd OG matches what they see on screen, even before the
+		// in-tab `useEffect` mirrors the gameId into the URL.
 		const searchParams = new URLSearchParams(location.searchStr);
 		const searchGameId = getValidatedGameId(searchParams.get("gameId") ?? "");
-		const activeGameId: GameId | null = subdomainGameId ?? searchGameId ?? null;
+		const activeGameId: GameId | null =
+			subdomainGameId ?? searchGameId ?? cookieGameId ?? null;
 
 		// "none" cleanly bypasses the override branch in resolveAvatar (no override
 		// rows are stored against "none"), so primary-then-legacy fallback applies.

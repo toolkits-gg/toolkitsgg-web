@@ -11,6 +11,8 @@ const FALLBACK_DISPLAY_NAME = "Toolkits.gg User";
 
 const OG_IMAGE = `${import.meta.env.VITE_CLOUDFRONT_URL}/metadata/og-image.png`;
 
+const SERVER_GAME_INPUTS_QUERY_KEY = ["server-resolved-game-inputs"] as const;
+
 export {
 	DISCORD_URL,
 	GITHUB_URL,
@@ -20,4 +22,5 @@ export {
 	CHANGELOG_URL,
 	FALLBACK_DISPLAY_NAME,
 	OG_IMAGE,
+	SERVER_GAME_INPUTS_QUERY_KEY,
 };

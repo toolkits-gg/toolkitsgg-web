@@ -34,8 +34,11 @@ import { AppNavbar } from "#/components/navigation/AppNavbar";
 import { SocialMedia } from "#/components/SocialMedia";
 import { GettingStartedWizard } from "#/components/wizards/getting-started/components/GettingStartedWizard";
 import { useGettingStartedWizard } from "#/components/wizards/getting-started/hooks/use-getting-started-wizard";
-import { OG_IMAGE } from "#/constants";
+import { OG_IMAGE, SERVER_GAME_INPUTS_QUERY_KEY } from "#/constants";
 import { GameSwitcher } from "#/features/game/core/GameSwitcher";
+import { getServerResolvedGameInputsServerFn } from "#/features/game/dal/active-game";
+import { getValidatedGameId } from "#/features/game/registry/game-registry";
+import type { GameId } from "@/prisma";
 import classes from "./Root.module.css";
 
 interface MyRouterContext {
@@ -48,6 +51,36 @@ const description =
 const url = "https://toolkits.gg";
 
 const Route = createRootRouteWithContext<MyRouterContext>()({
+	beforeLoad: async ({ context, location }) => {
+		// Cache the server-fn result for the lifetime of the session — the Host
+		// header and the active-game cookie don't change without a hard reload.
+		const { subdomainGameId, cookieGameId } =
+			await context.queryClient.ensureQueryData({
+				queryKey: SERVER_GAME_INPUTS_QUERY_KEY,
+				queryFn: () => getServerResolvedGameInputsServerFn(),
+				staleTime: Number.POSITIVE_INFINITY,
+				gcTime: Number.POSITIVE_INFINITY,
+			});
+
+		const searchParams = new URLSearchParams(location.searchStr);
+		const devOverride = import.meta.env.DEV
+			? (getValidatedGameId(searchParams.get("_game") ?? "") ?? null)
+			: null;
+		const firstSeg = location.pathname.split("/").filter(Boolean)[0] ?? "";
+		const routeGameId = getValidatedGameId(firstSeg) ?? null;
+		const searchGameId =
+			getValidatedGameId(searchParams.get("gameId") ?? "") ?? null;
+
+		const ssrGameId: GameId | null =
+			subdomainGameId ??
+			devOverride ??
+			routeGameId ??
+			searchGameId ??
+			cookieGameId ??
+			null;
+
+		return { ssrGameId };
+	},
 	head: () => ({
 		meta: [
 			{ charSet: "utf-8" },
@@ -196,4 +229,4 @@ function RootDocument({ children }: { children: ReactNode }) {
 	);
 }
 
-export { Route };
+export { Route, type SERVER_GAME_INPUTS_QUERY_KEY };

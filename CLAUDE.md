@@ -75,14 +75,15 @@ Skills live in `.claude/skills/`. Use the `/skill-name` slash command or referen
 ### Routing
 
 - Routes live in `src/routes/`. `routeTree.gen.ts` is **generated** — do not edit (also marked read-only in `.vscode/settings.json` and excluded from Biome).
-- Root shell is `src/routes/__root.tsx`: renders `<html>`, the Mantine `AppShell` (header + navbar + footer), and mounts `AppProviders` (`src/components/AppProviders.tsx`). The provider chain is `NuqsAdapter` -> `GameProvider` -> `MantineProviderWithTheme`; `MantineProviderWithTheme` itself wraps children in Mantine's `ModalsProvider`, and a `ScreenshotPreviewProvider` is also rendered inside it.
-- Game-scoped URLs live under `src/routes/$gameId/` — the `gameId` param is written into the game store on mount.
+- Root shell is `src/routes/__root.tsx`: renders `<html>`, the Mantine `AppShell` (header + navbar + footer), and mounts `AppProviders` (`src/components/AppProviders.tsx`). The provider chain is `NuqsAdapter` -> `MantineProviderWithTheme`; `MantineProviderWithTheme` itself wraps children in Mantine's `ModalsProvider`, and a `ScreenshotPreviewProvider` is also rendered inside it.
+- The root route's `beforeLoad` resolves an authoritative `ssrGameId` for every request (see "Active-game resolution" below) and exposes it via route context.
+- Game-scoped URLs live under `src/routes/$gameId/` — the `$gameId` path segment feeds into the root `beforeLoad`'s resolution chain; the segment itself drives favicon `<link>` tags via the route's `head()`.
 - Profile routes:
   - `src/routes/profile/` — the anonymous/offline-friendly profile shell. Always reachable, even when signed out or offline (it renders the local DAL view). When the user is both authenticated **and** online, `route.tsx` redirects to `/account/profile/$userId` with the current session's user id.
   - `src/routes/account/profile/$userId/` — the canonical, userId-keyed profile route. Used for both the current user (after the redirect above) and public views of other users.
 - HTML head metadata:
   - Root tags (title, og:*, twitter:*) are defined in `__root.tsx`. Routes can override them with their own `head()` — TanStack Router merges by `property`/`name`, with child routes winning on key conflicts.
-  - The canonical profile route (`/account/profile/$userId`) overrides root metadata with user-specific OG/Twitter tags. The OG image is the active-game avatar override → primary avatar → legacy `avatarUrl` → site default. The active game is resolved from the request `Host` header via `getActiveGameIdFromRequestServerFn` (`src/features/game/dal/active-game.ts`), so subdomain-aware previews work during SSR.
+  - The canonical profile route (`/account/profile/$userId`) overrides root metadata with user-specific OG/Twitter tags. The OG image is the active-game avatar override → primary avatar → legacy `avatarUrl` → site default. The active game here resolves as `subdomain → ?gameId= → active-game cookie` (the loader-context route-segment chain isn't used for OG since the profile path itself never carries a gameId segment). The cookie matters because the owner often lands on a profile tab via in-app nav with no `?gameId=` in the URL; including the cookie keeps the SSR'd OG consistent with what they see on screen, while crawlers without the cookie still get the correct preview when the shared URL carries `?gameId=` (the in-tab `useEffect` in `collected-items.tsx` mirrors the active gameId into the URL on hydration). The loader reuses the cached result of `getServerResolvedGameInputsServerFn` (`src/features/game/dal/active-game.ts`, queryKey `SERVER_GAME_INPUTS_QUERY_KEY` from `src/routes/__root.tsx`) that the root `beforeLoad` already populated, so no extra server call fires.
   - Per-tab title overrides (e.g. "Display Name — Collected Items | Toolkits.gg") use the shared helpers in `src/features/auth/core/profile-tab-head.ts`. Each tab's `loader` calls `loadProfileTabData()` (cache-hit from the parent loader's `ensureQueryData` — no extra fetch).
 
 ### Game registry pattern
@@ -172,12 +173,23 @@ Follow these steps in order. The registry is the single place to check; no other
 
 ### Active-game resolution
 
-The active game is tracked in a `@tanstack/store` at `src/features/game/core/store.ts` (exports `gameStore` and `setGame`) with a `source` priority: `subdomain` > `route` > `toggle`/`session` > `default`. State is rehydrated from `localStorage` (`active-game` key) on module load. Two callers write to it:
+GameId resolution is SSR-deterministic: the root route's `beforeLoad` (in `src/routes/__root.tsx`) computes an authoritative `ssrGameId` per request and exposes it via route context. Components read it through `useGameId()` (`src/features/game/core/use-game-id.ts`), which merges the SSR value with a client-only in-memory store used for mid-session toggles.
 
-- `GameProvider` (client-only, mounted via `AppProviders` in `__root.tsx`) — reads `window.location.hostname` (`parseSubdomain` in `#/features/game/core/utils`) with a `?_game=` dev override.
-- `src/routes/$gameId/route.tsx` — calls `setGame(gameId, "route")` on every navigation under the `$gameId` segment.
+**Priority chain inside `beforeLoad`:**
+1. **Subdomain** — from the `Host` header (e.g. `remnant2.toolkits.gg` → `remnant2`).
+2. **Dev override** `?_game=` — only when `import.meta.env.DEV`. Used to test subdomain behavior on `localhost`.
+3. **Route segment** — leading `/$gameId/...` in `location.pathname`.
+4. **Search param** `?gameId=`.
+5. **Cookie** `active-game` — durable user preference, written by `GameSwitcher` via `setActiveGameCookie()` (in `#/features/game/core/utils`).
+6. Fallback `null` → resolves to `"none"` in `useGameId()`.
 
-A `subdomain`-sourced value deliberately wins over later `route` writes — be careful if you change this precedence.
+**Server-side resolution:** `getServerResolvedGameInputsServerFn` in `src/features/game/dal/active-game.ts` reads the Host header and the `active-game` cookie via `getRequest()`. Cached for the session via `queryClient.ensureQueryData` (queryKey `SERVER_GAME_INPUTS_QUERY_KEY` exported from `src/routes/__root.tsx`) with `staleTime: Infinity`, so it runs at most once per page load even when other loaders (e.g. the profile route) need the same inputs.
+
+**Client layer:** the `@tanstack/store` at `src/features/game/core/store.ts` is a thin reactive layer (`{ gameId: GameId | null }`) used by `GameSwitcher` for mid-session toggles. `useGameId()` returns `clientStore.gameId ?? ssrGameId ?? "none"` — the client store wins when set so a switcher click updates the UI immediately, but on initial paint the store is empty and the SSR value wins (deterministic hydration).
+
+**Writing from `GameSwitcher`:** `handleSelectGame` calls `setActiveGameCookie(id)` (durable) + `setGame(id)` (immediate UI reactivity). `handleGoHome` clears both.
+
+Because every input in the chain is server-knowable, no `ClientOnly` wrappers are needed for gameId-driven render output. (`ClientOnly` is still used for genuinely client-only state like `UserMenu`'s auth status.)
 
 ### Theme system
 

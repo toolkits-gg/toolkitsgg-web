@@ -1,42 +1,19 @@
-// src/stores/gameStore.ts
-
 import { Store } from "@tanstack/store";
 import type { GameId } from "@/prisma";
 
-type GameSource = "subdomain" | "route" | "toggle" | "session" | "default";
-
+/**
+ * Used to allow client-only updates via GameSwitcher toggles.
+ * The primary gameId is in the `active-game` cookie,
+ * exposed as `ssrGameId` via `useGameId`.
+ */
 interface GameState {
 	gameId: GameId | null;
-	source: GameSource;
 }
 
-const STORAGE_KEY = "active-game";
+const gameStore = new Store<GameState>({ gameId: null });
 
-// Rehydrate from localStorage on module load
-const stored = (() => {
-	try {
-		const raw = localStorage.getItem(STORAGE_KEY);
-		return raw ? JSON.parse(raw) : null;
-	} catch {
-		return null;
-	}
-})();
-
-const gameStore = new Store<GameState>({
-	gameId: stored?.gameId ?? null,
-	source: stored?.source ?? "default",
-});
-
-const setGame = (id: GameId, source: GameSource) => {
-	gameStore.setState((prev) => {
-		if (prev.source === "subdomain" && source === "route") return prev;
-		const next = { gameId: id, source };
-		// Persist side-effect lives here, not scattered across call sites
-		try {
-			localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-		} catch {}
-		return next;
-	});
+const setGame = (id: GameId | null) => {
+	gameStore.setState(() => ({ gameId: id }));
 };
 
-export { setGame, gameStore };
+export { gameStore, setGame };

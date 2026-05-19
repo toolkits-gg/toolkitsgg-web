@@ -1,18 +1,33 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
-import { parseSubdomain } from "#/features/game/core/utils";
+import { parseCookie, parseSubdomain } from "#/features/game/core/utils";
+import { getValidatedGameId } from "#/features/game/registry/game-registry";
 import type { GameId } from "@/prisma";
 
-// Reads the request's Host header and resolves a registered gameId from any
-// subdomain prefix.
-// This is the only way to get the game id on the server
-const getSubdomainGameIdServerFn = createServerFn({
-	method: "GET",
-}).handler(async (): Promise<GameId | null> => {
-	const request = getRequest();
-	const host = request.headers.get("host") ?? "";
-	const subdomain = parseSubdomain(host);
-	return subdomain ? (subdomain as GameId) : null;
-});
+const ACTIVE_GAME_COOKIE = "active-game";
 
-export { getSubdomainGameIdServerFn };
+/**
+ * Reads everything about the request that the server can know up front:
+ * the subdomain (Host header) and the active-game preference cookie.
+ * Used by the root route's beforeLoad to feed the gameId priority chain.
+ */
+const getServerResolvedGameInputsServerFn = createServerFn({
+	method: "GET",
+}).handler(
+	async (): Promise<{
+		subdomainGameId: GameId | null;
+		cookieGameId: GameId | null;
+	}> => {
+		const request = getRequest();
+		const host = request.headers.get("host") ?? "";
+		const cookieHeader = request.headers.get("cookie") ?? "";
+		const subdomainGameId = parseSubdomain(host);
+		const cookieValue = parseCookie(cookieHeader, ACTIVE_GAME_COOKIE);
+		return {
+			subdomainGameId: subdomainGameId ?? null,
+			cookieGameId: getValidatedGameId(cookieValue ?? "") ?? null,
+		};
+	},
+);
+
+export { ACTIVE_GAME_COOKIE, getServerResolvedGameInputsServerFn };

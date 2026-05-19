@@ -8,7 +8,6 @@ import {
 	Text,
 } from "@mantine/core";
 import { modals } from "@mantine/modals";
-import { ClientOnly } from "@tanstack/react-router";
 import { LuCamera, LuPencil } from "react-icons/lu";
 import { AvatarPicker } from "#/features/auth/core/AvatarPicker";
 import { ProfileEditForm } from "#/features/auth/core/ProfileEditForm";
@@ -90,11 +89,7 @@ const ProfileHeader = ({ userId, isOwner }: ProfileHeaderProps) => {
 			<Box className={classes.profileContent}>
 				<Group align="flex-end" gap="md">
 					<Box className={classes.avatarWrapper}>
-						<ClientOnly
-							fallback={<Skeleton height={96} width={96} radius="md" />}
-						>
-							<ProfileAvatar userId={userId} initials={initials} />
-						</ClientOnly>
+						<ProfileAvatar userId={userId} initials={initials} />
 						{isOwner && (
 							<ActionIcon
 								variant="filled"
