@@ -22,6 +22,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import {
+	ClientOnly,
 	createRootRouteWithContext,
 	HeadContent,
 	Scripts,
@@ -195,9 +196,11 @@ function RootDocument({ children }: { children: ReactNode }) {
 						<AppShell.Footer p="xs" className={classes.footer}>
 							<Flex justify="center" align="center" gap="sm" wrap="wrap">
 								<DefaultLogo size={24} />
-								<Text size="xs" c="dimmed">
-									© {new Date().getFullYear()} Toolkits.gg
-								</Text>
+								<ClientOnly>
+									<Text size="xs" c="dimmed">
+										© {new Date().getFullYear()} Toolkits.gg
+									</Text>
+								</ClientOnly>
 								<Divider orientation="vertical" />
 								<SocialMedia />
 							</Flex>
