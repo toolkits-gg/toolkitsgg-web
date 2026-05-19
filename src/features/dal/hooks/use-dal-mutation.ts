@@ -48,9 +48,11 @@ const useDalMutation = <Input, Output>(
 };
 
 /**
- * Executes the local write then enqueues the op for sync.
- * Local write runs first so the UI reflects the change immediately;
- * enqueueing second ensures the op is persisted before the process could be killed.
+ * Executes the local write and enqueues the op for sync.
+ * `getServerUpdatedAt` runs first because it reads the pre-write `updatedAt` baseline
+ * from the same prisma-idb record that `action.local` mutates — racing them would lose
+ * the baseline. `action.local` and `enqueueOp` target separate IndexedDB databases and
+ * share no data, so they race in parallel.
  */
 const runLocalWithEnqueue = async <Input, Output>(
 	action: DalWriteAction<Input, Output>,
@@ -60,16 +62,18 @@ const runLocalWithEnqueue = async <Input, Output>(
 	const serverUpdatedAt = action.getServerUpdatedAt
 		? await action.getServerUpdatedAt(input, ctx)
 		: undefined;
-	const result = await action.local(input, ctx);
-	const op = await enqueueOp({
-		anonUserId: ctx.anonUserId,
-		entity: action.entity,
-		operation: action.operation,
-		payload: input,
-		idempotencyKey: action.buildIdempotencyKey(input, ctx),
-		serverUpdatedAt: serverUpdatedAt ?? undefined,
-		summary: action.describe?.(input, ctx),
-	});
+	const [result, op] = await Promise.all([
+		action.local(input, ctx),
+		enqueueOp({
+			anonUserId: ctx.anonUserId,
+			entity: action.entity,
+			operation: action.operation,
+			payload: input,
+			idempotencyKey: action.buildIdempotencyKey(input, ctx),
+			serverUpdatedAt: serverUpdatedAt ?? undefined,
+			summary: action.describe?.(input, ctx),
+		}),
+	]);
 	return { result, branch: "local", enqueuedOpId: op?.id ?? null };
 };
 
