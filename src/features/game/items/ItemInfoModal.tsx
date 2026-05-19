@@ -51,7 +51,10 @@ const ItemInfoModal = ({
 	const watermark: WatermarkConfig | false = metadata
 		? {
 				gameConfig: {
-					METADATA: { renderLogo: metadata.renderLogo, label: metadata.label },
+					METADATA: {
+						LogoComponent: metadata.LogoComponent,
+						label: metadata.label,
+					},
 				},
 			}
 		: false;

@@ -27,7 +27,7 @@ import { useGameId } from "#/features/game/core/use-game-id";
 import {
 	getGameAvatars,
 	getGameConfig,
-	getGameLogo,
+	getGameLogoComponent,
 	REGISTERED_GAME_IDS,
 } from "#/features/game/registry/game-registry";
 import type { GameId } from "@/prisma";
@@ -101,6 +101,9 @@ export function AvatarPicker() {
 	const browsingGame = gamesWithAvatars.find(
 		(g) => g.gameId === browsingGameId,
 	);
+	const BrowsingGameLogo = browsingGame
+		? getGameLogoComponent(browsingGame.gameId)
+		: undefined;
 	const overrideForBrowsedGame = avatarOverrides.find(
 		(o) => o.gameId === browsingGameId,
 	);
@@ -278,20 +281,23 @@ export function AvatarPicker() {
 		);
 	};
 
-	const renderGameRow = (game: GameWithAvatars, compact: boolean) => (
-		<UnstyledButton
-			key={game.gameId}
-			className={`${classes.gameRow} ${compact ? classes.gameRowCompact : ""}`}
-			onClick={() => handleGameChange(game.gameId)}
-		>
-			<Flex align="center" gap={compact ? "sm" : "md"}>
-				{getGameLogo(game.gameId, compact ? 24 : 36)}
-				<Text size={compact ? "sm" : "md"} fw={500}>
-					{game.label}
-				</Text>
-			</Flex>
-		</UnstyledButton>
-	);
+	const renderGameRow = (game: GameWithAvatars, compact: boolean) => {
+		const LogoComponent = getGameLogoComponent(game.gameId);
+		return (
+			<UnstyledButton
+				key={game.gameId}
+				className={`${classes.gameRow} ${compact ? classes.gameRowCompact : ""}`}
+				onClick={() => handleGameChange(game.gameId)}
+			>
+				<Flex align="center" gap={compact ? "sm" : "md"}>
+					{LogoComponent && <LogoComponent size={compact ? 24 : 36} />}
+					<Text size={compact ? "sm" : "md"} fw={500}>
+						{game.label}
+					</Text>
+				</Flex>
+			</UnstyledButton>
+		);
+	};
 
 	return (
 		<Stack gap="md">
@@ -385,7 +391,7 @@ export function AvatarPicker() {
 					>
 						<Group wrap="nowrap" gap="sm" justify="space-between">
 							<Flex align="center" gap="sm">
-								{browsingGame && getGameLogo(browsingGame.gameId, 36)}
+								{BrowsingGameLogo && <BrowsingGameLogo size={36} />}
 								<Text size="sm" fw={600}>
 									{browsingGame?.label ?? "Select a game"}
 								</Text>

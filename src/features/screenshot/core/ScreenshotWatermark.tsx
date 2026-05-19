@@ -1,10 +1,10 @@
 import { Flex, Text } from "@mantine/core";
-import type { ReactNode } from "react";
+import type { ComponentType } from "react";
 
 import { DEFAULT_LOGO_SIZE, type LogoSize } from "#/components/AppLogo";
 
 type ScreenshotWatermarkProps = {
-	renderLogo: (size: LogoSize) => ReactNode;
+	LogoComponent: ComponentType<{ size?: LogoSize }>;
 	logoSize?: LogoSize;
 	label: string;
 	fontSize?: string;
@@ -12,7 +12,7 @@ type ScreenshotWatermarkProps = {
 };
 
 const ScreenshotWatermark = ({
-	renderLogo,
+	LogoComponent,
 	logoSize = DEFAULT_LOGO_SIZE,
 	label,
 	fontSize = "md",
@@ -20,7 +20,7 @@ const ScreenshotWatermark = ({
 }: ScreenshotWatermarkProps) => {
 	return (
 		<Flex align="center" justify="center" w="100%" gap={gap} py={0} px="sm">
-			{renderLogo(logoSize)}
+			<LogoComponent size={logoSize} />
 			<Flex direction="column" gap={0}>
 				<Text fz="lg" fw={700} c="accent" ff="heading" lh={1}>
 					toolkits.gg

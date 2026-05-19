@@ -94,7 +94,7 @@ Everything game-specific hangs off a central registry. Each game under `src/game
 const GAME_CONFIG = {
   ITEMS,         // { all, collectable, categorized, categories, uncollectableCategories }
   THEME,         // ToolkitThemeDefinition | undefined
-  METADATA,      // id, name, label, description, faviconSourcePath, renderLogo(), externalResources[]
+  METADATA,      // id, name, label, description, faviconSourcePath, LogoComponent, externalResources[]
   PAGES,         // { renderItemLookup, renderCollectedItems }
   SEARCH_PARAMS, // nuqs search param cache | undefined (when the game has no custom filters)
   AVATARS,       // GameAvatar[] (optional)
@@ -103,7 +103,7 @@ const GAME_CONFIG = {
 export { GAME_CONFIG };
 ```
 
-`src/features/game/registry/game-registry.tsx` wires every `gameId` to its `GameConfig` and exports: `GAME_REGISTRY`, `REGISTERED_GAME_IDS`, `getGameConfig()`, `getGameConfigTyped<TId>()`, `getGameItems()`, `getGameTheme()`, `getGameMetadata()`, `getGamePages()`, `getGameAvatars()`, `getGameLogo()`, `getGameSearchParams()`, `getAllRegisteredThemeDefinitions()`, `getAllRegisteredThemeClassNames()`, `isRegisteredGameId()`, `getValidatedGameId()`.
+`src/features/game/registry/game-registry.tsx` wires every `gameId` to its `GameConfig` and exports: `GAME_REGISTRY`, `REGISTERED_GAME_IDS`, `getGameConfig()`, `getGameConfigTyped<TId>()`, `getGameItems()`, `getGameTheme()`, `getGameMetadata()`, `getGamePages()`, `getGameAvatars()`, `getGameLogoComponent()`, `getGameSearchParams()`, `getAllRegisteredThemeDefinitions()`, `getAllRegisteredThemeClassNames()`, `isRegisteredGameId()`, `getValidatedGameId()`.
 
 The `GameId` enum is defined in `schema.prisma` and imported from `@/prisma`. `getAllRegisteredThemeDefinitions()` expands each game theme into light+dark variants plus a base `default-light`/`default-dark`.
 
@@ -140,7 +140,7 @@ Follow these steps in order. The registry is the single place to check; no other
    core/
      game-config/
        index.ts          # exports GAME_CONFIG satisfies GameConfig<LocalItem, CategoryEnum>
-       metadata.tsx      # id, name, label, description, faviconSourcePath, renderLogo()
+       metadata.tsx      # id, name, label, description, faviconSourcePath, LogoComponent
        pages.tsx         # GamePages with renderItemLookup() and renderCollectedItems()
        theme.ts          # ToolkitThemeDefinition (colors, Mantine overrides) — uses generateThemeColors() from #/features/theme/core/generate-palette
        items.ts          # item data + categorization
@@ -151,7 +151,7 @@ Follow these steps in order. The registry is the single place to check; no other
      item-data/          # raw item definitions consumed by game-config/items.ts
      types.ts            # game-specific TypeScript types (LocalItem, etc.)
      constants.ts        # game-specific constants
-     Logo.tsx            # game logo component referenced by metadata.renderLogo()
+     Logo.tsx            # game logo component referenced by metadata.LogoComponent
    dal/
      collected-items.ts  # exports the GameCollectedItemsDal via createCollectedItemsDal()
      server/

@@ -1,5 +1,5 @@
 import type { createSearchParamsCache } from "nuqs/server";
-import type { ReactNode } from "react";
+import type { ComponentType, ReactNode } from "react";
 import type { LogoSize } from "#/components/AppLogo";
 import type {
 	AppItem,
@@ -37,7 +37,7 @@ type GameMetadata = {
 	description: string;
 	/** CloudFront-relative path to the source PNG used for favicon generation */
 	faviconSourcePath: string;
-	renderLogo: (size: LogoSize) => ReactNode;
+	LogoComponent: ComponentType<{ size?: LogoSize }>;
 	/** Third-party resources related to the game */
 	externalResources: {
 		label: string;

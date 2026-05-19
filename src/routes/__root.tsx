@@ -53,7 +53,7 @@ const url = "https://toolkits.gg";
 
 const Route = createRootRouteWithContext<MyRouterContext>()({
 	beforeLoad: async ({ context, location }) => {
-		// Cache the server-fn result for the lifetime of the session — the Host
+		// Cache the server-fn result for the lifetime of the session - the Host
 		// header and the active-game cookie don't change without a hard reload.
 		const { subdomainGameId, cookieGameId } =
 			await context.queryClient.ensureQueryData({

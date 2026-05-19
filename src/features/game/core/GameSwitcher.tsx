@@ -30,7 +30,7 @@ import { useGameId } from "#/features/game/core/use-game-id";
 import { setActiveGameCookie } from "#/features/game/core/utils";
 import {
 	getGameConfig,
-	getGameLogo,
+	getGameLogoComponent,
 	REGISTERED_GAME_IDS,
 } from "#/features/game/registry/game-registry";
 import type { GameId } from "@/prisma";
@@ -110,6 +110,7 @@ function GameSwitcher() {
 
 	const activeLabel =
 		getGameConfig(activeGameId)?.THEME?.label ?? "Toolkits.gg";
+	const ActiveGameLogo = getGameLogoComponent(activeGameId);
 
 	const filteredGames = allGames.filter((g) =>
 		g.label.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -188,7 +189,7 @@ function GameSwitcher() {
 				>
 					<Group wrap="nowrap" gap="xs" justify="space-between">
 						<Flex align="center" gap="sm">
-							{getGameLogo(activeGameId) || <DefaultLogo />}
+							{ActiveGameLogo ? <ActiveGameLogo /> : <DefaultLogo />}
 							<Text size="sm" fw={600}>
 								{activeLabel}
 							</Text>

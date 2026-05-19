@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ComponentType } from "react";
 import type { LogoSize } from "#/components/AppLogo";
 import type { GameAvatar, GameConfig } from "#/features/game/core/types";
 import type { ToolkitThemeDefinition } from "#/features/theme/core/types";
@@ -45,11 +45,11 @@ function getGameItems(gameId: string): AnyGameConfig["ITEMS"] | undefined {
 		| undefined;
 }
 
-// Logo shortcut - returns METADATA.renderLogo response or undefined
-function getGameLogo(gameId: string, logoSize: LogoSize = 36): ReactNode {
-	return GAME_REGISTRY[gameId as RegistryGameId]?.METADATA?.renderLogo?.(
-		logoSize,
-	);
+// Logo shortcut - returns METADATA.LogoComponent or undefined
+function getGameLogoComponent(
+	gameId: string,
+): ComponentType<{ size?: LogoSize }> | undefined {
+	return GAME_REGISTRY[gameId as RegistryGameId]?.METADATA?.LogoComponent;
 }
 
 // Search params shortcut - returns SEARCH_PARAMS or undefined
@@ -137,7 +137,7 @@ export {
 	getAllRegisteredThemeDefinitions,
 	getGameAvatars,
 	getGameConfig,
-	getGameLogo,
+	getGameLogoComponent,
 	getGameItems,
 	getGameMetadata,
 	getGamePages,

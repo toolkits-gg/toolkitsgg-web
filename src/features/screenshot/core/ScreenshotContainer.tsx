@@ -1,6 +1,6 @@
 import { Avatar, Box, type BoxProps, Group, Stack, Text } from "@mantine/core";
 import cx from "clsx";
-import type { ReactNode } from "react";
+import type { ComponentType, ReactNode } from "react";
 import { forwardRef } from "react";
 import type { LogoSize } from "#/components/AppLogo";
 import { ScreenshotWatermark } from "#/features/screenshot/core/ScreenshotWatermark";
@@ -8,7 +8,7 @@ import classes from "./ScreenshotContainer.module.css";
 
 type WatermarkGameConfig = {
 	METADATA: {
-		renderLogo: (size: LogoSize) => ReactNode;
+		LogoComponent: ComponentType<{ size?: LogoSize }>;
 		label: string;
 	};
 };
@@ -90,7 +90,7 @@ const ScreenshotContainer = forwardRef<
 				{showWatermark && (
 					<Box mt="md">
 						<ScreenshotWatermark
-							renderLogo={watermark.gameConfig.METADATA.renderLogo}
+							LogoComponent={watermark.gameConfig.METADATA.LogoComponent}
 							label={watermark.gameConfig.METADATA.label}
 							logoSize={watermark.logoSize}
 							fontSize={watermark.fontSize}

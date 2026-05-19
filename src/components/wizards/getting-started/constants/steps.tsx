@@ -67,7 +67,7 @@ const GETTING_STARTED_STEPS: WizardStep[] = [
 						GitHub
 					</Text>
 					. A major goal is to help people make their first open-source
-					contributions—check out the repo or message me on Discord to get
+					contributions-check out the repo or message me on Discord to get
 					involved!
 				</Text>
 				<SocialMediaContent />

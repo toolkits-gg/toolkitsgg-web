@@ -24,23 +24,26 @@ const GettingStartedWizard = ({
 
 	const isMobile = useMediaQuery("(max-width: 768px)");
 
-	const adaptedSteps = GETTING_STARTED_STEPS
-		// On mobile, remove targetSelector for social-media step since
-		// the footer is not visible with the drawer open
-		.map((step) => {
-			if (isMobile && step.id === "social-media") {
-				return { ...step, targetSelector: undefined };
-			}
-			return step;
-		})
-		// if no gameId, remove the favorite-game slide since the
-		// favorite game heart icon is not visible
-		.filter((step) => {
+	const adaptedSteps = GETTING_STARTED_STEPS.reduce<typeof GETTING_STARTED_STEPS>(
+		(acc, step) => {
+			// if no gameId, remove the favorite-game slide since the
+			// favorite game heart icon is not visible
 			if (step.id === "favorite-game" && !gameId) {
-				return false;
+				return acc;
 			}
-			return true;
-		});
+
+			// On mobile, remove targetSelector for social-media step since
+			// the footer is not visible with the drawer open
+			if (isMobile && step.id === "social-media") {
+				acc.push({ ...step, targetSelector: undefined });
+			} else {
+				acc.push(step);
+			}
+
+			return acc;
+		},
+		[],
+	);
 
 	const handleBeforeOpen = () => {
 		if (isMobile && !navbarOpened) {
