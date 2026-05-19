@@ -16,7 +16,13 @@ const SearchItemInput = ({
 }: SearchItemInputProps) => {
 	const timeoutRef = useRef<number>(-1);
 	const [value, setValue] = useState(searchValue);
+	const [prevSearchValue, setPrevSearchValue] = useState(searchValue);
 	const [loading, setLoading] = useState(false);
+
+	if (searchValue !== prevSearchValue) {
+		setPrevSearchValue(searchValue);
+		setValue(searchValue);
+	}
 
 	const gameId = useGameId();
 	const items = getGameItems(gameId);

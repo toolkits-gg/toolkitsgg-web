@@ -66,6 +66,11 @@ const Wizard = ({
 	};
 
 	useEffect(() => {
+		if (!opened) return;
+
+		let cancelled = false;
+		let timer: ReturnType<typeof setTimeout> | undefined;
+
 		const openWizard = async () => {
 			setIsReady(false);
 
@@ -73,17 +78,20 @@ const Wizard = ({
 				await onBeforeOpen();
 			}
 
+			if (cancelled) return;
+
 			// Small delay to allow any animations or navigation to settle
-			const timer = setTimeout(() => {
+			timer = setTimeout(() => {
 				setIsReady(true);
 			}, 100);
-
-			return () => clearTimeout(timer);
 		};
 
-		if (!opened) return;
-
 		void openWizard();
+
+		return () => {
+			cancelled = true;
+			if (timer) clearTimeout(timer);
+		};
 	}, [opened, onBeforeOpen]);
 
 	useEffect(() => {

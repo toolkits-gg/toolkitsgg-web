@@ -68,7 +68,6 @@ const ItemFilterBar = ({
 		<Box className={classes.bar}>
 			<div className={classes.topRow}>
 				<SearchItemInput
-					key={search}
 					searchValue={search}
 					onSearchChange={(e) => onSearchChange(e)}
 				/>
