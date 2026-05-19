@@ -97,8 +97,10 @@ const userProfileActions = {
 		},
 		local: async (input, ctx) => {
 			const userId = input?.userId ?? resolveLocalUserId(ctx);
-			const profile = await getLocalUserProfile(userId);
-			const overrides = await getLocalAvatarOverrides(userId);
+			const [profile, overrides] = await Promise.all([
+				getLocalUserProfile(userId),
+				getLocalAvatarOverrides(userId),
+			]);
 			return {
 				displayName: profile?.displayName ?? "Traveler",
 				bio: profile?.bio ?? "No bio provided.",
