@@ -1,7 +1,6 @@
 import { Avatar, Box, type BoxProps, Group, Stack, Text } from "@mantine/core";
 import cx from "clsx";
-import type { ComponentType, ReactNode } from "react";
-import { forwardRef } from "react";
+import { type ComponentType, forwardRef, type PropsWithChildren } from "react";
 import type { LogoSize } from "#/components/AppLogo";
 import { ScreenshotWatermark } from "#/features/screenshot/core/ScreenshotWatermark";
 import classes from "./ScreenshotContainer.module.css";
@@ -20,15 +19,16 @@ type WatermarkConfig = {
 	gap?: number | string;
 };
 
-type ScreenshotContainerProps = {
-	children: ReactNode;
-	screenshotMode: boolean;
-	watermark?: WatermarkConfig | false;
-	title?: string;
-	subtitle?: string;
-	avatarUrl?: string;
-	className?: string;
-} & Omit<BoxProps, "className">;
+type ScreenshotContainerProps = PropsWithChildren<
+	{
+		screenshotMode: boolean;
+		watermark?: WatermarkConfig | false;
+		title?: string;
+		subtitle?: string;
+		avatarUrl?: string;
+		className?: string;
+	} & Omit<BoxProps, "className">
+>;
 
 const ScreenshotContainer = forwardRef<
 	HTMLDivElement,
