@@ -16,8 +16,6 @@ const withSizeSuffix = (src: string, size: SizePreset) => {
 	return src.replace(/(\.[a-z0-9]+)$/i, `-${w}x${h}$1`);
 };
 
-// style={{ width: 48, height: 48, objectFit: "contain" }}
-
 const AppImage = ({ src, size, ...rest }: AppImageProps) => {
 	let resolvedSrc = src;
 	if (src && typeof src === "string" && !src.startsWith("http")) {

@@ -1,5 +1,13 @@
-import { Box, Button, Dialog, Group, Loader, Text, Title } from "@mantine/core";
-import { AppImage } from "#/components/AppImage.tsx";
+import {
+	Box,
+	Button,
+	Dialog,
+	Group,
+	Loader,
+	Image as MantineImage,
+	Text,
+	Title,
+} from "@mantine/core";
 
 type ScreenshotPreviewProps = {
 	screenshot: string | null;
@@ -44,11 +52,10 @@ function ScreenshotPreview({
 				{error && <Text c="error">{error}</Text>}
 
 				{screenshot && (
-					<AppImage
+					<MantineImage
 						src={screenshot}
 						alt="Screenshot preview"
 						mx="auto"
-						size="md"
 						style={{
 							maxWidth: "100%",
 							maxHeight: 350,
