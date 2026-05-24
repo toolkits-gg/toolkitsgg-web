@@ -1,4 +1,5 @@
 import type { AppItem } from "#/features/game/items/types";
+import type { SlayTheSpire2AncientItem } from "#/games/slaythespire2/core/item-data/ancients.ts";
 import type { SlayTheSpire2CardItem } from "#/games/slaythespire2/core/item-data/cards";
 import type { SlayTheSpire2CharacterItem } from "#/games/slaythespire2/core/item-data/characters";
 import type { SlayTheSpire2PotionItem } from "#/games/slaythespire2/core/item-data/potions";
@@ -98,7 +99,8 @@ type SlayTheSpire2LocalItem =
 	| SlayTheSpire2RelicItem
 	| SlayTheSpire2CardItem
 	| SlayTheSpire2PotionItem
-	| SlayTheSpire2CharacterItem;
+	| SlayTheSpire2CharacterItem
+	| SlayTheSpire2AncientItem;
 
 export type {
 	BaseSlayTheSpire2Item,

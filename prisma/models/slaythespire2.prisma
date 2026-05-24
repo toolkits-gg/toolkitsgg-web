@@ -6,10 +6,9 @@ enum SlayTheSpire2ItemCategory {
   ANCIENT
 }
 
-// enum SlayTheSpire2UncollectableItemCategory {
-//   // TODO: Add your uncollectable item categories here
-//   PLACEHOLDER
-// }
+enum SlayTheSpire2UncollectableItemCategory {
+  ANCIENT
+}
 
 enum SlayTheSpire2PotionRarity {
   COMMON

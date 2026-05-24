@@ -5,7 +5,7 @@ type SlayTheSpire2AncientItem = BaseSlayTheSpire2Item & {
 	flavorText: string;
 };
 
-const ANCIENTS = [
+const ANCIENTS: SlayTheSpire2AncientItem[] = [
 	{
 		name: "Neow",
 		category: "ANCIENT",
