@@ -1,15 +1,14 @@
-/**
- * Helpers for converting raw wiki markup into `description: string[]`
- *
- * - splitOnLineBreaks: split on <br>, <br/>, <br /> (case-insensitive),
- *   trim segments, drop empties.
- * - cleanWikiTags: collapse `{{a|b|...}}` templates (prefer plural form
- *   when the template has one, otherwise the singular display arg),
- *   strip leading `$` from keyword links, expand @-icon tokens. Every
- *   resolved tag gets its first letter capitalized — tags are special
- *   terms and the source sometimes stores the plural slot lowercased.
- * - cleanWikiText: splitOnLineBreaks composed with cleanWikiTags.
- */
+// Helpers for converting raw wiki markup into `description: string[]`
+//
+// - splitOnLineBreaks: split on <br>, <br/>, <br /> (case-insensitive),
+//   trim segments, drop empties.
+// - cleanWikiTags: collapse `{{a|b|...}}` templates (prefer plural form
+//   when the template has one, otherwise the singular display arg),
+//   strip leading `$` from keyword links, expand @-icon tokens. Every
+//   resolved tag gets its first letter capitalized — tags are special
+//   terms and the source sometimes stores the plural slot lowercased.
+// - cleanWikiText: splitOnLineBreaks composed with cleanWikiTags.
+import { stripOmitTokens } from "#/features/wiki-sync/omit-tokens";
 import { capitalize } from "#/utils.ts";
 
 type IconTokenEntry =
@@ -48,24 +47,23 @@ const splitOnLineBreaks = (text: string): string[] => {
 const cleanWikiTags = (text: string): string => {
 	let result = text;
 
-	/**
-	 * 1. Collapse `{{...}}` templates. Two shapes are recognized:
-	 *
-	 *         Count-first plural picker — 3 args:
-	 *           {{count|plural|singular}}
-	 *           e.g. {{2|potions|Potion}} -> "Potions" (count=2 -> plural)
-	 *           e.g. {{1|potions|Potion}} -> "Potion" (count=1 -> singular)
-	 *           e.g. {{2|Rest Sites|Rest Site}} -> "Rest Sites"
-	 *
-	 *         Count-last label picker — used by C / QueryLink:
-	 *           {{C|singular|plural|count}} - 3 args
-	 *           {{QueryLink|category|singular|plural|count}} - 4 args
-	 *           When the last arg is a numeric count, take the plural
-	 *           (last-1) and fall back to singular (last-2) if plural is
-	 *           empty (e.g. `{{C|Byrd Swoop||2}}`).
-	 *
-	 *         Otherwise: treat the last arg as the display label.
-	 */
+	// 1. Collapse `{{...}}` templates. Two shapes are recognized:
+	//
+	//         Count-first plural picker — 3 args:
+	//           {{count|plural|singular}}
+	//           e.g. {{2|potions|Potion}} -> "Potions" (count=2 -> plural)
+	//           e.g. {{1|potions|Potion}} -> "Potion" (count=1 -> singular)
+	//           e.g. {{2|Rest Sites|Rest Site}} -> "Rest Sites"
+	//
+	//         Count-last label picker — used by C / QueryLink:
+	//           {{C|singular|plural|count}} - 3 args
+	//           {{QueryLink|category|singular|plural|count}} - 4 args
+	//           When the last arg is a numeric count, take the plural
+	//           (last-1) and fall back to singular (last-2) if plural is
+	//           empty (e.g. `{{C|Byrd Swoop||2}}`).
+	//
+	//         Otherwise: treat the last arg as the display label.
+
 	result = result.replace(/\{\{([^{}]+)\}\}/g, (match, inner: string) => {
 		const parts = inner.split("|").map((p) => p.trim());
 		if (parts.length < 2) {
@@ -92,20 +90,16 @@ const cleanWikiTags = (text: string): string => {
 		console.warn(`  ! template syntax remains after pass: ${result}`);
 	}
 
-	/**
-	 * 2. $Word -> Word (single bareword only — apostrophes allowed).
-	 */
+	// 2. $Word -> Word (single bareword only — apostrophes allowed).
 	result = result.replace(/\$([A-Za-z][\w']*)/g, (_m, word: string) =>
 		capitalize(word),
 	);
 
-	/**
-	 * 3. Replace tokens registered in ICON_TOKEN_MAP. Countable entries
-	 *       (@CE / @ST) expand to "<count> <icon-name>": consecutive repeats
-	 *       are collapsed, and a preceding number in the surrounding text
-	 *       (e.g. "costs 0 @CE") is reused instead of prepending one. Noun
-	 *       entries (@Gold, type:Attack) emit the word as-is.
-	 */
+	// 3. Replace tokens registered in ICON_TOKEN_MAP. Countable entries
+	//       (@CE / @ST) expand to "<count> <icon-name>": consecutive repeats
+	//       are collapsed, and a preceding number in the surrounding text
+	//       (e.g. "costs 0 @CE") is reused instead of prepending one. Noun
+	//       entries (@Gold, type:Attack) emit the word as-is.
 	result = result.replace(
 		ICON_TOKEN_REGEX,
 		(match: string, token: string, offset: number, full: string) => {
@@ -133,6 +127,10 @@ const cleanWikiTags = (text: string): string => {
 			console.warn(`  ! unknown icon token '${token}' left as-is`);
 		}
 	}
+
+	// 4. Strip configured omit tokens (literal substrings), then collapse any
+	//    whitespace they left behind.
+	result = stripOmitTokens(result).replace(/\s+/g, " ").trim();
 
 	return result;
 };

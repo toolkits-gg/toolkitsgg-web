@@ -328,7 +328,7 @@ const AMULETS: Remnant2AmuletItem[] = [
 		id: "3zi80a",
 		dlc: "BASE",
 		description: [
-			"Increases Explosion damage by 25%. Explosions apply 165 -> 495 BURNING damage over 5s.",
+			"Increases Explosion damage by 25%. Explosions apply 155 → 465 BURNING damage over 5s.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Detonation_Trigger`,
 		location: {
