@@ -3,6 +3,7 @@ enum SlayTheSpire2ItemCategory {
   CARD
   POTION
   CHARACTER
+  ANCIENT
 }
 
 // enum SlayTheSpire2UncollectableItemCategory {
@@ -35,6 +36,17 @@ enum SlayTheSpire2Character {
   REGENT
   DEFECT
   NECROBINDER
+}
+
+enum SlayTheSpire2Ancient {
+  NEOW
+  OROBAS
+  PAEL
+  TEZCATARA
+  DARV
+  NONUPEIPE
+  TANX
+  VAKUU
 }
 
 enum SlayTheSpire2DLC {
