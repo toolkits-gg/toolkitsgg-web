@@ -1,10 +1,8 @@
-import type { EquippableBy } from "#/games/slaythespire2/core/types";
 import type { BaseSlayTheSpire2Item } from "#/games/slaythespire2/core/types";
 import type { SlayTheSpire2PotionRarity } from "@/prisma";
 
 type SlayTheSpire2PotionItem = BaseSlayTheSpire2Item & {
 	rarity: SlayTheSpire2PotionRarity;
-	equippableBy: EquippableBy;
 };
 
 const POTIONS: SlayTheSpire2PotionItem[] = [
@@ -21,7 +19,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: undefined,
 	},
 	{
@@ -34,7 +31,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -56,7 +52,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: undefined,
 	},
 	{
@@ -69,7 +64,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -89,7 +83,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -109,7 +102,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -129,7 +121,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -149,7 +140,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -171,7 +161,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: undefined,
 	},
 	{
@@ -186,7 +175,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: undefined,
 	},
 	{
@@ -201,7 +189,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -221,7 +208,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -241,7 +227,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -261,7 +246,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -281,7 +265,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -301,7 +284,9 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: ["IRONCLAD"],
+		linkedItems: {
+			character: { name: "IRONCLAD" },
+		},
 		modifiers: undefined,
 	},
 	{
@@ -314,7 +299,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: ["SILENT"],
+		linkedItems: { character: { name: "SILENT" } },
 		modifiers: [
 			{
 				modifier: {
@@ -334,7 +319,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: ["REGENT"],
+		linkedItems: { character: { name: "REGENT" } },
 		modifiers: [
 			{
 				modifier: {
@@ -354,7 +339,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: ["NECROBINDER"],
+		linkedItems: { character: { name: "NECROBINDER" } },
 		modifiers: [
 			{
 				modifier: {
@@ -374,7 +359,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: ["DEFECT"],
+		linkedItems: { character: { name: "DEFECT" } },
 		modifiers: [
 			{
 				modifier: {
@@ -397,7 +382,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: undefined,
 	},
 	{
@@ -412,7 +397,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -438,7 +423,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -459,7 +444,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: undefined,
 	},
 	{
@@ -472,7 +457,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -492,7 +477,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -513,7 +498,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: undefined,
 	},
 	{
@@ -526,7 +511,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -546,7 +531,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -566,7 +551,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -587,7 +572,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -609,7 +594,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -635,7 +620,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -655,7 +640,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -677,7 +662,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
+
 		modifiers: undefined,
 	},
 	{
@@ -690,7 +675,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["IRONCLAD"],
+		linkedItems: { character: { name: "IRONCLAD" } },
 		modifiers: undefined,
 	},
 	{
@@ -703,7 +688,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["SILENT"],
+		linkedItems: { character: { name: "SILENT" } },
 		modifiers: undefined,
 	},
 	{
@@ -716,7 +701,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["REGENT"],
+		linkedItems: { character: { name: "REGENT" } },
 		modifiers: undefined,
 	},
 	{
@@ -729,7 +714,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["NECROBINDER"],
+		linkedItems: { character: { name: "NECROBINDER" } },
 		modifiers: undefined,
 	},
 	{
@@ -742,7 +727,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["DEFECT"],
+		linkedItems: { character: { name: "DEFECT" } },
 		modifiers: undefined,
 	},
 
@@ -757,7 +742,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -777,7 +762,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -797,7 +782,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: undefined,
 	},
 	{
@@ -810,7 +795,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: undefined,
 	},
 	{
@@ -823,7 +808,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: undefined,
 	},
 	{
@@ -832,19 +817,19 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		id: "lew36",
 		dlc: "BASE",
 		description: [
-			`When you would die, instead this potion is discarded and you heal to 30% of your Max HP.`,
+			`When your HP would be reduced to 0, instead this potion is discarded and you heal to 30% of your Max HP.`,
 		],
 		imageUrl: "potions/fairy_in_a_bottle.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
-					heal: 3,
+					healPercent: 0.3,
 				},
-				trigger: 3,
+				trigger: "health reaches zero",
 			},
 		],
 	},
@@ -858,7 +843,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -878,7 +863,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -900,7 +885,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: undefined,
 	},
 	{
@@ -913,7 +898,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: undefined,
 	},
 	{
@@ -926,7 +911,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: undefined,
 	},
 	{
@@ -941,7 +926,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: undefined,
 	},
 	{
@@ -954,7 +939,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -974,7 +959,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -996,7 +981,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -1016,7 +1001,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["IRONCLAD"],
+		linkedItems: { character: { name: "IRONCLAD" } },
 		modifiers: undefined,
 	},
 	{
@@ -1029,7 +1014,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["SILENT"],
+		linkedItems: { character: { name: "SILENT" } },
 		modifiers: [
 			{
 				modifier: {
@@ -1049,7 +1034,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["REGENT"],
+		linkedItems: { character: { name: "REGENT" } },
 		modifiers: undefined,
 	},
 	{
@@ -1062,7 +1047,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["NECROBINDER"],
+		linkedItems: { character: { name: "NECROBINDER" } },
 		modifiers: undefined,
 	},
 	{
@@ -1075,7 +1060,7 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["DEFECT"],
+		linkedItems: { character: { name: "DEFECT" } },
 		modifiers: undefined,
 	},
 
@@ -1094,7 +1079,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -1114,7 +1098,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -1142,7 +1125,6 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potions_List`,
 		location: undefined,
 		rarity: "TOKEN",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -1154,4 +1136,12 @@ const POTIONS: SlayTheSpire2PotionItem[] = [
 	},
 ];
 
-export { POTIONS, type SlayTheSpire2PotionItem };
+const POTION_RARITY_MAP: Record<string, SlayTheSpire2PotionRarity> = {
+	common: "COMMON",
+	uncommon: "UNCOMMON",
+	rare: "RARE",
+	event: "EVENT",
+	token: "TOKEN",
+};
+
+export { POTION_RARITY_MAP, POTIONS, type SlayTheSpire2PotionItem };

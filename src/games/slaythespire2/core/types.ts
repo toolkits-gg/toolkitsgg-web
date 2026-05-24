@@ -4,12 +4,11 @@ import type { SlayTheSpire2CharacterItem } from "#/games/slaythespire2/core/item
 import type { SlayTheSpire2PotionItem } from "#/games/slaythespire2/core/item-data/potions";
 import type { SlayTheSpire2RelicItem } from "#/games/slaythespire2/core/item-data/relics";
 import type {
+	SlayTheSpire2Ancient,
 	SlayTheSpire2Character,
 	SlayTheSpire2DLC,
 	SlayTheSpire2ItemCategory,
 } from "@/prisma";
-
-type EquippableBy = SlayTheSpire2Character[] | "ANY";
 
 type SlayTheSpire2ItemLocation = "Overgrowth" | "Underdocks" | "Hive" | "Glory";
 
@@ -19,7 +18,9 @@ type SlayTheSpire2CommunityTags = string[];
 type SlayTheSpire2SearchableTags = string[];
 
 type SlayTheSpire2LinkedItem = Partial<{
+	ancient: { name: SlayTheSpire2Ancient };
 	character: { name: SlayTheSpire2Character };
+	relic: { name: string };
 }>;
 
 type ItemModifiers = {
@@ -36,6 +37,7 @@ type ItemModifiers = {
 	focus: number;
 	gold: number;
 	heal: number;
+	healPercent: number;
 	health: number;
 	intangible: number;
 	poison: number;
@@ -67,6 +69,7 @@ type ModifierTrigger =
 	| "first three turns"
 	| "first time lose HP"
 	| "first time play Power"
+	| "health reaches zero"
 	| "next attack"
 	| "permanent"
 	| "shuffle draw pile";
@@ -98,8 +101,7 @@ type SlayTheSpire2LocalItem =
 	| SlayTheSpire2CharacterItem;
 
 export type {
-	EquippableBy,
 	BaseSlayTheSpire2Item,
-	SlayTheSpire2LocalItem,
 	SlayTheSpire2ItemLocation,
+	SlayTheSpire2LocalItem,
 };
