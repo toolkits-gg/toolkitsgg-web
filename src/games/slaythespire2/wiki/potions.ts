@@ -8,13 +8,15 @@
  */
 
 import { cleanWikiText } from "#/features/wiki-sync/clean-wiki-text";
-import { parseLuaModule } from "#/features/wiki-sync/parse-lua-module";
-import { fetchWithUserAgent } from "#/features/wiki-sync/utils";
 import { CHARACTER_MAP } from "#/games/slaythespire2/core/item-data/characters.ts";
 import {
 	POTION_RARITY_MAP,
 	POTIONS,
 } from "#/games/slaythespire2/core/item-data/potions";
+import {
+	type CompareResult,
+	syncWikiCategory,
+} from "#/games/slaythespire2/wiki/sync-category.ts";
 import type {
 	SlayTheSpire2Character,
 	SlayTheSpire2PotionRarity,
@@ -22,6 +24,8 @@ import type {
 
 const WIKI_URL =
 	"https://slaythespire.wiki.gg/wiki/Module:Potions/StS2%20data?action=raw";
+
+type LocalPotion = (typeof POTIONS)[number];
 
 type WikiPotion = {
 	name: string;
@@ -56,62 +60,30 @@ const normalizeEntry = (
 	return { name, description, rarity, character, image: rawImage };
 };
 
-const main = async () => {
-	console.log(`Fetching ${WIKI_URL}\n`);
-	const res = await fetchWithUserAgent(WIKI_URL);
-	if (!res.ok) {
-		throw new Error(`Wiki fetch failed: ${res.status} ${res.statusText}`);
+const comparePotion = (local: LocalPotion, wiki: WikiPotion): CompareResult => {
+	const differingFields: string[] = [];
+
+	const localDesc = JSON.stringify(local.description);
+	const wikiDesc = JSON.stringify(wiki.description);
+	if (localDesc !== wikiDesc) {
+		differingFields.push("description");
 	}
-	const raw = await res.text();
 
-	const parsed = parseLuaModule(raw);
-	const wikiPotions: WikiPotion[] = Object.entries(parsed).map(
-		([name, fields]) => normalizeEntry(name, fields as Record<string, unknown>),
-	);
-
-	console.log(
-		`\nFetched ${wikiPotions.length} potions from wiki; local has ${POTIONS.length}.\n`,
-	);
-
-	const localByName = new Map(POTIONS.map((p) => [p.name, p] as const));
-	const wikiByName = new Map(wikiPotions.map((p) => [p.name, p] as const));
-
-	let matchedCount = 0;
-	let descriptionDiffCount = 0;
-	let newCount = 0;
-	let staleCount = 0;
-
-	for (const w of wikiPotions) {
-		const local = localByName.get(w.name);
-		if (local) {
-			matchedCount++;
-			const localDesc = JSON.stringify(local.description);
-			const wikiDesc = JSON.stringify(w.description);
+	return {
+		differingFields,
+		printDetails: () => {
 			if (localDesc !== wikiDesc) {
-				descriptionDiffCount++;
-				console.log(`~ matched (description differs): ${w.name}`);
-				console.log(`    local: ${localDesc}`);
-				console.log(`    wiki:  ${wikiDesc}`);
-			} else {
-				console.log(`✓ matched: ${w.name}`);
+				console.log(`    description local: ${localDesc}`);
+				console.log(`    description wiki:  ${wikiDesc}`);
 			}
-		} else {
-			newCount++;
-			console.log(`+ new (wiki only): ${w.name}`);
-			console.log(`${JSON.stringify(w, null, 2)}`);
-		}
-	}
-
-	for (const l of POTIONS) {
-		if (!wikiByName.has(l.name)) {
-			staleCount++;
-			console.log(`- stale (local only): ${l.name}`);
-		}
-	}
-
-	console.log(
-		`\nSummary: ${matchedCount} matched (${descriptionDiffCount} with description diffs), ${newCount} new, ${staleCount} stale.`,
-	);
+		},
+	};
 };
 
-void main();
+void syncWikiCategory<LocalPotion, WikiPotion>({
+	wikiUrl: WIKI_URL,
+	label: "potions",
+	localItems: POTIONS,
+	normalizeEntry,
+	compareItem: comparePotion,
+});

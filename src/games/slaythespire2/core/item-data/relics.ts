@@ -2212,7 +2212,7 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "iqu2h",
 		dlc: "BASE",
 		description: [
-			`At the start of each combat, add a random card into your Hand.  It's free to play this turn.`,
+			"At the start of each combat, add a random card into your Hand. It's free to play this turn.",
 		],
 		flavorText: "Details for this relic will be revealed in the future...",
 		isUpgrade: false,
