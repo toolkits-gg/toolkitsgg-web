@@ -40,7 +40,7 @@ const RINGS: Remnant2RingItem[] = [
 		dlc: "BASE",
 		searchableTags: ["All Damage", "Status Effect", "Hardcore Reward"],
 		description: [
-			"Deal 5% additional damage for each Status Effect the target is suffering from.",
+			"Deal 5% additional damage for each unique Status Effect the target is suffering from.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Ahanae_Crystal`,
 		location: { world: `Ward 13`, dungeon: "Vendor" },
@@ -138,8 +138,7 @@ const RINGS: Remnant2RingItem[] = [
 		dlc: "BASE",
 		searchableTags: ["All Damage"],
 		description: [
-			"Reduces enemy Awareness Range by 25%.",
-			"Increases all damage dealt to enemies not targeting wearer by 10%.",
+			"Reduces enemy Awareness Range by 25%. Increases all damage dealt to enemies not targeting wearer by 10%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Assassin's_Seal`,
 		location: { world: "Losomn", dungeon: ["Council Chamber"] },
@@ -153,8 +152,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "ez01nk",
 		searchableTags: ["Critical Chance", "Grey Health"], // The damage it causes is grey health
 		description: [
-			"Self-inflicts BLEEDING Status upon the wearer, causing 0.275 - 0.55 BLEED damage per second.",
-			"Increases Critical Chance by 5%.",
+			"Self-inflicts BLEEDING Status upon the wearer, causing 0.275 - 0.55 BLEED damage per second. Increases Critical Chance by 5%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Atonement_Fold`,
 		location: { world: "Losomn", dungeon: ["Forlorn Coast"] },
@@ -167,8 +165,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "mm6dj8",
 		searchableTags: ["Movement Speed", "Health"],
 		description: [
-			"Increases Speed of Revive and being Revived by 35%.",
-			"Increases Downed Health and Downed Movement Speed by 100%.",
+			"Increases Speed of Revive and being Revived by 35%. Increases Downed Health and Downed Movement Speed by 100%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Band_Band`,
 		location: {
@@ -232,8 +229,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "7usn4n",
 		searchableTags: ["Stamina"],
 		description: [
-			"Gain Infinite Stamina.",
-			"All damage received is increased by 15%",
+			"Gain Infinite Stamina. All damage received is increased by 15%",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Bisected_Ring`,
 		location: { world: "The Backrooms", dungeon: "The Backrooms" },
@@ -248,9 +244,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "eozlwb",
 		searchableTags: ["Grey Health"],
 		description: [
-			"Forces 1% of wearer's Max Health to remain as Grey Health.",
-			"Activating a skill converts 33.5% Max Health into Grey Health.",
-			"Conversion cannot kill wearer.",
+			"Forces 1% of wearer's Max Health to remain as Grey Health. Activating a skill converts 33.5% Max Health into Grey Health. Conversion cannot kill wearer.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Bitter_Memento`,
 		location: { world: "Losomn", dungeon: ["Tormented Asylum"] },
@@ -263,8 +257,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "ac27lx",
 		searchableTags: ["Movement Speed"],
 		description: [
-			"When taking fatal damage, instead of dying, the wearer's Health will drop to 1, and Movement Speed will increase by 25% for 10s.",
-			"2m cooldown.",
+			"When taking fatal damage, instead of dying, the wearer's Health will drop to 1, and Movement Speed will increase by 25% for 10s. 2m cooldown.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Black_Cat_Band`,
 		location: { world: "Ward 13", dungeon: "Vendor" },
@@ -295,9 +288,7 @@ const RINGS: Remnant2RingItem[] = [
 		dlc: "BASE",
 		searchableTags: ["Status Effect", "Heal"],
 		description: [
-			"Applying a Negative Status Effect grants 2% Max Health per second for 3s.",
-			"Applying or refreshing a Negative Status Effect while buff is active will increase the duration by 1.5s.",
-			"Max 15s.",
+			"Applying a Negative Status Effect grants 2% Max Health per second for 3s. Applying or refreshing a Negative Status Effect while buff is active will increase the duration by 1.5s. Max 15s.",
 		],
 		wikiUrl: "https://remnant2.wiki.gg/Black_Spinel",
 		location: { world: "Losomn", dungeon: "World Drop" },
@@ -441,8 +432,7 @@ const RINGS: Remnant2RingItem[] = [
 		internalSlug: "Ring_BreachAccelerator_C",
 		id: "w268ge",
 		description: [
-			"Increases Movement Speed and Physical Damage by 5%.",
-			"Bonus is doubled when HASTE is active.",
+			"Increases Movement Speed and Physical Damage by 5%. Bonus is doubled when HASTE is active.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Breach_Accelerator`,
 		location: { world: `N'Erud`, dungeon: ["Agronomy Sector"] },
@@ -457,8 +447,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "t7sqw7",
 		searchableTags: ["Perfect Dodge", "Damage Reduction", "Melee Damage"],
 		description: [
-			"Perfect Dodge increases Melee Damage by 20% for 10s.",
-			"Perfect Evade Flop also gains 10% Damage Reduction for the duration.",
+			"Perfect Dodge increases Melee Damage by 20% for 10s. Perfect Evade Flop also gains 10% Damage Reduction for the duration.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Bridge_Warden's_Crest`,
 		location: { world: "Losomn", dungeon: ["Forlorn Coast"] },
@@ -471,8 +460,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "k45qer",
 		searchableTags: ["Heal", "Perfect Dodge"],
 		description: [
-			"Decreases all healing by 50%.",
-			"Perfect Dodges heal for 25% of Max Health.",
+			"Decreases all healing by 50%. Perfect Dodges heal for 25% of Max Health.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Audacious`,
 		location: { world: "Ward 13", dungeon: "Vendor" },
@@ -487,8 +475,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "syutk7",
 		searchableTags: ["All Damage"],
 		description: [
-			"Reduces Total Relic Charges by 33%.",
-			"Increases All Damage dealt by 10%.",
+			"Reduces Total Relic Charges by 33%. Increases All Damage dealt by 10%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Departed`,
 		location: { world: "Losomn", dungeon: ["Chamber of the Faithless"] },
@@ -501,8 +488,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "dgb0s9",
 		searchableTags: ["All Damage", "Range"],
 		description: [
-			"Decreases Range of all Firearms by 35%.",
-			"Increases all damage dealt by 15%.",
+			"Decreases Range of all Firearms by 35%. Increases all damage dealt by 15%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Destroyer`,
 		location: { world: "Ward 13", dungeon: "Vendor" },
@@ -515,8 +501,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "tvfpo7",
 		internalSlug: "Ring_BurdenOfTheDivine_C",
 		description: [
-			"All damage dealt by the wearer is reduced by 15%.",
-			"30% of self healing applies to allies.",
+			"All damage dealt by the wearer is reduced by 15%. 30% of self healing applies to allies.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Divine`,
 		location: {
@@ -535,8 +520,7 @@ const RINGS: Remnant2RingItem[] = [
 		searchableTags: ["Critical Hit", "Critical Chance"],
 		communityTags: ["Explosive Damage"],
 		description: [
-			"Explosions cannot Critical Hit.",
-			"Increases Explosive Damage by 35%.",
+			"Explosions cannot Critical Hit. Increases Explosive Damage by 35%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Excavator`,
 		dlc: "DLC3",
@@ -550,8 +534,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "b76cdv",
 		searchableTags: ["Fire Rate", "Mod Power"],
 		description: [
-			"Reduces Fire Rate by 15%.",
-			"Increases Mod Power Generation by 30%.",
+			"Reduces Fire Rate by 15%. Increases Mod Power Generation by 30%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Follower`,
 		location: {
@@ -569,8 +552,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "ctv31c",
 		searchableTags: ["Weakspot Damage", "Critical Chance"],
 		description: [
-			"Disables Weakspots.",
-			"Increases Critical Chance by 10% and Critical Damage by 15%.",
+			"Disables Weakspots. Increases Critical Chance by 10% and Critical Damage by 15%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Gambler`,
 		location: { world: "Ward 13", dungeon: "Vendor" },
@@ -584,8 +566,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "k89bxv",
 		searchableTags: ["Mod Power"],
 		description: [
-			"Increases Skill Cooldowns by 15%.",
-			"Generate 15% additional Mod Power for each Skill on Cooldown.",
+			"Increases Skill Cooldowns by 15%. Generate 15% additional Mod Power for each Skill on Cooldown.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Mariner`,
 		location: {
@@ -603,8 +584,7 @@ const RINGS: Remnant2RingItem[] = [
 		dlc: "DLC2",
 		searchableTags: ["Encumbrance", "Melee Damage", "Damage Reduction"],
 		description: [
-			"Decreases Dodge Weight Threshold by 25.",
-			"Increases Melee damage by 35% of the wearer's total Damage Reduction.",
+			"Decreases Dodge Weight Threshold by 25. Increases Melee damage by 35% of the wearer's total Damage Reduction.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Mason`,
 		location: { world: "Yaesha", dungeon: ["Luminous Vale"] },
@@ -621,8 +601,7 @@ const RINGS: Remnant2RingItem[] = [
 		dlc: "DLC2",
 		searchableTags: ["Health", "All Damage", "Damage Reduction"],
 		description: [
-			"Reduces Max Health by 20%.",
-			"Increases All Damage by 1% for every 5% of the wearer's total Damage Reduction.",
+			"Reduces Max Health by 20%. Increases All Damage by 1% for every 5% of the wearer's total Damage Reduction.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Mesmer`,
 		location: { world: "Yaesha", dungeon: ["Ancient Canopy", "Luminous Vale"] },
@@ -639,8 +618,7 @@ const RINGS: Remnant2RingItem[] = [
 		dlc: "DLC3",
 		searchableTags: [],
 		description: [
-			"Reduces incoming SHIELD Duration by 50%.",
-			"Increases SHIELD amount by 15%.",
+			"Reduces incoming SHIELD Duration by 50%. Increases SHIELD amount by 15%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Protector`,
 		location: {
@@ -657,8 +635,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "z169p0",
 		searchableTags: ["Reduce Skill Cooldown", "Relic Use Speed"],
 		description: [
-			"Reduces Relic Use Speed by 25%.",
-			"Reduces Skill Cooldowns by 15%.",
+			"Reduces Relic Use Speed by 25%. Reduces Skill Cooldowns by 15%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_Of_The_Rebel`,
 		location: { world: "Yaesha", dungeon: ["The Red Throne"] },
@@ -673,8 +650,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "7xb5zr",
 		searchableTags: ["Mod Damage", "Skill Damage", "Ammo Reserves"],
 		description: [
-			"Reduces Ammo Reserves by 20%.",
-			"Increases Mod and Skill Damage by 15%.",
+			"Reduces Ammo Reserves by 20%. Increases Mod and Skill Damage by 15%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Sciolist`,
 		location: { world: "Losomn", dungeon: ["Forlorn Coast"] },
@@ -687,8 +663,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "kj85yo",
 		searchableTags: ["Reduce Skill Cooldown"],
 		description: [
-			"Reduces Skill Cooldowns by 15%.",
-			"Activating a Skill costs 15% Health.",
+			"Reduces Skill Cooldowns by 15%. Activating a Skill costs 15% Health.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Stargazer`,
 		location: {
@@ -706,9 +681,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "mdu1f6",
 		searchableTags: ["Mod Power", "Grey Health"],
 		description: [
-			"Reduces Mod Power Requirement by 15%.",
-			"Activating a Mod costs 15% Health as Grey Health.",
-			"Conversion cannot kill wearer.",
+			"Reduces Mod Power Requirement by 15%. Activating a Mod costs 15% Health as Grey Health. Conversion cannot kill wearer.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Burden_of_the_Warlock`,
 		location: {
@@ -742,8 +715,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "cu0w65",
 		searchableTags: ["Relic Use Speed"],
 		description: [
-			"Increases Revive Speed and Relic Consume Speed by 25% per downed or dead ally.",
-			"Max 2 stacks.",
+			"Increases Revive Speed and Relic Consume Speed by 25% per downed or dead ally. Max 2 stacks.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Captain's_Insignia`,
 		location: { world: "Yaesha", dungeon: [`Endaira's End`] },
@@ -799,9 +771,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "Sm4o3R",
 		searchableTags: ["Charged Shot"],
 		description: [
-			"Gain 5% of Max Health as SHIELD for 10s after a Charged Shot.",
-			"Accumulation resets after 10s of inaction.",
-			"Max 25% SHIELD.",
+			"Gain 5% of Max Health as SHIELD for 10s after a Charged Shot. Accumulation resets after 10s of inaction. Max 25% SHIELD.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Closed_Loop`,
 		location: { world: `N'Erud`, dungeon: "World Drop" },
@@ -834,8 +804,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "6p71zo",
 		searchableTags: ["Fire Rate", "Melee Attack Speed"],
 		description: [
-			"After killing an enemy, gain 5% Fire Rate and Melee Attack Speed for 10s.",
-			"Stacks 3x.",
+			"After killing an enemy, gain 5% Fire Rate and Melee Attack Speed for 10s. Stacks 3x.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Compulsion_Loop`,
 		location: { world: "Ward 13", dungeon: "Vendor" },
@@ -898,8 +867,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "s916uj",
 		searchableTags: ["Critical Hit", "Skill Damage"],
 		description: [
-			"Critical Hits increase Skill Damage by 2% for 5s.",
-			"Max 10 stacks.",
+			"Critical Hits increase Skill Damage by 2% for 5s. Max 10 stacks.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Crimson_Dreamstone`,
 		location: {
@@ -916,8 +884,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "k6Sqka",
 		searchableTags: ["Damage Reduction"],
 		description: [
-			"Increases Armor by 1 per 2% of active SHIELD.",
-			"Max 100 Bonus Armor.",
+			"Increases Armor by 1 per 2% of active SHIELD. Max 100 Bonus Armor.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Custodian's_Bastion`,
 		dlc: "DLC3",
@@ -1041,8 +1008,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "l8a2e1",
 		searchableTags: ["Critical Hit", "Reduce Skill Cooldown"],
 		description: [
-			"Critical Hits have a 1% chance to reset Skill Cooldowns. Can only occur once every 10s.",
-			"Increases all incoming damage by 10%.",
+			"Critical Hits have a 1% chance to reset Skill Cooldowns. Can only occur once every 10s. Increases all incoming damage by 10%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Devoured_Loop`,
 		location: { world: "Ward 13", dungeon: "Vendor" },
@@ -1068,9 +1034,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "yry5r0",
 		searchableTags: ["Grey Health"],
 		description: [
-			"When wearer's Health drops below 25%, gain a SHIELD for 50% of total current Grey Health for 10s.",
-			"Max 50% SHIELD.",
-			"Does not stack with itself.",
+			"When wearer's Health drops below 25%, gain a SHIELD for 50% of total current Grey Health for 10s. Max 50% SHIELD. Does not stack with itself.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Disaster_Converter`,
 		dlc: "DLC3",
@@ -1151,7 +1115,7 @@ const RINGS: Remnant2RingItem[] = [
 	},
 	{
 		category: "RING",
-		name: "Dryzr Sniper Sigil",
+		name: "Drzyr Sniper Sigil",
 		imageUrl: "items/rings/dryzrsnipersigil.png",
 		internalSlug: "Ring_DrzyrSniperSigil_C",
 		id: "gtli7e",
@@ -1216,7 +1180,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "h2g5z3",
 		searchableTags: ["Damage Reduction", "Status Effect"],
 		description: [
-			"Wearer gains 7.5% incoming Damage Reduction when suffering from a unique Negative Status Effect or Blight. Max 2 stacks.",
+			"Wearer gains 7.5% incoming Damage Reduction when suffering from a unique Negative Status Effect or BLIGHT. Max 2 stacks.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Embrace_of_Sha'Hala`,
 		location: {
@@ -1436,7 +1400,8 @@ const RINGS: Remnant2RingItem[] = [
 		id: "ic2sn8",
 		searchableTags: [],
 		description: [
-			`While in combat, auto-consume the compatible item in the first quick-slot every 30s. Increases Consumable and Relic Use Speed by 10%.\n\nNot compatible with Concoctions, Grenades and some Unique Consumables.`,
+			"While in combat, auto-consume the compatible item in the first quick-slot every 30s. Increases Consumable and Relic Use Speed by 10%.",
+			"Not compatible with Concoctions, Grenades and some Unique Consumables.",
 		],
 		dlc: "BASE",
 		wikiUrl: `https://remnant2.wiki.gg/Feeding_Tube`,
@@ -1580,7 +1545,7 @@ const RINGS: Remnant2RingItem[] = [
 		imageUrl: "items/rings/groundingstone.png",
 		internalSlug: "Ring_GroundingStone_C",
 		id: "o7vaf6",
-		description: [`Increases SHOCK damage by 15% and SHOCK Resistance by 20%.`],
+		description: [`Increases SHOCK damage by 15% and SHOCK Resistance by 20.`],
 		wikiUrl: `https://remnant2.wiki.gg/Grounding_Stone`,
 		location: { world: "Ward 13", dungeon: "Vendor" },
 		modifiers: {
@@ -1639,7 +1604,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "f2ooga",
 		searchableTags: ["Damage Reduction"],
 		description: [
-			"Taking damage adds 1 stack of BULWARK for 10s. Max 3 BULWARK stacks.",
+			"Taking damage adds 1 stack of BULWARK for 10s. Max 3 stacks.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Hardcore_Metal_Band`,
 		location: {
@@ -2278,7 +2243,7 @@ const RINGS: Remnant2RingItem[] = [
 		id: "378qz0",
 		searchableTags: ["Health"],
 		description: [
-			"When wearer's Health drops below 25%, gain a Shield for 25% of Max Health. Lasts 10s.",
+			"When wearer's Health drops below 25%, gain a SHIELD for 25% of Max Health. Lasts 10s.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Ring_of_Crisis`,
 		dlc: "BASE",
