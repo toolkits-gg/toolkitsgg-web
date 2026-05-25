@@ -10,8 +10,10 @@
 import { RELICS } from "#/games/remnant2/core/item-data/relics.ts";
 import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category.ts";
 
-void syncWikiCategory({
-	category: "Relic",
-	label: "relics",
-	localItems: RELICS,
-});
+void syncWikiCategory([
+	{
+		category: "Relic",
+		label: "relics",
+		localItems: RELICS,
+	},
+]);

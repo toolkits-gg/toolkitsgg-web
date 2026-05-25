@@ -10,8 +10,10 @@
 import { RINGS } from "#/games/remnant2/core/item-data/rings.ts";
 import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category.ts";
 
-void syncWikiCategory({
-	category: "Ring",
-	label: "rings",
-	localItems: RINGS,
-});
+void syncWikiCategory([
+	{
+		category: "Ring",
+		label: "rings",
+		localItems: RINGS,
+	},
+]);

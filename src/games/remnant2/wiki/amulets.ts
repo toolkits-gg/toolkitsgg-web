@@ -10,8 +10,10 @@
 import { AMULETS } from "#/games/remnant2/core/item-data/amulets.ts";
 import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category.ts";
 
-void syncWikiCategory({
-	category: "Amulet",
-	label: "amulets",
-	localItems: AMULETS,
-});
+void syncWikiCategory([
+	{
+		category: "Amulet",
+		label: "amulets",
+		localItems: AMULETS,
+	},
+]);

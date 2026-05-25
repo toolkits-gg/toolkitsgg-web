@@ -1,10 +1,16 @@
 /**
  * Shared comparison runner for Remnant2 wiki sync scripts.
  *
- * Each per-category script (rings, amulets, ...) passes its local item array,
- * the Cargo `class` filter, and a plural label for log output. The runner
- * fetches matching rows from the wiki's Cargo `items` table and prints
- * matched / new / stale diffs against the local data.
+ * Each per-category script (rings, amulets, ...) passes an array of entries —
+ * each entry pairing a local item array with the Cargo `class` filter that
+ * surfaces those items on the wiki. The runner unions the entries' classes
+ * into a single `items.class IN (...)` Cargo query, aggregates the local
+ * arrays into one case-insensitive map, and prints matched / new / stale
+ * diffs against the merged set.
+ *
+ * Multi-entry usage lets one local category (e.g. `Consumables`) be checked
+ * against the union of multiple wiki classes (e.g. `Consumable` + `Curative`)
+ * without each unrelated class polluting the diff as "stale".
  *
  * Names are compared case-insensitively because the wiki's `items.name`
  * column inconsistently title-cases connector words (e.g. "Stone Of
@@ -65,29 +71,40 @@ const normalizeEntry = (row: CargoItemRow): WikiItem => {
 const syncWikiCategory = async <
 	TItem extends Pick<BaseRemnant2Item, "name" | "description" | "dlc">,
 >(
-	opts: SyncCategoryOptions<TItem>,
+	entries: readonly SyncCategoryOptions<TItem>[],
 ): Promise<void> => {
-	const { category, label, localItems } = opts;
+	if (entries.length === 0) {
+		throw new Error("syncWikiCategory requires at least one entry");
+	}
 
-	console.log(`Fetching ${label} via cargoquery from ${WIKI_API_URL}\n`);
+	const combinedLabel = entries.map((e) => e.label).join(" + ");
+	const inClause = entries.map((e) => `"${e.category}"`).join(",");
+
+	console.log(
+		`Fetching ${combinedLabel} via cargoquery from ${WIKI_API_URL}\n`,
+	);
 
 	const rows = await cargoQueryAll<CargoItemRow>({
 		apiUrl: WIKI_API_URL,
 		tables: "items",
 		fields: "items._pageName=page,name,image,require_dlc=dlc,description",
-		where: `items.class="${category}"`,
+		where: `items.class IN (${inClause})`,
 		orderBy: "name",
 	});
 
 	const wikiItems = rows.map(normalizeEntry);
 
+	const localByName = new Map<string, TItem>();
+	for (const entry of entries) {
+		for (const item of entry.localItems) {
+			localByName.set(item.name.toLowerCase(), item);
+		}
+	}
+
 	console.log(
-		`\nFetched ${wikiItems.length} ${label} from wiki; local has ${localItems.length}.\n`,
+		`\nFetched ${wikiItems.length} ${combinedLabel} from wiki; local has ${localByName.size}.\n`,
 	);
 
-	const localByName = new Map(
-		localItems.map((a) => [a.name.toLowerCase(), a] as const),
-	);
 	const wikiByName = new Map(
 		wikiItems.map((a) => [a.name.toLowerCase(), a] as const),
 	);
@@ -138,7 +155,7 @@ const syncWikiCategory = async <
 		}
 	}
 
-	for (const l of localItems) {
+	for (const l of localByName.values()) {
 		if (!wikiByName.has(l.name.toLowerCase())) {
 			staleCount++;
 			console.log(`- stale (local only): ${l.name}`);
@@ -146,7 +163,7 @@ const syncWikiCategory = async <
 	}
 
 	console.log(
-		`\nSummary: ${matchedCount} matched (${descriptionDiffCount} with description diffs, ${dlcDiffCount} with dlc diffs), ${newCount} new, ${staleCount} stale.`,
+		`\nSummary (${combinedLabel}): ${matchedCount} matched (${descriptionDiffCount} with description diffs, ${dlcDiffCount} with dlc diffs), ${newCount} new, ${staleCount} stale.`,
 	);
 };
 

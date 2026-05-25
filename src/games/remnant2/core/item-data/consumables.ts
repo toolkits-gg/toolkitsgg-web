@@ -105,8 +105,8 @@ const CONSUMABLES: Remnant2ConsumableItem[] = [
 		id: "nrdcko",
 		dlc: "BASE",
 		description: [
-			"When thrown, explodes in a 4m radius dealing 30 damage and creating a puddle lasting 15s which applies TARRED for 30s to creatures inside.",
-			"Ranged damage and other FIRE sources ignite TARRED entities, dealing 250 BURNING damage over 10s.",
+			"When thrown, explodes in a 4m radius dealing 30 → 90 damage and creating a puddle lasting 15s which applies TARRED for 30s to creatures inside.",
+			"Ranged damage and other FIRE sources ignite TARRED entities, dealing 250 → 750 BURNING damage over 10s.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Black_Tar`,
 		location: { world: "Losomn", dungeon: "World Drop" },
