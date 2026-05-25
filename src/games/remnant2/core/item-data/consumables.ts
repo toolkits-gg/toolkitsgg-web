@@ -233,6 +233,19 @@ const CONSUMABLES: Remnant2ConsumableItem[] = [
 	},
 	{
 		category: "CONSUMABLE",
+		name: "Fruit of Death",
+		imageUrl: "items/consumables/fruitofdeath.png",
+		internalSlug: "Consumable_FruitOfDeath_C",
+		id: "U2UgA",
+		dlc: "BASE",
+		description: [
+			"Instantly kills the Traveler and returns them to their last checkpoint.",
+		],
+		wikiUrl: `https://remnant2.wiki.gg/wiki/Fruit_of_Death`,
+		location: { world: "Yaesha", biome: "Forgotten Grove" },
+	},
+	{
+		category: "CONSUMABLE",
 		name: "Gul Serum",
 		imageUrl: "items/consumables/gulserum.png",
 		internalSlug: "Consumable_GulSerum_C",
@@ -284,7 +297,7 @@ const CONSUMABLES: Remnant2ConsumableItem[] = [
 		id: "E5CbP6",
 		dlc: "BASE",
 		searchableTags: [],
-		description: ["Grants HASTE. Lasts 60s."],
+		description: ["Grants HASTE. Lasts 30s."],
 		wikiUrl: `https://remnant2.wiki.gg/Light_Extract`,
 		location: { world: `N'Erud`, dungeon: "World Drop" },
 	},
@@ -338,7 +351,7 @@ const CONSUMABLES: Remnant2ConsumableItem[] = [
 		dlc: "DLC1",
 		searchableTags: ["Grey Health"],
 		description: [
-			"Converts  6.66 Health into Grey Health per second. Last  15s.",
+			"Converts 6.66 Health into Grey Health per second. Last 15s.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Mystery_Jerky`,
 		location: { world: "Ward 13", dungeon: "Quest" },
