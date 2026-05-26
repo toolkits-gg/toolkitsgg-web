@@ -18,9 +18,8 @@
 import { MUTATORS } from "#/games/remnant2/core/item-data/mutators.ts";
 import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category.ts";
 
-const LEVEL_BONUS_PREFIX = /^Level \d+:\s*/;
-
-const splitMutatorWiki = (lines: string[]) => {
+const mapMutatorWikiFields = (lines: string[]) => {
+	const LEVEL_BONUS_PREFIX = /^Level \d+:\s*/;
 	const bonusLines = lines.filter((l) => LEVEL_BONUS_PREFIX.test(l));
 	if (bonusLines.length > 0) {
 		return {
@@ -39,6 +38,6 @@ void syncWikiCategory([
 		category: "Mutator",
 		label: "mutators",
 		localItems: MUTATORS,
-		splitWikiArray: splitMutatorWiki,
+		mapWikiFields: mapMutatorWikiFields,
 	},
 ]);

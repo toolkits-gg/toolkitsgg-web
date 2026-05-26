@@ -12,7 +12,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/academicshat.png",
 		id: "9qo2gg",
 		dlc: "BASE",
-		set: "Academic's Set",
+		set: "Academic",
 		modifiers: {
 			armor: 12.7,
 			weight: 5.2,
@@ -38,7 +38,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/banditsmask.png",
 		id: "v66pgu",
 		dlc: "BASE",
-		set: "Bandit Set",
+		set: "Bandit",
 		modifiers: {
 			armor: 6.8,
 			weight: 2.7,
@@ -61,7 +61,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/battlehelmet.png",
 		id: "nathem",
 		dlc: "DLC2",
-		set: "Battle Set",
+		set: "Battle",
 		modifiers: {
 			armor: 13.1,
 			weight: 5.3,
@@ -106,7 +106,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/bruiserhelmet.png",
 		id: "bd4pam",
 		dlc: "BASE",
-		set: "Bruiser Set",
+		set: "Bruiser",
 		modifiers: {
 			armor: 17.6,
 			weight: 8.1,
@@ -129,7 +129,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		dlc: "DLC1",
 		imageUrl: "items/armors/crimsonguardshroud.png",
 		id: "ce8izt",
-		set: "Crimson Guard Set",
+		set: "Crimson Guard",
 		modifiers: {
 			armor: 15.6,
 			weight: 6.7,
@@ -174,7 +174,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/cultisthat.png",
 		id: "x9jrx1",
 		dlc: "BASE",
-		set: "Cultist Set",
+		set: "Cultist",
 		modifiers: {
 			armor: 11.1,
 			weight: 4.6,
@@ -219,7 +219,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/dendroidmask.png",
 		id: "y7fa8n",
 		dlc: "BASE",
-		set: "Dendroid Set",
+		set: "Dendroid",
 		modifiers: {
 			armor: 7.7,
 			weight: 3.1,
@@ -242,7 +242,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/discipleheadpiece.png",
 		id: "y7fa8d",
 		dlc: "DLC2",
-		set: "Disciple Set",
+		set: "Disciple",
 		modifiers: {
 			armor: 16,
 			weight: 7.2,
@@ -265,7 +265,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/elderheaddress.png",
 		id: "fek1ml",
 		dlc: "BASE",
-		set: "Elder Set",
+		set: "Elder",
 		modifiers: {
 			armor: 7.5,
 			weight: 3,
@@ -290,7 +290,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/faeroyalheadcover.png",
 		id: "88kdl6",
 		dlc: "BASE",
-		set: "Fae Royal Set",
+		set: "Fae Royal",
 		modifiers: {
 			armor: 15.4,
 			weight: 6.6,
@@ -313,6 +313,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/fieldmedichat.png",
 		id: "48nh1x",
 		dlc: "BASE",
+		set: "Field Medic",
 		modifiers: {
 			armor: 10.6,
 			weight: 4.4,
@@ -335,7 +336,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/fieldmedicmask.png",
 		id: "e1waki",
 		dlc: "BASE",
-		set: "Field Medic Set",
+		set: "Field Medic",
 		modifiers: {
 			armor: 10.6,
 			weight: 4.4,
@@ -358,7 +359,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/highnoonhat.png",
 		id: "94xkn1",
 		dlc: "BASE",
-		set: "High Noon Set",
+		set: "High Noon",
 		modifiers: {
 			armor: 11.7,
 			weight: 4.9,
@@ -381,7 +382,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/knottedhelm.png",
 		id: "oab1w0",
 		dlc: "BASE",
-		set: "Knotted Set",
+		set: "Knotted",
 		modifiers: {
 			armor: 15.5,
 			weight: 6.9,
@@ -404,7 +405,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/labyrinthheadplate.png",
 		id: "im7fm2",
 		dlc: "BASE",
-		set: "Labyrinth Set",
+		set: "Labyrinth",
 		modifiers: {
 			armor: 12.9,
 			weight: 5.4,
@@ -427,7 +428,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/letomark1helmet.png",
 		id: "kc4dc0",
 		dlc: "BASE",
-		set: "Leto Mark 1 Set",
+		set: "Leto Mark 1",
 		modifiers: {
 			armor: 22.6,
 			weight: 11.9,
@@ -450,7 +451,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/letomark2helmet.png",
 		id: "sdsybp",
 		dlc: "BASE",
-		set: "Leto Mark II Set",
+		set: "Leto Mark II",
 		modifiers: {
 			armor: 21.8,
 			weight: 11.1,
@@ -518,7 +519,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/nanoplatedtransmitter.png",
 		id: "2x3sxo",
 		dlc: "DLC3",
-		set: "Nanoplated Set",
+		set: "Nanoplated",
 		modifiers: {
 			armor: 12.4,
 			weight: 5,
@@ -569,7 +570,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/nightstalkershroud.png",
 		id: "zy1ce3",
 		dlc: "BASE",
-		set: "Nightstalker Set",
+		set: "Nightstalker",
 		modifiers: {
 			armor: 10.9,
 			weight: 4.5,
@@ -592,7 +593,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/phetyrsensor.png",
 		id: "3emu93",
 		dlc: "DLC3",
-		set: "Phetyr Set",
+		set: "Phetyr",
 		modifiers: {
 			armor: 19.8,
 			weight: 9.8,
@@ -613,7 +614,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/radiantvisage.png",
 		id: "hv4oqq",
 		dlc: "BASE",
-		set: "Radiant Set",
+		set: "Radiant",
 		modifiers: {
 			armor: 17.2,
 			weight: 7.9,
@@ -636,7 +637,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/realmwalkerberet.png",
 		id: "abhqna",
 		dlc: "BASE",
-		set: "Realmwalker Set",
+		set: "Realmwalker",
 		modifiers: {
 			armor: 7.2,
 			weight: 2.9,
@@ -659,7 +660,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/redwidowheaddress.png",
 		id: "k6zlwn",
 		dlc: "BASE",
-		set: "Red Widow Set",
+		set: "Red Widow",
 		modifiers: {
 			armor: 13.2,
 			weight: 5.6,
@@ -682,7 +683,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/spaceworkermask.png",
 		id: "n3vlkq",
 		dlc: "BASE",
-		set: "Space Worker Set",
+		set: "Space Worker",
 		modifiers: {
 			armor: 7,
 			weight: 2.8,
@@ -705,7 +706,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/technicianhelmet.png",
 		id: "gsctum",
 		dlc: "BASE",
-		set: "Technician Set",
+		set: "Technician",
 		modifiers: {
 			armor: 16.6,
 			weight: 7.5,
@@ -731,7 +732,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/trainercap.png",
 		id: "m8wgy9",
 		dlc: "BASE",
-		set: "Trainer Set",
+		set: "Trainer",
 		modifiers: {
 			armor: 10,
 			weight: 4.1,
@@ -754,7 +755,6 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/truecrimsoncrown.png",
 		id: "gsctud",
 		dlc: "BASE",
-		set: "True Crimson Set",
 		modifiers: {
 			armor: 16.6,
 			weight: 10,
@@ -777,7 +777,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/voidskull.png",
 		id: "s7tvfn",
 		dlc: "BASE",
-		set: "Void Set",
+		set: "Void",
 		modifiers: {
 			armor: 15.9,
 			weight: 7.1,
@@ -800,7 +800,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		dlc: "DLC1",
 		imageUrl: "items/armors/zealotshat.png",
 		id: "ts1v89",
-		set: "Zealot's Set",
+		set: "Zealot",
 		modifiers: {
 			armor: 11.3,
 			weight: 4.7,
@@ -827,7 +827,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/academicsovercoat.png",
 		id: "zk8f7a",
 		dlc: "BASE",
-		set: `Academic's Set`,
+		set: `Academic`,
 		modifiers: {
 			armor: 49.2,
 			weight: 20.8,
@@ -853,7 +853,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/banditjacket.png",
 		id: "h04d6v",
 		dlc: "BASE",
-		set: "Bandit Set",
+		set: "Bandit",
 		modifiers: {
 			armor: 27.2,
 			weight: 10.8,
@@ -876,7 +876,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/battleshirt.png",
 		id: "batshi",
 		dlc: "DLC2",
-		set: "Battle Set",
+		set: "Battle",
 		modifiers: {
 			armor: 31.6,
 			weight: 12.8,
@@ -899,7 +899,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/bruiserbodyplate.png",
 		id: "trz2cm",
 		dlc: "BASE",
-		set: "Bruiser Set",
+		set: "Bruiser",
 		modifiers: {
 			armor: 70.2,
 			weight: 32.4,
@@ -922,7 +922,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		dlc: "DLC1",
 		imageUrl: "items/armors/crimsonguardplate.png",
 		id: "hz7ddb",
-		set: "Crimson Guard Set",
+		set: "Crimson Guard",
 		modifiers: {
 			armor: 60.8,
 			weight: 26.8,
@@ -945,7 +945,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/cultistduster.png",
 		id: "w4emjx",
 		dlc: "BASE",
-		set: "Cultist Set",
+		set: "Cultist",
 		modifiers: {
 			armor: 44.6,
 			weight: 18.4,
@@ -968,7 +968,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/dendroidchest.png",
 		id: "uoddub",
 		dlc: "BASE",
-		set: "Dendroid Set",
+		set: "Dendroid",
 		modifiers: {
 			armor: 30.8,
 			weight: 12.4,
@@ -991,7 +991,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/disciplemantle.png",
 		id: "ddddub",
 		dlc: "DLC2",
-		set: "Disciple Set",
+		set: "Disciple",
 		modifiers: {
 			armor: 64,
 			weight: 28.8,
@@ -1014,7 +1014,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/elderraiment.png",
 		id: "zu64t4",
 		dlc: "BASE",
-		set: "Elder Set",
+		set: "Elder",
 		modifiers: {
 			armor: 29.6,
 			weight: 12,
@@ -1037,7 +1037,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/faeroyalbodyplate.png",
 		id: "0sm6sn",
 		dlc: "BASE",
-		set: "Fae Royal Set",
+		set: "Fae Royal",
 		modifiers: {
 			armor: 60,
 			weight: 26.4,
@@ -1060,7 +1060,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/fieldmedicovercoat.png",
 		id: "m07a0z",
 		dlc: "BASE",
-		set: "Field Medic Set",
+		set: "Field Medic",
 		modifiers: {
 			armor: 42.8,
 			weight: 17.6,
@@ -1083,7 +1083,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/highnoonduds.png",
 		id: "uszg5g",
 		dlc: "BASE",
-		set: "High Noon Set",
+		set: "High Noon",
 		modifiers: {
 			armor: 47.1,
 			weight: 19.6,
@@ -1106,7 +1106,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/knottedcage.png",
 		id: "n92z22",
 		dlc: "BASE",
-		set: "Knotted Set",
+		set: "Knotted",
 		modifiers: {
 			armor: 62.2,
 			weight: 27.6,
@@ -1129,7 +1129,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/labyrinthmantle.png",
 		id: "ivwkr5",
 		dlc: "BASE",
-		set: "Labyrinth Set",
+		set: "Labyrinth",
 		modifiers: {
 			armor: 51,
 			weight: 21.6,
@@ -1152,7 +1152,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/letomark1armor.png",
 		id: "y1xt79",
 		dlc: "BASE",
-		set: "Leto Mark 1 Set",
+		set: "Leto Mark 1",
 		modifiers: {
 			armor: 90.4,
 			weight: 47.5,
@@ -1175,7 +1175,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/letomark2armor.png",
 		id: "ioksvz",
 		dlc: "BASE",
-		set: "Leto Mark II Set",
+		set: "Leto Mark II",
 		modifiers: {
 			armor: 88.8,
 			weight: 45.2,
@@ -1198,7 +1198,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/nanoplatedvestments.png",
 		id: "4rt0f9",
 		dlc: "DLC3",
-		set: "Nanoplated Set",
+		set: "Nanoplated",
 		modifiers: {
 			armor: 29.6,
 			weight: 12,
@@ -1222,7 +1222,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/nightstalkergarb.png",
 		id: "lqrdx5",
 		dlc: "BASE",
-		set: "Nightstalker Set",
+		set: "Nightstalker",
 		modifiers: {
 			armor: 43.6,
 			weight: 18,
@@ -1245,7 +1245,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/phetyrchassis.png",
 		id: "smq21h",
 		dlc: "DLC3",
-		set: "Phetyr Set",
+		set: "Phetyr",
 		modifiers: {
 			armor: 80.6,
 			weight: 39.9,
@@ -1266,7 +1266,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/radiantprotector.png",
 		id: "dd5s6k",
 		dlc: "BASE",
-		set: "Radiant Set",
+		set: "Radiant",
 		modifiers: {
 			armor: 69,
 			weight: 31.6,
@@ -1289,7 +1289,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/realmwalkertunic.png",
 		id: "2h9xgj",
 		dlc: "BASE",
-		set: "Realmwalker Set",
+		set: "Realmwalker",
 		modifiers: {
 			armor: 29,
 			weight: 11.6,
@@ -1312,7 +1312,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/redwidowraiment.png",
 		id: "lude4p",
 		dlc: "BASE",
-		set: "Red Widow Set",
+		set: "Red Widow",
 		modifiers: {
 			armor: 52.8,
 			weight: 22.4,
@@ -1335,7 +1335,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/spaceworkerbody.png",
 		id: "jwanjw",
 		dlc: "BASE",
-		set: "Space Worker Set",
+		set: "Space Worker",
 		modifiers: {
 			armor: 28,
 			weight: 11.2,
@@ -1358,7 +1358,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/survivorovercoat.png",
 		id: "jr8r1l",
 		dlc: "BASE",
-		set: "Survivor Set",
+		set: "Survivor",
 		modifiers: {
 			armor: 39.2,
 			weight: 16,
@@ -1381,7 +1381,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/technicianbodyplate.png",
 		id: "0c35xs",
 		dlc: "BASE",
-		set: "Technician Set",
+		set: "Technician",
 		modifiers: {
 			armor: 66.4,
 			weight: 30,
@@ -1407,7 +1407,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/trainerclothes.png",
 		id: "ldli1k",
 		dlc: "BASE",
-		set: "Trainer Set",
+		set: "Trainer",
 		modifiers: {
 			armor: 40,
 			weight: 16.4,
@@ -1430,7 +1430,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/voidcarapace.png",
 		id: "rmq9je",
 		dlc: "BASE",
-		set: "Void Set",
+		set: "Void",
 		modifiers: {
 			armor: 63.6,
 			weight: 28.4,
@@ -1441,7 +1441,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 			resistToxin: 4,
 		},
 		description: [
-			`Crafted from the same mysterious material as the Void gloves, helm, and greaves, the chest armor completes the set's unsettling aesthetic. Its angular design is both practical and intimidating, providing unparalleled protection against the deadly environments and creatures of Rhom.`,
+			`Crafted from the same mysterious material as the Void gloves, helm, and greaves, the chest armor completes the's unsettling aesthetic. Its angular design is both practical and intimidating, providing unparalleled protection against the deadly environments and creatures of Rhom.`,
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Void_Carapace`,
 		location: { world: "Ward 13", dungeon: "Vendor" },
@@ -1453,7 +1453,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		dlc: "DLC1",
 		imageUrl: "items/armors/zealotsovercoat.png",
 		id: "ym0mau",
-		set: "Zealot's Set",
+		set: "Zealot",
 		modifiers: {
 			armor: 45.2,
 			weight: 18.8,
@@ -1479,7 +1479,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/academicstrousers.png",
 		id: "9b43cb",
 		dlc: "BASE",
-		set: `Academic's Set`,
+		set: `Academic`,
 		modifiers: {
 			armor: 24.6,
 			weight: 10.4,
@@ -1505,7 +1505,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/bandittrousers.png",
 		id: "zdv44y",
 		dlc: "BASE",
-		set: "Bandit Set",
+		set: "Bandit",
 		modifiers: {
 			armor: 13.6,
 			weight: 5.4,
@@ -1528,7 +1528,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/battleslacks.png",
 		id: "battra",
 		dlc: "DLC2",
-		set: "Battle Set",
+		set: "Battle",
 		modifiers: {
 			armor: 15.8,
 			weight: 6.4,
@@ -1539,7 +1539,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 			resistToxin: 1,
 		},
 		description: [
-			`A rugged pair of army pants complete with a functional, nondescript belt, a belt buckle, and a set of worn leather boots. They're designed to withstand whatver the mission demands of a soldier.`,
+			`A rugged pair of army pants complete with a functional, nondescript belt, a belt buckle, and a of worn leather boots. They're designed to withstand whatver the mission demands of a soldier.`,
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Battle_Slacks`,
 		location: { world: "Yaesha", dungeon: [`Proving Grounds`] },
@@ -1551,7 +1551,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/bruiserboots.png",
 		id: "pof5ii",
 		dlc: "BASE",
-		set: "Bruiser Set",
+		set: "Bruiser",
 		modifiers: {
 			armor: 35,
 			weight: 16.2,
@@ -1574,7 +1574,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		dlc: "DLC1",
 		imageUrl: "items/armors/crimsonguardsabatons.png",
 		id: "zk58sf",
-		set: "Crimson Guard Set",
+		set: "Crimson Guard",
 		modifiers: {
 			armor: 30.4,
 			weight: 13.4,
@@ -1597,7 +1597,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/cultistbritches.png",
 		id: "mr4hn3",
 		dlc: "BASE",
-		set: "Cultist Set",
+		set: "Cultist",
 		modifiers: {
 			armor: 22.2,
 			weight: 9.2,
@@ -1620,7 +1620,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/dendroidleggings.png",
 		id: "zwh3mb",
 		dlc: "BASE",
-		set: "Dendroid Set",
+		set: "Dendroid",
 		modifiers: {
 			armor: 15.4,
 			weight: 6.2,
@@ -1643,7 +1643,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/disciplegreaves.png",
 		id: "udddub",
 		dlc: "DLC2",
-		set: "Disciple Set",
+		set: "Disciple",
 		modifiers: {
 			armor: 32,
 			weight: 14.4,
@@ -1666,7 +1666,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/elderleggings.png",
 		id: "tfvyyg",
 		dlc: "BASE",
-		set: "Elder Set",
+		set: "Elder",
 		modifiers: {
 			armor: 14.8,
 			weight: 6,
@@ -1689,7 +1689,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/faeroyalgreaves.png",
 		id: "pi4h8k",
 		dlc: "BASE",
-		set: "Fae Royal Set",
+		set: "Fae Royal",
 		modifiers: {
 			armor: 30,
 			weight: 13.2,
@@ -1713,7 +1713,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/fieldmedictrousers.png",
 		id: "eqcfyt",
 		dlc: "BASE",
-		set: "Field Medic Set",
+		set: "Field Medic",
 		modifiers: {
 			armor: 21.4,
 			weight: 8.8,
@@ -1736,7 +1736,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/highnoonsoles.png",
 		id: "yccols",
 		dlc: "BASE",
-		set: "High Noon Set",
+		set: "High Noon",
 		modifiers: {
 			armor: 23.4,
 			weight: 9.8,
@@ -1759,7 +1759,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/knottedgreaves.png",
 		id: "b48zw1",
 		dlc: "BASE",
-		set: "Knotted Set",
+		set: "Knotted",
 		modifiers: {
 			armor: 31.1,
 			weight: 13.8,
@@ -1782,7 +1782,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/labyrinthtreads.png",
 		id: "td29nk",
 		dlc: "BASE",
-		set: "Labyrinth Set",
+		set: "Labyrinth",
 		modifiers: {
 			armor: 25.5,
 			weight: 10.8,
@@ -1805,7 +1805,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/letomark1leggings.png",
 		id: "59uhgg",
 		dlc: "BASE",
-		set: "Leto Mark 1 Set",
+		set: "Leto Mark 1",
 		modifiers: {
 			armor: 45.2,
 			weight: 23.7,
@@ -1828,7 +1828,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/letomark2leggings.png",
 		id: "t8auqk",
 		dlc: "BASE",
-		set: "Leto Mark II Set",
+		set: "Leto Mark II",
 		modifiers: {
 			armor: 44.4,
 			weight: 22.6,
@@ -1851,7 +1851,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/nanoplatedwaist.png",
 		id: "im4rk0",
 		dlc: "DLC3",
-		set: "Nanoplated Set",
+		set: "Nanoplated",
 		modifiers: {
 			armor: 14.8,
 			weight: 6,
@@ -1875,7 +1875,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/nightstalkerpants.png",
 		id: "l6utx1",
 		dlc: "BASE",
-		set: "Nightstalker Set",
+		set: "Nightstalker",
 		modifiers: {
 			armor: 21.8,
 			weight: 9,
@@ -1898,7 +1898,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/phetyrlocomotor.png",
 		id: "pd68a7",
 		dlc: "DLC3",
-		set: "Phetyr Set",
+		set: "Phetyr",
 		modifiers: {
 			armor: 43.8,
 			weight: 21.7,
@@ -1919,7 +1919,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/radiantgreaves.png",
 		id: "vsg3ue",
 		dlc: "BASE",
-		set: "Radiant Set",
+		set: "Radiant",
 		modifiers: {
 			armor: 34.5,
 			weight: 15.8,
@@ -1942,7 +1942,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/realmwalkerpantaloons.png",
 		id: "4sy6z9",
 		dlc: "BASE",
-		set: "Realmwalker Set",
+		set: "Realmwalker",
 		modifiers: {
 			armor: 14.5,
 			weight: 5.8,
@@ -1963,7 +1963,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/redwidowleggings.png",
 		id: "e4fbbu",
 		dlc: "BASE",
-		set: "Red Widow Set",
+		set: "Red Widow",
 		modifiers: {
 			armor: 26.2,
 			weight: 11.2,
@@ -1986,7 +1986,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/spaceworkerleggings.png",
 		id: "rsyilr",
 		dlc: "BASE",
-		set: "Space Worker Set",
+		set: "Space Worker",
 		modifiers: {
 			armor: 14,
 			weight: 5.6,
@@ -2009,7 +2009,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/survivorleggings.png",
 		id: "gv2eqj",
 		dlc: "BASE",
-		set: "Survivor Set",
+		set: "Survivor",
 		modifiers: {
 			armor: 19.6,
 			weight: 8,
@@ -2032,7 +2032,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/techniciangreaves.png",
 		id: "m16oqd",
 		dlc: "BASE",
-		set: "Technician Set",
+		set: "Technician",
 		modifiers: {
 			armor: 33.2,
 			weight: 15,
@@ -2058,7 +2058,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/trainerworkboots.png",
 		id: "olwicb",
 		dlc: "BASE",
-		set: "Trainer Set",
+		set: "Trainer",
 		modifiers: {
 			armor: 20,
 			weight: 8.2,
@@ -2081,7 +2081,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/voidgreaves.png",
 		id: "73lqjk",
 		dlc: "BASE",
-		set: "Void Set",
+		set: "Void",
 		modifiers: {
 			armor: 31.8,
 			weight: 14.2,
@@ -2104,7 +2104,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		dlc: "DLC1",
 		imageUrl: "items/armors/zealotsseaboots.png",
 		id: "sem0s8",
-		set: "Zealot's Set",
+		set: "Zealot",
 		modifiers: {
 			armor: 22.6,
 			weight: 9.4,
@@ -2127,7 +2127,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		category: "GLOVES",
 		name: "Academic's Gloves",
 		internalSlug: "Armor_Gloves_Alchemist_C",
-		set: "Academic's Set",
+		set: "Academic",
 		imageUrl: "items/armors/academicsgloves.png",
 		id: "f4tb3k",
 		dlc: "BASE",
@@ -2156,7 +2156,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/banditgloves.png",
 		id: "b7j8ys",
 		dlc: "BASE",
-		set: "Bandit Set",
+		set: "Bandit",
 		modifiers: {
 			armor: 6.8,
 			weight: 2.7,
@@ -2179,7 +2179,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/battlegloves.png",
 		id: "batglo",
 		dlc: "DLC2",
-		set: "Battle Set",
+		set: "Battle",
 		modifiers: {
 			armor: 7.9,
 			weight: 3.2,
@@ -2202,7 +2202,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/bruisergloves.png",
 		id: "80xuqr",
 		dlc: "BASE",
-		set: "Bruiser Set",
+		set: "Bruiser",
 		modifiers: {
 			armor: 17.6,
 			weight: 8.1,
@@ -2225,7 +2225,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		dlc: "DLC1",
 		imageUrl: "items/armors/crimsonguardgauntlets.png",
 		id: "ms9geh",
-		set: "Crimson Guard Set",
+		set: "Crimson Guard",
 		modifiers: {
 			armor: 15.2,
 			weight: 6.7,
@@ -2248,7 +2248,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/cultistgloves.png",
 		id: "6jrywg",
 		dlc: "BASE",
-		set: "Cultist Set",
+		set: "Cultist",
 		modifiers: {
 			armor: 11.1,
 			weight: 4.6,
@@ -2271,7 +2271,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/dendroidgrips.png",
 		id: "6oy3xp",
 		dlc: "BASE",
-		set: "Dendroid Set",
+		set: "Dendroid",
 		modifiers: {
 			armor: 7.7,
 			weight: 3.1,
@@ -2295,7 +2295,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/disciplevambraces.png",
 		id: "6dy3xp",
 		dlc: "DLC2",
-		set: "Disciple Set",
+		set: "Disciple",
 		modifiers: {
 			armor: 16,
 			weight: 7.2,
@@ -2318,7 +2318,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/eldergloves.png",
 		id: "1ijl54",
 		dlc: "BASE",
-		set: "Elder Set",
+		set: "Elder",
 		modifiers: {
 			armor: 7.5,
 			weight: 3,
@@ -2341,7 +2341,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/faeroyalvambraces.png",
 		id: "6005lk",
 		dlc: "BASE",
-		set: "Fae Royal Set",
+		set: "Fae Royal",
 		modifiers: {
 			armor: 15,
 			weight: 6.6,
@@ -2364,7 +2364,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/fieldmedicgloves.png",
 		id: "7ic3gp",
 		dlc: "BASE",
-		set: "Field Medic Set",
+		set: "Field Medic",
 		modifiers: {
 			armor: 10.6,
 			weight: 4.4,
@@ -2387,7 +2387,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/highnoonarmguards.png",
 		id: "afu61j",
 		dlc: "BASE",
-		set: "High Noon Set",
+		set: "High Noon",
 		modifiers: {
 			armor: 11.7,
 			weight: 4.9,
@@ -2410,7 +2410,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/knottedgloves.png",
 		id: "07mqqe",
 		dlc: "BASE",
-		set: "Knotted Set",
+		set: "Knotted",
 		modifiers: {
 			armor: 15.5,
 			weight: 6.9,
@@ -2433,7 +2433,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/labyrinthgauntlets.png",
 		id: "bhw19m",
 		dlc: "BASE",
-		set: "Labyrinth Set",
+		set: "Labyrinth",
 		modifiers: {
 			armor: 12.9,
 			weight: 5.4,
@@ -2456,7 +2456,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/letomark1gloves.png",
 		id: "2lqg9t",
 		dlc: "BASE",
-		set: "Leto Mark 1 Set",
+		set: "Leto Mark 1",
 		modifiers: {
 			armor: 22.6,
 			weight: 11.9,
@@ -2479,7 +2479,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/letomark2gloves.png",
 		id: "nfxk7i",
 		dlc: "BASE",
-		set: "Leto Mark II Set",
+		set: "Leto Mark II",
 		modifiers: {
 			armor: 21.8,
 			weight: 11.1,
@@ -2502,7 +2502,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/nanoplatedhands.png",
 		id: "1asxjo",
 		dlc: "DLC3",
-		set: "Nanoplated Set",
+		set: "Nanoplated",
 		modifiers: {
 			armor: 7.4,
 			weight: 3,
@@ -2526,7 +2526,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/nightstalkergloves.png",
 		id: "xl7dm2",
 		dlc: "BASE",
-		set: "Nightstalker Set",
+		set: "Nightstalker",
 		modifiers: {
 			armor: 10.9,
 			weight: 4.5,
@@ -2549,7 +2549,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/phetyrcrushers.png",
 		id: "i21ob4",
 		dlc: "DLC3",
-		set: "Phetyr Set",
+		set: "Phetyr",
 		modifiers: {
 			armor: 17.4,
 			weight: 8.6,
@@ -2570,7 +2570,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/radiantbracers.png",
 		id: "rjm014",
 		dlc: "BASE",
-		set: "Radiant Set",
+		set: "Radiant",
 		modifiers: {
 			armor: 17.2,
 			weight: 7.9,
@@ -2593,7 +2593,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/realmwalkergloves.png",
 		id: "47ak51",
 		dlc: "BASE",
-		set: "Realmwalker Set",
+		set: "Realmwalker",
 		modifiers: {
 			armor: 7.2,
 			weight: 2.9,
@@ -2616,7 +2616,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/redwidowbracers.png",
 		id: "7uqilq",
 		dlc: "BASE",
-		set: "Red Widow Set",
+		set: "Red Widow",
 		modifiers: {
 			armor: 13.1,
 			weight: 5.6,
@@ -2639,7 +2639,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/spaceworkergloves.png",
 		id: "6clcha",
 		dlc: "BASE",
-		set: "Space Worker Set",
+		set: "Space Worker",
 		modifiers: {
 			armor: 7,
 			weight: 2.8,
@@ -2662,7 +2662,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/survivorgloves.png",
 		id: "ws5jah",
 		dlc: "BASE",
-		set: "Survivor Set",
+		set: "Survivor",
 		modifiers: {
 			armor: 9.8,
 			weight: 4,
@@ -2685,7 +2685,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/techniciangloves.png",
 		id: "11wear",
 		dlc: "BASE",
-		set: "Technician Set",
+		set: "Technician",
 		modifiers: {
 			armor: 16.6,
 			weight: 7.5,
@@ -2711,7 +2711,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/trainerbracer.png",
 		id: "tgd095",
 		dlc: "BASE",
-		set: "Trainer Set",
+		set: "Trainer",
 		modifiers: {
 			armor: 10.1,
 			weight: 4.1,
@@ -2734,7 +2734,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		imageUrl: "items/armors/voidwraps.png",
 		id: "a527cd",
 		dlc: "BASE",
-		set: "Void Set",
+		set: "Void",
 		modifiers: {
 			armor: 15.9,
 			weight: 7.1,
@@ -2779,7 +2779,7 @@ const ARMORS: Remnant2ArmorItem[] = [
 		dlc: "DLC1",
 		imageUrl: "items/armors/zealotswraps.png",
 		id: "irt51q",
-		set: "Zealot's Set",
+		set: "Zealot",
 		modifiers: {
 			armor: 11.3,
 			weight: 4.7,
