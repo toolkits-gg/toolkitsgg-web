@@ -14,13 +14,13 @@ const OG_IMAGE = `${import.meta.env.VITE_CLOUDFRONT_URL}/metadata/og-image.png`;
 const SERVER_GAME_INPUTS_QUERY_KEY = ["server-resolved-game-inputs"] as const;
 
 export {
+	CHANGELOG_URL,
 	DISCORD_URL,
+	FALLBACK_DISPLAY_NAME,
 	GITHUB_URL,
+	KOFI_URL,
+	OG_IMAGE,
 	PATREON_URL,
 	PAYPAL_URL,
-	KOFI_URL,
-	CHANGELOG_URL,
-	FALLBACK_DISPLAY_NAME,
-	OG_IMAGE,
 	SERVER_GAME_INPUTS_QUERY_KEY,
 };

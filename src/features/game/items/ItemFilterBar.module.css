@@ -2,7 +2,10 @@
 	position: sticky;
 	top: var(--app-shell-header-offset, 60px);
 	z-index: 10;
-	background-color: light-dark(var(--mantine-color-primary-1), var(--mantine-color-primary-9));
+	background-color: light-dark(
+		var(--mantine-color-primary-1),
+		var(--mantine-color-primary-9)
+	);
 	border-bottom: 1px solid var(--mantine-color-primary-5);
 }
 

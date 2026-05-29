@@ -18,7 +18,9 @@ const GameImage = ({ src, ...rest }: GameImageProps) => {
 	}
 
 	if (typeof src === "string" && !src.startsWith("http")) {
-		return <AppImage src={`games/${gameId}/${withResizedDir(src)}`} {...rest} />;
+		return (
+			<AppImage src={`games/${gameId}/${withResizedDir(src)}`} {...rest} />
+		);
 	}
 
 	return <AppImage src={src} {...rest} />;

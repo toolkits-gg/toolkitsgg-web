@@ -1,7 +1,7 @@
 import { Select } from "@mantine/core";
 import { useGameId } from "#/features/game/core/use-game-id";
 import { getGameItems } from "#/features/game/registry/game-registry";
-import {useRef, useState} from "react";
+import { useRef, useState } from "react";
 
 type SearchItemInputProps = {
 	searchValue: string;

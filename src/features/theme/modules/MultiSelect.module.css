@@ -1,41 +1,38 @@
 .input {
-  background-color: light-dark(
-    var(--mantine-color-input-1),
-    var(--mantine-color-input-9)
-  );
-  border: 1px solid var(--mantine-color-border-4);
-  color: var(--mantine-color-inputFg-5);
+	background-color: light-dark(
+		var(--mantine-color-input-1),
+		var(--mantine-color-input-9)
+	);
+	border: 1px solid var(--mantine-color-border-4);
+	color: var(--mantine-color-inputFg-5);
 }
 
 .dropdown {
-  background-color: light-dark(
-    var(--mantine-color-input-1),
-    var(--mantine-color-input-9)
-  );
-  color: var(--mantine-color-inputFg-5);
+	background-color: light-dark(
+		var(--mantine-color-input-1),
+		var(--mantine-color-input-9)
+	);
+	color: var(--mantine-color-inputFg-5);
 }
 
 .option {
-  background-color: transparent;
+	background-color: transparent;
 
-  &[data-combobox-selected] {
-    background-color: var(--mantine-primary-color-light);
-  }
+	&[data-combobox-selected] {
+		background-color: var(--mantine-primary-color-light);
+	}
 
-  &:hover {
-    background-color: var(--mantine-primary-color-light-hover);
-  }
+	&:hover {
+		background-color: var(--mantine-primary-color-light-hover);
+	}
 }
 
 .pill {
-  color: light-dark(
-    var(--mantine-color-black),
-    var(--mantine-color-white)
-  );
+	color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
 }
 
 .label {
-  font-size: var(--mantine-font-size-sm);
-  font-weight: 500;
-  margin-bottom: var(--mantine-spacing-xs);
+	font-size: var(--mantine-font-size-sm);
+	font-weight: 500;
+	margin-bottom: var(--mantine-spacing-xs);
 }

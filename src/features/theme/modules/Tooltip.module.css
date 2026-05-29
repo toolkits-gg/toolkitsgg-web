@@ -1,6 +1,7 @@
 .tooltip {
-  background-color: var(--mantine-color-card-1);
-  color: #000;
-  border: 1px solid light-dark(var(--mantine-color-border-7), var(--mantine-color-border-4));
-  font-size: var(--mantine-font-size-xs);
+	background-color: var(--mantine-color-card-1);
+	color: #000;
+	border: 1px solid
+		light-dark(var(--mantine-color-border-7), var(--mantine-color-border-4));
+	font-size: var(--mantine-font-size-xs);
 }
