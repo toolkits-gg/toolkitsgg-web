@@ -25,15 +25,7 @@ const CARDS: SlayTheSpire2CardItem[] = [
 			energy: 2,
 			secondary: undefined,
 		},
-		modifiers: [
-			{
-				modifier: {
-					damage: 8,
-					vulnerable: 2,
-				},
-				trigger: "attack",
-			},
-		],
+		modifiers: undefined,
 	},
 ];
 

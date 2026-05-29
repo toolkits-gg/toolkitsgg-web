@@ -15,6 +15,8 @@ import {
 } from "#/games/slaythespire2/core/item-data/potions";
 import {
 	type CompareResult,
+	getString,
+	resolveMapped,
 	syncWikiCategory,
 } from "#/games/slaythespire2/wiki/sync-category.ts";
 import type {
@@ -39,25 +41,17 @@ const normalizeEntry = (
 	name: string,
 	fields: Record<string, unknown>,
 ): WikiPotion => {
-	const rawText = typeof fields.Text === "string" ? fields.Text : "";
-	const rawRarity =
-		typeof fields.Rarity === "string" ? fields.Rarity.toLowerCase() : "";
-	const rawCharacter =
-		typeof fields.Character === "string" ? fields.Character.toLowerCase() : "";
-	const rawImage = typeof fields.Image === "string" ? fields.Image : "";
+	const rawRarity = getString(fields, "Rarity").toLowerCase();
+	const rawCharacter = getString(fields, "Character").toLowerCase();
 
-	const description = cleanWikiText(rawText);
-	const rarity = POTION_RARITY_MAP[rawRarity];
-	if (rawRarity && !rarity) {
-		console.warn(`  ! unknown rarity '${rawRarity}' for ${name}`);
-	}
-
-	const character = rawCharacter ? (CHARACTER_MAP[rawCharacter] ?? null) : null;
-	if (rawCharacter && !character) {
-		console.warn(`  ! unknown character '${rawCharacter}' for ${name}`);
-	}
-
-	return { name, description, rarity, character, image: rawImage };
+	return {
+		name,
+		description: cleanWikiText(getString(fields, "Text")),
+		image: getString(fields, "Image"),
+		rarity: resolveMapped(rawRarity, POTION_RARITY_MAP, "rarity", name),
+		character:
+			resolveMapped(rawCharacter, CHARACTER_MAP, "character", name) ?? null,
+	};
 };
 
 const comparePotion = (local: LocalPotion, wiki: WikiPotion): CompareResult => {

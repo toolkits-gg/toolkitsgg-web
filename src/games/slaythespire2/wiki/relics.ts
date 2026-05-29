@@ -16,6 +16,8 @@ import {
 } from "#/games/slaythespire2/core/item-data/relics.ts";
 import {
 	type CompareResult,
+	getString,
+	resolveMapped,
 	syncWikiCategory,
 } from "#/games/slaythespire2/wiki/sync-category.ts";
 import type {
@@ -44,100 +46,75 @@ const normalizeEntry = (
 	name: string,
 	fields: Record<string, unknown>,
 ): WikiRelic => {
-	const rawText =
-		typeof fields.Description === "string" ? fields.Description : "";
-	const rawRarity =
-		typeof fields.Rarity === "string" ? fields.Rarity.toLowerCase() : "";
-	const rawCharacter =
-		typeof fields.Character === "string" ? fields.Character.toLowerCase() : "";
-	const rawAncient =
-		typeof fields.Ancient === "string" ? fields.Ancient.toLowerCase() : "";
-	const rawImage = typeof fields.Image === "string" ? fields.Image : "";
-	const rawFlavorText = typeof fields.Flavor === "string" ? fields.Flavor : "";
-	const rawUpgrade = typeof fields.Upgrade === "string" ? fields.Upgrade : "";
-	const rawIsUpgrade = rawUpgrade.toLowerCase() === "yes";
-
-	const description = cleanWikiText(rawText);
-	const rarity = RELIC_RARITY_MAP[rawRarity];
-	if (rawRarity && !rarity) {
-		console.warn(`  ! unknown rarity '${rawRarity}' for ${name}`);
-	}
-
-	const character = rawCharacter ? (CHARACTER_MAP[rawCharacter] ?? null) : null;
-	if (rawCharacter && !character) {
-		console.warn(`  ! unknown character '${rawCharacter}' for ${name}`);
-	}
-
-	const ancient = rawAncient ? (ANCIENT_MAP[rawAncient] ?? null) : null;
-	if (rawAncient && !ancient) {
-		console.warn(`  ! unknown ancient '${rawAncient}' for ${name}`);
-	}
+	const rawRarity = getString(fields, "Rarity").toLowerCase();
+	const rawCharacter = getString(fields, "Character").toLowerCase();
+	const rawAncient = getString(fields, "Ancient").toLowerCase();
 
 	return {
 		name,
-		description,
-		rarity,
-		character,
-		ancient,
-		flavorText: rawFlavorText,
-		isUpgrade: rawIsUpgrade,
-		image: rawImage,
+		description: cleanWikiText(getString(fields, "Description")),
+		flavorText: getString(fields, "Flavor"),
+		isUpgrade: getString(fields, "Upgrade").toLowerCase() === "yes",
+		image: getString(fields, "Image"),
+		rarity: resolveMapped(rawRarity, RELIC_RARITY_MAP, "rarity", name),
+		character:
+			resolveMapped(rawCharacter, CHARACTER_MAP, "character", name) ?? null,
+		ancient: resolveMapped(rawAncient, ANCIENT_MAP, "ancient", name) ?? null,
 	};
 };
 
+const diffLinkedItem = (
+	fieldName: string,
+	localValue: string | null,
+	wikiValue: string | null,
+): string | null => {
+	if (wikiValue === localValue) return null;
+	if (wikiValue && !localValue) {
+		return `missing linkedItems.${fieldName} (expected '${wikiValue}')`;
+	}
+	if (!wikiValue && localValue) {
+		return `unexpected linkedItems.${fieldName} '${localValue}' (wiki has none)`;
+	}
+	return `linkedItems.${fieldName} mismatch (local '${localValue}' vs wiki '${wikiValue}')`;
+};
+
+type ScalarDiff = { field: string; local: string; wiki: string };
+
 const compareRelic = (local: LocalRelic, wiki: WikiRelic): CompareResult => {
-	const differingFields: string[] = [];
+	const scalarDiffs: ScalarDiff[] = (
+		[
+			{
+				field: "description",
+				local: JSON.stringify(local.description),
+				wiki: JSON.stringify(wiki.description),
+			},
+			{
+				field: "isUpgrade",
+				local: String(local.isUpgrade),
+				wiki: String(wiki.isUpgrade),
+			},
+			{
+				field: "flavorText",
+				local: JSON.stringify(local.flavorText),
+				wiki: JSON.stringify(wiki.flavorText),
+			},
+		] satisfies ScalarDiff[]
+	).filter((d) => d.local !== d.wiki);
 
-	const localDesc = JSON.stringify(local.description);
-	const wikiDesc = JSON.stringify(wiki.description);
-	if (localDesc !== wikiDesc) {
-		differingFields.push("description");
-	}
+	const linkedItemIssues = [
+		diffLinkedItem(
+			"character",
+			local.linkedItems?.character?.name ?? null,
+			wiki.character,
+		),
+		diffLinkedItem(
+			"ancient",
+			local.linkedItems?.ancient?.name ?? null,
+			wiki.ancient,
+		),
+	].filter((issue): issue is string => issue !== null);
 
-	const isUpgradeDiffers = local.isUpgrade !== wiki.isUpgrade;
-	if (isUpgradeDiffers) {
-		differingFields.push("isUpgrade");
-	}
-
-	const localFlavorText = JSON.stringify(local.flavorText);
-	const wikiFlavorText = JSON.stringify(wiki.flavorText);
-	if (localFlavorText !== wikiFlavorText) {
-		differingFields.push("flavorText");
-	}
-
-	const localCharacter = local.linkedItems?.character?.name ?? null;
-	const localAncient = local.linkedItems?.ancient?.name ?? null;
-	const linkedItemIssues: string[] = [];
-	if (wiki.character !== localCharacter) {
-		if (wiki.character && !localCharacter) {
-			linkedItemIssues.push(
-				`missing linkedItems.character (expected '${wiki.character}')`,
-			);
-		} else if (!wiki.character && localCharacter) {
-			linkedItemIssues.push(
-				`unexpected linkedItems.character '${localCharacter}' (wiki has none)`,
-			);
-		} else {
-			linkedItemIssues.push(
-				`linkedItems.character mismatch (local '${localCharacter}' vs wiki '${wiki.character}')`,
-			);
-		}
-	}
-	if (wiki.ancient !== localAncient) {
-		if (wiki.ancient && !localAncient) {
-			linkedItemIssues.push(
-				`missing linkedItems.ancient (expected '${wiki.ancient}')`,
-			);
-		} else if (!wiki.ancient && localAncient) {
-			linkedItemIssues.push(
-				`unexpected linkedItems.ancient '${localAncient}' (wiki has none)`,
-			);
-		} else {
-			linkedItemIssues.push(
-				`linkedItems.ancient mismatch (local '${localAncient}' vs wiki '${wiki.ancient}')`,
-			);
-		}
-	}
+	const differingFields = scalarDiffs.map((d) => d.field);
 	if (linkedItemIssues.length > 0) {
 		differingFields.push("linkedItems");
 	}
@@ -145,17 +122,9 @@ const compareRelic = (local: LocalRelic, wiki: WikiRelic): CompareResult => {
 	return {
 		differingFields,
 		printDetails: () => {
-			if (localDesc !== wikiDesc) {
-				console.log(`    description local: ${localDesc}`);
-				console.log(`    description wiki:  ${wikiDesc}`);
-			}
-			if (isUpgradeDiffers) {
-				console.log(`    isUpgrade local: ${local.isUpgrade}`);
-				console.log(`    isUpgrade wiki:  ${wiki.isUpgrade}`);
-			}
-			if (localFlavorText !== wikiFlavorText) {
-				console.log(`    flavorText local: ${localFlavorText}`);
-				console.log(`    flavorText wiki:  ${wikiFlavorText}`);
+			for (const diff of scalarDiffs) {
+				console.log(`    ${diff.field} local: ${diff.local}`);
+				console.log(`    ${diff.field} wiki:  ${diff.wiki}`);
 			}
 			for (const issue of linkedItemIssues) {
 				console.log(`    ! ${issue}`);

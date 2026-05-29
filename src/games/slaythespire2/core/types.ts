@@ -91,7 +91,7 @@ type BaseSlayTheSpire2Item<TItemSubcategory = string> = AppItem<
 	dlc: SlayTheSpire2DLC;
 	location: SlayTheSpire2ItemLocation | undefined;
 	modifiers:
-		| Array<{ modifier: Partial<ItemModifiers>; trigger: ModifierTrigger }>
+		| Array<{ modifier: Partial<ItemModifiers>; trigger?: ModifierTrigger }>
 		| undefined;
 };
 
