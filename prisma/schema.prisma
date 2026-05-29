@@ -73,8 +73,6 @@ model User {
   remnant2BuildCollections Remnant2BuildCollection[]
 
   slayTheSpire2CollectedItems SlayTheSpire2CollectedItem[]
-
-  @@map("user")
 }
 
 model Session {
@@ -89,7 +87,6 @@ model Session {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
-  @@map("session")
 }
 
 model Account {
@@ -110,7 +107,6 @@ model Account {
 
   @@unique([providerId, accountId])
   @@index([userId])
-  @@map("account")
 }
 
 model Verification {
@@ -125,7 +121,6 @@ model Verification {
 
   @@unique([identifier, value])
   @@index([userId])
-  @@map("verification")
 }
 
 model UserProfile {
@@ -140,8 +135,6 @@ model UserProfile {
   user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId              String               @unique
   avatarOverrides     UserAvatarOverride[]
-
-  @@map("user_profiles")
 }
 
 model UserAvatarOverride {
@@ -155,7 +148,6 @@ model UserAvatarOverride {
 
   @@unique([userProfileId, gameId])
   @@index([userProfileId])
-  @@map("user_avatar_overrides")
 }
 
 model UserFavoriteGame {
@@ -169,7 +161,6 @@ model UserFavoriteGame {
   @@id([userId, gameId])
   @@index([userId])
   @@index([gameId])
-  @@map("user_favorite_games")
 }
 
 model UserFollowedUsers {
@@ -183,7 +174,6 @@ model UserFollowedUsers {
   @@id([userId, followedUserId])
   @@index([userId])
   @@index([followedUserId])
-  @@map("user_followed_users")
 }
 
 enum Role {
@@ -206,5 +196,4 @@ model UserRole {
   @@unique([userId, role])
   @@index([userId])
   @@index([role])
-  @@map("user_roles")
 }
