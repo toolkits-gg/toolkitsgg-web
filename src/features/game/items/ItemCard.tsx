@@ -123,5 +123,5 @@ const ItemCard = ({
 	);
 };
 
-export { ItemCard };
 export type { ItemCardProps };
+export { ItemCard };
