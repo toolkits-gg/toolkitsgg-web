@@ -134,7 +134,7 @@ const compareRelic = (local: LocalRelic, wiki: WikiRelic): CompareResult => {
 };
 
 void syncWikiCategory<LocalRelic, WikiRelic>({
-	wikiUrl: WIKI_URL,
+	wikiUrls: [WIKI_URL],
 	label: "relics",
 	localItems: RELICS,
 	normalizeEntry,

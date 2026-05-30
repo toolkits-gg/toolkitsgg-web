@@ -54,7 +54,7 @@ type SyncCategoryOptions<
 	TLocal extends { name: string },
 	TWiki extends { name: string },
 > = {
-	wikiUrl: string;
+	wikiUrls: string[];
 	label: string;
 	localItems: readonly TLocal[];
 	normalizeEntry: (name: string, fields: Record<string, unknown>) => TWiki;
@@ -68,7 +68,7 @@ type WikiSyncStats = {
 	diffCounts: Map<string, number>;
 };
 
-const fetchWikiItems = async <TWiki>(
+const fetchModule = async <TWiki extends { name: string }>(
 	wikiUrl: string,
 	normalizeEntry: (name: string, fields: Record<string, unknown>) => TWiki,
 ): Promise<TWiki[]> => {
@@ -81,6 +81,24 @@ const fetchWikiItems = async <TWiki>(
 	return Object.entries(parsed).map(([name, fields]) =>
 		normalizeEntry(name, fields as Record<string, unknown>),
 	);
+};
+
+const fetchWikiItems = async <TWiki extends { name: string }>(
+	wikiUrls: string[],
+	normalizeEntry: (name: string, fields: Record<string, unknown>) => TWiki,
+): Promise<TWiki[]> => {
+	const seen = new Set<string>();
+	const all: TWiki[] = [];
+	for (const wikiUrl of wikiUrls) {
+		for (const item of await fetchModule(wikiUrl, normalizeEntry)) {
+			if (seen.has(item.name)) {
+				console.warn(`  ! duplicate '${item.name}' across modules — last wins`);
+			}
+			seen.add(item.name);
+			all.push(item);
+		}
+	}
+	return all;
 };
 
 const reportMatch = <TLocal, TWiki extends { name: string }>(
@@ -122,9 +140,9 @@ const syncWikiCategory = async <
 >(
 	opts: SyncCategoryOptions<TLocal, TWiki>,
 ): Promise<void> => {
-	const { wikiUrl, label, localItems, normalizeEntry, compareItem } = opts;
+	const { wikiUrls, label, localItems, normalizeEntry, compareItem } = opts;
 
-	const wikiItems = await fetchWikiItems(wikiUrl, normalizeEntry);
+	const wikiItems = await fetchWikiItems(wikiUrls, normalizeEntry);
 	console.log(
 		`\nFetched ${wikiItems.length} ${label} from wiki; local has ${localItems.length}.\n`,
 	);

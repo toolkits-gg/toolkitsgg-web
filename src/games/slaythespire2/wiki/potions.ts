@@ -75,7 +75,7 @@ const comparePotion = (local: LocalPotion, wiki: WikiPotion): CompareResult => {
 };
 
 void syncWikiCategory<LocalPotion, WikiPotion>({
-	wikiUrl: WIKI_URL,
+	wikiUrls: [WIKI_URL],
 	label: "potions",
 	localItems: POTIONS,
 	normalizeEntry,
