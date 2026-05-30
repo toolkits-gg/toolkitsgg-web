@@ -16,6 +16,7 @@ import { useEffect, useRef, useState } from "react";
 import { LuCamera, LuCheck, LuPlus } from "react-icons/lu";
 import { GameImage } from "#/components/GameImage";
 import { useGameId } from "#/features/game/core/use-game-id";
+import { ItemDescription } from "#/features/game/items/ItemDescription";
 import type { AppItem, CollectItemInput } from "#/features/game/items/types";
 import { getGameMetadata } from "#/features/game/registry/game-registry";
 import {
@@ -110,13 +111,14 @@ const ItemInfoModal = ({
 						{item.name}
 					</Text>
 					<Group gap="xs">
-						<Badge variant="light" size="sm">
+						<Text size="xs" fw="bold">
 							{String(item.category)}
-						</Badge>
+						</Text>
+
 						{item.subcategory && (
-							<Badge variant="outline" size="sm">
+							<Text size="xs" c="dimmed">
 								{String(item.subcategory)}
-							</Badge>
+							</Text>
 						)}
 					</Group>
 					{!screenshotMode &&
@@ -154,13 +156,7 @@ const ItemInfoModal = ({
 			{hasDescription && (
 				<>
 					<Divider label="Description" />
-					<Stack gap="xs">
-						{item.description.map((line) => (
-							<Text key={line} size="sm" style={{ whiteSpace: "pre-line" }}>
-								{line}
-							</Text>
-						))}
-					</Stack>
+					<ItemDescription description={item.description} size="xs" mt={0} />
 				</>
 			)}
 
@@ -232,5 +228,5 @@ const ItemInfoModal = ({
 	);
 };
 
-export { ItemInfoModal };
 export type { ItemInfoModalProps };
+export { ItemInfoModal };

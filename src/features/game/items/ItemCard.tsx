@@ -2,6 +2,7 @@ import { ActionIcon, Box, Flex, Text } from "@mantine/core";
 import clsx from "clsx";
 import { LuCheck, LuInfo, LuPlus, LuX } from "react-icons/lu";
 import { GameImage } from "#/components/GameImage";
+import { ItemDescription } from "#/features/game/items/ItemDescription";
 import type { AppItem, CollectItemInput } from "#/features/game/items/types";
 import classes from "./ItemCard.module.css";
 
@@ -106,17 +107,15 @@ const ItemCard = ({
 							</Text>
 						)}
 					</Text>
-					{item.description.length > 0 && item.description[0] !== "" && (
-						<Text
-							size="xs"
-							c="dimmed"
-							lh={1.15}
-							mt={0}
-							className={classes.description}
-						>
-							{item.description[0]}
-						</Text>
-					)}
+					<ItemDescription
+						description={item.description}
+						firstOnly
+						size="xs"
+						c="dimmed"
+						lh={1.15}
+						mt={0}
+						className={classes.description}
+					/>
 				</Flex>
 			</Flex>
 		</Box>

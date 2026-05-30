@@ -8,7 +8,8 @@
  * Run with: pnpm tsx src/games/slaythespire2/wiki/cards.ts
  */
 
-import { cleanWikiText } from "#/features/wiki-sync/clean-wiki-text";
+import { renderDescriptionVariant } from "#/features/game/items/description-tokens";
+import { cleanWikiTextPreservingTokens } from "#/features/wiki-sync/clean-wiki-text";
 import {
 	CARDS,
 	type SlayTheSpire2CardItem,
@@ -39,6 +40,7 @@ type WikiCard = {
 	name: string;
 	description: string[];
 	cost: number | undefined;
+	costPlus: number | undefined;
 	type: string;
 	rarity: string;
 	color: string;
@@ -56,36 +58,64 @@ const normalizeEntry = (
 	fields: Record<string, unknown>,
 ): WikiCard => ({
 	name,
-	description: cleanWikiText(getString(fields, "Text")),
+	description: cleanWikiTextPreservingTokens(getString(fields, "Text")),
 	cost: getNumber(fields, "Cost"),
+	costPlus: getNumber(fields, "CostPlus"),
 	type: getString(fields, "Type"),
 	rarity: getString(fields, "Rarity"),
 	color: getString(fields, "Color"),
 	image: getString(fields, "Image"),
 });
 
+/**
+ * Renders every line to one variant and serializes, so base and upgraded text
+ * are compared independently.
+ */
+const renderVariant = (lines: string[], variant: "base" | "upgraded"): string =>
+	JSON.stringify(lines.map((line) => renderDescriptionVariant(line, variant)));
+
 const compareCard = (local: LocalCard, wiki: WikiCard): CompareResult => {
-	const localDesc = JSON.stringify(local.description);
-	const wikiDesc = JSON.stringify(wiki.description);
-	const localCost = local.cost.energy;
-	const wikiCost = wiki.cost;
+	const localBase = renderVariant(local.description, "base");
+	const wikiBase = renderVariant(wiki.description, "base");
+	const localUpgraded = renderVariant(local.description, "upgraded");
+	const wikiUpgraded = renderVariant(wiki.description, "upgraded");
+
+	const localEnergy = local.cost.energy;
+	const wikiEnergy = wiki.cost;
+	const localEnergyUpgraded = local.cost.energyUpgraded;
+	const wikiEnergyUpgraded = wiki.costPlus;
+
+	const baseDiffers = localBase !== wikiBase;
+	const upgradedDiffers = localUpgraded !== wikiUpgraded;
+	const energyDiffers = wikiEnergy !== undefined && localEnergy !== wikiEnergy;
+	const energyUpgradedDiffers =
+		wikiEnergyUpgraded !== undefined &&
+		localEnergyUpgraded !== wikiEnergyUpgraded;
 
 	const differingFields: string[] = [];
-	if (localDesc !== wikiDesc) differingFields.push("description");
-	if (wikiCost !== undefined && localCost !== wikiCost) {
-		differingFields.push("cost.energy");
-	}
+	if (baseDiffers) differingFields.push("description (base)");
+	if (upgradedDiffers) differingFields.push("description (upgraded)");
+	if (energyDiffers) differingFields.push("cost.energy");
+	if (energyUpgradedDiffers) differingFields.push("cost.energyUpgraded");
 
 	return {
 		differingFields,
 		printDetails: () => {
-			if (localDesc !== wikiDesc) {
-				console.log(`    description local: ${localDesc}`);
-				console.log(`    description wiki:  ${wikiDesc}`);
+			if (baseDiffers) {
+				console.log(`    description (base) local: ${localBase}`);
+				console.log(`    description (base) wiki:  ${wikiBase}`);
 			}
-			if (wikiCost !== undefined && localCost !== wikiCost) {
-				console.log(`    cost.energy local: ${localCost}`);
-				console.log(`    cost.energy wiki:  ${wikiCost}`);
+			if (upgradedDiffers) {
+				console.log(`    description (upgraded) local: ${localUpgraded}`);
+				console.log(`    description (upgraded) wiki:  ${wikiUpgraded}`);
+			}
+			if (energyDiffers) {
+				console.log(`    cost.energy local: ${localEnergy}`);
+				console.log(`    cost.energy wiki:  ${wikiEnergy}`);
+			}
+			if (energyUpgradedDiffers) {
+				console.log(`    cost.energyUpgraded local: ${localEnergyUpgraded}`);
+				console.log(`    cost.energyUpgraded wiki:  ${wikiEnergyUpgraded}`);
 			}
 		},
 	};

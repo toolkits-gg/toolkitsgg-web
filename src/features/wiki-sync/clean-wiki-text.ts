@@ -90,7 +90,7 @@ const cleanWikiTags = (text: string): string => {
 		console.warn(`  ! template syntax remains after pass: ${result}`);
 	}
 
-	// 2. $Word -> Word (single bareword only — apostrophes allowed).
+	// 2. $Word -> Word (single bareword only - apostrophes allowed).
 	result = result.replace(/\$([A-Za-z][\w']*)/g, (_m, word: string) =>
 		capitalize(word),
 	);
@@ -139,4 +139,59 @@ const cleanWikiText = (text: string): string[] => {
 	return splitOnLineBreaks(text).map(cleanWikiTags);
 };
 
-export { cleanWikiTags, cleanWikiText, splitOnLineBreaks };
+/**
+ * Similar to splitOnLineBreaks, but only splits on a <br> that lives at the top level.
+ * A <br> inside a `[base|upgraded]` upgrade token is left in
+ * place so the token is not torn across array elements.
+ */
+const splitOnTopLevelLineBreaks = (text: string): string[] => {
+	const segments: string[] = [];
+	let depth = 0;
+	let current = "";
+
+	for (let i = 0; i < text.length; i++) {
+		const char = text[i]!;
+		if (char === "[") {
+			depth++;
+			current += char;
+			continue;
+		}
+		if (char === "]") {
+			if (depth > 0) depth--;
+			current += char;
+			continue;
+		}
+		if (depth === 0 && char === "<") {
+			const brMatch = /^<br\s*\/?>/i.exec(text.slice(i));
+			if (brMatch) {
+				segments.push(current);
+				current = "";
+				i += brMatch[0].length - 1;
+				continue;
+			}
+		}
+		current += char;
+	}
+	segments.push(current);
+
+	return segments.map((s) => s.trim()).filter((s) => s.length > 0);
+};
+
+/**
+ * Variant of cleanWikiText that preserves `[base|upgraded]` upgrade tokens.
+ * Top-level <br> become separate array elements (as usual); a <br> *inside* a
+ * token is converted to `\n` so a single variant can still introduce a line
+ * break.
+ */
+const cleanWikiTextPreservingTokens = (text: string): string[] => {
+	return splitOnTopLevelLineBreaks(text).map((segment) =>
+		cleanWikiTags(segment).replace(/<br\s*\/?>/gi, "\n"),
+	);
+};
+
+export {
+	cleanWikiTags,
+	cleanWikiText,
+	cleanWikiTextPreservingTokens,
+	splitOnLineBreaks,
+};
