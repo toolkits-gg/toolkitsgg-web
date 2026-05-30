@@ -64,25 +64,31 @@ const cleanWikiTags = (text: string): string => {
 	//
 	//         Otherwise: treat the last arg as the display label.
 
-	result = result.replace(/\{\{([^{}]+)\}\}/g, (match, inner: string) => {
+	result = result.replace(/\{\{([^{}]+)}}/g, (match, inner: string) => {
 		const parts = inner.split("|").map((p) => p.trim());
 		if (parts.length < 2) {
 			console.warn(`  ! single-arg template not converted: ${match}`);
 			return match;
 		}
-		const first = parts[0]!;
+
+		if (!parts[0] || !parts[1] || !parts[2]) {
+			console.warn(`  ! empty template arg: ${match}`);
+			return match;
+		}
+
+		const first = parts[0];
 		if (/^\d+$/.test(first) && parts.length === 3) {
 			const count = Number.parseInt(first, 10);
-			const plural = parts[1]!;
-			const singular = parts[2]!;
+			const plural = parts[1];
+			const singular = parts[2];
 			const chosen = count === 1 ? singular || plural : plural || singular;
 			return capitalize(chosen);
 		}
-		const last = parts[parts.length - 1]!;
+		const last = parts[parts.length - 1];
 		if (/^\d+$/.test(last) && parts.length >= 4) {
-			return capitalize(parts[parts.length - 2] || parts[parts.length - 3]!);
+			return capitalize(parts[parts.length - 2] || parts[parts.length - 3]);
 		}
-		return capitalize(parts[parts.length - 1] || parts[parts.length - 2]!);
+		return capitalize(parts[parts.length - 1] || parts[parts.length - 2]);
 	});
 
 	// Warn about any remaining nested or unbalanced templates.
@@ -103,14 +109,14 @@ const cleanWikiTags = (text: string): string => {
 	result = result.replace(
 		ICON_TOKEN_REGEX,
 		(match: string, token: string, offset: number, full: string) => {
-			const entry = ICON_TOKEN_MAP[token]!;
+			const entry = ICON_TOKEN_MAP[token];
 			if (entry.kind === "noun") {
 				return capitalize(entry.word);
 			}
 			const before = full.slice(0, offset).trimEnd();
 			const precedingNumber = before.match(/(\d+)$/);
 			if (precedingNumber) {
-				const prev = Number.parseInt(precedingNumber[1]!, 10);
+				const prev = Number.parseInt(precedingNumber[1], 10);
 				return capitalize(prev === 1 ? entry.singular : entry.plural);
 			}
 			const count = match.split(token).length - 1;
@@ -150,7 +156,7 @@ const splitOnTopLevelLineBreaks = (text: string): string[] => {
 	let current = "";
 
 	for (let i = 0; i < text.length; i++) {
-		const char = text[i]!;
+		const char = text[i];
 		if (char === "[") {
 			depth++;
 			current += char;
