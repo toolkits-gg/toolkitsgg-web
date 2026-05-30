@@ -63,7 +63,6 @@ const cleanWikiTags = (text: string): string => {
 	//           empty (e.g. `{{C|Byrd Swoop||2}}`).
 	//
 	//         Otherwise: treat the last arg as the display label.
-
 	result = result.replace(/\{\{([^{}]+)}}/g, (match, inner: string) => {
 		const parts = inner.split("|").map((p) => p.trim());
 		if (parts.length < 2) {
