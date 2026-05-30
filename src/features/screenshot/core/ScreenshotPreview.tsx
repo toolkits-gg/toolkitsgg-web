@@ -42,7 +42,7 @@ function ScreenshotPreview({
 			size="md"
 			withCloseButton
 			bg="light-dark(var(--mantine-color-popover-4),var(--mantine-color-popover-8))"
-			zIndex="var(--mantine-z-index-modal)"
+			zIndex="var(--mantine-z-index-popover)"
 		>
 			<Box ta="center">
 				<Title order={4} mb="sm" c="primary.5" px="lg">
