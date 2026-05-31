@@ -4,16 +4,16 @@ This is the web application for Toolkits.gg. Toolkits.gg is a collection of gami
 
 ## Quick Links
 
-| Resource | Description |
-| --- | --- |
-| [Code of Conduct](.github/CODE_OF_CONDUCT.md) | Community standards and expectations |
-| [Support](.github/SUPPORT.md) | Ways to support the project |
-| [Discord](https://discord.gg/VQF23tPKyK) | Community chat and help |
-| [Local Setup](.github/LOCALSETUP.md) | Get the project running on your machine |
-| [Contributing](.github/CONTRIBUTING.md) | Guidelines for contributing code and content |
-| [Architecture](.github/ARCHITECTURE.md) | Framework stack, game registry pattern, adding a new game |
-| [Themes](.github/THEMES.md) | Per-game theming, palette generation, light/dark handling |
-| [DAL](.github/DAL.md) | Offline-first data layer for persisted state |
+| Resource                                      | Description                                               |
+|-----------------------------------------------|-----------------------------------------------------------|
+| [Code of Conduct](.github/CODE_OF_CONDUCT.md) | Community standards and expectations                      |
+| [Support](.github/SUPPORT.md)                 | Ways to support the project                               |
+| [Discord](https://discord.gg/VQF23tPKyK)      | Community chat and help                                   |
+| [Local Setup](.github/LOCALSETUP.md)          | Get the project running on your machine                   |
+| [Contributing](.github/CONTRIBUTING.md)       | Guidelines for contributing code and content              |
+| [Architecture](.github/ARCHITECTURE.md)       | Framework stack, game registry pattern, adding a new game |
+| [Themes](.github/THEMES.md)                   | Per-game theming, palette generation, light/dark handling |
+| [DAL](.github/DAL.md)                         | Offline-first data layer for persisted state              |
 
 ## Contributing
 
@@ -24,7 +24,7 @@ Contributions are welcome! Whether it's a bug report, a suggestion, or a pull re
 3. Open a pull request or [create an issue](https://github.com/toolkits-gg/toolkitsgg-web/issues).
 
 > [!TIP]
-> First time contributing to open source? Don't be shy - come say hello in the [Discord](https://discord.gg/VQF23tPKyK).
+> First time contributing to open source? Come say hello in the [Discord](https://discord.gg/VQF23tPKyK).
 
 ## Support
 

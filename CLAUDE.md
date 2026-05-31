@@ -49,18 +49,18 @@ Prisma is configured via `prisma.config.ts` with `schema: path.join('prisma')`, 
 
 Skills live in `.claude/skills/`. Use the `/skill-name` slash command or reference them when working on relevant code.
 
-| Skill | Use when |
-|---|---|
-| `tanstack-start` | Server functions, SSR, deployment |
-| `tanstack-router` | Routes, loaders, search params, link generation |
-| `tanstack-query` | `useQuery`, `useMutation`, query keys, cache invalidation |
-| `tanstack-form` | Form state, validation, field arrays |
-| `tanstack-virtual` | Virtualizing large lists |
-| `tanstack-table` | Tables, sorting, filtering, pagination |
-| `tanstack-store` | Reactive stores with `@tanstack/store` |
-| `mantine-custom-components` | Creating components with Mantine Styles API, `factory()`, compound components |
-| `better-auth-best-practices` | Auth config, plugins, session management |
-| `web-design-guidelines` | Accessibility, UX review |
+| Skill                        | Use when                                                                      |
+|------------------------------|-------------------------------------------------------------------------------|
+| `tanstack-start`             | Server functions, SSR, deployment                                             |
+| `tanstack-router`            | Routes, loaders, search params, link generation                               |
+| `tanstack-query`             | `useQuery`, `useMutation`, query keys, cache invalidation                     |
+| `tanstack-form`              | Form state, validation, field arrays                                          |
+| `tanstack-virtual`           | Virtualizing large lists                                                      |
+| `tanstack-table`             | Tables, sorting, filtering, pagination                                        |
+| `tanstack-store`             | Reactive stores with `@tanstack/store`                                        |
+| `mantine-custom-components`  | Creating components with Mantine Styles API, `factory()`, compound components |
+| `better-auth-best-practices` | Auth config, plugins, session management                                      |
+| `web-design-guidelines`      | Accessibility, UX review                                                      |
 
 ## Architecture
 
@@ -165,13 +165,13 @@ Follow these steps in order. The registry is the single place to check; no other
 
 5. **Register in all registry files** (all live in `src/features/game/registry/`):
 
-   | File | What to add |
-   |---|---|
-   | `game-registry.tsx` | Entry in `GAME_REGISTRY` object |
-   | `game-db-seed-registry.ts` | Entry in `allGameDBSeeds` |
-   | `game-idb-seed-registry.ts` | Entry in `allGameIDBSeeds` |
+   | File                            | What to add                                             |
+   |---------------------------------|---------------------------------------------------------|
+   | `game-registry.tsx`             | Entry in `GAME_REGISTRY` object                         |
+   | `game-db-seed-registry.ts`      | Entry in `allGameDBSeeds`                               |
+   | `game-idb-seed-registry.ts`     | Entry in `allGameIDBSeeds`                              |
    | `game-sync-handler-registry.ts` | Entry mapping entity name -> `collectedItemSyncHandler` |
-   | `favicon-registry.json` | `"<gameId>": "<favicon-path>"` |
+   | `favicon-registry.json`         | `"<gameId>": "<favicon-path>"`                          |
 
 ### Active-game resolution
 
@@ -273,7 +273,7 @@ mutation.mutate({ id: "...", value: "..." });
 ```typescript
 import { requireUserId, getOptionalUserId } from "#/features/auth/dal/require-user.server";
 const userId = await requireUserId();     // throws 401 if no session
-const userId = await getOptionalUserId(); // returns null if unauthenticated
+const anotherUserId = await getOptionalUserId(); // returns null if unauthenticated
 ```
 
 ### Imports & path aliases
