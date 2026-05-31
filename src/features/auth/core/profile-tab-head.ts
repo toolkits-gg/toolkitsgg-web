@@ -1,10 +1,10 @@
 import type { QueryClient } from "@tanstack/react-query";
 import { FALLBACK_DISPLAY_NAME } from "#/constants.ts";
-import { getPublicUserProfileServerFn } from "#/features/auth/dal/user-profile/user-profile";
 import {
 	buildGetProfileQueryKey,
 	mapUserToProfileData,
-} from "#/features/auth/dal/user-profile/user-profile.actions";
+} from "#/features/game/dal/user-profile/user-profile.dal.ts";
+import { getPublicUserProfileServerFn } from "#/features/game/dal/user-profile/user-profile.ts";
 
 // hits the cached profile query populated by the parent profile loader.
 const loadProfileTabData = async (

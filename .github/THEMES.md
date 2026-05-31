@@ -138,4 +138,4 @@ Be conservative here. Theme handling is one of the easiest places to introduce a
 
 ---
 
-> _This documentation was generated with the help of AI, and reviewed and refined by a human._
+> _This documentation was generated with the help of an LLM._

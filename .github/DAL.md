@@ -2,7 +2,7 @@
 
 The DAL is an **offline-first data layer**. Every read and write executes against either a remote Postgres backend (via TanStack Start server functions) or a local IndexedDB backend, and the choice is made automatically by `chooseBackend()` based on auth status and network connectivity.
 
-If you're adding any persisted state to the app — collected items, profile fields, favorites, anything a user expects to keep — you go through the DAL. Reaching for `useQuery` directly will silently break the offline experience.
+If you're adding any persisted state to the app - collected items, profile fields, favorites, anything a user expects to keep - you go through the DAL. Reaching for `useQuery` directly will silently break the offline experience.
 
 ## When the remote vs. local backend is chosen
 
@@ -13,9 +13,9 @@ If you're adding any persisted state to the app — collected items, profile fie
 
 Otherwise it picks `local`. That covers:
 
-- Signed-out browsing — collected items persist in IndexedDB under an anon UUID.
-- Signed-in but offline — reads/writes hit IndexedDB; writes get queued.
-- The signed-in user comes back online — queued writes flush to the server with last-write-wins resolution.
+- Signed-out browsing - collected items persist in IndexedDB under an anon UUID.
+- Signed-in but offline - reads/writes hit IndexedDB; writes get queued.
+- The signed-in user comes back online - queued writes flush to the server with last-write-wins resolution.
 
 ## Folder layout
 
@@ -23,11 +23,9 @@ Otherwise it picks `local`. That covers:
 
 ```
 core/
-  define-action.ts            # defineDalRead / defineDalWrite — the action factories
-  create-collected-items-dal.ts # the per-game DAL builder (what each game wraps)
+  define-action.ts            # defineDalRead / defineDalWrite - the action factories
   choose-backend.ts           # remote-vs-local selection logic
   to-query-options.ts         # adapts a DalRead to TanStack Query options
-  registry.ts                 # action lookup by entity name (used by the sync runner)
   types.ts                    # DalContext, DalRead, DalWrite, PendingOp, etc.
 hooks/
   useDalQuery / useDalSuspenseQuery
@@ -44,11 +42,12 @@ queue/
   Last-write-wins resolution
   usePendingOps               # observe pending ops from React
 server/
-  apply-pending-ops.ts        # server function the sync runner calls
+  apply-pending-ops.ts        # server function the sync runner calls; dispatches by entity
+  presence-sync-handler.ts    # shared SyncHandler factory for presence-toggle entities
   Cross-cutting collected-item handler + sync glue
 ```
 
-There's also a [`DIAGRAM.md`](../src/features/dal/DIAGRAM.md) in `src/features/dal/` with mermaid diagrams of the read/write, sync, and LWW conflict-resolution flows. Read that alongside this doc.
+The sync runner uploads every queued op through the single `applyPendingOpServerFn`, which dispatches to the right `SyncHandler` by `op.entity`. There is no client-side write-action registry - server-side dispatch is the only routing layer.
 
 ## The flow at a glance
 
@@ -71,13 +70,13 @@ When a write happens locally, it:
 
 ```typescript
 interface DalContext {
-  anonUserId: string;        // UUID from localStorage — always present
+  anonUserId: string;        // UUID from localStorage - always present
   authUserId: string | null; // set when signed in
   backend: "remote" | "local";
 }
 ```
 
-Use `ctx.authUserId ?? ctx.anonUserId` whenever you need a stable local user ID — that's the key your local rows should be scoped to.
+Use `ctx.authUserId ?? ctx.anonUserId` whenever you need a stable local user ID - that's the key your local rows should be scoped to.
 
 ## Defining actions
 
@@ -110,16 +109,20 @@ const upsert = defineDalWrite<MyInput, MyItem>({
   remote: async (input, _ctx) => myUpsertServerFn({ data: input }),
   local: async (input, ctx) =>
     upsertLocalItem({ userId: ctx.authUserId ?? ctx.anonUserId, ...input }),
-  sync: (op) => applyPendingOpServerFn({ data: op }),
+  // Optional: describe (sync-UI summary) and getServerUpdatedAt (LWW baseline).
+  describe: (input) => ({ title: `Saved ${input.id}` }),
 });
 ```
 
 Write actions carry more metadata because they need to participate in the sync queue:
 
-- **`entity` + `operation`** — categorize the op for the sync handler.
-- **`invalidates`** — query keys to invalidate after the write succeeds. This is what makes related lists re-fetch.
-- **`buildIdempotencyKey`** — used for de-duplication on the server when the same op flushes twice (network retry, etc.). Include the user id and a stable identifier from the input.
-- **`sync`** — how to apply a queued op when the user comes back online. Almost always `(op) => applyPendingOpServerFn({ data: op })`.
+- **`entity` + `operation`** - categorize the op. `entity` must match a key in the server-side sync-handler map (see below).
+- **`invalidates`** - query keys to invalidate after the write succeeds. This is what makes related lists re-fetch.
+- **`buildIdempotencyKey`** - used for de-duplication on the server when the same op flushes twice (network retry, etc.). Include the user id and a stable identifier from the input.
+- **`describe`** _(optional)_ - a `PendingOpSummary` snapshot so the data-sync UI can show a friendly description of the queued op.
+- **`getServerUpdatedAt`** _(optional)_ - reads the server record's `updatedAt` before the local write and stores it on the op as the last-write-wins baseline (see DIAGRAM.md). Omit it for pure creates; actions without it fall back to comparing the op's own creation time.
+
+There is **no `sync` field**. Every queued op is uploaded by the sync runner through the same `applyPendingOpServerFn`, which dispatches by `entity` - so wiring sync is just registering the server-side handler.
 
 ## Using actions in components
 
@@ -159,18 +162,18 @@ DAL actions split by scope:
 
 | Scope | Location |
 |---|---|
-| Cross-game (e.g. `favoriteGames`, `userProfile`) | `src/features/<feature>/dal/<entity>/` — currently all under `src/features/auth/dal/` since both belong to the authenticated-user surface |
+| Cross-game (e.g. `favoriteGames`, `userProfile`) | `src/features/<feature>/dal/<entity>/` - currently all under `src/features/auth/dal/` since both belong to the authenticated-user surface |
 | Game-specific (e.g. `collectedItems`) | `src/games/<gameId>/dal/` |
 
 Within each cross-game DAL folder, files follow a consistent suffix convention:
 
-- **`<entity>.ts`** — TanStack Start server functions (Postgres reads/writes via Prisma)
-- **`<entity>.idb.ts`** — IndexedDB layer (local reads/writes via the prisma-idb client)
-- **`<entity>.actions.ts`** — `defineDalRead` / `defineDalWrite` action definitions, wiring `remote` to the server functions and `local` to the IDB helpers
-- **`sync-handler.server.ts`** — server-side sync handler invoked by `applyPendingOpServerFn`
+- **`<entity>.ts`** - TanStack Start server functions (Postgres reads/writes via Prisma)
+- **`<entity>.idb.ts`** - IndexedDB layer (local reads/writes via the prisma-idb client)
+- **`<entity>.actions.ts`** - `defineDalRead` / `defineDalWrite` action definitions, wiring `remote` to the server functions and `local` to the IDB helpers
+- **`sync-handler.ts`** - server-side sync handler invoked by `applyPendingOpServerFn`
 
 > [!IMPORTANT]
-> Game-specific DAL logic must live under `src/games/<gameId>/dal/`, **never** as a branch inside `src/features/`. The shared `createCollectedItemsDal()` factory in `#/features/dal/core/create-collected-items-dal` is how per-game DAL files stay short — they pass in the model accessor and server functions and get a fully-wired DAL back.
+> Game-specific DAL logic must live under `src/games/<gameId>/dal/`, **never** as a branch inside `src/features/`. The shared `createCollectedItemsDal()` factory in `#/features/game/dal/collected-items/collected-items.actions` is how per-game DAL files stay short - they pass in the model accessor and server functions and get a fully-wired DAL back.
 
 ## Adding a new persisted entity
 
@@ -178,15 +181,17 @@ The shortest path:
 
 1. **Add the Prisma model** in `prisma/schema.prisma` (or `prisma/models/<gameId>.prisma` if it's game-scoped). Run `pnpm db:generate && pnpm db:push`.
 
-2. **Write the server functions** (`<entity>.ts`) — standard TanStack Start `createServerFn` calls that read/write via the `prisma` client.
+2. **Write the server functions** (`<entity>.ts`) - standard TanStack Start `createServerFn` calls that read/write via the `prisma` client.
 
-3. **Write the IDB helpers** (`<entity>.idb.ts`) — read/write via the prisma-idb client. The local row type usually mirrors the Postgres row but with extra bookkeeping (e.g. `userId` scoping).
+3. **Write the IDB helpers** (`<entity>.idb.ts`) - read/write via the prisma-idb client. The local row type usually mirrors the Postgres row but with extra bookkeeping (e.g. `userId` scoping).
 
-4. **Define the actions** (`<entity>.actions.ts`) with `defineDalRead` / `defineDalWrite` — see the examples above.
+4. **Define the actions** (`<entity>.actions.ts`) with `defineDalRead` / `defineDalWrite` - see the examples above.
 
-5. **(Writes only)** Add the sync handler in `sync-handler.server.ts`. It receives the `PendingOp` and applies it to Postgres, with last-write-wins on conflicts.
+5. **(Writes only)** Add the sync handler in `sync-handler.ts`. It receives the `PendingOp` and applies it to Postgres, with last-write-wins on conflicts. If the entity is a simple presence toggle (a row that either exists or not, with no mutable fields - like collected items or favorited games), reuse `createPresenceToggleSyncHandler` from `#/features/dal/server/presence-sync-handler` instead of hand-writing the delete/upsert + LWW branching.
 
-6. **(Writes only, if game-scoped)** Register the sync handler in `src/features/game/registry/game-sync-handler-registry.ts` so the runner can dispatch the op to the right game.
+6. **(Writes only)** Register the handler under its `entity` key so `applyPendingOpServerFn` can dispatch to it:
+   - **Game-scoped** - add it to `src/features/game/registry/game-sync-handler-registry.ts`.
+   - **Cross-game** - add it to the `handlers` map in `src/features/dal/server/apply-pending-ops.ts`.
 
 7. **Use it from components** with `useDalQuery` / `useDalMutation`.
 
@@ -194,14 +199,13 @@ The shortest path:
 
 - **Calling `useQuery` directly instead of `useDalQuery`.** Works fine when signed in and online; silently shows an empty state otherwise. Always go through the DAL for persisted data.
 - **Forgetting `buildIdempotencyKey` on writes.** Without it, a retried op can apply twice and produce duplicate rows.
-- **Scoping local rows to `authUserId` only.** Anonymous users have an `anonUserId` but no `authUserId` — your row key should always be `ctx.authUserId ?? ctx.anonUserId`. Anything else makes signed-out usage silently lose data.
+- **Scoping local rows to `authUserId` only.** Anonymous users have an `anonUserId` but no `authUserId` - your row key should always be `ctx.authUserId ?? ctx.anonUserId`. Anything else makes signed-out usage silently lose data.
 - **Mixing `remote` and `local` resolvers that return different shapes.** `useDalQuery` typing won't catch this if both return `unknown`-y types; you'll get a runtime shape mismatch when the user switches backends. Keep the return shape identical.
 - **Putting game-keyed branches inside `src/features/dal/`.** The factory pattern exists precisely so game logic stays in `src/games/<gameId>/`. If you find yourself writing `if (gameId === ...)` inside a DAL file, refactor instead.
 
 ## Related docs
 
-- [`src/features/dal/DIAGRAM.md`](../src/features/dal/DIAGRAM.md) — read/write, sync, and LWW conflict-resolution flow diagrams.
-- [Architecture](ARCHITECTURE.md) — the game registry and why the feature/game split matters for the DAL.
+- [Architecture](ARCHITECTURE.md) - the game registry and why the feature/game split matters for the DAL.
 ---
 
-> _This documentation was generated with the help of AI, and reviewed and refined by a human._
+> _This documentation was generated with the help of an LLM._

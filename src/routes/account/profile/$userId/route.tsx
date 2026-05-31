@@ -8,13 +8,13 @@ import {
 import { ProfileHeader } from "#/features/auth/core/ProfileHeader";
 import { ProfileTabNav } from "#/features/auth/core/ProfileTabNav";
 import { resolveAvatar } from "#/features/auth/core/utils";
-import { getPublicUserProfileServerFn } from "#/features/auth/dal/user-profile/user-profile";
+import { getServerResolvedGameInputsServerFn } from "#/features/game/dal/active-game";
 import {
 	buildGetProfileQueryKey,
 	getViewerUserIdServerFn,
 	mapUserToProfileData,
-} from "#/features/auth/dal/user-profile/user-profile.actions";
-import { getServerResolvedGameInputsServerFn } from "#/features/game/dal/active-game";
+} from "#/features/game/dal/user-profile/user-profile.dal.ts";
+import { getPublicUserProfileServerFn } from "#/features/game/dal/user-profile/user-profile.ts";
 import { getValidatedGameId } from "#/features/game/registry/game-registry";
 import type { GameId } from "@/prisma";
 

@@ -122,7 +122,7 @@ Within each cross-game DAL folder, files follow a consistent suffix convention:
 - `<entity>.ts` — TanStack Start server functions (Postgres reads/writes via Prisma)
 - `<entity>.idb.ts` — IndexedDB layer (local reads/writes via the prisma-idb client)
 - `<entity>.actions.ts` — `defineDalRead` / `defineDalWrite` action definitions wiring `remote` to server functions and `local` to IDB helpers
-- `sync-handler.server.ts` — server-side sync handler invoked by `applyPendingOpServerFn`
+- `sync-handler.ts` — server-side sync handler invoked by `applyPendingOpServerFn`
 
 All cross-game aggregation maps (the registries) belong in `src/features/game/registry/`. When you add a new game, that folder is **the single place** to look for everything that needs a new entry.
 
@@ -172,7 +172,7 @@ dal/
     sync-handler.ts    # collectedItemSyncHandler — registered in game-sync-handler-registry.ts
 ```
 
-The DAL action file (`dal/collected-items.ts`) is a thin wrapper around `createCollectedItemsDal({ entityName, getModel, serverFns })` from `#/features/dal/core/create-collected-items-dal`. The factory handles all the offline/online switching — your game just supplies the model accessor and server functions.
+The DAL action file (`dal/collected-items.ts`) is a thin wrapper around `createCollectedItemsDal({ entityName, getModel, serverFns })` from `#/features/game/dal/collected-items/collected-items.actions`. The factory handles all the offline/online switching — your game just supplies the model accessor and server functions.
 
 ### 5. Register in every registry file
 
@@ -269,4 +269,4 @@ If you need a new env var, add it to:
 
 ---
 
-> _This documentation was generated with the help of AI, and reviewed and refined by a human._
+> _This documentation was generated with the help of an LLM._

@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireUserId } from "#/features/auth/dal/require-user.server";
-import { createCollectedItemHandlers } from "#/features/dal/server/collected-item-handlers";
+import { createCollectedItemHandlers } from "#/features/game/dal/collected-items/collected-items.ts";
 import { prisma } from "@/prisma";
 
 const CollectInput = z.object({ itemId: z.string().min(1) });
@@ -27,8 +27,8 @@ const listCollectedItemsByUserIdServerFn = createServerFn({
 	.handler(async ({ data }) => h.list(data.userId));
 
 export {
-	listCollectedItemsServerFn,
-	uncollectItemServerFn,
 	collectItemServerFn,
 	listCollectedItemsByUserIdServerFn,
+	listCollectedItemsServerFn,
+	uncollectItemServerFn,
 };

@@ -1,4 +1,4 @@
-import { createCollectedItemsDal } from "#/features/dal/core/create-collected-items-dal";
+import { createCollectedItemsDal } from "#/features/game/dal/collected-items/collected-items.dal.ts";
 import {
 	collectItemServerFn,
 	listCollectedItemsByUserIdServerFn,

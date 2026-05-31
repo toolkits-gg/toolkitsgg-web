@@ -7,21 +7,21 @@ import { useDalContextSource } from "#/features/dal/hooks/use-dal-context-source
  * Executes a DAL read action via TanStack Query.
  * The context getter ensures the backend (remote vs local) is chosen at query execution time.
  */
-function useDalQuery<Input, Output>(
+const useDalQuery = <Input, Output>(
 	action: DalReadAction<Input, Output>,
 	input: Input,
-) {
+) => {
 	const ctxGetter = useDalContextSource();
 	return useQuery(toQueryOptions(action, input, ctxGetter));
-}
+};
 
 /** Suspense-enabled variant of useDalQuery. */
-function useDalSuspenseQuery<Input, Output>(
+const useDalSuspenseQuery = <Input, Output>(
 	action: DalReadAction<Input, Output>,
 	input: Input,
-) {
+) => {
 	const ctxGetter = useDalContextSource();
 	return useSuspenseQuery(toQueryOptions(action, input, ctxGetter));
-}
+};
 
 export { useDalQuery, useDalSuspenseQuery };

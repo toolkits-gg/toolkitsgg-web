@@ -7,10 +7,12 @@ import type { ListOpsFilter, PendingOp } from "#/features/dal/queue/types";
  * `refetchOnWindowFocus` is disabled because queue changes are driven by explicit
  * mutations; background polling would show stale intermediate states during sync.
  */
-export function usePendingOps(filter?: ListOpsFilter) {
+const usePendingOps = (filter?: ListOpsFilter) => {
 	return useQuery<PendingOp[]>({
 		queryKey: ["dal-queue", filter?.status ?? "all", filter?.entity ?? "all"],
 		queryFn: () => listOps(filter),
 		refetchOnWindowFocus: false,
 	});
-}
+};
+
+export { usePendingOps };

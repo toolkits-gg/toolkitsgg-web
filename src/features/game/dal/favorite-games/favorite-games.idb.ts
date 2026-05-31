@@ -1,6 +1,6 @@
-import { STORE_USER_FAVORITE_GAME } from "#/features/dal/local/constants";
-import { getLocalDB } from "#/features/dal/local/local-db";
-import type { LocalUserFavoriteGame } from "#/features/dal/local/types";
+import { STORE_USER_FAVORITE_GAME } from "#/features/dal/local/constants.ts";
+import { getLocalDB } from "#/features/dal/local/local-db.ts";
+import type { LocalUserFavoriteGame } from "#/features/dal/local/types.ts";
 import type { GameId } from "@/prisma";
 
 const listLocalFavoriteGames = async (
@@ -45,7 +45,7 @@ const deleteLocalFavoriteGame = async (input: {
 };
 
 export {
+	deleteLocalFavoriteGame,
 	listLocalFavoriteGames,
 	upsertLocalFavoriteGame,
-	deleteLocalFavoriteGame,
 };

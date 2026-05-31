@@ -1,6 +1,7 @@
 // Orchestrates syncing a batch of pending ops to the server sequentially.
 
-import type { DalWriteAction, SyncResult } from "#/features/dal/core/types";
+import type { SyncResult } from "#/features/dal/core/types";
+import { applyPendingOpServerFn } from "#/features/dal/queue/apply-pending-ops.ts";
 import {
 	deleteOp,
 	markConflict,
@@ -9,12 +10,6 @@ import {
 import type { PendingOp } from "#/features/dal/queue/types";
 
 interface SyncAllOptions {
-	/**
-	 * Resolves a DalWriteAction by entity name.
-	 * Passed as a callback (not a direct import) to avoid circular dependencies
-	 * between the queue module and the core registry.
-	 */
-	resolveAction: (entity: string) => DalWriteAction<unknown, unknown> | null;
 	/** Called before each op is processed — use to drive UI progress indicators. */
 	onProgress?: (op: PendingOp, index: number, total: number) => void;
 }
@@ -29,8 +24,6 @@ interface SyncAllReport {
 	noops: number;
 	/** Ops that failed due to a network error or handler exception. */
 	errors: number;
-	/** Ops whose entity had no registered action (marked failed). */
-	skipped: number;
 }
 
 /**
@@ -40,27 +33,18 @@ interface SyncAllReport {
  */
 const syncOps = async (
 	ops: PendingOp[],
-	options: SyncAllOptions,
+	options?: SyncAllOptions,
 ): Promise<SyncAllReport> => {
 	const report: SyncAllReport = {
 		applied: 0,
 		conflicts: 0,
 		noops: 0,
 		errors: 0,
-		skipped: 0,
 	};
 	for (let index = 0; index < ops.length; index += 1) {
 		const op = ops[index];
-		options.onProgress?.(op, index, ops.length);
-		const action = options.resolveAction(op.entity);
-		if (!action) {
-			// Entity's DAL was removed or not yet registered — mark failed rather than silently dropping.
-			report.skipped += 1;
-			await markStatus(op.id, "failed", `no action for ${op.entity}`);
-			continue;
-		}
-
-		const result = await runOnce(op, action);
+		options?.onProgress?.(op, index, ops.length);
+		const result = await runOnce(op);
 		await applyResult(op.id, result, report);
 	}
 	return report;
@@ -71,17 +55,13 @@ const syncOps = async (
  * skip its LWW check. Intended for the "Keep mine" path from the data-sync UI
  * after a previous attempt produced a conflict.
  */
-const forceSyncOp = async (
-	op: PendingOp,
-	action: DalWriteAction<unknown, unknown>,
-): Promise<SyncResult> => {
-	const result = await runOnce(op, action, { force: true });
+const forceSyncOp = async (op: PendingOp): Promise<SyncResult> => {
+	const result = await runOnce(op, { force: true });
 	const report: SyncAllReport = {
 		applied: 0,
 		conflicts: 0,
 		noops: 0,
 		errors: 0,
-		skipped: 0,
 	};
 	await applyResult(op.id, result, report);
 	return result;
@@ -89,12 +69,13 @@ const forceSyncOp = async (
 
 const runOnce = async (
 	op: PendingOp,
-	action: DalWriteAction<unknown, unknown>,
 	options?: { force?: boolean },
 ): Promise<SyncResult> => {
 	await markStatus(op.id, "syncing");
 	try {
-		return await action.sync(op, options);
+		return await applyPendingOpServerFn({
+			data: { op, force: options?.force },
+		});
 	} catch (err) {
 		const message = err instanceof Error ? err.message : String(err);
 		return { status: "error", message };
@@ -126,4 +107,4 @@ const applyResult = async (
 	}
 };
 
-export { syncOps, forceSyncOp };
+export { forceSyncOp, syncOps };

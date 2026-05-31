@@ -2,14 +2,14 @@
 
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { userFavoriteGameHandler } from "#/features/auth/dal/favorite-games/sync-handler.server";
-import { requireUserId } from "#/features/auth/dal/require-user.server";
+import { requireUserId } from "#/features/auth/dal/require-user.server.ts";
+import type { SyncHandler, SyncResult } from "#/features/dal/core/types.ts";
+import { favoriteGameSyncHandler } from "#/features/game/dal/favorite-games/sync-handler.ts";
 import {
 	userAvatarOverrideHandler,
 	userProfileHandler,
-} from "#/features/auth/dal/user-profile/sync-handler.server";
-import type { SyncHandler, SyncResult } from "#/features/dal/core/types";
-import { gameSyncHandlers } from "#/features/game/registry/game-sync-handler-registry";
+} from "#/features/game/dal/user-profile/sync-handler.ts";
+import { gameSyncHandlers } from "#/features/game/registry/game-sync-handler-registry.ts";
 
 /** Re-validates the PendingOp at the server boundary; client data is untrusted. */
 const PendingOpSchema = z.object({
@@ -64,7 +64,7 @@ const recallResult = (key: string): SyncResult | null => {
 
 const handlers: Record<string, SyncHandler | undefined> = {
 	...gameSyncHandlers,
-	userFavoriteGame: userFavoriteGameHandler,
+	userFavoriteGame: favoriteGameSyncHandler,
 	userAvatarOverride: userAvatarOverrideHandler,
 	userProfile: userProfileHandler,
 };

@@ -17,7 +17,6 @@ import {
 	buildTabHead,
 	loadProfileTabData,
 } from "#/features/auth/core/profile-tab-head";
-import { resolveWriteAction } from "#/features/dal/core/registry";
 import { clearSynced, deleteOp } from "#/features/dal/queue/pending-ops";
 import { forceSyncOp, syncOps } from "#/features/dal/queue/sync-runner";
 import type { PendingOp } from "#/features/dal/queue/types";
@@ -232,7 +231,7 @@ function DataSync() {
 	const syncAll = useMutation({
 		mutationFn: async () => {
 			if (!pending.data) return null;
-			return syncOps(pending.data, { resolveAction: resolveWriteAction });
+			return syncOps(pending.data);
 		},
 		onSuccess: (report) => {
 			if (!report) return;
@@ -249,12 +248,8 @@ function DataSync() {
 			});
 		},
 		onSettled: () => {
-			queryClient.invalidateQueries({ queryKey: ["dal-queue"] }).then(() => {
-				// placeholder - no action needed
-			});
-			queryClient.invalidateQueries({ queryKey: ["dal"] }).then(() => {
-				// placeholder - no action needed
-			});
+			void queryClient.invalidateQueries({ queryKey: ["dal-queue"] });
+			void queryClient.invalidateQueries({ queryKey: ["dal"] });
 		},
 	});
 
@@ -265,9 +260,7 @@ function DataSync() {
 
 	const keepMine = useMutation({
 		mutationFn: async (op: PendingOp) => {
-			const action = resolveWriteAction(op.entity);
-			if (!action) throw new Error(`No action for ${op.entity}`);
-			return forceSyncOp(op, action);
+			return forceSyncOp(op);
 		},
 		onSuccess: (result) => {
 			const ok = result.status === "applied" || result.status === "noop";
@@ -283,12 +276,8 @@ function DataSync() {
 			});
 		},
 		onSettled: () => {
-			queryClient.invalidateQueries({ queryKey: ["dal-queue"] }).then(() => {
-				// placeholder - no action needed
-			});
-			queryClient.invalidateQueries({ queryKey: ["dal"] }).then(() => {
-				// placeholder - no action needed
-			});
+			void queryClient.invalidateQueries({ queryKey: ["dal-queue"] });
+			void queryClient.invalidateQueries({ queryKey: ["dal"] });
 		},
 	});
 
@@ -302,12 +291,8 @@ function DataSync() {
 			});
 		},
 		onSettled: () => {
-			queryClient.invalidateQueries({ queryKey: ["dal-queue"] }).then(() => {
-				// placeholder - no action needed
-			});
-			queryClient.invalidateQueries({ queryKey: ["dal"] }).then(() => {
-				// placeholder - no action needed
-			});
+			void queryClient.invalidateQueries({ queryKey: ["dal-queue"] });
+			void queryClient.invalidateQueries({ queryKey: ["dal"] });
 		},
 	});
 

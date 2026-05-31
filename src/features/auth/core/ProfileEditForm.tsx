@@ -2,8 +2,8 @@ import { Button, Group, Stack, Text, Textarea, TextInput } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { useForm } from "@tanstack/react-form";
 import { useState } from "react";
-import { userProfileActions } from "#/features/auth/dal/user-profile/user-profile.actions";
 import { useDalMutation } from "#/features/dal/hooks/use-dal-mutation";
+import { createUserProfileDal } from "#/features/game/dal/user-profile/user-profile.dal.ts";
 
 type ProfileEditFormProps = {
 	initialDisplayName: string;
@@ -15,7 +15,7 @@ const ProfileEditForm = ({
 	initialBio,
 }: ProfileEditFormProps) => {
 	const [serverError, setServerError] = useState<string | null>(null);
-	const mutation = useDalMutation(userProfileActions.updateProfile);
+	const mutation = useDalMutation(createUserProfileDal().updateProfile);
 
 	const form = useForm({
 		defaultValues: {

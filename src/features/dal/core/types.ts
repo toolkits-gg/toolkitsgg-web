@@ -84,13 +84,6 @@ interface DalWriteAction<Input, Output> {
 	/** Writes to IndexedDB. Used when backend === "local"; the op is then enqueued for sync. */
 	local: (input: Input, ctx: DalContext) => Promise<Output>;
 	/**
-	 * Uploads a queued PendingOp to the server. Called by syncOps during the sync flow.
-	 * `options.force === true` requests that the handler skip its LWW check and
-	 * unconditionally apply the op — used when the user explicitly chooses
-	 * "Keep mine" on a previously-conflicted op.
-	 */
-	sync: (op: PendingOp, options?: SyncOptions) => Promise<SyncResult>;
-	/**
 	 * Returns the server's last-known `updatedAt` for the record being written.
 	 * Captured before the local write and stored on the PendingOp as the LWW baseline.
 	 * If the server has advanced past this value by sync time, a concurrent writer won.
@@ -114,10 +107,10 @@ type DalAction<Input = unknown, Output = unknown> =
 
 export type {
 	Backend,
+	DalAction,
 	DalContext,
 	DalReadAction,
 	DalWriteAction,
-	DalAction,
 	SyncHandler,
 	SyncOptions,
 	SyncResult,

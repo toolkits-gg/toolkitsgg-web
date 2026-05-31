@@ -128,4 +128,4 @@ Thanks for contributing! ❤️
 
 ---
 
-> _This documentation was generated with the help of AI, and reviewed and refined by a human._
+> _This documentation was generated with the help of an LLM._

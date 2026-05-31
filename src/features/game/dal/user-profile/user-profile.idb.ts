@@ -1,12 +1,12 @@
 import {
 	STORE_USER_AVATAR_OVERRIDE,
 	STORE_USER_PROFILE,
-} from "#/features/dal/local/constants";
-import { getLocalDB } from "#/features/dal/local/local-db";
+} from "#/features/dal/local/constants.ts";
+import { getLocalDB } from "#/features/dal/local/local-db.ts";
 import type {
 	LocalUserAvatarOverride,
 	LocalUserProfile,
-} from "#/features/dal/local/types";
+} from "#/features/dal/local/types.ts";
 import type { GameId } from "@/prisma";
 
 const getLocalUserProfile = async (
@@ -95,9 +95,9 @@ const deleteLocalAvatarOverride = async (
 };
 
 export {
-	getLocalUserProfile,
-	upsertLocalUserProfile,
-	getLocalAvatarOverrides,
 	deleteLocalAvatarOverride,
+	getLocalAvatarOverrides,
+	getLocalUserProfile,
 	upsertLocalAvatarOverride,
+	upsertLocalUserProfile,
 };

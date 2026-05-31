@@ -120,7 +120,9 @@ Within each cross-game DAL folder, files follow a consistent suffix convention:
 - `<entity>.ts` — TanStack Start server functions (Postgres reads/writes via Prisma)
 - `<entity>.idb.ts` — IndexedDB layer (local reads/writes via the prisma-idb client)
 - `<entity>.actions.ts` — `defineDalRead` / `defineDalWrite` action definitions wiring `remote` to the server functions and `local` to the IDB helpers
-- `sync-handler.server.ts` — server-side sync handler invoked by `applyPendingOpServerFn`
+- `sync-handler.ts` — server-side sync handler invoked by `applyPendingOpServerFn`
+
+The game-specific `collectedItems` entity follows the same four-file convention in `src/features/game/dal/collected-items/`, but because it spans every game's Prisma model each file exports a **factory** rather than a concrete singleton: `collected-items.ts` (`createCollectedItemHandlers` — Prisma CRUD), `collected-items.idb.ts` (`createCollectedItemsIdb`), `collected-items.dal.ts` (`createCollectedItemsDal`), and `sync-handler.ts` (`createCollectedItemSyncHandler`). Each game's `src/games/<gameId>/dal/` instantiates these factories with its own model.
 
 All cross-game aggregation maps (registries) belong in `src/features/game/registry/`. When adding a new game, that folder is the single place to look for all maps that need a new entry — `game-registry.tsx`, `game-sync-handler-registry.ts`, `game-db-seed-registry.ts`, `game-idb-seed-registry.ts`, `favicon-registry.json`. Registry files may import from `src/games/` but must not contain any per-game business logic inline.
 
@@ -159,7 +161,7 @@ Follow these steps in order. The registry is the single place to check; no other
        sync-handler.ts    # collectedItemSyncHandler — registered in game-sync-handler-registry.ts
    ```
 
-   The DAL action file (`dal/collected-items.ts`) is a thin wrapper that calls `createCollectedItemsDal({ entityName, getModel, serverFns })` from `#/features/dal/core/create-collected-items-dal`.
+   The DAL action file (`dal/collected-items.ts`) is a thin wrapper that calls `createCollectedItemsDal({ entityName, getModel, serverFns })` from `#/features/game/dal/collected-items/collected-items.actions`.
 
 5. **Register in all registry files** (all live in `src/features/game/registry/`):
 
@@ -203,12 +205,12 @@ The DAL (`src/features/dal/`) is an offline-first data layer. Every read/write e
 
 `src/features/dal/` contains:
 
-- `core/` — `define-action.ts` (action factories), `create-collected-items-dal.ts` (the per-game DAL builder), `choose-backend.ts`, `to-query-options.ts`, `registry.ts`, `types.ts`
+- `core/` — `define-action.ts` (action factories), `choose-backend.ts`, `to-query-options.ts`, `types.ts`
 - `hooks/` — `useDalQuery`, `useDalMutation`, `useBackend`, `useDalContextSource`
 - `identity/` — anon-id generation/persistence and `useEffectiveUserId`
 - `local/` — IndexedDB constants, `local-db.ts` (prisma-idb client wrapper), and shared local row types
 - `queue/` — `PendingOp` storage (`pending-ops.ts`), the `syncOps()` runner, last-write-wins resolution, and the `usePendingOps` hook
-- `server/` — `apply-pending-ops.ts` server function and the cross-cutting collected-item handler/sync glue
+- `server/` — `apply-pending-ops.ts` server function (dispatches each op to a `SyncHandler` by `entity`) and `presence-sync-handler.ts` (shared factory for presence-toggle entities)
 
 See `src/features/dal/DIAGRAM.md` for mermaid diagrams of the read/write, sync, and LWW conflict-resolution flows.
 
@@ -253,8 +255,9 @@ const upsert = defineDalWrite<MyInput, MyItem>({
   buildIdempotencyKey: (input, ctx) => `myEntity:upsert:${ctx.anonUserId}:${input.id}`,
   remote: async (input, _ctx) => myUpsertServerFn({ data: input }),
   local: async (input, ctx) => upsertLocalItem({ userId: ctx.authUserId ?? ctx.anonUserId, ...input }),
-  sync: (op) => applyPendingOpServerFn({ data: op }),
 });
+// Queued ops are uploaded by syncOps via applyPendingOpServerFn, which dispatches
+// to the right SyncHandler by `entity` — no per-action sync wiring is needed.
 ```
 
 **Use in components:**

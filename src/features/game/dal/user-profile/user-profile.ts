@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { requireUserId } from "#/features/auth/dal/require-user.server";
-import { getGameAvatars } from "#/features/game/registry/game-registry";
+import { requireUserId } from "#/features/auth/dal/require-user.server.ts";
+import { getGameAvatars } from "#/features/game/registry/game-registry.tsx";
 import { GameId, prisma } from "@/prisma";
 
 const AvatarInput = z.object({
@@ -115,9 +115,9 @@ const getPublicUserProfileServerFn = createServerFn({ method: "GET" })
 	});
 
 export {
-	updateAvatarServerFn,
-	removePrimaryAvatarServerFn,
-	removeAvatarOverrideServerFn,
-	updateProfileServerFn,
 	getPublicUserProfileServerFn,
+	removeAvatarOverrideServerFn,
+	removePrimaryAvatarServerFn,
+	updateAvatarServerFn,
+	updateProfileServerFn,
 };

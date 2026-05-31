@@ -1,6 +1,6 @@
-import { userProfileActions } from "#/features/auth/dal/user-profile/user-profile.actions";
 import { useDalMutation } from "#/features/dal/hooks/use-dal-mutation";
 import { useDalQuery } from "#/features/dal/hooks/use-dal-query";
+import { createUserProfileDal } from "#/features/game/dal/user-profile/user-profile.dal.ts";
 import { useSession } from "#/integrations/better-auth/auth-client";
 import type { GameId } from "@/prisma";
 
@@ -8,16 +8,18 @@ type UseUserProfileArgs = { userId?: string } | undefined;
 
 const useUserProfile = (args?: UseUserProfileArgs) => {
 	const { data: session, isPending: sessionPending } = useSession();
+	const userProfileDal = createUserProfileDal();
+
 	const profileQuery = useDalQuery(
-		userProfileActions.getProfile,
+		userProfileDal.getProfile,
 		args?.userId ? { userId: args.userId } : undefined,
 	);
-	const updateAvatarMutation = useDalMutation(userProfileActions.updateAvatar);
+	const updateAvatarMutation = useDalMutation(userProfileDal.updateAvatar);
 	const removePrimaryAvatarMutation = useDalMutation(
-		userProfileActions.removePrimaryAvatar,
+		userProfileDal.removePrimaryAvatar,
 	);
 	const removeAvatarOverrideMutation = useDalMutation(
-		userProfileActions.removeAvatarOverride,
+		userProfileDal.removeAvatarOverride,
 	);
 
 	const isAuthenticated = !!session?.user;

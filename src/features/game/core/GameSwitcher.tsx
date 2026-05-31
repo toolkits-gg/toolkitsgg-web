@@ -22,19 +22,18 @@ import {
 } from "react-icons/lu";
 
 import { DefaultLogo } from "#/components/AppLogo";
-import { favoriteGameActions } from "#/features/auth/dal/favorite-games/favorite-games.actions";
 import { useDalMutation } from "#/features/dal/hooks/use-dal-mutation";
 import { useDalQuery } from "#/features/dal/hooks/use-dal-query";
 import { setGame } from "#/features/game/core/store";
 import { useGameId } from "#/features/game/core/use-game-id";
 import { setActiveGameCookie } from "#/features/game/core/utils";
+import { createFavoriteGameDal } from "#/features/game/dal/favorite-games/favorite-games.dal.ts";
 import {
 	getGameConfig,
 	getGameLogoComponent,
 	REGISTERED_GAME_IDS,
 } from "#/features/game/registry/game-registry";
 import type { GameId } from "@/prisma";
-
 import classes from "./GameSwitcher.module.css";
 
 type GameEntry = {
@@ -102,9 +101,10 @@ function GameSwitcher() {
 	const navigate = useNavigate();
 	const { location } = useRouterState();
 
-	const { data } = useDalQuery(favoriteGameActions.list, undefined);
-	const favorite = useDalMutation(favoriteGameActions.favorite);
-	const unfavorite = useDalMutation(favoriteGameActions.unfavorite);
+	const favoriteGameDal = createFavoriteGameDal();
+	const { data } = useDalQuery(favoriteGameDal.list, undefined);
+	const favorite = useDalMutation(favoriteGameDal.favorite);
+	const unfavorite = useDalMutation(favoriteGameDal.unfavorite);
 
 	const favoriteGameIds = data?.map((r) => r.gameId) ?? [];
 

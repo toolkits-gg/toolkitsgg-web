@@ -19,11 +19,11 @@ import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import { LuCheck, LuChevronDown, LuSearch, LuX } from "react-icons/lu";
 import { avatarImageUrl } from "#/features/auth/core/utils";
-import { favoriteGameActions } from "#/features/auth/dal/favorite-games/favorite-games.actions";
 import { useUserProfile } from "#/features/auth/hooks/use-user-profile";
 import { useDalQuery } from "#/features/dal/hooks/use-dal-query";
 import type { GameAvatar } from "#/features/game/core/types";
 import { useGameId } from "#/features/game/core/use-game-id";
+import { createFavoriteGameDal } from "#/features/game/dal/favorite-games/favorite-games.dal.ts";
 import {
 	getGameAvatars,
 	getGameConfig,
@@ -78,7 +78,7 @@ export function AvatarPicker() {
 	const gameId = useGameId();
 	const { profile, updateAvatar, removePrimaryAvatar, removeAvatarOverride } =
 		useUserProfile();
-	const favoritesQuery = useDalQuery(favoriteGameActions.list, undefined);
+	const favoritesQuery = useDalQuery(createFavoriteGameDal().list, undefined);
 	const favoriteGameIds: GameId[] = (favoritesQuery.data ?? []).map(
 		(f) => f.gameId,
 	);

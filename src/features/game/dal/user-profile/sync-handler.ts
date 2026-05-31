@@ -1,4 +1,4 @@
-import type { SyncHandler } from "#/features/dal/core/types";
+import type { SyncHandler } from "#/features/dal/core/types.ts";
 import { GameId, prisma } from "@/prisma";
 
 const userProfileHandler: SyncHandler = async (op, userId) => {
@@ -76,4 +76,4 @@ const userAvatarOverrideHandler: SyncHandler = async (op, userId) => {
 	return { status: "applied" };
 };
 
-export { userProfileHandler, userAvatarOverrideHandler };
+export { userAvatarOverrideHandler, userProfileHandler };
