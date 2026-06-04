@@ -7,7 +7,7 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_USER: toolkitsgg
-      POSTGRES_PASSWORD: devdevdev
+      POSTGRES_PASSWORD: toolkitsgg_dev_password
       POSTGRES_DB: toolkitsgg_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
