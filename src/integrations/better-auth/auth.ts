@@ -1,9 +1,9 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { nextCookies } from "better-auth/next-js";
-import { serverEnv } from "#/config/env";
 import { EmailPasswordReset } from "#/emails/auth/email-password-reset.tsx";
 import { EmailVerification } from "#/emails/auth/email-verification.tsx";
+import { serverEnv } from "#/env.ts";
 import { resend } from "#/integrations/resend/resend";
 import { prisma } from "@/prisma";
 

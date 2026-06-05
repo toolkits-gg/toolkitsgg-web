@@ -252,13 +252,13 @@ const url = serverEnv.DATABASE_URL;
 const appUrl = import.meta.env.VITE_APP_URL;
 ```
 
-Client-side `import.meta.env` is **type-safe** — the `ImportMetaEnv` interface in `vite-env.d.ts` (at the repo root) declares every `VITE_*` key. If a key isn't listed there, TypeScript will reject `import.meta.env.VITE_FOO`. This is intentional: it forces every client-side env var to be explicitly opted in, so typos and missing config are caught at compile time rather than silently resolving to `undefined` at runtime.
+Client-side `import.meta.env` is **type-safe** — the `ImportMetaEnv` interface in `env.d.ts` (at the repo root) declares every `VITE_*` key. If a key isn't listed there, TypeScript will reject `import.meta.env.VITE_FOO`. This is intentional: it forces every client-side env var to be explicitly opted in, so typos and missing config are caught at compile time rather than silently resolving to `undefined` at runtime.
 
 If you need a new env var, add it to:
 
 1. `.env.local.example` (with a comment explaining what it's for)
 2. `src/config/env.ts` (the zod schema)
-3. **`vite-env.d.ts`** — only if it's a client-side `VITE_*` var. Add a `readonly VITE_FOO: string` line to the `ImportMetaEnv` interface so `import.meta.env.VITE_FOO` is typed.
+3. **`env.d.ts`** — only if it's a client-side `VITE_*` var. Add a `readonly VITE_FOO: string` line to the `ImportMetaEnv` interface so `import.meta.env.VITE_FOO` is typed.
 4. The README's "Configuration" section if it's user-facing
 
 ## Where to go next

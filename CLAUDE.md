@@ -300,7 +300,7 @@ const url = serverEnv.DATABASE_URL;
 const appUrl = import.meta.env.VITE_APP_URL;
 ```
 
-Client-side `import.meta.env` is type-safe via `vite-env.d.ts` (repo root). Every `VITE_*` key must be declared in the `ImportMetaEnv` interface there or TypeScript will reject `import.meta.env.VITE_FOO`. When adding a new client env var, update `vite-env.d.ts` in addition to `.env.local.example` and `src/config/env.ts`.
+Client-side `import.meta.env` is type-safe via `env.d.ts` (repo root). Every `VITE_*` key must be declared in the `ImportMetaEnv` interface there or TypeScript will reject `import.meta.env.VITE_FOO`. When adding a new client env var, update `env.d.ts` in addition to `.env.local.example` and `src/config/env.ts`.
 
 ## Code style
 
@@ -327,7 +327,7 @@ And `CLAUDE.md` itself (this file) is the source of truth for AI-assisted work �
 Use this checklist when finishing a change:
 
 - Did you add, remove, or rename a `pnpm` script? Update `CLAUDE.md` Commands, `CONTRIBUTING.md`, and `LOCALSETUP.md`.
-- Did you add or change an env var? Update `.env.local.example`, `src/config/env.ts`, `CLAUDE.md` Env vars, `LOCALSETUP.md` config table, and `ARCHITECTURE.md` Env vars. **If it's a client-side `VITE_*` var, also add it to `vite-env.d.ts`'s `ImportMetaEnv` interface** — without that, `import.meta.env.VITE_FOO` won't typecheck.
+- Did you add or change an env var? Update `.env.local.example`, `src/config/env.ts`, `CLAUDE.md` Env vars, `LOCALSETUP.md` config table, and `ARCHITECTURE.md` Env vars. **If it's a client-side `VITE_*` var, also add it to `env.d.ts`'s `ImportMetaEnv` interface** — without that, `import.meta.env.VITE_FOO` won't typecheck.
 - Did you add a new game, change the registry shape, or change "Adding a new game" steps? Update `CLAUDE.md` Architecture and `docs/ARCHITECTURE.md`.
 - Did you change the theme system (palette generator, light/dark switching, registry expansion)? Update `docs/THEMES.md`.
 - Did you change DAL action shapes, the sync flow, or the file conventions under `src/features/dal/` or `src/games/*/dal/`? Update `docs/DAL.md` and `src/features/dal/DIAGRAM.md` if the diagrams are now wrong.

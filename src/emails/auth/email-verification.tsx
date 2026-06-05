@@ -15,6 +15,9 @@ type EmailVerificationProps = {
 };
 
 const EmailVerification = ({ toName, url }: EmailVerificationProps) => {
+	// We do not use import.meta here deliberately to avoid breaking the seed script
+	const appName = process.env.VITE_APP_NAME;
+
 	return (
 		<Html>
 			<Head />
@@ -23,8 +26,8 @@ const EmailVerification = ({ toName, url }: EmailVerificationProps) => {
 					<Container>
 						<Section>
 							<Text>
-								Hello {toName}, welcome to {import.meta.env.VITE_APP_NAME}!
-								Please verify your email address by clicking the button below.
+								Hello {toName}, welcome to {appName}! Please verify your email
+								address by clicking the button below.
 							</Text>
 						</Section>
 						<Section>
