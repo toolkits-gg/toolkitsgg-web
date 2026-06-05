@@ -12,7 +12,7 @@ import { useNetwork } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { type PropsWithChildren, useEffect, useState } from "react";
 import {
 	buildTabHead,
 	loadProfileTabData,
@@ -50,7 +50,7 @@ const PendingList = ({
 	return (
 		<Stack gap="xs">
 			{ops.map((op) => (
-				<Stack key={op.id} gap={4}>
+				<OpContainer key={op.id}>
 					<Group justify="space-between" wrap="nowrap" align="center" gap="sm">
 						<Stack gap={2}>
 							<Group gap="xs">
@@ -85,7 +85,7 @@ const PendingList = ({
 							busy={resolvingOpId === op.id}
 						/>
 					) : null}
-				</Stack>
+				</OpContainer>
 			))}
 		</Stack>
 	);
@@ -160,7 +160,7 @@ function SyncedList({ ops }: { ops: PendingOp[] }) {
 			<Divider label="Completed" labelPosition="left" />
 			<Stack gap="xs">
 				{ops.map((op) => (
-					<Stack key={op.id} gap={2}>
+					<OpContainer key={op.id}>
 						<Group gap="xs" wrap="nowrap" align="center">
 							<Badge>{op.entity}</Badge>
 							<Badge variant="light">{op.operation}</Badge>
@@ -169,10 +169,26 @@ function SyncedList({ ops }: { ops: PendingOp[] }) {
 							</Badge>
 						</Group>
 						<OpSummary op={op} />
-					</Stack>
+					</OpContainer>
 				))}
 			</Stack>
 		</>
+	);
+}
+
+function OpContainer({ children }: PropsWithChildren) {
+	return (
+		<Stack
+			gap="xs"
+			p="xs"
+			style={{
+				background:
+					"light-dark(var(--mantine-color-gray-2), var(--mantine-color-base-6))",
+				borderLeft: "1px solid var(--mantine-color-secondary-6)",
+			}}
+		>
+			{children}
+		</Stack>
 	);
 }
 
@@ -188,17 +204,10 @@ function OpSummary({ op }: { op: PendingOp }) {
 		? getGameMetadata(op.summary.gameId)?.label
 		: undefined;
 	return (
-		<>
-			<Group gap="xs" align="center" wrap="nowrap">
-				{gameLabel ? <Badge variant="light">{gameLabel}</Badge> : null}
-				<Text size="sm">{op.summary.title}</Text>
-			</Group>
-			{op.summary.details ? (
-				<Text size="xs" c="dimmed">
-					{op.summary.details}
-				</Text>
-			) : null}
-		</>
+		<Group gap="xs" align="center" wrap="nowrap">
+			{gameLabel ? <Badge variant="light">{gameLabel}</Badge> : null}
+			<Text size="sm">{op.summary.title}</Text>
+		</Group>
 	);
 }
 
