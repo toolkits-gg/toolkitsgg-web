@@ -2,6 +2,7 @@ import { ActionIcon, Group, Tooltip } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { ClientOnly, useRouterState } from "@tanstack/react-router";
 import { LuShare2 } from "react-icons/lu";
+import { clientEnv } from "#/env/client-env.ts";
 import { useGameId } from "#/features/game/core/use-game-id";
 
 const ShareCollectionButton = () => {
@@ -10,7 +11,7 @@ const ShareCollectionButton = () => {
 
 	const handleShare = async () => {
 		const baseUrl =
-			import.meta.env.VITE_APP_URL ||
+			clientEnv.VITE_APP_URL ||
 			(typeof window !== "undefined" ? window.location.origin : "");
 		const url = `${baseUrl}${pathname}?gameId=${activeGameId}`;
 		try {

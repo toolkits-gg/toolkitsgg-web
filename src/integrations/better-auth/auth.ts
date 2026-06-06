@@ -3,7 +3,8 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { nextCookies } from "better-auth/next-js";
 import { EmailPasswordReset } from "#/emails/auth/email-password-reset.tsx";
 import { EmailVerification } from "#/emails/auth/email-verification.tsx";
-import { serverEnv } from "#/env.ts";
+import { clientEnv } from "#/env/client-env.ts";
+import { serverEnv } from "#/env/server-env.ts";
 import { resend } from "#/integrations/resend/resend";
 import { prisma } from "@/prisma";
 
@@ -14,7 +15,7 @@ const auth = betterAuth({
 	secret: serverEnv.BETTER_AUTH_SECRET,
 	baseURL:
 		serverEnv.BETTER_AUTH_URL ||
-		import.meta.env.VITE_APP_URL ||
+		clientEnv.VITE_APP_URL ||
 		"http://localhost:3000",
 	emailAndPassword: {
 		enabled: true,

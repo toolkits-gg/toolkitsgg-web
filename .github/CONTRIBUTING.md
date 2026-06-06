@@ -58,7 +58,7 @@ src/
   components/        # Shared React components
   integrations/      # Third-party glue (tanstack-query, prisma-idb)
   emails/            # React Email templates (auth)
-  config/env.ts      # zod-validated env accessors — never read process.env directly
+  config/server-env.ts      # zod-validated env accessors — never read process.env directly
 prisma/
   schema.prisma      # GameId enum + base models
   models/            # Per-game .prisma files (auto-discovered)
@@ -103,7 +103,7 @@ Biome enforces formatting and linting; the config is in `biome.json`.
 - **`import type`** for type-only imports (strict `verbatimModuleSyntax`).
 - **No manual memoization** (`useMemo`, `useCallback`, `React.memo`) for ordinary values — the React Compiler is enabled and handles this. Reach for them only when you genuinely need stable identity.
 - **Path aliases:** `#/` -> `./src/`, `@/prisma` -> `./prisma/client`. Never import from `prisma/generated/prisma` directly.
-- **Env vars:** import `serverEnv` from `#/config/env` (server) or read `import.meta.env.VITE_*` (client). Never use `process.env` directly.
+- **Env vars:** import `serverEnv` from `#/config/env` (server) or read `clientEnv.VITE_*` (client). Never use `process.env` directly.
 - **Comments are off by default.** Only add one when the *why* is non-obvious. Don't restate what the code does.
 
 ## Commit & PR conventions

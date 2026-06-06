@@ -8,6 +8,7 @@ import {
 	Tailwind,
 	Text,
 } from "react-email";
+import { clientEnv } from "#/env/client-env.ts";
 
 type EmailVerificationProps = {
 	toName: string;
@@ -15,8 +16,7 @@ type EmailVerificationProps = {
 };
 
 const EmailVerification = ({ toName, url }: EmailVerificationProps) => {
-	// We do not use import.meta here deliberately to avoid breaking the seed script
-	const appName = process.env.VITE_APP_NAME;
+	const appName = clientEnv.VITE_APP_NAME;
 
 	return (
 		<Html>

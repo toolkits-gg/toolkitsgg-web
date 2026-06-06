@@ -2,6 +2,7 @@ import {
 	Image as MantineImage,
 	type ImageProps as MantineImageProps,
 } from "@mantine/core";
+import { clientEnv } from "#/env/client-env.ts";
 import IMAGE_SIZES from "#/features/game/registry/image-sizes.json";
 
 type SizePreset = keyof typeof IMAGE_SIZES;
@@ -20,7 +21,7 @@ const AppImage = ({ src, size, ...rest }: AppImageProps) => {
 	let resolvedSrc = src;
 	if (src && typeof src === "string" && !src.startsWith("http")) {
 		const sized = size ? withSizeSuffix(src, size) : src;
-		resolvedSrc = `${import.meta.env.VITE_CLOUDFRONT_URL}/${sized.replace(/^\//, "")}`;
+		resolvedSrc = `${clientEnv.VITE_CLOUDFRONT_URL}/${sized.replace(/^\//, "")}`;
 	}
 	return <MantineImage src={resolvedSrc} {...rest} />;
 };

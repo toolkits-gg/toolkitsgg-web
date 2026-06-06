@@ -1,3 +1,4 @@
+import { clientEnv } from "#/env/client-env.ts";
 import { getGameAvatars } from "#/features/game/registry/game-registry";
 import type { GameId } from "@/prisma";
 
@@ -11,7 +12,7 @@ type ResolveAvatarParams = {
 
 function avatarImageUrl(imageUrl: string, gameId: GameId): string {
 	if (imageUrl.startsWith("http")) return imageUrl;
-	return `${import.meta.env.VITE_CLOUDFRONT_URL}/games/${gameId}/${imageUrl.replace(/^\//, "")}`;
+	return `${clientEnv.VITE_CLOUDFRONT_URL}/games/${gameId}/${imageUrl.replace(/^\//, "")}`;
 }
 
 const resolveAvatar = (
@@ -61,4 +62,4 @@ const resolveAvatar = (
 	return { avatarUrl: null, avatarId: null, gameId: null };
 };
 
-export { resolveAvatar, avatarImageUrl };
+export { avatarImageUrl, resolveAvatar };

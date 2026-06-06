@@ -110,16 +110,16 @@ Then open `.env.local` in your editor and fill in the values below.
 
 **Optional — leave blank if you don't need them:**
 
-| Variable | What it's for                                                                                                                                                                                                                                                   |
-|---|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Variable                                      | What it's for                                                                                                                                                                                                                                                   |
+|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DISCORD_CLIENT_ID` / `DISCORD_CLIENT_SECRET` | Lets you sign in with Discord locally. Get these from the [Discord developer portal](https://discord.com/developers/applications), and set the redirect URI to `http://localhost:3000/api/auth/callback/discord`. Skip if you don't need Discord login locally. |
-| `RESEND_KEY` | Used to send verification + password-reset emails. Get a free key at [resend.com](https://resend.com). Without it, signup still works — you just won't receive the verification email.                                                                          |
-| `VITE_CLOUDFRONT_URL` | Image CDN for almost all project images. (# TODO: Make assets available for self-hosted CDN).                                                                                                                                                                   |
+| `RESEND_KEY`                                  | Used to send verification + password-reset emails. Get a free key at [resend.com](https://resend.com). Without it, signup still works — you just won't receive the verification email.                                                                          |
+| `VITE_CLOUDFRONT_URL`                         | Image CDN for almost all project images. (# TODO: Make assets available for self-hosted CDN).                                                                                                                                                                   |
 
 > [!IMPORTANT]
-> All env vars are validated by zod (a TypeScript validation library) in `src/config/env.ts`. If you start the app with a missing or malformed value, you'll see a clear error message at startup — read it; it usually tells you exactly what's wrong.
+> All env vars are validated by zod (a TypeScript validation library) in `src/config/server-env.ts`. If you start the app with a missing or malformed value, you'll see a clear error message at startup — read it; it usually tells you exactly what's wrong.
 >
-> In code, server-side files import `serverEnv` from `#/config/env`. Client-side files read `import.meta.env.VITE_*`. You don't need to know this to get set up, but it's good to know once you start contributing.
+> In code, server-side files import `serverEnv` from `#/config/env`. Client-side files read `clientEnv.VITE_*`. You don't need to know this to get set up, but it's good to know once you start contributing.
 
 ## 5. Start Postgres
 

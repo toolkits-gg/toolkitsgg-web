@@ -1,3 +1,5 @@
+import { clientEnv } from "#/env/client-env.ts";
+
 const DISCORD_URL = "https://discord.gg/VQF23tPKyK";
 const GITHUB_URL = "https://github.com/toolkits-gg";
 const CHANGELOG_URL =
@@ -9,7 +11,7 @@ const KOFI_URL = "https://ko-fi.com/remnant2toolkit";
 
 const FALLBACK_DISPLAY_NAME = "Toolkits.gg User";
 
-const OG_IMAGE = `${import.meta.env.VITE_CLOUDFRONT_URL}/metadata/og-image.png`;
+const OG_IMAGE = `${clientEnv.VITE_CLOUDFRONT_URL}/metadata/og-image.png`;
 
 const SERVER_GAME_INPUTS_QUERY_KEY = ["server-resolved-game-inputs"] as const;
 

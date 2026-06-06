@@ -5,6 +5,7 @@ import {
 	OG_IMAGE,
 	SERVER_GAME_INPUTS_QUERY_KEY,
 } from "#/constants.ts";
+import { clientEnv } from "#/env/client-env.ts";
 import { ProfileHeader } from "#/features/auth/core/ProfileHeader";
 import { ProfileTabNav } from "#/features/auth/core/ProfileTabNav";
 import { resolveAvatar } from "#/features/auth/core/utils";
@@ -94,7 +95,7 @@ const Route = createFileRoute("/account/profile/$userId")({
 		const displayName = meta.displayName || FALLBACK_DISPLAY_NAME;
 		const title = `${displayName} — Toolkits.gg`;
 		const description = meta.bio || `${displayName}'s profile on Toolkits.gg`;
-		const url = `${import.meta.env.VITE_APP_URL}/account/profile/${params.userId}`;
+		const url = `${clientEnv.VITE_APP_URL}/account/profile/${params.userId}`;
 		return {
 			meta: [
 				{ title },
