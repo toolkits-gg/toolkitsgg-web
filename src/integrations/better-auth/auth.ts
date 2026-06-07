@@ -5,8 +5,11 @@ import { EmailPasswordReset } from "#/emails/auth/email-password-reset.tsx";
 import { EmailVerification } from "#/emails/auth/email-verification.tsx";
 import { clientEnv } from "#/env/client-env.ts";
 import { serverEnv } from "#/env/server-env.ts";
+import { getNoReplyFrom } from "#/features/email/utils.ts";
 import { resend } from "#/integrations/resend/resend";
 import { prisma } from "@/prisma";
+
+const FROM = getNoReplyFrom();
 
 const auth = betterAuth({
 	database: prismaAdapter(prisma, {
@@ -22,7 +25,7 @@ const auth = betterAuth({
 		requireEmailVerification: true,
 		async sendResetPassword({ user, url }) {
 			await resend.emails.send({
-				from: `Toolkits.gg <noreply@app.toolkits.gg>`,
+				from: FROM,
 				to: user.email,
 				subject: "Reset your password",
 				react: EmailPasswordReset({
@@ -37,7 +40,7 @@ const auth = betterAuth({
 		autoSignInAfterVerification: true,
 		async sendVerificationEmail({ user, url }) {
 			await resend.emails.send({
-				from: `Toolkits.gg <noreply@app.toolkits.gg>`,
+				from: FROM,
 				to: user.email,
 				subject: "Verify your email address",
 				react: EmailVerification({

@@ -3,6 +3,7 @@
 interface ImportMetaEnv {
 	readonly VITE_APP_NAME: string;
 	readonly VITE_APP_URL: string;
+	readonly VITE_APP_NOREPLY_EMAIL: string;
 	readonly VITE_CLOUDFRONT_URL: string;
 	readonly VITE_LOCAL_ADMIN_EMAIL: string;
 	readonly VITE_LOCAL_ADMIN_PASSWORD: string;
