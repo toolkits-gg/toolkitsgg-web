@@ -22,7 +22,7 @@ const nextThemeToMantineTheme = (
 		(definition) => nextTheme?.includes(definition.className),
 	);
 
-	if (!themeDefinition || !themeDefinition.theme) {
+	if (!themeDefinition?.theme) {
 		return defaultTheme;
 	}
 
