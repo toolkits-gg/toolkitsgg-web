@@ -31,7 +31,7 @@ const parseDescriptionSegments = (line: string): DescriptionSegment[] => {
 		if (match.index > lastIndex) {
 			segments.push({ kind: "text", text: line.slice(lastIndex, match.index) });
 		}
-		segments.push({ kind: "upgrade", base: match[1]!, upgraded: match[2]! });
+		segments.push({ kind: "upgrade", base: match[1], upgraded: match[2] });
 		lastIndex = match.index + match[0].length;
 		match = regex.exec(line);
 	}

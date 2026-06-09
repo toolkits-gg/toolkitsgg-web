@@ -20,104 +20,162 @@ type Token =
 	| { type: "number"; value: number }
 	| { type: "ident"; value: string };
 
+type PunctuationToken = Extract<
+	Token,
+	{ type: "{" | "}" | "[" | "]" | "=" | "," }
+>["type"];
+
+const PUNCTUATION = new Set<string>(["{", "}", "[", "]", "=", ","]);
+
+const isWhitespace = (c: string | undefined): boolean =>
+	c === " " || c === "\t" || c === "\n" || c === "\r";
+
+const isDigit = (c: string | undefined): boolean =>
+	c !== undefined && c >= "0" && c <= "9";
+
+const isIdentStart = (c: string | undefined): boolean =>
+	c !== undefined && /[A-Za-z_]/.test(c);
+
+const isIdentCont = (c: string | undefined): boolean =>
+	c !== undefined && /[A-Za-z0-9_]/.test(c);
+
+const isQuote = (c: string | undefined): c is '"' | "'" =>
+	c === '"' || c === "'";
+
+const isPunctuation = (c: string | undefined): c is PunctuationToken =>
+	c !== undefined && PUNCTUATION.has(c);
+
+const skipLineComment = (input: string, start: number): number => {
+	let i = start;
+	while (i < input.length && input[i] !== "\n") i++;
+	return i;
+};
+
+const readEscapedChar = (input: string, slashIndex: number): string => {
+	const next = input[slashIndex + 1];
+
+	switch (next) {
+		case "n":
+			return "\n";
+		case "t":
+			return "\t";
+		case "r":
+			return "\r";
+		case "\\":
+			return "\\";
+		case '"':
+			return '"';
+		case "'":
+			return "'";
+		case undefined:
+			throw new Error("Unterminated escape at end of input");
+		default:
+			return next;
+	}
+};
+
+const readString = (input: string, start: number): [Token, number] => {
+	const quote = input[start];
+	if (!isQuote(quote)) {
+		throw new Error(`Expected string literal at position ${start}`);
+	}
+
+	let i = start + 1;
+	let value = "";
+
+	while (i < input.length && input[i] !== quote) {
+		const ch = input[i];
+
+		if (ch === "\\") {
+			value += readEscapedChar(input, i);
+			i += 2;
+			continue;
+		}
+
+		value += ch;
+		i++;
+	}
+
+	if (i >= input.length) throw new Error("Unterminated string literal");
+
+	return [{ type: "string", value }, i + 1];
+};
+
+const readNumber = (input: string, start: number): [Token, number] => {
+	let i = start;
+	if (input[i] === "-") i++;
+
+	while (isDigit(input[i])) i++;
+
+	if (input[i] === ".") {
+		i++;
+		while (isDigit(input[i])) i++;
+	}
+	const value = Number(input.slice(start, i));
+	if (Number.isNaN(value)) {
+		throw new Error(`Invalid number at position ${start}`);
+	}
+	return [{ type: "number", value }, i];
+};
+
+const readIdentifier = (input: string, start: number): [Token, number] => {
+	let i = start + 1;
+	while (isIdentCont(input[i])) i++;
+	return [{ type: "ident", value: input.slice(start, i) }, i];
+};
+
+const unexpectedCharacterError = (input: string, position: number): Error => {
+	const context = input.slice(Math.max(0, position - 20), position + 20);
+	return new Error(
+		`Unexpected character '${input[position]}' at position ${position} (context: ${JSON.stringify(context)})`,
+	);
+};
+
 const tokenize = (input: string): Token[] => {
 	const tokens: Token[] = [];
 	let i = 0;
-	const len = input.length;
 
-	const isIdentStart = (c: string) => /[A-Za-z_]/.test(c);
-	const isIdentCont = (c: string) => /[A-Za-z0-9_]/.test(c);
-	const isDigit = (c: string) => c >= "0" && c <= "9";
+	while (i < input.length) {
+		const c = input[i];
 
-	while (i < len) {
-		const c = input[i]!;
-
-		// whitespace
-		if (c === " " || c === "\t" || c === "\n" || c === "\r") {
+		if (isWhitespace(c)) {
 			i++;
 			continue;
 		}
 
-		// line comment: -- ... \n
 		if (c === "-" && input[i + 1] === "-") {
-			while (i < len && input[i] !== "\n") i++;
+			i = skipLineComment(input, i);
 			continue;
 		}
 
-		// punctuation
-		if (
-			c === "{" ||
-			c === "}" ||
-			c === "[" ||
-			c === "]" ||
-			c === "=" ||
-			c === ","
-		) {
+		if (isPunctuation(c)) {
 			tokens.push({ type: c });
 			i++;
 			continue;
 		}
 
-		// string literal
-		if (c === '"' || c === "'") {
-			const quote = c;
-			i++;
-			let value = "";
-			while (i < len && input[i] !== quote) {
-				const ch = input[i]!;
-				if (ch === "\\") {
-					const next = input[i + 1];
-					if (next === "n") value += "\n";
-					else if (next === "t") value += "\t";
-					else if (next === "r") value += "\r";
-					else if (next === "\\") value += "\\";
-					else if (next === '"') value += '"';
-					else if (next === "'") value += "'";
-					else if (next === undefined) {
-						throw new Error("Unterminated escape at end of input");
-					} else value += next;
-					i += 2;
-				} else {
-					value += ch;
-					i++;
-				}
-			}
-			if (i >= len) throw new Error("Unterminated string literal");
-			i++; // consume closing quote
-			tokens.push({ type: "string", value });
+		if (isQuote(c)) {
+			const [token, next] = readString(input, i);
+			tokens.push(token);
+			i = next;
 			continue;
 		}
 
-		// number literal (integer or float, optional leading -)
-		if (isDigit(c) || (c === "-" && isDigit(input[i + 1] ?? ""))) {
-			const start = i;
-			if (c === "-") i++;
-			while (i < len && isDigit(input[i]!)) i++;
-			if (input[i] === ".") {
-				i++;
-				while (i < len && isDigit(input[i]!)) i++;
-			}
-			const value = Number(input.slice(start, i));
-			if (Number.isNaN(value)) {
-				throw new Error(`Invalid number at position ${start}`);
-			}
-			tokens.push({ type: "number", value });
+		if (isDigit(c) || (c === "-" && isDigit(input[i + 1]))) {
+			const [token, next] = readNumber(input, i);
+			tokens.push(token);
+			i = next;
 			continue;
 		}
 
-		// identifier / keyword
 		if (isIdentStart(c)) {
-			const start = i;
-			i++;
-			while (i < len && isIdentCont(input[i]!)) i++;
-			const value = input.slice(start, i);
-			tokens.push({ type: "ident", value });
+			const [token, next] = readIdentifier(input, i);
+			tokens.push(token);
+			i = next;
 			continue;
 		}
 
-		throw new Error(
-			`Unexpected character '${c}' at position ${i} (context: ${JSON.stringify(input.slice(Math.max(0, i - 20), i + 20))})`,
-		);
+		throw unexpectedCharacterError(input, i);
 	}
 
 	return tokens;
@@ -171,7 +229,7 @@ const parseTable = (tokens: Token[], pos: number): [LuaTable, number] => {
 	let i = pos + 1;
 	const result: LuaTable = {};
 
-	while (i < tokens.length && tokens[i]!.type !== "}") {
+	while (i < tokens.length && tokens[i].type !== "}") {
 		const [key, afterKey] = parseKey(tokens, i);
 		i = afterKey;
 
