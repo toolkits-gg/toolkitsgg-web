@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
 	readonly VITE_APP_NAME: string;
+	readonly VITE_APP_DESCRIPTION: string;
 	readonly VITE_APP_URL: string;
 	readonly VITE_APP_NOREPLY_EMAIL: string;
 	readonly VITE_CLOUDFRONT_URL: string;
@@ -11,7 +12,7 @@ interface ImportMetaEnv {
 	readonly VITE_LOCAL_USER_PASSWORD: string;
 }
 
-// biome-ignore lint/correctness/noUnusedVariables: <Here for type safety and clarity>
+// biome-ignore lint/correctness/noUnusedVariables: <here for type safety and clarity>
 interface ImportMeta {
 	readonly env: ImportMetaEnv;
 }

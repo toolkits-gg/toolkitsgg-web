@@ -9,9 +9,14 @@ const requiredServerEnv = [
 
 const requiredClientEnv = [
 	"VITE_APP_NAME",
+	"VITE_APP_DESCRIPTION",
 	"VITE_APP_URL",
 	"VITE_APP_NOREPLY_EMAIL",
 	"VITE_CLOUDFRONT_URL",
+	"VITE_LOCAL_ADMIN_EMAIL",
+	"VITE_LOCAL_ADMIN_PASSWORD",
+	"VITE_LOCAL_USER_EMAIL",
+	"VITE_LOCAL_USER_PASSWORD",
 ] as const;
 
 // Validate on server startup

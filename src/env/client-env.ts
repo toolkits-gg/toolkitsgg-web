@@ -2,6 +2,7 @@ import { z } from "zod";
 
 const clientEnvSchema = z.object({
 	VITE_APP_NAME: z.string(),
+	VITE_APP_DESCRIPTION: z.string(),
 	VITE_APP_URL: z.url(),
 	VITE_APP_NOREPLY_EMAIL: z.email(),
 	VITE_CLOUDFRONT_URL: z.url(),
