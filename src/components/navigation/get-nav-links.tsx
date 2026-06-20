@@ -24,39 +24,40 @@ type NavLink = NavLinkBase &
 		| { url?: undefined; links: NavLinkSubLink[] }
 	);
 
-const buildGeneralNavLink = (): NavLink => ({
-	label: "Toolkits.gg",
-	icon: GiLockedChest,
-	initiallyOpened: true,
-	links: [
-		{
-			label: "Home",
-			link: "/",
-		},
-		{
-			label: "Change Log",
-			link: "/changelog",
-		},
-	],
-});
-
-const buildHelpNavLink = (onGettingStartedWizard?: () => void): NavLink => ({
-	label: "Help",
-	icon: LuBadgeHelp,
-	initiallyOpened: true,
-	links: [
-		{
-			label: "Getting Started",
-			onClick: onGettingStartedWizard,
-			dataWizardTarget: "get-started-link",
-		},
-		{
-			label: "Support Toolkits.gg",
-			link: "/",
-			dataWizardTarget: "support-link",
-		},
-	],
-});
+const buildToolkitLinks = (onGettingStartedWizard?: () => void): NavLink[] => [
+	{
+		label: "Toolkits.gg",
+		icon: GiLockedChest,
+		initiallyOpened: true,
+		links: [
+			{
+				label: "Home",
+				link: "/",
+			},
+			{
+				label: "Change Log",
+				link: "/changelog",
+			},
+		],
+	},
+	{
+		label: "Help",
+		icon: LuBadgeHelp,
+		initiallyOpened: true,
+		links: [
+			{
+				label: "Getting Started",
+				onClick: onGettingStartedWizard,
+				dataWizardTarget: "get-started-link",
+			},
+			{
+				label: "Support Toolkits.gg",
+				link: "/",
+				dataWizardTarget: "support-link",
+			},
+		],
+	},
+];
 
 const buildItemsNavLink = (gameId: GameId): NavLink => ({
 	label: "Items",
@@ -80,11 +81,10 @@ const getNavLinks = ({
 	gameId,
 }: GetNavLinksParams): NavLink[] => {
 	const navLinks: NavLink[] = [];
-	navLinks.push(buildGeneralNavLink());
 	if (gameId && gameId !== "none") {
 		navLinks.push(buildItemsNavLink(gameId));
 	}
-	navLinks.push(buildHelpNavLink(onGettingStartedWizard));
+	navLinks.push(...buildToolkitLinks(onGettingStartedWizard));
 	return navLinks;
 };
 
