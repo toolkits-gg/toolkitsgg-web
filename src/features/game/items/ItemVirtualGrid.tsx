@@ -1,6 +1,6 @@
 import { Modal, Text } from "@mantine/core";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { ItemCard } from "#/features/game/items/ItemCard";
 import { ItemInfoModal } from "#/features/game/items/ItemInfoModal";
 import type { AppItem, CollectItemInput } from "#/features/game/items/types";
@@ -42,13 +42,22 @@ const ItemVirtualGrid = ({
 	const [columns, setColumns] = useState(1);
 	const [activeItem, setActiveItem] = useState<AppItem | null>(null);
 
-	useEffect(() => {
-		if (!containerRef.current) return;
+	useLayoutEffect(() => {
+		const el = containerRef.current;
+		if (!el) return;
+
+		const computeColumns = (width: number) =>
+			Math.max(1, Math.floor(width / MIN_CARD_WIDTH));
+
+		// Runs before paint, so first paint already
+		// has the correct column count instead of flashing at 1 then reflowing.
+		setColumns(computeColumns(el.getBoundingClientRect().width));
+
+		// Subsequent resizes only.
 		const observer = new ResizeObserver(([entry]) => {
-			const width = entry.contentRect.width;
-			setColumns(Math.max(1, Math.floor(width / MIN_CARD_WIDTH)));
+			setColumns(computeColumns(entry.contentRect.width));
 		});
-		observer.observe(containerRef.current);
+		observer.observe(el);
 		return () => observer.disconnect();
 	}, []);
 
