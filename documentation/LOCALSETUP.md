@@ -226,7 +226,7 @@ Both are Gulp tasks defined in `gulpfile.js`. See the [Architecture guide](ARCHI
 Once you're up and running, a couple of things to keep in mind:
 
 - **Adding dependencies?** The project's `.npmrc` pins exact versions (no `^` or `~`), and blocks brand-new packages (less than 3 days old) as a precaution against supply-chain issues. If you need a brand-new package urgently, mention it in your PR.
-- **Where to go next:** read the [Architecture guide](ARCHITECTURE.md) to understand how the codebase is laid out, then [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow.
+- **Where to go next:** read the [Architecture guide](ARCHITECTURE.md) to understand how the codebase is laid out, then [CONTRIBUTING.md](../.github/CONTRIBUTING.md) for the workflow.
 
 ## Troubleshooting
 
@@ -255,6 +255,3 @@ This file is auto-generated — don't edit it by hand. Delete it, then run `pnpm
 
 Next: read the [Architecture guide](ARCHITECTURE.md) to understand how the codebase is laid out, especially if you're adding a new game.
 
----
-
-> _This documentation was generated with the help of an LLM._

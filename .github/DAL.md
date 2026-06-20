@@ -203,7 +203,4 @@ The shortest path:
 
 ## Related docs
 
-- [Architecture](ARCHITECTURE.md) - the game registry and why the feature/game split matters for the DAL.
----
-
-> _This documentation was generated with the help of an LLM._
+- [Architecture](../documentation/ARCHITECTURE.md) - the game registry and why the feature/game split matters for the DAL.

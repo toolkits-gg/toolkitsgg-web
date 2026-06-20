@@ -3,7 +3,7 @@
 This document covers the parts of the codebase that aren't obvious from reading the source: how the framework pieces fit together, how the game-agnostic registry works, and how to add a new game.
 
 > [!TIP]
-> Pair this doc with the [DAL guide](DAL.md) (persisted data) and the [Themes guide](THEMES.md) (visual identity per game). Most non-trivial changes touch at least two of the three.
+> Pair this doc with the [DAL guide](../.github/DAL.md) (persisted data) and the [Themes guide](THEMES.md) (visual identity per game). Most non-trivial changes touch at least two of the three.
 
 ## Framework stack
 
@@ -110,12 +110,12 @@ This is the hard rule that makes the registry pattern work:
 
 In practice that means:
 
-| Logic type | Lives in |
-|---|---|
+| Logic type                                              | Lives in                                                                                                                                  |
+|---------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | Cross-game DAL actions (`favoriteGames`, `userProfile`) | `src/features/<feature>/dal/<entity>/` — currently all under `src/features/auth/dal/` since both belong to the authenticated-user surface |
-| Game-specific DAL actions (`collectedItems`) | `src/games/<gameId>/dal/` |
-| The registry that maps game id -> handler | `src/features/game/registry/` |
-| Per-game item data, themes, pages, logos | `src/games/<gameId>/` |
+| Game-specific DAL actions (`collectedItems`)            | `src/games/<gameId>/dal/`                                                                                                                 |
+| The registry that maps game id -> handler               | `src/features/game/registry/`                                                                                                             |
+| Per-game item data, themes, pages, logos                | `src/games/<gameId>/`                                                                                                                     |
 
 Within each cross-game DAL folder, files follow a consistent suffix convention:
 
@@ -178,13 +178,13 @@ The DAL action file (`dal/collected-items.ts`) is a thin wrapper around `createC
 
 All five live in `src/features/game/registry/`:
 
-| File | What to add |
-|---|---|
-| `game-registry.tsx` | Entry in `GAME_REGISTRY` mapping `<newGameId>` -> `GAME_CONFIG` |
-| `game-db-seed-registry.ts` | Entry in `allGameDBSeeds` |
-| `game-idb-seed-registry.ts` | Entry in `allGameIDBSeeds` |
+| File                            | What to add                                                                         |
+|---------------------------------|-------------------------------------------------------------------------------------|
+| `game-registry.tsx`             | Entry in `GAME_REGISTRY` mapping `<newGameId>` -> `GAME_CONFIG`                     |
+| `game-db-seed-registry.ts`      | Entry in `allGameDBSeeds`                                                           |
+| `game-idb-seed-registry.ts`     | Entry in `allGameIDBSeeds`                                                          |
 | `game-sync-handler-registry.ts` | Entry mapping the entity name (e.g. `collectedItems`) -> `collectedItemSyncHandler` |
-| `favicon-registry.json` | `"<newGameId>": "<favicon-path>"` |
+| `favicon-registry.json`         | `"<newGameId>": "<favicon-path>"`                                                   |
 
 That's it — no `src/features/` files need to change. If you find yourself editing anything else under `src/features/` to support the new game, stop and ask whether the logic actually belongs in `src/games/<newGameId>/` instead.
 
@@ -266,10 +266,7 @@ If you need a new env var, add it to:
 
 ## Where to go next
 
-- **Persisted data** (collected items, profile, favorites) — read the [DAL guide](DAL.md). The DAL is offline-first; reaching for `useQuery` directly will silently break the offline experience.
+- **Persisted data** (collected items, profile, favorites) — read the [DAL guide](../.github/DAL.md). The DAL is offline-first; reaching for `useQuery` directly will silently break the offline experience.
 - **Visual identity per game** — read the [Themes guide](THEMES.md).
-- **Contributing in general** — see [CONTRIBUTING.md](CONTRIBUTING.md) for workflow and code style.
+- **Contributing in general** — see [CONTRIBUTING.md](../.github/CONTRIBUTING.md) for workflow and code style.
 
----
-
-> _This documentation was generated with the help of an LLM._

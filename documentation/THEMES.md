@@ -6,16 +6,16 @@ This doc covers what lives where, how a new theme gets wired in, and how the run
 
 ## The pieces
 
-| File / module | What it does |
-|---|---|
-| `src/features/theme/themes/` | Base Mantine theme objects and the `default-light` / `default-dark` themes |
-| `src/games/<gameId>/core/game-config/theme.ts` | A single game's `ToolkitThemeDefinition` (palette + Mantine overrides) |
-| `src/features/theme/core/generate-palette.ts` | `generateThemeColors()` — turns a seed color into a full Mantine color tuple |
-| `src/features/theme/core/store.ts` | `useMantineThemeStore` — reactive store holding the active Mantine theme object |
+| File / module                                  | What it does                                                                                                           |
+|------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| `src/features/theme/themes/`                   | Base Mantine theme objects and the `default-light` / `default-dark` themes                                             |
+| `src/games/<gameId>/core/game-config/theme.ts` | A single game's `ToolkitThemeDefinition` (palette + Mantine overrides)                                                 |
+| `src/features/theme/core/generate-palette.ts`  | `generateThemeColors()` — turns a seed color into a full Mantine color tuple                                           |
+| `src/features/theme/core/store.ts`             | `useMantineThemeStore` — reactive store holding the active Mantine theme object                                        |
 | `src/features/game/registry/game-registry.tsx` | `getAllRegisteredThemeDefinitions()` and `getAllRegisteredThemeClassNames()` — what every theme-related consumer reads |
-| `src/components/AppProviders.tsx` | Mounts `MantineProviderWithTheme` and `next-themes`' provider |
-| `MantineProviderWithTheme` | Reads the active theme from the store, feeds the class-name list to `next-themes` |
-| `SyncAndApplyTheme` | Two-way syncs `next-themes` ↔ the Mantine store and persists `autoChangeTheme` to `localStorage` |
+| `src/components/AppProviders.tsx`              | Mounts `MantineProviderWithTheme` and `next-themes`' provider                                                          |
+| `MantineProviderWithTheme`                     | Reads the active theme from the store, feeds the class-name list to `next-themes`                                      |
+| `SyncAndApplyTheme`                            | Two-way syncs `next-themes` ↔ the Mantine store and persists `autoChangeTheme` to `localStorage`                       |
 
 ## How the runtime resolves the active theme
 
@@ -135,7 +135,3 @@ Be conservative here. Theme handling is one of the easiest places to introduce a
 ## Related docs
 
 - [Architecture](ARCHITECTURE.md) — the game registry, active-game resolution, and where `THEME` fits in the larger game config.
-
----
-
-> _This documentation was generated with the help of an LLM._
