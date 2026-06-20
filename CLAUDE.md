@@ -205,14 +205,11 @@ The DAL (`src/features/dal/`) is an offline-first data layer. Every read/write e
 
 `src/features/dal/` contains:
 
-- `core/` — `define-action.ts` (action factories), `choose-backend.ts`, `to-query-options.ts`, `types.ts`
+- `core/` — `define-action.ts` (action factories), `choose-backend.ts`, `to-query-options.ts`, `types.ts`, and `presence-sync-handler.ts` (shared `createPresenceToggleSyncHandler` factory for presence-toggle entities)
 - `hooks/` — `useDalQuery`, `useDalMutation`, `useBackend`, `useDalContextSource`
 - `identity/` — anon-id generation/persistence and `useEffectiveUserId`
 - `local/` — IndexedDB constants, `local-db.ts` (prisma-idb client wrapper), and shared local row types
-- `queue/` — `PendingOp` storage (`pending-ops.ts`), the `syncOps()` runner, last-write-wins resolution, and the `usePendingOps` hook
-- `server/` — `apply-pending-ops.ts` server function (dispatches each op to a `SyncHandler` by `entity`) and `presence-sync-handler.ts` (shared factory for presence-toggle entities)
-
-See `src/features/dal/DIAGRAM.md` for mermaid diagrams of the read/write, sync, and LWW conflict-resolution flows.
+- `queue/` — `PendingOp` storage (`pending-ops.ts`), the `syncOps()`/`forceSyncOp()` runner (`sync-runner.ts`), last-write-wins resolution (`last-write-wins.ts`), the `usePendingOps` hook, and `apply-pending-ops.ts` (the `applyPendingOpServerFn` server function that dispatches each op to a `SyncHandler` by `entity`)
 
 ```
 Component
@@ -285,18 +282,19 @@ Two aliases are declared in both `package.json` `imports` **and** `tsconfig.json
 
 ### Env vars
 
-Validated with zod in `src/config/server-env.ts`. `.env.local.example` is the template. **Never read `process.env` directly** — always use the type-safe accessors below.
+Env validation lives in `src/env/`: `server-env.ts` (zod-validated `serverEnv`), `client-env.ts` (zod-validated `clientEnv`), and `validate-required.ts` (a startup presence check for every required key). `.env.local.example` is the template. **Never read `process.env` / `import.meta.env` directly** — always use the type-safe accessors below.
 
-**Server (private) vars** — import `serverEnv` from `#/config/env`. Keys: `DATABASE_URL`, `NODE_ENV`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `RESEND_KEY`.
+**Server (private) vars** — import `serverEnv` from `#/env/server-env.ts`. Keys: `DATABASE_URL`, `NODE_ENV`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `RESEND_KEY`.
 
 ```typescript
-import { serverEnv } from "#/config/env";
+import { serverEnv } from "#/env/server-env.ts";
 const url = serverEnv.DATABASE_URL;
 ```
 
-**Client (public) vars** — must be prefixed `VITE_*` and accessed via `clientEnv`. Keys: `VITE_APP_NAME`, `VITE_APP_URL`, `VITE_CLOUDFRONT_URL`.
+**Client (public) vars** — must be prefixed `VITE_*` and accessed via `clientEnv` (imported from `#/env/client-env.ts`). Keys: `VITE_APP_NAME`, `VITE_APP_DESCRIPTION`, `VITE_APP_URL`, `VITE_APP_NOREPLY_EMAIL`, `VITE_CLOUDFRONT_URL`, `VITE_LOCAL_ADMIN_EMAIL`, `VITE_LOCAL_ADMIN_PASSWORD`, `VITE_LOCAL_USER_EMAIL`, `VITE_LOCAL_USER_PASSWORD`. The four `VITE_LOCAL_*` vars are consumed by `prisma/seed.ts` to seed local admin/user accounts; `VITE_APP_NOREPLY_EMAIL` is the From address for Resend auth emails (`src/features/email/utils.ts`); `VITE_APP_DESCRIPTION` feeds the root HTML metadata.
 
 ```typescript
+import { clientEnv } from "#/env/client-env.ts";
 const appUrl = clientEnv.VITE_APP_URL;
 ```
 
@@ -312,23 +310,23 @@ const appUrl = clientEnv.VITE_APP_URL;
 
 **After any non-trivial code change, check whether the contributor docs need to be updated.** Stale docs are worse than missing docs — a contributor who follows an out-of-date guide loses time and trust.
 
-The contributor-facing docs live in two places:
+The contributor-facing docs all live under `.github/`:
 
 - `.github/CONTRIBUTING.md` — entry point: workflow, code style, commit/PR conventions, links to the deep dives.
-- `docs/LOCALSETUP.md` — environment setup (Node, pnpm, Docker, env vars, db scripts, troubleshooting).
-- `docs/ARCHITECTURE.md` — framework stack, routing, active-game store, the game registry pattern, the feature/game separation rule, "Adding a new game" checklist.
-- `docs/THEMES.md` — per-game theming, palette generation, light/dark handling.
-- `docs/DAL.md` — offline-first data layer, action factories, sync queue.
+- `.github/LOCALSETUP.md` — environment setup (Node, pnpm, Docker, env vars, db scripts, troubleshooting).
+- `.github/ARCHITECTURE.md` — framework stack, routing, active-game store, the game registry pattern, the feature/game separation rule, "Adding a new game" checklist.
+- `.github/THEMES.md` — per-game theming, palette generation, light/dark handling.
+- `.github/DAL.md` — offline-first data layer, action factories, sync queue.
 
 And `CLAUDE.md` itself (this file) is the source of truth for AI-assisted work — keep it in sync with the contributor docs when the underlying behavior changes.
 
 Use this checklist when finishing a change:
 
 - Did you add, remove, or rename a `pnpm` script? Update `CLAUDE.md` Commands, `CONTRIBUTING.md`, and `LOCALSETUP.md`.
-- Did you add or change an env var? Update `.env.local.example`, `src/config/server-env.ts`, `CLAUDE.md` Env vars, `LOCALSETUP.md` config table, and `ARCHITECTURE.md` Env vars. **If it's a client-side `VITE_*` var, also add it to `env.d.ts`'s `ImportMetaEnv` interface** — without that, `import.meta.env.VITE_FOO` won't typecheck.
-- Did you add a new game, change the registry shape, or change "Adding a new game" steps? Update `CLAUDE.md` Architecture and `docs/ARCHITECTURE.md`.
-- Did you change the theme system (palette generator, light/dark switching, registry expansion)? Update `docs/THEMES.md`.
-- Did you change DAL action shapes, the sync flow, or the file conventions under `src/features/dal/` or `src/games/*/dal/`? Update `docs/DAL.md` and `src/features/dal/DIAGRAM.md` if the diagrams are now wrong.
-- Did you change routing structure (root shell, provider chain, profile redirect, `$gameId` route behavior)? Update `CLAUDE.md` Routing and `docs/ARCHITECTURE.md` Routing.
+- Did you add or change an env var? Update `.env.local.example`, the matching schema in `src/env/server-env.ts` or `src/env/client-env.ts`, the required-key list in `src/env/validate-required.ts`, `CLAUDE.md` Env vars, `LOCALSETUP.md` config table, and `ARCHITECTURE.md` Env vars. **If it's a client-side `VITE_*` var, also add it to `src/env.d.ts`'s `ImportMetaEnv` interface** — without that, `import.meta.env.VITE_FOO` won't typecheck.
+- Did you add a new game, change the registry shape, or change "Adding a new game" steps? Update `CLAUDE.md` Architecture and `.github/ARCHITECTURE.md`.
+- Did you change the theme system (palette generator, light/dark switching, registry expansion)? Update `.github/THEMES.md`.
+- Did you change DAL action shapes, the sync flow, or the file conventions under `src/features/dal/` or `src/games/*/dal/`? Update `.github/DAL.md`.
+- Did you change routing structure (root shell, provider chain, profile redirect, `$gameId` route behavior)? Update `CLAUDE.md` Routing and `.github/ARCHITECTURE.md` Routing.
 
 If you're unsure whether a change warrants a doc update, mention it in your response so the user can decide — don't silently skip it.

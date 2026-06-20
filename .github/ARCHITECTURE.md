@@ -233,33 +233,36 @@ Two aliases are declared in **both** `package.json` `imports` and `tsconfig.json
 
 ## Env vars
 
-All env vars are validated by zod in `src/validate-required.ts`. `.env.local.example` is the canonical template.
+Env validation lives in `src/env/`: `server-env.ts` (zod-validated `serverEnv`), `client-env.ts` (zod-validated `clientEnv`), and `validate-required.ts` (a startup presence check for every required key). `.env.local.example` is the canonical template.
 
 > [!IMPORTANT]
-> Never read `process.env` directly. Always use the type-safe accessors below.
+> Never read `process.env` or `import.meta.env` directly. Always use the type-safe accessors below.
 
-**Server (private) vars** — import `serverEnv` from `#/src/server-env.ts`. Keys: `DATABASE_URL`, `NODE_ENV`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `RESEND_KEY`.
+**Server (private) vars** — import `serverEnv` from `#/env/server-env.ts`. Keys: `DATABASE_URL`, `NODE_ENV`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `RESEND_KEY`.
 
 ```typescript
-import { serverEnv } from "#/src/env";
+import { serverEnv } from "#/env/server-env.ts";
 
 const url = serverEnv.DATABASE_URL;
 ```
 
-**Client (public) vars** — must be prefixed `VITE_*` and accessed via `clientEnv`. Keys: `VITE_APP_NAME`, `VITE_APP_URL`, `VITE_CLOUDFRONT_URL`.
+**Client (public) vars** — must be prefixed `VITE_*` and accessed via `clientEnv` (imported from `#/env/client-env.ts`). Keys: `VITE_APP_NAME`, `VITE_APP_DESCRIPTION`, `VITE_APP_URL`, `VITE_APP_NOREPLY_EMAIL`, `VITE_CLOUDFRONT_URL`, `VITE_LOCAL_ADMIN_EMAIL`, `VITE_LOCAL_ADMIN_PASSWORD`, `VITE_LOCAL_USER_EMAIL`, `VITE_LOCAL_USER_PASSWORD`. The four `VITE_LOCAL_*` vars seed local admin/user accounts via `prisma/seed.ts`; `VITE_APP_NOREPLY_EMAIL` is the From address for Resend auth emails; `VITE_APP_DESCRIPTION` feeds the root HTML metadata.
 
 ```typescript
+import { clientEnv } from "#/env/client-env.ts";
+
 const appUrl = clientEnv.VITE_APP_URL;
 ```
 
-Client-side `clientEnv` is **type-safe** — the `ImportMetaEnv` interface in `env.d.ts` (at the repo root) declares every `VITE_*` key. If a key isn't listed there, TypeScript will reject `clientEnv.VITE_FOO`. This is intentional: it forces every client-side env var to be explicitly opted in, so typos and missing config are caught at compile time rather than silently resolving to `undefined` at runtime.
+Client-side `clientEnv` is **type-safe** — the `ImportMetaEnv` interface in `src/env.d.ts` declares every `VITE_*` key. If a key isn't listed there, TypeScript will reject `clientEnv.VITE_FOO`. This is intentional: it forces every client-side env var to be explicitly opted in, so typos and missing config are caught at compile time rather than silently resolving to `undefined` at runtime.
 
 If you need a new env var, add it to:
 
 1. `.env.local.example` (with a comment explaining what it's for)
-2. `src/config/server-env.ts` (the zod schema)
-3. **`env.d.ts`** — only if it's a client-side `VITE_*` var. Add a `readonly VITE_FOO: string` line to the `ImportMetaEnv` interface so `clientEnv.VITE_FOO` is typed.
-4. The README's "Configuration" section if it's user-facing
+2. The matching zod schema — `src/env/server-env.ts` or `src/env/client-env.ts`
+3. The required-key list in `src/env/validate-required.ts`
+4. **`src/env.d.ts`** — only if it's a client-side `VITE_*` var. Add a `readonly VITE_FOO: string` line to the `ImportMetaEnv` interface so `clientEnv.VITE_FOO` is typed.
+5. The README's "Configuration" section if it's user-facing
 
 ## Where to go next
 

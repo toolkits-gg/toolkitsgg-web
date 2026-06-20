@@ -26,6 +26,7 @@ core/
   define-action.ts            # defineDalRead / defineDalWrite - the action factories
   choose-backend.ts           # remote-vs-local selection logic
   to-query-options.ts         # adapts a DalRead to TanStack Query options
+  presence-sync-handler.ts    # shared SyncHandler factory for presence-toggle entities
   types.ts                    # DalContext, DalRead, DalWrite, PendingOp, etc.
 hooks/
   useDalQuery / useDalSuspenseQuery
@@ -38,13 +39,10 @@ local/
   IndexedDB constants, local-db.ts (prisma-idb wrapper), shared local row types
 queue/
   pending-ops.ts              # PendingOp storage in IndexedDB
-  syncOps()                   # the runner that drains the queue
-  Last-write-wins resolution
+  sync-runner.ts              # syncOps() / forceSyncOp() - drains the queue
+  last-write-wins.ts          # last-write-wins conflict resolution
+  apply-pending-ops.ts        # applyPendingOpServerFn the runner calls; dispatches by entity
   usePendingOps               # observe pending ops from React
-server/
-  apply-pending-ops.ts        # server function the sync runner calls; dispatches by entity
-  presence-sync-handler.ts    # shared SyncHandler factory for presence-toggle entities
-  Cross-cutting collected-item handler + sync glue
 ```
 
 The sync runner uploads every queued op through the single `applyPendingOpServerFn`, which dispatches to the right `SyncHandler` by `op.entity`. There is no client-side write-action registry - server-side dispatch is the only routing layer.
@@ -120,7 +118,7 @@ Write actions carry more metadata because they need to participate in the sync q
 - **`invalidates`** - query keys to invalidate after the write succeeds. This is what makes related lists re-fetch.
 - **`buildIdempotencyKey`** - used for de-duplication on the server when the same op flushes twice (network retry, etc.). Include the user id and a stable identifier from the input.
 - **`describe`** _(optional)_ - a `PendingOpSummary` snapshot so the data-sync UI can show a friendly description of the queued op.
-- **`getServerUpdatedAt`** _(optional)_ - reads the server record's `updatedAt` before the local write and stores it on the op as the last-write-wins baseline (see DIAGRAM.md). Omit it for pure creates; actions without it fall back to comparing the op's own creation time.
+- **`getServerUpdatedAt`** _(optional)_ - reads the server record's `updatedAt` before the local write and stores it on the op as the last-write-wins baseline (resolution lives in `queue/last-write-wins.ts`). Omit it for pure creates; actions without it fall back to comparing the op's own creation time.
 
 There is **no `sync` field**. Every queued op is uploaded by the sync runner through the same `applyPendingOpServerFn`, which dispatches by `entity` - so wiring sync is just registering the server-side handler.
 
@@ -187,11 +185,11 @@ The shortest path:
 
 4. **Define the actions** (`<entity>.actions.ts`) with `defineDalRead` / `defineDalWrite` - see the examples above.
 
-5. **(Writes only)** Add the sync handler in `sync-handler.ts`. It receives the `PendingOp` and applies it to Postgres, with last-write-wins on conflicts. If the entity is a simple presence toggle (a row that either exists or not, with no mutable fields - like collected items or favorited games), reuse `createPresenceToggleSyncHandler` from `#/features/dal/server/presence-sync-handler` instead of hand-writing the delete/upsert + LWW branching.
+5. **(Writes only)** Add the sync handler in `sync-handler.ts`. It receives the `PendingOp` and applies it to Postgres, with last-write-wins on conflicts. If the entity is a simple presence toggle (a row that either exists or not, with no mutable fields - like collected items or favorited games), reuse `createPresenceToggleSyncHandler` from `#/features/dal/core/presence-sync-handler` instead of hand-writing the delete/upsert + LWW branching.
 
 6. **(Writes only)** Register the handler under its `entity` key so `applyPendingOpServerFn` can dispatch to it:
    - **Game-scoped** - add it to `src/features/game/registry/game-sync-handler-registry.ts`.
-   - **Cross-game** - add it to the `handlers` map in `src/features/dal/server/apply-pending-ops.ts`.
+   - **Cross-game** - add it to the `handlers` map in `src/features/dal/queue/apply-pending-ops.ts`.
 
 7. **Use it from components** with `useDalQuery` / `useDalMutation`.
 

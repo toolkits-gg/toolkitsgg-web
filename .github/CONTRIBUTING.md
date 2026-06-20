@@ -24,10 +24,10 @@ If you ever get stuck, come say hi in the [Discord](https://discord.gg/VQF23tPKy
 
 ## Local setup
 
-A full step-by-step is in [`docs/LOCALSETUP.md`](LOCALSETUP.md) — read that first. The TL;DR:
+A full step-by-step is in [`LOCALSETUP.md`](LOCALSETUP.md) — read that first. The TL;DR:
 
 ```bash
-# 1. Install Node 22+, pnpm 11+, and Docker (see docs/LOCALSETUP.md)
+# 1. Install Node 22+, pnpm 11+, and Docker (see LOCALSETUP.md)
 # 2. Clone and install
 git clone https://github.com/toolkits-gg/toolkitsgg-web.git
 cd toolkitsgg-web
@@ -58,11 +58,11 @@ src/
   components/        # Shared React components
   integrations/      # Third-party glue (tanstack-query, prisma-idb)
   emails/            # React Email templates (auth)
-  config/server-env.ts      # zod-validated env accessors — never read process.env directly
+  env/               # zod-validated env accessors — never read process.env directly
 prisma/
   schema.prisma      # GameId enum + base models
   models/            # Per-game .prisma files (auto-discovered)
-docs/                # Architecture, themes, DAL, local setup
+.github/             # Contributor docs: ARCHITECTURE, THEMES, DAL, LOCALSETUP
 ```
 
 The most important rule for newcomers: **game-specific code never lives in `src/features/`**. If you find yourself reaching for a `switch (gameId)` inside a feature module, stop — that logic belongs in `src/games/<gameId>/`. See [Architecture](ARCHITECTURE.md) for the registry pattern.
@@ -103,7 +103,7 @@ Biome enforces formatting and linting; the config is in `biome.json`.
 - **`import type`** for type-only imports (strict `verbatimModuleSyntax`).
 - **No manual memoization** (`useMemo`, `useCallback`, `React.memo`) for ordinary values — the React Compiler is enabled and handles this. Reach for them only when you genuinely need stable identity.
 - **Path aliases:** `#/` -> `./src/`, `@/prisma` -> `./prisma/client`. Never import from `prisma/generated/prisma` directly.
-- **Env vars:** import `serverEnv` from `#/config/env` (server) or read `clientEnv.VITE_*` (client). Never use `process.env` directly.
+- **Env vars:** import `serverEnv` from `#/env/server-env.ts` (server) or `clientEnv` from `#/env/client-env.ts` and read `clientEnv.VITE_*` (client). Never use `process.env` or `import.meta.env` directly.
 - **Comments are off by default.** Only add one when the *why* is non-obvious. Don't restate what the code does.
 
 ## Commit & PR conventions

@@ -107,6 +107,13 @@ Then open `.env.local` in your editor and fill in the values below.
 | `BETTER_AUTH_URL` | Where the app lives | `http://localhost:3000` for local dev |
 | `VITE_APP_URL` | Same — public URL of the app | `http://localhost:3000` for local dev |
 | `VITE_APP_NAME` | Shown in page titles | `"Toolkits.gg"` |
+| `VITE_APP_DESCRIPTION` | Site description used in HTML metadata | Leave the default from `.env.local.example` |
+| `VITE_APP_NOREPLY_EMAIL` | From address for Resend auth emails | Leave the default from `.env.local.example` |
+| `VITE_LOCAL_ADMIN_EMAIL` / `VITE_LOCAL_ADMIN_PASSWORD` | Credentials for the seeded local admin account (`pnpm db:seed`) | Leave the defaults from `.env.local.example` |
+| `VITE_LOCAL_USER_EMAIL` / `VITE_LOCAL_USER_PASSWORD` | Credentials for the seeded local user account (`pnpm db:seed`) | Leave the defaults from `.env.local.example` |
+
+> [!NOTE]
+> Env validation treats every variable in this required table as mandatory — the app throws at startup if any is missing. The `VITE_APP_*` and `VITE_LOCAL_*` rows above ship with working defaults in `.env.local.example`, so copying the template is enough; you only need to fill in `BETTER_AUTH_SECRET` yourself.
 
 **Optional — leave blank if you don't need them:**
 
@@ -117,9 +124,9 @@ Then open `.env.local` in your editor and fill in the values below.
 | `VITE_CLOUDFRONT_URL`                         | Image CDN for almost all project images. (# TODO: Make assets available for self-hosted CDN).                                                                                                                                                                   |
 
 > [!IMPORTANT]
-> All env vars are validated by zod (a TypeScript validation library) in `src/config/server-env.ts`. If you start the app with a missing or malformed value, you'll see a clear error message at startup — read it; it usually tells you exactly what's wrong.
+> All env vars are validated by zod (a TypeScript validation library) in `src/env/` (`server-env.ts` and `client-env.ts`), with a startup presence check in `src/env/validate-required.ts`. If you start the app with a missing or malformed value, you'll see a clear error message at startup — read it; it usually tells you exactly what's wrong.
 >
-> In code, server-side files import `serverEnv` from `#/config/env`. Client-side files read `clientEnv.VITE_*`. You don't need to know this to get set up, but it's good to know once you start contributing.
+> In code, server-side files import `serverEnv` from `#/env/server-env.ts`. Client-side files import `clientEnv` from `#/env/client-env.ts` and read `clientEnv.VITE_*`. You don't need to know this to get set up, but it's good to know once you start contributing.
 
 ## 5. Start Postgres
 
