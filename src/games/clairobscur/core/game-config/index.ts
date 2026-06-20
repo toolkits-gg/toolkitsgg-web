@@ -1,4 +1,4 @@
-import type { GameConfig } from "#/features/game/core/types";
+import type { GameConfig } from "#/features/game/types.ts";
 import { ITEMS } from "#/games/clairobscur/core/game-config/items";
 import { METADATA } from "#/games/clairobscur/core/game-config/metadata";
 import { PAGES } from "#/games/clairobscur/core/game-config/pages";

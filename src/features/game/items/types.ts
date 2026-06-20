@@ -1,6 +1,6 @@
 import type { SingleParserBuilder } from "nuqs";
 import type { ReactNode } from "react";
-import type { DalReadAction, DalWriteAction } from "#/features/dal/core/types";
+import type { DalReadAction, DalWriteAction } from "#/features/dal/types.ts";
 
 /**
  * Shared item definition across the application

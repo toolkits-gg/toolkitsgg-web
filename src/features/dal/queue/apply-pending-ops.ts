@@ -2,8 +2,8 @@
 
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { requireUserId } from "#/features/auth/dal/require-user.server.ts";
-import type { SyncHandler, SyncResult } from "#/features/dal/core/types.ts";
+import { requireUserId } from "#/features/auth/require-user.server.ts";
+import type { SyncHandler, SyncResult } from "#/features/dal/types.ts";
 import { favoriteGameSyncHandler } from "#/features/game/dal/favorite-games/sync-handler.ts";
 import {
 	userAvatarOverrideHandler,

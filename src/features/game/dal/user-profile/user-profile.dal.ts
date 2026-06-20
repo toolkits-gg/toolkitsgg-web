@@ -1,14 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
-import { prisma } from "#/db.ts";
 import {
 	getOptionalUserId,
 	requireUserId,
-} from "#/features/auth/dal/require-user.server.ts";
-import {
-	defineDalRead,
-	defineDalWrite,
-} from "#/features/dal/core/define-action.ts";
-import type { DalContext } from "#/features/dal/core/types.ts";
+} from "#/features/auth/require-user.server.ts";
+import { defineDalRead, defineDalWrite } from "#/features/dal/define-action.ts";
+import type { DalContext } from "#/features/dal/types.ts";
+import { prisma } from "#/features/db/client.ts";
 import {
 	deleteLocalAvatarOverride,
 	getLocalAvatarOverrides,

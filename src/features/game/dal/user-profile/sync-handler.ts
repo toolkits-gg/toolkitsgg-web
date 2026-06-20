@@ -1,4 +1,4 @@
-import type { SyncHandler } from "#/features/dal/core/types.ts";
+import type { SyncHandler } from "#/features/dal/types.ts";
 import { GameId, prisma } from "@/prisma";
 
 const userProfileHandler: SyncHandler = async (op, userId) => {

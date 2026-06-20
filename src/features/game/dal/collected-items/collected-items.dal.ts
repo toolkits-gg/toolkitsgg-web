@@ -1,11 +1,8 @@
 // Reusable DAL actions for any game's collected-item feature.
 // Each game instantiates this with its own entity name, IDB model accessor, and server functions.
 
-import {
-	defineDalRead,
-	defineDalWrite,
-} from "#/features/dal/core/define-action";
-import type { DalContext } from "#/features/dal/core/types";
+import { defineDalRead, defineDalWrite } from "#/features/dal/define-action.ts";
+import type { DalContext } from "#/features/dal/types.ts";
 import {
 	type CollectedItemIDBDelegate,
 	createCollectedItemsIdb,

@@ -1,4 +1,4 @@
-import type { GameMetadata } from "#/features/game/core/types";
+import type { GameMetadata } from "#/features/game/types.ts";
 import { GAME_ID } from "#/games/clairobscur/core/constants";
 import { ClairObscurLogo } from "#/games/clairobscur/core/Logo";
 

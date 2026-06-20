@@ -1,8 +1,8 @@
 import type { ComponentType } from "react";
 import type { LogoSize } from "#/components/AppLogo";
-import type { GameAvatar, GameConfig } from "#/features/game/core/types";
-import type { ToolkitThemeDefinition } from "#/features/theme/core/types";
+import type { GameAvatar, GameConfig } from "#/features/game/types.ts";
 import { defaultTheme } from "#/features/theme/themes/default-theme";
+import type { ToolkitThemeDefinition } from "#/features/theme/types.ts";
 import { GAME_CONFIG as CLAIROBSCUR_CONFIG } from "#/games/clairobscur/core/game-config";
 import { GAME_CONFIG as REMNANT2_CONFIG } from "#/games/remnant2/core/game-config";
 import { GAME_CONFIG as SLAYTHESPIRE2_CONFIG } from "#/games/slaythespire2/core/game-config";

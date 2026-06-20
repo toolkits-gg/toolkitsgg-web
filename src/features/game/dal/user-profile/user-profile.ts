@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { requireUserId } from "#/features/auth/dal/require-user.server.ts";
+import { requireUserId } from "#/features/auth/require-user.server.ts";
 import { getGameAvatars } from "#/features/game/registry/game-registry.tsx";
 import { GameId, prisma } from "@/prisma";
 

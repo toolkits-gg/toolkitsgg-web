@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { useDalMutation } from "#/features/dal/hooks/use-dal-mutation";
-import { useDalQuery } from "#/features/dal/hooks/use-dal-query";
+import { useDalMutation } from "#/features/dal/use-dal-mutation.ts";
+import { useDalQuery } from "#/features/dal/use-dal-query.ts";
 import type {
 	CollectedItemsViewMode,
 	CollectItemInput,
@@ -51,5 +51,5 @@ const useCollectedItems = ({
 	return { collectedIds, isPublicView, handleCollect, handleUncollect };
 };
 
-export { useCollectedItems };
 export type { UseCollectedItemsArgs, UseCollectedItemsResult };
+export { useCollectedItems };

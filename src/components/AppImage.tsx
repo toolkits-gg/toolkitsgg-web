@@ -3,7 +3,7 @@ import {
 	type ImageProps as MantineImageProps,
 } from "@mantine/core";
 import { clientEnv } from "#/env/client-env.ts";
-import IMAGE_SIZES from "#/features/game/core/image-sizes.json";
+import IMAGE_SIZES from "#/features/game/image-sizes.json";
 
 type SizePreset = keyof typeof IMAGE_SIZES;
 

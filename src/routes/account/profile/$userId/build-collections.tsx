@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
 	buildTabHead,
 	loadProfileTabData,
-} from "#/features/auth/core/profile-tab-head";
+} from "#/features/auth/profile-tab-head.ts";
 
 function BuildCollections() {
 	return (

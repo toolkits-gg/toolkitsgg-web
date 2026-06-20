@@ -1,4 +1,4 @@
-import type { GameConfig } from "#/features/game/core/types";
+import type { GameConfig } from "#/features/game/types.ts";
 import { ANCIENTS } from "#/games/slaythespire2/core/item-data/ancients.ts";
 import { CARDS } from "#/games/slaythespire2/core/item-data/cards";
 import { CHARACTERS } from "#/games/slaythespire2/core/item-data/characters";

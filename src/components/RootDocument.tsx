@@ -20,7 +20,7 @@ import { SocialMedia } from "#/components/SocialMedia.tsx";
 import { GettingStartedWizard } from "#/components/wizards/getting-started/components/GettingStartedWizard.tsx";
 import { useGettingStartedWizard } from "#/components/wizards/getting-started/hooks/use-getting-started-wizard.ts";
 import { clientEnv } from "#/env/client-env.ts";
-import { GameSwitcher } from "#/features/game/core/GameSwitcher.tsx";
+import { GameSwitcher } from "#/features/game/GameSwitcher.tsx";
 import classes from "./RootDocument.module.css";
 
 export const RootDocument = ({ children }: PropsWithChildren) => {

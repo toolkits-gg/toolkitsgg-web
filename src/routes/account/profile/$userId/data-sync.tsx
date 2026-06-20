@@ -16,7 +16,7 @@ import { type PropsWithChildren, useEffect, useState } from "react";
 import {
 	buildTabHead,
 	loadProfileTabData,
-} from "#/features/auth/core/profile-tab-head";
+} from "#/features/auth/profile-tab-head.ts";
 import { clearSynced, deleteOp } from "#/features/dal/queue/pending-ops";
 import { forceSyncOp, syncOps } from "#/features/dal/queue/sync-runner";
 import type { PendingOp } from "#/features/dal/queue/types";

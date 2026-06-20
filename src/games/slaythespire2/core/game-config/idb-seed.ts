@@ -1,4 +1,4 @@
-import type { GameIDBSeed } from "#/features/game/core/types";
+import type { GameIDBSeed } from "#/features/game/types.ts";
 import { ITEMS } from "#/games/slaythespire2/core/game-config/items";
 import { getIDBClient } from "#/integrations/prisma-idb/idb-client";
 

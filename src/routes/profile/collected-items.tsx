@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useGameId } from "#/features/game/core/use-game-id";
 import { getGameConfig } from "#/features/game/registry/game-registry";
+import { useGameId } from "#/features/game/use-game-id.ts";
 
 function CollectedItems() {
 	const gameId = useGameId();

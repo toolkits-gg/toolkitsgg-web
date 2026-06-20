@@ -1,4 +1,4 @@
-import type { GameMetadata } from "#/features/game/core/types";
+import type { GameMetadata } from "#/features/game/types.ts";
 import { GAME_ID } from "#/games/slaythespire2/core/constants";
 import { SlayTheSpire2Logo } from "#/games/slaythespire2/core/Logo";
 

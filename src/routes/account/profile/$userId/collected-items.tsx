@@ -3,13 +3,13 @@ import { useEffect } from "react";
 import {
 	buildTabHead,
 	loadProfileTabData,
-} from "#/features/auth/core/profile-tab-head";
-import { useGameId } from "#/features/game/core/use-game-id";
+} from "#/features/auth/profile-tab-head.ts";
 import {
 	getGameConfig,
 	getGameMetadata,
 	isRegisteredGameId,
 } from "#/features/game/registry/game-registry";
+import { useGameId } from "#/features/game/use-game-id.ts";
 import type { GameId } from "@/prisma";
 
 type CollectedItemsSearch = {

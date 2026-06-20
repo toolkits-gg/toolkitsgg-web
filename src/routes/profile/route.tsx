@@ -2,8 +2,8 @@ import { Box, Stack } from "@mantine/core";
 import { useNetwork } from "@mantine/hooks";
 import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { ProfileHeader } from "#/features/auth/core/ProfileHeader";
-import { ProfileTabNav } from "#/features/auth/core/ProfileTabNav";
+import { ProfileHeader } from "#/features/auth/ProfileHeader.tsx";
+import { ProfileTabNav } from "#/features/auth/ProfileTabNav.tsx";
 import { useSession } from "#/integrations/better-auth/auth-client";
 
 const LocalProfileLayout = () => {

@@ -1,4 +1,4 @@
-import type { GameMetadata } from "#/features/game/core/types";
+import type { GameMetadata } from "#/features/game/types.ts";
 import { GAME_ID } from "#/games/remnant2/core/constants";
 import { Remnant2Logo } from "#/games/remnant2/core/Logo";
 

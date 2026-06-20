@@ -1,5 +1,5 @@
 import { AppImage, type AppImageProps } from "#/components/AppImage";
-import { useGameId } from "#/features/game/core/use-game-id";
+import { useGameId } from "#/features/game/use-game-id.ts";
 
 type GameImageProps = AppImageProps & {};
 

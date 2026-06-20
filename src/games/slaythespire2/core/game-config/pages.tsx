@@ -1,7 +1,6 @@
 import { MultiSelect, Stack, Text } from "@mantine/core";
 import { parseAsString } from "nuqs";
 import type { ReactNode } from "react";
-import type { GamePages } from "#/features/game/core/types";
 import { AppItemPage } from "#/features/game/items/AppItemPage";
 import type { AppItem, GameFilterConfig } from "#/features/game/items/types";
 import {
@@ -10,6 +9,7 @@ import {
 	itemMatchesCategory,
 	resolveLinkedItems,
 } from "#/features/game/items/utils";
+import type { GamePages } from "#/features/game/types.ts";
 import { ITEMS } from "#/games/slaythespire2/core/game-config/items";
 import { slayTheSpire2CollectedItemsDal } from "#/games/slaythespire2/dal/collected-items";
 

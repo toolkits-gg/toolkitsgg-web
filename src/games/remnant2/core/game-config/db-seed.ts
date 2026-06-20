@@ -1,4 +1,4 @@
-import type { GameDBSeed } from "#/features/game/core/types";
+import type { GameDBSeed } from "#/features/game/types.ts";
 import { ALL_REMNANT2_ITEMS } from "#/games/remnant2/core/game-config/items";
 import { prisma } from "@/prisma";
 

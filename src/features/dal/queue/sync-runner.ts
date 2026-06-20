@@ -1,6 +1,5 @@
 // Orchestrates syncing a batch of pending ops to the server sequentially.
 
-import type { SyncResult } from "#/features/dal/core/types";
 import { applyPendingOpServerFn } from "#/features/dal/queue/apply-pending-ops.ts";
 import {
 	deleteOp,
@@ -8,6 +7,7 @@ import {
 	markStatus,
 } from "#/features/dal/queue/pending-ops";
 import type { PendingOp } from "#/features/dal/queue/types";
+import type { SyncResult } from "#/features/dal/types.ts";
 
 interface SyncAllOptions {
 	/** Called before each op is processed — use to drive UI progress indicators. */

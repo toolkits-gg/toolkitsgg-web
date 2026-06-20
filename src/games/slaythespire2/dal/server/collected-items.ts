@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { requireUserId } from "#/features/auth/dal/require-user.server";
+import { requireUserId } from "#/features/auth/require-user.server.ts";
 import { createCollectedItemHandlers } from "#/features/game/dal/collected-items/collected-items.ts";
 import { prisma } from "@/prisma";
 

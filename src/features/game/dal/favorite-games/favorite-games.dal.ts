@@ -1,9 +1,6 @@
-import {
-	defineDalRead,
-	defineDalWrite,
-} from "#/features/dal/core/define-action.ts";
-import type { DalContext } from "#/features/dal/core/types.ts";
+import { defineDalRead, defineDalWrite } from "#/features/dal/define-action.ts";
 import type { LocalUserFavoriteGame } from "#/features/dal/local/types.ts";
+import type { DalContext } from "#/features/dal/types.ts";
 import {
 	deleteLocalFavoriteGame,
 	listLocalFavoriteGames,

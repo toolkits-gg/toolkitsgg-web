@@ -5,11 +5,11 @@ import type { AppItem, GameFilterConfig } from "#/features/game/items/types";
 import type { AnyGameConfig } from "#/features/game/registry/game-registry";
 import {
 	dimUncollectedItemsParser,
-	searchParser,
 	showCollectableOnlyParser,
 	showCollectedItemsParser,
 	showUncollectedItemsParser,
-} from "#/search-params";
+} from "#/features/nuqs/parsers/item-collection.ts";
+import { searchParser } from "#/features/nuqs/parsers/search.ts";
 
 const itemLookupParsers = {
 	search: searchParser,
@@ -19,9 +19,9 @@ const itemLookupParsers = {
 	showCollectableOnly: showCollectableOnlyParser,
 };
 
-// Hide uncollected items by default on the Profile collected items tab
 const collectedItemsTabParsers = {
 	...itemLookupParsers,
+	// Hide uncollected items by default on the Profile collected items tab
 	showUncollectedItems: parseAsBoolean.withDefault(false).withOptions({
 		shallow: true,
 		clearOnDefault: true,
@@ -258,5 +258,5 @@ const useItemFilters = ({
 	};
 };
 
+export type { UniversalParamKey, UseItemFiltersArgs, UseItemFiltersResult };
 export { useItemFilters };
-export type { UseItemFiltersArgs, UseItemFiltersResult, UniversalParamKey };

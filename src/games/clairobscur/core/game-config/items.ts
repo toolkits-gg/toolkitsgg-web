@@ -1,4 +1,4 @@
-import type { GameConfig } from "#/features/game/core/types";
+import type { GameConfig } from "#/features/game/types.ts";
 import { CHARACTERS } from "#/games/clairobscur/core/item-data/characters";
 import type { ClairObscurLocalItem } from "#/games/clairobscur/core/types.ts";
 import type { ClairObscurItemCategory } from "@/prisma";

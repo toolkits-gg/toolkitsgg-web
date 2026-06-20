@@ -14,7 +14,7 @@ import {
 	Tooltip,
 } from "@mantine/core";
 
-import { GREEN, RED } from "#/features/theme/core/constants";
+import { GREEN, RED } from "#/features/theme/constants.ts";
 
 import inputClasses from "../modules/Input.module.css";
 import modalClasses from "../modules/Modal.module.css";

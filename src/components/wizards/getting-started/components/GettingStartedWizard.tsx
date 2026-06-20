@@ -1,7 +1,7 @@
 import { useMediaQuery } from "@mantine/hooks";
 import { LOCALSTORAGE_KEY_PREFIX } from "#/components/wizards/getting-started/constants/localstorage-keys";
 import { GETTING_STARTED_STEPS } from "#/components/wizards/getting-started/constants/steps";
-import { useGameId } from "#/features/game/core/use-game-id";
+import { useGameId } from "#/features/game/use-game-id.ts";
 import { Wizard } from "#/features/wizard/Wizard";
 
 type GettingStartedWizardProps = {

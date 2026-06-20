@@ -1,6 +1,6 @@
-import type { GamePages } from "#/features/game/core/types";
 import { AppItemPage } from "#/features/game/items/AppItemPage";
 import { resolveLinkedItems } from "#/features/game/items/utils.ts";
+import type { GamePages } from "#/features/game/types.ts";
 import { ITEMS } from "#/games/clairobscur/core/game-config/items";
 import { clairObscurCollectedItemsDal } from "#/games/clairobscur/dal/collected-items";
 

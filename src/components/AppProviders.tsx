@@ -1,7 +1,7 @@
 import { NuqsAdapter } from "nuqs/adapters/tanstack-router";
 import type { PropsWithChildren } from "react";
-import { ScreenshotPreviewProvider } from "#/features/screenshot/core/ScreenshotPreviewProvider";
-import { MantineProviderWithTheme } from "#/features/theme/core/MantineProviderWithTheme";
+import { ScreenshotPreviewProvider } from "#/features/screenshot/ScreenshotPreviewProvider.tsx";
+import { MantineProviderWithTheme } from "#/features/theme/MantineProviderWithTheme.tsx";
 
 const AppProviders = ({ children }: PropsWithChildren) => {
 	return (

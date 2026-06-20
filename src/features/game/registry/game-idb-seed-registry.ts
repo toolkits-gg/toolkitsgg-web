@@ -1,4 +1,4 @@
-import type { GameIDBSeed } from "#/features/game/core/types";
+import type { GameIDBSeed } from "#/features/game/types.ts";
 import { clairObscurIDBSeed } from "#/games/clairobscur/core/game-config/idb-seed";
 import { remnant2IDBSeed } from "#/games/remnant2/core/game-config/idb-seed";
 import { slayTheSpire2IDBSeed } from "#/games/slaythespire2/core/game-config/idb-seed";

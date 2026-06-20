@@ -1,4 +1,4 @@
-import type { GameDBSeed } from "#/features/game/core/types";
+import type { GameDBSeed } from "#/features/game/types.ts";
 import { ALL_CLAIROBSCUR_ITEMS } from "#/games/clairobscur/core/game-config/items";
 import { prisma } from "@/prisma";
 

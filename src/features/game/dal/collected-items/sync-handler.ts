@@ -1,9 +1,9 @@
 // SyncHandler for collected items — a presence-toggle entity (collected or not).
 // Delegates the delete/upsert + LWW branching to createPresenceToggleSyncHandler.
 
-import { createPresenceToggleSyncHandler } from "#/features/dal/core/presence-sync-handler.ts";
-import type { SyncHandler } from "#/features/dal/core/types.ts";
+import { createPresenceToggleSyncHandler } from "#/features/dal/presence-sync-handler.ts";
 import type { HasUpdatedAt } from "#/features/dal/queue/last-write-wins.ts";
+import type { SyncHandler } from "#/features/dal/types.ts";
 
 // Structural interface so the same handler works with any game's Prisma model delegate
 // without importing game-specific generated types. Each game passes its own model instance.

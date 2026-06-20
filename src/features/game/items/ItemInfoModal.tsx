@@ -15,15 +15,15 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { LuCamera, LuCheck, LuPlus } from "react-icons/lu";
 import { GameImage } from "#/components/GameImage";
-import { useGameId } from "#/features/game/core/use-game-id";
 import { ItemDescription } from "#/features/game/items/ItemDescription";
 import type { AppItem, CollectItemInput } from "#/features/game/items/types";
 import { getGameMetadata } from "#/features/game/registry/game-registry";
+import { useGameId } from "#/features/game/use-game-id.ts";
 import {
 	ScreenshotContainer,
 	type WatermarkConfig,
-} from "#/features/screenshot/core/ScreenshotContainer";
-import { useScreenshot } from "#/features/screenshot/hooks/use-screenshot";
+} from "#/features/screenshot/ScreenshotContainer.tsx";
+import { useScreenshot } from "#/features/screenshot/use-screenshot.ts";
 
 type ItemInfoModalProps = {
 	item: AppItem;

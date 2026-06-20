@@ -3,7 +3,7 @@ import { notifications } from "@mantine/notifications";
 import { ClientOnly, useRouterState } from "@tanstack/react-router";
 import { LuShare2 } from "react-icons/lu";
 import { clientEnv } from "#/env/client-env.ts";
-import { useGameId } from "#/features/game/core/use-game-id";
+import { useGameId } from "#/features/game/use-game-id.ts";
 
 const ShareCollectionButton = () => {
 	const activeGameId = useGameId();

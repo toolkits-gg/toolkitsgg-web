@@ -20,7 +20,7 @@ If you ever get stuck, come say hi in the [Discord](https://discord.gg/VQF23tPKy
 - **First-time contributors** — look for issues labelled `good first issue` or `help wanted`.
 - **Adding a new game** — read the [Architecture guide](../documentation/ARCHITECTURE.md) end-to-end first; the "Adding a new game" section is your checklist.
 - **Adding a theme** — read the [Themes guide](../documentation/THEMES.md).
-- **Working with persisted data** (collected items, profile, favorites) — read the [DAL guide](DAL.md). The DAL is offline-first; bypassing it will silently break the offline experience.
+- **Working with persisted data** (collected items, profile, favorites) — read the [DAL guide](../documentation/DAL.md). The DAL is offline-first; bypassing it will silently break the offline experience.
 
 ## Local setup
 
@@ -122,7 +122,7 @@ These three docs cover the non-obvious parts of the codebase. Read the one(s) re
 |-----------------------------------|---------------------------------------------------------------------------------------------------------------|
 | [Architecture](../documentation/ARCHITECTURE.md)   | Adding a game, touching the game registry, navigating routes, or wondering "where does this logic belong?"    |
 | [Themes](../documentation/THEMES.md)               | Building a per-game theme, modifying the palette generator, or changing how light/dark switching works        |
-| [DAL (data access layer)](DAL.md) | Adding any persisted state — collected items, profile fields, favorites. Anything that needs to work offline. |
+| [DAL (data access layer)](../documentation/DAL.md) | Adding any persisted state — collected items, profile fields, favorites. Anything that needs to work offline. |
 
 Thanks for contributing! ❤️
 

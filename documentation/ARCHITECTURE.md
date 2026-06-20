@@ -1,9 +1,11 @@
 # Architecture
 
+TODO: This is likely outdated.
+
 This document covers the parts of the codebase that aren't obvious from reading the source: how the framework pieces fit together, how the game-agnostic registry works, and how to add a new game.
 
 > [!TIP]
-> Pair this doc with the [DAL guide](../.github/DAL.md) (persisted data) and the [Themes guide](THEMES.md) (visual identity per game). Most non-trivial changes touch at least two of the three.
+> Pair this doc with the [DAL guide](DAL.md) (persisted data) and the [Themes guide](THEMES.md) (visual identity per game). Most non-trivial changes touch at least two of the three.
 
 ## Framework stack
 
@@ -61,7 +63,7 @@ This is the single most important pattern in the codebase. **Everything game-spe
 
 ### Anatomy of a game
 
-Each game lives at `src/games/<gameId>/` and exposes a `GAME_CONFIG` from `core/game-config/index.ts`:
+Each game lives at `src/games/<gameId>/` and exposes a `GAME_CONFIG` from `core/game-config/client.ts`:
 
 ```typescript
 const GAME_CONFIG = {
@@ -152,12 +154,12 @@ Create `src/games/<newGameId>/` with two top-level folders, `core/` and `dal/`:
 ```
 core/
   game-config/
-    index.ts          # exports GAME_CONFIG satisfies GameConfig<LocalItem, CategoryEnum>
+    client.ts          # exports GAME_CONFIG satisfies GameConfig<LocalItem, CategoryEnum>
     metadata.tsx      # id, name, label, description, faviconSourcePath, renderLogo()
     pages.tsx         # GamePages with renderItemLookup() and renderCollectedItems()
     theme.ts          # ToolkitThemeDefinition (colors, Mantine overrides) — uses generateThemeColors()
     items.ts          # item data + categorization
-    search-params.ts  # nuqs parsers (optional — only if custom filters)
+    nuqs-parsers.ts  # nuqs parsers (optional — only if custom filters)
     avatars.ts        # GameAvatar[] (optional)
     db-seed.ts        # GameDBSeed (initial Postgres data)
     idb-seed.ts       # GameIDBSeed (initial IndexedDB data)
@@ -266,7 +268,7 @@ If you need a new env var, add it to:
 
 ## Where to go next
 
-- **Persisted data** (collected items, profile, favorites) — read the [DAL guide](../.github/DAL.md). The DAL is offline-first; reaching for `useQuery` directly will silently break the offline experience.
+- **Persisted data** (collected items, profile, favorites) — read the [DAL guide](DAL.md). The DAL is offline-first; reaching for `useQuery` directly will silently break the offline experience.
 - **Visual identity per game** — read the [Themes guide](THEMES.md).
 - **Contributing in general** — see [CONTRIBUTING.md](../.github/CONTRIBUTING.md) for workflow and code style.
 

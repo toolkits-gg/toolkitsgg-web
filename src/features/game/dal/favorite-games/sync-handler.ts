@@ -1,4 +1,4 @@
-import { createPresenceToggleSyncHandler } from "#/features/dal/core/presence-sync-handler.ts";
+import { createPresenceToggleSyncHandler } from "#/features/dal/presence-sync-handler.ts";
 import { GameId, prisma } from "@/prisma";
 
 const favoriteGameSyncHandler = createPresenceToggleSyncHandler<GameId>({

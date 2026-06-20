@@ -67,7 +67,7 @@ const THEME: ToolkitThemeDefinition = {
 export { THEME };
 ```
 
-That definition gets attached to the game's `GAME_CONFIG.THEME` in `src/games/<gameId>/core/game-config/index.ts`.
+That definition gets attached to the game's `GAME_CONFIG.THEME` in `src/games/<gameId>/core/game-config/client.ts`.
 
 ### Why `generateThemeColors()`?
 
@@ -101,7 +101,7 @@ Most contributors only need to do this when adding a new game. The full path:
 
 2. **Write `src/games/<gameId>/core/game-config/theme.ts`** following the shape above.
 
-3. **Attach it to the game config** in `src/games/<gameId>/core/game-config/index.ts`:
+3. **Attach it to the game config** in `src/games/<gameId>/core/game-config/client.ts`:
 
    ```typescript
    import { THEME } from "./theme";

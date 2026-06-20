@@ -1,8 +1,8 @@
 import type { MantineThemeOverride } from "@mantine/core";
-import { generateThemeColors } from "#/features/theme/core/generate-palette";
-import type { ToolkitThemeDefinition } from "#/features/theme/core/types";
-import { createThemeColors } from "#/features/theme/core/utils";
+import { generateThemeColors } from "#/features/theme/generate-palette.ts";
 import { baseTheme } from "#/features/theme/themes/base-theme";
+import type { ToolkitThemeDefinition } from "#/features/theme/types.ts";
+import { createThemeColors } from "#/features/theme/utils.ts";
 import { GAME_ID } from "#/games/slaythespire2/core/constants";
 
 const slayTheSpire2ThemeColors = createThemeColors(

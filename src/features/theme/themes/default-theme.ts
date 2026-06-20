@@ -1,8 +1,8 @@
 import type { MantineThemeOverride } from "@mantine/core";
 
-import { BLACK, RED, WHITE } from "#/features/theme/core/constants";
-import { createThemeColors } from "#/features/theme/core/utils";
+import { BLACK, RED, WHITE } from "#/features/theme/constants.ts";
 import { baseTheme } from "#/features/theme/themes/base-theme";
+import { createThemeColors } from "#/features/theme/utils.ts";
 
 const defaultThemeColors = createThemeColors({
 	primary: {

@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
-import { parseCookie, parseSubdomain } from "#/features/game/core/utils";
 import { getValidatedGameId } from "#/features/game/registry/game-registry";
+import { parseCookie, parseSubdomain } from "#/features/game/utils.ts";
 import type { GameId } from "@/prisma";
 
 const ACTIVE_GAME_COOKIE = "active-game";
