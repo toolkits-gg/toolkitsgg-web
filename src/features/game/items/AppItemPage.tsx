@@ -12,7 +12,7 @@ import { useCollectedItems } from "#/features/game/items/use-collected-items";
 import { useItemFilters } from "#/features/game/items/use-item-filters";
 import type { AnyGameConfig } from "#/features/game/registry/game-registry";
 
-type AppItemPageProps = {
+export type AppItemPageProps = {
 	items: AnyGameConfig["ITEMS"];
 	resolveLinkedItems: (item: AppItem) => AppItem[];
 	dal: GameCollectedItemsDal;
@@ -20,7 +20,7 @@ type AppItemPageProps = {
 	viewMode?: CollectedItemsViewMode;
 };
 
-const AppItemPage = ({
+export const AppItemPage = ({
 	items,
 	resolveLinkedItems,
 	dal,
@@ -80,6 +80,3 @@ const AppItemPage = ({
 		</Box>
 	);
 };
-
-export { AppItemPage };
-export type { AppItemPageProps };

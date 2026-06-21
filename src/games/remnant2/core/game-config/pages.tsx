@@ -26,16 +26,16 @@ const REMNANT2_DLC_LABELS: Record<Remnant2DLC, string> = {
 	DLC3: "The Dark Horizon",
 };
 
-function parseDlc(raw: string): TriStateFilterValue {
+const parseDlc = (raw: string): TriStateFilterValue => {
 	if (!raw) return {};
 	try {
 		return JSON.parse(raw) as TriStateFilterValue;
 	} catch {
 		return {};
 	}
-}
+};
 
-function formatDlcLabel(raw: string): string {
+const formatDlcLabel = (raw: string): string => {
 	const dlc = parseDlc(raw);
 	const included = Object.entries(dlc)
 		.filter(([, s]) => s === "include")
@@ -47,9 +47,9 @@ function formatDlcLabel(raw: string): string {
 	if (included.length > 0) parts.push(`+${included.join(", ")}`);
 	if (excluded.length > 0) parts.push(`-${excluded.join(", ")}`);
 	return parts.join(" / ");
-}
+};
 
-const remnant2FilterConfig: GameFilterConfig = {
+const remnant2ItemFilterConfig: GameFilterConfig = {
 	label: "Remnant 2 Filters",
 	parsers: {
 		category: parseAsString.withDefault(""),
@@ -60,14 +60,12 @@ const remnant2FilterConfig: GameFilterConfig = {
 			key: "category",
 			label: "Categories",
 			defaultValue: "",
-			serialize: (v) => v || undefined,
 			formatValue: formatCategoryLabel,
 		},
 		{
 			key: "dlc",
 			label: "DLC",
 			defaultValue: "",
-			serialize: (v) => v || undefined,
 			formatValue: formatDlcLabel,
 		},
 	],
@@ -152,13 +150,13 @@ const remnant2FilterConfig: GameFilterConfig = {
 	},
 };
 
-const PAGES: GamePages = {
+export const PAGES: GamePages = {
 	renderItemLookup: () => (
 		<AppItemPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
 			dal={remnant2CollectedItemsDal}
-			gameFilterConfig={remnant2FilterConfig}
+			gameFilterConfig={remnant2ItemFilterConfig}
 		/>
 	),
 	renderCollectedItems: ({ mode }) => (
@@ -166,11 +164,9 @@ const PAGES: GamePages = {
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
 			dal={remnant2CollectedItemsDal}
-			gameFilterConfig={remnant2FilterConfig}
+			gameFilterConfig={remnant2ItemFilterConfig}
 			viewMode={mode}
 		/>
 	),
 	renderCreateBuild: () => <AppBuildPage />,
 };
-
-export { PAGES };

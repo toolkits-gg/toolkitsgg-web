@@ -69,7 +69,6 @@ type GameFilterDef = {
 	key: string;
 	label: string;
 	defaultValue: string;
-	serialize: (value: string) => string | undefined;
 	formatValue?: (raw: string) => string;
 };
 
