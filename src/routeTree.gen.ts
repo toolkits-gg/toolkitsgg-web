@@ -24,6 +24,7 @@ import { Route as ProfileBuildCollectionsRouteImport } from './routes/profile/bu
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as GameIdItemsRouteImport } from './routes/$gameId/items'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as GameIdBuilderCreateRouteImport } from './routes/$gameId/builder/create'
 import { Route as AccountProfileUserIdRouteRouteImport } from './routes/account/profile/$userId/route'
 import { Route as AccountProfileUserIdIndexRouteImport } from './routes/account/profile/$userId/index'
 import { Route as AccountProfileUserIdLikedBuildsRouteImport } from './routes/account/profile/$userId/liked-builds'
@@ -108,6 +109,11 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GameIdBuilderCreateRoute = GameIdBuilderCreateRouteImport.update({
+  id: '/builder/create',
+  path: '/builder/create',
+  getParentRoute: () => GameIdRouteRoute,
+} as any)
 const AccountProfileUserIdRouteRoute =
   AccountProfileUserIdRouteRouteImport.update({
     id: '/account/profile/$userId',
@@ -173,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/profile/liked-builds': typeof ProfileLikedBuildsRoute
   '/profile/': typeof ProfileIndexRoute
   '/account/profile/$userId': typeof AccountProfileUserIdRouteRouteWithChildren
+  '/$gameId/builder/create': typeof GameIdBuilderCreateRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/account/profile/$userId/build-collections': typeof AccountProfileUserIdBuildCollectionsRoute
   '/account/profile/$userId/collected-items': typeof AccountProfileUserIdCollectedItemsRoute
@@ -196,6 +203,7 @@ export interface FileRoutesByTo {
   '/profile/created-builds': typeof ProfileCreatedBuildsRoute
   '/profile/liked-builds': typeof ProfileLikedBuildsRoute
   '/profile': typeof ProfileIndexRoute
+  '/$gameId/builder/create': typeof GameIdBuilderCreateRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/account/profile/$userId/build-collections': typeof AccountProfileUserIdBuildCollectionsRoute
   '/account/profile/$userId/collected-items': typeof AccountProfileUserIdCollectedItemsRoute
@@ -222,6 +230,7 @@ export interface FileRoutesById {
   '/profile/liked-builds': typeof ProfileLikedBuildsRoute
   '/profile/': typeof ProfileIndexRoute
   '/account/profile/$userId': typeof AccountProfileUserIdRouteRouteWithChildren
+  '/$gameId/builder/create': typeof GameIdBuilderCreateRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/account/profile/$userId/build-collections': typeof AccountProfileUserIdBuildCollectionsRoute
   '/account/profile/$userId/collected-items': typeof AccountProfileUserIdCollectedItemsRoute
@@ -249,6 +258,7 @@ export interface FileRouteTypes {
     | '/profile/liked-builds'
     | '/profile/'
     | '/account/profile/$userId'
+    | '/$gameId/builder/create'
     | '/api/auth/$'
     | '/account/profile/$userId/build-collections'
     | '/account/profile/$userId/collected-items'
@@ -272,6 +282,7 @@ export interface FileRouteTypes {
     | '/profile/created-builds'
     | '/profile/liked-builds'
     | '/profile'
+    | '/$gameId/builder/create'
     | '/api/auth/$'
     | '/account/profile/$userId/build-collections'
     | '/account/profile/$userId/collected-items'
@@ -297,6 +308,7 @@ export interface FileRouteTypes {
     | '/profile/liked-builds'
     | '/profile/'
     | '/account/profile/$userId'
+    | '/$gameId/builder/create'
     | '/api/auth/$'
     | '/account/profile/$userId/build-collections'
     | '/account/profile/$userId/collected-items'
@@ -426,6 +438,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$gameId/builder/create': {
+      id: '/$gameId/builder/create'
+      path: '/builder/create'
+      fullPath: '/$gameId/builder/create'
+      preLoaderRoute: typeof GameIdBuilderCreateRouteImport
+      parentRoute: typeof GameIdRouteRoute
+    }
     '/account/profile/$userId': {
       id: '/account/profile/$userId'
       path: '/account/profile/$userId'
@@ -487,10 +506,12 @@ declare module '@tanstack/react-router' {
 
 interface GameIdRouteRouteChildren {
   GameIdItemsRoute: typeof GameIdItemsRoute
+  GameIdBuilderCreateRoute: typeof GameIdBuilderCreateRoute
 }
 
 const GameIdRouteRouteChildren: GameIdRouteRouteChildren = {
   GameIdItemsRoute: GameIdItemsRoute,
+  GameIdBuilderCreateRoute: GameIdBuilderCreateRoute,
 }
 
 const GameIdRouteRouteWithChildren = GameIdRouteRoute._addFileChildren(

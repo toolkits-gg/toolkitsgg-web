@@ -9,28 +9,28 @@ import type {
 import type { ToolkitThemeDefinition } from "#/features/theme/types.ts";
 import type { GameId } from "@/prisma";
 
-type GameAvatar = {
+export type GameAvatar = {
 	id: string;
 	name: string;
 	imageUrl: string;
 	category?: string;
 };
 
-type GameIDBSeed = {
+export type GameIDBSeed = {
 	/** localStorage flag key to prevent re-seeding, e.g. 'idb-seeded-remnant2' */
 	seedFlag: string;
 	/** Seeds game-specific items into IDB. Calls getIDBClient() internally. */
 	seed: () => Promise<void>;
 };
 
-type GameDBSeed = {
+export type GameDBSeed = {
 	/** Seeds game-specific items into PostgreSQL. Uses prisma client internally. */
 	seed: () => Promise<void>;
 };
 
-type GameDal = { collectedItems: GameCollectedItemsDal };
+export type GameDal = { collectedItems: GameCollectedItemsDal };
 
-type GameMetadata = {
+export type GameMetadata = {
 	id: GameId;
 	name: string;
 	label: string;
@@ -45,12 +45,13 @@ type GameMetadata = {
 	}[];
 };
 
-type GamePages = {
+export type GamePages = {
+	renderCreateBuild: () => ReactNode | undefined;
 	renderItemLookup: () => ReactNode;
 	renderCollectedItems: (args: { mode: CollectedItemsViewMode }) => ReactNode;
 };
 
-type GameConfig<
+export type GameConfig<
 	TItem extends AppItem = AppItem,
 	TCategory extends string | number | symbol = string,
 > = {
@@ -67,14 +68,4 @@ type GameConfig<
 	THEME: ToolkitThemeDefinition | undefined;
 	AVATARS?: GameAvatar[];
 	DAL: GameDal;
-};
-
-export type {
-	GameAvatar,
-	GameConfig,
-	GameDal,
-	GameDBSeed,
-	GameIDBSeed,
-	GameMetadata,
-	GamePages,
 };
