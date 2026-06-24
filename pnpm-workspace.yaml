@@ -7,3 +7,14 @@ allowBuilds:
   lightningcss: true
   '@prisma/engines': true
   prisma: true
+minimumReleaseAgeExclude:
+  - '@mantine/carousel@9.4.0'
+  - '@mantine/code-highlight@9.4.0'
+  - '@mantine/core@9.4.0'
+  - '@mantine/dates@9.4.0'
+  - '@mantine/hooks@9.4.0'
+  - '@mantine/modals@9.4.0'
+  - '@mantine/notifications@9.4.0'
+  - '@mantine/spotlight@9.4.0'
+  - '@mantine/store@9.4.0'
+  - '@mantine/tiptap@9.4.0'
