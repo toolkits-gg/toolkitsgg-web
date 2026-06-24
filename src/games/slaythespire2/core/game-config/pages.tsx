@@ -1,6 +1,7 @@
 import { MultiSelect, Stack, Text } from "@mantine/core";
 import { parseAsString } from "nuqs";
 import type { ReactNode } from "react";
+import { AppBuildPage } from "#/components/AppBuildPage.tsx";
 import { AppItemPage } from "#/features/game/items/AppItemPage";
 import type { AppItem, GameFilterConfig } from "#/features/game/items/types";
 import {
@@ -23,7 +24,7 @@ const slayTheSpire2FilterConfig: GameFilterConfig = {
 			key: "category",
 			label: "Categories",
 			defaultValue: "",
-			serialize: (v) => v || undefined,
+
 			formatValue: formatCategoryLabel,
 		},
 	],
@@ -90,6 +91,7 @@ const PAGES: GamePages = {
 			viewMode={mode}
 		/>
 	),
+	renderCreateBuild: () => <AppBuildPage />,
 };
 
 export { PAGES };

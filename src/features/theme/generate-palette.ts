@@ -245,6 +245,9 @@ const resolveRing = (
 // Generator
 // ---------------------------------------------------------------------------
 
+/**
+ * Convenience function to use the same color ramp for dark and light modes.
+ */
 const symmetric = (
 	ramp: MantineColorsTuple,
 	fgDark: MantineColorsTuple,

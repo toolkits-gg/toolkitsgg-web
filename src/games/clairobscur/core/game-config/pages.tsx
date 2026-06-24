@@ -1,3 +1,4 @@
+import { AppBuildPage } from "#/components/AppBuildPage.tsx";
 import { AppItemPage } from "#/features/game/items/AppItemPage";
 import { resolveLinkedItems } from "#/features/game/items/utils.ts";
 import type { GamePages } from "#/features/game/types.ts";
@@ -20,6 +21,7 @@ const PAGES: GamePages = {
 			viewMode={mode}
 		/>
 	),
+	renderCreateBuild: () => <AppBuildPage />,
 };
 
 export { PAGES };
