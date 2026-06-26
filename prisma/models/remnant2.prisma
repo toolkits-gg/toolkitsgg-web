@@ -1,3 +1,41 @@
+enum Remnant2DLC {
+  BASE
+  DLC1
+  DLC2
+  DLC3
+}
+
+enum Remnant2ItemCategory {
+  AMULET
+  ARCHETYPE
+  ARMOR
+  CONCOCTION
+  CONSUMABLE
+  FUSION
+  GLOVES
+  HELM
+  LEGS
+  MOD
+  MUTATOR
+  PERK
+  PRISM
+  PYLON
+  RELIC_FRAGMENT
+  RELIC
+  RING
+  SKILL
+  TORSO
+  TRAIT
+  WEAPON
+}
+
+enum Remnant2UncollectableItemCategory {
+  FUSION
+  SKILL
+  PERK
+  PYLON
+}
+
 model Remnant2Build {
   id          String   @id @default(cuid())
   createdAt   DateTime @default(now())
@@ -60,15 +98,15 @@ model Remnant2BuildTag {
 }
 
 model Remnant2BuildCollection {
-  id              String               @id @default(cuid())
-  createdBy       User                 @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  id              String                        @id @default(cuid())
+  createdBy       User                          @relation(fields: [createdById], references: [id], onDelete: Cascade)
   createdById     String
-  createdAt       DateTime             @default(now())
-  updatedAt       DateTime             @updatedAt
+  createdAt       DateTime                      @default(now())
+  updatedAt       DateTime                      @updatedAt
   name            String
-  description     String?              @db.Text
-  visibility      BuildVisibility      @default(PUBLIC)
-  moderatorStatus BuildModeratorStatus @default(PENDING)
+  description     String?                       @db.Text
+  visibility      BuildVisibility               @default(PUBLIC)
+  moderatorStatus BuildModeratorStatus          @default(PENDING)
   builds          Remnant2BuildsOnCollections[]
 }
 
@@ -113,44 +151,6 @@ model Remnant2BuildViewCount {
   buildId String        @unique
 }
 
-enum Remnant2ItemCategory {
-  AMULET
-  ARCHETYPE
-  ARMOR
-  CONCOCTION
-  CONSUMABLE
-  FUSION
-  GLOVES
-  HELM
-  LEGS
-  MOD
-  MUTATOR
-  PERK
-  PRISM
-  PYLON
-  RELIC_FRAGMENT
-  RELIC
-  RING
-  SKILL
-  TORSO
-  TRAIT
-  WEAPON
-}
-
-enum Remnant2UncollectableItemCategory {
-  FUSION
-  SKILL
-  PERK
-  PYLON
-}
-
-enum Remnant2DLC {
-  BASE
-  DLC1
-  DLC2
-  DLC3
-}
-
 model Remnant2Item {
   id       String  @id @default(cuid())
   slug     String  @unique
@@ -162,6 +162,7 @@ model Remnant2Item {
   buildItems Remnant2BuildItem[]
 }
 
+// Remnant2Item when used in a build
 model Remnant2BuildItem {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
