@@ -3,7 +3,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { Link } from "@tanstack/react-router";
 import type { FC } from "react";
 import { LuChevronRight } from "react-icons/lu";
-import type { NavLinkSubLink } from "#/components/navigation/get-nav-links";
+import type { NavLinkSubLink } from "#/components/navbar/get-nav-links";
 import classes from "./NavbarLinksGroup.module.css";
 
 interface NavbarLinksGroupProps {

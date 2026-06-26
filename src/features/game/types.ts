@@ -47,6 +47,9 @@ export type GameMetadata = {
 
 export type GamePages = {
 	renderCreateBuild: () => ReactNode | undefined;
+	renderViewBuild: () => ReactNode | undefined;
+	renderEditBuild: () => ReactNode | undefined;
+
 	renderItemLookup: () => ReactNode;
 	renderCollectedItems: (args: { mode: CollectedItemsViewMode }) => ReactNode;
 };

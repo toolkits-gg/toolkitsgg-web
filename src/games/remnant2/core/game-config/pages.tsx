@@ -1,7 +1,9 @@
 import { MultiSelect, SimpleGrid, Stack, Text } from "@mantine/core";
 import { parseAsString } from "nuqs";
 import type { ReactNode } from "react";
-import { AppBuildPage } from "#/components/AppBuildPage.tsx";
+import { BuildCreatePage } from "#/components/pages/BuildCreate.tsx";
+import { BuildEditPage } from "#/components/pages/BuildEdit.tsx";
+import { BuildViewPage } from "#/components/pages/BuildView.tsx";
 import {
 	TriStateFilter,
 	type TriStateFilterValue,
@@ -168,5 +170,7 @@ export const PAGES: GamePages = {
 			viewMode={mode}
 		/>
 	),
-	renderCreateBuild: () => <AppBuildPage />,
+	renderCreateBuild: () => <BuildCreatePage />,
+	renderEditBuild: () => <BuildEditPage />,
+	renderViewBuild: () => <BuildViewPage />,
 };

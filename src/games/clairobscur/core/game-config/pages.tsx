@@ -1,4 +1,6 @@
-import { AppBuildPage } from "#/components/AppBuildPage.tsx";
+import { BuildCreatePage } from "#/components/pages/BuildCreate.tsx";
+import { BuildEditPage } from "#/components/pages/BuildEdit.tsx";
+import { BuildViewPage } from "#/components/pages/BuildView.tsx";
 import { AppItemPage } from "#/features/game/items/AppItemPage";
 import { resolveLinkedItems } from "#/features/game/items/utils.ts";
 import type { GamePages } from "#/features/game/types.ts";
@@ -21,7 +23,9 @@ const PAGES: GamePages = {
 			viewMode={mode}
 		/>
 	),
-	renderCreateBuild: () => <AppBuildPage />,
+	renderCreateBuild: () => <BuildCreatePage />,
+	renderEditBuild: () => <BuildEditPage />,
+	renderViewBuild: () => <BuildViewPage />,
 };
 
 export { PAGES };

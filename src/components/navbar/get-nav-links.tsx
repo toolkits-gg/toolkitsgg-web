@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { BsCollection } from "react-icons/bs";
-import { GiLockedChest } from "react-icons/gi";
-import { LuBadgeHelp } from "react-icons/lu";
+import { GiCapeArmor, GiLockedChest } from "react-icons/gi";
+import { getGamePages } from "#/features/game/registry/game-registry.tsx";
 import type { GameId } from "@/prisma";
 
 type NavLinkSubLink = {
@@ -35,17 +35,6 @@ const buildToolkitLinks = (onGettingStartedWizard?: () => void): NavLink[] => [
 				link: "/",
 			},
 			{
-				label: "Change Log",
-				link: "/changelog",
-			},
-		],
-	},
-	{
-		label: "Help",
-		icon: LuBadgeHelp,
-		initiallyOpened: true,
-		links: [
-			{
 				label: "Getting Started",
 				onClick: onGettingStartedWizard,
 				dataWizardTarget: "get-started-link",
@@ -54,6 +43,10 @@ const buildToolkitLinks = (onGettingStartedWizard?: () => void): NavLink[] => [
 				label: "Support Toolkits.gg",
 				link: "/",
 				dataWizardTarget: "support-link",
+			},
+			{
+				label: "Change Log",
+				link: "/changelog",
 			},
 		],
 	},
@@ -71,6 +64,24 @@ const buildItemsNavLink = (gameId: GameId): NavLink => ({
 	],
 });
 
+const buildBuildsNavLink = (gameId: GameId): NavLink => {
+	return {
+		label: "Builds",
+		icon: GiCapeArmor,
+		initiallyOpened: true,
+		links: [
+			{
+				label: "Featured Builds",
+				link: `/${gameId}/build/featured`,
+			},
+			{
+				label: "Community Builds",
+				link: `/${gameId}/build/community`,
+			},
+		],
+	};
+};
+
 type GetNavLinksParams = {
 	gameId: GameId | undefined;
 	onGettingStartedWizard?: () => void;
@@ -82,7 +93,16 @@ const getNavLinks = ({
 }: GetNavLinksParams): NavLink[] => {
 	const navLinks: NavLink[] = [];
 	if (gameId && gameId !== "none") {
+		const gamePages = getGamePages(gameId);
+		const noBuildPages =
+			!gamePages?.renderCreateBuild &&
+			!gamePages?.renderViewBuild &&
+			!gamePages?.renderEditBuild;
+
 		navLinks.push(buildItemsNavLink(gameId));
+		if (!noBuildPages) {
+			navLinks.push(buildBuildsNavLink(gameId));
+		}
 	}
 	navLinks.push(...buildToolkitLinks(onGettingStartedWizard));
 	return navLinks;

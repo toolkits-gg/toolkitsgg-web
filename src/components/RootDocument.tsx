@@ -15,7 +15,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import type { PropsWithChildren } from "react";
 import { DefaultLogo } from "#/components/AppLogo.tsx";
 import { AppProviders } from "#/components/AppProviders.tsx";
-import { AppNavbar } from "#/components/navigation/AppNavbar.tsx";
+import { AppNavbar } from "#/components/navbar/AppNavbar.tsx";
 import { SocialMedia } from "#/components/SocialMedia.tsx";
 import { GettingStartedWizard } from "#/components/wizards/getting-started/components/GettingStartedWizard.tsx";
 import { useGettingStartedWizard } from "#/components/wizards/getting-started/hooks/use-getting-started-wizard.ts";

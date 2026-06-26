@@ -1,7 +1,9 @@
 import { MultiSelect, Stack, Text } from "@mantine/core";
 import { parseAsString } from "nuqs";
 import type { ReactNode } from "react";
-import { AppBuildPage } from "#/components/AppBuildPage.tsx";
+import { BuildCreatePage } from "#/components/pages/BuildCreate.tsx";
+import { BuildEditPage } from "#/components/pages/BuildEdit.tsx";
+import { BuildViewPage } from "#/components/pages/BuildView.tsx";
 import { AppItemPage } from "#/features/game/items/AppItemPage";
 import type { AppItem, GameFilterConfig } from "#/features/game/items/types";
 import {
@@ -91,7 +93,9 @@ const PAGES: GamePages = {
 			viewMode={mode}
 		/>
 	),
-	renderCreateBuild: () => <AppBuildPage />,
+	renderCreateBuild: () => <BuildCreatePage />,
+	renderViewBuild: () => <BuildViewPage />,
+	renderEditBuild: () => <BuildEditPage />,
 };
 
 export { PAGES };

@@ -80,7 +80,7 @@ const Wizard = ({
 
 			if (cancelled) return;
 
-			// Small delay to allow any animations or navigation to settle
+			// Small delay to allow any animations or navbar to settle
 			timer = setTimeout(() => {
 				setIsReady(true);
 			}, 100);
