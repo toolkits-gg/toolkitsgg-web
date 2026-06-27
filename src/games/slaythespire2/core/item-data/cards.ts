@@ -21,7 +21,7 @@ type SlayTheSpire2CardItem = BaseSlayTheSpire2Item & {
 /**
  * `description` lines may embed `[base|upgraded]` upgrade tokens, matching the
  * wiki source 1:1 — e.g. `"Deal [8|10] damage."` shows 8 base / 10 upgraded.
- * Either side may be empty (`"...Discard Pile[| +3]."`). The `ItemDescription`
+ * Either side may be empty (`"...Discard Pile[| +3]."`). The `AppItemDescription`
  * component parses these for display;
  *
  * see `#/features/game/items/description-tokens`.

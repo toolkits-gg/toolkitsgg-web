@@ -1,10 +1,10 @@
-import type { AppItem } from "#/features/game/items/types.ts";
 import type { ClairObscurCharacterItem } from "#/games/clairobscur/core/item-data/characters.ts";
 import type {
 	ClairObscurCharacter,
 	ClairObscurDLC,
 	ClairObscurItemCategory,
 } from "@/prisma";
+import type {AppItem} from "#/features/game/types.ts";
 
 type ClairObscurItemLocation = "Overgrowth" | "Underdocks" | "Hive" | "Glory";
 

@@ -1,7 +1,7 @@
 import { AppImage, type AppImageProps } from "#/components/AppImage";
 import { useGameId } from "#/features/game/use-game-id.ts";
 
-type GameImageProps = AppImageProps & {};
+export type AppGameImageProps = AppImageProps & {};
 
 /**
  * Small AppImage wrapper that automatically resolves the image URL
@@ -10,7 +10,7 @@ type GameImageProps = AppImageProps & {};
 const withResizedDir = (src: string) =>
 	src.replace(/(^|\/)([^/]+)$/, "$1resized/$2");
 
-const GameImage = ({ src, ...rest }: GameImageProps) => {
+export const AppGameImage = ({ src, ...rest }: AppGameImageProps) => {
 	const gameId = useGameId();
 
 	if (gameId === "none") {
@@ -25,5 +25,3 @@ const GameImage = ({ src, ...rest }: GameImageProps) => {
 
 	return <AppImage src={src} {...rest} />;
 };
-
-export { GameImage, type GameImageProps };

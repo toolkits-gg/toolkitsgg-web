@@ -6,7 +6,7 @@ import sharp from "sharp";
 import FAVICON_REGISTRY from "./src/features/game/registry/favicon-registry.json" with {
 	type: "json",
 };
-import IMAGE_SIZES from "#/features/game/image-sizes.json" with {
+import IMAGE_SIZES from "#/image-sizes.json" with {
 	type: "json",
 };
 

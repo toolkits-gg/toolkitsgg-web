@@ -1,10 +1,12 @@
+import type {AppItemTag} from "#/features/game/types.ts";
+
 /**
  * Community defined item tags for Remnant 2.
  * These tags are created and maintained by the player community
  * and allow for better categorization of items that may not be clear
  * from the item description, or that have special interactions.
  */
-const COMMUNITY_ITEM_TAGS = [
+export const COMMUNITY_ITEM_TAGS: AppItemTag[] = [
 	{
 		token: "AOE/Aura",
 		color: {
@@ -107,13 +109,4 @@ const COMMUNITY_ITEM_TAGS = [
 		description:
 			"This item is currently bugged and MAY not function as expected. Check remnant.wiki for more information.",
 	},
-] as const satisfies {
-	token: string;
-	color: {
-		light: string;
-		dark: string;
-	};
-	description: string | undefined;
-}[];
-
-export { COMMUNITY_ITEM_TAGS };
+]

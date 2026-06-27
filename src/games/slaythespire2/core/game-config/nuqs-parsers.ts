@@ -4,10 +4,10 @@ import {
 	parseAsArrayOf,
 	parseAsString,
 } from "nuqs/server";
-import type { TriStateFilterValue } from "#/components/TriStateFilter";
 import { paginationParser } from "#/features/nuqs/parsers/pagination.ts";
 import { searchParser } from "#/features/nuqs/parsers/search.ts";
 import { sortParser } from "#/features/nuqs/parsers/sort.ts";
+import type {TriStateFilterValue} from "#/components/TriStateFilter.tsx";
 
 const categoryParser = parseAsArrayOf(
 	parseAsString.withOptions({

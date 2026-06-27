@@ -1,9 +1,9 @@
-import type { ItemTag } from "#/features/game/items/types";
+import type {AppItemTag} from "#/features/game/types.ts";
 
 /**
  * These tags are highlighted inline in item descriptions throughout the toolkit.
  */
-const INLINE_ITEM_TAGS = [
+export const INLINE_ITEM_TAGS: Array<AppItemTag & { type: string}> = [
 	{
 		type: "attack",
 		token: "Attack",
@@ -278,7 +278,5 @@ const INLINE_ITEM_TAGS = [
 			dark: "#e76f51",
 		},
 		description: `Weak creatures deal 25% less damage with Attacks.`,
-	},
-] as const satisfies ItemTag[];
-
-export { INLINE_ITEM_TAGS };
+	}
+]

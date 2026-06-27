@@ -1,18 +1,14 @@
 import { Box } from "@mantine/core";
-import { ItemFilterBar } from "#/features/game/items/ItemFilterBar";
-import { ItemVirtualGrid } from "#/features/game/items/ItemVirtualGrid";
-import { ShareCollectionButton } from "#/features/game/items/ShareCollectionButton";
-import type {
-	AppItem,
-	CollectedItemsViewMode,
-	GameCollectedItemsDal,
-	GameFilterConfig,
-} from "#/features/game/items/types";
-import { useCollectedItems } from "#/features/game/items/use-collected-items";
-import { useItemFilters } from "#/features/game/items/use-item-filters";
-import type { AnyGameConfig } from "#/features/game/registry/game-registry";
+import { ItemFilterBar } from "#/components/pages/item-list/ItemFilterBar.tsx";
+import { AppItemVirtualGrid } from "#/components/AppItemVirtualGrid.tsx";
+import { ItemCollectionShareButton } from "#/components/pages/item-list/ItemCollectionShareButton.tsx";
+import { useCollectedItems } from "#/components/pages/item-list/use-collected-items.ts";
+import { useItemFilters } from "#/components/pages/item-list/use-item-filters.ts";
+import type { AnyGameConfig } from "#/features/game/registry/game-registry.tsx";
+import type {AppItem, CollectedItemsViewMode, GameFilterConfig} from "#/features/game/types.ts";
+import type {GameCollectedItemsDal} from "#/features/game/dal/types.ts";
 
-export type AppItemPageProps = {
+export type ItemListPageProps = {
 	items: AnyGameConfig["ITEMS"];
 	resolveLinkedItems: (item: AppItem) => AppItem[];
 	dal: GameCollectedItemsDal;
@@ -20,13 +16,13 @@ export type AppItemPageProps = {
 	viewMode?: CollectedItemsViewMode;
 };
 
-export const AppItemPage = ({
+export const ItemListPage = ({
 	items,
 	resolveLinkedItems,
 	dal,
 	gameFilterConfig,
 	viewMode,
-}: AppItemPageProps) => {
+}: ItemListPageProps) => {
 	const isCollectedItemsTab = viewMode !== undefined;
 	const { collectedIds, isPublicView, handleCollect, handleUncollect } =
 		useCollectedItems({ dal, viewMode });
@@ -39,7 +35,7 @@ export const AppItemPage = ({
 
 	return (
 		<Box>
-			{isCollectedItemsTab && <ShareCollectionButton />}
+			{isCollectedItemsTab && <ItemCollectionShareButton />}
 			<ItemFilterBar
 				search={filters.search}
 				onSearchChange={(v) => filters.setUniversalParam("search", v)}
@@ -65,7 +61,7 @@ export const AppItemPage = ({
 				hasCollectableItems={items.collectable.length > 0}
 			/>
 			<Box p="md">
-				<ItemVirtualGrid
+				<AppItemVirtualGrid
 					items={filters.filteredItems}
 					resolveLinkedItems={resolveLinkedItems}
 					categories={filters.filteredCategories}

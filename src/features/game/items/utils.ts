@@ -1,5 +1,5 @@
 import { upperFirst } from "@mantine/hooks";
-import type { AppItem } from "#/features/game/items/types";
+import type {AppItem} from "#/features/game/types.ts";
 
 /** Formats a comma-separated category filter value (or "cat:sub") into a human-readable label. */
 const formatCategoryLabel = (raw: string): string => {

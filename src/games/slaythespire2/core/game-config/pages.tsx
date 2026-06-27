@@ -4,17 +4,16 @@ import type { ReactNode } from "react";
 import { BuildCreatePage } from "#/components/pages/BuildCreate.tsx";
 import { BuildEditPage } from "#/components/pages/BuildEdit.tsx";
 import { BuildViewPage } from "#/components/pages/BuildView.tsx";
-import { AppItemPage } from "#/features/game/items/AppItemPage";
-import type { AppItem, GameFilterConfig } from "#/features/game/items/types";
 import {
 	formatCategoryLabel,
 	getItemSubcategories,
 	itemMatchesCategory,
 	resolveLinkedItems,
 } from "#/features/game/items/utils";
-import type { GamePages } from "#/features/game/types.ts";
+import type {AppItem, GameFilterConfig, GamePages} from "#/features/game/types.ts";
 import { ITEMS } from "#/games/slaythespire2/core/game-config/items";
 import { slayTheSpire2CollectedItemsDal } from "#/games/slaythespire2/dal/collected-items";
+import {ItemListPage} from "#/components/pages/ItemList.tsx";
 
 const slayTheSpire2FilterConfig: GameFilterConfig = {
 	label: "Slay the Spire 2 Filters",
@@ -77,7 +76,7 @@ const slayTheSpire2FilterConfig: GameFilterConfig = {
 
 const PAGES: GamePages = {
 	renderItemLookup: () => (
-		<AppItemPage
+		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
 			dal={slayTheSpire2CollectedItemsDal}
@@ -85,7 +84,7 @@ const PAGES: GamePages = {
 		/>
 	),
 	renderCollectedItems: ({ mode }) => (
-		<AppItemPage
+		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
 			dal={slayTheSpire2CollectedItemsDal}

@@ -8,11 +8,7 @@ import {
 	createCollectedItemsIdb,
 	type IDBClient,
 } from "#/features/game/dal/collected-items/collected-items.idb.ts";
-import type {
-	CollectedItemRecord,
-	CollectItemInput,
-	GameCollectedItemsDal,
-} from "#/features/game/items/types";
+import type {CollectedItemRecord, CollectItemInput, GameCollectedItemsDal} from "#/features/game/dal/types.ts";
 
 /** TanStack Start server functions injected per game. */
 interface CollectedItemServerFns {

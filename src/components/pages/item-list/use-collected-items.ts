@@ -1,11 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useDalMutation } from "#/features/dal/use-dal-mutation.ts";
 import { useDalQuery } from "#/features/dal/use-dal-query.ts";
-import type {
-	CollectedItemsViewMode,
-	CollectItemInput,
-	GameCollectedItemsDal,
-} from "#/features/game/items/types";
+import type {CollectItemInput, GameCollectedItemsDal} from "#/features/game/dal/types.ts";
+import type {CollectedItemsViewMode} from "#/features/game/types.ts";
 
 type UseCollectedItemsArgs = {
 	dal: GameCollectedItemsDal;

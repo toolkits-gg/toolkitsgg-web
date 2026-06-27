@@ -5,7 +5,7 @@ import { LuShare2 } from "react-icons/lu";
 import { clientEnv } from "#/env/client-env.ts";
 import { useGameId } from "#/features/game/use-game-id.ts";
 
-const ShareCollectionButton = () => {
+const ItemCollectionShareButton = () => {
 	const activeGameId = useGameId();
 	const pathname = useRouterState({ select: (s) => s.location.pathname });
 
@@ -47,4 +47,4 @@ const ShareCollectionButton = () => {
 	);
 };
 
-export { ShareCollectionButton };
+export { ItemCollectionShareButton };

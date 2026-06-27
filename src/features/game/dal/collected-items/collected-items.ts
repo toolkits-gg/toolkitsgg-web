@@ -1,7 +1,7 @@
 // Thin Prisma wrappers for collected-item database operations.
 // Used by per-game server functions to perform CRUD without duplicating Prisma call shapes.
 
-import type { CollectedItemRecord } from "#/features/game/items/types.ts";
+import type {CollectedItemRecord} from "#/features/game/dal/types.ts";
 
 /**
  * Structural interface satisfied by every game's Prisma collected-item model delegate.

@@ -16,7 +16,7 @@ import {
 import { useLocalStorage } from "@mantine/hooks";
 import type { ReactNode } from "react";
 import { LuChevronUp, LuFilter, LuX } from "react-icons/lu";
-import { SearchItemInput } from "#/features/game/items/SearchItemInput";
+import { ItemSearchInput } from "#/components/pages/item-list/ItemSearchInput.tsx";
 import classes from "./ItemFilterBar.module.css";
 
 type ActiveFilter = {
@@ -67,7 +67,7 @@ const ItemFilterBar = ({
 	return (
 		<Box className={classes.bar}>
 			<div className={classes.topRow}>
-				<SearchItemInput
+				<ItemSearchInput
 					searchValue={search}
 					onSearchChange={(e) => onSearchChange(e)}
 				/>

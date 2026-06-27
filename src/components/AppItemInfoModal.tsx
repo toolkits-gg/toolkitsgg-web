@@ -14,18 +14,19 @@ import {
 } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import { LuCamera, LuCheck, LuPlus } from "react-icons/lu";
-import { GameImage } from "#/components/GameImage";
-import { ItemDescription } from "#/features/game/items/ItemDescription";
-import type { AppItem, CollectItemInput } from "#/features/game/items/types";
-import { getGameMetadata } from "#/features/game/registry/game-registry";
+import { AppGameImage } from "#/components/AppGameImage.tsx";
+import { AppItemDescription } from "#/components/AppItemDescription.tsx";
+import { getGameMetadata } from "#/features/game/registry/game-registry.tsx";
 import { useGameId } from "#/features/game/use-game-id.ts";
 import {
 	ScreenshotContainer,
 	type WatermarkConfig,
 } from "#/features/screenshot/ScreenshotContainer.tsx";
 import { useScreenshot } from "#/features/screenshot/use-screenshot.ts";
+import type {AppItem} from "#/features/game/types.ts";
+import type {CollectItemInput} from "#/features/game/dal/types.ts";
 
-type ItemInfoModalProps = {
+export type AppItemInfoModalProps = {
 	item: AppItem;
 	resolveLinkedItems: (item: AppItem) => AppItem[];
 	isCollected: boolean;
@@ -35,7 +36,7 @@ type ItemInfoModalProps = {
 	readOnly?: boolean;
 };
 
-const ItemInfoModal = ({
+export const AppItemInfoModal = ({
 	item,
 	resolveLinkedItems,
 	isCollected,
@@ -43,7 +44,7 @@ const ItemInfoModal = ({
 	onCollect,
 	onUncollect,
 	readOnly = false,
-}: ItemInfoModalProps) => {
+}: AppItemInfoModalProps) => {
 	const [screenshotMode, setScreenshotMode] = useState(false);
 	const containerRef = useRef<HTMLDivElement>(null);
 
@@ -98,7 +99,7 @@ const ItemInfoModal = ({
 			<Flex gap="md" align="flex-start">
 				{item.imageUrl ? (
 					<Box style={{ flexShrink: 0, width: 96, height: 96 }}>
-						<GameImage
+						<AppGameImage
 							alt={`Image of ${item.name}`}
 							src={item.imageUrl}
 							size="md"
@@ -156,7 +157,7 @@ const ItemInfoModal = ({
 			{hasDescription && (
 				<>
 					<Divider label="Description" />
-					<ItemDescription description={item.description} size="xs" mt={0} />
+					<AppItemDescription description={item.description} size="xs" mt={0} />
 				</>
 			)}
 
@@ -176,7 +177,7 @@ const ItemInfoModal = ({
 								}}
 							>
 								{linkedItem.imageUrl && (
-									<GameImage
+									<AppGameImage
 										alt={`Image of ${linkedItem.name}`}
 										src={linkedItem.imageUrl}
 										size="md"
@@ -227,6 +228,3 @@ const ItemInfoModal = ({
 		</Stack>
 	);
 };
-
-export type { ItemInfoModalProps };
-export { ItemInfoModal };

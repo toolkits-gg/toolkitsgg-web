@@ -1,10 +1,11 @@
 import { Modal, Text } from "@mantine/core";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { useLayoutEffect, useRef, useState } from "react";
-import { ItemCard } from "#/features/game/items/ItemCard";
-import { ItemInfoModal } from "#/features/game/items/ItemInfoModal";
-import type { AppItem, CollectItemInput } from "#/features/game/items/types";
-import classes from "./ItemVirtualGrid.module.css";
+import { ItemCard } from "#/components/pages/item-list/ItemCard.tsx";
+import { AppItemInfoModal } from "#/components/AppItemInfoModal.tsx";
+import classes from "./AppItemVirtualGrid.module.css";
+import type {AppItem} from "#/features/game/types.ts";
+import type {CollectItemInput} from "#/features/game/dal/types.ts";
 
 const HEADER_HEIGHT = 64;
 const ITEM_ROW_HEIGHT = 112;
@@ -15,7 +16,7 @@ type RowData =
 	| { type: "header"; category: string }
 	| { type: "items"; items: AppItem[] };
 
-type ItemVirtualGridProps = {
+export type AppItemVirtualGridProps = {
 	items: AppItem[];
 	resolveLinkedItems: (item: AppItem) => AppItem[];
 	categories: string[];
@@ -27,7 +28,7 @@ type ItemVirtualGridProps = {
 	readOnly?: boolean;
 };
 
-const ItemVirtualGrid = ({
+export const AppItemVirtualGrid = ({
 	items,
 	resolveLinkedItems,
 	categories,
@@ -37,7 +38,7 @@ const ItemVirtualGrid = ({
 	onCollect,
 	onUncollect,
 	readOnly = false,
-}: ItemVirtualGridProps) => {
+}: AppItemVirtualGridProps) => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [columns, setColumns] = useState(1);
 	const [activeItem, setActiveItem] = useState<AppItem | null>(null);
@@ -106,7 +107,7 @@ const ItemVirtualGrid = ({
 				centered
 			>
 				{activeItem && (
-					<ItemInfoModal
+					<AppItemInfoModal
 						item={activeItem}
 						resolveLinkedItems={resolveLinkedItems}
 						isCollected={collectedIds.includes(activeItem.id)}
@@ -223,6 +224,3 @@ const ItemVirtualGrid = ({
 		</div>
 	);
 };
-
-export { ItemVirtualGrid };
-export type { ItemVirtualGridProps };

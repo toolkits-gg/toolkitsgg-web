@@ -7,16 +7,15 @@ import { BuildViewPage } from "#/components/pages/BuildView.tsx";
 import {
 	TriStateFilter,
 	type TriStateFilterValue,
-} from "#/components/TriStateFilter";
-import { AppItemPage } from "#/features/game/items/AppItemPage";
-import type { AppItem, GameFilterConfig } from "#/features/game/items/types";
+} from "#/components/TriStateFilter.tsx";
+import { ItemListPage } from "#/components/pages/ItemList.tsx";
 import {
 	formatCategoryLabel,
 	getItemSubcategories,
 	itemMatchesCategory,
 	resolveLinkedItems,
 } from "#/features/game/items/utils";
-import type { GamePages } from "#/features/game/types.ts";
+import type {AppItem, GameFilterConfig, GamePages} from "#/features/game/types.ts";
 import { ITEMS } from "#/games/remnant2/core/game-config/items";
 import { remnant2CollectedItemsDal } from "#/games/remnant2/dal/collected-items";
 import type { Remnant2DLC } from "@/prisma";
@@ -154,7 +153,7 @@ const remnant2ItemFilterConfig: GameFilterConfig = {
 
 export const PAGES: GamePages = {
 	renderItemLookup: () => (
-		<AppItemPage
+		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
 			dal={remnant2CollectedItemsDal}
@@ -162,7 +161,7 @@ export const PAGES: GamePages = {
 		/>
 	),
 	renderCollectedItems: ({ mode }) => (
-		<AppItemPage
+		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
 			dal={remnant2CollectedItemsDal}

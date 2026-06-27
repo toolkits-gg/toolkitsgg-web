@@ -1,19 +1,19 @@
 import { Select } from "@mantine/core";
 import { useRef, useState } from "react";
-import { getGameItems } from "#/features/game/registry/game-registry";
+import { getGameItems } from "#/features/game/registry/game-registry.tsx";
 import { useGameId } from "#/features/game/use-game-id.ts";
 
-type SearchItemInputProps = {
+export type ItemSearchInputProps = {
 	searchValue: string;
 	onSearchChange: (query: string) => void;
 	onLoadingChange?: (loading: boolean) => void;
 };
 
-const SearchItemInput = ({
+export const ItemSearchInput = ({
 	searchValue,
 	onSearchChange,
 	onLoadingChange,
-}: SearchItemInputProps) => {
+}: ItemSearchInputProps) => {
 	const timeoutRef = useRef<number>(-1);
 	const [value, setValue] = useState(searchValue);
 	const [prevSearchValue, setPrevSearchValue] = useState(searchValue);
@@ -70,5 +70,3 @@ const SearchItemInput = ({
 		/>
 	);
 };
-
-export { SearchItemInput };

@@ -1,9 +1,8 @@
 // IndexedDB layer for any game's collected-item feature.
 // Each game's Prisma IDB client is a different generated type; this factory works
 // with any of them by taking a `getModel` accessor instead of importing game-specific types.
-
-import type { CollectedItemRecord } from "#/features/game/items/types.ts";
 import { getIDBClient } from "#/integrations/prisma-idb/idb-client";
+import type {CollectedItemRecord} from "#/features/game/dal/types.ts";
 
 /**
  * Structural interface for the IDB model delegate.

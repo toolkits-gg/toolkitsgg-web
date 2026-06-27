@@ -7,8 +7,6 @@
  *
  * Run with: pnpm tsx src/games/slaythespire2/wiki/cards.ts
  */
-
-import { renderDescriptionVariant } from "#/features/game/items/description-tokens";
 import { cleanWikiTextPreservingTokens } from "#/features/wiki-sync/clean-wiki-text";
 import {
 	CARDS,
@@ -19,6 +17,7 @@ import {
 	getString,
 	syncWikiCategory,
 } from "#/games/slaythespire2/wiki/sync-category.ts";
+import {renderDescriptionVariant} from "#/components/AppItemDescription.tsx";
 
 const CARD_SUBMODULES = [
 	"Ironclad",
