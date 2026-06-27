@@ -3,9 +3,9 @@ import clsx from "clsx";
 import { LuCheck, LuInfo, LuPlus, LuX } from "react-icons/lu";
 import { AppGameImage } from "#/components/AppGameImage.tsx";
 import { AppItemDescription } from "#/components/AppItemDescription.tsx";
+import type { CollectItemInput } from "#/features/game/data/types.ts";
+import type { AppItem } from "#/features/game/types.ts";
 import classes from "./ItemCard.module.css";
-import type {AppItem} from "#/features/game/types.ts";
-import type {CollectItemInput} from "#/features/game/dal/types.ts";
 
 type ItemCardProps = {
 	item: AppItem;

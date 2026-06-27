@@ -4,20 +4,26 @@ import type { ReactNode } from "react";
 import { BuildCreatePage } from "#/components/pages/BuildCreate.tsx";
 import { BuildEditPage } from "#/components/pages/BuildEdit.tsx";
 import { BuildViewPage } from "#/components/pages/BuildView.tsx";
+import { CreatedBuildsPage } from "#/components/pages/created-builds/CreatedBuilds.tsx";
+import { ItemListPage } from "#/components/pages/ItemList.tsx";
 import {
 	TriStateFilter,
 	type TriStateFilterValue,
 } from "#/components/TriStateFilter.tsx";
-import { ItemListPage } from "#/components/pages/ItemList.tsx";
 import {
 	formatCategoryLabel,
 	getItemSubcategories,
 	itemMatchesCategory,
 	resolveLinkedItems,
 } from "#/features/game/items/utils";
-import type {AppItem, GameFilterConfig, GamePages} from "#/features/game/types.ts";
+import type {
+	AppItem,
+	GameFilterConfig,
+	GamePages,
+} from "#/features/game/types.ts";
 import { ITEMS } from "#/games/remnant2/core/game-config/items";
-import { remnant2CollectedItemsDal } from "#/games/remnant2/dal/collected-items";
+import { remnant2CollectedItemsData } from "#/games/remnant2/data/collected-items";
+import { remnant2CreatedBuildsData } from "#/games/remnant2/data/created-builds";
 import type { Remnant2DLC } from "@/prisma";
 
 const REMNANT2_DLC_LABELS: Record<Remnant2DLC, string> = {
@@ -156,7 +162,7 @@ export const PAGES: GamePages = {
 		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
-			dal={remnant2CollectedItemsDal}
+			data={remnant2CollectedItemsData}
 			gameFilterConfig={remnant2ItemFilterConfig}
 		/>
 	),
@@ -164,10 +170,13 @@ export const PAGES: GamePages = {
 		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
-			dal={remnant2CollectedItemsDal}
+			data={remnant2CollectedItemsData}
 			gameFilterConfig={remnant2ItemFilterConfig}
 			viewMode={mode}
 		/>
+	),
+	renderCreatedBuilds: ({ mode }) => (
+		<CreatedBuildsPage data={remnant2CreatedBuildsData} viewMode={mode} />
 	),
 	renderCreateBuild: () => <BuildCreatePage />,
 	renderEditBuild: () => <BuildEditPage />,

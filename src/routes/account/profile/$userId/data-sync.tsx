@@ -13,15 +13,15 @@ import { notifications } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { type PropsWithChildren, useEffect, useState } from "react";
+import { getGameMetadata } from "#/features/game/registry/game-public-registry.tsx";
+import { clearSynced, deleteOp } from "#/features/sync/queue/pending-ops";
+import type { PendingOp } from "#/features/sync/queue/types";
+import { usePendingOps } from "#/features/sync/queue/use-pending-ops";
+import { forceSyncOp, syncOps } from "#/features/sync/sync-runner";
 import {
 	buildTabHead,
 	loadProfileTabData,
-} from "#/features/auth/profile-tab-head.ts";
-import { clearSynced, deleteOp } from "#/features/dal/queue/pending-ops";
-import { forceSyncOp, syncOps } from "#/features/dal/queue/sync-runner";
-import type { PendingOp } from "#/features/dal/queue/types";
-import { usePendingOps } from "#/features/dal/queue/use-pending-ops";
-import { getGameMetadata } from "#/features/game/registry/game-registry";
+} from "#/features/user/profile-tab-head.ts";
 import { useSession } from "#/integrations/better-auth/auth-client";
 
 const PendingList = ({
@@ -257,14 +257,15 @@ function DataSync() {
 			});
 		},
 		onSettled: () => {
-			void queryClient.invalidateQueries({ queryKey: ["dal-queue"] });
-			void queryClient.invalidateQueries({ queryKey: ["dal"] });
+			void queryClient.invalidateQueries({ queryKey: ["sync-queue"] });
+			void queryClient.invalidateQueries({ queryKey: ["data"] });
 		},
 	});
 
 	const clear = useMutation({
 		mutationFn: () => clearSynced(),
-		onSuccess: () => queryClient.invalidateQueries({ queryKey: ["dal-queue"] }),
+		onSuccess: () =>
+			queryClient.invalidateQueries({ queryKey: ["sync-queue"] }),
 	});
 
 	const keepMine = useMutation({
@@ -285,8 +286,8 @@ function DataSync() {
 			});
 		},
 		onSettled: () => {
-			void queryClient.invalidateQueries({ queryKey: ["dal-queue"] });
-			void queryClient.invalidateQueries({ queryKey: ["dal"] });
+			void queryClient.invalidateQueries({ queryKey: ["sync-queue"] });
+			void queryClient.invalidateQueries({ queryKey: ["data"] });
 		},
 	});
 
@@ -300,8 +301,8 @@ function DataSync() {
 			});
 		},
 		onSettled: () => {
-			void queryClient.invalidateQueries({ queryKey: ["dal-queue"] });
-			void queryClient.invalidateQueries({ queryKey: ["dal"] });
+			void queryClient.invalidateQueries({ queryKey: ["sync-queue"] });
+			void queryClient.invalidateQueries({ queryKey: ["data"] });
 		},
 	});
 
@@ -336,7 +337,7 @@ function DataSync() {
 				ops={(pending.data ?? []).filter((op) => op.status !== "synced")}
 				onDelete={(id) => {
 					deleteOp(id).then(() =>
-						queryClient.invalidateQueries({ queryKey: ["dal-queue"] }),
+						queryClient.invalidateQueries({ queryKey: ["sync-queue"] }),
 					);
 				}}
 				onKeepMine={(op) => keepMine.mutate(op)}

@@ -1,11 +1,11 @@
 import { Modal, Text } from "@mantine/core";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { useLayoutEffect, useRef, useState } from "react";
-import { ItemCard } from "#/components/pages/item-list/ItemCard.tsx";
 import { AppItemInfoModal } from "#/components/AppItemInfoModal.tsx";
+import { ItemCard } from "#/components/pages/item-list/ItemCard.tsx";
+import type { CollectItemInput } from "#/features/game/data/types.ts";
+import type { AppItem } from "#/features/game/types.ts";
 import classes from "./AppItemVirtualGrid.module.css";
-import type {AppItem} from "#/features/game/types.ts";
-import type {CollectItemInput} from "#/features/game/dal/types.ts";
 
 const HEADER_HEIGHT = 64;
 const ITEM_ROW_HEIGHT = 112;

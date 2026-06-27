@@ -1,12 +1,17 @@
-import { Stack, Text, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
+import { useGameId } from "#/features/game/use-game-id.ts";
+import { getGamePages } from "#/features/game/registry/game-pages-registry.tsx";
+import { ProfileTabPlaceholder } from "#/features/user/ProfileTabPlaceholder.tsx";
 
 function CreatedBuilds() {
+	const gameId = useGameId();
+	const pages = getGamePages(gameId);
 	return (
-		<Stack gap="sm">
-			<Title order={3}>Created Builds</Title>
-			<Text c="dimmed">Content coming soon.</Text>
-		</Stack>
+		<>
+			{pages?.renderCreatedBuilds?.({ mode: { kind: "self" } }) ?? (
+				<ProfileTabPlaceholder title="Created Builds" />
+			)}
+		</>
 	);
 }
 

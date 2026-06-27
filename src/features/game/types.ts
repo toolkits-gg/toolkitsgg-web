@@ -1,10 +1,20 @@
+import type { SingleParserBuilder } from "nuqs";
 import type { createSearchParamsCache } from "nuqs/server";
 import type { ComponentType, ReactNode } from "react";
 import type { LogoSize } from "#/components/AppLogo.tsx";
+import type {
+	GameCollectedItemsData,
+	GameCreatedBuildsData,
+} from "#/features/game/data/types.ts";
 import type { ToolkitThemeDefinition } from "#/features/theme/types.ts";
 import type { GameId } from "@/prisma";
-import type {SingleParserBuilder} from "nuqs";
-import type {GameCollectedItemsDal} from "#/features/game/dal/types.ts";
+
+type GameFilterDef = {
+	key: string;
+	label: string;
+	defaultValue: string;
+	formatValue?: (raw: string) => string;
+};
 
 export type AppItemTag = {
 	token: string;
@@ -68,16 +78,12 @@ export type AppItem<
 	internalSlug?: string;
 };
 
-export type CollectedItemsViewMode =
+/** Whether a profile tab is viewed by its owner or by another user. */
+export type ProfileTabViewMode =
 	| { kind: "self" }
 	| { kind: "public"; userId: string };
 
-type GameFilterDef = {
-	key: string;
-	label: string;
-	defaultValue: string;
-	formatValue?: (raw: string) => string;
-};
+export type CollectedItemsViewMode = ProfileTabViewMode;
 
 export type GameFilterConfig = {
 	label: string;
@@ -110,7 +116,11 @@ export type GameDBSeed = {
 	seed: () => Promise<void>;
 };
 
-export type GameDal = { collectedItems: GameCollectedItemsDal };
+export type GameData = {
+	collectedItems: GameCollectedItemsData;
+	/** Optional — only games with a build table expose created-builds hooks. */
+	createdBuilds?: GameCreatedBuildsData;
+};
 
 export type GameMetadata = {
 	id: GameId;
@@ -134,6 +144,11 @@ export type GamePages = {
 
 	renderItemLookup: () => ReactNode;
 	renderCollectedItems: (args: { mode: CollectedItemsViewMode }) => ReactNode;
+	/**
+	 * Lists a user's created builds for the profile tab. Optional — only games with
+	 * a build table provide it; the route falls back to a placeholder otherwise.
+	 */
+	renderCreatedBuilds?: (args: { mode: ProfileTabViewMode }) => ReactNode;
 };
 
 export type GameConfig<
@@ -152,5 +167,8 @@ export type GameConfig<
 	SEARCH_PARAMS: ReturnType<typeof createSearchParamsCache> | undefined;
 	THEME: ToolkitThemeDefinition | undefined;
 	AVATARS?: GameAvatar[];
-	DAL: GameDal;
+	data: GameData;
 };
+
+// Widened type for runtime-keyed access (base AppItem, string category)
+export type AnyGameConfig = GameConfig;

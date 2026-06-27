@@ -4,7 +4,7 @@ import { METADATA } from "#/games/clairobscur/core/game-config/metadata";
 import { PAGES } from "#/games/clairobscur/core/game-config/pages";
 import { THEME } from "#/games/clairobscur/core/game-config/theme";
 import type { ClairObscurLocalItem } from "#/games/clairobscur/core/types.ts";
-import { clairObscurCollectedItemsDal } from "#/games/clairobscur/dal/collected-items";
+import { clairObscurCollectedItemsData } from "#/games/clairobscur/data/collected-items";
 import type { ClairObscurItemCategory } from "@/prisma";
 
 const GAME_CONFIG = {
@@ -13,7 +13,7 @@ const GAME_CONFIG = {
 	METADATA,
 	PAGES,
 	SEARCH_PARAMS: undefined, // TODO
-	DAL: { collectedItems: clairObscurCollectedItemsDal },
+	data: { collectedItems: clairObscurCollectedItemsData },
 } satisfies GameConfig<ClairObscurLocalItem, ClairObscurItemCategory>;
 
 export { GAME_CONFIG };

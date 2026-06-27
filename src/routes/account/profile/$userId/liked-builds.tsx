@@ -1,18 +1,9 @@
-import { Stack, Text, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
+import { ProfileTabPlaceholder } from "#/features/user/ProfileTabPlaceholder.tsx";
 import {
 	buildTabHead,
 	loadProfileTabData,
-} from "#/features/auth/profile-tab-head.ts";
-
-function LikedBuilds() {
-	return (
-		<Stack gap="sm">
-			<Title order={3}>Liked Builds</Title>
-			<Text c="dimmed">Content coming soon.</Text>
-		</Stack>
-	);
-}
+} from "#/features/user/profile-tab-head.ts";
 
 const Route = createFileRoute("/account/profile/$userId/liked-builds")({
 	loader: async ({ params, context }) =>
@@ -23,7 +14,7 @@ const Route = createFileRoute("/account/profile/$userId/liked-builds")({
 			"Liked Builds",
 		),
 	}),
-	component: LikedBuilds,
+	component: () => <ProfileTabPlaceholder title="Liked Builds" />,
 });
 
 export { Route };

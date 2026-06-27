@@ -5,21 +5,21 @@ import { ItemListPage } from "#/components/pages/ItemList.tsx";
 import { resolveLinkedItems } from "#/features/game/items/utils.ts";
 import type { GamePages } from "#/features/game/types.ts";
 import { ITEMS } from "#/games/clairobscur/core/game-config/items";
-import { clairObscurCollectedItemsDal } from "#/games/clairobscur/dal/collected-items";
+import { clairObscurCollectedItemsData } from "#/games/clairobscur/data/collected-items";
 
 const PAGES: GamePages = {
 	renderItemLookup: () => (
 		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
-			dal={clairObscurCollectedItemsDal}
+			data={clairObscurCollectedItemsData}
 		/>
 	),
 	renderCollectedItems: ({ mode }) => (
 		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
-			dal={clairObscurCollectedItemsDal}
+			data={clairObscurCollectedItemsData}
 			viewMode={mode}
 		/>
 	),

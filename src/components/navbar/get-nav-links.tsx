@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import { BsCollection } from "react-icons/bs";
 import { GiCapeArmor, GiLockedChest } from "react-icons/gi";
-import { getGamePages } from "#/features/game/registry/game-registry.tsx";
 import type { GameId } from "@/prisma";
 
 type NavLinkSubLink = {
@@ -93,16 +92,8 @@ const getNavLinks = ({
 }: GetNavLinksParams): NavLink[] => {
 	const navLinks: NavLink[] = [];
 	if (gameId && gameId !== "none") {
-		const gamePages = getGamePages(gameId);
-		const noBuildPages =
-			!gamePages?.renderCreateBuild &&
-			!gamePages?.renderViewBuild &&
-			!gamePages?.renderEditBuild;
-
 		navLinks.push(buildItemsNavLink(gameId));
-		if (!noBuildPages) {
-			navLinks.push(buildBuildsNavLink(gameId));
-		}
+		navLinks.push(buildBuildsNavLink(gameId));
 	}
 	navLinks.push(...buildToolkitLinks(onGettingStartedWizard));
 	return navLinks;

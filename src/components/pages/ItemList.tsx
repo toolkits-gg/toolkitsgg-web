@@ -1,17 +1,21 @@
 import { Box } from "@mantine/core";
-import { ItemFilterBar } from "#/components/pages/item-list/ItemFilterBar.tsx";
 import { AppItemVirtualGrid } from "#/components/AppItemVirtualGrid.tsx";
 import { ItemCollectionShareButton } from "#/components/pages/item-list/ItemCollectionShareButton.tsx";
+import { ItemFilterBar } from "#/components/pages/item-list/ItemFilterBar.tsx";
 import { useCollectedItems } from "#/components/pages/item-list/use-collected-items.ts";
 import { useItemFilters } from "#/components/pages/item-list/use-item-filters.ts";
-import type { AnyGameConfig } from "#/features/game/registry/game-registry.tsx";
-import type {AppItem, CollectedItemsViewMode, GameFilterConfig} from "#/features/game/types.ts";
-import type {GameCollectedItemsDal} from "#/features/game/dal/types.ts";
+import type { GameCollectedItemsData } from "#/features/game/data/types.ts";
+import type {
+	AnyGameConfig,
+	AppItem,
+	CollectedItemsViewMode,
+	GameFilterConfig,
+} from "#/features/game/types.ts";
 
 export type ItemListPageProps = {
 	items: AnyGameConfig["ITEMS"];
 	resolveLinkedItems: (item: AppItem) => AppItem[];
-	dal: GameCollectedItemsDal;
+	data: GameCollectedItemsData;
 	gameFilterConfig?: GameFilterConfig;
 	viewMode?: CollectedItemsViewMode;
 };
@@ -19,13 +23,13 @@ export type ItemListPageProps = {
 export const ItemListPage = ({
 	items,
 	resolveLinkedItems,
-	dal,
+	data,
 	gameFilterConfig,
 	viewMode,
 }: ItemListPageProps) => {
 	const isCollectedItemsTab = viewMode !== undefined;
 	const { collectedIds, isPublicView, handleCollect, handleUncollect } =
-		useCollectedItems({ dal, viewMode });
+		useCollectedItems({ data, viewMode });
 	const filters = useItemFilters({
 		items,
 		collectedIds,

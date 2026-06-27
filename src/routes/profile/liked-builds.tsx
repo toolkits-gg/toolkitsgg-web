@@ -1,17 +1,8 @@
-import { Stack, Text, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
-
-function LikedBuilds() {
-	return (
-		<Stack gap="sm">
-			<Title order={3}>Liked Builds</Title>
-			<Text c="dimmed">Content coming soon.</Text>
-		</Stack>
-	);
-}
+import { ProfileTabPlaceholder } from "#/features/user/ProfileTabPlaceholder.tsx";
 
 const Route = createFileRoute("/profile/liked-builds")({
-	component: LikedBuilds,
+	component: () => <ProfileTabPlaceholder title="Liked Builds" />,
 });
 
 export { Route };

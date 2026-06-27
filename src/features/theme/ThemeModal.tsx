@@ -8,16 +8,16 @@ import {
 import { upperFirst, useLocalStorage } from "@mantine/hooks";
 import { useTheme as useNextTheme } from "next-themes";
 import { type ChangeEvent, useState } from "react";
-import {
-	getAllRegisteredThemeClassNames,
-	getAllRegisteredThemeDefinitions,
-	getGameTheme,
-} from "#/features/game/registry/game-registry.tsx";
+import { getGameTheme } from "#/features/game/registry/game-public-registry.tsx";
 import {
 	LOCALSTORAGE_KEYS,
 	MANTINE_COLOR_SCHEMES,
 } from "#/features/theme/constants.ts";
-import { parseColorScheme } from "#/features/theme/utils.ts";
+import {
+	getAllRegisteredThemeClassNames,
+	getAllRegisteredThemeDefinitions,
+	parseColorScheme,
+} from "#/features/theme/utils.ts";
 
 // This feature was game-aware, need to rework it
 const allThemeDefinitions: Array<{ label: string; className: string }> =

@@ -1,14 +1,12 @@
 import type { MantineThemeOverride } from "@mantine/core";
 import { useTheme as useNextTheme } from "next-themes";
 import { useEffect } from "react";
-import {
-	getAllRegisteredThemeDefinitions,
-	getGameTheme,
-} from "#/features/game/registry/game-registry.tsx";
+import { getGameTheme } from "#/features/game/registry/game-public-registry.tsx";
 import { useGameId } from "#/features/game/use-game-id.ts";
 import { LOCALSTORAGE_KEYS } from "#/features/theme/constants.ts";
 import { changeMantineTheme } from "#/features/theme/store.ts";
 import { defaultTheme } from "#/features/theme/themes/default-theme.ts";
+import { getAllRegisteredThemeDefinitions } from "#/features/theme/utils.ts";
 
 /**
  * This function determines which Mantine theme to use based on the provided nextTheme class string.

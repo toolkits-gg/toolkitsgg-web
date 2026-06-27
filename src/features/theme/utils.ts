@@ -1,20 +1,15 @@
 import { type MantineColorsTuple, virtualColor } from "@mantine/core";
+import {
+	getGameTheme,
+	REGISTERED_GAME_IDS,
+} from "#/features/game/registry/game-public-registry.tsx";
+import { defaultTheme } from "#/features/theme/themes/default-theme";
 import type {
 	ColorVariants,
 	ToolkitThemeColorKey,
 	ToolkitThemeColors,
+	ToolkitThemeDefinition,
 } from "#/features/theme/types.ts";
-
-/**
- * Input type for creating a theme color with all its variants.
- * Includes color tuples for dark and light modes, both background and foreground.
- */
-type ThemeColorInput = {
-	dark: MantineColorsTuple;
-	light: MantineColorsTuple;
-	fgDark: MantineColorsTuple;
-	fgLight: MantineColorsTuple;
-};
 
 /**
  * Creates a complete set of color variants for a theme color.
@@ -68,6 +63,17 @@ function createThemeColor<T extends ToolkitThemeColorKey>(
 }
 
 /**
+ * Input type for creating a theme color with all its variants.
+ * Includes color tuples for dark and light modes, both background and foreground.
+ */
+export type ThemeColorInput = {
+	dark: MantineColorsTuple;
+	light: MantineColorsTuple;
+	fgDark: MantineColorsTuple;
+	fgLight: MantineColorsTuple;
+};
+
+/**
  * Creates theme colors from an object of color definitions.
  * This is a convenience function for creating multiple colors at once.
  *
@@ -92,7 +98,7 @@ function createThemeColor<T extends ToolkitThemeColorKey>(
  * });
  * ```
  */
-function createThemeColors<T extends ToolkitThemeColorKey>(
+export function createThemeColors<T extends ToolkitThemeColorKey>(
 	colorDefinitions: Record<T, ThemeColorInput>,
 ): Record<string, MantineColorsTuple> {
 	const result: Record<string, MantineColorsTuple> = {};
@@ -112,9 +118,46 @@ function createThemeColors<T extends ToolkitThemeColorKey>(
  * @param nextTheme - The current Next.js theme string
  * @returns The parsed color scheme ('light' or 'dark')
  */
-const parseColorScheme = (nextTheme: string | undefined) => {
+export const parseColorScheme = (nextTheme: string | undefined) => {
 	if (!nextTheme) return "dark";
 	return nextTheme.includes("-light") ? "light" : "dark";
 };
 
-export { createThemeColors, parseColorScheme, type ThemeColorInput };
+// Return an array of all THEME defintions across registered games (for validation, theme switcher dropdowns, etc.)
+export const getAllRegisteredThemeDefinitions =
+	(): ToolkitThemeDefinition[] => {
+		const definitions: ToolkitThemeDefinition[] = [
+			{
+				label: "Default Light",
+				className: "default-light",
+				theme: defaultTheme,
+			},
+			{
+				label: "Default Dark",
+				className: "default-dark",
+				theme: defaultTheme,
+			},
+		];
+
+		for (const gameId of REGISTERED_GAME_IDS) {
+			const theme = getGameTheme(gameId);
+			if (theme) {
+				definitions.push({
+					label: `${theme.label} - Light`,
+					className: `${theme.className}-light`,
+					theme: theme.theme,
+				});
+				definitions.push({
+					label: `${theme.label} - Dark`,
+					className: `${theme.className}-dark`,
+					theme: theme.theme,
+				});
+			}
+		}
+		return definitions;
+	};
+
+export const getAllRegisteredThemeClassNames = (): string[] =>
+	getAllRegisteredThemeDefinitions()
+		.map((def) => def.className)
+		.sort();

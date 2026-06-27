@@ -6,17 +6,17 @@ import {
 	SERVER_GAME_INPUTS_QUERY_KEY,
 } from "#/constants.ts";
 import { clientEnv } from "#/env/client-env.ts";
-import { ProfileHeader } from "#/features/auth/ProfileHeader.tsx";
-import { ProfileTabNav } from "#/features/auth/ProfileTabNav.tsx";
-import { resolveAvatar } from "#/features/auth/utils.ts";
-import { getServerResolvedGameInputsServerFn } from "#/features/game/dal/active-game";
+import { getServerResolvedGameInputsServerFn } from "#/features/game/active-game";
 import {
 	buildGetProfileQueryKey,
+	getPublicUserProfileServerFn,
 	getViewerUserIdServerFn,
 	mapUserToProfileData,
-} from "#/features/game/dal/user-profile/user-profile.dal.ts";
-import { getPublicUserProfileServerFn } from "#/features/game/dal/user-profile/user-profile.ts";
-import { getValidatedGameId } from "#/features/game/registry/game-registry";
+} from "#/features/game/data/user-profile/user-profile.ts";
+import { getValidatedGameId } from "#/features/game/registry/game-public-registry.tsx";
+import { ProfileHeader } from "#/features/user/ProfileHeader.tsx";
+import { ProfileTabNav } from "#/features/user/ProfileTabNav.tsx";
+import { resolveAvatar } from "#/features/user/utils.ts";
 import type { GameId } from "@/prisma";
 
 const ProfileLayout = () => {

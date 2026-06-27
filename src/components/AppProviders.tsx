@@ -1,15 +1,16 @@
+import { MantineProvider } from "@mantine/core";
+import { ModalsProvider } from "@mantine/modals";
+import { Notifications } from "@mantine/notifications";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/tanstack-router";
-import {type PropsWithChildren, useEffect} from "react";
+import { type PropsWithChildren, useEffect } from "react";
+import { isRegisteredGameId } from "#/features/game/registry/game-public-registry.tsx";
+import { useGameId } from "#/features/game/use-game-id.ts";
 import { ScreenshotPreviewProvider } from "#/features/screenshot/ScreenshotPreviewProvider.tsx";
-import {useMantineThemeStore} from "#/features/theme/store.ts";
-import {DEFAULT_NEXT_THEME} from "#/features/theme/constants.ts";
-import {MantineProvider} from "@mantine/core";
-import {SyncAndApplyTheme} from "#/features/theme/SyncAndApplyTheme.ts";
-import {Notifications} from "@mantine/notifications";
-import {ModalsProvider} from "@mantine/modals";
-import {ThemeProvider as NextThemesProvider} from "next-themes";
-import {getAllRegisteredThemeClassNames, isRegisteredGameId} from "#/features/game/registry/game-registry.tsx";
-import {useGameId} from "#/features/game/use-game-id.ts";
+import { DEFAULT_NEXT_THEME } from "#/features/theme/constants.ts";
+import { SyncAndApplyTheme } from "#/features/theme/SyncAndApplyTheme.ts";
+import { useMantineThemeStore } from "#/features/theme/store.ts";
+import { getAllRegisteredThemeClassNames } from "#/features/theme/utils.ts";
 
 const FAVICON_BASE_PATH = "/favicons/";
 const ALL_THEME_CLASS_NAMES: string[] = getAllRegisteredThemeClassNames();

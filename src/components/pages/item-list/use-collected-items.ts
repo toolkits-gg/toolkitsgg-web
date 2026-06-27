@@ -1,11 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { useDalMutation } from "#/features/dal/use-dal-mutation.ts";
-import { useDalQuery } from "#/features/dal/use-dal-query.ts";
-import type {CollectItemInput, GameCollectedItemsDal} from "#/features/game/dal/types.ts";
-import type {CollectedItemsViewMode} from "#/features/game/types.ts";
+import type {
+	CollectItemInput,
+	GameCollectedItemsData,
+} from "#/features/game/data/types.ts";
+import type { CollectedItemsViewMode } from "#/features/game/types.ts";
 
 type UseCollectedItemsArgs = {
-	dal: GameCollectedItemsDal;
+	data: GameCollectedItemsData;
 	viewMode?: CollectedItemsViewMode;
 };
 
@@ -17,27 +17,20 @@ type UseCollectedItemsResult = {
 };
 
 const useCollectedItems = ({
-	dal,
+	data,
 	viewMode,
 }: UseCollectedItemsArgs): UseCollectedItemsResult => {
 	const isPublicView = viewMode?.kind === "public";
 	const publicUserId = viewMode?.kind === "public" ? viewMode.userId : null;
 
-	const selfQuery = useDalQuery(dal.list, undefined);
-	const publicQuery = useQuery({
-		queryKey: [...dal.list.queryKey(undefined), "byUserId", publicUserId],
-		queryFn: () =>
-			publicUserId
-				? dal.listByUserIdServerFn({ data: { userId: publicUserId } })
-				: Promise.resolve([]),
-		enabled: isPublicView && !!publicUserId,
-	});
+	const selfQuery = data.useList();
+	const publicQuery = data.usePublicList(publicUserId);
 
 	const collectedData = isPublicView ? publicQuery.data : selfQuery.data;
 	const collectedIds = (collectedData ?? []).map((r) => r.itemId);
 
-	const { mutate: collect } = useDalMutation(dal.collect);
-	const { mutate: uncollect } = useDalMutation(dal.uncollect);
+	const { mutate: collect } = data.useCollect();
+	const { mutate: uncollect } = data.useUncollect();
 
 	const handleCollect = ({ itemId, itemName }: CollectItemInput) =>
 		collect({ itemId, itemName });

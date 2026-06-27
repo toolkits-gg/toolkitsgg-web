@@ -1,15 +1,15 @@
 import { createFileRoute, getRouteApi } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { getGamePages } from "#/features/game/registry/game-pages-registry.tsx";
+import {
+	getGameMetadata,
+	isRegisteredGameId,
+} from "#/features/game/registry/game-public-registry.tsx";
+import { useGameId } from "#/features/game/use-game-id.ts";
 import {
 	buildTabHead,
 	loadProfileTabData,
-} from "#/features/auth/profile-tab-head.ts";
-import {
-	getGameConfig,
-	getGameMetadata,
-	isRegisteredGameId,
-} from "#/features/game/registry/game-registry";
-import { useGameId } from "#/features/game/use-game-id.ts";
+} from "#/features/user/profile-tab-head.ts";
 import type { GameId } from "@/prisma";
 
 type CollectedItemsSearch = {
@@ -36,11 +36,11 @@ const CollectedItems = () => {
 		});
 	}, [gameId, urlGameId, navigate]);
 
-	const config = gameId !== "none" ? getGameConfig(gameId) : undefined;
+	const pages = gameId !== "none" ? getGamePages(gameId) : undefined;
 
 	return (
 		<>
-			{config?.PAGES.renderCollectedItems({
+			{pages?.renderCollectedItems({
 				mode: isOwner ? { kind: "self" } : { kind: "public", userId },
 			})}
 		</>

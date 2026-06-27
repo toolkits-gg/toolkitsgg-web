@@ -6,7 +6,7 @@ import { SEARCH_PARAMS } from "#/games/slaythespire2/core/game-config/nuqs-parse
 import { PAGES } from "#/games/slaythespire2/core/game-config/pages";
 import { THEME } from "#/games/slaythespire2/core/game-config/theme";
 import type { SlayTheSpire2LocalItem } from "#/games/slaythespire2/core/types";
-import { slayTheSpire2CollectedItemsDal } from "#/games/slaythespire2/dal/collected-items";
+import { slayTheSpire2CollectedItemsData } from "#/games/slaythespire2/data/collected-items";
 import type { SlayTheSpire2ItemCategory } from "@/prisma";
 
 const GAME_CONFIG = {
@@ -16,7 +16,7 @@ const GAME_CONFIG = {
 	PAGES,
 	SEARCH_PARAMS,
 	AVATARS,
-	DAL: { collectedItems: slayTheSpire2CollectedItemsDal },
+	data: { collectedItems: slayTheSpire2CollectedItemsData },
 } satisfies GameConfig<SlayTheSpire2LocalItem, SlayTheSpire2ItemCategory>;
 
 export { GAME_CONFIG };

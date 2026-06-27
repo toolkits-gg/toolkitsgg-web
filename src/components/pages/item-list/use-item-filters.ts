@@ -1,7 +1,11 @@
 import { parseAsBoolean, useQueryStates } from "nuqs";
 import type { ReactNode } from "react";
 import type { ActiveFilter } from "#/components/pages/item-list/ItemFilterBar.tsx";
-import type { AnyGameConfig } from "#/features/game/registry/game-registry.tsx";
+import type {
+	AnyGameConfig,
+	AppItem,
+	GameFilterConfig,
+} from "#/features/game/types.ts";
 import {
 	dimUncollectedItemsParser,
 	showCollectableOnlyParser,
@@ -9,7 +13,6 @@ import {
 	showUncollectedItemsParser,
 } from "#/features/nuqs/parsers/item-collection.ts";
 import { searchParser } from "#/features/nuqs/parsers/search.ts";
-import type {AppItem, GameFilterConfig} from "#/features/game/types.ts";
 
 const itemLookupParsers = {
 	search: searchParser,

@@ -22,14 +22,16 @@ import {
 } from "react-icons/lu";
 
 import { DefaultLogo } from "#/components/AppLogo.tsx";
-import { useDalMutation } from "#/features/dal/use-dal-mutation.ts";
-import { useDalQuery } from "#/features/dal/use-dal-query.ts";
-import { createFavoriteGameDal } from "#/features/game/dal/favorite-games/favorite-games.dal.ts";
 import {
-	getGameConfig,
+	useFavoriteGame,
+	useFavoriteGames,
+	useUnfavoriteGame,
+} from "#/features/game/data/favorite-games/use-favorite-games.ts";
+import {
 	getGameLogoComponent,
+	getGameMetadata,
 	REGISTERED_GAME_IDS,
-} from "#/features/game/registry/game-registry.tsx";
+} from "#/features/game/registry/game-public-registry.tsx";
 import { setGame } from "#/features/game/store.ts";
 import { useGameId } from "#/features/game/use-game-id.ts";
 import { setActiveGameCookie } from "#/features/game/utils.ts";
@@ -43,7 +45,7 @@ type GameEntry = {
 
 const allGames: GameEntry[] = REGISTERED_GAME_IDS.map((id) => ({
 	id: id as GameId,
-	label: getGameConfig(id)?.THEME?.label ?? id,
+	label: getGameMetadata(id)?.label ?? id,
 }));
 
 const sortByLabel = (a: GameEntry, b: GameEntry) =>
@@ -101,15 +103,13 @@ function GameSwitcher() {
 	const navigate = useNavigate();
 	const { location } = useRouterState();
 
-	const favoriteGameDal = createFavoriteGameDal();
-	const { data } = useDalQuery(favoriteGameDal.list, undefined);
-	const favorite = useDalMutation(favoriteGameDal.favorite);
-	const unfavorite = useDalMutation(favoriteGameDal.unfavorite);
+	const { data } = useFavoriteGames();
+	const favorite = useFavoriteGame();
+	const unfavorite = useUnfavoriteGame();
 
 	const favoriteGameIds = data?.map((r) => r.gameId) ?? [];
 
-	const activeLabel =
-		getGameConfig(activeGameId)?.THEME?.label ?? "Toolkits.gg";
+	const activeLabel = getGameMetadata(activeGameId)?.label ?? "Toolkits.gg";
 	const ActiveGameLogo = getGameLogoComponent(activeGameId);
 
 	const filteredGames = allGames.filter((g) =>

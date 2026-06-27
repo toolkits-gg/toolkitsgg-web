@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getGameConfig } from "#/features/game/registry/game-registry";
+import { getGamePages } from "#/features/game/registry/game-pages-registry.tsx";
 
 export const Route = createFileRoute("/$gameId/items")({
 	component: function ItemsPage() {
 		const { gameId } = Route.useParams();
-		const config = getGameConfig(gameId);
-		return <>{config?.PAGES.renderItemLookup()}</>;
+		const pages = getGamePages(gameId);
+		return <>{pages?.renderItemLookup()}</>;
 	},
 });
