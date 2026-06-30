@@ -13,7 +13,7 @@ import { RootDocument } from "#/components/RootDocument.tsx";
 import { OG_IMAGE, SERVER_GAME_INPUTS_QUERY_KEY } from "#/constants";
 import { clientEnv } from "#/env/client-env.ts";
 import { getServerResolvedGameInputsServerFn } from "#/features/game/active-game";
-import { getValidatedGameId } from "#/features/game/registry/game-public-registry.tsx";
+import { getValidatedGameId } from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
 
 interface MyRouterContext {

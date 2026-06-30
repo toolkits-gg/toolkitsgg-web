@@ -27,14 +27,14 @@ import {
 	useFavoriteGames,
 	useUnfavoriteGame,
 } from "#/features/game/data/favorite-games/use-favorite-games.ts";
+import { setGame } from "#/features/game/store.ts";
+import { useGameId } from "#/features/game/use-game-id.ts";
+import { setActiveGameCookie } from "#/features/game/utils.ts";
 import {
 	getGameLogoComponent,
 	getGameMetadata,
 	REGISTERED_GAME_IDS,
-} from "#/features/game/registry/game-public-registry.tsx";
-import { setGame } from "#/features/game/store.ts";
-import { useGameId } from "#/features/game/use-game-id.ts";
-import { setActiveGameCookie } from "#/features/game/utils.ts";
+} from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
 import classes from "./GameSwitcher.module.css";
 

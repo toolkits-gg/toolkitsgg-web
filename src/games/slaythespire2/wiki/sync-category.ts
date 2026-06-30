@@ -13,8 +13,8 @@
  * lines, and rolling per-field diff counts into the final summary.
  */
 
-import { parseLuaModule } from "#/features/wiki-sync/parse-lua-module";
-import { fetchWithUserAgent } from "#/features/wiki-sync/utils";
+import { parseLuaModule } from "#/features/sync/wiki/parse-lua-module";
+import { fetchWithUserAgent } from "#/features/sync/wiki/utils";
 
 type CompareResult = {
 	differingFields: string[];

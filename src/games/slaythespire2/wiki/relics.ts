@@ -7,7 +7,7 @@
  * Run with: pnpm tsx src/games/slaythespire2/wiki/relics.ts
  */
 
-import { cleanWikiText } from "#/features/wiki-sync/clean-wiki-text";
+import { cleanWikiText } from "#/features/sync/wiki/clean-wiki-text";
 import { ANCIENT_MAP } from "#/games/slaythespire2/core/item-data/ancients.ts";
 import { CHARACTER_MAP } from "#/games/slaythespire2/core/item-data/characters.ts";
 import {

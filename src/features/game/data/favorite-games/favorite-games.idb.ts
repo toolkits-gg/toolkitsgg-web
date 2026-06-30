@@ -1,6 +1,6 @@
-import { STORE_USER_FAVORITE_GAME } from "#/features/sync/local/constants.ts";
-import { getLocalDB } from "#/features/sync/local/local-db.ts";
-import type { LocalUserFavoriteGame } from "#/features/sync/local/types.ts";
+import { STORE_USER_FAVORITE_GAME } from "#/features/sync/local-data/local/constants.ts";
+import { getLocalDB } from "#/features/sync/local-data/local/local-db.ts";
+import type { LocalUserFavoriteGame } from "#/features/sync/local-data/local/types.ts";
 import type { GameId } from "@/prisma";
 
 const listLocalFavoriteGames = async (

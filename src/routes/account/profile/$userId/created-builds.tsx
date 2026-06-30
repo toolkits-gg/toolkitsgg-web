@@ -1,15 +1,13 @@
 import { createFileRoute, getRouteApi } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useGameId } from "#/features/game/use-game-id.ts";
-import { getGamePages } from "#/features/game/registry/game-pages-registry.tsx";
-import {
-	isRegisteredGameId,
-} from "#/features/game/registry/game-public-registry.tsx";
 import { ProfileTabPlaceholder } from "#/features/user/ProfileTabPlaceholder.tsx";
 import {
 	buildTabHead,
 	loadProfileTabData,
 } from "#/features/user/profile-tab-head.ts";
+import { getGamePages } from "#/registry/game-pages-registry.tsx";
+import { isRegisteredGameId } from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
 
 type CreatedBuildsSearch = {

@@ -13,16 +13,22 @@ import { notifications } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { type PropsWithChildren, useEffect, useState } from "react";
-import { getGameMetadata } from "#/features/game/registry/game-public-registry.tsx";
-import { clearSynced, deleteOp } from "#/features/sync/queue/pending-ops";
-import type { PendingOp } from "#/features/sync/queue/types";
-import { usePendingOps } from "#/features/sync/queue/use-pending-ops";
-import { forceSyncOp, syncOps } from "#/features/sync/sync-runner";
+import {
+	clearSynced,
+	deleteOp,
+} from "#/features/sync/local-data/queue/pending-ops";
+import type { PendingOp } from "#/features/sync/local-data/queue/types";
+import { usePendingOps } from "#/features/sync/local-data/queue/use-pending-ops";
+import {
+	forceSyncOp,
+	syncOps,
+} from "#/features/sync/local-data/sync-runner.ts";
 import {
 	buildTabHead,
 	loadProfileTabData,
 } from "#/features/user/profile-tab-head.ts";
 import { useSession } from "#/integrations/better-auth/auth-client";
+import { getGameMetadata } from "#/registry/game-public-registry.tsx";
 
 const PendingList = ({
 	ops,

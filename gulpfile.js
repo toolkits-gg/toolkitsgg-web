@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { favicons } from "favicons";
 import sharp from "sharp";
-import FAVICON_REGISTRY from "./src/features/game/registry/favicon-registry.json" with {
+import FAVICON_REGISTRY from "./src/registry/favicon-registry.json" with {
 	type: "json",
 };
 import IMAGE_SIZES from "#/image-sizes.json" with {

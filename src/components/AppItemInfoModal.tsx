@@ -17,7 +17,6 @@ import { LuCamera, LuCheck, LuPlus } from "react-icons/lu";
 import { AppGameImage } from "#/components/AppGameImage.tsx";
 import { AppItemDescription } from "#/components/AppItemDescription.tsx";
 import type { CollectItemInput } from "#/features/game/data/types.ts";
-import { getGameMetadata } from "#/features/game/registry/game-public-registry.tsx";
 import type { AppItem } from "#/features/game/types.ts";
 import { useGameId } from "#/features/game/use-game-id.ts";
 import {
@@ -25,6 +24,7 @@ import {
 	type WatermarkConfig,
 } from "#/features/screenshot/ScreenshotContainer.tsx";
 import { useScreenshot } from "#/features/screenshot/use-screenshot.ts";
+import { getGameMetadata } from "#/registry/game-public-registry.tsx";
 
 export type AppItemInfoModalProps = {
 	item: AppItem;

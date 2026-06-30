@@ -16,8 +16,8 @@
  * `"modifiers.armor"` are walked into nested local objects).
  */
 
-import { cargoQueryAll } from "#/features/wiki-sync/cargo-query";
-import { cleanCargoHtml } from "#/features/wiki-sync/clean-cargo-html";
+import { cargoQueryAll } from "#/features/sync/wiki/cargo-query";
+import { cleanCargoHtml } from "#/features/sync/wiki/clean-cargo-html";
 import type { Remnant2DLC } from "@/prisma";
 
 const WIKI_API_URL = "https://remnant2.wiki.gg/api.php";

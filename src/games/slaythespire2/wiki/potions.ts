@@ -7,7 +7,7 @@
  * Run with: pnpm tsx src/games/slaythespire2/wiki/potions.ts
  */
 
-import { cleanWikiText } from "#/features/wiki-sync/clean-wiki-text";
+import { cleanWikiText } from "#/features/sync/wiki/clean-wiki-text";
 import { CHARACTER_MAP } from "#/games/slaythespire2/core/item-data/characters.ts";
 import {
 	POTION_RARITY_MAP,

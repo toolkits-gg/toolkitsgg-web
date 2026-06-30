@@ -22,10 +22,10 @@ import {
 	updateAvatarServerFn,
 	updateProfileServerFn,
 } from "#/features/game/data/user-profile/user-profile.ts";
-import { getGameMetadata } from "#/features/game/registry/game-public-registry.tsx";
-import { getOrCreateAnonUserId } from "#/features/sync/identity/anon-id.ts";
-import { enqueueOp } from "#/features/sync/queue/pending-ops.ts";
+import { getOrCreateAnonUserId } from "#/features/sync/local-data/identity/anon-id.ts";
+import { enqueueOp } from "#/features/sync/local-data/queue/pending-ops.ts";
 import { useSession } from "#/integrations/better-auth/auth-client.ts";
+import { getGameMetadata } from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
 
 type GetProfileArgs = { userId?: string } | undefined;

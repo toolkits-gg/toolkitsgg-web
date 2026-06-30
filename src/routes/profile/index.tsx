@@ -1,7 +1,7 @@
 import { Badge, Card, Group, Stack, Text } from "@mantine/core";
 import { useNetwork } from "@mantine/hooks";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffectiveUserId } from "#/features/sync/identity/use-effective-user-id";
+import { useEffectiveUserId } from "#/features/sync/local-data/identity/use-effective-user-id";
 import { useSession } from "#/integrations/better-auth/auth-client";
 
 function LocalProfileHome() {

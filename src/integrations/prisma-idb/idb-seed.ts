@@ -1,5 +1,5 @@
-import { allGameIDBSeeds } from "#/features/game/registry/game-idb-seed-registry";
 import { getIDBClient } from "#/integrations/prisma-idb/idb-client";
+import { allGameIDBSeeds } from "#/registry/game-idb-seed-registry";
 import type { GameId } from "@/prisma";
 
 const LOCAL_USER_ID = "local-user";

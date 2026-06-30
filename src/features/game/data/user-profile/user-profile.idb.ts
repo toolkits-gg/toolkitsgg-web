@@ -1,12 +1,12 @@
 import {
 	STORE_USER_AVATAR_OVERRIDE,
 	STORE_USER_PROFILE,
-} from "#/features/sync/local/constants.ts";
-import { getLocalDB } from "#/features/sync/local/local-db.ts";
+} from "#/features/sync/local-data/local/constants.ts";
+import { getLocalDB } from "#/features/sync/local-data/local/local-db.ts";
 import type {
 	LocalUserAvatarOverride,
 	LocalUserProfile,
-} from "#/features/sync/local/types.ts";
+} from "#/features/sync/local-data/local/types.ts";
 import type { GameId } from "@/prisma";
 
 const getLocalUserProfile = async (

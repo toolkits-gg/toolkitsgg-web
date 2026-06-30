@@ -13,10 +13,10 @@ import {
 	getViewerUserIdServerFn,
 	mapUserToProfileData,
 } from "#/features/game/data/user-profile/user-profile.ts";
-import { getValidatedGameId } from "#/features/game/registry/game-public-registry.tsx";
 import { ProfileHeader } from "#/features/user/ProfileHeader.tsx";
 import { ProfileTabNav } from "#/features/user/ProfileTabNav.tsx";
 import { resolveAvatar } from "#/features/user/utils.ts";
+import { getValidatedGameId } from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
 
 const ProfileLayout = () => {

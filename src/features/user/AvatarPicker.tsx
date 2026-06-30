@@ -19,16 +19,16 @@ import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import { LuCheck, LuChevronDown, LuSearch, LuX } from "react-icons/lu";
 import { useFavoriteGames } from "#/features/game/data/favorite-games/use-favorite-games.ts";
+import type { GameAvatar } from "#/features/game/types.ts";
+import { useGameId } from "#/features/game/use-game-id.ts";
+import { useUserProfile } from "#/features/user/use-user-profile.ts";
+import { avatarImageUrl } from "#/features/user/utils.ts";
 import {
 	getGameAvatars,
 	getGameLogoComponent,
 	getGameMetadata,
 	REGISTERED_GAME_IDS,
-} from "#/features/game/registry/game-public-registry.tsx";
-import type { GameAvatar } from "#/features/game/types.ts";
-import { useGameId } from "#/features/game/use-game-id.ts";
-import { useUserProfile } from "#/features/user/use-user-profile.ts";
-import { avatarImageUrl } from "#/features/user/utils.ts";
+} from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
 import classes from "./AvatarPicker.module.css";
 

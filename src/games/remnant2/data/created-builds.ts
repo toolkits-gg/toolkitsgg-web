@@ -12,8 +12,8 @@ import type {
 	GameCreatedBuildsData,
 	UpdateBuildInput,
 } from "#/features/game/data/types.ts";
-import { getOrCreateAnonUserId } from "#/features/sync/identity/anon-id.ts";
-import { enqueueOp } from "#/features/sync/queue/pending-ops.ts";
+import { getOrCreateAnonUserId } from "#/features/sync/local-data/identity/anon-id.ts";
+import { enqueueOp } from "#/features/sync/local-data/queue/pending-ops.ts";
 import {
 	deleteBuildServerFn,
 	getBuildByIdServerFn,

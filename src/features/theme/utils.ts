@@ -1,8 +1,4 @@
 import { type MantineColorsTuple, virtualColor } from "@mantine/core";
-import {
-	getGameTheme,
-	REGISTERED_GAME_IDS,
-} from "#/features/game/registry/game-public-registry.tsx";
 import { defaultTheme } from "#/features/theme/themes/default-theme";
 import type {
 	ColorVariants,
@@ -10,6 +6,10 @@ import type {
 	ToolkitThemeColors,
 	ToolkitThemeDefinition,
 } from "#/features/theme/types.ts";
+import {
+	getGameTheme,
+	REGISTERED_GAME_IDS,
+} from "#/registry/game-public-registry.tsx";
 
 /**
  * Creates a complete set of color variants for a theme color.

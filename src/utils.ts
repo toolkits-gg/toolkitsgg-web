@@ -1,4 +1,4 @@
-import { isRegisteredGameId } from "#/features/game/registry/game-public-registry.tsx";
+import { isRegisteredGameId } from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
 
 const ROOT_DOMAINS = ["toolkits.gg", "www.toolkits.gg", "localhost"];
