@@ -1,27 +1,3 @@
-// Core types shared across the offline-sync machinery.
-//
-// Architecture overview
-// ---------------------
-// Local writes (favorite a game, collect an item, edit a build) are recorded as
-// PendingOps in IndexedDB (queue/) and replayed against the server one at a time
-// by the sync runner (sync-runner.ts -> apply-pending-ops.ts). Each op names an
-// `entity`; the handler registry (handler-registry.server.ts) maps that entity to
-// a SyncHandler that knows how to write it to Postgres and resolve conflicts.
-//
-// Handlers come in two shapes, each built by a shared factory so the
-// create/update/delete branching and last-write-wins (LWW) logic live in one place
-// and individual entities only supply their Prisma read/write functions:
-//
-//   - Presence toggle  (presence-sync-handler.ts) — rows that either exist or not,
-//     with no mutable fields (collected items, favorited games). Re-applying an
-//     existing row is a noop.
-//   - Content record   (record-sync-handler.ts)   — rows with mutable fields
-//     beyond mere existence (builds, profiles). Re-applying overwrites the row
-//     from the op payload.
-//
-// Each entity's handler is defined in a `<name>.sync.server.ts` module, kept
-// separate from the plain CRUD data-access in its sibling `<name>.server.ts`.
-
 import type { PendingOp } from "#/features/sync/local-data/queue/types.ts";
 
 /**

@@ -1,9 +1,10 @@
-// Shared SyncHandler factory for "presence-toggle" entities — rows that either
-// exist or don't, with no mutable fields beyond their existence (e.g. collected
-// items, favorited games). The delete/upsert branching and last-write-wins
-// conflict resolution live here once, so individual entities only supply how to
-// extract their key from the op payload and how to read/create/delete the row.
-
+/**
+ * Shared SyncHandler factory for "presence-toggle" entities — rows that either
+ * exist or don't, with no mutable fields beyond their existence (e.g. collected
+ * items, favorited games). The delete/upsert branching and last-write-wins
+ * conflict resolution live here once, so individual entities only supply how to
+ * extract their key from the op payload and how to read/create/delete the row.
+ */
 import { compareTimestamps } from "#/features/sync/local-data/last-write-wins.ts";
 import type { PendingOp } from "#/features/sync/local-data/queue/types.ts";
 import type {

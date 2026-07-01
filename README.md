@@ -13,7 +13,7 @@ This is the web application for Toolkits.gg. Toolkits.gg is a collection of gami
 | [Contributing](.github/CONTRIBUTING.md)       | Guidelines for contributing code and content              |
 | [Architecture](documentation/ARCHITECTURE.md) | Framework stack, game registry pattern, adding a new game |
 | [Themes](documentation/THEMES.md)             | Per-game theming, palette generation, light/dark handling |
-| [DAL](documentation/DAL.md)                         | Offline-first data layer for persisted state              |
+| [DAL](documentation/DAL.md)                   | Offline-first data layer for persisted state              |
 
 ## Contributing
 

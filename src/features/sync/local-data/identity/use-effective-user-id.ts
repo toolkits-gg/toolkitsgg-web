@@ -1,4 +1,6 @@
-// Resolves the active user identity across user and anon states.
+/**
+ * Resolves the active user identity across user and anon states.
+ */
 
 import { useEffect, useState } from "react";
 import { getOrCreateAnonUserId } from "#/features/sync/local-data/identity/anon-id.ts";

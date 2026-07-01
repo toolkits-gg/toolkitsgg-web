@@ -1,6 +1,8 @@
-// Persistent anonymous user ID for pre-user data collection.
-// Allows users to collect items before signing up; the ID travels with pending ops
-// so the server can attribute offline writes to the correct user after login.
+/**
+ * Persistent anonymous user ID for pre-user data collection.
+ * Allows users to collect items before signing up; the ID travels with pending ops
+ * so the server can attribute offline writes to the correct user after login.
+ */
 
 /** localStorage key: "toolkitsgg.anonUserId" */
 const STORAGE_KEY = "toolkitsgg.anonUserId";

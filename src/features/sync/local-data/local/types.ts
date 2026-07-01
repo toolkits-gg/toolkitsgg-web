@@ -1,6 +1,3 @@
-// TypeScript interfaces for IndexedDB-stored user records.
-// These mirror the server-side Prisma models but use ISO string timestamps (IDB has no Date type).
-
 import type { GameId } from "@/prisma";
 
 /** Per-game avatar override for a user — mirrors the Prisma UserAvatarOverride model. */

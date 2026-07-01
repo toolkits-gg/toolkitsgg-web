@@ -1,12 +1,14 @@
-// Shared SyncHandler factory for "content-record" entities — rows with mutable
-// fields beyond mere existence (e.g. builds, profiles). The create/update/delete
-// branching and last-write-wins conflict resolution live here once, so individual
-// entities only supply how to extract their key from the op payload and how to
-// read/create/update/delete the row.
-//
-// Sibling of presence-sync-handler.ts: presence-toggle rows have no mutable fields,
-// so an upsert onto an existing row is a noop. Content records instead overwrite
-// the row from the op payload on update.
+/**
+ * Shared SyncHandler factory for "content-record" entities — rows with mutable
+ * fields beyond mere existence (e.g. builds, profiles). The create/update/delete
+ * branching and last-write-wins conflict resolution live here once, so individual
+ * entities only supply how to extract their key from the op payload and how to
+ * read/create/update/delete the row.
+ *
+ * Sibling of presence-sync-handler.ts: presence-toggle rows have no mutable fields,
+ * so an upsert onto an existing row is a noop. Content records instead overwrite
+ * the row from the op payload on update.
+ */
 
 import { compareTimestamps } from "#/features/sync/local-data/last-write-wins.ts";
 import type {

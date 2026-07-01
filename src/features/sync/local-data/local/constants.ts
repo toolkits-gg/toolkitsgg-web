@@ -1,5 +1,3 @@
-// IndexedDB object store name constants for the toolkitsgg-local database.
-
 /** Stores user profile records (displayName, bio, avatar references). */
 const STORE_USER_PROFILE = "userProfile";
 /** Stores user ↔ game favorite relationships. */

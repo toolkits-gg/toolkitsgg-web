@@ -1,11 +1,13 @@
-// Last-write-wins conflict resolution used when syncing pending ops to the server.
+/**
+ *  Last-write-wins conflict resolution used when syncing pending ops to the server.
+ */
 
 import type { HasUpdatedAt } from "#/features/sync/local-data/types.ts";
 
 /**
- * - `local-wins`  — the pending op should be applied (local change is authoritative).
+ * - `local-wins` — the pending op should be applied (local change is authoritative).
  * - `server-wins` — the server record is newer; treat as a conflict and surface it.
- * - `equal`       — the op is redundant (already synced); safe to delete it.
+ * - `equal` — the op is redundant (already synced); safe to delete it.
  */
 type LwwComparison = "local-wins" | "server-wins" | "equal";
 
@@ -45,8 +47,6 @@ const compareTimestamps = (
 	if (serverTime === null) return "local-wins";
 
 	if (baselineTime === null) {
-		// Action hasn't implemented getServerUpdatedAt (e.g. favorites, user-profile).
-		// Fall back to comparing op creation time vs. server record time — a close approximation.
 		if (opTime === null) return "server-wins";
 		if (opTime > serverTime) return "local-wins";
 		if (opTime < serverTime) return "server-wins";

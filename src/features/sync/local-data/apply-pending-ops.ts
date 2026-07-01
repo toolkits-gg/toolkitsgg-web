@@ -1,5 +1,3 @@
-// TanStack Start server function that applies a single pending op with idempotency.
-
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import type { SyncResult } from "#/features/sync/local-data/types.ts";

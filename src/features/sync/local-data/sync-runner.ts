@@ -1,5 +1,6 @@
-// Orchestrates syncing a batch of pending ops to the server sequentially.
-
+/**
+ * Orchestrates syncing a batch of pending ops to the server sequentially.
+ */
 import { applyPendingOpServerFn } from "#/features/sync/local-data/apply-pending-ops.ts";
 import {
 	deleteOp,

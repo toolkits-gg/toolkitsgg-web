@@ -1,5 +1,3 @@
-// Types for the pending-operations queue (client-side sync queue).
-
 import type { GameId } from "@/prisma";
 
 type PendingOpOperation = "create" | "update" | "upsert" | "delete";
