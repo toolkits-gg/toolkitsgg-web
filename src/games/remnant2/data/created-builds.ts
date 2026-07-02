@@ -1,10 +1,5 @@
-// Remnant 2 created builds: client data hooks. Each hook inlines the backend
-// choice (remote when authed + online, else local IndexedDB) and, on the local
-// path, mirrors the write to IDB and enqueues a pending op for later sync.
-
 import { useNetwork } from "@mantine/hooks";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { extractBuildWriteFields } from "#/features/game/data/build-fields.ts";
 import type {
 	CreatedBuildRecord,
 	CreatedBuildSummary,
@@ -12,6 +7,7 @@ import type {
 	GameCreatedBuildsData,
 	UpdateBuildInput,
 } from "#/features/game/data/types.ts";
+import { extractBuildWriteFields } from "#/features/game/data/utils.ts";
 import { getOrCreateAnonUserId } from "#/features/sync/local-data/identity/anon-id.ts";
 import { enqueueOp } from "#/features/sync/local-data/queue/pending-ops.ts";
 import {

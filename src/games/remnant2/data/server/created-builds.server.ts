@@ -1,12 +1,5 @@
-// Remnant 2 created builds: server-only data access (Postgres via Prisma). Build
-// CRUD is written out here rather than hidden behind a factory; the ownership-
-// scoped `updateOwnedBuild` write is shared with the offline-sync handler, which
-// lives alongside in created-builds.sync.server.ts. The `.server.ts` suffix opts
-// this into Start's import protection, keeping prisma out of the client bundle.
-// Consumed by the created-builds server-fn wrappers (inside their handlers).
-
-import type { BuildWriteFields } from "#/features/game/data/build-fields.ts";
 import type {
+	BuildWriteFields,
 	CreatedBuildRecord,
 	CreatedBuildSummary,
 } from "#/features/game/data/types.ts";

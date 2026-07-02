@@ -1,11 +1,4 @@
-// Offline-sync handler for the remnant2Build entity (mutable content record).
-// Split out from created-builds.server.ts so the sync-replay path lives apart
-// from the direct CRUD data access, while still reusing its ownership-scoped
-// `updateOwnedBuild` write. The `.server.ts` suffix opts this into Start's import
-// protection, keeping prisma out of the client bundle. Consumed only by the sync
-// handler registry.
-
-import { extractBuildWriteFields } from "#/features/game/data/build-fields.ts";
+import { extractBuildWriteFields } from "#/features/game/data/utils.ts";
 import { createRecordSyncHandler } from "#/features/sync/local-data/record-sync-handler.ts";
 import type {
 	HasUpdatedAt,

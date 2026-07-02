@@ -1,9 +1,5 @@
-// Plain data types shared by the per-entity data modules and the generic UI
-// components. No coupling to any data-access abstraction — these are just the
-// record/input shapes plus the "hooks bundle" contracts a game exposes to the
-// generic ItemList / CreatedBuilds pages.
-
 import type { UseMutationResult, UseQueryResult } from "@tanstack/react-query";
+import type { BuildVisibility } from "@/prisma";
 
 export type CollectItemInput = { itemId: string; itemName: string };
 
@@ -13,12 +9,24 @@ export type CollectedItemRecord = {
 	updatedAt?: Date | string | null;
 };
 
+/** The mutable fields a user can edit on a build. */
+export type BuildWriteFields = {
+	name?: string;
+	description?: string | null;
+	visibility?: BuildVisibility;
+	videoUrl?: string | null;
+	imageUrl?: string | null;
+	thumbnailUrl?: string | null;
+	referenceUrl?: string | null;
+	gameVersion?: string | null;
+};
+
 /** Lightweight row for build lists (profile tabs, cards). */
 export type CreatedBuildSummary = {
 	id: string;
 	name: string;
 	createdById: string | null;
-	visibility: string;
+	visibility: BuildVisibility;
 	imageUrl?: string | null;
 	thumbnailUrl?: string | null;
 	createdAt?: Date | string | null;
@@ -42,7 +50,7 @@ export type UpdateBuildInput = {
 	buildId: string;
 	name?: string;
 	description?: string | null;
-	visibility?: string;
+	visibility?: BuildVisibility;
 	videoUrl?: string | null;
 	imageUrl?: string | null;
 	thumbnailUrl?: string | null;

@@ -16,6 +16,7 @@ import type {
 } from "#/features/game/data/types.ts";
 import type { ProfileTabViewMode } from "#/features/game/types.ts";
 import { useGameId } from "#/features/game/use-game-id.ts";
+import type { BuildVisibility, GameId } from "@/prisma";
 import { useCreatedBuilds } from "./use-created-builds.ts";
 
 type CreatedBuildsPageProps = {
@@ -23,7 +24,7 @@ type CreatedBuildsPageProps = {
 	viewMode: ProfileTabViewMode;
 };
 
-const VISIBILITY_COLORS: Record<string, string> = {
+const VISIBILITY_COLORS: Record<BuildVisibility, string> = {
 	PUBLIC: "green",
 	UNLISTED: "yellow",
 	PRIVATE: "gray",
@@ -34,7 +35,7 @@ const BuildCard = ({
 	gameId,
 }: {
 	build: CreatedBuildSummary;
-	gameId: string;
+	gameId: GameId;
 }) => {
 	const imageSrc = build.thumbnailUrl ?? build.imageUrl ?? undefined;
 	return (

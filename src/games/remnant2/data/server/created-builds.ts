@@ -1,15 +1,10 @@
-// Remnant 2 created builds: input validation and the TanStack server-fn wrappers.
-// Each wrapper delegates to ./created-builds.server.ts; those imports are
-// referenced only inside handler bodies, so the compiler strips them (and prisma)
-// from the client bundle.
-
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { extractBuildWriteFields } from "#/features/game/data/build-fields.ts";
 import type {
 	CreatedBuildRecord,
 	CreatedBuildSummary,
 } from "#/features/game/data/types.ts";
+import { extractBuildWriteFields } from "#/features/game/data/utils.ts";
 import {
 	deleteBuild,
 	getBuildById,

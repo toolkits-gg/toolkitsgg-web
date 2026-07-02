@@ -18,6 +18,7 @@ import {
 	parseColorScheme,
 } from "#/features/theme/utils.ts";
 import { getGameTheme } from "#/registry/game-public-registry.tsx";
+import type { GameId } from "@/prisma";
 
 // This feature was game-aware, need to rework it
 const allThemeDefinitions: Array<{ label: string; className: string }> =
@@ -27,7 +28,7 @@ const allThemeDefinitions: Array<{ label: string; className: string }> =
 const allThemeClassNames: string[] = getAllRegisteredThemeClassNames();
 
 type ThemeModalProps = {
-	gameId: string | undefined;
+	gameId: GameId | undefined;
 };
 
 const ThemeModal = ({ gameId }: ThemeModalProps) => {
