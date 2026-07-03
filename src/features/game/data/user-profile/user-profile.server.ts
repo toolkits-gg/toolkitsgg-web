@@ -3,7 +3,7 @@ import {
 	getOptionalUserId,
 	requireUserId,
 } from "#/features/user/require-user.server.ts";
-import { getGameAvatars } from "#/registry/game-public-registry.tsx";
+import { getGameAvatars } from "#/registry/game-public-registry.tsx";;
 import { type GameId, prisma } from "@/prisma";
 
 type UpdateAvatarData = {

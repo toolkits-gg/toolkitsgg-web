@@ -2,7 +2,7 @@
 // Split out from collected-items.server.ts so the sync-replay path lives apart
 // from the direct CRUD data access. The `.server.ts` suffix opts this into
 // Start's import protection, keeping prisma out of the client bundle. Consumed
-// only by the sync handler registry.
+// only by the sync handler game-registry.
 
 import { createPresenceToggleSyncHandler } from "#/features/sync/local-data/presence-sync-handler.ts";
 import type { SyncHandler } from "#/features/sync/local-data/types.ts";

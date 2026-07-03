@@ -1,10 +1,10 @@
-// Explicit registry of offline-sync handlers, keyed by entity name.
+// Explicit game-registry of offline-sync handlers, keyed by entity name.
 //
 // Each entity's handler is imported and listed here by hand — no auto-discovery.
 // To add a new syncable entity: export its SyncHandler, then add one line below.
 // applyPendingOpServerFn looks up the handler for an op's `entity` here.
 //
-// Handlers live in per-entity `.server.ts` modules, so this registry is itself
+// Handlers live in per-entity `.server.ts` modules, so this game-registry is itself
 // server-only (the `.server.ts` suffix opts it into Start's import protection).
 
 import { favoriteGameSyncHandler } from "#/features/game/data/favorite-games/favorite-games.sync.server.ts";

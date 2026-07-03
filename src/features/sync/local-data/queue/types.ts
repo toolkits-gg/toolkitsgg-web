@@ -6,7 +6,7 @@ type PendingOpOperation = "create" | "update" | "upsert" | "delete";
  * Human-readable snapshot of a pending op, captured at enqueue time so the
  * data-sync UI can show the user what each row actually does without parsing
  * `payload` or the idempotency key. Snapshotted (not derived at render time)
- * so an item rename or registry change doesn't rewrite the user's history.
+ * so an item rename or game-registry change doesn't rewrite the user's history.
  */
 interface PendingOpSummary {
 	/** Primary line, e.g. "Collected: Sword of Legends". */
@@ -44,7 +44,7 @@ interface PendingOp {
 	updatedAt: string;
 	/** The anon user ID at the time the op was enqueued. The user may have logged in since. */
 	anonUserId: string;
-	/** Entity name — must match a key in the sync-handler registry. */
+	/** Entity name — must match a key in the sync-handler game-registry. */
 	entity: string;
 	operation: PendingOpOperation;
 	/** The original mutation input, serialized as-is. */

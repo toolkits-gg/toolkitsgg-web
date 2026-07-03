@@ -5,11 +5,11 @@ import {
 	buildTabHead,
 	loadProfileTabData,
 } from "#/features/user/profile-tab-head.ts";
-import { getGamePages } from "#/registry/game-pages-registry.tsx";
+import { getGamePages } from "#/game-registry/game-pages-registry.tsx";
 import {
 	getGameMetadata,
 	isRegisteredGameId,
-} from "#/registry/game-public-registry.tsx";
+} from "#/registry/game-public-registry.tsx";;
 import type { GameId } from "@/prisma";
 
 type CollectedItemsSearch = {

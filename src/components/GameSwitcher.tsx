@@ -34,7 +34,7 @@ import {
 	getGameLogoComponent,
 	getGameMetadata,
 	REGISTERED_GAME_IDS,
-} from "#/registry/game-public-registry.tsx";
+} from "#/registry/game-public-registry.tsx";;
 import type { GameId } from "@/prisma";
 import classes from "./GameSwitcher.module.css";
 

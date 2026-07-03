@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import type { SyncResult } from "#/features/sync/local-data/types.ts";
 import { requireUserId } from "#/features/user/require-user.server.ts";
-import { syncHandlers } from "#/registry/handler-registry.server.ts";
+import { syncHandlers } from "#/game-registry/handler-registry.server.ts";
 
 /** Re-validates the PendingOp at the server boundary; client data is untrusted. */
 const PendingOpSchema = z.object({

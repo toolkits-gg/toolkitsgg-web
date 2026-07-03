@@ -80,7 +80,7 @@ When in doubt, pass a single seed color and trust the generator. Only override i
 You don't need to write light and dark themes separately. The registry expansion does it for you:
 
 ```typescript
-// game-registry.tsx
+// game-game-registry.tsx
 getAllRegisteredThemeDefinitions()
 // returns: [
 //   default-light, default-dark,

@@ -11,6 +11,7 @@ import {
 	unfavoriteGame,
 } from "#/features/game/data/favorite-games/favorite-games.server.ts";
 import { REGISTERED_GAME_IDS } from "#/registry/game-public-registry.tsx";
+
 import type { GameId } from "@/prisma";
 
 const GAME_ID_SET = new Set<string>(REGISTERED_GAME_IDS);

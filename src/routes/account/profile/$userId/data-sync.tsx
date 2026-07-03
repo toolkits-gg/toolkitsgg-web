@@ -27,8 +27,8 @@ import {
 	buildTabHead,
 	loadProfileTabData,
 } from "#/features/user/profile-tab-head.ts";
+import { getGameMetadata } from "#/registry/game-public-registry.tsx";;
 import { useSession } from "#/integrations/better-auth/auth-client";
-import { getGameMetadata } from "#/registry/game-public-registry.tsx";
 
 const PendingList = ({
 	ops,

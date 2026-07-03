@@ -1,4 +1,4 @@
-import { allGameDBSeeds } from "#/registry/game-db-seed-registry";
+import { allGameDBSeeds } from "#/game-registry/game-db-seed-registry";
 
 import { auth } from "#/integrations/better-auth/auth";
 import { prisma } from "./client";

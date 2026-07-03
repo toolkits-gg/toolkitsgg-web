@@ -167,8 +167,13 @@ export type GameConfig<
 	SEARCH_PARAMS: ReturnType<typeof createSearchParamsCache> | undefined;
 	THEME: ToolkitThemeDefinition | undefined;
 	AVATARS?: GameAvatar[];
-	data: GameData;
+	DATA: GameData;
 };
+
+export type PublicGameConfig<
+	TItem extends AppItem = AppItem,
+	TCategory extends string | number | symbol = string,
+> = Omit<GameConfig<TItem, TCategory>, "PAGES" | "DATA">;
 
 // Widened type for runtime-keyed access (base AppItem, string category)
 export type AnyGameConfig = GameConfig;

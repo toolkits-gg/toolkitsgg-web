@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
-import { getValidatedGameId } from "#/registry/game-public-registry.tsx";
+import { getValidatedGameId } from "#/registry/game-public-registry.tsx";;
 import { parseCookie, parseSubdomain } from "#/utils.ts";
 import type { GameId } from "@/prisma";
 
