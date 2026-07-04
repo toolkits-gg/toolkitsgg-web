@@ -3,7 +3,9 @@ import {
 	getOptionalUserId,
 	requireUserId,
 } from "#/features/user/require-user.server.ts";
-import { getGameAvatars } from "#/registry/game-public-registry.tsx";;
+import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/user-write-limit.server.ts";
+import { getGameAvatars } from "#/registry/game-public-registry.tsx";
+
 import { type GameId, prisma } from "@/prisma";
 
 type UpdateAvatarData = {
@@ -14,6 +16,7 @@ type UpdateAvatarData = {
 
 const updateAvatar = async (data: UpdateAvatarData) => {
 	const userId = await requireUserId();
+	await enforceUserWriteLimit(userId);
 
 	const avatars = getGameAvatars(data.avatarGameId);
 	const avatarExists = avatars?.some((a) => a.id === data.avatarId);
@@ -56,6 +59,7 @@ const updateAvatar = async (data: UpdateAvatarData) => {
 
 const removePrimaryAvatar = async () => {
 	const userId = await requireUserId();
+	await enforceUserWriteLimit(userId);
 	await prisma.userProfile.update({
 		where: { userId },
 		data: { primaryAvatarId: null, primaryAvatarGameId: null },
@@ -65,6 +69,7 @@ const removePrimaryAvatar = async () => {
 
 const removeAvatarOverride = async (targetGameId: GameId) => {
 	const userId = await requireUserId();
+	await enforceUserWriteLimit(userId);
 	const profile = await prisma.userProfile.findUnique({ where: { userId } });
 	if (!profile) throw new Error("User profile not found");
 
@@ -76,6 +81,7 @@ const removeAvatarOverride = async (targetGameId: GameId) => {
 
 const updateProfile = async (data: { displayName?: string; bio?: string }) => {
 	const userId = await requireUserId();
+	await enforceUserWriteLimit(userId);
 	await prisma.userProfile.update({
 		where: { userId },
 		data: {

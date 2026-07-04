@@ -58,6 +58,18 @@ const auth = betterAuth({
 			maxAge: 5 * 60, // 5 minutes
 		},
 	},
+	rateLimit: {
+		window: 60, // default window, in seconds
+		max: 100, // default requests per window per IP
+		storage: "memory",
+		customRules: {
+			"/sign-in/email": { window: 60, max: 10 },
+			"/sign-up/email": { window: 60, max: 5 },
+			"/forget-password": { window: 60, max: 3 },
+			"/reset-password": { window: 60, max: 5 },
+			"/send-verification-email": { window: 60, max: 3 },
+		},
+	},
 	user: {
 		additionalFields: {
 			username: {

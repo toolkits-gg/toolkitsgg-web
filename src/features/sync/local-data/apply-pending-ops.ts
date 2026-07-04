@@ -3,6 +3,7 @@ import { z } from "zod";
 import type { SyncResult } from "#/features/sync/local-data/types.ts";
 import { requireUserId } from "#/features/user/require-user.server.ts";
 import { syncHandlers } from "#/game-registry/handler-registry.server.ts";
+import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/user-write-limit.server.ts";
 
 /** Re-validates the PendingOp at the server boundary; client data is untrusted. */
 const PendingOpSchema = z.object({
@@ -61,6 +62,7 @@ const applyPendingOpServerFn = createServerFn({ method: "POST" })
 		const { op, force } = data;
 		// requireUserId() runs first because userId is part of the deduplication key.
 		const userId = await requireUserId();
+		await enforceUserWriteLimit(userId);
 		// Force-syncs must skip the dedupe cache: the prior cached result is the
 		// conflict the user just chose to override.
 		const dedupeKey = `${userId}:${op.idempotencyKey}`;

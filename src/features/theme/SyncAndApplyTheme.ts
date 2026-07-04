@@ -27,7 +27,7 @@ const nextThemeToMantineTheme = (
 	return themeDefinition.theme;
 };
 
-const SyncAndApplyTheme = () => {
+export const SyncAndApplyTheme = () => {
 	const { theme: nextTheme, setTheme: setNextTheme } = useNextTheme();
 	const gameId = useGameId();
 
@@ -80,5 +80,3 @@ const SyncAndApplyTheme = () => {
 
 	return null;
 };
-
-export { SyncAndApplyTheme };

@@ -4,6 +4,7 @@ import type {
 	CreatedBuildSummary,
 } from "#/features/game/data/types.ts";
 import { requireUserId } from "#/features/user/require-user.server.ts";
+import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/user-write-limit.server.ts";
 import { BuildVisibility, prisma } from "@/prisma";
 
 /** Server-side build-write fields — like BuildWriteFields but with the real enum. */
@@ -50,11 +51,15 @@ const listBuildsByUserId = (userId: string): Promise<CreatedBuildSummary[]> =>
 const updateBuild = async (
 	buildId: string,
 	fields: BuildWriteFields,
-): Promise<CreatedBuildRecord> =>
-	updateOwnedBuild(await requireUserId(), buildId, fields);
+): Promise<CreatedBuildRecord> => {
+	const userId = await requireUserId();
+	await enforceUserWriteLimit(userId);
+	return updateOwnedBuild(userId, buildId, fields);
+};
 
 const deleteBuild = async (buildId: string) => {
 	const userId = await requireUserId();
+	await enforceUserWriteLimit(userId);
 	await prisma.remnant2Build.deleteMany({
 		where: { id: buildId, createdById: userId },
 	});
