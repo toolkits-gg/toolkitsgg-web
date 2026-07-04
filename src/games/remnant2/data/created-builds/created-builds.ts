@@ -11,7 +11,7 @@ import {
 	listBuilds,
 	listBuildsByUserId,
 	updateBuild,
-} from "#/games/remnant2/data/server/created-builds.server.ts";
+} from "#/games/remnant2/data/created-builds/created-builds.server.ts";
 
 // Client-safe mirror of the Prisma `BuildVisibility` enum, so this validation
 // module never references `@/prisma` at module scope.

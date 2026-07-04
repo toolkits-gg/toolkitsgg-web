@@ -42,7 +42,7 @@ pnpm db:generate
 pnpm db:push
 pnpm db:seed
 
-# 5. Run the dev server
+# 5. Run the dev created-builds
 pnpm dev
 ```
 

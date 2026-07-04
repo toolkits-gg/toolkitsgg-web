@@ -9,7 +9,7 @@ import { getGamePages } from "#/game-registry/game-pages-registry.tsx";
 import {
 	getGameMetadata,
 	isRegisteredGameId,
-} from "#/registry/game-public-registry.tsx";;
+} from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
 
 type CollectedItemsSearch = {

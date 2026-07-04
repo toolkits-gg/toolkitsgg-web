@@ -1,6 +1,6 @@
 /**
  * Writes the active-game preference cookie from the client.
- * Read on the server in beforeLoad to seed the gameId resolution chain.
+ * Read on the created-builds in beforeLoad to seed the gameId resolution chain.
  * `null` clears the cookie.
  */
 export const setActiveGameCookie = (value: string | null): void => {

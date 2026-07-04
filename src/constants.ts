@@ -1,4 +1,5 @@
 import { clientEnv } from "#/env/client-env.ts";
+import type { AppLogoSize } from "#/types.ts";
 
 const DISCORD_URL = "https://discord.gg/VQF23tPKyK";
 const GITHUB_URL = "https://github.com/toolkits-gg";
@@ -13,7 +14,9 @@ const FALLBACK_DISPLAY_NAME = "Toolkits.gg User";
 
 const OG_IMAGE = `${clientEnv.VITE_CLOUDFRONT_URL}/metadata/og-image.png`;
 
-const SERVER_GAME_INPUTS_QUERY_KEY = ["server-resolved-game-inputs"] as const;
+const SERVER_GAME_INPUTS_QUERY_KEY = ["created-builds-resolved-game-inputs"] as const;
+
+export const DEFAULT_APP_LOGO_SIZE: AppLogoSize = 36;
 
 export {
 	CHANGELOG_URL,

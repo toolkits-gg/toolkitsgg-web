@@ -7314,7 +7314,7 @@ snapshots:
     transitivePeerDependencies:
       - '@rspack/core'
       - crossws
-      - react-server-dom-rspack
+      - react-created-builds-dom-rspack
       - supports-color
       - vite-plugin-solid
       - webpack

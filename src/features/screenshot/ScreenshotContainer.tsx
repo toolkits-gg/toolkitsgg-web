@@ -1,23 +1,9 @@
 import { Avatar, Box, type BoxProps, Group, Stack, Text } from "@mantine/core";
 import cx from "clsx";
-import { type ComponentType, forwardRef, type PropsWithChildren } from "react";
-import type { LogoSize } from "#/components/AppLogo.tsx";
+import { forwardRef, type PropsWithChildren } from "react";
 import { ScreenshotWatermark } from "#/features/screenshot/ScreenshotWatermark.tsx";
+import type { WatermarkConfig } from "#/features/screenshot/types.ts";
 import classes from "./ScreenshotContainer.module.css";
-
-type WatermarkGameConfig = {
-	METADATA: {
-		LogoComponent: ComponentType<{ size?: LogoSize }>;
-		label: string;
-	};
-};
-
-type WatermarkConfig = {
-	gameConfig: WatermarkGameConfig;
-	logoSize?: LogoSize;
-	fontSize?: string;
-	gap?: number | string;
-};
 
 type ScreenshotContainerProps = PropsWithChildren<
 	{
@@ -105,5 +91,4 @@ const ScreenshotContainer = forwardRef<
 
 ScreenshotContainer.displayName = "ScreenshotContainer";
 
-export type { WatermarkConfig };
 export { ScreenshotContainer };

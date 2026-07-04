@@ -3,7 +3,7 @@ import { getLocalDB } from "#/features/sync/local-data/local/local-db.ts";
 import type { LocalUserFavoriteGame } from "#/features/sync/local-data/local/types.ts";
 import type { GameId } from "@/prisma";
 
-const listLocalFavoriteGames = async (
+export const listLocalFavoriteGames = async (
 	userId: string,
 ): Promise<LocalUserFavoriteGame[]> => {
 	const db = await getLocalDB();
@@ -11,7 +11,7 @@ const listLocalFavoriteGames = async (
 	return db.getAllFromIndex(STORE_USER_FAVORITE_GAME, "userId", userId);
 };
 
-const upsertLocalFavoriteGame = async (input: {
+export const upsertLocalFavoriteGame = async (input: {
 	userId: string;
 	gameId: GameId;
 }): Promise<LocalUserFavoriteGame> => {
@@ -35,17 +35,11 @@ const upsertLocalFavoriteGame = async (input: {
 	return next;
 };
 
-const deleteLocalFavoriteGame = async (input: {
+export const deleteLocalFavoriteGame = async (input: {
 	userId: string;
 	gameId: GameId;
 }): Promise<void> => {
 	const db = await getLocalDB();
 	if (!db) return;
 	await db.delete(STORE_USER_FAVORITE_GAME, [input.userId, input.gameId]);
-};
-
-export {
-	deleteLocalFavoriteGame,
-	listLocalFavoriteGames,
-	upsertLocalFavoriteGame,
 };

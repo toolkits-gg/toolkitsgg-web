@@ -13,15 +13,14 @@ import {
 import { getOrCreateAnonUserId } from "#/features/sync/local-data/identity/anon-id.ts";
 import type { LocalUserFavoriteGame } from "#/features/sync/local-data/local/types.ts";
 import { enqueueOp } from "#/features/sync/local-data/queue/pending-ops.ts";
-import { getGameMetadata } from "#/registry/game-public-registry.tsx";;
 import { useSession } from "#/integrations/better-auth/auth-client.ts";
+import { getGameMetadata } from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
-
-type FavoriteGameInput = { gameId: GameId };
 
 const ENTITY = "userFavoriteGame";
 
-const useFavoriteGames = () => {
+export type FavoriteGameInput = { gameId: GameId };
+export const useFavoriteGames = () => {
 	const { data: session } = useSession();
 	const { online } = useNetwork();
 	const authUserId = session?.user?.id ?? null;
@@ -46,7 +45,7 @@ const useFavoriteGames = () => {
 	});
 };
 
-const useFavoriteGame = () => {
+export const useFavoriteGame = () => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
 	const { online } = useNetwork();
@@ -87,7 +86,7 @@ const useFavoriteGame = () => {
 	});
 };
 
-const useUnfavoriteGame = () => {
+export const useUnfavoriteGame = () => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
 	const { online } = useNetwork();
@@ -121,6 +120,3 @@ const useUnfavoriteGame = () => {
 			queryClient.invalidateQueries({ queryKey: ["data", ENTITY] }),
 	});
 };
-
-export type { FavoriteGameInput };
-export { useFavoriteGame, useFavoriteGames, useUnfavoriteGame };

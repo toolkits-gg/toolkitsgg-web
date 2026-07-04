@@ -24,21 +24,20 @@ import {
 } from "#/features/game/data/user-profile/user-profile.ts";
 import { getOrCreateAnonUserId } from "#/features/sync/local-data/identity/anon-id.ts";
 import { enqueueOp } from "#/features/sync/local-data/queue/pending-ops.ts";
-import { getGameMetadata } from "#/registry/game-public-registry.tsx";;
 import { useSession } from "#/integrations/better-auth/auth-client.ts";
+import { getGameMetadata } from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
-
-type GetProfileArgs = { userId?: string } | undefined;
-type UpdateAvatarInput = {
-	avatarId: string;
-	avatarGameId: GameId;
-	targetGameId?: GameId;
-};
 
 const invalidateProfile = (queryClient: ReturnType<typeof useQueryClient>) =>
 	queryClient.invalidateQueries({ queryKey: ["data", "userProfile"] });
 
-const useUserProfileQuery = (args?: GetProfileArgs) => {
+export type GetProfileArgs = { userId?: string } | undefined;
+export type UpdateAvatarInput = {
+	avatarId: string;
+	avatarGameId: GameId;
+	targetGameId?: GameId;
+};
+export const useUserProfileQuery = (args?: GetProfileArgs) => {
 	const { data: session } = useSession();
 	const { online } = useNetwork();
 	const authUserId = session?.user?.id ?? null;
@@ -77,7 +76,7 @@ const useUserProfileQuery = (args?: GetProfileArgs) => {
 	});
 };
 
-const useUpdateAvatar = () => {
+export const useUpdateAvatar = () => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
 	const { online } = useNetwork();
@@ -123,7 +122,7 @@ const useUpdateAvatar = () => {
 	});
 };
 
-const useRemovePrimaryAvatar = () => {
+export const useRemovePrimaryAvatar = () => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
 	const { online } = useNetwork();
@@ -154,7 +153,7 @@ const useRemovePrimaryAvatar = () => {
 	});
 };
 
-const useRemoveAvatarOverride = () => {
+export const useRemoveAvatarOverride = () => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
 	const { online } = useNetwork();
@@ -186,7 +185,7 @@ const useRemoveAvatarOverride = () => {
 	});
 };
 
-const useUpdateProfile = () => {
+export const useUpdateProfile = () => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
 	const { online } = useNetwork();
@@ -220,13 +219,4 @@ const useUpdateProfile = () => {
 			onSuccess: () => invalidateProfile(queryClient),
 		},
 	);
-};
-
-export type { GetProfileArgs, UpdateAvatarInput };
-export {
-	useRemoveAvatarOverride,
-	useRemovePrimaryAvatar,
-	useUpdateAvatar,
-	useUpdateProfile,
-	useUserProfileQuery,
 };

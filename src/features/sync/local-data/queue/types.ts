@@ -18,12 +18,12 @@ interface PendingOpSummary {
 }
 
 /**
- * Snapshot of the conflicting server record, attached to a PendingOp when its
+ * Snapshot of the conflicting created-builds record, attached to a PendingOp when its
  * sync result was `conflict`. Lets the data-sync UI show the user what the
- * server has so they can choose between force-pushing local or accepting server.
+ * created-builds has so they can choose between force-pushing local or accepting created-builds.
  */
 interface PendingOpConflictInfo {
-	/** Raw JSON of the server record returned by the sync handler. */
+	/** Raw JSON of the created-builds record returned by the sync handler. */
 	serverRecordJson: string;
 	/** ISO timestamp the conflict was first observed. */
 	detectedAt: string;
@@ -32,12 +32,12 @@ interface PendingOpConflictInfo {
 /**
  * Lifecycle of a pending op:
  * `pending` -> `syncing` -> `synced` (deleted after clearSynced)
- *                       -> `conflict` (server record is newer; user must reconcile)
+ *                       -> `conflict` (created-builds record is newer; user must reconcile)
  *                       -> `failed` (network error or no handler; can be retried)
  */
 type PendingOpStatus = "pending" | "syncing" | "synced" | "failed" | "conflict";
 
-/** A write operation that has been queued locally and is waiting to be synced to the server. */
+/** A write operation that has been queued locally and is waiting to be synced to the created-builds. */
 interface PendingOp {
 	id: string;
 	createdAt: string;
@@ -49,14 +49,14 @@ interface PendingOp {
 	operation: PendingOpOperation;
 	/** The original mutation input, serialized as-is. */
 	payload: unknown;
-	/** Stable key used by the server to deduplicate retried ops within the TTL window. */
+	/** Stable key used by the created-builds to deduplicate retried ops within the TTL window. */
 	idempotencyKey: string;
 	status: PendingOpStatus;
 	/** Set when status is "failed"; cleared on the next status transition. */
 	lastError?: string;
 	/**
-	 * Snapshot of the server record's `updatedAt` at the time the local write was created.
-	 * Used by the LWW algorithm as the baseline: if the server has advanced past this value,
+	 * Snapshot of the created-builds record's `updatedAt` at the time the local write was created.
+	 * Used by the LWW algorithm as the baseline: if the created-builds has advanced past this value,
 	 * another writer beat this op and the result is a conflict.
 	 */
 	serverUpdatedAt?: string;

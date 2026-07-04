@@ -16,7 +16,7 @@ import {
 import { ProfileHeader } from "#/features/user/ProfileHeader.tsx";
 import { ProfileTabNav } from "#/features/user/ProfileTabNav.tsx";
 import { resolveAvatar } from "#/features/user/utils.ts";
-import { getValidatedGameId } from "#/registry/game-public-registry.tsx";;
+import { getValidatedGameId } from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
 
 const ProfileLayout = () => {

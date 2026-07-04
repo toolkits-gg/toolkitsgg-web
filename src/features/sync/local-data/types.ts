@@ -2,8 +2,8 @@ import type { PendingOp } from "#/features/sync/local-data/queue/types.ts";
 
 /**
  * Result returned by a SyncHandler after attempting to apply a pending op.
- * - `applied`  — op was written to the server; caller marks the op "synced".
- * - `conflict` — server record is newer; caller marks the op "conflict" and surfaces the server record.
+ * - `applied`  — op was written to the created-builds; caller marks the op "synced".
+ * - `conflict` — created-builds record is newer; caller marks the op "conflict" and surfaces the created-builds record.
  * - `noop`     — op is redundant (already applied); caller deletes the op.
  * - `error`    — handler threw or returned an error; caller marks the op "failed".
  */

@@ -20,7 +20,7 @@ import type {
 export interface RecordSyncDeps<TKey> {
 	/** Pulls the record's key fields from the op payload (validating/coercing as needed). */
 	resolveKey: (op: { payload: unknown }) => KeyResolution<TKey>;
-	/** Reads the current server record (must expose `updatedAt` for LWW) or null if absent. */
+	/** Reads the current created-builds record (must expose `updatedAt` for LWW) or null if absent. */
 	findRecord: (userId: string, key: TKey) => Promise<HasUpdatedAt | null>;
 	/** Inserts the row from the op payload. Only called when no record currently exists. */
 	createRecord: (userId: string, key: TKey, payload: unknown) => Promise<void>;
@@ -35,11 +35,11 @@ export interface RecordSyncDeps<TKey> {
  *
  * Delete op:
  * - record absent -> noop (desired end state already reached)
- * - record present -> LWW check (server newer = conflict, unless `force`), then delete
+ * - record present -> LWW check (created-builds newer = conflict, unless `force`), then delete
  *
  * Create / update / upsert op:
  * - record absent -> create from payload
- * - record present -> LWW check (unless `force`): server newer = conflict, equal = noop
+ * - record present -> LWW check (unless `force`): created-builds newer = conflict, equal = noop
  *   (already synced), otherwise overwrite from payload
  */
 export const createRecordSyncHandler = <TKey>(

@@ -4,16 +4,13 @@ import type {
 	CreatedBuildSummary,
 } from "#/features/game/data/types.ts";
 import { requireUserId } from "#/features/user/require-user.server.ts";
-import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/user-write-limit.server.ts";
+import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/enforce-user-write-limit.ts";
 import { BuildVisibility, prisma } from "@/prisma";
 
-/** Server-side build-write fields — like BuildWriteFields but with the real enum. */
-type BuildUpdateData = Omit<BuildWriteFields, "visibility"> & {
+export type BuildUpdateData = Omit<BuildWriteFields, "visibility"> & {
 	visibility?: BuildVisibility;
 };
-
-/** Updates a build the user owns. Throws if it doesn't exist or isn't theirs. */
-const updateOwnedBuild = async (
+export const updateOwnedBuild = async (
 	userId: string,
 	buildId: string,
 	fields: BuildWriteFields,
@@ -31,7 +28,7 @@ const updateOwnedBuild = async (
 	return updated;
 };
 
-const listBuilds = async (): Promise<CreatedBuildSummary[]> => {
+export const listBuilds = async (): Promise<CreatedBuildSummary[]> => {
 	const userId = await requireUserId();
 	return prisma.remnant2Build.findMany({
 		where: { createdById: userId },
@@ -39,16 +36,20 @@ const listBuilds = async (): Promise<CreatedBuildSummary[]> => {
 	});
 };
 
-const getBuildById = (buildId: string): Promise<CreatedBuildRecord | null> =>
+export const getBuildById = (
+	buildId: string,
+): Promise<CreatedBuildRecord | null> =>
 	prisma.remnant2Build.findUnique({ where: { id: buildId } });
 
-const listBuildsByUserId = (userId: string): Promise<CreatedBuildSummary[]> =>
+export const listBuildsByUserId = (
+	userId: string,
+): Promise<CreatedBuildSummary[]> =>
 	prisma.remnant2Build.findMany({
 		where: { createdById: userId, visibility: BuildVisibility.PUBLIC },
 		orderBy: { updatedAt: "desc" },
 	});
 
-const updateBuild = async (
+export const updateBuild = async (
 	buildId: string,
 	fields: BuildWriteFields,
 ): Promise<CreatedBuildRecord> => {
@@ -57,21 +58,11 @@ const updateBuild = async (
 	return updateOwnedBuild(userId, buildId, fields);
 };
 
-const deleteBuild = async (buildId: string) => {
+export const deleteBuild = async (buildId: string) => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
 	await prisma.remnant2Build.deleteMany({
 		where: { id: buildId, createdById: userId },
 	});
 	return { ok: true as const };
-};
-
-export {
-	type BuildUpdateData,
-	deleteBuild,
-	getBuildById,
-	listBuilds,
-	listBuildsByUserId,
-	updateBuild,
-	updateOwnedBuild,
 };

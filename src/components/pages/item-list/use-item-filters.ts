@@ -11,8 +11,8 @@ import {
 	showCollectableOnlyParser,
 	showCollectedItemsParser,
 	showUncollectedItemsParser,
-} from "#/features/nuqs/parsers/item-collection.ts";
-import { searchParser } from "#/features/nuqs/parsers/search.ts";
+} from "#/features/search-params/parsers/item-collection.ts";
+import { searchParser } from "#/features/search-params/parsers/search.ts";
 
 const itemLookupParsers = {
 	search: searchParser,

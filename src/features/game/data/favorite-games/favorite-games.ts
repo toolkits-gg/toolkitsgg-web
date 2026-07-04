@@ -1,5 +1,5 @@
-// Favorite games: client-safe input validation plus the TanStack server-fn
-// wrappers. Each wrapper delegates to ./favorite-games.server.ts; those imports
+// Favorite games: client-safe input validation plus the TanStack created-builds-fn
+// wrappers. Each wrapper delegates to ./favorite-games.created-builds.ts; those imports
 // are referenced only inside handler bodies, so the compiler strips them (and
 // prisma) from the client bundle.
 
@@ -19,20 +19,14 @@ const isGameId = (value: string): value is GameId => GAME_ID_SET.has(value);
 
 const FavoriteInput = z.object({ gameId: z.string().refine(isGameId) });
 
-const favoriteGameServerFn = createServerFn({ method: "POST" })
+export const favoriteGameServerFn = createServerFn({ method: "POST" })
 	.validator((v: unknown) => FavoriteInput.parse(v))
 	.handler(async ({ data }) => favoriteGame(data.gameId));
 
-const unfavoriteGameServerFn = createServerFn({ method: "POST" })
+export const unfavoriteGameServerFn = createServerFn({ method: "POST" })
 	.validator((v: unknown) => FavoriteInput.parse(v))
 	.handler(async ({ data }) => unfavoriteGame(data.gameId));
 
-const listFavoriteGamesServerFn = createServerFn({ method: "GET" }).handler(
-	async () => listFavoriteGames(),
-);
-
-export {
-	favoriteGameServerFn,
-	listFavoriteGamesServerFn,
-	unfavoriteGameServerFn,
-};
+export const listFavoriteGamesServerFn = createServerFn({
+	method: "GET",
+}).handler(async () => listFavoriteGames());

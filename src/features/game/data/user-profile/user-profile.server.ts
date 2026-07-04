@@ -3,7 +3,7 @@ import {
 	getOptionalUserId,
 	requireUserId,
 } from "#/features/user/require-user.server.ts";
-import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/user-write-limit.server.ts";
+import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/enforce-user-write-limit.ts";
 import { getGameAvatars } from "#/registry/game-public-registry.tsx";
 
 import { type GameId, prisma } from "@/prisma";
@@ -14,7 +14,7 @@ type UpdateAvatarData = {
 	targetGameId?: GameId;
 };
 
-const updateAvatar = async (data: UpdateAvatarData) => {
+export const updateAvatar = async (data: UpdateAvatarData) => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
 
@@ -57,7 +57,7 @@ const updateAvatar = async (data: UpdateAvatarData) => {
 	return { ok: true as const };
 };
 
-const removePrimaryAvatar = async () => {
+export const removePrimaryAvatar = async () => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
 	await prisma.userProfile.update({
@@ -67,7 +67,7 @@ const removePrimaryAvatar = async () => {
 	return { ok: true as const };
 };
 
-const removeAvatarOverride = async (targetGameId: GameId) => {
+export const removeAvatarOverride = async (targetGameId: GameId) => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
 	const profile = await prisma.userProfile.findUnique({ where: { userId } });
@@ -79,7 +79,10 @@ const removeAvatarOverride = async (targetGameId: GameId) => {
 	return { ok: true as const };
 };
 
-const updateProfile = async (data: { displayName?: string; bio?: string }) => {
+export const updateProfile = async (data: {
+	displayName?: string;
+	bio?: string;
+}) => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
 	await prisma.userProfile.update({
@@ -94,7 +97,9 @@ const updateProfile = async (data: { displayName?: string; bio?: string }) => {
 	return { ok: true as const };
 };
 
-const getPublicUserProfile = (userId: string): Promise<UserWithProfile> =>
+export const getPublicUserProfile = (
+	userId: string,
+): Promise<UserWithProfile> =>
 	prisma.user.findUnique({
 		where: { id: userId },
 		include: {
@@ -104,9 +109,9 @@ const getPublicUserProfile = (userId: string): Promise<UserWithProfile> =>
 		},
 	});
 
-const getViewerUserId = () => getOptionalUserId();
+export const getViewerUserId = () => getOptionalUserId();
 
-const getUserProfile = async (): Promise<UserWithProfile> => {
+export const getUserProfile = async (): Promise<UserWithProfile> => {
 	const userId = await requireUserId();
 	return prisma.user.findUnique({
 		where: { id: userId },
@@ -116,14 +121,4 @@ const getUserProfile = async (): Promise<UserWithProfile> => {
 			},
 		},
 	});
-};
-
-export {
-	getPublicUserProfile,
-	getUserProfile,
-	getViewerUserId,
-	removeAvatarOverride,
-	removePrimaryAvatar,
-	updateAvatar,
-	updateProfile,
 };

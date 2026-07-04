@@ -16,7 +16,7 @@ import type {
 interface PresenceToggleDeps<TKey> {
 	/** Pulls the record's key fields from the op payload (validating/coercing as needed). */
 	resolveKey: (op: PendingOp) => KeyResolution<TKey>;
-	/** Reads the current server record (must expose `updatedAt` for LWW) or null if absent. */
+	/** Reads the current created-builds record (must expose `updatedAt` for LWW) or null if absent. */
 	findRecord: (userId: string, key: TKey) => Promise<HasUpdatedAt | null>;
 	/** Deletes the row. Must be a no-op if the row is already absent. */
 	deleteRecord: (userId: string, key: TKey) => Promise<void>;
@@ -29,10 +29,10 @@ interface PresenceToggleDeps<TKey> {
  *
  * Delete op:
  * - record absent -> noop (desired end state already reached)
- * - record present -> LWW check (server newer = conflict, unless `force`), then delete
+ * - record present -> LWW check (created-builds newer = conflict, unless `force`), then delete
  *
  * Upsert op:
- * - record present -> LWW check (server newer = conflict, unless `force`); otherwise
+ * - record present -> LWW check (created-builds newer = conflict, unless `force`); otherwise
  *   noop, since the row has no mutable fields to overwrite
  * - record absent -> create
  */

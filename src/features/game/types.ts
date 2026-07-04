@@ -1,12 +1,12 @@
 import type { SingleParserBuilder } from "nuqs";
 import type { createSearchParamsCache } from "nuqs/server";
 import type { ComponentType, ReactNode } from "react";
-import type { LogoSize } from "#/components/AppLogo.tsx";
 import type {
 	GameCollectedItemsData,
 	GameCreatedBuildsData,
 } from "#/features/game/data/types.ts";
 import type { ToolkitThemeDefinition } from "#/features/theme/types.ts";
+import type { AppLogoSize } from "#/types.ts";
 import type { GameId } from "@/prisma";
 
 type GameFilterDef = {
@@ -129,7 +129,7 @@ export type GameMetadata = {
 	description: string;
 	/** CloudFront-relative path to the source PNG used for favicon generation */
 	faviconSourcePath: string;
-	LogoComponent: ComponentType<{ size?: LogoSize }>;
+	LogoComponent: ComponentType<{ size?: AppLogoSize }>;
 	/** Third-party resources related to the game */
 	externalResources: {
 		label: string;

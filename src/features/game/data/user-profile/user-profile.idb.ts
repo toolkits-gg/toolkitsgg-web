@@ -9,7 +9,7 @@ import type {
 } from "#/features/sync/local-data/local/types.ts";
 import type { GameId } from "@/prisma";
 
-const getLocalUserProfile = async (
+export const getLocalUserProfile = async (
 	userId: string,
 ): Promise<LocalUserProfile | undefined> => {
 	const db = await getLocalDB();
@@ -17,7 +17,7 @@ const getLocalUserProfile = async (
 	return db.get(STORE_USER_PROFILE, userId);
 };
 
-const upsertLocalUserProfile = async (data: {
+export const upsertLocalUserProfile = async (data: {
 	userId: string;
 	displayName?: string;
 	bio?: string;
@@ -50,7 +50,7 @@ const upsertLocalUserProfile = async (data: {
 	return next;
 };
 
-const getLocalAvatarOverrides = async (
+export const getLocalAvatarOverrides = async (
 	userId: string,
 ): Promise<LocalUserAvatarOverride[]> => {
 	const db = await getLocalDB();
@@ -58,7 +58,7 @@ const getLocalAvatarOverrides = async (
 	return db.getAllFromIndex(STORE_USER_AVATAR_OVERRIDE, "userId", userId);
 };
 
-async function upsertLocalAvatarOverride(data: {
+export async function upsertLocalAvatarOverride(data: {
 	userId: string;
 	gameId: GameId;
 	avatarId: string;
@@ -85,19 +85,11 @@ async function upsertLocalAvatarOverride(data: {
 	return next;
 }
 
-const deleteLocalAvatarOverride = async (
+export const deleteLocalAvatarOverride = async (
 	userId: string,
 	gameId: GameId,
 ): Promise<void> => {
 	const db = await getLocalDB();
 	if (!db) return;
 	await db.delete(STORE_USER_AVATAR_OVERRIDE, `${userId}:${gameId}`);
-};
-
-export {
-	deleteLocalAvatarOverride,
-	getLocalAvatarOverrides,
-	getLocalUserProfile,
-	upsertLocalAvatarOverride,
-	upsertLocalUserProfile,
 };

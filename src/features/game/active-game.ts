@@ -7,7 +7,7 @@ import type { GameId } from "@/prisma";
 const ACTIVE_GAME_COOKIE = "active-game";
 
 /**
- * Reads everything about the request that the server can know up front:
+ * Reads everything about the request that the created-builds can know up front:
  * the subdomain (Host header) and the active-game preference cookie.
  * Used by the root route's beforeLoad to feed the gameId priority chain.
  */

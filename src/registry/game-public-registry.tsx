@@ -1,5 +1,4 @@
 import type { ComponentType } from "react";
-import type { LogoSize } from "#/components/AppLogo.tsx";
 import type { AnyGameConfig, GameAvatar } from "#/features/game/types.ts";
 import type { ToolkitThemeDefinition } from "#/features/theme/types.ts";
 import { ITEMS as CLAIROBSCUR_ITEMS } from "#/games/clairobscur/core/game-config/items.ts";
@@ -13,6 +12,7 @@ import { AVATARS as SLAYTHESPIRE2_AVATARS } from "#/games/slaythespire2/core/gam
 import { ITEMS as SLAYTHESPIRE2_ITEMS } from "#/games/slaythespire2/core/game-config/items.ts";
 import { METADATA as SLAYTHESPIRE2_METADATA } from "#/games/slaythespire2/core/game-config/metadata.tsx";
 import { THEME as SLAYTHESPIRE2_THEME } from "#/games/slaythespire2/core/game-config/theme.ts";
+import type { AppLogoSize } from "#/types.ts";
 import type { GameId } from "@/prisma";
 
 type PublicGameConfig = {
@@ -25,7 +25,7 @@ type PublicGameConfig = {
 	};
 	METADATA: {
 		label: string;
-		LogoComponent: ComponentType<{ size?: LogoSize }>;
+		LogoComponent: ComponentType<{ size?: AppLogoSize }>;
 	};
 	THEME:
 		| {
@@ -92,5 +92,5 @@ export const getGameAvatars = (gameId: string): GameAvatar[] | undefined =>
 
 export const getGameLogoComponent = (
 	gameId: string,
-): ComponentType<{ size?: LogoSize }> | undefined =>
+): ComponentType<{ size?: AppLogoSize }> | undefined =>
 	PUBLIC_GAME_REGISTRY[gameId as PublicRegistryGameId]?.METADATA?.LogoComponent;

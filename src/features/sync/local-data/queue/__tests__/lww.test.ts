@@ -6,22 +6,22 @@ const T2 = "2026-01-02T00:00:00.000Z";
 const T3 = "2026-01-03T00:00:00.000Z";
 
 describe("compareTimestamps", () => {
-	it("returns local-wins when server record is missing", () => {
+	it("returns local-wins when created-builds record is missing", () => {
 		expect(
 			compareTimestamps(null, { serverUpdatedAt: T1, updatedAt: T2 }),
 		).toBe("local-wins");
 	});
 
-	it("returns server-wins when server advanced past the baseline", () => {
+	it("returns created-builds-wins when created-builds advanced past the baseline", () => {
 		expect(
 			compareTimestamps(
 				{ updatedAt: T3 },
 				{ serverUpdatedAt: T1, updatedAt: T2 },
 			),
-		).toBe("server-wins");
+		).toBe("created-builds-wins");
 	});
 
-	it("returns local-wins when server matches baseline", () => {
+	it("returns local-wins when created-builds matches baseline", () => {
 		expect(
 			compareTimestamps(
 				{ updatedAt: T1 },
@@ -35,7 +35,7 @@ describe("compareTimestamps", () => {
 			"local-wins",
 		);
 		expect(compareTimestamps({ updatedAt: T3 }, { updatedAt: T2 })).toBe(
-			"server-wins",
+			"created-builds-wins",
 		);
 	});
 

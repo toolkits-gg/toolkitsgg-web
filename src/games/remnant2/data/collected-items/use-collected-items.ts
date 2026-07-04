@@ -16,7 +16,7 @@ import {
 	listCollectedItemsByUserIdServerFn,
 	listCollectedItemsServerFn,
 	uncollectItemServerFn,
-} from "#/games/remnant2/data/server/collected-items.ts";
+} from "#/games/remnant2/data/collected-items/collected-items.ts";
 import { useSession } from "#/integrations/better-auth/auth-client.ts";
 import { ensureIdbUserStub } from "#/integrations/prisma-idb/ensure-user-stub.ts";
 import { getIDBClient } from "#/integrations/prisma-idb/idb-client.ts";

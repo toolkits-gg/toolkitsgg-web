@@ -16,7 +16,7 @@ import {
 	listBuildsByUserIdServerFn,
 	listBuildsServerFn,
 	updateBuildServerFn,
-} from "#/games/remnant2/data/server/created-builds.ts";
+} from "#/games/remnant2/data/created-builds/created-builds.ts";
 import { useSession } from "#/integrations/better-auth/auth-client.ts";
 import { getIDBClient } from "#/integrations/prisma-idb/idb-client.ts";
 

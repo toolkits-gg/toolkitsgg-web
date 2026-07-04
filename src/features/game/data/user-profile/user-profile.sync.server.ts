@@ -1,22 +1,22 @@
 // Offline-sync handlers for the user-profile entities (userProfile, userAvatarOverride).
-// Split out from user-profile.server.ts so the sync-replay path lives apart from the
+// Split out from user-profile.created-builds.ts so the sync-replay path lives apart from the
 // direct CRUD data access. Unlike most entities these handlers are hand-written rather
 // than factory-built, because the avatar-override op fans out to two different Prisma
 // rows (profile primary avatar vs. per-game override) depending on the payload. The
-// `.server.ts` suffix opts this into Start's import protection, keeping prisma out of
+// `.created-builds.ts` suffix opts this into Start's import protection, keeping prisma out of
 // the client bundle. Consumed only by the sync handler game-registry.
 
 import type { SyncHandler } from "#/features/sync/local-data/types.ts";
-import { REGISTERED_GAME_IDS } from "#/registry/game-public-registry.tsx";;
+import { REGISTERED_GAME_IDS } from "#/registry/game-public-registry.tsx";
 import { type GameId, prisma } from "@/prisma";
 
 // Self-contained guard (intentionally duplicated from user-profile.ts) so this
-// server-only module never imports back from its client-safe sibling. "none" is
+// created-builds-only module never imports back from its client-safe sibling. "none" is
 // a valid profile gameId, hence the extra set member.
 const GAME_ID_SET = new Set<string>(["none", ...REGISTERED_GAME_IDS]);
 const isGameId = (value: string): value is GameId => GAME_ID_SET.has(value);
 
-const userProfileHandler: SyncHandler = async (op, userId) => {
+export const userProfileSyncHandler: SyncHandler = async (op, userId) => {
 	if (op.operation === "upsert") {
 		await prisma.userProfile.update({
 			where: { userId },
@@ -27,7 +27,10 @@ const userProfileHandler: SyncHandler = async (op, userId) => {
 	return { status: "error", message: `unsupported operation ${op.operation}` };
 };
 
-const userAvatarOverrideHandler: SyncHandler = async (op, userId) => {
+export const userAvatarOverrideSyncHandler: SyncHandler = async (
+	op,
+	userId,
+) => {
 	const payload = op.payload as {
 		avatarId?: string;
 		avatarGameId?: string;
@@ -87,5 +90,3 @@ const userAvatarOverrideHandler: SyncHandler = async (op, userId) => {
 	}
 	return { status: "applied" };
 };
-
-export { userAvatarOverrideHandler, userProfileHandler };

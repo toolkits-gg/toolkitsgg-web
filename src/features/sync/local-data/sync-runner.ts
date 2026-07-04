@@ -1,5 +1,5 @@
 /**
- * Orchestrates syncing a batch of pending ops to the server sequentially.
+ * Orchestrates syncing a batch of pending ops to the created-builds sequentially.
  */
 import { applyPendingOpServerFn } from "#/features/sync/local-data/apply-pending-ops.ts";
 import {
@@ -17,11 +17,11 @@ interface SyncAllOptions {
 
 /** Summary of a completed sync run. */
 interface SyncAllReport {
-	/** Ops successfully written to the server. */
+	/** Ops successfully written to the created-builds. */
 	applied: number;
-	/** Ops where the server record was newer; user reconciliation required. */
+	/** Ops where the created-builds record was newer; user reconciliation required. */
 	conflicts: number;
-	/** Ops that were already reflected on the server (deleted from the queue). */
+	/** Ops that were already reflected on the created-builds (deleted from the queue). */
 	noops: number;
 	/** Ops that failed due to a network error or handler exception. */
 	errors: number;
@@ -30,7 +30,7 @@ interface SyncAllReport {
 /**
  * Processes each op sequentially (not in parallel) to preserve causal ordering.
  * Parallel execution could allow a delete to race an upsert for the same entity,
- * producing inconsistent server state.
+ * producing inconsistent created-builds state.
  */
 const syncOps = async (
 	ops: PendingOp[],

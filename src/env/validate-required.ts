@@ -19,7 +19,7 @@ const requiredClientEnv = [
 	"VITE_LOCAL_USER_PASSWORD",
 ] as const;
 
-// Validate on server startup
+// Validate on created-builds startup
 for (const key of requiredServerEnv) {
 	if (!process.env[key]) {
 		throw new Error(`Missing required environment variable: ${key}`);

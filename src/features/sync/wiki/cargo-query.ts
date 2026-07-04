@@ -1,6 +1,6 @@
 /**
  * Paginated wrapper around MediaWiki's Cargo `action=cargoquery` API. The API
- * caps each response at a server-controlled limit (typically 500), so callers
+ * caps each response at a created-builds-controlled limit (typically 500), so callers
  * with no upper bound on row count must keep fetching with increasing offsets
  * until a short page comes back.
  *

@@ -22,8 +22,8 @@ import type {
 	GamePages,
 } from "#/features/game/types.ts";
 import { ITEMS } from "#/games/remnant2/core/game-config/items";
-import { remnant2CollectedItemsData } from "#/games/remnant2/data/collected-items";
-import { remnant2CreatedBuildsData } from "#/games/remnant2/data/created-builds";
+import { remnant2CollectedItemsData } from "#/games/remnant2/data/collected-items/use-collected-items.ts";
+import { remnant2CreatedBuildsData } from "#/games/remnant2/data/created-builds/use-created-builds.ts";
 import type { Remnant2DLC } from "@/prisma";
 
 const REMNANT2_DLC_LABELS: Record<Remnant2DLC, string> = {

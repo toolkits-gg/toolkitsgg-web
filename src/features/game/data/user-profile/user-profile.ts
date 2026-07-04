@@ -1,5 +1,5 @@
 // User profile: client-safe helpers, types, and input validation, plus the
-// TanStack server-fn wrappers. Each wrapper delegates to ./user-profile.server.ts;
+// TanStack created-builds-fn wrappers. Each wrapper delegates to ./user-profile.created-builds.ts;
 // those imports are referenced only inside handler bodies, so the compiler strips
 // them (and prisma) from the client bundle.
 
@@ -14,10 +14,22 @@ import {
 	updateAvatar,
 	updateProfile,
 } from "#/features/game/data/user-profile/user-profile.server.ts";
-import { REGISTERED_GAME_IDS } from "#/registry/game-public-registry.tsx";;
+import { REGISTERED_GAME_IDS } from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
 
-type UserProfileData = {
+const GAME_ID_SET = new Set<string>(["none", ...REGISTERED_GAME_IDS]);
+
+// biome-ignore lint/style/useExportsLast: <Needed for the AvatarInput zod schema>
+export const isGameId = (value: string): value is GameId =>
+	GAME_ID_SET.has(value);
+
+const AvatarInput = z.object({
+	avatarId: z.string(),
+	avatarGameId: z.string().refine(isGameId),
+	targetGameId: z.string().refine(isGameId).optional(),
+});
+
+export type UserProfileData = {
 	displayName: string;
 	bio: string;
 	avatarUrl: string | null;
@@ -27,7 +39,7 @@ type UserProfileData = {
 };
 
 // Not using UserProfileData type due to needed `null` flexibility.
-type UserWithProfile = {
+export type UserWithProfile = {
 	userProfile: {
 		displayName: string;
 		bio: string;
@@ -38,13 +50,9 @@ type UserWithProfile = {
 	} | null;
 } | null;
 
-type GetProfileInput = { userId?: string } | undefined;
+export type GetProfileInput = { userId?: string } | undefined;
 
-const GAME_ID_SET = new Set<string>(["none", ...REGISTERED_GAME_IDS]);
-
-const isGameId = (value: string): value is GameId => GAME_ID_SET.has(value);
-
-const mapUserToProfileData = (
+export const mapUserToProfileData = (
 	user: UserWithProfile,
 ): UserProfileData | null => {
 	if (!user?.userProfile) return null;
@@ -65,33 +73,27 @@ const mapUserToProfileData = (
 };
 
 // Inner cache-key tail (without the ["data", ...] prefix).
-const getProfileQueryKeyTail = (userId: string) =>
+export const getProfileQueryKeyTail = (userId: string) =>
 	["userProfile", "getProfile", userId] as const;
 
 // Full cache key, used from route loaders that prefetch via queryClient directly
 // and from the client hook so both resolve to the same key.
-const buildGetProfileQueryKey = (userId: string) =>
+export const buildGetProfileQueryKey = (userId: string) =>
 	["data", ...getProfileQueryKeyTail(userId)] as const;
 
-const AvatarInput = z.object({
-	avatarId: z.string(),
-	avatarGameId: z.string().refine(isGameId),
-	targetGameId: z.string().refine(isGameId).optional(),
-});
-
-const updateAvatarServerFn = createServerFn({ method: "POST" })
+export const updateAvatarServerFn = createServerFn({ method: "POST" })
 	.validator((v: unknown) => AvatarInput.parse(v))
 	.handler(async ({ data }) => updateAvatar(data));
 
-const removePrimaryAvatarServerFn = createServerFn({ method: "POST" }).handler(
-	async () => removePrimaryAvatar(),
-);
+export const removePrimaryAvatarServerFn = createServerFn({
+	method: "POST",
+}).handler(async () => removePrimaryAvatar());
 
 const RemoveOverrideInput = z.object({
 	targetGameId: z.string().refine(isGameId),
 });
 
-const removeAvatarOverrideServerFn = createServerFn({ method: "POST" })
+export const removeAvatarOverrideServerFn = createServerFn({ method: "POST" })
 	.validator((v: unknown) => RemoveOverrideInput.parse(v))
 	.handler(async ({ data }) => removeAvatarOverride(data.targetGameId));
 
@@ -100,36 +102,21 @@ const UpdateProfileInput = z.object({
 	bio: z.string().max(500).optional(),
 });
 
-const updateProfileServerFn = createServerFn({ method: "POST" })
+export const updateProfileServerFn = createServerFn({ method: "POST" })
 	.validator((v: unknown) => UpdateProfileInput.parse(v))
 	.handler(async ({ data }) => updateProfile(data));
 
-const getPublicUserProfileServerFn = createServerFn({ method: "GET" })
+export const getPublicUserProfileServerFn = createServerFn({ method: "GET" })
 	.validator((v: unknown) => z.object({ userId: z.string() }).parse(v))
 	.handler(
 		async ({ data }): Promise<UserWithProfile> =>
 			getPublicUserProfile(data.userId),
 	);
 
-const getViewerUserIdServerFn = createServerFn({ method: "GET" }).handler(
-	async () => getViewerUserId(),
-);
+export const getViewerUserIdServerFn = createServerFn({
+	method: "GET",
+}).handler(async () => getViewerUserId());
 
-const getUserProfileServerFn = createServerFn({ method: "GET" }).handler(
+export const getUserProfileServerFn = createServerFn({ method: "GET" }).handler(
 	async (): Promise<UserWithProfile> => getUserProfile(),
 );
-
-export type { GetProfileInput, UserProfileData, UserWithProfile };
-export {
-	buildGetProfileQueryKey,
-	getProfileQueryKeyTail,
-	getPublicUserProfileServerFn,
-	getUserProfileServerFn,
-	getViewerUserIdServerFn,
-	isGameId,
-	mapUserToProfileData,
-	removeAvatarOverrideServerFn,
-	removePrimaryAvatarServerFn,
-	updateAvatarServerFn,
-	updateProfileServerFn,
-};

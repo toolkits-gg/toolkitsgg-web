@@ -1,11 +1,11 @@
 import { Flex, Text } from "@mantine/core";
 import type { ComponentType } from "react";
-
-import { DEFAULT_LOGO_SIZE, type LogoSize } from "#/components/AppLogo.tsx";
+import { DEFAULT_APP_LOGO_SIZE } from "#/constants.ts";
+import type { AppLogoSize } from "#/types.ts";
 
 type ScreenshotWatermarkProps = {
-	LogoComponent: ComponentType<{ size?: LogoSize }>;
-	logoSize?: LogoSize;
+	LogoComponent: ComponentType<{ size?: AppLogoSize }>;
+	logoSize?: AppLogoSize;
 	label: string;
 	fontSize?: string;
 	gap?: number | string;
@@ -13,7 +13,7 @@ type ScreenshotWatermarkProps = {
 
 const ScreenshotWatermark = ({
 	LogoComponent,
-	logoSize = DEFAULT_LOGO_SIZE,
+	logoSize = DEFAULT_APP_LOGO_SIZE,
 	label,
 	fontSize = "md",
 	gap = 2,

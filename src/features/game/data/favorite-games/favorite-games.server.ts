@@ -1,8 +1,8 @@
 import { requireUserId } from "#/features/user/require-user.server.ts";
-import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/user-write-limit.server.ts";
+import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/enforce-user-write-limit.ts";
 import { type GameId, prisma } from "@/prisma";
 
-const favoriteGame = async (gameId: GameId) => {
+export const favoriteGame = async (gameId: GameId) => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
 	return prisma.userFavoriteGame.upsert({
@@ -12,16 +12,14 @@ const favoriteGame = async (gameId: GameId) => {
 	});
 };
 
-const unfavoriteGame = async (gameId: GameId) => {
+export const unfavoriteGame = async (gameId: GameId) => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
 	await prisma.userFavoriteGame.deleteMany({ where: { userId, gameId } });
 	return { ok: true as const };
 };
 
-const listFavoriteGames = async () => {
+export const listFavoriteGames = async () => {
 	const userId = await requireUserId();
 	return prisma.userFavoriteGame.findMany({ where: { userId } });
 };
-
-export { favoriteGame, listFavoriteGames, unfavoriteGame };

@@ -4,29 +4,29 @@
 // To add a new syncable entity: export its SyncHandler, then add one line below.
 // applyPendingOpServerFn looks up the handler for an op's `entity` here.
 //
-// Handlers live in per-entity `.server.ts` modules, so this game-registry is itself
-// server-only (the `.server.ts` suffix opts it into Start's import protection).
+// Handlers live in per-entity `.created-builds.ts` modules, so this game-registry is itself
+// created-builds-only (the `.created-builds.ts` suffix opts it into Start's import protection).
 
 import { favoriteGameSyncHandler } from "#/features/game/data/favorite-games/favorite-games.sync.server.ts";
 import {
-	userAvatarOverrideHandler,
-	userProfileHandler,
+	userAvatarOverrideSyncHandler,
+	userProfileSyncHandler,
 } from "#/features/game/data/user-profile/user-profile.sync.server.ts";
 import type { SyncHandler } from "#/features/sync/local-data/types.ts";
 import { clairObscurCollectedItemHandler } from "#/games/clairobscur/data/server/collected-items.sync.server.ts";
-import { remnant2CollectedItemHandler } from "#/games/remnant2/data/server/collected-items.sync.server.ts";
-import { remnant2BuildHandler } from "#/games/remnant2/data/server/created-builds.sync.server.ts";
+import { remnant2CollectedItemSyncHandler } from "#/games/remnant2/data/collected-items/collected-items.sync.server.ts";
+import { remnant2BuildSyncHandler } from "#/games/remnant2/data/created-builds/created-builds.sync.server.ts";
 import { slayTheSpire2CollectedItemHandler } from "#/games/slaythespire2/data/server/collected-items.sync.server.ts";
 
 /** entity name -> SyncHandler. The `entity` field on each PendingOp indexes this. */
 const syncHandlers: Record<string, SyncHandler> = {
-	remnant2CollectedItem: remnant2CollectedItemHandler,
+	remnant2CollectedItem: remnant2CollectedItemSyncHandler,
 	clairObscurCollectedItem: clairObscurCollectedItemHandler,
 	slayTheSpire2CollectedItem: slayTheSpire2CollectedItemHandler,
-	remnant2Build: remnant2BuildHandler,
+	remnant2Build: remnant2BuildSyncHandler,
 	userFavoriteGame: favoriteGameSyncHandler,
-	userProfile: userProfileHandler,
-	userAvatarOverride: userAvatarOverrideHandler,
+	userProfile: userProfileSyncHandler,
+	userAvatarOverride: userAvatarOverrideSyncHandler,
 };
 
 export { syncHandlers };

@@ -1,5 +1,4 @@
 import type { ComponentType } from "react";
-import type { LogoSize } from "#/components/AppLogo.tsx";
 import type {
 	AnyGameConfig,
 	GameAvatar,
@@ -9,6 +8,7 @@ import type { ToolkitThemeDefinition } from "#/features/theme/types.ts";
 import { PUBLIC_GAME_CONFIG as COE33_PUBLIC_GAME_CONFIG } from "#/games/clairobscur/core/game-config";
 import { PUBLIC_GAME_CONFIG as REMNANT2_PUBLIC_GAME_CONFIG } from "#/games/remnant2/core/game-config";
 import { PUBLIC_GAME_CONFIG as SLAYTHESPIRE2_PUBLIC_GAME_CONFIG } from "#/games/slaythespire2/core/game-config";
+import type { AppLogoSize } from "#/types.ts";
 import type { GameId } from "@/prisma";
 
 // biome-ignore lint/style/useExportsLast: {Needed for derived value}
@@ -53,5 +53,5 @@ export const getGameAvatars = (gameId: string): GameAvatar[] | undefined =>
 
 export const getGameLogoComponent = (
 	gameId: string,
-): ComponentType<{ size?: LogoSize }> | undefined =>
+): ComponentType<{ size?: AppLogoSize }> | undefined =>
 	PUBLIC_GAME_REGISTRY[gameId as PublicRegistryGameId]?.METADATA?.LogoComponent;
