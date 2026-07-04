@@ -106,6 +106,7 @@ const useUpdate = () => {
 						title: input.name
 							? `Updated build: ${input.name}`
 							: "Updated build",
+						gameId: "remnant2",
 					},
 				}),
 			]);
@@ -140,7 +141,7 @@ const useRemove = () => {
 					payload: input,
 					idempotencyKey: `${ENTITY}:delete:${anonUserId}:${input.buildId}`,
 					serverUpdatedAt: toIso(existing?.updatedAt),
-					summary: { title: "Deleted build" },
+					summary: { title: "Deleted build", gameId: "remnant2" },
 				}),
 			]);
 			return { ok: true as const };

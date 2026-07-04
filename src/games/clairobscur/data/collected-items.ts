@@ -85,7 +85,10 @@ const useCollect = () => {
 					payload: { itemId: input.itemId, itemName: input.itemName },
 					idempotencyKey: `${ENTITY}:upsert:${anonUserId}:${input.itemId}`,
 					serverUpdatedAt: toIso(existing?.updatedAt),
-					summary: { title: `Collected: ${input.itemName}` },
+					summary: {
+						title: `Collected: ${input.itemName}`,
+						gameId: "clairobscur",
+					},
 				}),
 			]);
 			return record;
@@ -123,7 +126,10 @@ const useUncollect = () => {
 					payload: { itemId: input.itemId, itemName: input.itemName },
 					idempotencyKey: `${ENTITY}:delete:${anonUserId}:${input.itemId}`,
 					serverUpdatedAt: toIso(existing?.updatedAt),
-					summary: { title: `Uncollected: ${input.itemName}` },
+					summary: {
+						title: `Uncollected: ${input.itemName}`,
+						gameId: "clairobscur",
+					},
 				}),
 			]);
 			return { ok: true as const };

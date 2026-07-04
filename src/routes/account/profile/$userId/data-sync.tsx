@@ -13,10 +13,8 @@ import { notifications } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { type PropsWithChildren, useEffect, useState } from "react";
-import {
-	clearSynced,
-	deleteOp,
-} from "#/features/sync/local-data/queue/pending-ops";
+import { useGameId } from "#/features/game/use-game-id.ts";
+import { deleteOp } from "#/features/sync/local-data/queue/pending-ops";
 import type { PendingOp } from "#/features/sync/local-data/queue/types";
 import { usePendingOps } from "#/features/sync/local-data/queue/use-pending-ops";
 import {
@@ -27,8 +25,8 @@ import {
 	buildTabHead,
 	loadProfileTabData,
 } from "#/features/user/profile-tab-head.ts";
-import { getGameMetadata } from "#/registry/game-public-registry.tsx";
 import { useSession } from "#/integrations/better-auth/auth-client";
+import { getGameMetadata } from "#/registry/game-public-registry.tsx";
 
 const PendingList = ({
 	ops,
@@ -243,10 +241,19 @@ function DataSync() {
 	const pending = usePendingOps();
 	const canSync = !!session?.user?.id && online;
 
+	// Scope the tab to the active game. Ops with no `summary.gameId` are
+	// account-wide (profile, primary avatar) and stay visible under every game.
+	const gameId = useGameId();
+	const visibleOps = (pending.data ?? []).filter(
+		(op) => op.summary?.gameId == null || op.summary.gameId === gameId,
+	);
+	const pendingOps = visibleOps.filter((op) => op.status !== "synced");
+	const syncedOps = visibleOps.filter((op) => op.status === "synced");
+
 	const syncAll = useMutation({
 		mutationFn: async () => {
-			if (!pending.data) return null;
-			return syncOps(pending.data);
+			if (!visibleOps.length) return null;
+			return syncOps(visibleOps);
 		},
 		onSuccess: (report) => {
 			if (!report) return;
@@ -269,7 +276,9 @@ function DataSync() {
 	});
 
 	const clear = useMutation({
-		mutationFn: () => clearSynced(),
+		mutationFn: async () => {
+			await Promise.all(syncedOps.map((op) => deleteOp(op.id)));
+		},
 		onSuccess: () =>
 			queryClient.invalidateQueries({ queryKey: ["sync-queue"] }),
 	});
@@ -321,14 +330,14 @@ function DataSync() {
 						size="xs"
 						variant="default"
 						onClick={() => clear.mutate()}
-						disabled={clear.isPending}
+						disabled={clear.isPending || !syncedOps.length}
 					>
 						Clear synced
 					</Button>
 					<Button
 						size="xs"
 						onClick={() => syncAll.mutate()}
-						disabled={!canSync || syncAll.isPending || !pending.data?.length}
+						disabled={!canSync || syncAll.isPending || !pendingOps.length}
 					>
 						{syncAll.isPending ? "Syncing…" : "Sync all"}
 					</Button>
@@ -340,7 +349,7 @@ function DataSync() {
 				</Text>
 			) : null}
 			<PendingList
-				ops={(pending.data ?? []).filter((op) => op.status !== "synced")}
+				ops={pendingOps}
 				onDelete={(id) => {
 					deleteOp(id).then(() =>
 						queryClient.invalidateQueries({ queryKey: ["sync-queue"] }),
@@ -357,9 +366,7 @@ function DataSync() {
 							: null
 				}
 			/>
-			<SyncedList
-				ops={(pending.data ?? []).filter((op) => op.status === "synced")}
-			/>
+			<SyncedList ops={syncedOps} />
 		</Stack>
 	);
 }
