@@ -79,7 +79,7 @@ export async function generateFavicons() {
 const IMAGE_OUTPUT_ROOT = path.join(__dirname, ".images");
 const ITEM_DATA_GLOB_ROOT = path.join(__dirname, "src", "games");
 const FETCH_CONCURRENCY = 16;
-const IMAGE_URL_REGEX = /imageUrl:\s*["']([^"']+)["']/g;
+const IMAGE_URL_REGEX = /imageUrl:\s*["'`]([^"'`]+)["'`]/g;
 
 const fileExists = async (p) => {
 	try {
