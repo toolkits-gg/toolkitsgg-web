@@ -57,7 +57,7 @@ const recallResult = (key: string): SyncResult | null => {
 };
 
 const applyPendingOpServerFn = createServerFn({ method: "POST" })
-	.inputValidator((v: unknown) => ApplyPendingOpInputSchema.parse(v))
+	.validator((v: unknown) => ApplyPendingOpInputSchema.parse(v))
 	.handler(async ({ data }) => {
 		const { op, force } = data;
 		// requireUserId() runs first because userId is part of the deduplication key.
