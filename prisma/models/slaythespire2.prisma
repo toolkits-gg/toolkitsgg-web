@@ -67,7 +67,7 @@ model SlayTheSpire2CollectedItem {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
   itemId String

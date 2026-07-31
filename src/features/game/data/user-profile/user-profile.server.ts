@@ -103,7 +103,7 @@ export const getPublicUserProfile = (
 	prisma.user.findUnique({
 		where: { id: userId },
 		include: {
-			userProfile: {
+			UserProfile: {
 				include: { avatarOverrides: true },
 			},
 		},
@@ -116,7 +116,7 @@ export const getUserProfile = async (): Promise<UserWithProfile> => {
 	return prisma.user.findUnique({
 		where: { id: userId },
 		include: {
-			userProfile: {
+			UserProfile: {
 				include: { avatarOverrides: true },
 			},
 		},

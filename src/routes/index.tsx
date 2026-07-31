@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { setGame } from "#/features/game/store.ts";
 
 const HomePage = () => {
-	useEffect(() => setGame("none"));
+	useEffect(() => setGame("none"), []);
 
 	return <Title order={1}>Home Page</Title>;
 };

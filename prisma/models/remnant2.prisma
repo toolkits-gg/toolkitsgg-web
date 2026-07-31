@@ -55,12 +55,12 @@ model Remnant2Build {
 
   // Remnant2 specific fields
   items                Remnant2BuildItem[]
-  buildCollectionCount Remnant2BuildCollectionCount?
-  buildDuplicateCount  Remnant2BuildDuplicateCount?
-  buildLikeCount       Remnant2BuildLikeCount?
-  buildViewCount       Remnant2BuildViewCount?
-  buildCollections     Remnant2BuildsOnCollections[]
-  buildTags            Remnant2BuildTag[]
+  BuildCollectionCount Remnant2BuildCollectionCount?
+  BuildDuplicateCount  Remnant2BuildDuplicateCount?
+  BuildLikeCount       Remnant2BuildLikeCount?
+  BuildViewCount       Remnant2BuildViewCount?
+  BuildCollections     Remnant2BuildsOnCollections[]
+  BuildTags            Remnant2BuildTag[]
 
   @@index([createdById])
 }
@@ -80,19 +80,13 @@ enum REMNANT2_BUILD_TAG {
   Gimmick
 }
 
-enum REMNANT2_BUILD_TAG_CATEGORY {
-  Type
-  Tag
-}
-
 model Remnant2BuildTag {
   id        String                      @id @default(cuid())
   createdAt DateTime                    @default(now())
   updatedAt DateTime                    @updatedAt
-  category  REMNANT2_BUILD_TAG_CATEGORY @default(Tag)
-  build     Remnant2Build               @relation(fields: [buildId], references: [id], onDelete: Cascade)
-  buildId   String
   tag       REMNANT2_BUILD_TAG
+  Build     Remnant2Build               @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  buildId   String
 
   @@index([buildId])
 }
@@ -107,15 +101,15 @@ model Remnant2BuildCollection {
   description     String?                       @db.Text
   visibility      BuildVisibility               @default(PUBLIC)
   moderatorStatus BuildModeratorStatus          @default(PENDING)
-  builds          Remnant2BuildsOnCollections[]
+  Builds          Remnant2BuildsOnCollections[]
 }
 
 model Remnant2BuildsOnCollections {
   createdAt    DateTime                @default(now())
   updatedAt    DateTime                @updatedAt
-  build        Remnant2Build           @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  Build        Remnant2Build           @relation(fields: [buildId], references: [id], onDelete: Cascade)
   buildId      String
-  collection   Remnant2BuildCollection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  Collection   Remnant2BuildCollection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
   collectionId String
 
   @@id([buildId, collectionId])
@@ -126,28 +120,28 @@ model Remnant2BuildsOnCollections {
 model Remnant2BuildCollectionCount {
   id      String        @id @default(cuid())
   count   Int           @default(0)
-  build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  Build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
   buildId String        @unique
 }
 
 model Remnant2BuildLikeCount {
   id      String        @id @default(cuid())
   count   Int           @default(0)
-  build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  Build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
   buildId String        @unique
 }
 
 model Remnant2BuildDuplicateCount {
   id      String        @id @default(cuid())
   count   Int           @default(0)
-  build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  Build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
   buildId String        @unique
 }
 
 model Remnant2BuildViewCount {
   id      String        @id @default(cuid())
   count   Int           @default(0)
-  build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  Build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
   buildId String        @unique
 }
 
@@ -159,7 +153,7 @@ model Remnant2Item {
 
   // Remnant2 specific fields
   category   Remnant2ItemCategory
-  buildItems Remnant2BuildItem[]
+  BuildItems Remnant2BuildItem[]
 }
 
 // Remnant2Item when used in a build
@@ -171,10 +165,10 @@ model Remnant2BuildItem {
   amount    Int?
   optional  Boolean  @default(false)
 
-  item   Remnant2Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  Item   Remnant2Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
   itemId String
 
-  build   Remnant2Build? @relation(fields: [buildId], references: [id])
+  Build   Remnant2Build? @relation(fields: [buildId], references: [id])
   buildId String?
 
   @@index([itemId])
@@ -186,7 +180,7 @@ model Remnant2CollectedItem {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
   itemId String

@@ -40,7 +40,7 @@ export type UserProfileData = {
 
 // Not using UserProfileData type due to needed `null` flexibility.
 export type UserWithProfile = {
-	userProfile: {
+	UserProfile: {
 		displayName: string;
 		bio: string;
 		avatarUrl: string | null;
@@ -55,8 +55,8 @@ export type GetProfileInput = { userId?: string } | undefined;
 export const mapUserToProfileData = (
 	user: UserWithProfile,
 ): UserProfileData | null => {
-	if (!user?.userProfile) return null;
-	const profile = user.userProfile;
+	if (!user?.UserProfile) return null;
+	const profile = user.UserProfile;
 	return {
 		displayName: profile.displayName,
 		bio: profile.bio,

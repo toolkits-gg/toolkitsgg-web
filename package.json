@@ -23,6 +23,7 @@
     "prisma-idb-tsc-fix": "node -e \"const fs=require('fs'),f='prisma/generated/prisma-idb/client/prisma-idb-client.ts',c=fs.readFileSync(f,'utf8');if(!c.startsWith('// @ts-nocheck'))fs.writeFileSync(f,'// @ts-nocheck\\n'+c)\"",
     "db:generate": "dotenv -e .env.local -- prisma generate && pnpm prisma-idb-tsc-fix",
     "db:push": "dotenv -e .env.local -- prisma db push",
+    "db:push:force": "dotenv -e .env.local -- prisma db push --force-reset",
     "db:migrate": "dotenv -e .env.local -- prisma migrate dev",
     "db:studio": "dotenv -e .env.local -- prisma studio",
     "db:seed": "dotenv -e .env.local -- tsx prisma/seed.ts",

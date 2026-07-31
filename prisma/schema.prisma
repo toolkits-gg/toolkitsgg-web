@@ -58,21 +58,21 @@ model User {
   accounts      Account[]
   verification  Verification[]
 
-  userProfile       UserProfile?
-  userFavoriteGames UserFavoriteGame[]
+  UserProfile       UserProfile?
+  UserFavoriteGames UserFavoriteGame[]
 
-  usersBeingFollowed UserFollowedUsers[] @relation("userBeingFollowed")
-  usersFollowed      UserFollowedUsers[] @relation("userFollowed")
+  UsersBeingFollowed UserFollowedUsers[] @relation("userBeingFollowed")
+  UsersFollowed      UserFollowedUsers[] @relation("userFollowed")
 
-  userRoles              UserRole[]     @relation("UserRoles")
+  UserRoles              UserRole[]     @relation("UserRoles")
 
-  clairObscurCollectedItems ClairObscurCollectedItem[]
+  ClairObscurCollectedItems ClairObscurCollectedItem[]
 
-  remnant2CollectedItems   Remnant2CollectedItem[]
-  remnant2Builds           Remnant2Build[]
-  remnant2BuildCollections Remnant2BuildCollection[]
+  Remnant2CollectedItems   Remnant2CollectedItem[]
+  Remnant2Builds           Remnant2Build[]
+  Remnant2BuildCollections Remnant2BuildCollection[]
 
-  slayTheSpire2CollectedItems SlayTheSpire2CollectedItem[]
+  SlayTheSpire2CollectedItems SlayTheSpire2CollectedItem[]
 }
 
 model Session {
@@ -84,7 +84,7 @@ model Session {
   ipAddress String?
   userAgent String?
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
@@ -103,7 +103,7 @@ model Account {
   password              String?
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([providerId, accountId])
   @@index([userId])
@@ -117,7 +117,7 @@ model Verification {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   userId     String?
-  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([identifier, value])
   @@index([userId])
@@ -132,7 +132,7 @@ model UserProfile {
   avatarUrl           String?
   primaryAvatarId     String?
   primaryAvatarGameId GameId?
-  user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId              String               @unique
   avatarOverrides     UserAvatarOverride[]
 }
@@ -143,7 +143,7 @@ model UserAvatarOverride {
   updatedAt     DateTime    @updatedAt
   gameId        GameId
   avatarId      String
-  userProfile   UserProfile @relation(fields: [userProfileId], references: [id], onDelete: Cascade)
+  UserProfile   UserProfile @relation(fields: [userProfileId], references: [id], onDelete: Cascade)
   userProfileId String
 
   @@unique([userProfileId, gameId])
@@ -155,7 +155,7 @@ model UserFavoriteGame {
   updatedAt DateTime @updatedAt
   gameId    GameId
 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
   @@id([userId, gameId])
@@ -166,9 +166,9 @@ model UserFavoriteGame {
 model UserFollowedUsers {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-  user           User     @relation("userBeingFollowed", fields: [userId], references: [id], onDelete: Cascade)
+  User           User     @relation("userBeingFollowed", fields: [userId], references: [id], onDelete: Cascade)
   userId         String
-  followedUser   User     @relation("userFollowed", fields: [followedUserId], references: [id], onDelete: Cascade)
+  FollowedUser   User     @relation("userFollowed", fields: [followedUserId], references: [id], onDelete: Cascade)
   followedUserId String
 
   @@id([userId, followedUserId])
@@ -189,7 +189,7 @@ model UserRole {
   updatedAt DateTime @updatedAt
 
   userId String
-  user   User   @relation("UserRoles", fields: [userId], references: [id], onDelete: Cascade)
+  User   User   @relation("UserRoles", fields: [userId], references: [id], onDelete: Cascade)
 
   role Role
 

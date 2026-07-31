@@ -12,5 +12,10 @@ const clientEnvSchema = z.object({
 	VITE_LOCAL_USER_PASSWORD: z.string(),
 });
 
-// Validate client environment (build-time, always safe)
-export const clientEnv = clientEnvSchema.parse(import.meta.env);
+// Vite replaces `import.meta.env` at build time, but plain Node processes that
+// import this module (e.g. `prisma/seed.ts` via tsx) only have `process.env`.
+const clientEnvSource =
+	typeof import.meta.env === "undefined" ? process.env : import.meta.env;
+
+// Validate client environment
+export const clientEnv = clientEnvSchema.parse(clientEnvSource);
