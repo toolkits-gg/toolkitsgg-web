@@ -11,6 +11,7 @@ const clientEnvSchema = z.object({
 	VITE_LOCAL_USER_EMAIL: z.email(),
 	VITE_LOCAL_USER_PASSWORD: z.string(),
 	VITE_ENABLE_MAINTENANCE_MODE: z.boolean(),
+	VITE_SHOW_COMING_SOON: z.boolean(),
 });
 
 // Vite replaces `import.meta.env` at build time, but plain Node processes that

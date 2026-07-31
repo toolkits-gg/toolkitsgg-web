@@ -18,6 +18,7 @@ const requiredClientEnv = [
 	"VITE_LOCAL_USER_EMAIL",
 	"VITE_LOCAL_USER_PASSWORD",
 	"VITE_ENABLE_MAINTENANCE_MODE",
+	"VITE_SHOW_COMING_SOON",
 ] as const;
 
 // Validate on created-builds startup
