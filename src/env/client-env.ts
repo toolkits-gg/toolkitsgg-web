@@ -10,8 +10,10 @@ const clientEnvSchema = z.object({
 	VITE_LOCAL_ADMIN_PASSWORD: z.string(),
 	VITE_LOCAL_USER_EMAIL: z.email(),
 	VITE_LOCAL_USER_PASSWORD: z.string(),
-	VITE_ENABLE_MAINTENANCE_MODE: z.boolean(),
-	VITE_SHOW_COMING_SOON: z.boolean(),
+	// `import.meta.env` / `process.env` values are always strings, so these
+	// flags have to be coerced rather than validated as real booleans.
+	VITE_ENABLE_MAINTENANCE_MODE: z.stringbool(),
+	VITE_SHOW_COMING_SOON: z.stringbool(),
 });
 
 // Vite replaces `import.meta.env` at build time, but plain Node processes that

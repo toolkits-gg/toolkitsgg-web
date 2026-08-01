@@ -9,6 +9,7 @@ import "@fontsource/geist/700.css";
 import { Box, Text, Title } from "@mantine/core";
 import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext } from "@tanstack/react-router";
+import { MaintenanceModeDocument } from "#/components/MaintenanceModeDocument.tsx";
 import { RootDocument } from "#/components/RootDocument.tsx";
 import { OG_IMAGE, SERVER_GAME_INPUTS_QUERY_KEY } from "#/constants";
 import { clientEnv } from "#/env/client-env.ts";
@@ -27,7 +28,7 @@ const url = clientEnv.VITE_APP_URL;
 const Route = createRootRouteWithContext<MyRouterContext>()({
 	beforeLoad: async ({ context, location }) => {
 		// Cache the created-builds-fn result for the lifetime of the session - the Host
-		// header and the active-game cookie don't change without a hard reload.
+		// header and the active-game cookie don't change without a hard reload or setActiveGameCookie
 		const { subdomainGameId, cookieGameId } =
 			await context.queryClient.ensureQueryData({
 				queryKey: SERVER_GAME_INPUTS_QUERY_KEY,
@@ -89,7 +90,9 @@ const Route = createRootRouteWithContext<MyRouterContext>()({
 			},
 		],
 	}),
-	shellComponent: RootDocument,
+	shellComponent: clientEnv.VITE_ENABLE_MAINTENANCE_MODE
+		? MaintenanceModeDocument
+		: RootDocument,
 	notFoundComponent: () => {
 		return (
 			<Box p="md">
