@@ -53,25 +53,25 @@ enum SlayTheSpire2DLC {
 }
 
 model SlayTheSpire2Item {
-  id       String  @id @default(cuid())
-  slug     String  @unique
+  id       String  @id
   name     String
   disabled Boolean @default(false)
 
   // SlayTheSpire2 specific fields
-  category SlayTheSpire2ItemCategory
+  category       SlayTheSpire2ItemCategory
+  CollectedItems SlayTheSpire2CollectedItem[]
 }
 
 model SlayTheSpire2CollectedItem {
-  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
+  Item   SlayTheSpire2Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
   itemId String
 
-  @@unique([userId, itemId])
-  @@index([userId])
+  // used for "collected items for user X".
+  @@id([userId, itemId])
 }

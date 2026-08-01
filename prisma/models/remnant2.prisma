@@ -43,29 +43,43 @@ model Remnant2Build {
   createdBy   User?    @relation(fields: [createdById], references: [id], onDelete: SetNull)
   createdById String?
 
-  name            String
-  description     String?              @db.Text
-  visibility      BuildVisibility      @default(PUBLIC)
-  moderatorStatus BuildModeratorStatus @default(PENDING)
-  videoUrl        String?
-  imageUrl        String?
-  thumbnailUrl    String?
-  referenceUrl    String?
-  gameVersion     String?
+  name               String
+  description        String?              @db.Text
+  visibility         BuildVisibility      @default(PUBLIC)
+  moderatorStatus    BuildModeratorStatus @default(PENDING)
+  videoUrl           String?
+  imageUrl           String?
+  thumbnailUrl       String?
+  referenceUrl       String?
+  gameVersion        String?
+  // Denormalized counts.
+  // Each is recomputable from a source table except viewCount.
+  itemCount          Int                  @default(0) // count(BuildItems)
+  collectionCount    Int                  @default(0) // count(BuildCollections)
+  duplicateCount     Int                  @default(0) // count(Duplicates)
+  upvoteCount        Int                  @default(0) // count(Upvotes)
+  viewCount          Int                  @default(0) // no source table
+  validatedViewCount Int                  @default(0) // count(Views)
 
-  // Remnant2 specific fields
-  items                Remnant2BuildItem[]
-  BuildCollectionCount Remnant2BuildCollectionCount?
-  BuildDuplicateCount  Remnant2BuildDuplicateCount?
-  BuildLikeCount       Remnant2BuildLikeCount?
-  BuildViewCount       Remnant2BuildViewCount?
-  BuildCollections     Remnant2BuildsOnCollections[]
-  BuildTags            Remnant2BuildTag[]
+  /**
+   * Remnant2 specific fields
+   */
+  // Relations
+  BuildItems       Remnant2BuildItem[]
+  BuildCollections Remnant2BuildsOnCollections[]
+  BuildTags        Remnant2BuildTag[]
+  FeedMemberships  Remnant2BuildFeedMembership[]
+  Upvotes          Remnant2BuildUpvote[]
+  Views            Remnant2BuildView[]
 
-  @@index([createdById])
+  // Public listings filter on visibility AND moderatorStatus, so both lead.
+  @@index([visibility, moderatorStatus, createdAt, id])
+  @@index([visibility, moderatorStatus, upvoteCount, id])
+  // "a user's builds, newest edit first" — see created-builds.server.ts.
+  @@index([createdById, updatedAt])
 }
 
-enum REMNANT2_BUILD_TAG {
+enum Remnant2BuildTagName {
   EasyToPlay
   Melee
   Mods
@@ -81,14 +95,61 @@ enum REMNANT2_BUILD_TAG {
 }
 
 model Remnant2BuildTag {
-  id        String                      @id @default(cuid())
-  createdAt DateTime                    @default(now())
-  updatedAt DateTime                    @updatedAt
-  tag       REMNANT2_BUILD_TAG
-  Build     Remnant2Build               @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  tag       Remnant2BuildTagName
+  Build     Remnant2Build        @relation(fields: [buildId], references: [id], onDelete: Cascade)
   buildId   String
 
-  @@index([buildId])
+  // A tag can only be attached to a build once.
+  @@id([buildId, tag])
+}
+
+// Curated feeds a build belongs to.
+enum Remnant2BuildFeed {
+  FEATURED
+  BASE_GAME
+  BEGINNER
+  GIMMICK
+}
+
+model Remnant2BuildFeedMembership {
+  feed    Remnant2BuildFeed
+  addedAt DateTime          @default(now())
+  Build   Remnant2Build     @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  buildId String
+
+  @@id([feed, buildId])
+  // used for "builds in feed X, newest first".
+  @@index([feed, addedAt, buildId])
+}
+
+// Source of truth for Remnant2Build.upvoteCount.
+model Remnant2BuildUpvote {
+  createdAt DateTime      @default(now())
+  Build     Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  buildId   String
+  User      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+
+  // One upvote per user per build.
+  @@id([buildId, userId])
+  // used for "builds upvoted by user X".
+  @@index([userId, buildId])
+}
+
+// Source of truth for Remnant2Build.validatedViewCount.
+// Deduped per viewer, so this grows with distinct viewers
+// rather than with raw page hits.
+model Remnant2BuildView {
+  firstViewedAt DateTime      @default(now())
+  lastViewedAt  DateTime      @updatedAt
+  Build         Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  buildId       String
+  // Auth userId when signed in, otherwise the anon id from anon-id.ts.
+  viewerKey     String
+
+  @@id([buildId, viewerKey])
 }
 
 model Remnant2BuildCollection {
@@ -102,63 +163,38 @@ model Remnant2BuildCollection {
   visibility      BuildVisibility               @default(PUBLIC)
   moderatorStatus BuildModeratorStatus          @default(PENDING)
   Builds          Remnant2BuildsOnCollections[]
+
+  @@index([createdById])
 }
 
+// Explicit join so a collection can order its builds and record when each was added.
 model Remnant2BuildsOnCollections {
   createdAt    DateTime                @default(now())
-  updatedAt    DateTime                @updatedAt
+  position     Int                     @default(0)
   Build        Remnant2Build           @relation(fields: [buildId], references: [id], onDelete: Cascade)
   buildId      String
   Collection   Remnant2BuildCollection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
   collectionId String
 
-  @@id([buildId, collectionId])
+  // used for "builds in collection X" index.
+  @@id([collectionId, buildId])
+  // used for "collections containing build X" index.
   @@index([buildId])
-  @@index([collectionId])
-}
-
-model Remnant2BuildCollectionCount {
-  id      String        @id @default(cuid())
-  count   Int           @default(0)
-  Build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
-  buildId String        @unique
-}
-
-model Remnant2BuildLikeCount {
-  id      String        @id @default(cuid())
-  count   Int           @default(0)
-  Build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
-  buildId String        @unique
-}
-
-model Remnant2BuildDuplicateCount {
-  id      String        @id @default(cuid())
-  count   Int           @default(0)
-  Build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
-  buildId String        @unique
-}
-
-model Remnant2BuildViewCount {
-  id      String        @id @default(cuid())
-  count   Int           @default(0)
-  Build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
-  buildId String        @unique
 }
 
 model Remnant2Item {
-  id       String  @id @default(cuid())
-  slug     String  @unique
+  id       String  @id
   name     String
   disabled Boolean @default(false)
 
   // Remnant2 specific fields
-  category   Remnant2ItemCategory
-  BuildItems Remnant2BuildItem[]
+  category       Remnant2ItemCategory
+  BuildItems     Remnant2BuildItem[]
+  CollectedItems Remnant2CollectedItem[]
 }
 
 // Remnant2Item when used in a build
 model Remnant2BuildItem {
-  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   level     Int      @default(1)
@@ -168,23 +204,25 @@ model Remnant2BuildItem {
   Item   Remnant2Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
   itemId String
 
-  Build   Remnant2Build? @relation(fields: [buildId], references: [id])
-  buildId String?
+  Build   Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  buildId String
 
-  @@index([itemId])
-  @@index([buildId])
+  // used for "items in build X" index.
+  @@id([buildId, itemId])
+  // used for "builds containing item X" index.
+  @@index([itemId, buildId])
 }
 
 model Remnant2CollectedItem {
-  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
+  Item   Remnant2Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
   itemId String
 
-  @@unique([userId, itemId])
-  @@index([userId])
+  // used for "collected items for user X".
+  @@id([userId, itemId])
 }

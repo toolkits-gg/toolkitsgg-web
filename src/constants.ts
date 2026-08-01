@@ -14,7 +14,9 @@ const FALLBACK_DISPLAY_NAME = "Toolkits.gg User";
 
 const OG_IMAGE = `${clientEnv.VITE_CLOUDFRONT_URL}/metadata/og-image.png`;
 
-const SERVER_GAME_INPUTS_QUERY_KEY = ["created-builds-resolved-game-inputs"] as const;
+const SERVER_RESOLVED_GAME_ID_SOURCES = [
+	"server-resolved-game-id-sources",
+] as const;
 
 export const DEFAULT_APP_LOGO_SIZE: AppLogoSize = 36;
 
@@ -27,5 +29,5 @@ export {
 	OG_IMAGE,
 	PATREON_URL,
 	PAYPAL_URL,
-	SERVER_GAME_INPUTS_QUERY_KEY,
+	SERVER_RESOLVED_GAME_ID_SOURCES,
 };

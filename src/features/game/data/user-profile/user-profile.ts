@@ -1,5 +1,5 @@
 // User profile: client-safe helpers, types, and input validation, plus the
-// TanStack created-builds-fn wrappers. Each wrapper delegates to ./user-profile.created-builds.ts;
+// TanStack server-fn wrappers. Each wrapper delegates to ./user-profile.server.ts;
 // those imports are referenced only inside handler bodies, so the compiler strips
 // them (and prisma) from the client bundle.
 
@@ -41,14 +41,26 @@ export type UserProfileData = {
 // Not using UserProfileData type due to needed `null` flexibility.
 export type UserWithProfile = {
 	UserProfile: {
-		displayName: string;
-		bio: string;
+		displayName: string | null;
+		bio: string | null;
 		avatarUrl: string | null;
 		primaryAvatarId: string | null;
 		primaryAvatarGameId: string | null;
-		avatarOverrides: { gameId: string; avatarId: string }[];
+		UserAvatarOverrides: {
+			gameId: string;
+			avatarId: string;
+			avatarGameId: string;
+		}[];
 	} | null;
 } | null;
+
+/**
+ * Placeholders for a profile the user has never filled in. These live here
+ * rather than as column defaults so the database can still tell "never set"
+ * apart from a user who typed this exact text.
+ */
+export const DEFAULT_DISPLAY_NAME = "Traveler";
+export const DEFAULT_BIO = "No bio provided.";
 
 export type GetProfileInput = { userId?: string } | undefined;
 
@@ -58,16 +70,15 @@ export const mapUserToProfileData = (
 	if (!user?.UserProfile) return null;
 	const profile = user.UserProfile;
 	return {
-		displayName: profile.displayName,
-		bio: profile.bio,
+		displayName: profile.displayName ?? DEFAULT_DISPLAY_NAME,
+		bio: profile.bio ?? DEFAULT_BIO,
 		avatarUrl: profile.avatarUrl ?? null,
 		primaryAvatarId: profile.primaryAvatarId ?? null,
 		primaryAvatarGameId: profile.primaryAvatarGameId as GameId | null,
-		avatarOverrides: profile.avatarOverrides.map((o) => ({
+		avatarOverrides: profile.UserAvatarOverrides.map((o) => ({
 			gameId: o.gameId as GameId,
 			avatarId: o.avatarId,
-			// Server-side overrides don't store avatarGameId; use gameId as fallback.
-			avatarGameId: o.gameId as GameId,
+			avatarGameId: o.avatarGameId as GameId,
 		})),
 	};
 };

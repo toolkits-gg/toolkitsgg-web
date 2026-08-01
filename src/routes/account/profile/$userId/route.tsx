@@ -3,7 +3,7 @@ import { createFileRoute, notFound, Outlet } from "@tanstack/react-router";
 import {
 	FALLBACK_DISPLAY_NAME,
 	OG_IMAGE,
-	SERVER_GAME_INPUTS_QUERY_KEY,
+	SERVER_RESOLVED_GAME_ID_SOURCES,
 } from "#/constants.ts";
 import { clientEnv } from "#/env/client-env.ts";
 import { getServerResolvedGameInputsServerFn } from "#/features/game/active-game";
@@ -53,7 +53,7 @@ const Route = createFileRoute("/account/profile/$userId")({
 				}),
 				getViewerUserIdServerFn(),
 				queryClient.ensureQueryData({
-					queryKey: SERVER_GAME_INPUTS_QUERY_KEY,
+					queryKey: SERVER_RESOLVED_GAME_ID_SOURCES,
 					queryFn: () => getServerResolvedGameInputsServerFn(),
 					staleTime: Number.POSITIVE_INFINITY,
 					gcTime: Number.POSITIVE_INFINITY,

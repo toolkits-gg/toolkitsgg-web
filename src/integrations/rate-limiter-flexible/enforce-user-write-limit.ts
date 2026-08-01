@@ -14,9 +14,9 @@ const writeLimiter = new RateLimiterMemory({
 
 /**
  * Consumes one point for `userId`, throwing a 429 Response when the user is over
- * budget. Thrown Responses propagate as the HTTP result (this mirrors how
- * requireUserId() throws a 401 Response), so call this right after resolving the
- * userId in a write created-builds function:
+ * budget. Thrown Responses propagate as the HTTP result,
+ * so call this right after resolving the userId in a write
+ * server function:
  *
  *   const userId = await requireUserId();
  *   await enforceUserWriteLimit(userId);

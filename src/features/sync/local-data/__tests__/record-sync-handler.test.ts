@@ -32,7 +32,7 @@ const makeDeps = (record: { updatedAt: string } | null) => ({
 });
 
 describe("createRecordSyncHandler", () => {
-	it("creates when no created-builds record exists", async () => {
+	it("creates when no server record exists", async () => {
 		const deps = makeDeps(null);
 		const handler = createRecordSyncHandler(deps);
 		const result = await handler(makeOp({ operation: "create" }), "u1");
@@ -45,9 +45,9 @@ describe("createRecordSyncHandler", () => {
 	});
 
 	it("updates the record from payload when local wins", async () => {
-		const deps = makeDeps({ updatedAt: T1 }); // created-builds == baseline -> equal? no: baseline T1, created-builds T1 => equal
+		const deps = makeDeps({ updatedAt: T1 }); // server == baseline -> equal? no: baseline T1, server T1 => equal
 		const handler = createRecordSyncHandler(deps);
-		// Make created-builds behind baseline so it resolves to local-wins -> update.
+		// Make server behind baseline so it resolves to local-wins -> update.
 		const result = await handler(
 			makeOp({ operation: "update", serverUpdatedAt: T2 }),
 			"u1",
@@ -59,7 +59,7 @@ describe("createRecordSyncHandler", () => {
 		});
 	});
 
-	it("noops an update when the created-builds matches the baseline (already synced)", async () => {
+	it("noops an update when the server matches the baseline (already synced)", async () => {
 		const deps = makeDeps({ updatedAt: T1 });
 		const handler = createRecordSyncHandler(deps);
 		const result = await handler(
@@ -70,7 +70,7 @@ describe("createRecordSyncHandler", () => {
 		expect(deps.updateRecord).not.toHaveBeenCalled();
 	});
 
-	it("reports a conflict when the created-builds advanced past the baseline", async () => {
+	it("reports a conflict when the server advanced past the baseline", async () => {
 		const deps = makeDeps({ updatedAt: T3 });
 		const handler = createRecordSyncHandler(deps);
 		const result = await handler(
@@ -84,7 +84,7 @@ describe("createRecordSyncHandler", () => {
 		expect(deps.updateRecord).not.toHaveBeenCalled();
 	});
 
-	it("force-applies an update despite a created-builds conflict", async () => {
+	it("force-applies an update despite a server conflict", async () => {
 		const deps = makeDeps({ updatedAt: T3 });
 		const handler = createRecordSyncHandler(deps);
 		const result = await handler(
@@ -115,7 +115,7 @@ describe("createRecordSyncHandler", () => {
 		expect(deps.deleteRecord).toHaveBeenCalledWith("u1", "r1");
 	});
 
-	it("conflicts on delete when the created-builds advanced past the baseline", async () => {
+	it("conflicts on delete when the server advanced past the baseline", async () => {
 		const deps = makeDeps({ updatedAt: T3 });
 		const handler = createRecordSyncHandler(deps);
 		const result = await handler(

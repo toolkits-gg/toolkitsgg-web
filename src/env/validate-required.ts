@@ -21,7 +21,7 @@ const requiredClientEnv = [
 	"VITE_SHOW_COMING_SOON",
 ] as const;
 
-// Validate on created-builds startup
+// Validate on server startup
 for (const key of requiredServerEnv) {
 	if (!process.env[key]) {
 		throw new Error(`Missing required environment variable: ${key}`);

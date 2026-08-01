@@ -15,6 +15,7 @@ import { Route as ChangelogRouteImport } from './routes/changelog'
 import { Route as ProfileRouteRouteImport } from './routes/profile/route'
 import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as SignUpRouteImport } from './routes/sign-up'
+import { Route as GameIdIndexRouteImport } from './routes/$gameId/index'
 import { Route as GameIdItemsRouteImport } from './routes/$gameId/items'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ProfileIndexRouteImport } from './routes/profile/index'
@@ -65,6 +66,11 @@ const SignUpRoute = SignUpRouteImport.update({
   id: '/sign-up',
   path: '/sign-up',
   getParentRoute: () => rootRouteImport,
+} as any)
+const GameIdIndexRoute = GameIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GameIdRouteRoute,
 } as any)
 const GameIdItemsRoute = GameIdItemsRouteImport.update({
   id: '/items',
@@ -189,6 +195,7 @@ export interface FileRoutesByFullPath {
   '/profile/collection-stats': typeof ProfileCollectionStatsRoute
   '/profile/created-builds': typeof ProfileCreatedBuildsRoute
   '/profile/liked-builds': typeof ProfileLikedBuildsRoute
+  '/$gameId/': typeof GameIdIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/$gameId/build/$buildId': typeof GameIdBuildBuildIdRouteRouteWithChildren
   '/account/profile/$userId': typeof AccountProfileUserIdRouteRouteWithChildren
@@ -205,7 +212,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/$gameId': typeof GameIdRouteRouteWithChildren
   '/changelog': typeof ChangelogRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
@@ -216,6 +222,7 @@ export interface FileRoutesByTo {
   '/profile/collection-stats': typeof ProfileCollectionStatsRoute
   '/profile/created-builds': typeof ProfileCreatedBuildsRoute
   '/profile/liked-builds': typeof ProfileLikedBuildsRoute
+  '/$gameId': typeof GameIdIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/$gameId/build/$buildId': typeof GameIdBuildBuildIdRouteRouteWithChildren
   '/$gameId/build/create': typeof GameIdBuildCreateRoute
@@ -244,6 +251,7 @@ export interface FileRoutesById {
   '/profile/collection-stats': typeof ProfileCollectionStatsRoute
   '/profile/created-builds': typeof ProfileCreatedBuildsRoute
   '/profile/liked-builds': typeof ProfileLikedBuildsRoute
+  '/$gameId/': typeof GameIdIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/$gameId/build/$buildId': typeof GameIdBuildBuildIdRouteRouteWithChildren
   '/account/profile/$userId': typeof AccountProfileUserIdRouteRouteWithChildren
@@ -274,6 +282,7 @@ export interface FileRouteTypes {
     | '/profile/collection-stats'
     | '/profile/created-builds'
     | '/profile/liked-builds'
+    | '/$gameId/'
     | '/profile/'
     | '/$gameId/build/$buildId'
     | '/account/profile/$userId'
@@ -290,7 +299,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/$gameId'
     | '/changelog'
     | '/sign-in'
     | '/sign-up'
@@ -301,6 +309,7 @@ export interface FileRouteTypes {
     | '/profile/collection-stats'
     | '/profile/created-builds'
     | '/profile/liked-builds'
+    | '/$gameId'
     | '/profile'
     | '/$gameId/build/$buildId'
     | '/$gameId/build/create'
@@ -328,6 +337,7 @@ export interface FileRouteTypes {
     | '/profile/collection-stats'
     | '/profile/created-builds'
     | '/profile/liked-builds'
+    | '/$gameId/'
     | '/profile/'
     | '/$gameId/build/$buildId'
     | '/account/profile/$userId'
@@ -398,6 +408,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/sign-up'
       preLoaderRoute: typeof SignUpRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/$gameId/': {
+      id: '/$gameId/'
+      path: '/'
+      fullPath: '/$gameId/'
+      preLoaderRoute: typeof GameIdIndexRouteImport
+      parentRoute: typeof GameIdRouteRoute
     }
     '/$gameId/items': {
       id: '/$gameId/items'
@@ -558,12 +575,14 @@ const GameIdBuildBuildIdRouteRouteWithChildren =
 
 interface GameIdRouteRouteChildren {
   GameIdItemsRoute: typeof GameIdItemsRoute
+  GameIdIndexRoute: typeof GameIdIndexRoute
   GameIdBuildBuildIdRouteRoute: typeof GameIdBuildBuildIdRouteRouteWithChildren
   GameIdBuildCreateRoute: typeof GameIdBuildCreateRoute
 }
 
 const GameIdRouteRouteChildren: GameIdRouteRouteChildren = {
   GameIdItemsRoute: GameIdItemsRoute,
+  GameIdIndexRoute: GameIdIndexRoute,
   GameIdBuildBuildIdRouteRoute: GameIdBuildBuildIdRouteRouteWithChildren,
   GameIdBuildCreateRoute: GameIdBuildCreateRoute,
 }

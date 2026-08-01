@@ -11,7 +11,7 @@ const remnant2IDBSeed: GameIDBSeed = {
 		if (existingCount === 0) {
 			await idb.remnant2Item.createMany({
 				data: ITEMS.collectable.map((item) => ({
-					slug: item.id,
+					id: item.id,
 					name: item.name,
 					category: item.category,
 					disabled: false,

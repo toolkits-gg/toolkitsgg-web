@@ -27,14 +27,13 @@ import {
 	useFavoriteGames,
 	useUnfavoriteGame,
 } from "#/features/game/data/favorite-games/use-favorite-games.ts";
-import { setGame } from "#/features/game/store.ts";
 import { useGameId } from "#/features/game/use-game-id.ts";
-import { setActiveGameCookie } from "#/features/game/utils.ts";
+import { useSetActiveGame } from "#/features/game/use-set-active-game.ts";
 import {
 	getGameLogoComponent,
 	getGameMetadata,
 	REGISTERED_GAME_IDS,
-} from "#/registry/game-public-registry.tsx";;
+} from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
 import classes from "./GameSwitcher.module.css";
 
@@ -102,6 +101,7 @@ function GameSwitcher() {
 	const activeGameId = useGameId();
 	const navigate = useNavigate();
 	const { location } = useRouterState();
+	const setActiveGame = useSetActiveGame();
 
 	const { data } = useFavoriteGames();
 	const favorite = useFavoriteGame();
@@ -130,9 +130,13 @@ function GameSwitcher() {
 	};
 
 	const handleGoHome = async () => {
-		setActiveGameCookie(null);
-		setGame(null);
+		setActiveGame(null);
 		await navigate({ to: "/" });
+		handleClose();
+	};
+
+	const handleGoGameHome = async () => {
+		await navigate({ to: `/${activeGameId}` as never });
 		handleClose();
 	};
 
@@ -142,8 +146,7 @@ function GameSwitcher() {
 	};
 
 	const handleSelectGame = (id: GameId) => {
-		setActiveGameCookie(id);
-		setGame(id);
+		setActiveGame(id);
 
 		// If on a game-scoped route, navigate to the same sub-path under the new game
 		const segments = location.pathname.split("/").filter(Boolean);
@@ -153,8 +156,9 @@ function GameSwitcher() {
 		) {
 			segments[0] = id;
 			void navigate({ to: `/${segments.join("/")}` as never });
+		} else {
+			void navigate({ to: `/${id}` as never });
 		}
-
 		handleClose();
 	};
 
@@ -210,6 +214,20 @@ function GameSwitcher() {
 					data-autofocus
 				/>
 
+				{activeGameId !== "none" && (
+					<UnstyledButton
+						component="div"
+						className={classes.gameRow}
+						onClick={handleGoGameHome}
+					>
+						<Group gap="xs">
+							<LuHouse size={14} />
+							<Text size="sm" fw={500}>
+								{activeLabel} Home
+							</Text>
+						</Group>
+					</UnstyledButton>
+				)}
 				<UnstyledButton
 					component="div"
 					className={classes.gameRow}
@@ -218,7 +236,7 @@ function GameSwitcher() {
 					<Group gap="xs">
 						<LuHouse size={14} />
 						<Text size="sm" fw={500}>
-							Home
+							Toolkits.gg Home
 						</Text>
 					</Group>
 				</UnstyledButton>

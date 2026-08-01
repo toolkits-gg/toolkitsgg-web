@@ -1,5 +1,5 @@
-// Slay the Spire 2 collected items: input validation and the TanStack created-builds-fn
-// wrappers. Each wrapper delegates to ./collected-items.created-builds.ts; those imports
+// Slay the Spire 2 collected items: input validation and the TanStack server-fn
+// wrappers. Each wrapper delegates to ./collected-items.server.ts; those imports
 // are referenced only inside handler bodies, so the compiler strips them (and
 // prisma) from the client bundle. Hand-written per game — the small amount of
 // duplication across games is intentional and keeps each game self-contained.

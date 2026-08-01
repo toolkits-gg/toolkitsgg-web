@@ -17,7 +17,7 @@ type UseCreatedBuildsResult = {
 
 /**
  * Reads created builds for either the signed-in owner (local/remote) or, on a
- * public profile, another user's publicly-visible builds via the created-builds fn.
+ * public profile, another user's publicly-visible builds via the server fn.
  * Mirrors use-collected-items so both profile tabs behave consistently.
  */
 const useCreatedBuilds = ({

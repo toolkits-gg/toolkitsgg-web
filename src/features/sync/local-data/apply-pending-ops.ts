@@ -5,7 +5,7 @@ import { requireUserId } from "#/features/user/require-user.server.ts";
 import { syncHandlers } from "#/game-registry/handler-registry.server.ts";
 import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/enforce-user-write-limit.ts";
 
-/** Re-validates the PendingOp at the created-builds boundary; client data is untrusted. */
+/** Re-validates the PendingOp at the server boundary; client data is untrusted. */
 const PendingOpSchema = z.object({
 	id: z.string(),
 	createdAt: z.string(),
@@ -35,7 +35,7 @@ const DEDUPE_TTL_MS = 10 * 60 * 1000;
 
 /**
  * In-memory deduplication cache keyed by `userId:idempotencyKey`.
- * Per-process only — cleared on created-builds restart. Deduplication is a best-effort
+ * Per-process only — cleared on server restart. Deduplication is a best-effort
  * optimization (prevents double-writes on retry storms), not a correctness guarantee.
  */
 const seen = new Map<string, { result: SyncResult; seenAt: number }>();

@@ -1,20 +1,20 @@
 generator client {
-  provider        = "prisma-client"
-  output          = "./generated/prisma"
+  provider = "prisma-client"
+  output   = "./generated/prisma"
 }
 
 generator prismaIDB {
   provider = "idb-client-generator"
   output   = "./generated/prisma-idb"
-  
+
   // Optional: Enable sync engine
-  //outboxSync = true
-  //rootModel  = "User"
-  //exclude    = ["Changelog", "Session"]
+  // outboxSync = true
+  // rootModel  = "User"
+  // exclude    = ["Changelog", "Session"]
 }
 
 datasource db {
-  provider  = "postgresql"
+  provider = "postgresql"
 }
 
 enum GameId {
@@ -37,14 +37,6 @@ enum BuildModeratorStatus {
   LOCKED
 }
 
-enum NotificationType {
-  SYSTEM
-  FOLLOW
-  BUILD_UPDATE
-  LIKE
-  MENTION
-}
-
 model User {
   id            String         @id @default(cuid())
   username      String         @unique
@@ -64,13 +56,14 @@ model User {
   UsersBeingFollowed UserFollowedUsers[] @relation("userBeingFollowed")
   UsersFollowed      UserFollowedUsers[] @relation("userFollowed")
 
-  UserRoles              UserRole[]     @relation("UserRoles")
+  UserRoles UserRole[] @relation("UserRoles")
 
   ClairObscurCollectedItems ClairObscurCollectedItem[]
 
   Remnant2CollectedItems   Remnant2CollectedItem[]
   Remnant2Builds           Remnant2Build[]
   Remnant2BuildCollections Remnant2BuildCollection[]
+  Remnant2BuildUpvotes     Remnant2BuildUpvote[]
 
   SlayTheSpire2CollectedItems SlayTheSpire2CollectedItem[]
 }
@@ -127,27 +120,30 @@ model UserProfile {
   id                  String               @id @default(cuid())
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt
-  displayName         String               @default("Traveler")
-  bio                 String               @default("No bio provided.") @db.Text
+  displayName         String?
+  bio                 String?              @db.Text
   avatarUrl           String?
   primaryAvatarId     String?
   primaryAvatarGameId GameId?
+  UserAvatarOverrides UserAvatarOverride[]
   User                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId              String               @unique
-  avatarOverrides     UserAvatarOverride[]
 }
 
 model UserAvatarOverride {
   id            String      @id @default(cuid())
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+  // The game whose profile this override applies to.
   gameId        GameId
   avatarId      String
+  // The game the avatar art itself comes from - may differ from gameId, e.g. a
+  // Clair Obscur avatar used on the Remnant 2 profile.
+  avatarGameId  GameId
   UserProfile   UserProfile @relation(fields: [userProfileId], references: [id], onDelete: Cascade)
   userProfileId String
 
   @@unique([userProfileId, gameId])
-  @@index([userProfileId])
 }
 
 model UserFavoriteGame {
@@ -159,7 +155,6 @@ model UserFavoriteGame {
   userId String
 
   @@id([userId, gameId])
-  @@index([userId])
   @@index([gameId])
 }
 
@@ -172,7 +167,6 @@ model UserFollowedUsers {
   followedUserId String
 
   @@id([userId, followedUserId])
-  @@index([userId])
   @@index([followedUserId])
 }
 
@@ -194,6 +188,6 @@ model UserRole {
   role Role
 
   @@unique([userId, role])
-  @@index([userId])
+  // Reverse lookup only; [userId] is already the unique-index prefix.
   @@index([role])
 }

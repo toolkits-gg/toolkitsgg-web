@@ -4,19 +4,22 @@ import { prisma } from "@/prisma";
 
 const slayTheSpire2DBSeed: GameDBSeed = {
 	seed: async () => {
-		await Promise.all([
-			prisma.slayTheSpire2CollectedItem.deleteMany(),
-			prisma.slayTheSpire2Item.deleteMany(),
-		]);
-
-		await prisma.slayTheSpire2Item.createMany({
-			data: ALL_SLAYTHESPIRE2_ITEMS.map((item) => ({
-				slug: item.id,
-				name: item.name,
-				category: item.category,
-				disabled: false,
-			})),
-		});
+		// Items are NOT deleted: SlayTheSpire2CollectedItem.itemId cascades from
+		// here, so a deleteMany would wipe every user's collection on each reseed.
+		await prisma.$transaction(
+			ALL_SLAYTHESPIRE2_ITEMS.map((item) =>
+				prisma.slayTheSpire2Item.upsert({
+					where: { id: item.id },
+					update: { name: item.name, category: item.category, disabled: false },
+					create: {
+						id: item.id,
+						name: item.name,
+						category: item.category,
+						disabled: false,
+					},
+				}),
+			),
+		);
 	},
 };
 

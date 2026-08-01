@@ -15,7 +15,7 @@ export const titleCase = (str: string): string =>
 		.join(" ");
 
 /**
- * Tiny cookie-header parser for created-builds-side reads. Returns the decoded value of
+ * Tiny cookie-header parser for server-side reads. Returns the decoded value of
  * the named cookie or null if absent. Format: "a=1; b=2; c=3".
  */
 export const parseCookie = (header: string, name: string): string | null => {

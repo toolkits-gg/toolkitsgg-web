@@ -126,7 +126,7 @@ const getOp = async (id: string): Promise<PendingOp | null> => {
  * `lastError` is preserved across transitions only when the new status is "failed";
  * any other transition clears it unless a new error string is explicitly provided.
  * `conflictInfo` is preserved only when the new status is "conflict"; any other
- * transition clears it so a stale created-builds snapshot isn't shown after the op moves on.
+ * transition clears it so a stale server snapshot isn't shown after the op moves on.
  */
 const markStatus = async (
 	id: string,
@@ -150,9 +150,9 @@ const markStatus = async (
 };
 
 /**
- * Transitions an op to "conflict" and stores the created-builds record snapshot.
+ * Transitions an op to "conflict" and stores the server record snapshot.
  * Used by the sync runner when a handler reports `{ status: "conflict", serverRecordJson }`,
- * so the data-sync UI can show the user what the created-builds has and offer a resolution path.
+ * so the data-sync UI can show the user what the server has and offer a resolution path.
  */
 const markConflict = async (
 	id: string,

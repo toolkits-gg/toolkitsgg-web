@@ -4,30 +4,36 @@ import { prisma } from "@/prisma";
 
 const remnant2DBSeed: GameDBSeed = {
 	seed: async () => {
+		// Build-scoped data is disposable, so it is reset wholesale.
 		await Promise.all([
 			prisma.remnant2BuildItem.deleteMany(),
 			prisma.remnant2BuildsOnCollections.deleteMany(),
 			prisma.remnant2BuildTag.deleteMany(),
-			prisma.remnant2BuildCollectionCount.deleteMany(),
-			prisma.remnant2BuildDuplicateCount.deleteMany(),
-			prisma.remnant2BuildLikeCount.deleteMany(),
-			prisma.remnant2BuildViewCount.deleteMany(),
-			prisma.remnant2CollectedItem.deleteMany(),
+			prisma.remnant2BuildFeedMembership.deleteMany(),
+			prisma.remnant2BuildUpvote.deleteMany(),
+			prisma.remnant2BuildView.deleteMany(),
 		]);
 		await Promise.all([
 			prisma.remnant2Build.deleteMany(),
 			prisma.remnant2BuildCollection.deleteMany(),
 		]);
-		await prisma.remnant2Item.deleteMany();
 
-		await prisma.remnant2Item.createMany({
-			data: ALL_REMNANT2_ITEMS.map((item) => ({
-				slug: item.id,
-				name: item.name,
-				category: item.category,
-				disabled: false,
-			})),
-		});
+		// Items are NOT deleted: Remnant2CollectedItem.itemId cascades from here,
+		// so a deleteMany would wipe every user's collection on each reseed.
+		await prisma.$transaction(
+			ALL_REMNANT2_ITEMS.map((item) =>
+				prisma.remnant2Item.upsert({
+					where: { id: item.id },
+					update: { name: item.name, category: item.category, disabled: false },
+					create: {
+						id: item.id,
+						name: item.name,
+						category: item.category,
+						disabled: false,
+					},
+				}),
+			),
+		);
 	},
 };
 

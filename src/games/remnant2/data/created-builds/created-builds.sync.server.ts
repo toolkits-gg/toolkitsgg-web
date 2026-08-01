@@ -23,7 +23,7 @@ export const remnant2BuildSyncHandler: SyncHandler =
 				where: { id: buildId },
 			}) as Promise<HasUpdatedAt | null>,
 		createRecord: async (userId, buildId, payload) => {
-			// Only reached if the created-builds row is gone — resurrect the user's own build.
+			// Only reached if the server row is gone — resurrect the user's own build.
 			const fields = extractBuildWriteFields(
 				payload as Record<string, unknown>,
 			);

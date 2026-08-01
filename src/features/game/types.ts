@@ -112,13 +112,11 @@ export type GameIDBSeed = {
 };
 
 export type GameDBSeed = {
-	/** Seeds game-specific items into PostgreSQL. Uses prisma client internally. */
 	seed: () => Promise<void>;
 };
 
 export type GameData = {
 	collectedItems: GameCollectedItemsData;
-	/** Optional — only games with a build table expose created-builds hooks. */
 	createdBuilds?: GameCreatedBuildsData;
 };
 
@@ -138,16 +136,12 @@ export type GameMetadata = {
 };
 
 export type GamePages = {
+	renderHome?: () => ReactNode;
 	renderCreateBuild: () => ReactNode | undefined;
 	renderViewBuild: () => ReactNode | undefined;
 	renderEditBuild: () => ReactNode | undefined;
-
 	renderItemLookup: () => ReactNode;
 	renderCollectedItems: (args: { mode: CollectedItemsViewMode }) => ReactNode;
-	/**
-	 * Lists a user's created builds for the profile tab. Optional — only games with
-	 * a build table provide it; the route falls back to a placeholder otherwise.
-	 */
 	renderCreatedBuilds?: (args: { mode: ProfileTabViewMode }) => ReactNode;
 };
 

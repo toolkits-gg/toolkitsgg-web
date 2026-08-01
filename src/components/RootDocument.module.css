@@ -13,10 +13,10 @@
 }
 
 .main {
-	background-color: var(--mantine-color-base-5);
+	composes: ambientBackground from "./AmbientBackground.module.css";
 	display: flex;
 	flex-direction: column;
-	min-height: 0;
+	min-height: 100dvh;
 }
 
 .footer {

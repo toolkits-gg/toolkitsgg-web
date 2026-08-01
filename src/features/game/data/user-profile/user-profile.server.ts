@@ -37,11 +37,12 @@ export const updateAvatar = async (data: UpdateAvatarData) => {
 					gameId: data.targetGameId,
 				},
 			},
-			update: { avatarId: data.avatarId },
+			update: { avatarId: data.avatarId, avatarGameId: data.avatarGameId },
 			create: {
 				userProfileId: profile.id,
 				gameId: data.targetGameId,
 				avatarId: data.avatarId,
+				avatarGameId: data.avatarGameId,
 			},
 		});
 	} else {
@@ -104,7 +105,7 @@ export const getPublicUserProfile = (
 		where: { id: userId },
 		include: {
 			UserProfile: {
-				include: { avatarOverrides: true },
+				include: { UserAvatarOverrides: true },
 			},
 		},
 	});
@@ -117,7 +118,7 @@ export const getUserProfile = async (): Promise<UserWithProfile> => {
 		where: { id: userId },
 		include: {
 			UserProfile: {
-				include: { avatarOverrides: true },
+				include: { UserAvatarOverrides: true },
 			},
 		},
 	});

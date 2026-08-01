@@ -1,5 +1,5 @@
-// Favorite games: client-safe input validation plus the TanStack created-builds-fn
-// wrappers. Each wrapper delegates to ./favorite-games.created-builds.ts; those imports
+// Favorite games: client-safe input validation plus the TanStack server-fn
+// wrappers. Each wrapper delegates to ./favorite-games.server.ts; those imports
 // are referenced only inside handler bodies, so the compiler strips them (and
 // prisma) from the client bundle.
 

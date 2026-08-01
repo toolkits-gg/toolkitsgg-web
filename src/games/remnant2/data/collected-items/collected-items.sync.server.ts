@@ -1,6 +1,6 @@
 // Offline-sync handler for the remnant2CollectedItem entity (presence toggle).
-// Split out from collected-items.created-builds.ts so the sync-replay path lives apart
-// from the direct CRUD data access. The `.created-builds.ts` suffix opts this into
+// Split out from collected-items.server.ts so the sync-replay path lives apart
+// from the direct CRUD data access. The `.server.ts` suffix opts this into
 // Start's import protection, keeping prisma out of the client bundle. Consumed
 // only by the sync handler game-registry.
 

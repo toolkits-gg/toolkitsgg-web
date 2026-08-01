@@ -1,7 +1,11 @@
 import { Box, Text, Title } from "@mantine/core";
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, notFound, Outlet } from "@tanstack/react-router";
+import { getValidatedGameId } from "#/registry/game-public-registry.tsx";
 
 const Route = createFileRoute("/$gameId")({
+	beforeLoad: ({ params }) => {
+		if (!getValidatedGameId(params.gameId)) throw notFound();
+	},
 	head: ({ params }) => ({
 		links: [
 			{

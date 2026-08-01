@@ -4,19 +4,22 @@ import { prisma } from "@/prisma";
 
 const clairObscurDBSeed: GameDBSeed = {
 	seed: async () => {
-		await Promise.all([
-			prisma.clairObscurCollectedItem.deleteMany(),
-			prisma.clairObscurItem.deleteMany(),
-		]);
-
-		await prisma.clairObscurItem.createMany({
-			data: ALL_CLAIROBSCUR_ITEMS.map((item) => ({
-				slug: item.id,
-				name: item.name,
-				category: item.category,
-				disabled: false,
-			})),
-		});
+		// Items are NOT deleted: ClairObscurCollectedItem.itemId cascades from here,
+		// so a deleteMany would wipe every user's collection on each reseed.
+		await prisma.$transaction(
+			ALL_CLAIROBSCUR_ITEMS.map((item) =>
+				prisma.clairObscurItem.upsert({
+					where: { id: item.id },
+					update: { name: item.name, category: item.category, disabled: false },
+					create: {
+						id: item.id,
+						name: item.name,
+						category: item.category,
+						disabled: false,
+					},
+				}),
+			),
+		);
 	},
 };
 

@@ -12,7 +12,7 @@ import { createRootRouteWithContext } from "@tanstack/react-router";
 import { ComingSoonDocument } from "#/components/ComingSoonDocument.tsx";
 import { MaintenanceModeDocument } from "#/components/MaintenanceModeDocument.tsx";
 import { RootDocument } from "#/components/RootDocument.tsx";
-import { OG_IMAGE, SERVER_GAME_INPUTS_QUERY_KEY } from "#/constants";
+import { OG_IMAGE, SERVER_RESOLVED_GAME_ID_SOURCES } from "#/constants";
 import { clientEnv } from "#/env/client-env.ts";
 import { getServerResolvedGameInputsServerFn } from "#/features/game/active-game";
 import { getValidatedGameId } from "#/registry/game-public-registry.tsx";
@@ -28,11 +28,11 @@ const url = clientEnv.VITE_APP_URL;
 
 const Route = createRootRouteWithContext<MyRouterContext>()({
 	beforeLoad: async ({ context, location }) => {
-		// Cache the created-builds-fn result for the lifetime of the session - the Host
+		// Cache the server-fn result for the lifetime of the session - the Host
 		// header and the active-game cookie don't change without a hard reload or setActiveGameCookie
 		const { subdomainGameId, cookieGameId } =
 			await context.queryClient.ensureQueryData({
-				queryKey: SERVER_GAME_INPUTS_QUERY_KEY,
+				queryKey: SERVER_RESOLVED_GAME_ID_SOURCES,
 				queryFn: () => getServerResolvedGameInputsServerFn(),
 				staleTime: Number.POSITIVE_INFINITY,
 				gcTime: Number.POSITIVE_INFINITY,

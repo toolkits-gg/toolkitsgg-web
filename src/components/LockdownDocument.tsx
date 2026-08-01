@@ -51,9 +51,11 @@ export const LockdownDocument = ({
 		<html lang="en" {...mantineHtmlProps}>
 			<head>
 				<ColorSchemeScript forceColorScheme="dark" />
-				<HeadContent />
+				{/* Must precede `HeadContent`: the root route also emits a <title>,
+				    and the browser honors whichever comes first. */}
 				<title>{`${clientEnv.VITE_APP_NAME} — ${documentTitle}`}</title>
 				<meta name="robots" content="noindex" />
+				<HeadContent />
 			</head>
 			<body className={classes.body}>
 				<MantineProvider

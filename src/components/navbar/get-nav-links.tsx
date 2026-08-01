@@ -1,6 +1,8 @@
 import type { FC } from "react";
 import { BsCollection } from "react-icons/bs";
 import { GiCapeArmor, GiLockedChest } from "react-icons/gi";
+import { LuHouse } from "react-icons/lu";
+import { getGameMetadata } from "#/registry/game-public-registry.tsx";
 import type { GameId } from "@/prisma";
 
 type NavLinkSubLink = {
@@ -51,6 +53,18 @@ const buildToolkitLinks = (onGettingStartedWizard?: () => void): NavLink[] => [
 	},
 ];
 
+const buildGameHomeNavLink = (gameId: GameId): NavLink => ({
+	label: getGameMetadata(gameId)?.label ?? gameId,
+	icon: LuHouse,
+	initiallyOpened: true,
+	links: [
+		{
+			label: "Game Home",
+			link: `/${gameId}`,
+		},
+	],
+});
+
 const buildItemsNavLink = (gameId: GameId): NavLink => ({
 	label: "Items",
 	icon: BsCollection,
@@ -92,6 +106,7 @@ const getNavLinks = ({
 }: GetNavLinksParams): NavLink[] => {
 	const navLinks: NavLink[] = [];
 	if (gameId && gameId !== "none") {
+		navLinks.push(buildGameHomeNavLink(gameId));
 		navLinks.push(buildItemsNavLink(gameId));
 		navLinks.push(buildBuildsNavLink(gameId));
 	}

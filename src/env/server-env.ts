@@ -10,5 +10,5 @@ const serverEnvSchema = z.object({
 	RESEND_KEY: z.string(),
 });
 
-// Validate created-builds environment
+// Validate server environment
 export const serverEnv = serverEnvSchema.parse(process.env);

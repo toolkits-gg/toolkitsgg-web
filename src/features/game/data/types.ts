@@ -34,9 +34,9 @@ export type CreatedBuildSummary = {
 };
 
 /**
- * Full scalar build record returned by the byId read. Game-specific relations
+ * Full build record returned by the byId read. Game-specific relations
  * (e.g. Remnant2BuildItem[]) are intentionally excluded from this shared type;
- * each game can widen its own created-builds-fn return when the build/edit UI needs them.
+ * each game can widen its own server-fn return when the build/edit UI needs them.
  */
 export type CreatedBuildRecord = CreatedBuildSummary & {
 	description?: string | null;

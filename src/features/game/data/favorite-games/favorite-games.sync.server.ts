@@ -1,6 +1,6 @@
 // Offline-sync handler for the userFavoriteGame entity (a presence toggle).
-// Split out from favorite-games.created-builds.ts so the sync-replay path lives apart
-// from the direct CRUD data access. The `.created-builds.ts` suffix opts this into
+// Split out from favorite-games.server.ts so the sync-replay path lives apart
+// from the direct CRUD data access. The `.server.ts` suffix opts this into
 // Start's import protection, keeping prisma out of the client bundle. Consumed
 // only by the sync handler game-registry.
 
@@ -10,7 +10,7 @@ import { REGISTERED_GAME_IDS } from "#/registry/game-public-registry.tsx";
 import { type GameId, prisma } from "@/prisma";
 
 // Self-contained guard (intentionally duplicated from favorite-games.ts) so this
-// created-builds-only module never imports back from its client-safe sibling.
+// server-only module never imports back from its client-safe sibling.
 const GAME_ID_SET = new Set<string>(REGISTERED_GAME_IDS);
 const isGameId = (value: string): value is GameId => GAME_ID_SET.has(value);
 

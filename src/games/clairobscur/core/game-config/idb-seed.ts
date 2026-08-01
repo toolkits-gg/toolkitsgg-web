@@ -11,7 +11,7 @@ const clairObscurIDBSeed: GameIDBSeed = {
 		if (existingCount === 0) {
 			await idb.clairObscurItem.createMany({
 				data: ITEMS.collectable.map((item) => ({
-					slug: item.id,
+					id: item.id,
 					name: item.name,
 					category: item.category,
 					disabled: false,
