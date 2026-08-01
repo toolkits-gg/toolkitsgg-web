@@ -9,6 +9,7 @@ import "@fontsource/geist/700.css";
 import { Box, Text, Title } from "@mantine/core";
 import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext } from "@tanstack/react-router";
+import { ComingSoonDocument } from "#/components/ComingSoonDocument.tsx";
 import { MaintenanceModeDocument } from "#/components/MaintenanceModeDocument.tsx";
 import { RootDocument } from "#/components/RootDocument.tsx";
 import { OG_IMAGE, SERVER_GAME_INPUTS_QUERY_KEY } from "#/constants";
@@ -90,9 +91,13 @@ const Route = createRootRouteWithContext<MyRouterContext>()({
 			},
 		],
 	}),
+	// Maintenance wins over coming soon: if the site is down while still
+	// pre-launch, the outage is the more accurate message.
 	shellComponent: clientEnv.VITE_ENABLE_MAINTENANCE_MODE
 		? MaintenanceModeDocument
-		: RootDocument,
+		: clientEnv.VITE_SHOW_COMING_SOON
+			? ComingSoonDocument
+			: RootDocument,
 	notFoundComponent: () => {
 		return (
 			<Box p="md">

@@ -148,6 +148,13 @@
 .footer {
 	position: relative;
 	z-index: 1;
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
 	font-size: var(--mantine-font-size-xs);
 	color: var(--mantine-color-mutedFg-5);
+}
+
+.footerIcon {
+	display: inline-flex;
 }
