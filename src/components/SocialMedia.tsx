@@ -2,7 +2,7 @@ import { ActionIcon, Group, Tooltip } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { LuGithub } from "react-icons/lu";
 import { SiDiscord } from "react-icons/si";
-import { DISCORD_URL, GITHUB_URL } from "#/constants.ts";
+import { CODEBERG_URL, DISCORD_URL } from "#/constants.ts";
 
 const SocialMedia = () => {
 	return (
@@ -25,7 +25,7 @@ const SocialMedia = () => {
 			<Tooltip label="View on GitHub">
 				<ActionIcon
 					component={Link}
-					href={GITHUB_URL}
+					href={CODEBERG_URL}
 					target="_blank"
 					rel="noopener noreferrer"
 					variant="subtle"

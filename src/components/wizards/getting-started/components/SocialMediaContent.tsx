@@ -1,7 +1,7 @@
 import { Button, Stack } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { SiDiscord, SiGithub } from "react-icons/si";
-import { DISCORD_URL, GITHUB_URL } from "#/constants.ts";
+import { CODEBERG_URL, DISCORD_URL } from "#/constants.ts";
 
 const SocialMediaContent = () => {
 	return (
@@ -21,7 +21,7 @@ const SocialMediaContent = () => {
 
 			<Button
 				component={Link}
-				href={GITHUB_URL}
+				href={CODEBERG_URL}
 				target="_blank"
 				rel="noopener noreferrer"
 				leftSection={<SiGithub size={18} />}

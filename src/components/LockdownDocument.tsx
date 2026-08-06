@@ -10,7 +10,7 @@ import type { ReactNode } from "react";
 import { LuGithub } from "react-icons/lu";
 import { SiDiscord } from "react-icons/si";
 import { AnimatedLogo } from "#/components/AppLogo.tsx";
-import { DISCORD_URL, GITHUB_URL } from "#/constants.ts";
+import { CODEBERG_URL, DISCORD_URL } from "#/constants.ts";
 import { clientEnv } from "#/env/client-env.ts";
 import { defaultTheme } from "#/features/theme/themes/default-theme.ts";
 import classes from "./LockdownDocument.module.css";
@@ -98,7 +98,7 @@ export const LockdownDocument = ({
 								</a>
 								<a
 									className={classes.link}
-									href={GITHUB_URL}
+									href={CODEBERG_URL}
 									target="_blank"
 									rel="noopener noreferrer"
 								>

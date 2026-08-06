@@ -2,7 +2,7 @@ import { clientEnv } from "#/env/client-env.ts";
 import type { AppLogoSize } from "#/types.ts";
 
 const DISCORD_URL = "https://discord.gg/VQF23tPKyK";
-const GITHUB_URL = "https://github.com/toolkits-gg";
+const CODEBERG_URL = "https://codeberg.org/toolkitsgg";
 const CHANGELOG_URL =
 	"https://github.com/joshpayette/toolkits.gg/blob/main/CHANGELOG.md";
 const PATREON_URL = "https://www.patreon.com/JoshPayette";
@@ -22,9 +22,9 @@ export const DEFAULT_APP_LOGO_SIZE: AppLogoSize = 36;
 
 export {
 	CHANGELOG_URL,
+	CODEBERG_URL,
 	DISCORD_URL,
 	FALLBACK_DISPLAY_NAME,
-	GITHUB_URL,
 	KOFI_URL,
 	OG_IMAGE,
 	PATREON_URL,

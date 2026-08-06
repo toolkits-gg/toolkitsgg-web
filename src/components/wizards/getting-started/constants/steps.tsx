@@ -1,7 +1,7 @@
 import { Text } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { SupportButtons } from "#/components/SupportButtons";
-import { DISCORD_URL, GITHUB_URL } from "#/constants.ts";
+import { CODEBERG_URL, DISCORD_URL } from "#/constants.ts";
 import type { WizardStep } from "#/features/wizard/types";
 import { SocialMediaContent } from "../components/SocialMediaContent";
 
@@ -59,7 +59,7 @@ const GETTING_STARTED_STEPS: WizardStep[] = [
 					project is also totally open-source and ad-free on{" "}
 					<Text
 						component={Link}
-						href={GITHUB_URL}
+						href={CODEBERG_URL}
 						target="_blank"
 						rel="noopener noreferrer"
 						style={{ color: "inherit", textDecoration: "underline" }}
