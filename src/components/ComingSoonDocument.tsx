@@ -19,7 +19,7 @@ export const ComingSoonDocument = () => {
 					collections, tooling, and so much more.
 				</>
 			}
-			linksIntro="Want to know the moment it goes live?"
+			linksIntro="Want to get updates or contribute to the project?"
 			footerIcon={<LuRocket size={12} />}
 			footerLabel="coming soon"
 		/>
