@@ -12,13 +12,7 @@ export default defineConfig({
 		tsconfigPaths: true,
 	},
 	plugins: [
-		tanstackStart({
-			server: {
-				build: {
-					staticNodeEnv: false, // Keep NODE_ENV dynamic at runtime
-				},
-			},
-		}),
+		tanstackStart(),
 		nitro(),
 		// react's vite plugin must come after start's vite plugin
 		viteReact(),
