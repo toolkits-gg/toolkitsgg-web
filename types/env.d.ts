@@ -6,10 +6,6 @@ interface ImportMetaEnv {
 	readonly VITE_APP_URL: string;
 	readonly VITE_APP_NOREPLY_EMAIL: string;
 	readonly VITE_CLOUDFRONT_URL: string;
-	readonly VITE_LOCAL_ADMIN_EMAIL: string;
-	readonly VITE_LOCAL_ADMIN_PASSWORD: string;
-	readonly VITE_LOCAL_USER_EMAIL: string;
-	readonly VITE_LOCAL_USER_PASSWORD: string;
 }
 
 // biome-ignore lint/correctness/noUnusedVariables: <here for type safety and clarity>
@@ -28,6 +24,12 @@ declare global {
 			readonly DISCORD_CLIENT_ID: string;
 			readonly DISCORD_CLIENT_SECRET: string;
 			readonly RESEND_KEY: string;
+			// Seed-only credentials, loaded from `.env.local` by `prisma/seed.ts`.
+			// Never set in production/preview, so they are optional.
+			readonly LOCAL_ADMIN_EMAIL?: string;
+			readonly LOCAL_ADMIN_PASSWORD?: string;
+			readonly LOCAL_USER_EMAIL?: string;
+			readonly LOCAL_USER_PASSWORD?: string;
 		}
 	}
 }

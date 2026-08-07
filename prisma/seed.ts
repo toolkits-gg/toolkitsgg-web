@@ -6,17 +6,25 @@ import dotenv from 'dotenv'
 
 dotenv.config({ path: '.env.local' });
 
+const requireLocalEnv = (key: string) => {
+	const value = process.env[key];
+	if (!value) {
+		throw new Error(`DB Seed: missing required variable ${key} in .env.local`);
+	}
+	return value;
+};
+
 const seededUsers = [
 	{
 		username: "admin",
-		email: process.env.VITE_LOCAL_ADMIN_EMAIL,
-		password: process.env.VITE_LOCAL_ADMIN_PASSWORD,
+		email: requireLocalEnv("LOCAL_ADMIN_EMAIL"),
+		password: requireLocalEnv("LOCAL_ADMIN_PASSWORD"),
 		emailVerified: true,
 	},
 	{
 		username: "user",
-		email: process.env.VITE_LOCAL_USER_EMAIL,
-		password: process.env.VITE_LOCAL_USER_PASSWORD,
+		email: requireLocalEnv("LOCAL_USER_EMAIL"),
+		password: requireLocalEnv("LOCAL_USER_PASSWORD"),
 		emailVerified: true
 	}
 ];
