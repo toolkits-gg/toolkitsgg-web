@@ -1,5 +1,5 @@
 import { clientEnv } from "#/env/client-env.ts";
-import { getGameAvatars } from "#/game-registry/public-registry.ts";;
+import { getGameAvatars } from "#/game-registry/public-registry.ts";
 import type { GameId } from "@/prisma";
 
 type ResolveAvatarParams = {
