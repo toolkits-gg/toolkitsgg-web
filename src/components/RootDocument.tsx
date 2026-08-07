@@ -9,19 +9,27 @@ import {
 	Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { TanStackDevtools } from "@tanstack/react-devtools";
 import { ClientOnly, HeadContent, Scripts } from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import type { PropsWithChildren } from "react";
+import { lazy, type PropsWithChildren, Suspense } from "react";
 import { DefaultLogo } from "#/components/AppLogo.tsx";
 import { AppProviders } from "#/components/AppProviders.tsx";
+import { GameSwitcher } from "#/components/GameSwitcher.tsx";
 import { AppNavbar } from "#/components/navbar/AppNavbar.tsx";
 import { SocialMedia } from "#/components/SocialMedia.tsx";
 import { GettingStartedWizard } from "#/components/wizards/getting-started/components/GettingStartedWizard.tsx";
 import { useGettingStartedWizard } from "#/components/wizards/getting-started/hooks/use-getting-started-wizard.ts";
 import { clientEnv } from "#/env/client-env.ts";
-import { GameSwitcher } from "#/components/GameSwitcher.tsx";
 import classes from "./RootDocument.module.css";
+
+// The devtools pull in client-only browser APIs at module scope.
+// Keep them out of the production build entirely.
+const Devtools = import.meta.env.DEV
+	? lazy(() =>
+			import("#/components/Devtools.tsx").then((m) => ({
+				default: m.Devtools,
+			})),
+		)
+	: () => null;
 
 export const RootDocument = ({ children }: PropsWithChildren) => {
 	const [navbarOpened, { toggle: toggleNavbar }] = useDisclosure();
@@ -111,17 +119,11 @@ export const RootDocument = ({ children }: PropsWithChildren) => {
 					</AppShell>
 				</AppProviders>
 
-				<TanStackDevtools
-					config={{
-						position: "bottom-right",
-					}}
-					plugins={[
-						{
-							name: "Tanstack Router",
-							render: <TanStackRouterDevtoolsPanel />,
-						},
-					]}
-				/>
+				<ClientOnly>
+					<Suspense fallback={null}>
+						<Devtools />
+					</Suspense>
+				</ClientOnly>
 				<Scripts />
 			</body>
 		</html>

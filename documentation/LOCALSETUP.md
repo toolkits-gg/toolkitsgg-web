@@ -109,11 +109,14 @@ Then open `.env.local` in your editor and fill in the values below.
 | `VITE_APP_NAME` | Shown in page titles | `"Toolkits.gg"` |
 | `VITE_APP_DESCRIPTION` | Site description used in HTML metadata | Leave the default from `.env.local.example` |
 | `VITE_APP_NOREPLY_EMAIL` | From address for Resend auth emails | Leave the default from `.env.local.example` |
-| `VITE_LOCAL_ADMIN_EMAIL` / `VITE_LOCAL_ADMIN_PASSWORD` | Credentials for the seeded local admin account (`pnpm db:seed`) | Leave the defaults from `.env.local.example` |
-| `VITE_LOCAL_USER_EMAIL` / `VITE_LOCAL_USER_PASSWORD` | Credentials for the seeded local user account (`pnpm db:seed`) | Leave the defaults from `.env.local.example` |
+| `LOCAL_ADMIN_EMAIL` / `LOCAL_ADMIN_PASSWORD` | Credentials for the seeded local admin account (`pnpm db:seed`) | Leave the defaults from `.env.local.example` |
+| `LOCAL_USER_EMAIL` / `LOCAL_USER_PASSWORD` | Credentials for the seeded local user account (`pnpm db:seed`) | Leave the defaults from `.env.local.example` |
 
 > [!NOTE]
-> Env validation treats every variable in this required table as mandatory — the app throws at startup if any is missing. The `VITE_APP_*` and `VITE_LOCAL_*` rows above ship with working defaults in `.env.local.example`, so copying the template is enough; you only need to fill in `BETTER_AUTH_SECRET` yourself.
+> Env validation treats every variable in this required table as mandatory — the app throws at startup if any is missing. The `VITE_APP_*` rows above ship with working defaults in `.env.local.example`, so copying the template is enough; you only need to fill in `BETTER_AUTH_SECRET` yourself.
+
+> [!IMPORTANT]
+> The `LOCAL_*` variables are read only by `prisma/seed.ts`.
 
 **Optional — leave blank if you don't need them:**
 
