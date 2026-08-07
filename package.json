@@ -7,7 +7,7 @@
     "@/prisma": "./prisma/client"
   },
   "engines": {
-    "node": ">=26",
+    "node": "24.x",
     "pnpm": ">=11"
   },
   "scripts": {
