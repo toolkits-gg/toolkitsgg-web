@@ -6,10 +6,10 @@ const clientEnvSchema = z.object({
 	VITE_APP_URL: z.url(),
 	VITE_APP_NOREPLY_EMAIL: z.email(),
 	VITE_CLOUDFRONT_URL: z.url(),
-	VITE_LOCAL_ADMIN_EMAIL: z.email(),
-	VITE_LOCAL_ADMIN_PASSWORD: z.string(),
-	VITE_LOCAL_USER_EMAIL: z.email(),
-	VITE_LOCAL_USER_PASSWORD: z.string(),
+	VITE_LOCAL_ADMIN_EMAIL: z.email().optional(),
+	VITE_LOCAL_ADMIN_PASSWORD: z.string().optional(),
+	VITE_LOCAL_USER_EMAIL: z.email().optional(),
+	VITE_LOCAL_USER_PASSWORD: z.string().optional(),
 	// `import.meta.env` / `process.env` values are always strings, so these
 	// flags have to be coerced rather than validated as real booleans.
 	VITE_ENABLE_MAINTENANCE_MODE: z.stringbool(),
