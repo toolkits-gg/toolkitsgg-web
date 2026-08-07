@@ -552,7 +552,7 @@ const WEAPONS: Remnant2WeaponItem[] = [
 		id: "g3esv1",
 		dlc: "BASE",
 		description: [
-			"Fires tooth-like flechettes. When weapon reticle is fully compressed, flechettes apply 200 → 600 BLEED damage over 10s.",
+			"Fires tooth-like flechettes. When weapon reticle is fully compressed, flechettes apply 200 -> 600 BLEED damage over 10s.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Merciless`,
 		location: { world: "Yaesha", dungeon: ["Ravager's Lair"] },
@@ -951,7 +951,7 @@ const WEAPONS: Remnant2WeaponItem[] = [
 		imageUrl: "items/weapons/sparkfireshotgun.png",
 		id: "3r9jm7",
 		description: [
-			"Fires incendiary shells that apply BURNING which deals 30 → 90 FIRE damage over 3 seconds.",
+			"Fires incendiary shells that apply BURNING which deals 30 -> 90 FIRE damage over 3 seconds.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Sparkfire_Shotgun`,
 		location: { world: "Losomn", dungeon: ["Derelict Lighthouse"] },
@@ -2354,7 +2354,7 @@ const WEAPONS: Remnant2WeaponItem[] = [
 		id: "8u8j4G",
 		dlc: "BASE",
 		description: [
-			"Semi-automatic laser weapon. Weakspot hits and kills create a Nano-bot for 8s that seeks enemies within 20m and repeatedly attacks dealing 6 → 18 ACID damage per hit. Max 5 Nano-bots.",
+			"Semi-automatic laser weapon. Weakspot hits and kills create a Nano-bot for 8s that seeks enemies within 20m and repeatedly attacks dealing 6 -> 18 ACID damage per hit. Max 5 Nano-bots.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Corrupted_Nebula`,
 		location: { world: "Ward 13", dungeon: "Vendor" },
@@ -2536,7 +2536,7 @@ const WEAPONS: Remnant2WeaponItem[] = [
 		id: "797iqq",
 		dlc: "BASE",
 		description: [
-			"Spews flames that apply BURNING which deals 300 → 900 FIRE damage over 10 seconds.",
+			"Spews flames that apply BURNING which deals 300 -> 900 FIRE damage over 10 seconds.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Hellfire`,
 		location: { world: "Root Earth", dungeon: ["Ashen Wasteland"] },

@@ -1,14 +1,32 @@
-import { allGameDBSeeds } from "#/features/game/registry/game-db-seed-registry";
+import { allGameDBSeeds } from "#/game-registry/game-db-seed-registry";
 
 import { auth } from "#/integrations/better-auth/auth";
 import { prisma } from "./client";
+import dotenv from 'dotenv'
+
+dotenv.config({ path: '.env.local' });
+
+const requireLocalEnv = (key: string) => {
+	const value = process.env[key];
+	if (!value) {
+		throw new Error(`DB Seed: missing required variable ${key} in .env.local`);
+	}
+	return value;
+};
 
 const seededUsers = [
 	{
 		username: "admin",
-		email: "yo@toolkits.gg",
+		email: requireLocalEnv("LOCAL_ADMIN_EMAIL"),
+		password: requireLocalEnv("LOCAL_ADMIN_PASSWORD"),
 		emailVerified: true,
 	},
+	{
+		username: "user",
+		email: requireLocalEnv("LOCAL_USER_EMAIL"),
+		password: requireLocalEnv("LOCAL_USER_PASSWORD"),
+		emailVerified: true
+	}
 ];
 
 const seededUserProfiles = [
@@ -17,6 +35,11 @@ const seededUserProfiles = [
 		bio: "Toolkit Admin bio here",
 		avatarUrl: undefined,
 	},
+	{
+		displayName: "Toolkit User",
+		bio: "Toolkit User bio here",
+		avatarUrl: undefined,
+	}
 ];
 
 const seed = async () => {
@@ -36,14 +59,12 @@ const seed = async () => {
 		console.warn("DB Seed: Skipping cleanup (fresh database)");
 	}
 
-	const seededLocalPassword = "useruser!";
-
 	await Promise.all(
-		seededUsers.map(async (user, index) => {
+		seededUsers.filter(user => user.email && user.password).map(async (user, index) => {
 			const result = await auth.api.signUpEmail({
 				body: {
-					email: user.email,
-					password: seededLocalPassword,
+					email: user.email as string, // filtered prior
+					password: user.password as string, // filtered prior
 					name: user.username,
 					username: user.username,
 				},
@@ -80,4 +101,4 @@ const seed = async () => {
 	console.log(`DB Seed: Finished (${t1 - t0}ms)`);
 };
 
-seed();
+seed().then(() => console.info('Seed successfully ran.'));

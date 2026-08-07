@@ -1,15 +1,8 @@
-import { Stack, Text, Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
+import { ProfileTabPlaceholder } from "#/features/user/ProfileTabPlaceholder.tsx";
 
-export const Route = createFileRoute("/profile/collection-stats")({
-	component: CollectionStats,
+const Route = createFileRoute("/profile/collection-stats")({
+	component: () => <ProfileTabPlaceholder title="Collection Stats" />,
 });
 
-function CollectionStats() {
-	return (
-		<Stack gap="sm">
-			<Title order={3}>Collection Stats</Title>
-			<Text c="dimmed">Content coming soon.</Text>
-		</Stack>
-	);
-}
+export { Route };

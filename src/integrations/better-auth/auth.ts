@@ -1,11 +1,15 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { nextCookies } from "better-auth/next-js";
-import { serverEnv } from "#/config/env";
-import EmailPasswordReset from "#/emails/auth/email-password-reset";
-import EmailVerification from "#/emails/auth/email-verification";
+import { EmailPasswordReset } from "#/emails/auth/email-password-reset.tsx";
+import { EmailVerification } from "#/emails/auth/email-verification.tsx";
+import { clientEnv } from "#/env/client-env.ts";
+import { serverEnv } from "#/env/server-env.ts";
+import { getNoReplyFrom } from "#/features/email/utils.ts";
 import { resend } from "#/integrations/resend/resend";
 import { prisma } from "@/prisma";
+
+const FROM = getNoReplyFrom();
 
 const auth = betterAuth({
 	database: prismaAdapter(prisma, {
@@ -14,14 +18,14 @@ const auth = betterAuth({
 	secret: serverEnv.BETTER_AUTH_SECRET,
 	baseURL:
 		serverEnv.BETTER_AUTH_URL ||
-		import.meta.env.VITE_APP_URL ||
+		clientEnv.VITE_APP_URL ||
 		"http://localhost:3000",
 	emailAndPassword: {
 		enabled: true,
 		requireEmailVerification: true,
 		async sendResetPassword({ user, url }) {
 			await resend.emails.send({
-				from: `Toolkits.gg <noreply@app.toolkits.gg>`,
+				from: FROM,
 				to: user.email,
 				subject: "Reset your password",
 				react: EmailPasswordReset({
@@ -36,7 +40,7 @@ const auth = betterAuth({
 		autoSignInAfterVerification: true,
 		async sendVerificationEmail({ user, url }) {
 			await resend.emails.send({
-				from: `Toolkits.gg <noreply@app.toolkits.gg>`,
+				from: FROM,
 				to: user.email,
 				subject: "Verify your email address",
 				react: EmailVerification({
@@ -52,6 +56,18 @@ const auth = betterAuth({
 		cookieCache: {
 			enabled: true,
 			maxAge: 5 * 60, // 5 minutes
+		},
+	},
+	rateLimit: {
+		window: 60, // default window, in seconds
+		max: 100, // default requests per window per IP
+		storage: "memory",
+		customRules: {
+			"/sign-in/email": { window: 60, max: 10 },
+			"/sign-up/email": { window: 60, max: 5 },
+			"/forget-password": { window: 60, max: 3 },
+			"/reset-password": { window: 60, max: 5 },
+			"/send-verification-email": { window: 60, max: 3 },
 		},
 	},
 	user: {

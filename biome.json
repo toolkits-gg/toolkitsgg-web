@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.4.5/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
 	"vcs": {
 		"enabled": false,
 		"clientKind": "git",
@@ -26,6 +26,9 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
+			"complexity": {
+				"useArrowFunction": "error"
+			},
 			"correctness": {
 				"noUnusedVariables": {
 					"level": "error",
@@ -33,6 +36,10 @@
 						"ignoreRestSiblings": true
 					}
 				}
+			},
+			"style": {
+				"useExportsLast": "error",
+				"noDefaultExport": "error"
 			}
 		}
 	},

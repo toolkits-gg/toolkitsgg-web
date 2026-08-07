@@ -39,7 +39,6 @@ const WizardContent = ({
 					left: "50%",
 					transform: "translate(-50%, -50%)",
 				};
-			case "bottom":
 			default:
 				return {
 					bottom: 24,
@@ -60,7 +59,7 @@ const WizardContent = ({
 			style={{
 				position: "fixed",
 				...getPositionStyles(),
-				zIndex: 1003,
+				zIndex: "calc(var(--mantine-z-index-overlay) + 1)",
 				maxWidth: "600px",
 				width: "calc(100% - 32px)",
 			}}

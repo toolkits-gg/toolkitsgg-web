@@ -1,7 +1,8 @@
 import { createAuthClient } from "better-auth/react";
+import { clientEnv } from "#/env/client-env.ts";
 
 const authClient = createAuthClient({
-	baseURL: import.meta.env.VITE_APP_URL || "http://localhost:3000",
+	baseURL: clientEnv.VITE_APP_URL || "http://localhost:3000",
 });
 
 // noinspection JSUnusedGlobalSymbols

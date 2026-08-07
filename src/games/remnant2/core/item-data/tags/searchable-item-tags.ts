@@ -7,7 +7,7 @@
  * items if the user searched for `critical chance` only. These tags allow
  * both to be found under the `Critical Chance` tag when searching.
  */
-const SEARCHABLE_ITEM_TAGS = [
+export const SEARCHABLE_ITEM_TAGS: string[] = [
 	"Ammo Reserves", // only need plural due to wording in game
 	"All Damage",
 	"Armor Increase",
@@ -74,6 +74,4 @@ const SEARCHABLE_ITEM_TAGS = [
 	"Weakspot Damage",
 	"Weakspot Hit",
 	"Weapon Damage",
-] as const satisfies string[];
-
-export { SEARCHABLE_ITEM_TAGS };
+]

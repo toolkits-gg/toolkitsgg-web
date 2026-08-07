@@ -1,4 +1,4 @@
-import type { GameIDBSeed } from "#/features/game/core/types";
+import type { GameIDBSeed } from "#/features/game/types.ts";
 import { ITEMS } from "#/games/clairobscur/core/game-config/items";
 import { getIDBClient } from "#/integrations/prisma-idb/idb-client";
 
@@ -11,7 +11,7 @@ const clairObscurIDBSeed: GameIDBSeed = {
 		if (existingCount === 0) {
 			await idb.clairObscurItem.createMany({
 				data: ITEMS.collectable.map((item) => ({
-					slug: item.id,
+					id: item.id,
 					name: item.name,
 					category: item.category,
 					disabled: false,

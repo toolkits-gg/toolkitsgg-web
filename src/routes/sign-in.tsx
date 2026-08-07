@@ -15,11 +15,24 @@ import { useForm } from "@tanstack/react-form";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiDiscord } from "react-icons/si";
+import { z } from "zod";
 import { authClient } from "#/integrations/better-auth/auth-client";
 
-export const Route = createFileRoute("/sign-in")({ component: SignInPage });
+const emailSchema = z.email("Enter a valid email").min(1, "Email is required");
 
-function SignInPage() {
+const passwordSchema = z.string().min(1, "Password is required");
+
+const fieldError = (errors: unknown[]): string | undefined => {
+	const first = errors[0];
+	if (!first) return undefined;
+	if (typeof first === "string") return first;
+	if (typeof first === "object" && "message" in first) {
+		return String((first as { message: unknown }).message);
+	}
+	return String(first);
+};
+
+const SignInPage = () => {
 	const navigate = useNavigate();
 	const [serverError, setServerError] = useState<string | null>(null);
 
@@ -66,31 +79,29 @@ function SignInPage() {
 						onSubmit={(e) => {
 							e.preventDefault();
 							e.stopPropagation();
-							form.handleSubmit();
+							void form.handleSubmit();
 						}}
 					>
 						<Stack>
 							<form.Field
 								name="email"
 								validators={{
-									onBlur: ({ value }) => {
-										if (!value) return "Email is required";
-										if (!value.includes("@")) return "Enter a valid email";
-										return undefined;
-									},
+									onBlur: emailSchema,
+									onSubmit: emailSchema,
 								}}
 							>
 								{(field) => (
 									<TextInput
 										label="Email"
 										placeholder="you@example.com"
+										type="email"
+										autoComplete="email"
 										value={field.state.value}
 										onChange={(e) => field.handleChange(e.currentTarget.value)}
 										onBlur={field.handleBlur}
 										error={
-											field.state.meta.isTouched &&
-											field.state.meta.errors.length > 0
-												? field.state.meta.errors[0]
+											field.state.meta.isTouched
+												? fieldError(field.state.meta.errors)
 												: undefined
 										}
 										radius="md"
@@ -100,21 +111,21 @@ function SignInPage() {
 							<form.Field
 								name="password"
 								validators={{
-									onBlur: ({ value }) =>
-										!value ? "Password is required" : undefined,
+									onBlur: passwordSchema,
+									onSubmit: passwordSchema,
 								}}
 							>
 								{(field) => (
 									<PasswordInput
 										label="Password"
 										placeholder="Password"
+										autoComplete="current-password"
 										value={field.state.value}
 										onChange={(e) => field.handleChange(e.currentTarget.value)}
 										onBlur={field.handleBlur}
 										error={
-											field.state.meta.isTouched &&
-											field.state.meta.errors.length > 0
-												? field.state.meta.errors[0]
+											field.state.meta.isTouched
+												? fieldError(field.state.meta.errors)
 												: undefined
 										}
 										radius="md"
@@ -154,4 +165,7 @@ function SignInPage() {
 			</Paper>
 		</Flex>
 	);
-}
+};
+
+const Route = createFileRoute("/sign-in")({ component: SignInPage });
+export { Route };

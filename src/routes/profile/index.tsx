@@ -1,12 +1,8 @@
 import { Badge, Card, Group, Stack, Text } from "@mantine/core";
 import { useNetwork } from "@mantine/hooks";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffectiveUserId } from "#/features/dal/identity/use-effective-user-id";
+import { useEffectiveUserId } from "#/features/sync/local-data/identity/use-effective-user-id";
 import { useSession } from "#/integrations/better-auth/auth-client";
-
-export const Route = createFileRoute("/profile/")({
-	component: LocalProfileHome,
-});
 
 function LocalProfileHome() {
 	const { data: session } = useSession();
@@ -39,3 +35,9 @@ function LocalProfileHome() {
 		</Stack>
 	);
 }
+
+const Route = createFileRoute("/profile/")({
+	component: LocalProfileHome,
+});
+
+export { Route };

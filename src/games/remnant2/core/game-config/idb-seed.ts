@@ -1,4 +1,4 @@
-import type { GameIDBSeed } from "#/features/game/core/types";
+import type { GameIDBSeed } from "#/features/game/types.ts";
 import { ITEMS } from "#/games/remnant2/core/game-config/items";
 import { getIDBClient } from "#/integrations/prisma-idb/idb-client";
 
@@ -11,7 +11,7 @@ const remnant2IDBSeed: GameIDBSeed = {
 		if (existingCount === 0) {
 			await idb.remnant2Item.createMany({
 				data: ITEMS.collectable.map((item) => ({
-					slug: item.id,
+					id: item.id,
 					name: item.name,
 					category: item.category,
 					disabled: false,

@@ -2,17 +2,11 @@ import { Box, Stack } from "@mantine/core";
 import { useNetwork } from "@mantine/hooks";
 import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { ProfileHeader } from "#/features/auth/core/ProfileHeader";
-import { ProfileTabNav } from "#/features/auth/core/ProfileTabNav";
-import { useUserProfile } from "#/features/auth/hooks/use-user-profile";
+import { ProfileHeader } from "#/features/user/ProfileHeader.tsx";
+import { ProfileTabNav } from "#/features/user/ProfileTabNav.tsx";
 import { useSession } from "#/integrations/better-auth/auth-client";
 
-export const Route = createFileRoute("/profile")({
-	component: LocalProfileLayout,
-});
-
-function LocalProfileLayout() {
-	const { profile } = useUserProfile();
+const LocalProfileLayout = () => {
 	const { data: session } = useSession();
 	const { online } = useNetwork();
 	const navigate = useNavigate();
@@ -24,22 +18,25 @@ function LocalProfileLayout() {
 				to: "/account/profile/$userId",
 				params: { userId: authedUserId },
 				replace: true,
+			}).then(() => {
+				// placeholder - no action needed
 			});
 		}
 	}, [online, authedUserId, navigate]);
 
 	return (
 		<Stack gap={0}>
-			<ProfileHeader
-				displayName={profile?.displayName ?? "Traveler"}
-				bio={profile?.bio ?? ""}
-				serverAvatarUrl={null}
-				isOwner={true}
-			/>
+			<ProfileHeader isOwner={true} />
 			<ProfileTabNav basePath="/profile" showDataSync={false} />
 			<Box p="md">
 				<Outlet />
 			</Box>
 		</Stack>
 	);
-}
+};
+
+const Route = createFileRoute("/profile")({
+	component: LocalProfileLayout,
+});
+
+export { Route };

@@ -1,0 +1,43 @@
+.ambientBackground {
+	--ambient-glow-size: 64% 46vh;
+	--ambient-glow-position: 50% -20vh;
+	--ambient-glow-opacity: 0.22;
+	--ambient-grid-cell: 48px;
+	--ambient-grid-mask: ellipse 38% 45vh at 50% 40vh;
+
+	position: relative;
+	isolation: isolate;
+	background-color: var(--mantine-color-base-5);
+}
+
+.ambientBackground::before,
+.ambientBackground::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	z-index: -1;
+	pointer-events: none;
+}
+
+.ambientBackground::before {
+	background-image: radial-gradient(
+		ellipse var(--ambient-glow-size) at var(--ambient-glow-position),
+		var(--mantine-color-primary-5) 0%,
+		transparent 100%
+	);
+	opacity: var(--ambient-glow-opacity);
+}
+
+.ambientBackground::after {
+	background-image:
+		linear-gradient(var(--mantine-color-border-7) 1px, transparent 1px),
+		linear-gradient(90deg, var(--mantine-color-border-7) 1px, transparent 1px);
+	background-size: var(--ambient-grid-cell) var(--ambient-grid-cell);
+	mask-image: radial-gradient(
+		var(--ambient-grid-mask),
+		black 0%,
+		transparent 100%
+	);
+	opacity: 0.35;
+}

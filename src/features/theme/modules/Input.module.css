@@ -1,5 +1,5 @@
 .input {
-  background-color: var(--mantine-color-input-5);
-  border: 1px solid var(--mantine-color-border-4);
-  color: var(--mantine-color-inputFg-5);
+	background-color: var(--mantine-color-input-5);
+	border: 1px solid var(--mantine-color-border-4);
+	color: var(--mantine-color-inputFg-5);
 }

@@ -1,4 +1,4 @@
-import type { GameAvatar } from "#/features/game/core/types";
+import type { GameAvatar } from "#/features/game/types.ts";
 import { ENEMIES } from "#/games/remnant2/core/enemy-data/remnant2-enemies";
 
 const enemies: GameAvatar[] = ENEMIES.sort((a, b) =>

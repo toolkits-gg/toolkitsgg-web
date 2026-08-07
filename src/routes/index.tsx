@@ -1,15 +1,18 @@
-import { Title } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { setGame } from "#/features/game/core/store";
+import { ToolkitHomePage } from "#/components/pages/ToolkitHome.tsx";
+import { useSetActiveGame } from "#/features/game/use-set-active-game.ts";
 
-export const Route = createFileRoute("/")({ component: App });
+const HomePage = () => {
+	const setActiveGame = useSetActiveGame();
 
-function App() {
-	// set game to none for the home page
-	useEffect(() => {
-		setGame("none", "route");
-	}, []);
+	useEffect(() => setActiveGame(null), [setActiveGame]);
 
-	return <Title order={1}>Home Page</Title>;
-}
+	return <ToolkitHomePage />;
+};
+
+const Route = createFileRoute("/")({
+	component: HomePage,
+});
+
+export { Route };

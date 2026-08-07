@@ -1,0 +1,36 @@
+.navbarInner {
+	border-right: 1px solid var(--mantine-color-border-7);
+	height: 100%;
+	padding: var(--mantine-spacing-md);
+	padding-bottom: 0;
+	flex-direction: column;
+}
+
+.scrollArea {
+	flex-grow: 1;
+	margin-left: calc(var(--mantine-spacing-md) * -1);
+	margin-right: calc(var(--mantine-spacing-md) * -1);
+}
+
+.scrollAreaContent {
+	padding-top: var(--mantine-spacing-xl);
+	padding-bottom: var(--mantine-spacing-xl);
+	overflow-x: hidden;
+}
+
+.themeChangerWrapper {
+	margin-left: calc(var(--mantine-spacing-md) * -1);
+	margin-right: calc(var(--mantine-spacing-md) * -1);
+	padding: var(--mantine-spacing-md);
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.userMenuWrapper {
+	margin-left: calc(var(--mantine-spacing-md) * -1);
+	margin-right: calc(var(--mantine-spacing-md) * -1);
+	padding: var(--mantine-spacing-md);
+	justify-content: flex-start;
+	align-items: center;
+	border-top: 1px solid var(--mantine-color-border-7);
+}

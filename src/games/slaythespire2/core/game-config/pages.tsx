@@ -1,17 +1,23 @@
 import { MultiSelect, Stack, Text } from "@mantine/core";
 import { parseAsString } from "nuqs";
 import type { ReactNode } from "react";
-import type { GamePages } from "#/features/game/core/types";
-import { AppItemPage } from "#/features/game/items/AppItemPage";
-import type { AppItem, GameFilterConfig } from "#/features/game/items/types";
+import { BuildCreatePage } from "#/components/pages/BuildCreate.tsx";
+import { BuildEditPage } from "#/components/pages/BuildEdit.tsx";
+import { BuildViewPage } from "#/components/pages/BuildView.tsx";
+import { ItemListPage } from "#/components/pages/ItemList.tsx";
 import {
 	formatCategoryLabel,
 	getItemSubcategories,
 	itemMatchesCategory,
 	resolveLinkedItems,
 } from "#/features/game/items/utils";
+import type {
+	AppItem,
+	GameFilterConfig,
+	GamePages,
+} from "#/features/game/types.ts";
 import { ITEMS } from "#/games/slaythespire2/core/game-config/items";
-import { slayTheSpire2CollectedItemsDal } from "#/games/slaythespire2/dal/collected-items";
+import { slayTheSpire2CollectedItemsData } from "#/games/slaythespire2/data/collected-items";
 
 const slayTheSpire2FilterConfig: GameFilterConfig = {
 	label: "Slay the Spire 2 Filters",
@@ -23,7 +29,7 @@ const slayTheSpire2FilterConfig: GameFilterConfig = {
 			key: "category",
 			label: "Categories",
 			defaultValue: "",
-			serialize: (v) => v || undefined,
+
 			formatValue: formatCategoryLabel,
 		},
 	],
@@ -74,22 +80,25 @@ const slayTheSpire2FilterConfig: GameFilterConfig = {
 
 const PAGES: GamePages = {
 	renderItemLookup: () => (
-		<AppItemPage
+		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
-			dal={slayTheSpire2CollectedItemsDal}
+			data={slayTheSpire2CollectedItemsData}
 			gameFilterConfig={slayTheSpire2FilterConfig}
 		/>
 	),
 	renderCollectedItems: ({ mode }) => (
-		<AppItemPage
+		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
-			dal={slayTheSpire2CollectedItemsDal}
+			data={slayTheSpire2CollectedItemsData}
 			gameFilterConfig={slayTheSpire2FilterConfig}
 			viewMode={mode}
 		/>
 	),
+	renderCreateBuild: () => <BuildCreatePage />,
+	renderViewBuild: () => <BuildViewPage />,
+	renderEditBuild: () => <BuildEditPage />,
 };
 
 export { PAGES };

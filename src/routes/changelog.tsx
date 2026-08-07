@@ -3,10 +3,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import ReactMarkdown from "react-markdown";
 import changelogContent from "../../CHANGELOG.md?raw";
 
-export const Route = createFileRoute("/changelog")({
-	component: ChangelogPage,
-});
-
 function ChangelogPage() {
 	return (
 		<Container>
@@ -14,3 +10,9 @@ function ChangelogPage() {
 		</Container>
 	);
 }
+
+const Route = createFileRoute("/changelog")({
+	component: ChangelogPage,
+});
+
+export { Route };

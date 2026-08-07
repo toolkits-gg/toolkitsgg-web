@@ -1,4 +1,4 @@
-import type { GameConfig } from "#/features/game/core/types";
+import type { GameConfig } from "#/features/game/types.ts";
 import { AMULETS } from "#/games/remnant2/core/item-data/amulets";
 import { ARCHETYPES } from "#/games/remnant2/core/item-data/archetypes";
 import { ARMORS } from "#/games/remnant2/core/item-data/armors";

@@ -1,8 +1,19 @@
 import { upperFirst } from "@mantine/hooks";
-import type { AppItem } from "#/features/game/items/types";
+import type { AppItem } from "#/features/game/types.ts";
+import { titleCase } from "#/utils.ts";
+
+type CategoryOption = {
+	label: string;
+	value: string;
+};
+
+type GroupedOption = {
+	group: string;
+	items: CategoryOption[];
+};
 
 /** Formats a comma-separated category filter value (or "cat:sub") into a human-readable label. */
-const formatCategoryLabel = (raw: string): string => {
+export const formatCategoryLabel = (raw: string): string => {
 	const selected = raw ? raw.split(",").filter(Boolean) : [];
 	if (selected.length === 0) return "";
 	if (selected.length === 1) {
@@ -17,7 +28,10 @@ const formatCategoryLabel = (raw: string): string => {
 };
 
 /** Returns true if the item's category (and optional subcategory) matches the filter value. */
-const itemMatchesCategory = (item: AppItem, filterValue: string): boolean => {
+export const itemMatchesCategory = (
+	item: AppItem,
+	filterValue: string,
+): boolean => {
 	if (filterValue.includes(":")) {
 		const [category, subcategory] = filterValue.split(":");
 		if (String(item.category) !== category) return false;
@@ -27,18 +41,7 @@ const itemMatchesCategory = (item: AppItem, filterValue: string): boolean => {
 	}
 	return String(item.category) === filterValue;
 };
-
-type CategoryOption = {
-	label: string;
-	value: string;
-};
-
-type GroupedOption = {
-	group: string;
-	items: CategoryOption[];
-};
-
-const getItemSubcategories = (
+export const getItemSubcategories = (
 	items: AppItem[],
 ): (CategoryOption | GroupedOption)[] => {
 	const categoryMap = new Map<string, Set<string>>();
@@ -85,18 +88,11 @@ const getItemSubcategories = (
 	return result;
 };
 
-const titleCase = (str: string): string => {
-	return str
-		.split(/[_ ]/)
-		.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-		.join(" ");
-};
-
 /**
  * Resolves linked items for a given item by matching names
  * from the item's linkedItems field against a list of all items.
  */
-const resolveLinkedItems = <TItem extends AppItem>(
+export const resolveLinkedItems = <TItem extends AppItem>(
 	item: TItem,
 	allItems: TItem[],
 ): TItem[] => {
@@ -123,11 +119,4 @@ const resolveLinkedItems = <TItem extends AppItem>(
 	}
 
 	return results;
-};
-
-export {
-	getItemSubcategories,
-	formatCategoryLabel,
-	itemMatchesCategory,
-	resolveLinkedItems,
 };

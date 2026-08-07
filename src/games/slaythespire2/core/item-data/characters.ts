@@ -1,5 +1,6 @@
 import type { SlayTheSpire2CardItem } from "#/games/slaythespire2/core/item-data/cards";
 import type { BaseSlayTheSpire2Item } from "#/games/slaythespire2/core/types";
+import type { SlayTheSpire2Character } from "@/prisma";
 
 type SlayTheSpire2CharacterItem = BaseSlayTheSpire2Item & {
 	health: number;
@@ -84,4 +85,12 @@ const CHARACTERS: SlayTheSpire2CharacterItem[] = [
 	},
 ];
 
-export { CHARACTERS, type SlayTheSpire2CharacterItem };
+const CHARACTER_MAP: Record<string, SlayTheSpire2Character> = {
+	ironclad: "IRONCLAD",
+	silent: "SILENT",
+	defect: "DEFECT",
+	regent: "REGENT",
+	necrobinder: "NECROBINDER",
+};
+
+export { CHARACTER_MAP, CHARACTERS, type SlayTheSpire2CharacterItem };

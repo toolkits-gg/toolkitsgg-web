@@ -1,13 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getGameConfig } from "#/features/game/registry/game-registry";
-import { useGameId } from "#/features/game/core/use-game-id";
-
-export const Route = createFileRoute("/profile/collected-items")({
-	component: CollectedItems,
-});
+import { useGameId } from "#/features/game/use-game-id.ts";
+import { getGamePages } from "#/game-registry/game-pages-registry.tsx";
 
 function CollectedItems() {
 	const gameId = useGameId();
-	const config = getGameConfig(gameId);
-	return <>{config?.PAGES.renderCollectedItems({ mode: { kind: "self" } })}</>;
+	const pages = getGamePages(gameId);
+	return <>{pages?.renderCollectedItems({ mode: { kind: "self" } })}</>;
 }
+
+const Route = createFileRoute("/profile/collected-items")({
+	component: CollectedItems,
+});
+
+export { Route };

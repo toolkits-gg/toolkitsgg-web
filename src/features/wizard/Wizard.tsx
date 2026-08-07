@@ -66,6 +66,11 @@ const Wizard = ({
 	};
 
 	useEffect(() => {
+		if (!opened) return;
+
+		let cancelled = false;
+		let timer: ReturnType<typeof setTimeout> | undefined;
+
 		const openWizard = async () => {
 			setIsReady(false);
 
@@ -73,17 +78,20 @@ const Wizard = ({
 				await onBeforeOpen();
 			}
 
-			// Small delay to allow any animations or navigation to settle
-			const timer = setTimeout(() => {
+			if (cancelled) return;
+
+			// Small delay to allow any animations or navbar to settle
+			timer = setTimeout(() => {
 				setIsReady(true);
 			}, 100);
-
-			return () => clearTimeout(timer);
 		};
 
-		if (!opened) return;
+		void openWizard();
 
-		openWizard();
+		return () => {
+			cancelled = true;
+			if (timer) clearTimeout(timer);
+		};
 	}, [opened, onBeforeOpen]);
 
 	useEffect(() => {
@@ -152,7 +160,7 @@ const Wizard = ({
 						right: 0,
 						bottom: 0,
 						backgroundColor: "rgba(0, 0, 0, 0.4)",
-						zIndex: 1002,
+						zIndex: "var(--mantine-z-index-overlay)",
 						pointerEvents: "none",
 					}}
 				/>

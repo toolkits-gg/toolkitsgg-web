@@ -1,26 +1,26 @@
-import type { EquippableBy } from "#/games/slaythespire2/core/types";
 import type { BaseSlayTheSpire2Item } from "#/games/slaythespire2/core/types";
 import type { SlayTheSpire2RelicRarity } from "@/prisma";
 
 type SlayTheSpire2RelicItem = BaseSlayTheSpire2Item & {
+	flavorText: string;
+	isUpgrade: boolean;
 	rarity: SlayTheSpire2RelicRarity;
-	equippableBy: EquippableBy;
 };
 
 const RELICS: SlayTheSpire2RelicItem[] = [
 	// #region STARTER
-
 	{
 		name: "Burning Blood",
 		category: "RELIC",
 		id: "5hg0s",
 		dlc: "BASE",
 		description: [`At the end of combat, heal 6 HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/burning_blood.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "STARTER",
-		equippableBy: ["IRONCLAD"],
 		modifiers: [
 			{
 				modifier: {
@@ -29,6 +29,10 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 				trigger: "combat end",
 			},
 		],
+		linkedItems: {
+			character: { name: "IRONCLAD" },
+			relic: { name: "Black Blood" },
+		},
 	},
 	{
 		name: "Black Blood",
@@ -36,11 +40,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "9gltv",
 		dlc: "BASE",
 		description: [`At the end of combat, heal 12 HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: true,
 		imageUrl: "relics/black_blood.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "STARTER",
-		equippableBy: ["IRONCLAD"],
+		linkedItems: {
+			character: { name: "IRONCLAD" },
+			relic: { name: "Burning Blood" },
+		},
 		modifiers: [
 			{
 				modifier: {
@@ -56,11 +65,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "6l7w7",
 		dlc: "BASE",
 		description: [`At the start of each combat, draw 2 additional cards.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/ring_of_the_snake.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "STARTER",
-		equippableBy: ["SILENT"],
+		linkedItems: {
+			character: { name: "SILENT" },
+			relic: { name: "Ring of the Drake" },
+		},
 		modifiers: [
 			{
 				modifier: {
@@ -78,11 +92,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of your first 3 turns, draw 2 additional cards.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: true,
 		imageUrl: "relics/ring_of_the_drake.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "STARTER",
-		equippableBy: ["SILENT"],
+		linkedItems: {
+			character: { name: "SILENT" },
+			relic: { name: "Ring of the Snake" },
+		},
 		modifiers: [
 			{
 				modifier: {
@@ -98,11 +117,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "pehq9",
 		dlc: "BASE",
 		description: [`At the start of each combat, gain 3 Stars.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/divine_right.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "STARTER",
-		equippableBy: ["REGENT"],
+		linkedItems: {
+			character: { name: "REGENT" },
+			relic: { name: "Divine Destiny" },
+		},
 		modifiers: [
 			{
 				modifier: {
@@ -118,11 +142,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "ne7pa",
 		dlc: "BASE",
 		description: [`At the start of each combat, gain 6 Stars.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: true,
 		imageUrl: "relics/divine_destiny.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "STARTER",
-		equippableBy: ["REGENT"],
+		linkedItems: {
+			character: { name: "REGENT" },
+			relic: { name: "Divine Right" },
+		},
 		modifiers: [
 			{
 				modifier: {
@@ -138,11 +167,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "cl85k",
 		dlc: "BASE",
 		description: [`At the start of your turn, Summon 1.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/bound_phylactery.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "STARTER",
-		equippableBy: ["NECROBINDER"],
+		linkedItems: {
+			character: { name: "NECROBINDER" },
+			relic: { name: "Phylactery Unbound" },
+		},
 		modifiers: [
 			{
 				modifier: {
@@ -160,11 +194,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of each combat, Summon 5. At the start of your turn, Summon 2.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: true,
 		imageUrl: "relics/phylactery_unbound.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "STARTER",
-		equippableBy: ["NECROBINDER"],
+		linkedItems: {
+			character: { name: "NECROBINDER" },
+			relic: { name: "Bound Phylactery" },
+		},
 		modifiers: [
 			{
 				modifier: {
@@ -186,11 +225,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "ss073",
 		dlc: "BASE",
 		description: [`At the start of each combat, Channel 1 Lightning.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/cracked_core.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "STARTER",
-		equippableBy: ["DEFECT"],
+		linkedItems: {
+			character: { name: "DEFECT" },
+			relic: { name: "Infused Core" },
+		},
 		modifiers: [
 			{
 				modifier: {
@@ -206,11 +250,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "cm91c",
 		dlc: "BASE",
 		description: [`At the start of each combat, Channel 3 Lightning.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: true,
 		imageUrl: "relics/infused_core.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "STARTER",
-		equippableBy: ["DEFECT"],
+		linkedItems: {
+			character: { name: "DEFECT" },
+			relic: { name: "Cracked Core" },
+		},
 		modifiers: [
 			{
 				modifier: {
@@ -228,12 +277,14 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		category: "RELIC",
 		id: "3m5y4",
 		dlc: "BASE",
-		description: [`Enemies drop 10 additional Gold.`],
+		description: [`Enemies drop 15 additional Gold.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/amethyst_aubergine.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -249,11 +300,13 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "dxo8a",
 		dlc: "BASE",
 		description: [`Start each combat with 10 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/anchor.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -269,11 +322,13 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "01jqa",
 		dlc: "BASE",
 		description: [`At the start of each combat, draw 2 additional cards.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/bag_of_preparation.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -288,12 +343,13 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		category: "RELIC",
 		id: "30uns",
 		dlc: "BASE",
-		description: [`At the start of each combat, heal 2 HP. `],
+		description: [`At the start of each combat, heal 2 HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/blood_vial.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -308,12 +364,14 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		category: "RELIC",
 		id: "21djj",
 		dlc: "BASE",
-		description: [`Every 5 cards you add to your Deck, heal 15 HP.`],
+		description: [`Every 5 cards you add to your Deck, heal 20 HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/book_of_five_rings.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -329,11 +387,13 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "h5nhy",
 		dlc: "BASE",
 		description: [`Start each combat with 3 Thorns.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/bronze_scales.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -349,11 +409,12 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "94m84",
 		dlc: "BASE",
 		description: [`The first time you lose HP each combat, draw 3 cards.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/centennial_puzzle.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -368,14 +429,13 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		category: "RELIC",
 		id: "munb5",
 		dlc: "BASE",
-		description: [
-			`At the start of each combat, deal 9 damage to ALL enemies. `,
-		],
+		description: [`At the start of each combat, deal 9 damage to ALL enemies.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/festive_popper.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -391,11 +451,12 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "y9m5p",
 		dlc: "BASE",
 		description: [`At the start of each combat, gain 4 Plating.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/gorget.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [{ modifier: { plating: 4 }, trigger: "combat start" }],
 	},
 	{
@@ -403,12 +464,13 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		category: "RELIC",
 		id: "8n79j",
 		dlc: "BASE",
-		description: [`Every 3 turns, gain Energy.`],
+		description: [`Every 3 turns, gain 1 Energy.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/happy_flower.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [{ modifier: { energy: 1 }, trigger: "each turn" }],
 	},
 	{
@@ -419,11 +481,12 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Regular enemy combats are no longer encountered in ? rooms.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/juzu_bracelet.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: undefined,
 	},
 	{
@@ -431,12 +494,13 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		category: "RELIC",
 		id: "yq4ei",
 		dlc: "BASE",
-		description: [`Start each combat with an additional Energy.`],
+		description: [`Start each combat with an additional 1 Energy.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/lantern.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -452,11 +516,13 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		id: "y9jjj",
 		dlc: "BASE",
 		description: [`Whenever you enter a shop room, heal 15 HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/meal_ticket.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
+
 		modifiers: [
 			{
 				modifier: {
@@ -471,12 +537,13 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		category: "RELIC",
 		id: "67fkz",
 		dlc: "BASE",
-		description: [`Whenever you shuffle your Draw Pile, draw a card.`],
+		description: [`Every 3 turns, draw 1 card.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/pendulum.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -491,12 +558,15 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		category: "RELIC",
 		id: "g9fc0",
 		dlc: "BASE",
-		description: [`The first time you play a Power each combat, gain 6 Block.`],
+		description: [
+			`The first time you play a Powers each combat, gain 7 Block.`,
+		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/permafrost.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
 		modifiers: [
 			{
 				modifier: {
@@ -506,77 +576,80 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 			},
 		],
 	},
-	// TODO
 	{
 		name: "Bone Flute",
 		category: "RELIC",
 		id: "hx081",
 		dlc: "BASE",
 		description: [`Whenever Osty attacks, gain 2 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/bone_flute.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: ["NECROBINDER"],
-		modifiers: [],
+		linkedItems: { character: { name: "NECROBINDER" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Data Disk",
 		category: "RELIC",
 		id: "jixvk",
 		dlc: "BASE",
 		description: [`Start each combat with 1 Focus.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/data_disk.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: ["DEFECT"],
-		modifiers: [],
+		linkedItems: { character: { name: "DEFECT" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Fencing Manual",
 		category: "RELIC",
 		id: "z7mz8",
 		dlc: "BASE",
 		description: [`At the start of each combat, Forge 10.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fencing_manual.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: ["REGENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "REGENT" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Oddly Smooth Stone",
 		category: "RELIC",
 		id: "ymdxy",
 		dlc: "BASE",
 		description: [`Start each combat with 1 Dexterity.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/oddly_smooth_stone.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Potion Belt",
 		category: "RELIC",
 		id: "cjqqq",
 		dlc: "BASE",
-		description: [`Upon pickup, gain 2 Potions|Potion slots.`],
+		description: [`Upon pickup, gain 2 Potion slots.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/potion_belt.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Red Skull",
 		category: "RELIC",
@@ -585,98 +658,100 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`While your HP is at or below 50%, you have 3 additional Strength.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/red_skull.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: ["IRONCLAD"],
-		modifiers: [],
+		linkedItems: { character: { name: "IRONCLAD" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Regal Pillow",
 		category: "RELIC",
 		id: "hup7t",
 		dlc: "BASE",
 		description: [`Whenever you Rest, heal an additional 15 HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/regal_pillow.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Snecko Skull",
 		category: "RELIC",
 		id: "a81gw",
 		dlc: "BASE",
 		description: [`Whenever you apply Poison, apply an additional 1 Poison.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/snecko_skull.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: ["SILENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "SILENT" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Strawberry",
 		category: "RELIC",
 		id: "owcte",
 		dlc: "BASE",
 		description: [`Upon pickup, raise your Max HP by 7.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/strawberry.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Strike Dummy",
 		category: "RELIC",
 		id: "zx2rz",
 		dlc: "BASE",
 		description: [`Cards containing “Strike” deal 3 additional damage.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/strike_dummy.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Tiny Mailbox",
 		category: "RELIC",
 		id: "bvizu",
 		dlc: "BASE",
-		description: [`Whenever you Rest, procure a random Potions|Potion.`],
+		description: [`Whenever you Rest, procure 2 random Potions.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/tiny_mailbox.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Vajra",
 		category: "RELIC",
 		id: "jq26e",
 		dlc: "BASE",
 		description: [`Start each combat with 1 Strength.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/vajra.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Venerable Tea Set",
 		category: "RELIC",
@@ -685,56 +760,56 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you enter a Rest Site, start the next combat with an additional 2 Energy.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/venerable_tea_set.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "War Paint",
 		category: "RELIC",
 		id: "fsica",
 		dlc: "BASE",
 		description: [`Upon pickup, Upgrade 2 random Skills.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/war_paint.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Whetstone",
 		category: "RELIC",
 		id: "lmvgp",
 		dlc: "BASE",
 		description: [`Upon pickup, Upgrade 2 random Attacks.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/whetstone.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "COMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Akabeko",
 		category: "RELIC",
 		id: "scze5",
 		dlc: "BASE",
 		description: [`At the start of each combat, gain 8 Vigor.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/akabeko.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Bag of Marbles",
 		category: "RELIC",
@@ -743,86 +818,88 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of each combat, apply 1 Vulnerable to ALL enemies.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/bag_of_marbles.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Bellows",
 		category: "RELIC",
 		id: "hn844",
 		dlc: "BASE",
 		description: [`The first Hand you draw each combat is Upgraded.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/bellows.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Book Repair Knife",
 		category: "RELIC",
 		id: "y4d8m",
 		dlc: "BASE",
 		description: [`Whenever a non-Minion enemy dies to Doom, heal 3 HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/book_repair_knife.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["NECROBINDER"],
-		modifiers: [],
+		linkedItems: { character: { name: "NECROBINDER" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Bowler Hat",
 		category: "RELIC",
 		id: "i7oyx",
 		dlc: "BASE",
-		description: [`Gain 20% additional Gold.`],
+		description: [`Gain 25% additional Gold.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/bowler_hat.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Candelabra",
 		category: "RELIC",
 		id: "893gh",
 		dlc: "BASE",
 		description: [`At the start of your 2nd turn, gain 2 Energy.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/candelabra.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Eternal Feather",
 		category: "RELIC",
 		id: "o9l0z",
 		dlc: "BASE",
 		description: [
-			`For every 5 cards in your Deck, heal 3 HP whenever you enter a Rest Sites|Rest Site.`,
+			`For every 5 cards in your Deck, heal 3 HP whenever you enter a Rest Site.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/eternal_feather.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Funerary Mask",
 		category: "RELIC",
@@ -831,28 +908,30 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of each combat, add 3 Souls into your Draw Pile.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/funerary_mask.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["NECROBINDER"],
-		modifiers: [],
+		linkedItems: { character: { name: "NECROBINDER" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Galactic Dust",
 		category: "RELIC",
 		id: "ytz9d",
 		dlc: "BASE",
-		description: [`For every 10 Star spent, gain 10 Block.`],
+		description: [`For every 10 Stars spent, gain 10 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/galactic_dust.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["REGENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "REGENT" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Gold-Plated Cables",
 		category: "RELIC",
@@ -861,56 +940,63 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Your rightmost Orb triggers its passive an additional time.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/gold_plated_cables.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["DEFECT"],
-		modifiers: [],
+		linkedItems: { character: { name: "DEFECT" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Gremlin Horn",
 		category: "RELIC",
 		id: "fgv64",
 		dlc: "BASE",
-		description: [`Whenever an enemy dies, gain Energy and draw 1 card.`],
+		description: [`Whenever an enemy dies, gain 1 Energy and draw 1 card.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/gremlin_horn.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Horn Cleat",
 		category: "RELIC",
 		id: "w53x5",
 		dlc: "BASE",
 		description: [`At the start of your 2nd turn, gain 14 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/horn_cleat.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Joss Paper",
 		category: "RELIC",
 		id: "ym2mj",
 		dlc: "BASE",
 		description: [`Every 5 times you Exhaust a card, draw 1 card.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/joss_paper.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Kusarigama",
 		category: "RELIC",
@@ -919,14 +1005,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Every time you play 3 Attacks in a single turn, deal 6 damage to a random enemy.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/kusarigama.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Letter Opener",
 		category: "RELIC",
@@ -935,84 +1023,93 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Every time you play 3 Skills in a single turn, deal 5 damage to ALL enemies.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/letter_opener.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Lucky Fysh",
 		category: "RELIC",
 		id: "bcluv",
 		dlc: "BASE",
 		description: [`Whenever you add a card to your Deck, gain 15 Gold.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/lucky_fysh.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Mercury Hourglass",
 		category: "RELIC",
 		id: "yge5l",
 		dlc: "BASE",
 		description: [`At the start of your turn, deal 3 damage to ALL enemies.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/mercury_hourglass.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Miniature Cannon",
 		category: "RELIC",
 		id: "0oqir",
 		dlc: "BASE",
 		description: [`Upgraded Attacks deal 3 additional damage.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/miniature_cannon.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Nunchaku",
 		category: "RELIC",
 		id: "plk00",
 		dlc: "BASE",
-		description: [`Every time you play 10 Attacks, gain Energy.`],
+		description: [`Every time you play 10 Attacks, gain 1 Energy.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/nunchaku.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Orichalcum",
 		category: "RELIC",
 		id: "fxslq",
 		dlc: "BASE",
 		description: [`If you end your turn without Block, gain 6 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/orichalcum.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Ornamental Fan",
 		category: "RELIC",
@@ -1021,28 +1118,32 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Every time you play 3 Attacks in a single turn, gain 4 Block.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/ornamental_fan.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Pantograph",
 		category: "RELIC",
 		id: "qiesy",
 		dlc: "BASE",
 		description: [`At the start of each Boss combat, heal 25 HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/pantograph.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Paper Phrog",
 		category: "RELIC",
@@ -1051,14 +1152,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Enemies with Vulnerable take 75% more damage rather than 50%.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/paper_phrog.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["IRONCLAD"],
-		modifiers: [],
+		linkedItems: { character: { name: "IRONCLAD" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Parrying Shield",
 		category: "RELIC",
@@ -1067,116 +1170,119 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`If you end a turn with at least 10 Block, deal 6 damage to a random enemy.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/parrying_shield.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Pear",
 		category: "RELIC",
 		id: "78lzd",
 		dlc: "BASE",
 		description: [`Upon pickup, raise your Max HP by 10.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/pear.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Pen Nib",
 		category: "RELIC",
 		id: "g1u6z",
 		dlc: "BASE",
 		description: [`Every 10th Attack you play deals double damage.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/pen_nib.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Petrified Toad",
 		category: "RELIC",
 		id: "j2k3x",
 		dlc: "BASE",
-		description: [
-			`At the start of each combat, procure a {{P|Potion-Shaped Rock||2}}.`,
-		],
+		description: [`At the start of each combat, procure a Potion-Shaped Rock.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/petrified_toad.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Planisphere",
 		category: "RELIC",
 		id: "tq082",
 		dlc: "BASE",
-		description: [`Whenever you enter a ? room, heal 4 HP.`],
+		description: [`Whenever you enter a ? room, heal 5 HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/planisphere.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Red Mask",
 		category: "RELIC",
 		id: "wvt2u",
 		dlc: "BASE",
 		description: [`At the start of each combat, apply 1 Weak to ALL enemies.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/red_mask.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Regalite",
 		category: "RELIC",
 		id: "esjr2",
 		dlc: "BASE",
-		description: [`Whenever you create a Colorless card, gain 2 Block.`],
+		description: [`Whenever you create a card, gain 2 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/regalite.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["REGENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "REGENT" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Reptile Trinket",
 		category: "RELIC",
 		id: "fitll",
 		dlc: "BASE",
-		description: [
-			`Whenever you use a Potions|Potion, gain 3 Strength this turn.`,
-		],
+		description: [`Whenever you use a Potion, gain 3 Strength this turn.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/reptile_trinket.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Ripple Basin",
 		category: "RELIC",
@@ -1185,28 +1291,32 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`If you did not play any Attacks during your turn, gain 4 Block.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/ripple_basin.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Self-Forming Clay",
 		category: "RELIC",
 		id: "to2tx",
 		dlc: "BASE",
 		description: [`Whenever you lose HP in combat, gain 3 Block next turn.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/self_forming_clay.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["IRONCLAD"],
-		modifiers: [],
+		linkedItems: { character: { name: "IRONCLAD" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Sparkling Rouge",
 		category: "RELIC",
@@ -1215,44 +1325,47 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of your 3rd turn, gain 1 Strength and 1 Dexterity.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/sparkling_rouge.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Stone Cracker",
 		category: "RELIC",
 		id: "7q0tw",
 		dlc: "BASE",
 		description: [
-			`At the start of Boss combats, Upgrade 3 random cards in your Draw Pile for the rest of combat.`,
+			`At the start of combat, Upgrade 2 random cards in your Draw Pile for the rest of combat.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/stone_cracker.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Symbiotic Virus",
 		category: "RELIC",
 		id: "cz48p",
 		dlc: "BASE",
 		description: [`At the start of each combat, Channel 1 Dark.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/symbiotic_virus.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["DEFECT"],
-		modifiers: [],
+		linkedItems: { character: { name: "DEFECT" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Tingsha",
 		category: "RELIC",
@@ -1261,28 +1374,32 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you discard a card during your turn, deal 3 damage to a random enemy for each card discarded.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/tingsha.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["SILENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "SILENT" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Tuning Fork",
 		category: "RELIC",
 		id: "q1hax",
 		dlc: "BASE",
 		description: [`Every time you play 10 Skills, gain 7 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/tuning_fork.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Twisted Funnel",
 		category: "RELIC",
@@ -1291,14 +1408,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of each combat, apply 4 Poison to ALL enemies.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/twisted_funnel.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: ["SILENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "SILENT" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Vambrace",
 		category: "RELIC",
@@ -1307,44 +1426,50 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`The first time you gain Block from a card each combat, double the amount gained.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/vambrace.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "UNCOMMON",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Art of War",
 		category: "RELIC",
 		id: "qkz6i",
 		dlc: "BASE",
 		description: [
-			`If you do not play any Attacks during your turn, gain an additional Energy next turn.`,
+			`If you do not play any Attacks during your turn, gain an additional 1 Energy next turn.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/art_of_war.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Beating Remnant",
 		category: "RELIC",
 		id: "0rxnt",
 		dlc: "BASE",
 		description: [`You cannot lose more than 20 HP in a single turn.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/beating_remnant.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Big Hat",
 		category: "RELIC",
@@ -1353,14 +1478,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of each combat, add 2 random Ethereal cards into your Hand.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/big_hat.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["NECROBINDER"],
-		modifiers: [],
+		linkedItems: { character: { name: "NECROBINDER" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Bookmark",
 		category: "RELIC",
@@ -1369,56 +1496,64 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the end of each turn, lower the cost of a random Retained card by 1 until played.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/bookmark.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["NECROBINDER"],
-		modifiers: [],
+		linkedItems: { character: { name: "NECROBINDER" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Captain's Wheel",
 		category: "RELIC",
 		id: "x2318",
 		dlc: "BASE",
 		description: [`At the start of your 3rd turn, gain 18 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/captains_wheel.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Chandelier",
 		category: "RELIC",
 		id: "q3cyu",
 		dlc: "BASE",
 		description: [`At the start of your 3rd turn, gain 3 Energy.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/chandelier.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Charon's Ashes",
 		category: "RELIC",
 		id: "s8so0",
 		dlc: "BASE",
 		description: [`Whenever you Exhaust a card, deal 3 damage to ALL enemies.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/charons_ashes.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["IRONCLAD"],
-		modifiers: [],
+		linkedItems: { character: { name: "IRONCLAD" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Cloak Clasp",
 		category: "RELIC",
@@ -1427,14 +1562,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the end of your turn, gain 1 Block for each card in your Hand.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/cloak_clasp.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Demon Tongue",
 		category: "RELIC",
@@ -1443,14 +1580,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`The first time you lose HP on your turn, heal HP equal to the amount lost.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/demon_tongue.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["IRONCLAD"],
-		modifiers: [],
+		linkedItems: { character: { name: "IRONCLAD" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Emotion Chip",
 		category: "RELIC",
@@ -1459,28 +1598,32 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`If you lost HP during the previous turn, trigger the passive ability of all Orbs at the start of your turn.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/emotion_chip.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["DEFECT"],
-		modifiers: [],
+		linkedItems: { character: { name: "DEFECT" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Frozen Egg",
 		category: "RELIC",
 		id: "n6c05",
 		dlc: "BASE",
 		description: [`Whenever you add a Powers into your Deck, Upgrade it.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/frozen_egg.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Gambling Chip",
 		category: "RELIC",
@@ -1489,70 +1632,80 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of each combat, discard any number of cards then draw that many.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/gambling_chip.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Game Piece",
 		category: "RELIC",
 		id: "zw768",
 		dlc: "BASE",
 		description: [`Whenever you play a Power, draw 1 card.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/game_piece.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Girya",
 		category: "RELIC",
 		id: "aojjw",
 		dlc: "BASE",
 		description: [`You can now gain Strength at Rest Sites. (3 times max)`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/girya.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Helical Dart",
 		category: "RELIC",
 		id: "7d51a",
 		dlc: "BASE",
 		description: [`Whenever you play a Shiv, gain 1 Dexterity this turn.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/helical_dart.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["SILENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "SILENT" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Ice Cream",
 		category: "RELIC",
 		id: "i1pst",
 		dlc: "BASE",
 		description: [`Energy is now conserved between turns.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/ice_cream.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Intimidating Helmet",
 		category: "RELIC",
@@ -1561,14 +1714,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you play a card that costs 2 Energy or more, gain 4 Block.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/intimidating_helmet.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Ivory Tile",
 		category: "RELIC",
@@ -1577,14 +1732,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you play a card that costs @NE@NE@NE or more, gain @NE.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/ivory_tile.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["NECROBINDER"],
-		modifiers: [],
+		linkedItems: { character: { name: "NECROBINDER" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Kunai",
 		category: "RELIC",
@@ -1593,14 +1750,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Every time you play 3 Attacks in a single turn, gain 1 Dexterity.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/kunai.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Lasting Candy",
 		category: "RELIC",
@@ -1609,58 +1768,66 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Every other combat, your card rewards gain an additional Power.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/lasting_candy.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Lizard Tail",
 		category: "RELIC",
 		id: "c295t",
 		dlc: "BASE",
 		description: [
-			`When you would die, heal to 50% of your Max HP instead (works once).`,
+			`When your HP would be reduced to 0, heal to 50% of your Max HP instead (works once).`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/lizard_tail.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Lunar Pastry",
 		category: "RELIC",
 		id: "41scw",
 		dlc: "BASE",
-		description: [`At the end of your turn, gain Star.`],
+		description: [`At the end of your turn, gain 1 Star.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/lunar_pastry.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["REGENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "REGENT" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Mango",
 		category: "RELIC",
 		id: "65hci",
 		dlc: "BASE",
 		description: [`Upon pickup, raise your Max HP by 14.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/mango.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Meat on the Bone",
 		category: "RELIC",
@@ -1669,14 +1836,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`If your HP is at or below 50% at the end of combat, heal 12 HP.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/meat_on_the_bone.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Metronome",
 		category: "RELIC",
@@ -1685,42 +1854,47 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`The first time you Channel 7 Orbs each combat, deal 30 damage to ALL enemies.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/metronome.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["DEFECT"],
-		modifiers: [],
+		linkedItems: { character: { name: "DEFECT" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Mini Regent",
 		category: "RELIC",
 		id: "cwcsw",
 		dlc: "BASE",
-		description: [`The first time you spend Star each turn, gain 1 Strength.`],
+		description: [
+			`The first time you spend 1 Star each turn, gain 1 Strength.`,
+		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/mini_regent.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["REGENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "REGENT" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Molten Egg",
 		category: "RELIC",
 		id: "w4faf",
 		dlc: "BASE",
 		description: [`Whenever you add an Attack card to your Deck, Upgrade it.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/molten_egg.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Mummified Hand",
 		category: "RELIC",
@@ -1729,28 +1903,28 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you play a Power, a random card in your Hand is free to play that turn.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/mummified_hand.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Old Coin",
 		category: "RELIC",
 		id: "5sveb",
 		dlc: "BASE",
 		description: [`Upon pickup, gain 300 Gold.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/old_coin.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Orange Dough",
 		category: "RELIC",
@@ -1759,14 +1933,15 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of each combat, add 2 random Colorless cards into your Hand.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/orange_dough.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["REGENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "REGENT" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Paper Krane",
 		category: "RELIC",
@@ -1775,14 +1950,15 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Enemies with Weak deal 40% less damage to you rather than 25%.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/paper_krane.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["SILENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "SILENT" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Pocketwatch",
 		category: "RELIC",
@@ -1791,14 +1967,14 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you play 3 or fewer cards during your turn, draw 3 additional cards at the start of your next turn.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/pocketwatch.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Power Cell",
 		category: "RELIC",
@@ -1807,28 +1983,29 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of each combat, add 2 zero-cost cards from your Draw Pile into your Hand.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/power_cell.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["DEFECT"],
-		modifiers: [],
+		linkedItems: { character: { name: "DEFECT" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Prayer Wheel",
 		category: "RELIC",
 		id: "fsogu",
 		dlc: "BASE",
 		description: [`Normal enemies drop an additional card reward.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/prayer_wheel.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Rainbow Ring",
 		category: "RELIC",
@@ -1837,14 +2014,14 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`The first time you play an Attack, Skill, and Powers each turn, gain 1 Strength and 1 Dexterity.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/rainbow_ring.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Razor Tooth",
 		category: "RELIC",
@@ -1853,14 +2030,14 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Every time you play an Attack or Skill, Upgrade it for the remainder of combat.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/razor_tooth.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Ruined Helmet",
 		category: "RELIC",
@@ -1869,28 +2046,29 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`The first time you gain Strength each combat, double the amount gained.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/ruined_helmet.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["IRONCLAD"],
-		modifiers: [],
+		linkedItems: { character: { name: "IRONCLAD" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Shovel",
 		category: "RELIC",
 		id: "9w70f",
 		dlc: "BASE",
 		description: [`You can now dig at Rest Sites to obtain a random Relic.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/shovel.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Shuriken",
 		category: "RELIC",
@@ -1899,58 +2077,58 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Every time you play 3 Attacks in a single turn, gain 1 Strength.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/shuriken.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Stone Calendar",
 		category: "RELIC",
 		id: "qg45r",
 		dlc: "BASE",
 		description: [`At the end of turn 7, deal 52 damage to ALL enemies.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/stone_calendar.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Sturdy Clamp",
 		category: "RELIC",
 		id: "atgfy",
 		dlc: "BASE",
 		description: [`Up to 10 Block persists across turns.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/sturdy_clamp.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "The Courier",
 		category: "RELIC",
 		id: "xkw4b",
 		dlc: "BASE",
 		description: [
-			`The merchant no longer runs out of cards, relics, or potions and his prices are reduced by 20%.`,
+			`The merchant no longer runs out of cards, relics, or Potions and his prices are reduced by 20%.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/the_courier.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Tough Bandages",
 		category: "RELIC",
@@ -1959,42 +2137,43 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you discard a card during your turn, gain 3 Block.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/tough_bandages.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: ["SILENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "SILENT" } },
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Toxic Egg",
 		category: "RELIC",
 		id: "lihqr",
 		dlc: "BASE",
 		description: [`Whenever you add a Skill into your Deck, Upgrade it.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/toxic_egg.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Tungsten Rod",
 		category: "RELIC",
 		id: "ke3fu",
 		dlc: "BASE",
 		description: [`Whenever you would lose HP, lose 1 less.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/tungsten_rod.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Unceasing Top",
 		category: "RELIC",
@@ -2003,14 +2182,14 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you have no cards in Hand during your turn, draw a card.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/unceasing_top.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Unsettling Lamp",
 		category: "RELIC",
@@ -2019,188 +2198,215 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Each combat, the first time you play a card that Debuffs an enemy, double its effect.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/unsettling_lamp.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Vexing Puzzlebox",
 		category: "RELIC",
 		id: "iqu2h",
 		dlc: "BASE",
 		description: [
-			`At the start of each combat, add a random card into your Hand. It costs 0Energy.`,
+			"At the start of each combat, add a random card into your Hand. It's free to play this turn.",
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/vexing_puzzlebox.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "White Beast Statue",
 		category: "RELIC",
 		id: "vn9ct",
 		dlc: "BASE",
 		description: [`Potions always appear in combat rewards.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/white_beast_statue.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "White Star",
 		category: "RELIC",
 		id: "edthh",
 		dlc: "BASE",
 		description: [`Elites drop an additional Rare card reward.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/white_star.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "RARE",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
 	{
 		name: "Astrolabe",
 		category: "RELIC",
 		id: "nws4u",
 		dlc: "BASE",
 		description: [`Upon pickup, Transform 3 cards, then Upgrade them.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/astrolabe.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "DARV" },
+		},
 	},
-	// TODO
 	{
 		name: "Black Star",
 		category: "RELIC",
 		id: "umhmj",
 		dlc: "BASE",
 		description: [`Elites drop an additional Relic when defeated.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/black_star.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "DARV" },
+		},
 	},
-	// TODO
 	{
 		name: "Calling Bell",
 		category: "RELIC",
 		id: "5de6a",
 		dlc: "BASE",
 		description: [`Upon pickup, obtain a unique Curse and 3 Relics.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/calling_bell.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "DARV" },
+		},
 	},
-	// TODO
 	{
 		name: "Dusty Tome",
 		category: "RELIC",
 		id: "tvasf",
 		dlc: "BASE",
 		description: [`Upon pickup, obtain an Ancient Card.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/dusty_tome.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "DARV" },
+		},
 	},
-	// TODO
 	{
 		name: "Ectoplasm",
 		category: "RELIC",
 		id: "7k503",
 		dlc: "BASE",
 		description: [
-			`You can no longer gain Gold. Gain Energy at the start of each turn.`,
+			`You can no longer gain Gold. Gain 1 Energy at the start of each turn.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/ectoplasm.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "DARV" },
+		},
 	},
-	// TODO
 	{
 		name: "Empty Cage",
 		category: "RELIC",
 		id: "r0rqq",
 		dlc: "BASE",
 		description: [`Upon pickup, remove 2 cards from your Deck.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/empty_cage.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "DARV" },
+		},
 	},
-	// TODO
 	{
 		name: "Pandora's Box",
 		category: "RELIC",
 		id: "emwi2",
 		dlc: "BASE",
 		description: [`Transform ALL Strikes and Defends.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/pandoras_box.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "DARV" },
+		},
 	},
-	// TODO
 	{
 		name: "Philosopher's Stone",
 		category: "RELIC",
 		id: "cezb8",
 		dlc: "BASE",
 		description: [
-			`Gain Energy at the start of each turn. ALL enemies start combat with 1 Strength.`,
+			`Gain 1 Energy at the start of each turn. ALL enemies start combat with 1 Strength.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/philosophers_stone.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "DARV" },
+		},
 	},
-	// TODO
 	{
 		name: "Runic Pyramid",
 		category: "RELIC",
 		id: "8lx0w",
 		dlc: "BASE",
 		description: [`At the end of your turn, you no longer discard your Hand.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/runic_pyramid.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "DARV" },
+		},
 	},
-	// TODO
 	{
 		name: "Snecko Eye",
 		category: "RELIC",
@@ -2209,46 +2415,55 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of your turn, draw 2 additional cards. Start each combat Confused.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/snecko_eye.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "DARV" },
+		},
 	},
-	// TODO
 	{
 		name: "Sozu",
 		category: "RELIC",
 		id: "ly79l",
 		dlc: "BASE",
 		description: [
-			`Gain Energy at the start of each turn. You can no longer obtain Potions.`,
+			`Gain 1 Energy at the start of each turn. You can no longer obtain Potions.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/sozu.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "DARV" },
+		},
 	},
-	// TODO
 	{
 		name: "Velvet Choker",
 		category: "RELIC",
 		id: "g4ebs",
 		dlc: "BASE",
 		description: [
-			`Gain Energy at the start of each turn. You cannot play more than 6 cards per turn.`,
+			`Gain 1 Energy at the start of each turn. You cannot play more than 6 cards per turn.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/velvet_choker.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "DARV" },
+		},
 	},
-	// TODO
 	{
 		name: "Arcane Scroll",
 		category: "RELIC",
@@ -2257,56 +2472,87 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, obtain a random Rare Card to add to your Deck.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/arcane_scroll.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Booming Conch",
 		category: "RELIC",
 		id: "y6o78",
 		dlc: "BASE",
 		description: [`At the start of Elite combats, draw 2 additional cards.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/booming_conch.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Cursed Pearl",
 		category: "RELIC",
 		id: "kwci1",
 		dlc: "BASE",
-		description: [`Upon pickup, receive {{C|Greed||2}}. Gain 333 Gold.`],
+		description: [`Upon pickup, receive Greed. Gain 333 Gold.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/cursed_pearl.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Golden Pearl",
 		category: "RELIC",
 		id: "jb5wa",
 		dlc: "BASE",
 		description: [`Upon pickup, gain 150 Gold.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/golden_pearl.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
+	{
+		name: "Hefty Tablet",
+		category: "RELIC",
+		id: "Sld3V",
+		dlc: "BASE",
+		description: [
+			`Choose 1 of 3 Rare cards to add to your Deck. Add 1 Injury to your Deck.`,
+		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
+		imageUrl: "relics/hefty_tablet.png",
+		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
+		location: undefined,
+		rarity: "ANCIENT",
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
+	},
 	{
 		name: "Large Capsule",
 		category: "RELIC",
@@ -2315,28 +2561,35 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, obtain 2 random Relics. Add an additional Strike and Defend to your Deck.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/large_capsule.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Lava Rock",
 		category: "RELIC",
 		id: "fzs2r",
 		dlc: "BASE",
 		description: [`The Act 1 Boss drops 2 Relics.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/lava_rock.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Lead Paperweight",
 		category: "RELIC",
@@ -2345,148 +2598,236 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, choose 1 of 2 Colorless cards to add to your Deck.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/lead_paperweight.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Leafy Poultice",
 		category: "RELIC",
 		id: "8f0p7",
 		dlc: "BASE",
 		description: [
-			`Upon pickup, Transform 1 of your Strikes and 1 of your Defends and lose 10 Max HP.`,
+			`Upon pickup, Transform 1 of your Strikes and 1 of your Defends and lose 12 Max HP.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/leafy_poultice.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Lost Coffer",
 		category: "RELIC",
 		id: "7qky0",
 		dlc: "BASE",
 		description: [
-			`Upon pickup, gain 1 card reward and procure 1 random Potions|Potion.`,
+			`Upon pickup, gain 1 card reward and procure 1 random Potion.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/lost_coffer.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Massive Scroll",
 		category: "RELIC",
 		id: "fykpz",
 		dlc: "BASE",
 		description: [
-			`Upon pickup, choose 1 of 3 Multiplayer Colorless Cards to add to your Deck.`,
+			`Upon pickup, choose 1 of 3 Multiplayer Cards to add to your Deck.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/massive_scroll.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
+	{
+		name: `Neow's Bones`,
+		category: "RELIC",
+		id: "1crEz",
+		dlc: "BASE",
+		description: [
+			`Upon pickup, gain 2 random Neow Relics. Add 1 random Curse to your Deck.`,
+		],
+		flavorText: `Details for this relic will be revealed in the future...`,
+		isUpgrade: false,
+		imageUrl: "relics/neows_bones.png",
+		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
+		location: undefined,
+		rarity: "ANCIENT",
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
+	},
+	{
+		name: `Neow's Talisman`,
+		category: "RELIC",
+		id: "iHY7I",
+		dlc: "BASE",
+		description: [
+			`Upon pickup, Upgrade 1 of your Strikes and 1 of your Defends.`,
+		],
+		flavorText: `Details for this relic will be revealed in the future...`,
+		isUpgrade: false,
+		imageUrl: "relics/neows_talisman.png",
+		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
+		location: undefined,
+		rarity: "ANCIENT",
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
+	},
 	{
 		name: "Neow's Torment",
 		category: "RELIC",
 		id: "glc7b",
 		dlc: "BASE",
-		description: [`Upon pickup, add 1 {{C|Neow's Fury||2}} to your Deck.`],
+		description: [`Upon pickup, add 1 Neow's Fury to your Deck.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/neows_torment.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "New Leaf",
 		category: "RELIC",
 		id: "r4nn4",
 		dlc: "BASE",
 		description: [`Upon pickup, Transform 1 card.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/new_leaf.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Nutritious Oyster",
 		category: "RELIC",
 		id: "c6f3g",
 		dlc: "BASE",
 		description: [`Upon pickup, raise your Max HP by 11.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/nutritious_oyster.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
+	{
+		name: "Phial Holster",
+		category: "RELIC",
+		id: "sqCY8",
+		dlc: "BASE",
+		description: [
+			`Upon pickup, gain 1 potion slot and procure 2 random Potions.`,
+		],
+		flavorText: `Details for this relic will be revealed in the future...`,
+		isUpgrade: false,
+		imageUrl: `relics/phial_holster.png`,
+		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
+		location: undefined,
+		rarity: "ANCIENT",
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
+	},
 	{
 		name: "Pomander",
 		category: "RELIC",
 		id: "nkv1v",
 		dlc: "BASE",
 		description: [`Upon pickup, Upgrade a card.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/pomander.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Precarious Shears",
 		category: "RELIC",
 		id: "5res1",
 		dlc: "BASE",
 		description: [
-			`Upon pickup, remove 2 cards from your Deck and take 13 damage.`,
+			`Upon pickup, remove 2 cards from your Deck and take 16 damage.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/precarious_shears.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Precise Scissors",
 		category: "RELIC",
 		id: "8vu9w",
 		dlc: "BASE",
 		description: [`Upon pickup, remove 1 card from your Deck.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/precise_scissors.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Scroll Boxes",
 		category: "RELIC",
@@ -2495,14 +2836,17 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, lose all Gold and choose 1 of 2 packs of cards to add to your Deck.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/scroll_boxes.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Silver Crucible",
 		category: "RELIC",
@@ -2511,42 +2855,71 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`The first 3 card rewards you see are Upgraded. The first Treasure Chest you open is empty.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/silver_crucible.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Small Capsule",
 		category: "RELIC",
 		id: "axay8",
 		dlc: "BASE",
 		description: [`Upon pickup, obtain a random Relic.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/small_capsule.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
 	{
 		name: "Stone Humidifier",
 		category: "RELIC",
 		id: "b7n6u",
 		dlc: "BASE",
 		description: [`Whenever you Rest at a Rest Site, raise your Max HP by 5.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/stone_humidifier.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
 	},
-	// TODO
+	{
+		name: "Winged Boots",
+		category: "RELIC",
+		id: "0tkXK",
+		dlc: "BASE",
+		description: [
+			`You may ignore paths when choosing the next rooms to travel to 3 times.`,
+		],
+		flavorText: `Details for this relic will be revealed in the future...`,
+		isUpgrade: false,
+		imageUrl: "relics/winged_boots.png",
+		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
+		rarity: "ANCIENT",
+		modifiers: undefined,
+		location: undefined,
+		linkedItems: {
+			ancient: { name: "NEOW" },
+		},
+	},
+
 	{
 		name: "Beautiful Bracelet",
 		category: "RELIC",
@@ -2555,60 +2928,72 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, choose 3 cards in your Deck. Enchant them with Swift 3.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/beautiful_bracelet.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NONUPEIPE" },
+		},
 	},
-	// TODO
 	{
 		name: "Blessed Antler",
 		category: "RELIC",
 		id: "y71is",
 		dlc: "BASE",
 		description: [
-			`Gain Energy at the start of each turn. At the start of each combat, shuffle 3 {{C|Dazed||2}} into your Draw Pile.`,
+			`Gain 1 Energy at the start of each turn. At the start of each combat, shuffle 3 Dazed into your Draw Pile.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/blessed_antler.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NONUPEIPE" },
+		},
 	},
-	// TODO
 	{
 		name: "Brilliant Scarf",
 		category: "RELIC",
 		id: "zgbue",
 		dlc: "BASE",
 		description: [`The 5th card you play each turn is free.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/brilliant_scarf.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NONUPEIPE" },
+		},
 	},
-	// TODO
 	{
 		name: "Delicate Frond",
 		category: "RELIC",
 		id: "9bnwn",
 		dlc: "BASE",
 		description: [
-			`At the start of each combat, fill all empty Potions|Potion slots with random Potions.`,
+			`At the start of each combat, fill all empty Potions slots with random Potions.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/delicate_frond.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NONUPEIPE" },
+		},
 	},
-	// TODO
 	{
 		name: "Diamond Diadem",
 		category: "RELIC",
@@ -2617,14 +3002,17 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you play 2 or fewer cards in a turn, take half damage from enemies.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/diamond_diadem.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NONUPEIPE" },
+		},
 	},
-	// TODO
 	{
 		name: "Fur Coat",
 		category: "RELIC",
@@ -2633,130 +3021,160 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, mark 7 random combats. Enemies in those rooms have 1 HP.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fur_coat.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NONUPEIPE" },
+		},
 	},
-	// TODO
 	{
 		name: "Glitter",
 		category: "RELIC",
 		id: "ww7d4",
 		dlc: "BASE",
 		description: [`Enchant all card rewards with Glam.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/glitter.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NONUPEIPE" },
+		},
 	},
-	// TODO
 	{
 		name: "Jewelry Box",
 		category: "RELIC",
 		id: "0s2p1",
 		dlc: "BASE",
-		description: [`Upon pickup, add 1 {{C|Apotheosis||2}} to your Deck.`],
+		description: [`Upon pickup, add 1 Apotheosis to your Deck.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/jewelry_box.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NONUPEIPE" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Looming Fruit",
 		category: "RELIC",
 		id: "0c5a8",
 		dlc: "BASE",
 		description: [`Upon pickup, raise your Max HP by 31.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/looming_fruit.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NONUPEIPE" },
+		},
 	},
-	// TODO
 	{
 		name: "Signet Ring",
 		category: "RELIC",
 		id: "b1mfm",
 		dlc: "BASE",
 		description: [`Upon pickup, gain 999 Gold.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/signet_ring.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "NONUPEIPE" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Alchemical Coffer",
 		category: "RELIC",
 		id: "4m52g",
 		dlc: "BASE",
 		description: [
-			`Upon pickup, gain 4 Potions|Potion slots filled with random Potions.`,
+			`Upon pickup, gain 4 Potion slots filled with random Potions.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/alchemical_coffer.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "OROBAS" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Archaic Tooth",
 		category: "RELIC",
 		id: "ya6np",
 		dlc: "BASE",
 		description: [
-			`Upon pickup, Transform a starter card with an ancient version.`,
+			`Upon pickup, Transform a starter card into an ancient version.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/archaic_tooth.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "OROBAS" },
+		},
 	},
-	// TODO
 	{
 		name: "Driftwood",
 		category: "RELIC",
 		id: "29k6v",
 		dlc: "BASE",
 		description: [`You may reroll each card reward once.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/driftwood.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "OROBAS" },
+		},
 	},
-	// TODO
 	{
 		name: "Electric Shrymp",
 		category: "RELIC",
 		id: "vehin",
 		dlc: "BASE",
 		description: [`Upon pickup, Enchant a Skill with Imbued.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/electric_shrymp.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "OROBAS" },
+		},
 	},
-	// TODO
 	{
 		name: "Glass Eye",
 		category: "RELIC",
@@ -2765,60 +3183,72 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, obtain 2 Common cards, 2 Uncommon cards, and 1 Rare card.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/glass_eye.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "OROBAS" },
+		},
 	},
-	// TODO
 	{
 		name: "Prismatic Gem",
 		category: "RELIC",
 		id: "4m7xj",
 		dlc: "BASE",
 		description: [
-			`Gain Energy at the start of each turn. Card rewards now contain cards from other colors.`,
+			`Gain 1 Energy at the start of each turn. Card rewards now contain cards from other colors.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/prismatic_gem.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "OROBAS" },
+		},
 	},
-	// TODO
 	{
 		name: "Radiant Pearl",
 		category: "RELIC",
 		id: "1zor4",
 		dlc: "BASE",
 		description: [
-			`At the start of each combat, add 1 {{C|Luminesce||2}} into your Hand.`,
+			`At the start of each combat, add 1 Luminesce into your Hand.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/radiant_pearl.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "OROBAS" },
+		},
 	},
-	// TODO
 	{
 		name: "Sand Castle",
 		category: "RELIC",
 		id: "9v7kg",
 		dlc: "BASE",
 		description: [`Upon pickup, Upgrade 6 random cards.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/sand_castle.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "OROBAS" },
+		},
 	},
-	// TODO
 	{
 		name: "Sea Glass",
 		category: "RELIC",
@@ -2827,14 +3257,18 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`See 15 cards from another character. Choose any number of them to add to your Deck.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/sea_glass.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "OROBAS" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Touch of Orobas",
 		category: "RELIC",
@@ -2843,42 +3277,54 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, replace your starter Relic with an Ancient version.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/touch_of_orobas.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "OROBAS" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Pael's Blood",
 		category: "RELIC",
 		id: "1zbe3",
 		dlc: "BASE",
 		description: [`At the start of your turn, draw 1 additional card.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/paels_blood.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "PAEL" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Pael's Claw",
 		category: "RELIC",
 		id: "2dueo",
 		dlc: "BASE",
 		description: [`Upon pickup, Enchant all Defends with Goopy.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/paels_claw.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "PAEL" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Pael's Eye",
 		category: "RELIC",
@@ -2887,58 +3333,74 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`The first time each combat you end your turn without playing cards, Exhaust your Hand, and take an extra turn.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/paels_eye.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "PAEL" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Pael's Flesh",
 		category: "RELIC",
 		id: "ik54z",
 		dlc: "BASE",
 		description: [
-			`Gain an additional Energy at the start of your 3rd turn, and every turn after that.`,
+			`Gain an additional 1 Energy at the start of your 3rd turn, and every turn after that.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/paels_flesh.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "PAEL" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Pael's Growth",
 		category: "RELIC",
 		id: "4yekb",
 		dlc: "BASE",
 		description: [`Upon pickup, Enchant a card with Clone.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/paels_growth.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "PAEL" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Pael's Horn",
 		category: "RELIC",
 		id: "njdsf",
 		dlc: "BASE",
-		description: [`Upon pickup, add 2 {{C|Relax||2}} to your Deck.`],
+		description: [`Upon pickup, add 2 Relax to your Deck.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/paels_horn.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "PAEL" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Pael's Legion",
 		category: "RELIC",
@@ -2947,30 +3409,38 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Doubles Block gained from a card, then goes to sleep for 2 turns.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/paels_legion.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "PAEL" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Pael's Tears",
 		category: "RELIC",
 		id: "xehia",
 		dlc: "BASE",
 		description: [
-			`If you end your turn with unspent Energy, gain an additional 2 Energy next turn.`,
+			`If you end your turn with unspent 1 Energy, gain an additional 2 Energy next turn.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/paels_tears.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "PAEL" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Pael's Tooth",
 		category: "RELIC",
@@ -2979,14 +3449,18 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, remove 5 cards from your Deck. After each combat, randomly add 1 back Upgraded.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/paels_tooth.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "PAEL" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Pael's Wing",
 		category: "RELIC",
@@ -2995,116 +3469,149 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`You may sacrifice card rewards to Pael. Every 2 sacrifices, obtain a Relic.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/paels_wing.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "PAEL" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Claws",
 		category: "RELIC",
 		id: "3627n",
 		dlc: "BASE",
-		description: [`Upon pickup, Transform up to 6 cards into {{C|Maul||2}}.`],
+		description: [`Upon pickup, Transform up to 6 cards into Maul.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/claws.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TANX" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Crossbow",
 		category: "RELIC",
 		id: "myxh1",
 		dlc: "BASE",
 		description: [
-			`At the start of your turn, add a random Attack into your Hand. It costs 0Energy this turn.`,
+			`At the start of your turn, add a random Attack into your Hand. It's free to play this turn`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/crossbow.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TANX" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Iron Club",
 		category: "RELIC",
 		id: "4moau",
 		dlc: "BASE",
 		description: [`Every 4 cards you play, draw 1 card.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/iron_club.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TANX" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Meat Cleaver",
 		category: "RELIC",
 		id: "9kftj",
 		dlc: "BASE",
 		description: [`You may Cook at Rest Sites.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/meat_cleaver.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TANX" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Sai",
 		category: "RELIC",
 		id: "e90gr",
 		dlc: "BASE",
 		description: [`At the start of your turn, gain 7 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/sai.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+
+		linkedItems: {
+			ancient: { name: "TANX" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Spiked Gauntlets",
 		category: "RELIC",
 		id: "3d5fs",
 		dlc: "BASE",
 		description: [
-			`Gain Energy at the start of each turn. Powers cost 1 more Energy.`,
+			`Gain 1 Energy at the start of each turn. Powers cost 1 more 1 Energy.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/spiked_gauntlets.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TANX" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Tanx's Whistle",
 		category: "RELIC",
 		id: "9gczc",
 		dlc: "BASE",
-		description: [`Upon pickup, add 1 {{C|Whistle||2}} to your Deck.`],
+		description: [`Upon pickup, add 1 Whistle to your Deck.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/tanxs_whistle.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TANX" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Throwing Axe",
 		category: "RELIC",
@@ -3113,58 +3620,74 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`The first card you play each combat is played an extra time.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/throwing_axe.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TANX" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Tri-Boomerang",
 		category: "RELIC",
 		id: "6mama",
 		dlc: "BASE",
 		description: [`Choose 3 Attacks in your Deck. Enchant them with Instinct.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/tri-boomerang.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TANX" },
+		},
 	},
-	// TODO
+
 	{
 		name: "War Hammer",
 		category: "RELIC",
 		id: "mr9yb",
 		dlc: "BASE",
 		description: [`Whenever you kill an Elite, Upgrade 4 random cards.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/war_hammer.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TANX" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Biiig Hug",
 		category: "RELIC",
 		id: "ssz2t",
 		dlc: "BASE",
 		description: [
-			`Upon pickup, remove 4 cards from your Deck. Whenever you shuffle your Draw Pile, add a {{C|Soot||2}} into your Draw Pile.`,
+			`Upon pickup, remove 4 cards from your Deck. Whenever you shuffle your Draw Pile, add a Soot into your Draw Pile.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/biiig_hug.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TEZCATARA" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Golden Compass",
 		category: "RELIC",
@@ -3173,14 +3696,18 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, replace the Act 2 Map with a single special path.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/golden_compass.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TEZCATARA" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Nutritious Soup",
 		category: "RELIC",
@@ -3189,58 +3716,74 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, Enchant all Strikes in your Deck with Tezcatara's Ember.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/nutritious_soup.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TEZCATARA" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Pumpkin Candle",
 		category: "RELIC",
 		id: "5cimt",
 		dlc: "BASE",
 		description: [
-			`Gain Energy at the start of each turn. Extinguishes at the start of Act 3.`,
+			`Gain 1 Energy at the start of each turn. Extinguishes at the start of Act 3.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/pumpkin_candle.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TEZCATARA" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Seal of Gold",
 		category: "RELIC",
 		id: "3djgw",
 		dlc: "BASE",
-		description: [`At the start of your turn, spend 5 Gold to gain Energy.`],
+		description: [`At the start of your turn, spend 5 Gold to gain 1 Energy.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/seal_of_gold.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TEZCATARA" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Storybook",
 		category: "RELIC",
 		id: "6whqt",
 		dlc: "BASE",
-		description: [`Upon pickup, add 1 {{C|Brightest Flame||2}} to your Deck.`],
+		description: [`Upon pickup, add 1 Brightest Flame to your Deck.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/storybook.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TEZCATARA" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Toasty Mittens",
 		category: "RELIC",
@@ -3249,14 +3792,18 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of your turn, Exhaust the top card of your Draw Pile and gain 1 Strength.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/toasty_mittens.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TEZCATARA" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Toy Box",
 		category: "RELIC",
@@ -3265,58 +3812,74 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, obtain 4 Wax Relics. Every 3 combats, your left-most Wax Relic will melt away.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/toy_box.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TEZCATARA" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Very Hot Cocoa",
 		category: "RELIC",
 		id: "7vnky",
 		dlc: "BASE",
 		description: [`Start each combat with an additional 4Energy.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/very_hot_cocoa.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TEZCATARA" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Yummy Cookie",
 		category: "RELIC",
 		id: "92et2",
 		dlc: "BASE",
 		description: [`Upon pickup, Upgrade 4 cards.`],
-		imageUrl: "relics/yummy_cookie_defect.png", // TODO: Has character variants, maybe incorporate somehow
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
+		imageUrl: "relics/yummy_cookie_defect.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "TEZCATARA" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Blood-Soaked Rose",
 		category: "RELIC",
 		id: "5opyz",
 		dlc: "BASE",
 		description: [
-			`Upon pickup, add 1 {{C|Enthralled||2}} to your Deck. Gain Energy at the start of each turn.`,
+			`Upon pickup, add 1 Enthralled to your Deck. Gain 1 Energy at the start of each turn.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/blood_soaked_rose.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "VAKUU" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Choices Paradox",
 		category: "RELIC",
@@ -3325,14 +3888,18 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of each combat, add 1 of 5 random cards into your Hand. Add Retain to the chosen card.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/choices_paradox.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "VAKUU" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Distinguished Cape",
 		category: "RELIC",
@@ -3341,14 +3908,18 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, lose 9 Max HP. Add 3 Apparitions to your Deck.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/distinguished_cape.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "VAKUU" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Fiddle",
 		category: "RELIC",
@@ -3357,14 +3928,18 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of each turn, draw 2 additional cards. You may not draw cards during your turn.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fiddle.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "VAKUU" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Jeweled Mask",
 		category: "RELIC",
@@ -3373,14 +3948,18 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of combat put a random Powers from your Draw Pile into your Hand, it's free to play.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/jeweled_mask.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "VAKUU" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Lord's Parasol",
 		category: "RELIC",
@@ -3389,14 +3968,17 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`When you encounter the Merchant, immediately obtain EVERYTHING he sells.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/lords_parasol.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "VAKUU" },
+		},
 	},
-	// TODO
 	{
 		name: "Music Box",
 		category: "RELIC",
@@ -3405,30 +3987,36 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Create an Ethereal copy of the first Attack you play each turn.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/music_box.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "VAKUU" },
+		},
 	},
-	// TODO
 	{
 		name: "Preserved Fog",
 		category: "RELIC",
 		id: "0qibh",
 		dlc: "BASE",
 		description: [
-			`Upon pickup, remove 5 cards from your Deck. Add {{C|Folly||2}} to your Deck.`,
+			`Upon pickup, remove 3 cards from your Deck. Add Folly to your Deck.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/preserved_fog.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "VAKUU" },
+		},
 	},
-	// TODO
 	{
 		name: "Sere Talon",
 		category: "RELIC",
@@ -3437,30 +4025,38 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, add 2 random Curses and 3 Wishes to your Deck.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/sere_talon.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "VAKUU" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Whispering Earring",
 		category: "RELIC",
 		id: "j1d95",
 		dlc: "BASE",
 		description: [
-			`Gain Energy at the start of each turn. Vakuu plays your first turn for you.`,
+			`Gain 1 Energy at the start of each turn. Vakuu plays your first turn for you.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/whispering_earring.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "ANCIENT",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
+		linkedItems: {
+			ancient: { name: "VAKUU" },
+		},
 	},
-	// TODO
+
 	{
 		name: "Belt Buckle",
 		category: "RELIC",
@@ -3469,30 +4065,34 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`While you have no Potions, you have 2 additional Dexterity.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/belt_buckle.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Bread",
 		category: "RELIC",
 		id: "fayvf",
 		dlc: "BASE",
 		description: [
-			`At the start of your first turn, lose 2 Energy. At the start of all other turns, gain Energy.`,
+			`At the start of your first turn, lose 2 Energy. At the start of all other turns, gain 1 Energy.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/bread.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Brimstone",
 		category: "RELIC",
@@ -3501,14 +4101,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of your turn, gain 2 Strength and ALL enemies gain 1 Strength.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/brimstone.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: ["IRONCLAD"],
-		modifiers: [],
+		linkedItems: { character: { name: "IRONCLAD" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Burning Sticks",
 		category: "RELIC",
@@ -3517,56 +4119,64 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`The first time each combat you Exhaust a Skill, add a copy of it into your Hand.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/burning_sticks.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Cauldron",
 		category: "RELIC",
 		id: "yu0me",
 		dlc: "BASE",
 		description: [`Upon pickup, brews 5 random Potions.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/cauldron.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Chemical X",
 		category: "RELIC",
 		id: "6g4ou",
 		dlc: "BASE",
 		description: [`The effects of your cost X cards are increased by 2.`],
+		flavorText:
+			"WARNING: Do not combine with sugar, spice, and everything nice.",
+		isUpgrade: false,
 		imageUrl: "relics/chemical_x.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Dingy Rug",
 		category: "RELIC",
 		id: "bjij8",
 		dlc: "BASE",
 		description: [`Card rewards can now contain Colorless cards.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/dingy_rug.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Dolly's Mirror",
 		category: "RELIC",
@@ -3575,70 +4185,80 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, obtain an additional copy of a card in your Deck.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/dollys_mirror.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Dragon Fruit",
 		category: "RELIC",
 		id: "w099k",
 		dlc: "BASE",
 		description: [`Whenever you gain Gold, raise your Max HP by 1.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/dragon_fruit.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Ghost Seed",
 		category: "RELIC",
 		id: "99oez",
 		dlc: "BASE",
 		description: [`Strikes and Defends gain Ethereal.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/ghost_seed.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Gnarled Hammer",
 		category: "RELIC",
 		id: "qi1zt",
 		dlc: "BASE",
 		description: [`Upon pickup, Enchant up to 3 Attacks with Sharp 3.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/gnarled_hammer.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Kifuda",
 		category: "RELIC",
 		id: "cam4e",
 		dlc: "BASE",
 		description: [`Upon pickup, Enchant up to 3 cards with Adroit.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/kifuda.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Lava Lamp",
 		category: "RELIC",
@@ -3647,14 +4267,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the end of combat, Upgrade all card rewards if you took no damage.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/lava_lamp.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Lee's Waffle",
 		category: "RELIC",
@@ -3663,112 +4285,128 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, raise your Max HP by 7 and heal all of your HP.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/lees_waffle.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Membership Card",
 		category: "RELIC",
 		id: "vlrp4",
 		dlc: "BASE",
 		description: [`50% discount on all products!`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/membership_card.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Miniature Tent",
 		category: "RELIC",
 		id: "4ac9q",
 		dlc: "BASE",
 		description: [`You may choose any number of options at Rest Sites.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/miniature_tent.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Mystic Lighter",
 		category: "RELIC",
 		id: "gip2x",
 		dlc: "BASE",
 		description: [`Enchanted Attacks deal 9 additional damage.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/mystic_lighter.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Ninja Scroll",
 		category: "RELIC",
 		id: "gsmnf",
 		dlc: "BASE",
 		description: [`At the start of each combat, add 3 Shivs into your Hand.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/ninja_scroll.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: ["SILENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "SILENT" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Orrery",
 		category: "RELIC",
 		id: "lqnun",
 		dlc: "BASE",
 		description: [`Upon pickup, gain 5 card rewards.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/orrery.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Punch Dagger",
 		category: "RELIC",
 		id: "yy4tq",
 		dlc: "BASE",
 		description: [`Upon pickup, Enchant an Attack with Momentum 5.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/punch_dagger.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Ringing Triangle",
 		category: "RELIC",
 		id: "2tr77",
 		dlc: "BASE",
 		description: [`Retain your Hand on the first turn of combat.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/ringing_triangle.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Royal Stamp",
 		category: "RELIC",
@@ -3777,28 +4415,32 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, choose an Attack or Skill in your Deck to Enchant with Royally Approved.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/royal_stamp.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Runic Capacitor",
 		category: "RELIC",
 		id: "sg786",
 		dlc: "BASE",
 		description: [`Start each combat with 3 additional Orb Slots.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/runic_capacitor.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: ["DEFECT"],
-		modifiers: [],
+		linkedItems: { character: { name: "DEFECT" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Screaming Flagon",
 		category: "RELIC",
@@ -3807,42 +4449,48 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`If you end your turn with no cards in your Hand, deal 20 damage to ALL enemies.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/screaming_flagon.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Sling of Courage",
 		category: "RELIC",
 		id: "ryuyr",
 		dlc: "BASE",
 		description: [`Start each Elite combat with 2 Strength.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/sling_of_courage.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "The Abacus",
 		category: "RELIC",
 		id: "kbnv1",
 		dlc: "BASE",
 		description: [`Whenever you shuffle your Draw Pile, gain 6 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/the_abacus.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Toolbox",
 		category: "RELIC",
@@ -3851,14 +4499,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of each combat, choose 1 of 3 random Colorless cards and add the chosen card into your Hand.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/toolbox.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Undying Sigil",
 		category: "RELIC",
@@ -3867,14 +4517,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Enemies with at least as much Doom as HP deal 50% less damage.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/undying_sigil.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: ["NECROBINDER"],
-		modifiers: [],
+		linkedItems: { character: { name: "NECROBINDER" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Vitruvian Minion",
 		category: "RELIC",
@@ -3883,14 +4535,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Cards containing “Minion” deal double damage and gain double Block.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/vitruvian_minion.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: ["REGENT"],
-		modifiers: [],
+		linkedItems: { character: { name: "REGENT" } },
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Wing Charm",
 		category: "RELIC",
@@ -3899,14 +4553,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`A random card in each card reward is Enchanted with Swift 1.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/wing_charm.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "SHOP",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Big Mushroom",
 		category: "RELIC",
@@ -3915,14 +4571,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Upon pickup, raise your Max HP by 20. At the start of each combat, draw 2 fewer cards.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/big_mushroom.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Bing Bong",
 		category: "RELIC",
@@ -3931,14 +4589,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you add a card to your Deck, add one additional copy.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/bing_bong.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Bone Tea",
 		category: "RELIC",
@@ -3947,86 +4607,98 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of the next combat, Upgrade your starting hand.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/bone_tea.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Byrdpip",
 		category: "RELIC",
 		id: "tvg0l",
 		dlc: "BASE",
 		description: [
-			`Upon pickup, gain the card {{C|Byrd Swoop||2}}. A Byrdpip will accompany you in battles.`,
+			`Upon pickup, gain the card Byrd Swoop. A Byrdpip will accompany you in battles.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/byrdpip.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Darkstone Periapt",
 		category: "RELIC",
 		id: "9busj",
 		dlc: "BASE",
 		description: [`Whenever you obtain a Curse, raise your Max HP by 6.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/darkstone_periapt.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Daughter of the Wind",
 		category: "RELIC",
 		id: "e7iwy",
 		dlc: "BASE",
 		description: [`Whenever you play an Attack, gain 1 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/daughter_of_the_wind.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Dream Catcher",
 		category: "RELIC",
 		id: "qdhcu",
 		dlc: "BASE",
 		description: [`Whenever you Rest, you may add a card to your Deck.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/dream_catcher.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Ember Tea",
 		category: "RELIC",
 		id: "z4p40",
 		dlc: "BASE",
 		description: [`At the start of the next 5 combats, gain 2 Strength.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/ember_tea.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Forgotten Soul",
 		category: "RELIC",
@@ -4035,28 +4707,32 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you Exhaust a card, deal 1 damage to a random enemy.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/forgotten_soul.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Fragrant Mushroom",
 		category: "RELIC",
 		id: "k94zs",
 		dlc: "BASE",
 		description: [`Upon pickup, lose 15 HP and Upgrade 3 random cards.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fragrant_mushroom.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Fresnel Lens",
 		category: "RELIC",
@@ -4065,28 +4741,32 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you add a card that gains Block to your Deck, Enchant it with Nimble 2.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fresnel_lens.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Hand Drill",
 		category: "RELIC",
 		id: "s0m7f",
 		dlc: "BASE",
 		description: [`Whenever you break an enemy's Block, apply 2 Vulnerable.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/hand_drill.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "History Course",
 		category: "RELIC",
@@ -4095,28 +4775,32 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of your turn, play a copy of your last played Attack or Skill.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/history_course.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Lost Wisp",
 		category: "RELIC",
 		id: "oupc6",
 		dlc: "BASE",
 		description: [`Whenever you play a Power, deal 8 damage to ALL enemies.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/lost_wisp.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Maw Bank",
 		category: "RELIC",
@@ -4125,14 +4809,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you climb a floor, gain 12 Gold. No longer works when you spend any Gold at the shop.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/maw_bank.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Mr. Struggles",
 		category: "RELIC",
@@ -4141,70 +4827,80 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of your turn, deal damage equal to the turn number to ALL enemies.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/mr_struggles.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Pollinous Core",
 		category: "RELIC",
 		id: "hctgu",
 		dlc: "BASE",
 		description: [`Every 4 turns, draw 2 additional cards.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/pollinous_core.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Royal Poison",
 		category: "RELIC",
 		id: "w4a4e",
 		dlc: "BASE",
 		description: [`At the start of each combat, lose 4 HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/royal_poison.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Sword of Jade",
 		category: "RELIC",
 		id: "kyjhu",
 		dlc: "BASE",
 		description: [`Start each combat with 3 Strength.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/sword_of_jade.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Sword of Stone",
 		category: "RELIC",
 		id: "fx4as",
 		dlc: "BASE",
 		description: [`Transforms into a powerful Relic after defeating 5 Elites.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/sword_of_stone.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Tea of Discourtesy",
 		category: "RELIC",
@@ -4213,14 +4909,16 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`At the start of the next combat, shuffle 2 Dazed into your Draw Pile.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/tea_of_discourtesy.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "The Boot",
 		category: "RELIC",
@@ -4229,211 +4927,253 @@ const RELICS: SlayTheSpire2RelicItem[] = [
 		description: [
 			`Whenever you would deal 4 or less unblocked attack damage, increase it to 5.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/the_boot.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "The Chosen Cheese",
 		category: "RELIC",
 		id: "vfn71",
 		dlc: "BASE",
 		description: [`At the end of combat, gain 1 Max HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/chosen_cheese.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Wongo Customer Appreciation Badge",
 		category: "RELIC",
 		id: "n94u5",
 		dlc: "BASE",
 		description: [`Does nothing.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/wongo_customer_appreciation_badge.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Wongo's Mystery Ticket",
 		category: "RELIC",
 		id: "ihe6f",
 		dlc: "BASE",
 		description: [`Receive 3 random Relics after 5 combats.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/wongos_mystery_ticket.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Anchor???",
 		category: "RELIC",
 		id: "ice0c",
 		dlc: "BASE",
 		description: [`Start each combat with 4 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fake_anchor.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Blood Vial???",
 		category: "RELIC",
 		id: "uqvpa",
 		dlc: "BASE",
 		description: [`At the start of each combat, heal 1 HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fake_blood_vial.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Happy Flower???",
 		category: "RELIC",
 		id: "dc87a",
 		dlc: "BASE",
-		description: [`Every 5 turns, gain Energy.`],
+		description: [`Every 5 turns, gain 1 Energy.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fake_happy_flower.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Lee's Waffle???",
 		category: "RELIC",
 		id: "pw1zy",
 		dlc: "BASE",
 		description: [`Upon pickup, heal 10% of your HP.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fake_lees_waffle.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Mango???",
 		category: "RELIC",
 		id: "dntmn",
 		dlc: "BASE",
 		description: [`Upon pickup, raise your Max HP by 3.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fake_mango.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Orichalcum???",
 		category: "RELIC",
 		id: "l0p6o",
 		dlc: "BASE",
 		description: [`If you end your turn without Block, gain 3 Block.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fake_orichalcum.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Snecko Eye???",
 		category: "RELIC",
 		id: "iywvv",
 		dlc: "BASE",
 		description: [`Start each combat Confused.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fake_snecko_eye.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Strike Dummy???",
 		category: "RELIC",
 		id: "zpvfn",
 		dlc: "BASE",
 		description: [`Cards containing “Strike” deal 1 additional damage.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fake_strike_dummy.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "The Merchant's Rug???",
 		category: "RELIC",
 		id: "rgf19",
 		dlc: "BASE",
 		description: [`Poor imitation. Does nothing.`],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fake_merchants_rug.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Venerable Tea Set???",
 		category: "RELIC",
 		id: "c6dd9",
 		dlc: "BASE",
 		description: [
-			`Whenever you enter a Rest Site, start the next combat with an additional Energy.`,
+			`Whenever you enter a Rest Site, start the next combat with an additional 1 Energy.`,
 		],
+		flavorText: "Details for this relic will be revealed in the future...",
+		isUpgrade: false,
 		imageUrl: "relics/fake_venerable_tea_set.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
-	// TODO
+
 	{
 		name: "Circlet",
 		category: "RELIC",
 		id: "pxdkh",
 		dlc: "BASE",
 		description: [`It's a circlet.`],
+		flavorText:
+			"A curious relic which appears when there's a problem within the Spire or there are no more relics to discover.",
+		isUpgrade: false,
 		imageUrl: "relics/circlet.png",
 		wikiUrl: `https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List`,
 		location: undefined,
 		rarity: "EVENT",
-		equippableBy: "ANY",
-		modifiers: [],
+
+		modifiers: undefined,
 	},
 ];
 
-export { RELICS, type SlayTheSpire2RelicItem };
+const RELIC_RARITY_MAP: Record<string, SlayTheSpire2RelicRarity> = {
+	starter: "STARTER",
+	common: "COMMON",
+	uncommon: "UNCOMMON",
+	rare: "RARE",
+	ancient: "ANCIENT",
+	shop: "SHOP",
+	event: "EVENT",
+	special: "SPECIAL",
+};
+
+export { RELIC_RARITY_MAP, RELICS, type SlayTheSpire2RelicItem };

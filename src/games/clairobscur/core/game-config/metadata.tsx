@@ -1,5 +1,4 @@
-import type { LogoSize } from "#/components/AppLogo";
-import type { GameMetadata } from "#/features/game/core/types";
+import type { GameMetadata } from "#/features/game/types.ts";
 import { GAME_ID } from "#/games/clairobscur/core/constants";
 import { ClairObscurLogo } from "#/games/clairobscur/core/Logo";
 
@@ -9,7 +8,7 @@ const METADATA: GameMetadata = {
 	label: "Clair Obscur",
 	description: `Clair Obscur: Expedition 33 is a turn-based role-playing video game developed by French studio Sandfall Interactive and published by Kepler Interactive. It follows the volunteers of Expedition 33, who set out to destroy the Paintress, a being at the root of the yearly Gommage, which erases those above an ever-decreasing age.`,
 	faviconSourcePath: "games/clairobscur/logos/512C33.png",
-	renderLogo: (size: LogoSize) => <ClairObscurLogo size={size} />,
+	LogoComponent: ClairObscurLogo,
 	externalResources: [
 		{
 			label: "Fandom Wiki",

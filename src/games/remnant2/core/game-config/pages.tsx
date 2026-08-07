@@ -1,21 +1,29 @@
 import { MultiSelect, SimpleGrid, Stack, Text } from "@mantine/core";
 import { parseAsString } from "nuqs";
 import type { ReactNode } from "react";
+import { BuildCreatePage } from "#/components/pages/BuildCreate.tsx";
+import { BuildEditPage } from "#/components/pages/BuildEdit.tsx";
+import { BuildViewPage } from "#/components/pages/BuildView.tsx";
+import { CreatedBuildsPage } from "#/components/pages/created-builds/CreatedBuilds.tsx";
+import { ItemListPage } from "#/components/pages/ItemList.tsx";
 import {
 	TriStateFilter,
 	type TriStateFilterValue,
-} from "#/components/TriStateFilter";
-import type { GamePages } from "#/features/game/core/types";
-import { AppItemPage } from "#/features/game/items/AppItemPage";
-import type { AppItem, GameFilterConfig } from "#/features/game/items/types";
+} from "#/components/TriStateFilter.tsx";
 import {
 	formatCategoryLabel,
 	getItemSubcategories,
 	itemMatchesCategory,
 	resolveLinkedItems,
 } from "#/features/game/items/utils";
+import type {
+	AppItem,
+	GameFilterConfig,
+	GamePages,
+} from "#/features/game/types.ts";
 import { ITEMS } from "#/games/remnant2/core/game-config/items";
-import { remnant2CollectedItemsDal } from "#/games/remnant2/dal/collected-items";
+import { remnant2CollectedItemsData } from "#/games/remnant2/data/collected-items/use-collected-items.ts";
+import { remnant2CreatedBuildsData } from "#/games/remnant2/data/created-builds/use-created-builds.ts";
 import type { Remnant2DLC } from "@/prisma";
 
 const REMNANT2_DLC_LABELS: Record<Remnant2DLC, string> = {
@@ -25,16 +33,16 @@ const REMNANT2_DLC_LABELS: Record<Remnant2DLC, string> = {
 	DLC3: "The Dark Horizon",
 };
 
-function parseDlc(raw: string): TriStateFilterValue {
+const parseDlc = (raw: string): TriStateFilterValue => {
 	if (!raw) return {};
 	try {
 		return JSON.parse(raw) as TriStateFilterValue;
 	} catch {
 		return {};
 	}
-}
+};
 
-function formatDlcLabel(raw: string): string {
+const formatDlcLabel = (raw: string): string => {
 	const dlc = parseDlc(raw);
 	const included = Object.entries(dlc)
 		.filter(([, s]) => s === "include")
@@ -46,9 +54,9 @@ function formatDlcLabel(raw: string): string {
 	if (included.length > 0) parts.push(`+${included.join(", ")}`);
 	if (excluded.length > 0) parts.push(`-${excluded.join(", ")}`);
 	return parts.join(" / ");
-}
+};
 
-const remnant2FilterConfig: GameFilterConfig = {
+const remnant2ItemFilterConfig: GameFilterConfig = {
 	label: "Remnant 2 Filters",
 	parsers: {
 		category: parseAsString.withDefault(""),
@@ -59,14 +67,12 @@ const remnant2FilterConfig: GameFilterConfig = {
 			key: "category",
 			label: "Categories",
 			defaultValue: "",
-			serialize: (v) => v || undefined,
 			formatValue: formatCategoryLabel,
 		},
 		{
 			key: "dlc",
 			label: "DLC",
 			defaultValue: "",
-			serialize: (v) => v || undefined,
 			formatValue: formatDlcLabel,
 		},
 	],
@@ -151,24 +157,28 @@ const remnant2FilterConfig: GameFilterConfig = {
 	},
 };
 
-const PAGES: GamePages = {
+export const PAGES: GamePages = {
 	renderItemLookup: () => (
-		<AppItemPage
+		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
-			dal={remnant2CollectedItemsDal}
-			gameFilterConfig={remnant2FilterConfig}
+			data={remnant2CollectedItemsData}
+			gameFilterConfig={remnant2ItemFilterConfig}
 		/>
 	),
 	renderCollectedItems: ({ mode }) => (
-		<AppItemPage
+		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
-			dal={remnant2CollectedItemsDal}
-			gameFilterConfig={remnant2FilterConfig}
+			data={remnant2CollectedItemsData}
+			gameFilterConfig={remnant2ItemFilterConfig}
 			viewMode={mode}
 		/>
 	),
+	renderCreatedBuilds: ({ mode }) => (
+		<CreatedBuildsPage data={remnant2CreatedBuildsData} viewMode={mode} />
+	),
+	renderCreateBuild: () => <BuildCreatePage />,
+	renderEditBuild: () => <BuildEditPage />,
+	renderViewBuild: () => <BuildViewPage />,
 };
-
-export { PAGES };

@@ -12,151 +12,21 @@ import { useNetwork } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { resolveWriteAction } from "#/features/dal/core/registry";
-import { clearSynced, deleteOp } from "#/features/dal/queue/pending-ops";
-import { forceSyncOp, syncOps } from "#/features/dal/queue/sync-runner";
-import type { PendingOp } from "#/features/dal/queue/types";
-import { usePendingOps } from "#/features/dal/queue/use-pending-ops";
-import { getGameMetadata } from "#/features/game/registry/game-registry";
+import { type PropsWithChildren, useEffect, useState } from "react";
+import { useGameId } from "#/features/game/use-game-id.ts";
+import { deleteOp } from "#/features/sync/local-data/queue/pending-ops";
+import type { PendingOp } from "#/features/sync/local-data/queue/types";
+import { usePendingOps } from "#/features/sync/local-data/queue/use-pending-ops";
+import {
+	forceSyncOp,
+	syncOps,
+} from "#/features/sync/local-data/sync-runner.ts";
+import {
+	buildTabHead,
+	loadProfileTabData,
+} from "#/features/user/profile-tab-head.ts";
 import { useSession } from "#/integrations/better-auth/auth-client";
-
-export const Route = createFileRoute("/account/profile/$userId/data-sync")({
-	component: DataSync,
-});
-
-function DataSync() {
-	const { data: session } = useSession();
-	const { online } = useNetwork();
-	const queryClient = useQueryClient();
-
-	const [mounted, setMounted] = useState(false);
-	useEffect(() => setMounted(true), []);
-
-	const pending = usePendingOps();
-	const canSync = !!session?.user?.id && online;
-
-	const syncAll = useMutation({
-		mutationFn: async () => {
-			if (!pending.data) return null;
-			return syncOps(pending.data, { resolveAction: resolveWriteAction });
-		},
-		onSuccess: (report) => {
-			if (!report) return;
-			const parts: string[] = [];
-			if (report.applied) parts.push(`${report.applied} applied`);
-			if (report.noops) parts.push(`${report.noops} already up-to-date`);
-			if (report.conflicts) parts.push(`${report.conflicts} conflicts`);
-			if (report.errors) parts.push(`${report.errors} errors`);
-			const hasIssues = report.conflicts > 0 || report.errors > 0;
-			notifications.show({
-				title: hasIssues ? "Sync completed with issues" : "Sync complete",
-				message: parts.length ? parts.join(", ") : "Nothing to sync.",
-				color: hasIssues ? "orange" : "green",
-			});
-		},
-		onSettled: () => {
-			queryClient.invalidateQueries({ queryKey: ["dal-queue"] });
-			queryClient.invalidateQueries({ queryKey: ["dal"] });
-		},
-	});
-
-	const clear = useMutation({
-		mutationFn: () => clearSynced(),
-		onSuccess: () => queryClient.invalidateQueries({ queryKey: ["dal-queue"] }),
-	});
-
-	const keepMine = useMutation({
-		mutationFn: async (op: PendingOp) => {
-			const action = resolveWriteAction(op.entity);
-			if (!action) throw new Error(`No action for ${op.entity}`);
-			return forceSyncOp(op, action);
-		},
-		onSuccess: (result) => {
-			const ok = result.status === "applied" || result.status === "noop";
-			notifications.show({
-				title: ok ? "Local change kept" : "Could not keep local change",
-				message:
-					result.status === "error"
-						? result.message
-						: result.status === "conflict"
-							? "Server still reports a conflict."
-							: "",
-				color: ok ? "green" : "orange",
-			});
-		},
-		onSettled: () => {
-			queryClient.invalidateQueries({ queryKey: ["dal-queue"] });
-			queryClient.invalidateQueries({ queryKey: ["dal"] });
-		},
-	});
-
-	const acceptServer = useMutation({
-		mutationFn: async (opId: string) => deleteOp(opId),
-		onSuccess: () => {
-			notifications.show({
-				title: "Server change accepted",
-				message: "Your local change was discarded.",
-				color: "blue",
-			});
-		},
-		onSettled: () => {
-			queryClient.invalidateQueries({ queryKey: ["dal-queue"] });
-			queryClient.invalidateQueries({ queryKey: ["dal"] });
-		},
-	});
-
-	return (
-		<Stack gap="sm">
-			<Group justify="space-between">
-				<Title order={3}>Data Sync</Title>
-				<Group gap="xs">
-					<Button
-						size="xs"
-						variant="default"
-						onClick={() => clear.mutate()}
-						disabled={clear.isPending}
-					>
-						Clear synced
-					</Button>
-					<Button
-						size="xs"
-						onClick={() => syncAll.mutate()}
-						disabled={!canSync || syncAll.isPending || !pending.data?.length}
-					>
-						{syncAll.isPending ? "Syncing…" : "Sync all"}
-					</Button>
-				</Group>
-			</Group>
-			{mounted && !canSync ? (
-				<Text size="sm" c="dimmed">
-					Sign in and come online to push pending changes.
-				</Text>
-			) : null}
-			<PendingList
-				ops={(pending.data ?? []).filter((op) => op.status !== "synced")}
-				onDelete={(id) => {
-					deleteOp(id).then(() =>
-						queryClient.invalidateQueries({ queryKey: ["dal-queue"] }),
-					);
-				}}
-				onKeepMine={(op) => keepMine.mutate(op)}
-				onAcceptServer={(id) => acceptServer.mutate(id)}
-				canResolve={canSync}
-				resolvingOpId={
-					keepMine.isPending
-						? (keepMine.variables?.id ?? null)
-						: acceptServer.isPending
-							? (acceptServer.variables ?? null)
-							: null
-				}
-			/>
-			<SyncedList
-				ops={(pending.data ?? []).filter((op) => op.status === "synced")}
-			/>
-		</Stack>
-	);
-}
+import { getGameMetadata } from "#/registry/game-public-registry.tsx";
 
 const PendingList = ({
 	ops,
@@ -184,7 +54,7 @@ const PendingList = ({
 	return (
 		<Stack gap="xs">
 			{ops.map((op) => (
-				<Stack key={op.id} gap={4}>
+				<OpContainer key={op.id}>
 					<Group justify="space-between" wrap="nowrap" align="center" gap="sm">
 						<Stack gap={2}>
 							<Group gap="xs">
@@ -219,7 +89,7 @@ const PendingList = ({
 							busy={resolvingOpId === op.id}
 						/>
 					) : null}
-				</Stack>
+				</OpContainer>
 			))}
 		</Stack>
 	);
@@ -294,7 +164,7 @@ function SyncedList({ ops }: { ops: PendingOp[] }) {
 			<Divider label="Completed" labelPosition="left" />
 			<Stack gap="xs">
 				{ops.map((op) => (
-					<Stack key={op.id} gap={2}>
+					<OpContainer key={op.id}>
 						<Group gap="xs" wrap="nowrap" align="center">
 							<Badge>{op.entity}</Badge>
 							<Badge variant="light">{op.operation}</Badge>
@@ -303,10 +173,26 @@ function SyncedList({ ops }: { ops: PendingOp[] }) {
 							</Badge>
 						</Group>
 						<OpSummary op={op} />
-					</Stack>
+					</OpContainer>
 				))}
 			</Stack>
 		</>
+	);
+}
+
+function OpContainer({ children }: PropsWithChildren) {
+	return (
+		<Stack
+			gap="xs"
+			p="xs"
+			style={{
+				background:
+					"light-dark(var(--mantine-color-gray-2), var(--mantine-color-base-6))",
+				borderLeft: "1px solid var(--mantine-color-secondary-6)",
+			}}
+		>
+			{children}
+		</Stack>
 	);
 }
 
@@ -322,17 +208,10 @@ function OpSummary({ op }: { op: PendingOp }) {
 		? getGameMetadata(op.summary.gameId)?.label
 		: undefined;
 	return (
-		<>
-			<Group gap="xs" align="center" wrap="nowrap">
-				{gameLabel ? <Badge variant="light">{gameLabel}</Badge> : null}
-				<Text size="sm">{op.summary.title}</Text>
-			</Group>
-			{op.summary.details ? (
-				<Text size="xs" c="dimmed">
-					{op.summary.details}
-				</Text>
-			) : null}
-		</>
+		<Group gap="xs" align="center" wrap="nowrap">
+			{gameLabel ? <Badge variant="light">{gameLabel}</Badge> : null}
+			<Text size="sm">{op.summary.title}</Text>
+		</Group>
 	);
 }
 
@@ -350,3 +229,158 @@ const statusColor = (status: PendingOp["status"]) => {
 			return "red";
 	}
 };
+
+function DataSync() {
+	const { data: session } = useSession();
+	const { online } = useNetwork();
+	const queryClient = useQueryClient();
+
+	const [mounted, setMounted] = useState(false);
+	useEffect(() => setMounted(true), []);
+
+	const pending = usePendingOps();
+	const canSync = !!session?.user?.id && online;
+
+	// Scope the tab to the active game. Ops with no `summary.gameId` are
+	// account-wide (profile, primary avatar) and stay visible under every game.
+	const gameId = useGameId();
+	const visibleOps = (pending.data ?? []).filter(
+		(op) => op.summary?.gameId == null || op.summary.gameId === gameId,
+	);
+	const pendingOps = visibleOps.filter((op) => op.status !== "synced");
+	const syncedOps = visibleOps.filter((op) => op.status === "synced");
+
+	const syncAll = useMutation({
+		mutationFn: async () => {
+			if (!visibleOps.length) return null;
+			return syncOps(visibleOps);
+		},
+		onSuccess: (report) => {
+			if (!report) return;
+			const parts: string[] = [];
+			if (report.applied) parts.push(`${report.applied} applied`);
+			if (report.noops) parts.push(`${report.noops} already up-to-date`);
+			if (report.conflicts) parts.push(`${report.conflicts} conflicts`);
+			if (report.errors) parts.push(`${report.errors} errors`);
+			const hasIssues = report.conflicts > 0 || report.errors > 0;
+			notifications.show({
+				title: hasIssues ? "Sync completed with issues" : "Sync complete",
+				message: parts.length ? parts.join(", ") : "Nothing to sync.",
+				color: hasIssues ? "orange" : "green",
+			});
+		},
+		onSettled: () => {
+			void queryClient.invalidateQueries({ queryKey: ["sync-queue"] });
+			void queryClient.invalidateQueries({ queryKey: ["data"] });
+		},
+	});
+
+	const clear = useMutation({
+		mutationFn: async () => {
+			await Promise.all(syncedOps.map((op) => deleteOp(op.id)));
+		},
+		onSuccess: () =>
+			queryClient.invalidateQueries({ queryKey: ["sync-queue"] }),
+	});
+
+	const keepMine = useMutation({
+		mutationFn: async (op: PendingOp) => {
+			return forceSyncOp(op);
+		},
+		onSuccess: (result) => {
+			const ok = result.status === "applied" || result.status === "noop";
+			notifications.show({
+				title: ok ? "Local change kept" : "Could not keep local change",
+				message:
+					result.status === "error"
+						? result.message
+						: result.status === "conflict"
+							? "Server still reports a conflict."
+							: "",
+				color: ok ? "green" : "orange",
+			});
+		},
+		onSettled: () => {
+			void queryClient.invalidateQueries({ queryKey: ["sync-queue"] });
+			void queryClient.invalidateQueries({ queryKey: ["data"] });
+		},
+	});
+
+	const acceptServer = useMutation({
+		mutationFn: async (opId: string) => deleteOp(opId),
+		onSuccess: () => {
+			notifications.show({
+				title: "Server change accepted",
+				message: "Your local change was discarded.",
+				color: "blue",
+			});
+		},
+		onSettled: () => {
+			void queryClient.invalidateQueries({ queryKey: ["sync-queue"] });
+			void queryClient.invalidateQueries({ queryKey: ["data"] });
+		},
+	});
+
+	return (
+		<Stack gap="sm">
+			<Group justify="space-between">
+				<Title order={3}>Data Sync</Title>
+				<Group gap="xs">
+					<Button
+						size="xs"
+						variant="default"
+						onClick={() => clear.mutate()}
+						disabled={clear.isPending || !syncedOps.length}
+					>
+						Clear synced
+					</Button>
+					<Button
+						size="xs"
+						onClick={() => syncAll.mutate()}
+						disabled={!canSync || syncAll.isPending || !pendingOps.length}
+					>
+						{syncAll.isPending ? "Syncing…" : "Sync all"}
+					</Button>
+				</Group>
+			</Group>
+			{mounted && !canSync ? (
+				<Text size="sm" c="dimmed">
+					Sign in and come online to push pending changes.
+				</Text>
+			) : null}
+			<PendingList
+				ops={pendingOps}
+				onDelete={(id) => {
+					deleteOp(id).then(() =>
+						queryClient.invalidateQueries({ queryKey: ["sync-queue"] }),
+					);
+				}}
+				onKeepMine={(op) => keepMine.mutate(op)}
+				onAcceptServer={(id) => acceptServer.mutate(id)}
+				canResolve={canSync}
+				resolvingOpId={
+					keepMine.isPending
+						? (keepMine.variables?.id ?? null)
+						: acceptServer.isPending
+							? (acceptServer.variables ?? null)
+							: null
+				}
+			/>
+			<SyncedList ops={syncedOps} />
+		</Stack>
+	);
+}
+
+const Route = createFileRoute("/account/profile/$userId/data-sync")({
+	loader: async ({ params, context }) =>
+		loadProfileTabData(params.userId, context.queryClient),
+	head: ({ loaderData }) => ({
+		meta: buildTabHead(
+			loaderData?.displayName ?? "Toolkits.gg User",
+			"Data Sync",
+		),
+	}),
+	component: DataSync,
+});
+
+export { Route };

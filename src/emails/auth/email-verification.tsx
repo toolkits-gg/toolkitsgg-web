@@ -8,6 +8,7 @@ import {
 	Tailwind,
 	Text,
 } from "react-email";
+import { clientEnv } from "#/env/client-env.ts";
 
 type EmailVerificationProps = {
 	toName: string;
@@ -15,6 +16,8 @@ type EmailVerificationProps = {
 };
 
 const EmailVerification = ({ toName, url }: EmailVerificationProps) => {
+	const appName = clientEnv.VITE_APP_NAME;
+
 	return (
 		<Html>
 			<Head />
@@ -23,8 +26,8 @@ const EmailVerification = ({ toName, url }: EmailVerificationProps) => {
 					<Container>
 						<Section>
 							<Text>
-								Hello {toName}, welcome to {`${"Toolkits.gg"}`}! Please verify
-								your email address by clicking the button below.
+								Hello {toName}, welcome to {appName}! Please verify your email
+								address by clicking the button below.
 							</Text>
 						</Section>
 						<Section>
@@ -47,4 +50,4 @@ EmailVerification.PreviewProps = {
 	url: "http://localhost:3000/verify-email/abc123",
 } as EmailVerificationProps;
 
-export default EmailVerification;
+export { EmailVerification };

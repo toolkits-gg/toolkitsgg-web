@@ -1,20 +1,20 @@
 generator client {
-  provider        = "prisma-client"
-  output          = "./generated/prisma"
+  provider = "prisma-client"
+  output   = "./generated/prisma"
 }
 
 generator prismaIDB {
   provider = "idb-client-generator"
   output   = "./generated/prisma-idb"
-  
+
   // Optional: Enable sync engine
-  //outboxSync = true
-  //rootModel  = "User"
-  //exclude    = ["Changelog", "Session"]
+  // outboxSync = true
+  // rootModel  = "User"
+  // exclude    = ["Changelog", "Session"]
 }
 
 datasource db {
-  provider  = "postgresql"
+  provider = "postgresql"
 }
 
 enum GameId {
@@ -37,14 +37,6 @@ enum BuildModeratorStatus {
   LOCKED
 }
 
-enum NotificationType {
-  SYSTEM
-  FOLLOW
-  BUILD_UPDATE
-  LIKE
-  MENTION
-}
-
 model User {
   id            String         @id @default(cuid())
   username      String         @unique
@@ -58,23 +50,22 @@ model User {
   accounts      Account[]
   verification  Verification[]
 
-  userProfile       UserProfile?
-  userFavoriteGames UserFavoriteGame[]
+  UserProfile       UserProfile?
+  UserFavoriteGames UserFavoriteGame[]
 
-  usersBeingFollowed UserFollowedUsers[] @relation("userBeingFollowed")
-  usersFollowed      UserFollowedUsers[] @relation("userFollowed")
+  UsersBeingFollowed UserFollowedUsers[] @relation("userBeingFollowed")
+  UsersFollowed      UserFollowedUsers[] @relation("userFollowed")
 
-  userRoles              UserRole[]     @relation("UserRoles")
+  UserRoles UserRole[] @relation("UserRoles")
 
-  clairObscurCollectedItems ClairObscurCollectedItem[]
+  ClairObscurCollectedItems ClairObscurCollectedItem[]
 
-  remnant2CollectedItems   Remnant2CollectedItem[]
-  remnant2Builds           Remnant2Build[]
-  remnant2BuildCollections Remnant2BuildCollection[]
+  Remnant2CollectedItems   Remnant2CollectedItem[]
+  Remnant2Builds           Remnant2Build[]
+  Remnant2BuildCollections Remnant2BuildCollection[]
+  Remnant2BuildUpvotes     Remnant2BuildUpvote[]
 
-  slayTheSpire2CollectedItems SlayTheSpire2CollectedItem[]
-
-  @@map("user")
+  SlayTheSpire2CollectedItems SlayTheSpire2CollectedItem[]
 }
 
 model Session {
@@ -86,10 +77,9 @@ model Session {
   ipAddress String?
   userAgent String?
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
-  @@map("session")
 }
 
 model Account {
@@ -106,11 +96,10 @@ model Account {
   password              String?
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([providerId, accountId])
   @@index([userId])
-  @@map("account")
 }
 
 model Verification {
@@ -121,41 +110,40 @@ model Verification {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   userId     String?
-  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([identifier, value])
   @@index([userId])
-  @@map("verification")
 }
 
 model UserProfile {
   id                  String               @id @default(cuid())
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt
-  displayName         String               @default("Traveler")
-  bio                 String               @default("No bio provided.") @db.Text
+  displayName         String?
+  bio                 String?              @db.Text
   avatarUrl           String?
   primaryAvatarId     String?
   primaryAvatarGameId GameId?
-  user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  UserAvatarOverrides UserAvatarOverride[]
+  User                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId              String               @unique
-  avatarOverrides     UserAvatarOverride[]
-
-  @@map("user_profiles")
 }
 
 model UserAvatarOverride {
   id            String      @id @default(cuid())
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+  // The game whose profile this override applies to.
   gameId        GameId
   avatarId      String
-  userProfile   UserProfile @relation(fields: [userProfileId], references: [id], onDelete: Cascade)
+  // The game the avatar art itself comes from - may differ from gameId, e.g. a
+  // Clair Obscur avatar used on the Remnant 2 profile.
+  avatarGameId  GameId
+  UserProfile   UserProfile @relation(fields: [userProfileId], references: [id], onDelete: Cascade)
   userProfileId String
 
   @@unique([userProfileId, gameId])
-  @@index([userProfileId])
-  @@map("user_avatar_overrides")
 }
 
 model UserFavoriteGame {
@@ -163,27 +151,23 @@ model UserFavoriteGame {
   updatedAt DateTime @updatedAt
   gameId    GameId
 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
   @@id([userId, gameId])
-  @@index([userId])
   @@index([gameId])
-  @@map("user_favorite_games")
 }
 
 model UserFollowedUsers {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-  user           User     @relation("userBeingFollowed", fields: [userId], references: [id], onDelete: Cascade)
+  User           User     @relation("userBeingFollowed", fields: [userId], references: [id], onDelete: Cascade)
   userId         String
-  followedUser   User     @relation("userFollowed", fields: [followedUserId], references: [id], onDelete: Cascade)
+  FollowedUser   User     @relation("userFollowed", fields: [followedUserId], references: [id], onDelete: Cascade)
   followedUserId String
 
   @@id([userId, followedUserId])
-  @@index([userId])
   @@index([followedUserId])
-  @@map("user_followed_users")
 }
 
 enum Role {
@@ -199,12 +183,11 @@ model UserRole {
   updatedAt DateTime @updatedAt
 
   userId String
-  user   User   @relation("UserRoles", fields: [userId], references: [id], onDelete: Cascade)
+  User   User   @relation("UserRoles", fields: [userId], references: [id], onDelete: Cascade)
 
   role Role
 
   @@unique([userId, role])
-  @@index([userId])
+  // Reverse lookup only; [userId] is already the unique-index prefix.
   @@index([role])
-  @@map("user_roles")
 }

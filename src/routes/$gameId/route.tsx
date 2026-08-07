@@ -1,13 +1,11 @@
-// src/routes/games/$gameId/route.tsx
-
 import { Box, Text, Title } from "@mantine/core";
-import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { setGame } from "#/features/game/core/store";
-import { isRegisteredGameId } from "#/features/game/registry/game-registry";
-import type { GameId } from "@/prisma";
+import { createFileRoute, notFound, Outlet } from "@tanstack/react-router";
+import { getValidatedGameId } from "#/registry/game-public-registry.tsx";
 
-export const Route = createFileRoute("/$gameId")({
+const Route = createFileRoute("/$gameId")({
+	beforeLoad: ({ params }) => {
+		if (!getValidatedGameId(params.gameId)) throw notFound();
+	},
 	head: ({ params }) => ({
 		links: [
 			{
@@ -35,18 +33,7 @@ export const Route = createFileRoute("/$gameId")({
 			</Box>
 		);
 	},
-	component: function GameRouteLayout() {
-		const { gameId } = Route.useParams();
-
-		const validatedGameId = (
-			isRegisteredGameId(gameId) ? gameId : "none"
-		) satisfies GameId;
-
-		// When the route changes, update the game in our global store
-		useEffect(() => {
-			setGame(validatedGameId, "route");
-		}, [validatedGameId]);
-
-		return <Outlet />;
-	},
+	component: () => <Outlet />,
 });
+
+export { Route };

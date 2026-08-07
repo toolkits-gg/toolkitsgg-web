@@ -15,7 +15,7 @@ const MUTATORS: Remnant2MutatorItem[] = [
 		dlc: "BASE",
 		searchableTags: ["Ammo Reserves", "Fire Rate"],
 		description: [
-			"Increases Magazine Capacity of this weapon by 20% - 45%.",
+			"On hit, grants a 10% - 30% chance to return spent Ammo directly into the magazine of this weapon.",
 			"Bows: Increases Reserve Size of this weapon by 20% - 45%.",
 		],
 		maxLevelBonus: [
@@ -90,7 +90,7 @@ const MUTATORS: Remnant2MutatorItem[] = [
 		dlc: "BASE",
 		searchableTags: ["Fire Rate", "Mod Power"],
 		description: [
-			"Mod use increases Fire Rate of this weapon by 10% - 20%  for 15s.",
+			"Mod use increases Fire Rate of this weapon by 10% - 20% for 15s.",
 		],
 		maxLevelBonus: ["Increases Mod Generation for this weapon by 15%."],
 		wikiUrl: `https://remnant2.wiki.gg/Bulletweaver`,
@@ -218,7 +218,7 @@ const MUTATORS: Remnant2MutatorItem[] = [
 			"Lifesteal",
 		],
 		description: [
-			"Increases Melee Charge Speed by 15% - 35% and Melee Attack Speed by 10%.",
+			"Increases Melee Charge Speed by 15% - 35% and Melee Attack Speed by 10% - 15%.",
 		],
 		maxLevelBonus: [
 			`Gain 3% of based Charged Melee Damage dealt as Lifesteal.`,
@@ -567,7 +567,7 @@ const MUTATORS: Remnant2MutatorItem[] = [
 		dlc: "BASE",
 		searchableTags: ["Melee Damage", "Status Effect"],
 		description: [
-			"Increase Melee damage by 6% - 10%  for each unique Negative Status the target is suffering from.",
+			"Increase Melee damage by 6% - 10% for each unique Negative Status the target is suffering from.",
 		],
 		maxLevelBonus: [`Charge Melee Attacks apply SLOW for 3s.`],
 		wikiUrl: `https://remnant2.wiki.gg/Misfortune`,
@@ -662,7 +662,7 @@ const MUTATORS: Remnant2MutatorItem[] = [
 			"Increases this weapon's Ranged and Mod Damage by 5% - 15% to enemies within 7m.",
 		],
 		maxLevelBonus: [
-			"Activating this weapon's Mod triggers a fixed 7m blast, dealing 50 Explosive Damage per 100 Mod Power spent in a single cast. Inflicts 1.5 Stagger Damage.",
+			"Activating this weapon's Mod triggers a fixed 7m blast, dealing 50 - 150 Explosive Damage per 100 Mod Power spent in a single cast. Inflicts 1.5 Stagger Damage.",
 		],
 		communityTags: [`Explosive Damage`],
 		wikiUrl: `https://remnant2.wiki.gg/Pressure_Point`,
@@ -784,7 +784,7 @@ const MUTATORS: Remnant2MutatorItem[] = [
 		dlc: "BASE",
 		searchableTags: ["Charged Shot", "Critical Chance"],
 		description: [
-			"This weapon's Charged Shots decrease the Charge time of Subsequent Charge Shots by 10% - 35%  for 5s.",
+			"This weapon's Charged Shots decrease the Charge time of Subsequent Charge Shots by 10% - 35% for 5s.",
 		],
 		maxLevelBonus: [
 			"While active, Charged Primary Shots grant 1% Ranged Critical Chance per round spent. Max 15%.",
@@ -823,7 +823,7 @@ const MUTATORS: Remnant2MutatorItem[] = [
 			"Empowers weapon after 3 hits. While empowered. the next Charged Melee Hit strikes all enemies within 7m with 50 - 100 SHOCK Damage.",
 		],
 		maxLevelBonus: [
-			"The SHOCK  Damage now applies OVERLOADED dealing 125 - 375 SHOCK damage every 5s for 5s.",
+			"The SHOCK Damage now applies OVERLOADED dealing 125 - 375 SHOCK damage every 5s for 5s.",
 		],
 		communityTags: [`AOE/Aura`],
 		wikiUrl: `https://remnant2.wiki.gg/Shocker`,
@@ -855,7 +855,7 @@ const MUTATORS: Remnant2MutatorItem[] = [
 		id: "xim1sx",
 		searchableTags: ["Critical Chance"],
 		description: [
-			"This weapon becomes EMPOWERED when stowed for 5 seconds, granting 25% Critical Chance for 5s - 10s  after it's drawn.",
+			"This weapon becomes EMPOWERED when stowed for 5 seconds, granting 25% Critical Chance for 5s - 10s after it's drawn.",
 		],
 		maxLevelBonus: [
 			"While EMPOWERED, increases Critical Damage of this weapon by 15%",
@@ -1007,7 +1007,7 @@ const MUTATORS: Remnant2MutatorItem[] = [
 		searchableTags: ["Heat Generation", "Status Effect"],
 		communityTags: ["Explosive Damage", "AOE/Aura"],
 		description: [
-			"When this weapon is above 25% Heat, a 7.5m Pulse deals 150 Explosive Damage once every  5s - 3s.",
+			"When this weapon is above 25% Heat, a 7.5m Pulse deals 150 Explosive Damage once every 5s - 3s.",
 		],
 		maxLevelBonus: [
 			"At Max Heat, a 10m Pulse deals 300 Explosive Damage which applies BURNING to all entities for 100 FIRE damage over 20s. Can only happen once every 3s.",
@@ -1121,10 +1121,12 @@ const MUTATORS: Remnant2MutatorItem[] = [
 		id: "1cxn5s",
 		dlc: "BASE",
 		searchableTags: ["Ranged Damage", "Ammo Reserves"],
-		description: ["Gaining Ammo increases Ranged Damage by 5% - 15% for 15s."],
+		description: [
+			"Gaining Ammo increases Ranged Damage by 5% - 15% for 15s.",
+			"Bows: New Ammo gains grants this weapon Infinite Reserves for 15s.",
+		],
 		maxLevelBonus: [
 			"New Ammo gains are added directly to into this weapon's magazine.",
-			"Bows: New Ammo gains grants this weapon Infinite Reserves for 15s.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Transpose`,
 		location: {

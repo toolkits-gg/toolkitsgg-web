@@ -1,4 +1,4 @@
-import type { GameAvatar } from "#/features/game/core/types";
+import type { GameAvatar } from "#/features/game/types.ts";
 import { CARDS } from "#/games/slaythespire2/core/item-data/cards";
 import { CHARACTERS } from "#/games/slaythespire2/core/item-data/characters";
 import { POTIONS } from "#/games/slaythespire2/core/item-data/potions";

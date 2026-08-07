@@ -14,7 +14,9 @@ dist-ssr
 .output
 .vinxi
 __unconfig*
-todos.json
+todos.ts
 /prisma/generated
+/.images
 settings.local.json
 .idea
+.junie

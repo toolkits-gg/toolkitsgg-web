@@ -1,0 +1,20 @@
+.screenshotContainer {
+	border-radius: var(--mantine-radius-lg);
+	border: 2px solid var(--mantine-color-primary-5);
+	background: light-dark(
+		linear-gradient(
+			0deg,
+			var(--mantine-color-gray-3) 0%,
+			var(--mantine-color-gray-1) 25%,
+			var(--mantine-color-gray-0) 75%,
+			var(--mantine-color-gray-3) 100%
+		),
+		linear-gradient(
+			0deg,
+			var(--mantine-color-primary-9) 0%,
+			var(--mantine-color-black) 25%,
+			var(--mantine-color-black) 75%,
+			var(--mantine-color-primary-9) 100%
+		)
+	);
+}

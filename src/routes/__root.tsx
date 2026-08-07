@@ -6,53 +6,72 @@ import "@fontsource/geist/400.css";
 import "@fontsource/geist/500.css";
 import "@fontsource/geist/600.css";
 import "@fontsource/geist/700.css";
-import {
-	AppShell,
-	Box,
-	Burger,
-	ColorSchemeScript,
-	Divider,
-	Flex,
-	Group,
-	mantineHtmlProps,
-	Text,
-	Title,
-} from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { TanStackDevtools } from "@tanstack/react-devtools";
+import { Box, Text, Title } from "@mantine/core";
 import type { QueryClient } from "@tanstack/react-query";
-import {
-	createRootRouteWithContext,
-	HeadContent,
-	Scripts,
-} from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { DefaultLogo } from "#/components/AppLogo";
-import { AppProviders } from "#/components/AppProviders";
-import { AppNavbar } from "#/components/navigation/AppNavbar";
-import { SocialMedia } from "#/components/SocialMedia";
-import { GettingStartedWizard } from "#/components/wizards/getting-started/components/GettingStartedWizard";
-import { useGettingStartedWizard } from "#/components/wizards/getting-started/hooks/use-getting-started-wizard";
-import { GameSwitcher } from "#/features/game/core/GameSwitcher";
-import classes from "./Root.module.css";
+import { createRootRouteWithContext } from "@tanstack/react-router";
+import { ComingSoonDocument } from "#/components/ComingSoonDocument.tsx";
+import { MaintenanceModeDocument } from "#/components/MaintenanceModeDocument.tsx";
+import { RootDocument } from "#/components/RootDocument.tsx";
+import { OG_IMAGE, SERVER_RESOLVED_GAME_ID_SOURCES } from "#/constants";
+import { clientEnv } from "#/env/client-env.ts";
+import { getServerResolvedGameInputsServerFn } from "#/features/game/active-game";
+import { getValidatedGameId } from "#/registry/game-public-registry.tsx";
+import type { GameId } from "@/prisma";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
 }
 
-export const Route = createRootRouteWithContext<MyRouterContext>()({
+const title = clientEnv.VITE_APP_NAME;
+const description = clientEnv.VITE_APP_DESCRIPTION;
+const url = clientEnv.VITE_APP_URL;
+
+const Route = createRootRouteWithContext<MyRouterContext>()({
+	beforeLoad: async ({ context, location }) => {
+		// Cache the server-fn result for the lifetime of the session - the Host
+		// header and the active-game cookie don't change without a hard reload or setActiveGameCookie
+		const { subdomainGameId, cookieGameId } =
+			await context.queryClient.ensureQueryData({
+				queryKey: SERVER_RESOLVED_GAME_ID_SOURCES,
+				queryFn: () => getServerResolvedGameInputsServerFn(),
+				staleTime: Number.POSITIVE_INFINITY,
+				gcTime: Number.POSITIVE_INFINITY,
+			});
+
+		const searchParams = new URLSearchParams(location.searchStr);
+		const devOverride = import.meta.env.DEV
+			? (getValidatedGameId(searchParams.get("_game") ?? "") ?? null)
+			: null;
+		const firstSeg = location.pathname.split("/").filter(Boolean)[0] ?? "";
+		const routeGameId = getValidatedGameId(firstSeg) ?? null;
+		const searchGameId =
+			getValidatedGameId(searchParams.get("gameId") ?? "") ?? null;
+
+		const ssrGameId: GameId | null =
+			subdomainGameId ??
+			devOverride ??
+			routeGameId ??
+			searchGameId ??
+			cookieGameId ??
+			null;
+
+		return { ssrGameId };
+	},
 	head: () => ({
 		meta: [
-			{
-				charSet: "utf-8",
-			},
-			{
-				name: "viewport",
-				content: "width=device-width, initial-scale=1",
-			},
-			{
-				title: "Toolkits.gg",
-			},
+			{ charSet: "utf-8" },
+			{ name: "viewport", content: "width=device-width, initial-scale=1" },
+			{ title },
+			{ property: "og:title", content: title },
+			{ property: "og:description", content: description },
+			{ property: "og:image", content: OG_IMAGE },
+			{ property: "og:type", content: "website" },
+			{ property: "og:url", content: url },
+			{ name: "twitter:card", content: "summary_large_image" },
+			{ name: "twitter:title", content: "Toolkits.gg" },
+			{ name: "twitter:description", content: description },
+			{ name: "twitter:image", content: OG_IMAGE },
+			{ name: "twitter:url", content: url },
 		],
 		links: [
 			{
@@ -72,7 +91,13 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 			},
 		],
 	}),
-	shellComponent: RootDocument,
+	// Maintenance wins over coming soon: if the site is down while still
+	// pre-launch, the outage is the more accurate message.
+	shellComponent: clientEnv.VITE_ENABLE_MAINTENANCE_MODE
+		? MaintenanceModeDocument
+		: clientEnv.VITE_SHOW_COMING_SOON
+			? ComingSoonDocument
+			: RootDocument,
 	notFoundComponent: () => {
 		return (
 			<Box p="md">
@@ -83,104 +108,4 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	},
 });
 
-function RootDocument({ children }: { children: React.ReactNode }) {
-	const [navbarOpened, { toggle: toggleNavbar }] = useDisclosure();
-
-	const { openWizard, closeWizard, setCurrentWizardStepId, wizardOpened } =
-		useGettingStartedWizard();
-
-	return (
-		<html lang="en" {...mantineHtmlProps}>
-			<head>
-				<ColorSchemeScript />
-				<script
-					suppressHydrationWarning
-					// biome-ignore lint/security/noDangerouslySetInnerHtml: <needed for hydration issue with next-themes>
-					dangerouslySetInnerHTML={{
-						__html: `(function(){try{var t=localStorage.getItem('theme');var s;if(t&&t!=='system'){document.documentElement.setAttribute('data-theme',t);s=t.endsWith('-light')?'light':'dark';}else{var d=window.matchMedia('(prefers-color-scheme: dark)').matches;s=d?'dark':'light';document.documentElement.setAttribute('data-theme','default-'+s);}document.documentElement.setAttribute('data-mantine-color-scheme',s);}catch(e){}})();`,
-					}}
-				/>
-				<HeadContent />
-			</head>
-			<body
-				style={{
-					color: `var(--mantine-color-baseFg-5)`,
-					backgroundColor: `var(--mantine-color-base-5)`,
-					fontFamily: `'Geist', sans-serif`,
-				}}
-			>
-				<AppProviders>
-					<AppShell
-						padding="md"
-						header={{ height: 60 }}
-						footer={{ height: 48 }}
-						navbar={{
-							width: 300,
-							breakpoint: "sm",
-							collapsed: { mobile: !navbarOpened },
-						}}
-					>
-						<AppShell.Header px="sm" className={classes.header}>
-							<Group h="100%" justify="space-between">
-								<Flex justify="start" align="center">
-									<Burger
-										opened={navbarOpened}
-										onClick={toggleNavbar}
-										hiddenFrom="sm"
-										size="sm"
-										color="var(--mantine-color-primary-4)"
-									/>
-								</Flex>
-
-								<Flex flex={1} align="center" justify="center" gap="xs">
-									<GameSwitcher />
-								</Flex>
-
-								<Flex justify="end" align="center">
-									{/* <NotificationBellMenu /> */}
-								</Flex>
-							</Group>
-						</AppShell.Header>
-
-						<AppShell.Navbar className={classes.navbar}>
-							<AppNavbar onGettingStartedWizard={openWizard} />
-						</AppShell.Navbar>
-
-						<AppShell.Main className={classes.main}>{children}</AppShell.Main>
-
-						<AppShell.Footer p="xs" className={classes.footer}>
-							<Flex justify="center" align="center" gap="sm" wrap="wrap">
-								<DefaultLogo size={24} />
-								<Text size="xs" c="dimmed">
-									© {new Date().getFullYear()} Toolkits.gg
-								</Text>
-								<Divider orientation="vertical" />
-								<SocialMedia />
-							</Flex>
-						</AppShell.Footer>
-						<GettingStartedWizard
-							opened={wizardOpened}
-							onClose={closeWizard}
-							navbarOpened={navbarOpened}
-							toggleNavbar={toggleNavbar}
-							onStepChange={setCurrentWizardStepId}
-						/>
-					</AppShell>
-				</AppProviders>
-
-				<TanStackDevtools
-					config={{
-						position: "bottom-right",
-					}}
-					plugins={[
-						{
-							name: "Tanstack Router",
-							render: <TanStackRouterDevtoolsPanel />,
-						},
-					]}
-				/>
-				<Scripts />
-			</body>
-		</html>
-	);
-}
+export { Route };

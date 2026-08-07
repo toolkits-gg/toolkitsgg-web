@@ -1,10 +1,10 @@
-import type { ItemTag } from "#/features/game/items/types";
 import { ARCHETYPE_COLORS } from "#/games/remnant2/core/constants";
+import type {AppItemTag} from "#/features/game/types.ts";
 
 /**
  * These tags are highlighted inline in item descriptions throughout the toolkit.
  */
-const INLINE_ITEM_TAGS = [
+export const INLINE_ITEM_TAGS: Array<AppItemTag & { type: string }> = [
 	{
 		type: "Acid",
 		token: "ACID",
@@ -621,6 +621,4 @@ const INLINE_ITEM_TAGS = [
 		},
 		description: undefined,
 	},
-] as const satisfies ItemTag[];
-
-export { INLINE_ITEM_TAGS };
+]

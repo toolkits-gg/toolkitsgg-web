@@ -1,15 +1,15 @@
-import type { AppItem } from "#/features/game/items/types";
+import type { SlayTheSpire2AncientItem } from "#/games/slaythespire2/core/item-data/ancients.ts";
 import type { SlayTheSpire2CardItem } from "#/games/slaythespire2/core/item-data/cards";
 import type { SlayTheSpire2CharacterItem } from "#/games/slaythespire2/core/item-data/characters";
 import type { SlayTheSpire2PotionItem } from "#/games/slaythespire2/core/item-data/potions";
 import type { SlayTheSpire2RelicItem } from "#/games/slaythespire2/core/item-data/relics";
 import type {
+	SlayTheSpire2Ancient,
 	SlayTheSpire2Character,
 	SlayTheSpire2DLC,
 	SlayTheSpire2ItemCategory,
 } from "@/prisma";
-
-type EquippableBy = SlayTheSpire2Character[] | "ANY";
+import type {AppItem} from "#/features/game/types.ts";
 
 type SlayTheSpire2ItemLocation = "Overgrowth" | "Underdocks" | "Hive" | "Glory";
 
@@ -19,7 +19,9 @@ type SlayTheSpire2CommunityTags = string[];
 type SlayTheSpire2SearchableTags = string[];
 
 type SlayTheSpire2LinkedItem = Partial<{
+	ancient: { name: SlayTheSpire2Ancient };
 	character: { name: SlayTheSpire2Character };
+	relic: { name: string };
 }>;
 
 type ItemModifiers = {
@@ -36,6 +38,7 @@ type ItemModifiers = {
 	focus: number;
 	gold: number;
 	heal: number;
+	healPercent: number;
 	health: number;
 	intangible: number;
 	poison: number;
@@ -67,6 +70,7 @@ type ModifierTrigger =
 	| "first three turns"
 	| "first time lose HP"
 	| "first time play Power"
+	| "health reaches zero"
 	| "next attack"
 	| "permanent"
 	| "shuffle draw pile";
@@ -87,7 +91,7 @@ type BaseSlayTheSpire2Item<TItemSubcategory = string> = AppItem<
 	dlc: SlayTheSpire2DLC;
 	location: SlayTheSpire2ItemLocation | undefined;
 	modifiers:
-		| Array<{ modifier: Partial<ItemModifiers>; trigger: ModifierTrigger }>
+		| Array<{ modifier: Partial<ItemModifiers>; trigger?: ModifierTrigger }>
 		| undefined;
 };
 
@@ -95,11 +99,11 @@ type SlayTheSpire2LocalItem =
 	| SlayTheSpire2RelicItem
 	| SlayTheSpire2CardItem
 	| SlayTheSpire2PotionItem
-	| SlayTheSpire2CharacterItem;
+	| SlayTheSpire2CharacterItem
+	| SlayTheSpire2AncientItem;
 
 export type {
-	EquippableBy,
 	BaseSlayTheSpire2Item,
-	SlayTheSpire2LocalItem,
 	SlayTheSpire2ItemLocation,
+	SlayTheSpire2LocalItem,
 };

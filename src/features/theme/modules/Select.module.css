@@ -1,24 +1,27 @@
 .input {
-  background-color: light-dark(
-    var(--mantine-color-input-1),
-    var(--mantine-color-input-9)
-  );
-  border: 1px solid var(--mantine-color-border-4);
-  color: var(--mantine-color-inputFg-5);
+	background-color: light-dark(
+		var(--mantine-color-input-1),
+		var(--mantine-color-input-9)
+	);
+	border: 1px solid var(--mantine-color-border-4);
+	color: var(--mantine-color-inputFg-5);
 }
 
 .dropdown {
-  background-color: light-dark(
-    var(--mantine-color-input-1),
-    var(--mantine-color-input-9)
-  );
-  color: var(--mantine-color-inputFg-5);
-  border: 1px solid var(--mantine-color-border-7);
+	background-color: light-dark(
+		var(--mantine-color-input-1),
+		var(--mantine-color-input-9)
+	);
+	color: var(--mantine-color-inputFg-5);
+	border: 1px solid var(--mantine-color-border-7);
 }
 
 .option {
-  background-color: transparent;
-  &:hover {
-    background-color: light-dark(var(--mantine-color-primary-3), var(--mantine-color-primary-5));
-  }
+	background-color: transparent;
+	&:hover {
+		background-color: light-dark(
+			var(--mantine-color-primary-3),
+			var(--mantine-color-primary-5)
+		);
+	}
 }

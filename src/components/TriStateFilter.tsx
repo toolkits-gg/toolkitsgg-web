@@ -13,9 +13,9 @@ import classes from "./TriStateFilter.module.css";
 
 type TriStateValue = "include" | "exclude" | "default";
 
-type TriStateFilterValue = Record<string, TriStateValue>;
+export type TriStateFilterValue = Record<string, TriStateValue>;
 
-type TriStateFilterProps = {
+export type AppTriStateFilterProps = {
 	label: string;
 	options: Record<string, string>;
 	value: TriStateFilterValue;
@@ -23,13 +23,13 @@ type TriStateFilterProps = {
 	placeholder?: string;
 };
 
-const TriStateFilter = ({
+export const TriStateFilter = ({
 	label,
 	options,
 	value,
 	onChange,
 	placeholder,
-}: TriStateFilterProps) => {
+}: AppTriStateFilterProps) => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [opened, setOpened] = useState(false);
 
@@ -237,5 +237,3 @@ const TriStateFilter = ({
 		</Stack>
 	);
 };
-
-export { TriStateFilter, type TriStateFilterValue, type TriStateValue };

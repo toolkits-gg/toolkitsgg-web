@@ -1,12 +1,7 @@
 import { Button, Stack } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { SiDiscord, SiKofi, SiPatreon, SiPaypal } from "react-icons/si";
-import {
-	DISCORD_URL,
-	KOFI_URL,
-	PATREON_URL,
-	PAYPAL_URL,
-} from "#/constants/paths";
+import { DISCORD_URL, KOFI_URL, PATREON_URL, PAYPAL_URL } from "#/constants.ts";
 
 const SupportButtons = () => {
 	return (

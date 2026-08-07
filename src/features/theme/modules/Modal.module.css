@@ -1,34 +1,33 @@
 .content {
-  background: linear-gradient(
-    0deg,
-    light-dark(
-      var(--mantine-color-gray-3),
-      var(--mantine-color-primary-9)
-    ) 0%,
-    light-dark(
-      var(--mantine-color-gray-1),
-      #000
-    ) 25%,
-    light-dark(
-      var(--mantine-color-gray-1),
-      #000
-    ) 75%,
-    light-dark(
-      var(--mantine-color-gray-3),
-      var(--mantine-color-primary-9)
-    ) 100%
-  );
-  border: 1px solid var(--mantine-color-border-7);
+	composes: ambientBackground from "../../../components/AmbientBackground.module.css";
+
+	--ambient-glow-size: 95% 55%;
+	--ambient-glow-position: 50% -8%;
+	--ambient-glow-opacity: 0.28;
+	--ambient-grid-cell: 24px;
+	--ambient-grid-mask: ellipse 70% 85% at 50% 0%;
+
+	background-image: linear-gradient(
+		0deg,
+		light-dark(var(--mantine-color-gray-3), var(--mantine-color-primary-9)) 0%,
+		light-dark(var(--mantine-color-gray-1), #000) 25%,
+		light-dark(var(--mantine-color-gray-1), #000) 75%,
+		light-dark(var(--mantine-color-gray-3), var(--mantine-color-primary-9)) 100%
+	);
+	border: 1px solid var(--mantine-color-border-7);
 }
 
 .header {
-  background-color: transparent;
-  margin-bottom: var(--mantine-spacing-md);
-  border-bottom: 1px solid var(--mantine-color-border-5);
+	background-color: transparent;
+	margin-bottom: var(--mantine-spacing-md);
+	border-bottom: 1px solid var(--mantine-color-border-5);
 }
 
 .title {
-  font-size: var(--mantine-font-size-lg);
-  font-weight: 600;
-  color: light-dark(var(--mantine-color-baseFg-5), var(--mantine-color-baseFg-5));
+	font-size: var(--mantine-font-size-lg);
+	font-weight: 600;
+	color: light-dark(
+		var(--mantine-color-baseFg-5),
+		var(--mantine-color-baseFg-5)
+	);
 }

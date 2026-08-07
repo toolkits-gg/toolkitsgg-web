@@ -11,7 +11,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "h9k5pd",
 		dlc: "DLC2",
 		description: [
-			"Imbues ammunition with BLEED and increases Lifesteal by 5% for 20s. Shots also apply BLEEDING, dealing 200 → 600 damage over 10s.",
+			"Imbues ammunition with BLEED and increases Lifesteal by 5% for 20s. Shots also apply BLEEDING, dealing 200 -> 600 damage over 10s.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Abrasive_Rounds`,
 		location: { world: "Yaesha", dungeon: ["Earthen Coliseum"] },
@@ -76,7 +76,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "mqta6g",
 		dlc: "BASE",
 		description: [
-			"Fires a short range burst of 7 star fragments which deal 70 → 210 damage each. Fragments bounce off walls up to 3 times, dealing 10% additional damage per bounce. Weakspot hits deal reduced damage.",
+			"Fires a short range burst of 7 star fragments which deal 70 -> 210 damage each. Fragments bounce off walls up to 3 times, dealing 10% additional damage per bounce. Weakspot hits deal reduced damage.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Astral_Burst`,
 		location: { world: "Yaesha", dungeon: ["Cathedral of Omens"] },
@@ -107,7 +107,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "k7z7r2",
 		dlc: "BASE",
 		description: [
-			"Banishes enemies or allies into another dimension for 4s. When Banish ends, enemies take 1.25x → 1.5x the damage from the Repulsor's primary fire for 8s.",
+			"Banishes enemies or allies into another dimension for 4s. When Banish ends, enemies take 1.25x -> 1.5x the damage from the Repulsor's primary fire for 8s.",
 			"Powerful enemies won't be banished, but will take increased damage from any Repulsor while debuffed.",
 		],
 		communityTags: [`Multiplicative Debuffs`],
@@ -128,7 +128,7 @@ const MODS: Remnant2ModItem[] = [
 		dlc: "BASE",
 		description: [
 			"Brands a target for 30s. Branded enemies that die leave a Brand at their location.",
-			"Reloading or Swapping detonates Brands dealing 225 → 675 damage. Additional Brands (3 Max) on the same target deal 50% damage. Slain enemies return 5% - 15% of Ammo and Mod Power to the weapon.",
+			"Reloading or Swapping detonates Brands dealing 225 -> 675 damage. Additional Brands (3 Max) on the same target deal 50% damage. Slain enemies return 5% - 15% of Ammo and Mod Power to the weapon.",
 		],
 		communityTags: [`Explosive Damage`],
 		wikiUrl: `https://remnant2.wiki.gg/Alpha_/_Omega`,
@@ -165,7 +165,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "s7ozpe",
 		dlc: "BASE",
 		description: [
-			"Funnels all current Mod Charges into the next shot. Projectile deals 65 → 195 direct damage and 65 → 195 Explosive damage per Charge consumed in a 5m radius. Explosion applies 75 → 225 BURNING damage over 10s per Charge consumed.",
+			"Funnels all current Mod Charges into the next shot. Projectile deals 65 -> 195 direct damage and 65 -> 195 Explosive damage per Charge consumed in a 5m radius. Explosion applies 75 -> 225 BURNING damage over 10s per Charge consumed.",
 			"Additional Charges consumed increase all damage by 5%. Max 5 Charges.",
 		],
 		communityTags: [`Explosive Damage`, `AOE/Aura`],
@@ -217,7 +217,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "yxxajn",
 		dlc: "BASE",
 		description: [
-			"Fires a devastating blast which penetrates through all enemies in its path. Deals 150 → 450 damage with a 25% Critical damage bonus, and 3x additional stagger.",
+			"Fires a devastating blast which penetrates through all enemies in its path. Deals 150 -> 450 damage with a 25% Critical damage bonus, and 3x additional stagger.",
 			"Bloodline damage increases by 50% for each enemy penetrated.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Merciless`,
@@ -236,7 +236,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "tw8tbh",
 		dlc: "BASE",
 		description: [
-			"While active, grants unlimited Reserve Ammo, increases Reload Speed by 50%, and shots appy 250 → 750 BLEEDING damage over 10s. If 3 shot hit a Weakspot reloading, Merciless will automatically perform a quick Reload. Lasts 13s.",
+			"While active, grants unlimited Reserve Ammo, increases Reload Speed by 50%, and shots appy 250 -> 750 BLEEDING damage over 10s. If 3 shot hit a Weakspot reloading, Merciless will automatically perform a quick Reload. Lasts 13s.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Corrupted_Merciless`,
 		linkedItems: {
@@ -254,7 +254,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "1rw0kk",
 		dlc: "BASE",
 		description: [
-			"Attacks from behind enemies always count as Weakspots. Charge Attacks deal 200 → 600 BLEEDING damage over 10s.",
+			"Attacks from behind enemies always count as Weakspots. Charge Attacks deal 200 -> 600 BLEEDING damage over 10s.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Assassin's_Dagger`,
 		linkedItems: {
@@ -305,8 +305,8 @@ const MODS: Remnant2ModItem[] = [
 		id: "dxnd9s",
 		dlc: "BASE",
 		description: [
-			"Drives electrified rods which tether to other rods within 10m. Tethers last 10s and deal 20 → 60 SHOCK damage per second.",
-			"Targets take 50 → 150 SHOCK damage per second, and 25% damage per extra rod. Increases 1.5x if linked to another rod. Rods in the same target will not link.",
+			"Drives electrified rods which tether to other rods within 10m. Tethers last 10s and deal 20 -> 60 SHOCK damage per second.",
+			"Targets take 50 -> 150 SHOCK damage per second, and 25% damage per extra rod. Increases 1.5x if linked to another rod. Rods in the same target will not link.",
 		],
 		communityTags: [`AOE/Aura`],
 		wikiUrl: `https://remnant2.wiki.gg/Enigma`,
@@ -387,7 +387,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "1bfanq",
 		dlc: "BASE",
 		description: [
-			"Generates a Cube Shield which absorbs up to 500 → 1500 damage from incoming enemy projectiles. Lasts 15s.",
+			"Generates a Cube Shield which absorbs up to 500 -> 1500 damage from incoming enemy projectiles. Lasts 15s.",
 			"Reactivating fires the Cube Shield which damages enemies as it travels. Damage is increased if the Cube Shield has absorbed enemy projectile damage before firing.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Cube_Gun`,
@@ -424,7 +424,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "ysz4fw",
 		dlc: "BASE",
 		description: [
-			"Fires a cluster bomb which detonates on impact across 2.5m. Each cluster deals up to 50 → 150 damage per explosion within 3.5m.",
+			"Fires a cluster bomb which detonates on impact across 2.5m. Each cluster deals up to 50 -> 150 damage per explosion within 3.5m.",
 		],
 		communityTags: [`AOE/Aura`, `Explosive Damage`],
 		wikiUrl: `https://remnant2.wiki.gg/Corrupted_Meridian`,
@@ -484,7 +484,7 @@ const MODS: Remnant2ModItem[] = [
 		dlc: "BASE",
 		description: [
 			"Dealing Melee Damage 6 times over 10s empowers Feral Judgement. When empowered, Neutral Backdash Charge Attacks apply Death Sentence.",
-			"After 1.5s of being sentenced, the enemy will suffer 10 Phantom Strikes, dealing 25 → 75 Damage each. Deals 25% additional damage to BLEEDING enemies.",
+			"After 1.5s of being sentenced, the enemy will suffer 10 Phantom Strikes, dealing 25 -> 75 Damage each. Deals 25% additional damage to BLEEDING enemies.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Feral_Judgement`,
 		linkedItems: {
@@ -538,7 +538,7 @@ const MODS: Remnant2ModItem[] = [
 		dlc: "BASE",
 		searchableTags: ["Status Effect"],
 		description: [
-			"After dealing 250 → 750 damage, Charge Attack will release a Dreamwave, floating outwards 20m and returning to caster.",
+			"After dealing 250 -> 750 damage, Charge Attack will release a Dreamwave, floating outwards 20m and returning to caster.",
 			"Dreamwave applies SLOW to all enemies for 10s and grants a Stack of REVERIE for each enemy affected. Each Stack grants 2% to All Damage and 2% Movement Speed, which lasts 15s.",
 		],
 		communityTags: [`AOE/Aura`],
@@ -608,7 +608,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "3xf7i2",
 		dlc: "BASE",
 		description: [
-			"Recalls bolts which deal 30 → 90 damage when pulled from a target and when striking targets on their return. Recalled bolts grant 2% of Max Health.",
+			"Recalls bolts which deal 30 -> 90 damage when pulled from a target and when striking targets on their return. Recalled bolts grant 2% of Max Health.",
 			"Recalled bolts can also overfill Sorrow up to +5. Any additional bolts will be returned to reserves.",
 		],
 		communityTags: [`Explosive Damage`],
@@ -628,7 +628,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "hpfdzp",
 		dlc: "BASE",
 		description: [
-			"Fires an explosive round that deals up to 175 → 525 FIRE damage within 9m and applies BURNING, dealing 250 → 750 FIRE damage over 10s.",
+			"Fires an explosive round that deals up to 175 -> 525 FIRE damage within 9m and applies BURNING, dealing 250 -> 750 FIRE damage over 10s.",
 		],
 		communityTags: [`AOE/Aura`, `Explosive Damage`],
 		wikiUrl: `https://remnant2.wiki.gg/Hellfire`,
@@ -692,7 +692,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "5mlisj",
 		dlc: "BASE",
 		description: [
-			"Melee Charge attacks fire off ground-based shockwaves which deal 115 → 345 damage.",
+			"Melee Charge attacks fire off ground-based shockwaves which deal 115 -> 345 damage.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Stonebreaker`,
 		linkedItems: {
@@ -724,7 +724,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "d490vt",
 		dlc: "BASE",
 		description: [
-			"On Neutral Evade Attacks Atom Splitter achieves Nuclear Fission, releasing a wave of charged particles which deals 150 → 450 damage to targets within 20m.",
+			"On Neutral Evade Attacks Atom Splitter achieves Nuclear Fission, releasing a wave of charged particles which deals 150 -> 450 damage to targets within 20m.",
 			"Charged Neutral Evade Attacks increase range by 3x and damage by 25%.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Atom_Splitter`,
@@ -777,7 +777,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "D8obdv",
 		dlc: "BASE",
 		description: [
-			"Funnels all current Mod Charges into a powerful penetrating rail dealing 100 → 300 base damage which is increased per Charge consumed. Max 5 Charges.",
+			"Funnels all current Mod Charges into a powerful penetrating rail dealing 100 -> 300 base damage which is increased per Charge consumed. Max 5 Charges.",
 			"Consuming a Charge refills 20% of the Primary Magazine.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Corrupted_Savior`,
@@ -797,7 +797,7 @@ const MODS: Remnant2ModItem[] = [
 		dlc: "BASE",
 		description: [
 			"Fires a highly compressed sphere which creates a large Gravity Well on contact, pulling in enemies for 4s.",
-			"When the Gravity Well expires, it deals 750 → 2250 damage within 10m. Adds 500 → 1500 damage per enemy and divides total damage among all enemies.",
+			"When the Gravity Well expires, it deals 750 -> 2250 damage within 10m. Adds 500 -> 1500 damage per enemy and divides total damage among all enemies.",
 		],
 		communityTags: [`AOE/Aura`, `Explosive Damage`],
 		wikiUrl: `https://remnant2.wiki.gg/Starkiller`,
@@ -817,7 +817,7 @@ const MODS: Remnant2ModItem[] = [
 		dlc: "BASE",
 		description: [
 			"When Mod Power is full, Primary Fire becomes Empowered and highlights enemies it strikes.",
-			"Activating the Mod calls down a Guardian Sword on enemies struck by an Empowered Energy Disc. Swords deal 150 → 450 damage and 3x stagger within 3m.",
+			"Activating the Mod calls down a Guardian Sword on enemies struck by an Empowered Energy Disc. Swords deal 150 -> 450 damage and 3x stagger within 3m.",
 		],
 		communityTags: [`AOE/Aura`, `Explosive Damage`],
 		wikiUrl: `https://remnant2.wiki.gg/Twisted_Arbalest`,
@@ -836,7 +836,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "WzXG4x",
 		dlc: "BASE",
 		description: [
-			"Imbues the Arbalest with the power of Yaesha's corrupted guardian, increases Fire Rate by 20%, reduces Recoil and Sway by 25% and each disc impact with an enemy explodes over 3.5m for 69 → 207 damage. Lasts 15s.",
+			"Imbues the Arbalest with the power of Yaesha's corrupted guardian, increases Fire Rate by 20%, reduces Recoil and Sway by 25% and each disc impact with an enemy explodes over 3.5m for 69 -> 207 damage. Lasts 15s.",
 		],
 		communityTags: [`AOE/Aura`, "Explosive Damage"],
 		wikiUrl: `https://remnant2.wiki.gg/Corrupted_Arbalest`,
@@ -929,7 +929,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "2fjw9q",
 		dlc: "BASE",
 		description: [
-			"Charge Attacks release a wide horizontal projectile that penetrates through multiple enemies dealing 100.8 → 302.4 damage.",
+			"Charge Attacks release a wide horizontal projectile that penetrates through multiple enemies dealing 100.8 -> 302.4 damage.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/World's_Edge`,
 		linkedItems: {
@@ -1004,7 +1004,7 @@ const MODS: Remnant2ModItem[] = [
 		dlc: "DLC3",
 		description: [
 			"Charged Melee empowers the Gauntlets for 15s, increasing Standard Melee Damage by 25% and causing Charged Melee Attacks to release 8m penetrating blasts. Each blast reduces the duration.",
-			"While empowered, performing a Charged Melee Attack during a Neutral Backdash gathers power for up to 5s, then fires a DARKNESS BEAM that deals 100 → 300 Melee Damage every 0.5s. The beam duration equals its time charged, then ends Kilonova after firing.",
+			"While empowered, performing a Charged Melee Attack during a Neutral Backdash gathers power for up to 5s, then fires a DARKNESS BEAM that deals 100 -> 300 Melee Damage every 0.5s. The beam duration equals its time charged, then ends Kilonova after firing.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Dark_Matter_Gauntlets`,
 		linkedItems: {
@@ -1073,7 +1073,7 @@ const MODS: Remnant2ModItem[] = [
 		dlc: "DLC1",
 		id: "aobtw7",
 		description: [
-			"Rapidly fires volatile needles that explode after 1.5s dealing 30 → 90 explosive damage. Deals additional damage to targets with lower health. Lasts 15s.",
+			"Rapidly fires volatile needles that explode after 1.5s dealing 30 -> 90 explosive damage. Deals additional damage to targets with lower health. Lasts 15s.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Anguish`,
 		linkedItems: {
@@ -1110,7 +1110,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "8izb2g",
 		dlc: "BASE",
 		description: [
-			"Fires 5 shattered star orbs. On contact, they each explode for 75 → 225 FIRE damage, and apply 200 → 600 BURNING damage over 10s to all targets within 2.75m.",
+			"Fires 5 shattered star orbs. On contact, they each explode for 75 -> 225 FIRE damage, and apply 200 -> 600 BURNING damage over 10s to all targets within 2.75m.",
 			"Striking the Micronova with Corrupted Aphelion's primary fire causes a chain reaction of larger and more powerful detonations which also apply the initial BURNING amount.",
 			"Generates 1 Primary Ammo on Fire.",
 		],
@@ -1206,7 +1206,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "tya9an",
 		dlc: "BASE",
 		description: [
-			"Imbues ammunition with SHOCK and increases Fire Rate by 15% and Reload Speed by 15% for 20 seconds. Shots also apply OVERLOADED, dealing 35 SHOCK Damage every 5s for 15s.",
+			"Imbues ammunition with SHOCK and increases Fire Rate by 15% and Reload Speed by 15% for 20 seconds. Shots also apply OVERLOADED, dealing 35 → 105 SHOCK Damage every 5s for 15s.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Overflow`,
 		location: {
@@ -1261,7 +1261,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "vtcg3o",
 		dlc: "BASE",
 		description: [
-			"Fires a superheated beam which deals 125 Mod Damage per second. Sustaining the beam on a target causes an explosion which deals 300 Mod damage in a 3m AOE.",
+			"Fires a superheated beam which deals 125 → 375 Mod Damage per second. Sustaining the beam on a target causes an explosion which deals 300 → 900 Mod damage in a 3m AOE.",
 		],
 		communityTags: [`AOE/Aura`, `Explosive Damage`],
 		wikiUrl: `https://remnant2.wiki.gg/Prismatic_Driver`,
@@ -1318,9 +1318,9 @@ const MODS: Remnant2ModItem[] = [
 		dlc: "DLC1",
 		id: "4rdl8r",
 		description: [
-			"Calls forth 7 Phantom Spears to encircle the wielder for 25s. Deals up to 35 damage per second to nearby enemies, based on the number of spears remaining in the ring.",
-			"While active, spears can be thrown by reactivating the Mod. Spears deal 100 and will remain at their impact point for the duration of the Mod.",
-			"Holding the Mod Button recalls embedded Spears, dealing 50 damage to enemies along their path. When all recalled spears return, they cause an Explosion dealing up to 350 damage based on the number of spears recalled.",
+			"Calls forth 7 Phantom Spears to encircle the wielder for 25s. Deals up to 35 → 105 damage per second to nearby enemies, based on the number of spears remaining in the ring.",
+			"While active, spears can be thrown by reactivating the Mod. Spears deal 100 → 300 and will remain at their impact point for the duration of the Mod.",
+			"Holding the Mod Button recalls embedded Spears, dealing 50 → 150 damage to enemies along their path. When all recalled spears return, they cause an Explosion dealing up to 350 → 1050 damage based on the number of spears recalled.",
 		],
 		communityTags: [`AOE/Aura`],
 		wikiUrl: `https://remnant2.wiki.gg/Ring_of_Spears`,
@@ -1334,7 +1334,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "nfw6ja",
 		dlc: "BASE",
 		description: [
-			"Launches a projectile which summons a Root Tentacle. Tentacles deal 30 - 90 damage and steal 1.5% of the hero's Max Health per hit. Lasts 20s. (Max 2)",
+			"Launches a projectile which summons a Root Tentacle. Tentacles deal 30 → 90 damage and steal 1.5% of the hero's Max Health per hit. Lasts 20s. (Max 2)",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Rootlash`,
 		location: { world: "Yaesha", dungeon: [`Kaeula's Rest`] },
@@ -1347,7 +1347,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "vgin4w",
 		dlc: "BASE",
 		description: [
-			"Fires a rotten arrow that deals 110 - 330 Base Damage with a 150% bonus Weakspot modifier. Detonates for another 100 - 300 damage within 4m.",
+			"Fires a rotten arrow that deals 110 → 330 Base Damage with a 150% bonus Weakspot modifier. Detonates for another 100 → 300 damage within 4m.",
 		],
 		communityTags: [`AOE/Aura`, `Explosive Damage`],
 		wikiUrl: `https://remnant2.wiki.gg/Rotted_Arrow`,
@@ -1382,7 +1382,7 @@ const MODS: Remnant2ModItem[] = [
 		dlc: "BASE",
 		searchableTags: ["Status Effect"],
 		description: [
-			"Fires a canister that releases Caltrops over an area of 6m. Caltrops apply SLOW and BLEEDING to enemies, dealing 400 - 1,200 damage over 10s. Lasts 10s.",
+			"Fires a canister that releases Caltrops over an area of 6m. Caltrops apply SLOW and BLEEDING to enemies, dealing 400 → 1200 damage over 10s. Lasts 10s.",
 		],
 		communityTags: [`AOE/Aura`],
 		wikiUrl: `https://remnant2.wiki.gg/Scrap_Shot`,
@@ -1447,7 +1447,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "cpvech",
 		dlc: "BASE",
 		description: [
-			"Fires a Wretched Spear which embeds itself on contact. Spears deal 125 damage on hit, rapidly dividing inside the target until bursting, dealing 140 damage to all targets within 3m. Spears embedded in the environment remain in place for 10s.",
+			"Fires a Wretched Spear which embeds itself on contact. Spears deal 200 → 600 damage on hit, rapidly dividing inside the target until bursting, dealing 350 → 1050 damage to all targets within 3m. Spears embedded in the environment remain in place for 10s.",
 		],
 		communityTags: ["AOE/Aura"],
 		wikiUrl: `https://remnant2.wiki.gg/Skewer_2.0`,
@@ -1497,7 +1497,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "5bb0mv",
 		dlc: "BASE",
 		description: [
-			"Fires a projectile that attaches to the enemy dealing 40 damage. Enemies within 7m become bound to the primary target after impact and share 60% of damage dealt to them. Lasts 15s.",
+			"Fires a projectile that attaches to the enemy dealing 40 → 120 damage. Enemies within 7m become bound to the primary target after impact and share 60% of damage dealt to them. Lasts 15s.",
 		],
 		communityTags: [`AOE/Aura`],
 		wikiUrl: `https://remnant2.wiki.gg/Soulbinder`,
@@ -1512,7 +1512,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "4wd3gm",
 		dlc: "BASE",
 		description: [
-			"Launch an alien egg that bursts on impact, releasing 5 Space Crabs. Crabs follow the caster, leaping towards enemies within 4m, and exploding, dealing 60 - 180 damage each.",
+			"Launch an alien egg that bursts on impact, releasing 5 Space Crabs. Crabs follow the caster, leaping towards enemies within 4m, and exploding, dealing 60 → 180 damage each.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Space_Crabs`,
 		location: { world: `N'Erud`, dungeon: [`The Hatchery`] },
@@ -1564,7 +1564,7 @@ const MODS: Remnant2ModItem[] = [
 		dlc: "BASE",
 		searchableTags: ["Status Effect"],
 		description: [
-			"Fires a beam which deals 15 - 45 damage per second, and applies SLOW Debuff. After 2s of application to an enemy, SLOW becomes STASIS, freezing the target in place for 10s.",
+			"Fires a beam which deals 15 → 45 damage per second, and applies SLOW Debuff. After 2s of application to an enemy, SLOW becomes STASIS, freezing the target in place for 10s.",
 		],
 		wikiUrl: `https://remnant2.wiki.gg/Stasis_Beam`,
 		location: { world: `N'Erud`, dungeon: ["The Eon Vault"] },
@@ -1619,7 +1619,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "g6glpj",
 		dlc: "BASE",
 		description: [
-			"Fires a projectile that cracks the ground and spawns shockwaves that deal 75 damage Within 9m for 6s. Shockwaves inflict 3x impact.",
+			"Fires a projectile that cracks the ground and spawns shockwaves that deal 75 → 225 damage Within 9m for 6s. Shockwaves inflict 3x impact.",
 		],
 		communityTags: [`AOE/Aura`, `Explosive Damage`],
 		wikiUrl: `https://remnant2.wiki.gg/Tremor`,
@@ -1648,7 +1648,7 @@ const MODS: Remnant2ModItem[] = [
 		dlc: "BASE",
 		searchableTags: ["Status Effect"],
 		description: [
-			"Launches a slow-moving orb that pulses every 0.5s, striking enemies within 6 for 20 → 60 SHOCK damage and applying OVERLOADED, dealing 25 → 75 SHOCK damage every 5s for 15s. The orb lasts 20s.",
+			"Launches a slow-moving orb that pulses every 0.5s, striking enemies within 6m for 30 → 90 SHOCK damage and applying OVERLOADED, dealing 25 → 75 SHOCK damage every 5s for 15s. The orb lasts 20s.",
 			"Repeatedly damaging the orb overcharges it, increasing its radius. Overcharged orb deals 50% increased pulse damage.",
 		],
 		communityTags: [`AOE/Aura`],
@@ -1718,7 +1718,7 @@ const MODS: Remnant2ModItem[] = [
 		id: "ggf5qe",
 		dlc: "BASE",
 		description: [
-			"Fires a highly volatile projectile that explodes to leave a line of flaming terrain. Deals 55 FIRE Damage per second, and applies BURNING, dealing 200 damage over 10s. Lasts 5s.",
+			"Fires a highly volatile projectile that explodes to leave a line of flaming terrain. Deals 150 → 450 FIRE Damage per second, and applies BURNING, dealing 200 → 600 damage over 10s. Lasts 10s.",
 		],
 		communityTags: [`AOE/Aura`],
 		wikiUrl: `https://remnant2.wiki.gg/Witchfire`,
