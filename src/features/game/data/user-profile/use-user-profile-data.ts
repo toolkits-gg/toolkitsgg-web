@@ -13,11 +13,13 @@ import {
 } from "#/features/game/data/user-profile/user-profile.idb.ts";
 import {
 	buildGetProfileQueryKey,
+	DEFAULT_BIO,
 	getPublicUserProfileServerFn,
 	getUserProfileServerFn,
 	mapUserToProfileData,
 	removeAvatarOverrideServerFn,
 	removePrimaryAvatarServerFn,
+	resolveDisplayName,
 	type UserProfileData,
 	updateAvatarServerFn,
 	updateProfileServerFn,
@@ -60,9 +62,12 @@ export const useUserProfileQuery = (args?: GetProfileArgs) => {
 				getLocalUserProfile(userId),
 				getLocalAvatarOverrides(userId),
 			]);
+			// The session name only describes the signed-in user, so it is not a
+			// fallback when reading somebody else's profile.
+			const sessionUser = args?.userId ? null : session?.user;
 			return {
-				displayName: profile?.displayName ?? "Traveler",
-				bio: profile?.bio ?? "No bio provided.",
+				displayName: resolveDisplayName(profile?.displayName, sessionUser),
+				bio: profile?.bio ?? DEFAULT_BIO,
 				avatarUrl: null,
 				primaryAvatarId: profile?.primaryAvatarId ?? null,
 				primaryAvatarGameId: (profile?.primaryAvatarGameId as GameId) ?? null,

@@ -87,8 +87,10 @@ const seedLocalFixtures = async () => {
 				});
 			}
 
-			await prisma.userProfile.create({
-				data: {
+			await prisma.userProfile.upsert({
+				where: { userId },
+				update: seededUserProfiles[index],
+				create: {
 					...seededUserProfiles[index],
 					userId,
 				},

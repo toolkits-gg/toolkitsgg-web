@@ -40,6 +40,8 @@ export type UserProfileData = {
 
 // Not using UserProfileData type due to needed `null` flexibility.
 export type UserWithProfile = {
+	name: string | null;
+	username: string;
 	UserProfile: {
 		displayName: string | null;
 		bio: string | null;
@@ -62,24 +64,37 @@ export type UserWithProfile = {
 export const DEFAULT_DISPLAY_NAME = "Traveler";
 export const DEFAULT_BIO = "No bio provided.";
 
+/**
+ * Effective display name for a user who has never set one. Social sign-ins
+ * carry a name worth showing (`mapProfileToUser` fills it from the Discord
+ * username), and every account has a username, so the generic placeholder is
+ * the last resort rather than the first.
+ */
+export const resolveDisplayName = (
+	displayName: string | null | undefined,
+	user: { name?: string | null; username?: string | null } | null | undefined,
+) =>
+	displayName || user?.name || user?.username || DEFAULT_DISPLAY_NAME;
+
 export type GetProfileInput = { userId?: string } | undefined;
 
 export const mapUserToProfileData = (
 	user: UserWithProfile,
 ): UserProfileData | null => {
-	if (!user?.UserProfile) return null;
+	if (!user) return null;
 	const profile = user.UserProfile;
 	return {
-		displayName: profile.displayName ?? DEFAULT_DISPLAY_NAME,
-		bio: profile.bio ?? DEFAULT_BIO,
-		avatarUrl: profile.avatarUrl ?? null,
-		primaryAvatarId: profile.primaryAvatarId ?? null,
-		primaryAvatarGameId: profile.primaryAvatarGameId as GameId | null,
-		avatarOverrides: profile.UserAvatarOverrides.map((o) => ({
-			gameId: o.gameId as GameId,
-			avatarId: o.avatarId,
-			avatarGameId: o.avatarGameId as GameId,
-		})),
+		displayName: resolveDisplayName(profile?.displayName, user),
+		bio: profile?.bio ?? DEFAULT_BIO,
+		avatarUrl: profile?.avatarUrl ?? null,
+		primaryAvatarId: profile?.primaryAvatarId ?? null,
+		primaryAvatarGameId: (profile?.primaryAvatarGameId as GameId) ?? null,
+		avatarOverrides:
+			profile?.UserAvatarOverrides.map((o) => ({
+				gameId: o.gameId as GameId,
+				avatarId: o.avatarId,
+				avatarGameId: o.avatarGameId as GameId,
+			})) ?? [],
 	};
 };
 

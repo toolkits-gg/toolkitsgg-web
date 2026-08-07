@@ -72,6 +72,19 @@ const auth = betterAuth({
 			});
 		},
 	},
+	databaseHooks: {
+		user: {
+			create: {
+				after: async (user) => {
+					await prisma.userProfile.upsert({
+						where: { userId: user.id },
+						update: {},
+						create: { userId: user.id },
+					});
+				},
+			},
+		},
+	},
 	session: {
 		expiresIn: 60 * 60 * 24 * 30, // 30 days
 		updateAge: 60 * 60 * 24 * 15, // 15 days - refresh session

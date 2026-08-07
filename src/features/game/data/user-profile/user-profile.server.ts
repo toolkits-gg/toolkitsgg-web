@@ -3,8 +3,8 @@ import {
 	getOptionalUserId,
 	requireUserId,
 } from "#/features/user/require-user.server.ts";
-import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/enforce-user-write-limit.ts";
 import { getGameAvatars } from "#/game-registry/public-registry.ts";
+import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/enforce-user-write-limit.ts";
 
 import { type GameId, prisma } from "@/prisma";
 
@@ -13,6 +13,13 @@ type UpdateAvatarData = {
 	avatarGameId: GameId;
 	targetGameId?: GameId;
 };
+
+export const ensureUserProfile = async (userId: string) =>
+	prisma.userProfile.upsert({
+		where: { userId },
+		update: {},
+		create: { userId },
+	});
 
 export const updateAvatar = async (data: UpdateAvatarData) => {
 	const userId = await requireUserId();
@@ -26,8 +33,7 @@ export const updateAvatar = async (data: UpdateAvatarData) => {
 		);
 	}
 
-	const profile = await prisma.userProfile.findUnique({ where: { userId } });
-	if (!profile) throw new Error("User profile not found");
+	const profile = await ensureUserProfile(userId);
 
 	if (data.targetGameId) {
 		await prisma.userAvatarOverride.upsert({
@@ -61,6 +67,7 @@ export const updateAvatar = async (data: UpdateAvatarData) => {
 export const removePrimaryAvatar = async () => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
+	await ensureUserProfile(userId);
 	await prisma.userProfile.update({
 		where: { userId },
 		data: { primaryAvatarId: null, primaryAvatarGameId: null },
@@ -71,8 +78,7 @@ export const removePrimaryAvatar = async () => {
 export const removeAvatarOverride = async (targetGameId: GameId) => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
-	const profile = await prisma.userProfile.findUnique({ where: { userId } });
-	if (!profile) throw new Error("User profile not found");
+	const profile = await ensureUserProfile(userId);
 
 	await prisma.userAvatarOverride.deleteMany({
 		where: { userProfileId: profile.id, gameId: targetGameId },
@@ -86,6 +92,7 @@ export const updateProfile = async (data: {
 }) => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
+	await ensureUserProfile(userId);
 	await prisma.userProfile.update({
 		where: { userId },
 		data: {
@@ -98,16 +105,31 @@ export const updateProfile = async (data: {
 	return { ok: true as const };
 };
 
+// Explicit select rather than include: this shape reaches the client, so it must
+// not carry the rest of the User row (email, verification state) with it.
+const profileSelect = {
+	name: true,
+	username: true,
+	UserProfile: {
+		select: {
+			displayName: true,
+			bio: true,
+			avatarUrl: true,
+			primaryAvatarId: true,
+			primaryAvatarGameId: true,
+			UserAvatarOverrides: {
+				select: { gameId: true, avatarId: true, avatarGameId: true },
+			},
+		},
+	},
+} as const;
+
 export const getPublicUserProfile = (
 	userId: string,
 ): Promise<UserWithProfile> =>
 	prisma.user.findUnique({
 		where: { id: userId },
-		include: {
-			UserProfile: {
-				include: { UserAvatarOverrides: true },
-			},
-		},
+		select: profileSelect,
 	});
 
 export const getViewerUserId = () => getOptionalUserId();
@@ -116,10 +138,6 @@ export const getUserProfile = async (): Promise<UserWithProfile> => {
 	const userId = await requireUserId();
 	return prisma.user.findUnique({
 		where: { id: userId },
-		include: {
-			UserProfile: {
-				include: { UserAvatarOverrides: true },
-			},
-		},
+		select: profileSelect,
 	});
 };

@@ -1,11 +1,4 @@
-// Offline-sync handlers for the user-profile entities (userProfile, userAvatarOverride).
-// Split out from user-profile.server.ts so the sync-replay path lives apart from the
-// direct CRUD data access. Unlike most entities these handlers are hand-written rather
-// than factory-built, because the avatar-override op fans out to two different Prisma
-// rows (profile primary avatar vs. per-game override) depending on the payload. The
-// `.server.ts` suffix opts this into Start's import protection, keeping prisma out of
-// the client bundle. Consumed only by the sync handler game-registry.
-
+import { ensureUserProfile } from "#/features/game/data/user-profile/user-profile.server.ts";
 import type { SyncHandler } from "#/features/sync/local-data/types.ts";
 import { REGISTERED_GAME_IDS } from "#/game-registry/public-registry.ts";
 import { type GameId, prisma } from "@/prisma";
@@ -18,6 +11,7 @@ const isGameId = (value: string): value is GameId => GAME_ID_SET.has(value);
 
 export const userProfileSyncHandler: SyncHandler = async (op, userId) => {
 	if (op.operation === "upsert") {
+		await ensureUserProfile(userId);
 		await prisma.userProfile.update({
 			where: { userId },
 			data: { primaryAvatarId: null, primaryAvatarGameId: null },
@@ -37,8 +31,7 @@ export const userAvatarOverrideSyncHandler: SyncHandler = async (
 		targetGameId?: string;
 	} | null;
 
-	const profile = await prisma.userProfile.findUnique({ where: { userId } });
-	if (!profile) return { status: "error", message: "user profile not found" };
+	const profile = await ensureUserProfile(userId);
 
 	if (op.operation === "delete") {
 		const rawTargetGameId = payload?.targetGameId;
