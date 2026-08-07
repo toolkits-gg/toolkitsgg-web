@@ -7,8 +7,7 @@
     "@/prisma": "./prisma/client"
   },
   "engines": {
-    "node": "24.x",
-    "pnpm": ">=11"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "vite dev --port 3000",
