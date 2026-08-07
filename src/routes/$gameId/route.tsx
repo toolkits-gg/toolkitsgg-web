@@ -1,6 +1,33 @@
-import { Box, Text, Title } from "@mantine/core";
-import { createFileRoute, notFound, Outlet } from "@tanstack/react-router";
+import {
+	createFileRoute,
+	notFound,
+	Outlet,
+	useParams,
+} from "@tanstack/react-router";
+import { NotFoundCard } from "#/components/NotFoundCard.tsx";
 import { getValidatedGameId } from "#/registry/game-public-registry.tsx";
+
+const GameNotFound = () => {
+	const params = useParams({ strict: false });
+
+	if (getValidatedGameId(params.gameId ?? "")) {
+		return <NotFoundCard />;
+	}
+
+	return (
+		<NotFoundCard
+			badge="Game not found"
+			heading={<>We don&rsquo;t have that game.</>}
+			description={
+				<>
+					That URL doesn&rsquo;t match a game we support. Use the game switcher
+					in the header to jump to one that we do.
+				</>
+			}
+			footerLabel="404 game not found"
+		/>
+	);
+};
 
 const Route = createFileRoute("/$gameId")({
 	beforeLoad: ({ params }) => {
@@ -25,14 +52,7 @@ const Route = createFileRoute("/$gameId")({
 			},
 		],
 	}),
-	notFoundComponent: () => {
-		return (
-			<Box p="md">
-				<Title order={1}>404 - Game Not Found</Title>
-				<Text>The page you are looking for does not exist.</Text>
-			</Box>
-		);
-	},
+	notFoundComponent: GameNotFound,
 	component: () => <Outlet />,
 });
 

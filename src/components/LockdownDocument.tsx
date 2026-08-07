@@ -2,15 +2,10 @@ import {
 	ColorSchemeScript,
 	MantineProvider,
 	mantineHtmlProps,
-	Text,
-	Title,
 } from "@mantine/core";
 import { HeadContent, Scripts } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { LuGithub } from "react-icons/lu";
-import { SiDiscord } from "react-icons/si";
-import { AnimatedLogo } from "#/components/AppLogo.tsx";
-import { CODEBERG_URL, DISCORD_URL } from "#/constants.ts";
+import { StatusCard } from "#/components/StatusCard.tsx";
 import { clientEnv } from "#/env/client-env.ts";
 import { defaultTheme } from "#/features/theme/themes/default-theme.ts";
 import classes from "./LockdownDocument.module.css";
@@ -63,56 +58,15 @@ export const LockdownDocument = ({
 					forceColorScheme="dark"
 					deduplicateCssVariables
 				>
-					<main className={classes.shell}>
-						<section className={classes.card}>
-							<div className={classes.logo}>
-								<AnimatedLogo size={128} />
-							</div>
-
-							<span className={classes.badge}>
-								<span className={classes.pulse} />
-								{badge}
-							</span>
-
-							<Title order={1} className={classes.title}>
-								{heading}
-							</Title>
-
-							<Text c="mutedFg.5">{description}</Text>
-
-							<div className={classes.divider} />
-
-							<Text size="sm" c="mutedFg.5" mb="lg">
-								{linksIntro}
-							</Text>
-
-							<div className={classes.links}>
-								<a
-									className={classes.link}
-									href={DISCORD_URL}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<SiDiscord size={16} />
-									Discord
-								</a>
-								<a
-									className={classes.link}
-									href={CODEBERG_URL}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<LuGithub size={16} />
-									GitHub
-								</a>
-							</div>
-						</section>
-
-						<footer className={classes.footer}>
-							<span className={classes.footerIcon}>{footerIcon}</span>
-							Toolkits.gg &middot; {footerLabel}
-						</footer>
-					</main>
+					<StatusCard
+						variant="standalone"
+						badge={badge}
+						heading={heading}
+						description={description}
+						linksIntro={linksIntro}
+						footerIcon={footerIcon}
+						footerLabel={footerLabel}
+					/>
 				</MantineProvider>
 				<Scripts />
 			</body>

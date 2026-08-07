@@ -1,5 +1,6 @@
-import { Box, Stack, Text, Title } from "@mantine/core";
+import { Box, Stack } from "@mantine/core";
 import { createFileRoute, notFound, Outlet } from "@tanstack/react-router";
+import { NotFoundCard } from "#/components/NotFoundCard.tsx";
 import {
 	FALLBACK_DISPLAY_NAME,
 	OG_IMAGE,
@@ -113,10 +114,17 @@ const Route = createFileRoute("/account/profile/$userId")({
 		};
 	},
 	notFoundComponent: () => (
-		<Box p="md">
-			<Title order={1}>Profile Not Found</Title>
-			<Text>This user profile does not exist.</Text>
-		</Box>
+		<NotFoundCard
+			badge="Profile not found"
+			heading={<>This profile doesn&rsquo;t exist.</>}
+			description={
+				<>
+					We couldn&rsquo;t find that user. The account may have been deleted,
+					or the link you followed might be wrong.
+				</>
+			}
+			footerLabel="404 profile not found"
+		/>
 	),
 	component: ProfileLayout,
 });

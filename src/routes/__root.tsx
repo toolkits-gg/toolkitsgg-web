@@ -6,11 +6,11 @@ import "@fontsource/geist/400.css";
 import "@fontsource/geist/500.css";
 import "@fontsource/geist/600.css";
 import "@fontsource/geist/700.css";
-import { Box, Text, Title } from "@mantine/core";
 import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext } from "@tanstack/react-router";
 import { ComingSoonDocument } from "#/components/ComingSoonDocument.tsx";
 import { MaintenanceModeDocument } from "#/components/MaintenanceModeDocument.tsx";
+import { NotFoundCard } from "#/components/NotFoundCard.tsx";
 import { RootDocument } from "#/components/RootDocument.tsx";
 import { OG_IMAGE, SERVER_RESOLVED_GAME_ID_SOURCES } from "#/constants";
 import { clientEnv } from "#/env/client-env.ts";
@@ -98,14 +98,7 @@ const Route = createRootRouteWithContext<MyRouterContext>()({
 		: clientEnv.VITE_SHOW_COMING_SOON
 			? ComingSoonDocument
 			: RootDocument,
-	notFoundComponent: () => {
-		return (
-			<Box p="md">
-				<Title order={1}>404 - Not Found</Title>
-				<Text>The page you are looking for does not exist.</Text>
-			</Box>
-		);
-	},
+	notFoundComponent: () => <NotFoundCard />,
 });
 
 export { Route };
