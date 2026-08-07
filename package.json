@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
+    "postinstall": "prisma generate",
     "preview": "vite preview",
     "test": "vitest run",
     "format": "biome format --write",
