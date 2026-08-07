@@ -1,5 +1,6 @@
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
+import { createSubdomainRewrite } from "./features/game/subdomain-rewrite";
 import { getContext } from "./integrations/tanstack-query/get-context";
 import { routeTree } from "./routeTree.gen";
 
@@ -12,6 +13,7 @@ function getRouter() {
 		scrollRestoration: true,
 		defaultPreload: "intent",
 		defaultPreloadStaleTime: 0,
+		rewrite: createSubdomainRewrite(routeTree),
 	});
 
 	setupRouterSsrQueryIntegration({ router, queryClient: context.queryClient });

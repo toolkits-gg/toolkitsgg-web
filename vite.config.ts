@@ -12,6 +12,9 @@ export default defineConfig(({ command }) => {
 	return {
 		server: {
 			port: 3000,
+			// Subdomain routing can only be exercised locally over a real host,
+			// e.g. remnant2.localhost:3000.
+			allowedHosts: [".localhost", ".toolkits.gg"],
 		},
 		resolve: {
 			tsconfigPaths: true,

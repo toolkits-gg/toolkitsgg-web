@@ -6,20 +6,46 @@ import { EmailVerification } from "#/emails/auth/email-verification.tsx";
 import { clientEnv } from "#/env/client-env.ts";
 import { serverEnv } from "#/env/server-env.ts";
 import { getNoReplyFrom } from "#/features/email/utils.ts";
+import { APP_DOMAIN } from "#/features/game/subdomain-rewrite.ts";
 import { resend } from "#/integrations/resend/resend";
+import { REGISTERED_GAME_IDS } from "#/registry/game-public-registry.tsx";
 import { prisma } from "@/prisma";
 
 const FROM = getNoReplyFrom();
+
+const baseURL =
+	serverEnv.BETTER_AUTH_URL ||
+	clientEnv.VITE_APP_URL ||
+	"http://localhost:3000";
+
+// Games are served from their own subdomain, so the session cookie has to be
+// readable across all of them. Only applied when the app really is on the app
+// domain - a domain attribute pinned to toolkits.gg breaks cookies on localhost.
+const isAppDomain = new URL(baseURL).hostname.endsWith(APP_DOMAIN);
+
+const crossSubdomain = isAppDomain
+	? {
+			trustedOrigins: [
+				`https://${APP_DOMAIN}`,
+				`https://www.${APP_DOMAIN}`,
+				...REGISTERED_GAME_IDS.map((id) => `https://${id}.${APP_DOMAIN}`),
+			],
+			advanced: {
+				crossSubDomainCookies: {
+					enabled: true,
+					domain: `.${APP_DOMAIN}`,
+				},
+			},
+		}
+	: {};
 
 const auth = betterAuth({
 	database: prismaAdapter(prisma, {
 		provider: "postgresql",
 	}),
 	secret: serverEnv.BETTER_AUTH_SECRET,
-	baseURL:
-		serverEnv.BETTER_AUTH_URL ||
-		clientEnv.VITE_APP_URL ||
-		"http://localhost:3000",
+	baseURL,
+	...crossSubdomain,
 	emailAndPassword: {
 		enabled: true,
 		requireEmailVerification: true,

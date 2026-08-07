@@ -1,9 +1,3 @@
-import { isRegisteredGameId } from "#/registry/game-public-registry.tsx";
-
-import type { GameId } from "@/prisma";
-
-const ROOT_DOMAINS = ["toolkits.gg", "www.toolkits.gg", "localhost"];
-
 export const capitalize = (s: string): string =>
 	s.length === 0 ? s : s[0].toUpperCase() + s.slice(1);
 
@@ -33,32 +27,4 @@ export const parseCookie = (header: string, name: string): string | null => {
 		}
 	}
 	return null;
-};
-export const parseSubdomain = (hostname: string): GameId | null => {
-	// Strip port (e.g. localhost:3000)
-	const host = hostname.split(":")[0];
-
-	// No subdomain possible on bare localhost
-	if (host === "localhost") return null;
-
-	// Check against known root domains
-	for (const root of ROOT_DOMAINS) {
-		if (host === root) return null;
-	}
-
-	// e.g. "remnant2.toolkits.gg" -> ["remnant2", "toolkits", "gg"]
-	const parts = host.split(".");
-
-	// Need at least 3 parts for a subdomain: [sub, domain, tld]
-	if (parts.length < 3) return null;
-
-	const subdomain = parts[0];
-
-	// Reject "www" explicitly in case it slips through
-	if (subdomain === "www") return null;
-
-	// Reject invalid subdomains
-	if (!isRegisteredGameId(subdomain)) return null;
-
-	return subdomain;
 };

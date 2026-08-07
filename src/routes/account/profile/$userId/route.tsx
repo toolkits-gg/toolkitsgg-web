@@ -41,35 +41,34 @@ const ProfileLayout = () => {
 const Route = createFileRoute("/account/profile/$userId")({
 	loader: async ({ params, context, location }) => {
 		const { queryClient } = context;
-		const [profile, viewerUserId, { subdomainGameId, cookieGameId }] =
-			await Promise.all([
-				queryClient.ensureQueryData({
-					queryKey: buildGetProfileQueryKey(params.userId),
-					queryFn: async () => {
-						const user = await getPublicUserProfileServerFn({
-							data: { userId: params.userId },
-						});
-						return mapUserToProfileData(user);
-					},
-				}),
-				getViewerUserIdServerFn(),
-				queryClient.ensureQueryData({
-					queryKey: SERVER_RESOLVED_GAME_ID_SOURCES,
-					queryFn: () => getServerResolvedGameInputsServerFn(),
-					staleTime: Number.POSITIVE_INFINITY,
-					gcTime: Number.POSITIVE_INFINITY,
-				}),
-			]);
+		const [profile, viewerUserId, { cookieGameId }] = await Promise.all([
+			queryClient.ensureQueryData({
+				queryKey: buildGetProfileQueryKey(params.userId),
+				queryFn: async () => {
+					const user = await getPublicUserProfileServerFn({
+						data: { userId: params.userId },
+					});
+					return mapUserToProfileData(user);
+				},
+			}),
+			getViewerUserIdServerFn(),
+			queryClient.ensureQueryData({
+				queryKey: SERVER_RESOLVED_GAME_ID_SOURCES,
+				queryFn: () => getServerResolvedGameInputsServerFn(),
+				staleTime: Number.POSITIVE_INFINITY,
+				gcTime: Number.POSITIVE_INFINITY,
+			}),
+		]);
 		if (!profile) throw notFound();
 
-		// Subdomain > ?gameId= > cookie.
+		// ?gameId= > cookie. Profile routes are reserved, so they keep their path
+		// on a game subdomain and no route segment carries the game here.
 		// The cookie reflects the owner's current switcher selection,
 		// so SSR'd OG matches what they see on screen, even before the
 		// in-tab `useEffect` mirrors the gameId into the URL.
 		const searchParams = new URLSearchParams(location.searchStr);
 		const searchGameId = getValidatedGameId(searchParams.get("gameId") ?? "");
-		const activeGameId: GameId | null =
-			subdomainGameId ?? searchGameId ?? cookieGameId ?? null;
+		const activeGameId: GameId | null = searchGameId ?? cookieGameId ?? null;
 
 		// "none" cleanly bypasses the override branch in resolveAvatar (no override
 		// rows are stored against "none"), so primary-then-legacy fallback applies.

@@ -4,7 +4,9 @@ import {
 	Outlet,
 	useParams,
 } from "@tanstack/react-router";
+import { GameNotFoundCard } from "#/components/GameNotFoundCard.tsx";
 import { NotFoundCard } from "#/components/NotFoundCard.tsx";
+import { gameCanonicalUrl } from "#/features/game/subdomain-rewrite.ts";
 import { getValidatedGameId } from "#/registry/game-public-registry.tsx";
 
 const GameNotFound = () => {
@@ -14,27 +16,22 @@ const GameNotFound = () => {
 		return <NotFoundCard />;
 	}
 
-	return (
-		<NotFoundCard
-			badge="Game not found"
-			heading={<>We don&rsquo;t have that game.</>}
-			description={
-				<>
-					That URL doesn&rsquo;t match a game we support. Use the game switcher
-					in the header to jump to one that we do.
-				</>
-			}
-			footerLabel="404 game not found"
-		/>
-	);
+	return <GameNotFoundCard />;
 };
 
 const Route = createFileRoute("/$gameId")({
 	beforeLoad: ({ params }) => {
 		if (!getValidatedGameId(params.gameId)) throw notFound();
 	},
-	head: ({ params }) => ({
+	head: ({ params, matches }) => ({
 		links: [
+			{
+				rel: "canonical",
+				href: gameCanonicalUrl(
+					params.gameId,
+					matches[matches.length - 1]?.pathname ?? `/${params.gameId}`,
+				),
+			},
 			{
 				rel: "icon",
 				type: "image/x-icon",
