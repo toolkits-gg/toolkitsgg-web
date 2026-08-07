@@ -1,14 +1,13 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { nextCookies } from "better-auth/next-js";
+import { APP_DOMAIN } from "#/constants.ts";
 import { EmailPasswordReset } from "#/emails/auth/email-password-reset.tsx";
 import { EmailVerification } from "#/emails/auth/email-verification.tsx";
 import { clientEnv } from "#/env/client-env.ts";
 import { serverEnv } from "#/env/server-env.ts";
 import { getNoReplyFrom } from "#/features/email/utils.ts";
-import { APP_DOMAIN } from "#/features/game/subdomain-rewrite.ts";
 import { resend } from "#/integrations/resend/resend";
-import { REGISTERED_GAME_IDS } from "#/registry/game-public-registry.tsx";
 import { prisma } from "@/prisma";
 
 const FROM = getNoReplyFrom();
@@ -25,11 +24,8 @@ const isAppDomain = new URL(baseURL).hostname.endsWith(APP_DOMAIN);
 
 const crossSubdomain = isAppDomain
 	? {
-			trustedOrigins: [
-				`https://${APP_DOMAIN}`,
-				`https://www.${APP_DOMAIN}`,
-				...REGISTERED_GAME_IDS.map((id) => `https://${id}.${APP_DOMAIN}`),
-			],
+			// Wildcard rather than a list built from the game registry
+			trustedOrigins: [`https://${APP_DOMAIN}`, `https://*.${APP_DOMAIN}`],
 			advanced: {
 				crossSubDomainCookies: {
 					enabled: true,

@@ -1,7 +1,7 @@
 import type { AnyRoute } from "@tanstack/react-router";
+import { APP_DOMAIN } from "#/constants.ts";
 import { isRegisteredGameId } from "#/registry/game-public-registry.tsx";
 
-const APP_DOMAIN = "toolkits.gg";
 const DEV_DOMAIN = "localhost";
 
 /**
@@ -123,4 +123,4 @@ const gameCanonicalUrl = (gameId: string, pathname: string): string => {
 	return `https://${gameId}.${APP_DOMAIN}${rest || "/"}`;
 };
 
-export { APP_DOMAIN, createSubdomainRewrite, gameCanonicalUrl, subdomainLabel };
+export { createSubdomainRewrite, gameCanonicalUrl, subdomainLabel };

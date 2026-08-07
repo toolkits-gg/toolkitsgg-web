@@ -112,7 +112,13 @@ export type GameIDBSeed = {
 };
 
 export type GameDBSeed = {
-	seed: () => Promise<void>;
+	/** Idempotent upserts of the game's reference data. Safe against any environment. */
+	seedReferenceData: () => Promise<void>;
+	/**
+	 * Wipes the game's user-generated data.
+	 * Destructive and local-only.
+	 */
+	resetUserData?: () => Promise<void>;
 };
 
 export type GameData = {

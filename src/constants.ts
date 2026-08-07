@@ -12,6 +12,13 @@ const KOFI_URL = "https://ko-fi.com/remnant2toolkit";
 
 const FALLBACK_DISPLAY_NAME = "Toolkits.gg User";
 
+/**
+ * Lives here rather than alongside the subdomain rewrite so that server-only
+ * modules can read it without pulling in the game registry,
+ * which violates the client/server boundary on dev.
+ */
+const APP_DOMAIN = "toolkits.gg";
+
 const OG_IMAGE = `${clientEnv.VITE_CLOUDFRONT_URL}/metadata/og-image.png`;
 
 const SERVER_RESOLVED_GAME_ID_SOURCES = [
@@ -21,6 +28,7 @@ const SERVER_RESOLVED_GAME_ID_SOURCES = [
 export const DEFAULT_APP_LOGO_SIZE: AppLogoSize = 36;
 
 export {
+	APP_DOMAIN,
 	CHANGELOG_URL,
 	CODEBERG_URL,
 	DISCORD_URL,

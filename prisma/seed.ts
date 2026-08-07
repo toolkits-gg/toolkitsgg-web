@@ -1,8 +1,9 @@
 import { allGameDBSeeds } from "#/game-registry/game-db-seed-registry";
 
 import { auth } from "#/integrations/better-auth/auth";
-import { prisma } from "./client";
 import dotenv from 'dotenv'
+import { prisma } from "./client";
+import { seedReferenceData } from "./seed-reference";
 
 dotenv.config({ path: '.env.local' });
 
@@ -42,9 +43,16 @@ const seededUserProfiles = [
 	}
 ];
 
-const seed = async () => {
-	const t0 = performance.now();
-	console.log("DB Seed: Started ...");
+/**
+ * Wipes user-generated data and recreates the local test accounts. Destructive:
+ * never point this at an environment whose users matter.
+ */
+const seedLocalFixtures = async () => {
+	for (const [gameId, gameSeed] of Object.entries(allGameDBSeeds)) {
+		if (!gameSeed.resetUserData) continue;
+		console.log(`DB Seed: Resetting user data for ${gameId}...`);
+		await gameSeed.resetUserData();
+	}
 
 	try {
 		await Promise.all([
@@ -89,16 +97,26 @@ const seed = async () => {
 			return result.user;
 		}),
 	);
+};
 
-	await Promise.all(
-		Object.entries(allGameDBSeeds).map(async ([gameId, gameSeed]) => {
-			console.log(`DB Seed: Seeding items for ${gameId}...`);
-			await gameSeed.seed();
-		}),
-	);
+const seed = async () => {
+	const t0 = performance.now();
+	console.log("DB Seed: Started ...");
+
+	await seedLocalFixtures();
+	await seedReferenceData();
 
 	const t1 = performance.now();
 	console.log(`DB Seed: Finished (${t1 - t0}ms)`);
 };
 
-seed().then(() => console.info('Seed successfully ran.'));
+seed()
+	.then(async () => {
+		await prisma.$disconnect();
+		console.info('Seed successfully ran.');
+	})
+	.catch(async (error: unknown) => {
+		console.error('DB Seed: Failed', error);
+		await prisma.$disconnect();
+		process.exit(1);
+	});

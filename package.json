@@ -27,6 +27,7 @@
     "db:migrate": "dotenv -e .env.local -- prisma migrate dev",
     "db:studio": "dotenv -e .env.local -- prisma studio",
     "db:seed": "dotenv -e .env.local -- tsx prisma/seed.ts",
+    "db:seed:reference": "dotenv -e .env.local -- tsx prisma/seed-reference.ts",
     "db:local:start": "docker compose -f compose.local.yaml up -d",
     "db:local:stop": "docker compose -f compose.local.yaml stop",
     "db:local:restart": "docker compose -f compose.local.yaml restart",
