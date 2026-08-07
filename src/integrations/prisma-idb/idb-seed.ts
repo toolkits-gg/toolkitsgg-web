@@ -1,4 +1,4 @@
-import { allGameIDBSeeds } from "#/game-registry/game-idb-seed-registry";
+import { allGameIDBSeeds } from "#/game-registry/idb-seed-registry";
 import { getIDBClient } from "#/integrations/prisma-idb/idb-client";
 import type { GameId } from "@/prisma";
 

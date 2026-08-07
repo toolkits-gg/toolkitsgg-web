@@ -16,7 +16,7 @@ import { LuExternalLink } from "react-icons/lu";
 import {
 	getGameLogoComponent,
 	getGameMetadata,
-} from "#/registry/game-public-registry.tsx";
+} from "#/game-registry/public-registry.ts";
 
 type QuickLink = {
 	label: string;

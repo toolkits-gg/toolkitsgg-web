@@ -25,7 +25,7 @@ import {
 import { getOrCreateAnonUserId } from "#/features/sync/local-data/identity/anon-id.ts";
 import { enqueueOp } from "#/features/sync/local-data/queue/pending-ops.ts";
 import { useSession } from "#/integrations/better-auth/auth-client.ts";
-import { getGameMetadata } from "#/registry/game-public-registry.tsx";
+import { getGameMetadata } from "#/game-registry/public-registry.ts";
 import type { GameId } from "@/prisma";
 
 const invalidateProfile = (queryClient: ReturnType<typeof useQueryClient>) =>

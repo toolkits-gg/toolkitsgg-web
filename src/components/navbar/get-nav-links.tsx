@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { BsCollection } from "react-icons/bs";
 import { GiCapeArmor, GiLockedChest } from "react-icons/gi";
 import { LuHouse } from "react-icons/lu";
-import { getGameMetadata } from "#/registry/game-public-registry.tsx";
+import { getGameMetadata } from "#/game-registry/public-registry.ts";
 import type { GameId } from "@/prisma";
 
 type NavLinkSubLink = {

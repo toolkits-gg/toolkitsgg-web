@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useGameId } from "#/features/game/use-game-id.ts";
 import { ProfileTabPlaceholder } from "#/features/user/ProfileTabPlaceholder.tsx";
-import { getGamePages } from "#/game-registry/game-pages-registry.tsx";
+import { getGamePages } from "#/game-registry/pages-registry.tsx";
 
 function CreatedBuilds() {
 	const gameId = useGameId();

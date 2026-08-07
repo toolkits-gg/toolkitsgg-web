@@ -10,7 +10,7 @@ import { DEFAULT_NEXT_THEME } from "#/features/theme/constants.ts";
 import { SyncAndApplyTheme } from "#/features/theme/SyncAndApplyTheme.ts";
 import { useMantineThemeStore } from "#/features/theme/store.ts";
 import { getAllRegisteredThemeClassNames } from "#/features/theme/utils.ts";
-import { isRegisteredGameId } from "#/registry/game-public-registry.tsx";
+import { isRegisteredGameId } from "#/game-registry/public-registry.ts";
 
 const FAVICON_BASE_PATH = "/favicons/";
 const ALL_THEME_CLASS_NAMES: string[] = getAllRegisteredThemeClassNames();

@@ -11,14 +11,13 @@ import { PUBLIC_GAME_CONFIG as SLAYTHESPIRE2_PUBLIC_GAME_CONFIG } from "#/games/
 import type { AppLogoSize } from "#/types.ts";
 import type { GameId } from "@/prisma";
 
-// biome-ignore lint/style/useExportsLast: {Needed for derived value}
 export const PUBLIC_GAME_REGISTRY = {
 	clairobscur: COE33_PUBLIC_GAME_CONFIG,
 	remnant2: REMNANT2_PUBLIC_GAME_CONFIG,
 	slaythespire2: SLAYTHESPIRE2_PUBLIC_GAME_CONFIG,
 } satisfies Record<Exclude<GameId, "none">, PublicGameConfig>;
 
-type PublicRegistryGameId = keyof typeof PUBLIC_GAME_REGISTRY;
+export type PublicRegistryGameId = keyof typeof PUBLIC_GAME_REGISTRY;
 
 export const REGISTERED_GAME_IDS: readonly PublicRegistryGameId[] = Object.keys(
 	PUBLIC_GAME_REGISTRY,

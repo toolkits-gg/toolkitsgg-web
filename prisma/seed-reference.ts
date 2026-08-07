@@ -1,4 +1,4 @@
-import { allGameDBSeeds } from "#/game-registry/game-db-seed-registry";
+import { allGameDBSeeds } from "#/game-registry/db-seed-registry";
 import dotenv from "dotenv";
 import { prisma } from "./client";
 

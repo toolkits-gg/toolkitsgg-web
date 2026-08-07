@@ -6,8 +6,8 @@ import {
 	buildTabHead,
 	loadProfileTabData,
 } from "#/features/user/profile-tab-head.ts";
-import { getGamePages } from "#/game-registry/game-pages-registry.tsx";
-import { isRegisteredGameId } from "#/registry/game-public-registry.tsx";
+import { getGamePages } from "#/game-registry/pages-registry.tsx";
+import { isRegisteredGameId } from "#/game-registry/public-registry.ts";
 import type { GameId } from "@/prisma";
 
 type CreatedBuildsSearch = {

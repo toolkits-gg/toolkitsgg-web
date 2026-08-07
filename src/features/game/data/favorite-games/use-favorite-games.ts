@@ -14,7 +14,7 @@ import { getOrCreateAnonUserId } from "#/features/sync/local-data/identity/anon-
 import type { LocalUserFavoriteGame } from "#/features/sync/local-data/local/types.ts";
 import { enqueueOp } from "#/features/sync/local-data/queue/pending-ops.ts";
 import { useSession } from "#/integrations/better-auth/auth-client.ts";
-import { getGameMetadata } from "#/registry/game-public-registry.tsx";
+import { getGameMetadata } from "#/game-registry/public-registry.ts";
 import type { GameId } from "@/prisma";
 
 const ENTITY = "userFavoriteGame";

@@ -6,7 +6,7 @@ import { LOCALSTORAGE_KEYS } from "#/features/theme/constants.ts";
 import { changeMantineTheme } from "#/features/theme/store.ts";
 import { defaultTheme } from "#/features/theme/themes/default-theme.ts";
 import { getAllRegisteredThemeDefinitions } from "#/features/theme/utils.ts";
-import { getGameTheme } from "#/registry/game-public-registry.tsx";
+import { getGameTheme } from "#/game-registry/public-registry.ts";
 
 /**
  * This function determines which Mantine theme to use based on the provided nextTheme class string.

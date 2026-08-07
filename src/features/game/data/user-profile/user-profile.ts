@@ -14,7 +14,7 @@ import {
 	updateAvatar,
 	updateProfile,
 } from "#/features/game/data/user-profile/user-profile.server.ts";
-import { REGISTERED_GAME_IDS } from "#/registry/game-public-registry.tsx";
+import { REGISTERED_GAME_IDS } from "#/game-registry/public-registry.ts";
 import type { GameId } from "@/prisma";
 
 const GAME_ID_SET = new Set<string>(["none", ...REGISTERED_GAME_IDS]);

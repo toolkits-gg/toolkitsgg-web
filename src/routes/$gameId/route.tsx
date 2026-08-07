@@ -7,7 +7,7 @@ import {
 import { GameNotFoundCard } from "#/components/GameNotFoundCard.tsx";
 import { NotFoundCard } from "#/components/NotFoundCard.tsx";
 import { gameCanonicalUrl } from "#/features/game/subdomain-rewrite.ts";
-import { getValidatedGameId } from "#/registry/game-public-registry.tsx";
+import { getValidatedGameId } from "#/game-registry/public-registry.ts";
 
 const GameNotFound = () => {
 	const params = useParams({ strict: false });

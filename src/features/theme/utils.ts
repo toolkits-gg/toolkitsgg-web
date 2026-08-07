@@ -9,7 +9,7 @@ import type {
 import {
 	getGameTheme,
 	REGISTERED_GAME_IDS,
-} from "#/registry/game-public-registry.tsx";
+} from "#/game-registry/public-registry.ts";
 
 /**
  * Creates a complete set of color variants for a theme color.

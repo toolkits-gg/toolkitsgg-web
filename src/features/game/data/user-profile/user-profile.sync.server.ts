@@ -7,7 +7,7 @@
 // the client bundle. Consumed only by the sync handler game-registry.
 
 import type { SyncHandler } from "#/features/sync/local-data/types.ts";
-import { REGISTERED_GAME_IDS } from "#/registry/game-public-registry.tsx";
+import { REGISTERED_GAME_IDS } from "#/game-registry/public-registry.ts";
 import { type GameId, prisma } from "@/prisma";
 
 // Self-contained guard (intentionally duplicated from user-profile.ts) so this

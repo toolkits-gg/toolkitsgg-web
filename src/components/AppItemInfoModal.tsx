@@ -22,7 +22,7 @@ import { useGameId } from "#/features/game/use-game-id.ts";
 import { ScreenshotContainer } from "#/features/screenshot/ScreenshotContainer.tsx";
 import type { WatermarkConfig } from "#/features/screenshot/types.ts";
 import { useScreenshot } from "#/features/screenshot/use-screenshot.ts";
-import { getGameMetadata } from "#/registry/game-public-registry.tsx";
+import { getGameMetadata } from "#/game-registry/public-registry.ts";
 
 export type AppItemInfoModalProps = {
 	item: AppItem;

@@ -13,7 +13,7 @@ import {
 	getGameLogoComponent,
 	getGameMetadata,
 	REGISTERED_GAME_IDS,
-} from "#/registry/game-public-registry.tsx";
+} from "#/game-registry/public-registry.ts";
 
 const ToolkitHomePage = () => {
 	return (

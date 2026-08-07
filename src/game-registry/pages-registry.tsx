@@ -2,7 +2,7 @@ import type { GamePages } from "#/features/game/types.ts";
 import { PAGES as CLAIROBSCUR_PAGES } from "#/games/clairobscur/core/game-config/pages.tsx";
 import { PAGES as REMNANT2_PAGES } from "#/games/remnant2/core/game-config/pages.tsx";
 import { PAGES as SLAYTHESPIRE2_PAGES } from "#/games/slaythespire2/core/game-config/pages.tsx";
-import type { PublicRegistryGameId } from "#/registry/game-public-registry.tsx";
+import type { PublicRegistryGameId } from "#/game-registry/public-registry.ts";
 
 export const GAME_PAGES_REGISTRY = {
 	clairobscur: CLAIROBSCUR_PAGES,

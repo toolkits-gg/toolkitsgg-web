@@ -15,7 +15,7 @@ import { RootDocument } from "#/components/RootDocument.tsx";
 import { OG_IMAGE, SERVER_RESOLVED_GAME_ID_SOURCES } from "#/constants";
 import { clientEnv } from "#/env/client-env.ts";
 import { getServerResolvedGameInputsServerFn } from "#/features/game/active-game";
-import { getValidatedGameId } from "#/registry/game-public-registry.tsx";
+import { getValidatedGameId } from "#/game-registry/public-registry.ts";
 import type { GameId } from "@/prisma";
 
 interface MyRouterContext {

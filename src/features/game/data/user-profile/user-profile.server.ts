@@ -4,7 +4,7 @@ import {
 	requireUserId,
 } from "#/features/user/require-user.server.ts";
 import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/enforce-user-write-limit.ts";
-import { getGameAvatars } from "#/registry/game-public-registry.tsx";
+import { getGameAvatars } from "#/game-registry/public-registry.ts";
 
 import { type GameId, prisma } from "@/prisma";
 

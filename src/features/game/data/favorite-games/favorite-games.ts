@@ -10,7 +10,7 @@ import {
 	listFavoriteGames,
 	unfavoriteGame,
 } from "#/features/game/data/favorite-games/favorite-games.server.ts";
-import { REGISTERED_GAME_IDS } from "#/registry/game-public-registry.tsx";
+import { REGISTERED_GAME_IDS } from "#/game-registry/public-registry.ts";
 
 import type { GameId } from "@/prisma";
 

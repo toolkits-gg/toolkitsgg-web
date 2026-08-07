@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getGamePages } from "#/game-registry/game-pages-registry.tsx";
+import { getGamePages } from "#/game-registry/pages-registry.tsx";
 
 export const Route = createFileRoute("/$gameId/build/$buildId")({
 	component: function CreateBuildPage() {

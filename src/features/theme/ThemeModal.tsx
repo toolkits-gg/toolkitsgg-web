@@ -17,7 +17,7 @@ import {
 	getAllRegisteredThemeDefinitions,
 	parseColorScheme,
 } from "#/features/theme/utils.ts";
-import { getGameTheme } from "#/registry/game-public-registry.tsx";
+import { getGameTheme } from "#/game-registry/public-registry.ts";
 import type { GameId } from "@/prisma";
 
 // This feature was game-aware, need to rework it
