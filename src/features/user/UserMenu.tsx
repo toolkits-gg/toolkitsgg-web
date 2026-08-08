@@ -12,6 +12,8 @@ import {
 import { modals } from "@mantine/modals";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
+import { BsCollection } from "react-icons/bs";
+import { GiCapeArmor } from "react-icons/gi";
 import {
 	LuCamera,
 	LuChevronRight,
@@ -19,12 +21,16 @@ import {
 	LuLayoutTemplate,
 	LuLogOut,
 	LuSettings,
-	LuStar,
+	LuShield,
 } from "react-icons/lu";
-import { AvatarPicker } from "#/features/user/AvatarPicker.tsx";
-import { useResolvedAvatar } from "#/features/user/use-resolved-avatar.ts";
-import { useUserProfile } from "#/features/user/use-user-profile.ts";
-import { signOut } from "#/integrations/better-auth/auth-client.ts";
+import { useViewerGrants } from "#/features/auth/use-viewer-grants";
+import { useGameId } from "#/features/game/use-game-id";
+import { AvatarPicker } from "#/features/user/AvatarPicker";
+import { useProfileLinks } from "#/features/user/use-profile-links";
+import { useResolvedAvatar } from "#/features/user/use-resolved-avatar";
+import { useUserProfile } from "#/features/user/use-user-profile";
+import { gameSupportsBuilds } from "#/games-registry/builds-registry";
+import { signOut } from "#/integrations/better-auth/auth-client";
 import classes from "./UserMenu.module.css";
 
 export function UserMenu() {
@@ -33,6 +39,10 @@ export function UserMenu() {
 	const theme = useMantineTheme();
 	const { profile, isLoading, isAuthenticated, session } = useUserProfile();
 	const { avatarUrl } = useResolvedAvatar();
+	const profileLinks = useProfileLinks();
+	const gameId = useGameId();
+	const supportsBuilds = gameSupportsBuilds(gameId);
+	const { hasAnyRole } = useViewerGrants();
 
 	if (isLoading) {
 		return <Skeleton height={75} width="100%" animate />;
@@ -49,10 +59,6 @@ export function UserMenu() {
 	const subtitle = isAuthenticated
 		? (session?.user.email ?? "")
 		: "Local account";
-	const profileHref =
-		isAuthenticated && session?.user.id
-			? `/account/profile/${session.user.id}`
-			: "/profile";
 
 	const handleOpenAvatarPicker = () => {
 		modals.open({
@@ -118,36 +124,66 @@ export function UserMenu() {
 							<Text size="xs" c="dimmed">
 								{subtitle}
 							</Text>
-							{profileHref && (
-								<Text size="xs" c="primary" component="a" href={profileHref}>
-									View your profile
-								</Text>
-							)}
+							<Text
+								size="xs"
+								c="primary"
+								renderRoot={(props) => (
+									<Link {...props} {...profileLinks.home} />
+								)}
+							>
+								View your profile
+							</Text>
 						</div>
 					</Group>
 
 					<Menu.Divider />
 
-					<Menu.Label>Builds</Menu.Label>
-					<Menu.Item
-						leftSection={<LuHeart size={16} color={theme.colors.red[6]} />}
-						disabled
-					>
-						Liked builds
-					</Menu.Item>
-					<Menu.Item
-						leftSection={<LuStar size={16} color={theme.colors.yellow[6]} />}
-						disabled
-					>
-						Saved builds
-					</Menu.Item>
+					{supportsBuilds && (
+						<>
+							<Menu.Label>Builds</Menu.Label>
+							<Menu.Item
+								leftSection={<LuHeart size={16} color={theme.colors.red[6]} />}
+								renderRoot={(props) => (
+									<Link {...props} {...profileLinks.likedBuilds} />
+								)}
+							>
+								Liked builds
+							</Menu.Item>
+							<Menu.Item
+								leftSection={
+									<GiCapeArmor size={16} color={theme.colors.yellow[6]} />
+								}
+								renderRoot={(props) => (
+									<Link {...props} {...profileLinks.createdBuilds} />
+								)}
+							>
+								Created builds
+							</Menu.Item>
+							<Menu.Item
+								leftSection={
+									<LuLayoutTemplate size={16} color={theme.colors.blue[6]} />
+								}
+								renderRoot={(props) => (
+									<Link {...props} {...profileLinks.buildCollections} />
+								)}
+							>
+								Your build collections
+							</Menu.Item>
+
+							<Menu.Divider />
+						</>
+					)}
+
+					<Menu.Label>Collection</Menu.Label>
 					<Menu.Item
 						leftSection={
-							<LuLayoutTemplate size={16} color={theme.colors.blue[6]} />
+							<BsCollection size={16} color={theme.colors.teal[6]} />
 						}
-						disabled
+						renderRoot={(props) => (
+							<Link {...props} {...profileLinks.collectedItems} />
+						)}
 					>
-						Your build collections
+						Collected items
 					</Menu.Item>
 
 					<Menu.Divider />
@@ -159,13 +195,23 @@ export function UserMenu() {
 					>
 						Change avatar
 					</Menu.Item>
-					{profileHref && (
+					{isAuthenticated && (
 						<Menu.Item
 							leftSection={<LuSettings size={16} />}
-							component="a"
-							href={profileHref}
+							renderRoot={(props) => <Link {...props} to="/account/settings" />}
 						>
 							Account settings
+						</Menu.Item>
+					)}
+
+					{hasAnyRole && (
+						<Menu.Item
+							leftSection={
+								<LuShield size={16} color={theme.colors.orange[6]} />
+							}
+							renderRoot={(props) => <Link {...props} to="/admin" />}
+						>
+							Moderation
 						</Menu.Item>
 					)}
 

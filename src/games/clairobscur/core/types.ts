@@ -1,10 +1,10 @@
-import type { ClairObscurCharacterItem } from "#/games/clairobscur/core/item-data/characters.ts";
+import type { AppItem, AppLinkedItemRef } from "#/features/game/types";
+import type { ClairObscurCharacterItem } from "#/games/clairobscur/core/item-data/characters";
 import type {
 	ClairObscurCharacter,
 	ClairObscurDLC,
 	ClairObscurItemCategory,
 } from "@/prisma";
-import type {AppItem} from "#/features/game/types.ts";
 
 type ClairObscurItemLocation = "Overgrowth" | "Underdocks" | "Hive" | "Glory";
 
@@ -14,7 +14,7 @@ type ClairObscurCommunityTags = string[];
 type ClairObscurSearchableTags = string[];
 
 type ClairObscurLinkedItem = Partial<{
-	character: { name: ClairObscurCharacter };
+	character: AppLinkedItemRef<ClairObscurCharacter>;
 }>;
 
 type ItemModifiers = {
@@ -90,6 +90,7 @@ type ClairObscurLocalItem = ClairObscurCharacterItem; // TODO Add other item typ
 
 export type {
 	BaseClairObscurItem,
-	ClairObscurLocalItem,
 	ClairObscurItemLocation,
+	ClairObscurLinkedItem,
+	ClairObscurLocalItem,
 };

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { ToolkitHomePage } from "#/components/pages/ToolkitHome.tsx";
-import { useSetActiveGame } from "#/features/game/use-set-active-game.ts";
+import { ToolkitHomePage } from "#/components/pages/ToolkitHome";
+import { useSetActiveGame } from "#/features/game/use-set-active-game";
 
 const HomePage = () => {
 	const setActiveGame = useSetActiveGame();

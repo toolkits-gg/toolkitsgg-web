@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.5.9/schema.json",
 	"vcs": {
 		"enabled": false,
 		"clientKind": "git",
@@ -21,31 +21,43 @@
 		"indentStyle": "tab",
 		"formatWithErrors": true
 	},
-	"assist": { "actions": { "source": { "organizeImports": "on" } } },
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true,
-			"complexity": {
-				"useArrowFunction": "error"
-			},
-			"correctness": {
-				"noUnusedVariables": {
-					"level": "error",
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
 					"options": {
-						"ignoreRestSiblings": true
+						"groups": [
+							"**/instrument.client",
+							":BLANK_LINE:",
+							":NODE:",
+							":PACKAGE:",
+							":ALIAS:",
+							":PATH:"
+						]
 					}
 				}
-			},
-			"style": {
-				"useExportsLast": "error",
-				"noDefaultExport": "error"
 			}
 		}
+	},
+	"linter": {
+		"enabled": false
 	},
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "double"
 		}
-	}
+	},
+	"overrides": [
+		{
+			"includes": ["**/src/emails/**/*.tsx"],
+			"linter": {
+				"rules": {
+					"style": {
+						"noDefaultExport": "off"
+					}
+				}
+			}
+		}
+	]
 }

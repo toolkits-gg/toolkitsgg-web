@@ -1,46 +1,32 @@
-import { useNetwork } from "@mantine/hooks";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-	deleteLocalFavoriteGame,
-	listLocalFavoriteGames,
-	upsertLocalFavoriteGame,
-} from "#/features/game/data/favorite-games/favorite-games.idb.ts";
 import {
 	favoriteGameServerFn,
 	listFavoriteGamesServerFn,
 	unfavoriteGameServerFn,
-} from "#/features/game/data/favorite-games/favorite-games.ts";
-import { getOrCreateAnonUserId } from "#/features/sync/local-data/identity/anon-id.ts";
-import type { LocalUserFavoriteGame } from "#/features/sync/local-data/local/types.ts";
-import { enqueueOp } from "#/features/sync/local-data/queue/pending-ops.ts";
-import { useSession } from "#/integrations/better-auth/auth-client.ts";
-import { getGameMetadata } from "#/game-registry/public-registry.ts";
+} from "#/features/game/data/favorite-games/favorite-games";
+import type { LocalUserFavoriteGame } from "#/features/local-db/types";
+import { userFavoriteGameStore } from "#/features/local-db/user-stores";
+import { getOrCreateAnonUserId } from "#/features/sync/identity/anon-id";
+import { enqueueOp } from "#/features/sync/queue/pending-ops";
+import { getGameMetadata } from "#/games-registry/public-registry";
+import { useSession } from "#/integrations/better-auth/auth-client";
 import type { GameId } from "@/prisma";
 
 const ENTITY = "userFavoriteGame";
 
-export type FavoriteGameInput = { gameId: GameId };
+type FavoriteGameInput = { gameId: GameId };
 export const useFavoriteGames = () => {
 	const { data: session } = useSession();
-	const { online } = useNetwork();
 	const authUserId = session?.user?.id ?? null;
 	const userId = authUserId ?? getOrCreateAnonUserId();
-	const remote = !!authUserId && online;
+	const remote = !!authUserId;
 
 	return useQuery({
 		queryKey: ["data", ENTITY, "list", userId],
 		queryFn: async (): Promise<LocalUserFavoriteGame[]> => {
-			if (remote) {
-				const rows = await listFavoriteGamesServerFn();
-				return rows.map((r) => ({
-					userId: r.userId,
-					gameId: r.gameId,
-					createdAt: r.createdAt.toISOString(),
-					updatedAt: r.updatedAt.toISOString(),
-				}));
-			}
+			if (remote) return listFavoriteGamesServerFn();
 			if (!userId) return [];
-			return listLocalFavoriteGames(userId);
+			return userFavoriteGameStore.findMany({ where: { userId } });
 		},
 	});
 };
@@ -48,24 +34,18 @@ export const useFavoriteGames = () => {
 export const useFavoriteGame = () => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
-	const { online } = useNetwork();
 
 	return useMutation<LocalUserFavoriteGame, Error, FavoriteGameInput>({
 		mutationFn: async (input) => {
 			const authUserId = session?.user?.id ?? null;
 			const anonUserId = getOrCreateAnonUserId();
-			const userId = authUserId ?? anonUserId;
-			if (authUserId && online) {
-				const row = await favoriteGameServerFn({ data: input });
-				return {
-					userId: row.userId,
-					gameId: row.gameId,
-					createdAt: row.createdAt.toISOString(),
-					updatedAt: row.updatedAt.toISOString(),
-				};
-			}
+			if (authUserId) return favoriteGameServerFn({ data: input });
 			const [local] = await Promise.all([
-				upsertLocalFavoriteGame({ userId, gameId: input.gameId }),
+				userFavoriteGameStore.upsert({
+					where: { userId: anonUserId, gameId: input.gameId },
+					update: {},
+					create: { userId: anonUserId, gameId: input.gameId },
+				}),
 				enqueueOp({
 					anonUserId,
 					entity: ENTITY,
@@ -89,18 +69,18 @@ export const useFavoriteGame = () => {
 export const useUnfavoriteGame = () => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
-	const { online } = useNetwork();
 
 	return useMutation<{ ok: true }, Error, FavoriteGameInput>({
 		mutationFn: async (input) => {
 			const authUserId = session?.user?.id ?? null;
 			const anonUserId = getOrCreateAnonUserId();
-			const userId = authUserId ?? anonUserId;
-			if (authUserId && online) {
+			if (authUserId) {
 				return unfavoriteGameServerFn({ data: input });
 			}
 			await Promise.all([
-				deleteLocalFavoriteGame({ userId, gameId: input.gameId }),
+				userFavoriteGameStore.deleteMany({
+					where: { userId: anonUserId, gameId: input.gameId },
+				}),
 				enqueueOp({
 					anonUserId,
 					entity: ENTITY,

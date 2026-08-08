@@ -1,10 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { getGamePages } from "#/game-registry/pages-registry.tsx";
+import { createFileRoute, notFound, Outlet } from "@tanstack/react-router";
+import { gameSupportsBuilds } from "#/games-registry/builds-registry";
 
+/**
+ * Layout only. The build view lives in `index.tsx` so the `edit` child route can
+ * actually render through this Outlet.
+ */
 export const Route = createFileRoute("/$gameId/build/$buildId")({
-	component: function CreateBuildPage() {
-		const { gameId } = Route.useParams();
-		const pages = getGamePages(gameId);
-		return <>{pages?.renderViewBuild()}</>;
+	beforeLoad: ({ params }) => {
+		if (!gameSupportsBuilds(params.gameId)) throw notFound();
 	},
+	component: () => <Outlet />,
 });

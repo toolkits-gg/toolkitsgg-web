@@ -7,8 +7,8 @@
  * Run with: pnpm tsx src/games/remnant2/wiki/amulets.ts
  */
 
-import { AMULETS } from "#/games/remnant2/core/item-data/amulets.ts";
-import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category.ts";
+import { AMULETS } from "#/games/remnant2/core/item-data/amulets";
+import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category";
 
 void syncWikiCategory([
 	{

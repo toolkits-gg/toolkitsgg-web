@@ -1,7 +1,7 @@
 import { Box, Text, Tooltip, UnstyledButton } from "@mantine/core";
 import clsx from "clsx";
-import { AppGameImage } from "#/components/AppGameImage.tsx";
-import type { AppItem } from "#/features/game/types.ts";
+import { AppGameImage } from "#/components/AppGameImage";
+import type { AppItem } from "#/features/game/types";
 import classes from "./PrimaryLinkedItem.module.css";
 
 type PrimaryLinkedItemProps = {

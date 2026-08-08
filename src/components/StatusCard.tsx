@@ -3,8 +3,8 @@ import clsx from "clsx";
 import type { ReactNode } from "react";
 import { LuGithub } from "react-icons/lu";
 import { SiDiscord } from "react-icons/si";
-import { AnimatedLogo } from "#/components/AppLogo.tsx";
-import { CODEBERG_URL, DISCORD_URL } from "#/constants.ts";
+import { AnimatedLogo } from "#/components/AppLogo";
+import { CODEBERG_URL, DISCORD_URL } from "#/constants";
 import classes from "./StatusCard.module.css";
 
 type StatusCardProps = {

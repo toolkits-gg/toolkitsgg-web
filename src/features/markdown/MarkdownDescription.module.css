@@ -1,0 +1,101 @@
+/*
+ * Markdown treats a single newline as a soft break, which HTML collapses to a
+ * space. Descriptions written before markdown existed are plain text with hard
+ * newlines, so `pre-line` keeps them laid out the way they were authored and
+ * gives new descriptions the line-break behaviour people expect from a comment
+ * box.
+ */
+.markdown p,
+.markdown li {
+	white-space: pre-line;
+}
+
+.markdown > :first-child {
+	margin-top: 0;
+}
+
+.markdown > :last-child {
+	margin-bottom: 0;
+}
+
+.markdown p {
+	margin: 0 0 var(--mantine-spacing-sm);
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+	margin: var(--mantine-spacing-md) 0 var(--mantine-spacing-xs);
+}
+
+.markdown ul,
+.markdown ol {
+	margin: 0 0 var(--mantine-spacing-sm);
+	padding-inline-start: var(--mantine-spacing-lg);
+}
+
+.markdown li {
+	margin-bottom: 4px;
+}
+
+.markdown li > ul,
+.markdown li > ol {
+	margin: 4px 0 0;
+}
+
+.markdown blockquote {
+	margin: 0 0 var(--mantine-spacing-sm);
+	padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+	border-inline-start: 3px solid
+		light-dark(var(--mantine-color-border-7), var(--mantine-color-border-4));
+	color: var(--mantine-color-dimmed);
+}
+
+.markdown code {
+	padding: 1px 4px;
+	border-radius: var(--mantine-radius-sm);
+	background-color: light-dark(
+		var(--mantine-color-gray-1),
+		var(--mantine-color-dark-6)
+	);
+	font-size: 0.9em;
+}
+
+.markdown pre {
+	margin: 0 0 var(--mantine-spacing-sm);
+	padding: var(--mantine-spacing-sm);
+	border-radius: var(--mantine-radius-sm);
+	background-color: light-dark(
+		var(--mantine-color-gray-1),
+		var(--mantine-color-dark-6)
+	);
+	overflow-x: auto;
+}
+
+.markdown pre code {
+	padding: 0;
+	background: none;
+}
+
+.markdown hr {
+	margin: var(--mantine-spacing-md) 0;
+	border: none;
+	border-top: 1px solid
+		light-dark(var(--mantine-color-border-7), var(--mantine-color-border-4));
+}
+
+.markdown table {
+	margin: 0 0 var(--mantine-spacing-sm);
+	border-collapse: collapse;
+}
+
+.markdown th,
+.markdown td {
+	padding: 4px var(--mantine-spacing-xs);
+	border: 1px solid
+		light-dark(var(--mantine-color-border-7), var(--mantine-color-border-4));
+	text-align: start;
+}

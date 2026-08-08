@@ -1,7 +1,7 @@
 import { useParams, useRouteContext } from "@tanstack/react-router";
 import { useSelector } from "@tanstack/react-store";
-import { gameStore } from "#/features/game/store.ts";
-import { getValidatedGameId } from "#/game-registry/public-registry.ts";
+import { gameStore } from "#/features/game/store";
+import { getValidatedGameId } from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
 
 /**

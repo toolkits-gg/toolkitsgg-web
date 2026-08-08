@@ -2,7 +2,7 @@
 	position: relative;
 	overflow: hidden;
 	border: 1px solid
-		light-dark(var(--mantine-color-primary-2), var(--mantine-color-primary-8));
+		light-dark(var(--mantine-color-primary-light), var(--mantine-color-primary-8));
 	border-radius: var(--mantine-radius-md);
 	padding: var(--mantine-spacing-xs);
 	padding-left: calc(var(--mantine-spacing-xs) + 34px);

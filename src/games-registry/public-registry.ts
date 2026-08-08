@@ -1,0 +1,88 @@
+import type { ComponentType } from "react";
+import type {
+	AnyGameConfig,
+	AppItemTag,
+	GameAvatar,
+	GameWallpaper,
+	PublicGameConfig,
+} from "#/features/game/types";
+import type { ToolkitThemeDefinition } from "#/features/theme/types";
+import { PUBLIC_GAME_CONFIG as COE33_PUBLIC_GAME_CONFIG } from "#/games/clairobscur/core/game-config";
+import { PUBLIC_GAME_CONFIG as REMNANT2_PUBLIC_GAME_CONFIG } from "#/games/remnant2/core/game-config";
+import { PUBLIC_GAME_CONFIG as SLAYTHESPIRE2_PUBLIC_GAME_CONFIG } from "#/games/slaythespire2/core/game-config";
+import type { AppLogoSize } from "#/types";
+import type { GameId } from "@/prisma";
+
+const PUBLIC_GAME_REGISTRY = {
+	clairobscur: COE33_PUBLIC_GAME_CONFIG,
+	remnant2: REMNANT2_PUBLIC_GAME_CONFIG,
+	slaythespire2: SLAYTHESPIRE2_PUBLIC_GAME_CONFIG,
+} satisfies Record<Exclude<GameId, "none">, PublicGameConfig>;
+
+export type PublicRegistryGameId = keyof typeof PUBLIC_GAME_REGISTRY;
+
+export const REGISTERED_GAME_IDS: readonly PublicRegistryGameId[] = Object.keys(
+	PUBLIC_GAME_REGISTRY,
+) as PublicRegistryGameId[];
+
+export const isRegisteredGameId = (id: string): id is PublicRegistryGameId =>
+	id in PUBLIC_GAME_REGISTRY;
+
+export const getValidatedGameId = (id: string): GameId | undefined =>
+	isRegisteredGameId(id) ? (id as GameId) : undefined;
+
+// Runtime-keyed getters. Return types are widened to AnyGameConfig's base shapes
+// so callers get the usable `AppItem`/`GameMetadata` types rather than the loose
+// `unknown`-based PublicGameConfig used only for the `satisfies` check above.
+export const getGameMetadata = (
+	gameId: string,
+): AnyGameConfig["METADATA"] | undefined =>
+	PUBLIC_GAME_REGISTRY[gameId as PublicRegistryGameId]?.METADATA;
+
+export const getGameItems = (
+	gameId: string,
+): AnyGameConfig["ITEMS"] | undefined =>
+	PUBLIC_GAME_REGISTRY[gameId as PublicRegistryGameId]?.ITEMS;
+
+export const getGameTheme = (
+	gameId: string,
+): ToolkitThemeDefinition | undefined =>
+	PUBLIC_GAME_REGISTRY[gameId as PublicRegistryGameId]?.THEME;
+
+export const getGameAvatars = (gameId: string): GameAvatar[] | undefined =>
+	PUBLIC_GAME_REGISTRY[gameId as PublicRegistryGameId]?.AVATARS;
+
+export const getGameWallpapers = (
+	gameId: string,
+): GameWallpaper[] | undefined =>
+	PUBLIC_GAME_REGISTRY[gameId as PublicRegistryGameId]?.WALLPAPERS;
+
+/**
+ * Wallpapers are opt-in: a game appears in the gallery only if it ships art.
+ * Absence is the opt-out, and it is the single source of truth, so the route,
+ * the nav link, and every picker gate on this rather than on a separate
+ * capability flag that could drift.
+ */
+export const gameHasWallpapers = (gameId: string): boolean =>
+	(getGameWallpapers(gameId)?.length ?? 0) > 0;
+
+/**
+ * Games are listed and routable only once they ship items. A game can be fully
+ * registered - prisma models, favicons, subdomain, seeds - well before it has
+ * content, and until then its item list would render empty. Derived from the
+ * items themselves rather than a hand-set flag, for the same reason
+ * `gameHasWallpapers` is: a separate capability flag could drift.
+ *
+ * Presentation only. The id stays in `REGISTERED_GAME_IDS`, which validation
+ * paths (roles, favorites, build image urls) still need.
+ */
+export const gameHasContent = (gameId: string): boolean =>
+	(getGameItems(gameId)?.all.length ?? 0) > 0;
+
+export const getGameInlineTags = (gameId: string): AppItemTag[] | undefined =>
+	PUBLIC_GAME_REGISTRY[gameId as PublicRegistryGameId]?.INLINE_TAGS;
+
+export const getGameLogoComponent = (
+	gameId: string,
+): ComponentType<{ size?: AppLogoSize }> | undefined =>
+	PUBLIC_GAME_REGISTRY[gameId as PublicRegistryGameId]?.METADATA?.LogoComponent;

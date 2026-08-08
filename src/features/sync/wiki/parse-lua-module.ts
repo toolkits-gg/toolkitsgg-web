@@ -205,11 +205,11 @@ const parseKey = (tokens: Token[], pos: number): [string, number] => {
 	// ["key"]
 	if (tok.type === "[") {
 		const next = tokens[pos + 1];
-		if (!next || next.type !== "string") {
+		if (next?.type !== "string") {
 			throw new Error("Expected string inside [ ... ] key");
 		}
 		const closing = tokens[pos + 2];
-		if (!closing || closing.type !== "]") {
+		if (closing?.type !== "]") {
 			throw new Error('Expected ] after [ "key"');
 		}
 		return [next.value, pos + 3];
@@ -223,7 +223,7 @@ const parseKey = (tokens: Token[], pos: number): [string, number] => {
 
 const parseTable = (tokens: Token[], pos: number): [LuaTable, number] => {
 	const open = tokens[pos];
-	if (!open || open.type !== "{") {
+	if (open?.type !== "{") {
 		throw new Error("Expected '{' at start of table");
 	}
 	let i = pos + 1;
@@ -234,7 +234,7 @@ const parseTable = (tokens: Token[], pos: number): [LuaTable, number] => {
 		i = afterKey;
 
 		const eq = tokens[i];
-		if (!eq || eq.type !== "=") {
+		if (eq?.type !== "=") {
 			throw new Error(`Expected '=' after key '${key}'`);
 		}
 		i++;
@@ -255,7 +255,7 @@ const parseTable = (tokens: Token[], pos: number): [LuaTable, number] => {
 	}
 
 	const close = tokens[i];
-	if (!close || close.type !== "}") throw new Error("Unterminated table");
+	if (close?.type !== "}") throw new Error("Unterminated table");
 	return [result, i + 1];
 };
 

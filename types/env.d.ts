@@ -23,13 +23,20 @@ declare global {
 			readonly NODE_ENV: "development" | "production" | "test";
 			readonly DISCORD_CLIENT_ID: string;
 			readonly DISCORD_CLIENT_SECRET: string;
+			readonly REDDIT_CLIENT_ID: string;
+			readonly REDDIT_CLIENT_SECRET: string;
 			readonly RESEND_KEY: string;
-			// Seed-only credentials, loaded from `.env.local` by `prisma/seed.ts`.
+			// Credentials for the site's super admin. Every environment must set
+			// these: `seedReferenceData()` guarantees the account exists and holds a
+			// global SUPERADMIN role.
+			readonly SUPER_ADMIN_EMAIL: string;
+			readonly SUPER_ADMIN_PASSWORD: string;
+			// Seed-only fixtures, loaded from `.env.local` by `prisma/seed-reset.ts`.
 			// Never set in production/preview, so they are optional.
-			readonly LOCAL_ADMIN_EMAIL?: string;
-			readonly LOCAL_ADMIN_PASSWORD?: string;
 			readonly LOCAL_USER_EMAIL?: string;
 			readonly LOCAL_USER_PASSWORD?: string;
+			readonly LOCAL_MODERATOR_EMAIL?: string;
+			readonly LOCAL_MODERATOR_PASSWORD?: string;
 		}
 	}
 }

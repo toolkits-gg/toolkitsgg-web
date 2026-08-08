@@ -4,13 +4,14 @@ import { Notifications } from "@mantine/notifications";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/tanstack-router";
 import { type PropsWithChildren, useEffect } from "react";
-import { useGameId } from "#/features/game/use-game-id.ts";
-import { ScreenshotPreviewProvider } from "#/features/screenshot/ScreenshotPreviewProvider.tsx";
-import { DEFAULT_NEXT_THEME } from "#/features/theme/constants.ts";
-import { SyncAndApplyTheme } from "#/features/theme/SyncAndApplyTheme.ts";
-import { useMantineThemeStore } from "#/features/theme/store.ts";
-import { getAllRegisteredThemeClassNames } from "#/features/theme/utils.ts";
-import { isRegisteredGameId } from "#/game-registry/public-registry.ts";
+import { useGameId } from "#/features/game/use-game-id";
+import { ScreenshotPreviewProvider } from "#/features/screenshot/ScreenshotPreviewProvider";
+import { ClaimAnonDataOnSignIn } from "#/features/sync/ClaimAnonDataOnSignIn";
+import { DEFAULT_NEXT_THEME } from "#/features/theme/constants";
+import { SyncAndApplyTheme } from "#/features/theme/SyncAndApplyTheme";
+import { useMantineThemeStore } from "#/features/theme/store";
+import { getAllRegisteredThemeClassNames } from "#/features/theme/utils";
+import { isRegisteredGameId } from "#/games-registry/public-registry";
 
 const FAVICON_BASE_PATH = "/favicons/";
 const ALL_THEME_CLASS_NAMES: string[] = getAllRegisteredThemeClassNames();
@@ -58,6 +59,7 @@ const AppProviders = ({ children }: PropsWithChildren) => {
 					<Notifications />
 					<ScreenshotPreviewProvider />
 					<ModalsProvider />
+					<ClaimAnonDataOnSignIn />
 					{children}
 				</MantineProvider>
 			</NextThemesProvider>

@@ -20,11 +20,6 @@ type ScreenshotPreviewProps = {
 	opened: boolean;
 };
 
-type ScreenshotPreviewModalHandle = {
-	open: () => void;
-	close: () => void;
-};
-
 function ScreenshotPreview({
 	screenshot,
 	loading,
@@ -81,8 +76,4 @@ function ScreenshotPreview({
 	);
 }
 
-export {
-	ScreenshotPreview,
-	type ScreenshotPreviewModalHandle,
-	type ScreenshotPreviewProps,
-};
+export { ScreenshotPreview };

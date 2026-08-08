@@ -1,6 +1,6 @@
 import { LuRocket } from "react-icons/lu";
-import { LockdownDocument } from "#/components/LockdownDocument.tsx";
-import { clientEnv } from "#/env/client-env.ts";
+import { LockdownDocument } from "#/components/LockdownDocument";
+import { clientEnv } from "#/env/client-env";
 
 /**
  * Shell rendered in place of `RootDocument` when `VITE_SHOW_COMING_SOON` is

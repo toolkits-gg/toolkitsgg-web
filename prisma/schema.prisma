@@ -3,16 +3,6 @@ generator client {
   output   = "./generated/prisma"
 }
 
-generator prismaIDB {
-  provider = "idb-client-generator"
-  output   = "./generated/prisma-idb"
-
-  // Optional: Enable sync engine
-  // outboxSync = true
-  // rootModel  = "User"
-  // exclude    = ["Changelog", "Session"]
-}
-
 datasource db {
   provider = "postgresql"
 }
@@ -37,18 +27,24 @@ enum BuildModeratorStatus {
   LOCKED
 }
 
+enum BuildCollectionDisplayMode {
+  CARDS
+  VARIANTS
+}
+
 model User {
-  id            String         @id @default(cuid())
-  username      String         @unique
-  email         String         @unique
-  emailVerified Boolean        @default(false)
-  name          String?
-  image         String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-  verification  Verification[]
+  id              String         @id @default(cuid())
+  username        String         @unique
+  displayUsername String?
+  email           String         @unique
+  emailVerified   Boolean        @default(false)
+  name            String?
+  image           String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  sessions        Session[]
+  accounts        Account[]
+  verification    Verification[]
 
   UserProfile       UserProfile?
   UserFavoriteGames UserFavoriteGame[]
@@ -56,7 +52,22 @@ model User {
   UsersBeingFollowed UserFollowedUsers[] @relation("userBeingFollowed")
   UsersFollowed      UserFollowedUsers[] @relation("userFollowed")
 
-  UserRoles UserRole[] @relation("UserRoles")
+  UserRoles        UserRole[] @relation("UserRoles")
+  UserRolesGranted UserRole[] @relation("UserRolesGranted")
+
+  // A ban blocks every authenticated request. `banExpiresAt` null means
+  // permanent.
+  // History lives in ModerationAction.
+  bannedAt     DateTime?
+  banReason    String?
+  banExpiresAt DateTime?
+  bannedById   String?
+  BannedBy     User?     @relation("UserBans", fields: [bannedById], references: [id], onDelete: SetNull)
+  UsersBanned  User[]    @relation("UserBans")
+
+  ModerationActions   ModerationAction[]     @relation("ModerationActions")
+  ReviewItemsAuthored ModerationReviewItem[] @relation("ReviewItemAuthor")
+  ReviewItemsResolved ModerationReviewItem[] @relation("ReviewItemResolver")
 
   ClairObscurCollectedItems ClairObscurCollectedItem[]
 
@@ -66,6 +77,8 @@ model User {
   Remnant2BuildUpvotes     Remnant2BuildUpvote[]
 
   SlayTheSpire2CollectedItems SlayTheSpire2CollectedItem[]
+
+  @@index([bannedAt])
 }
 
 model Session {
@@ -116,18 +129,57 @@ model Verification {
   @@index([userId])
 }
 
+// better-auth's own rate limit store, used when `rateLimit.storage` is
+// "database".
+// `lastRequest` holds epoch milliseconds, which overflows Int, but
+// it is deliberately Float rather than BigInt to avoid Prisma BigInt issues.
+model RateLimit {
+  id          String @id @default(cuid())
+  key         String @unique
+  count       Int
+  lastRequest Float
+}
+
+// Backs the app's own limiters (per-user writes, per-recipient email).
+// Kept separate from RateLimit because better-auth owns that table.
+model AppRateLimit {
+  key         String   @id
+  count       Int
+  windowStart DateTime
+
+  @@index([windowStart])
+}
+
+// Deduplicates sync ops across retries. Persisted rather than held in
+// process memory because sync handlers are not all idempotent - replaying a
+// build duplicate creates a second build.
+model SyncIdempotency {
+  key       String   @id
+  result    Json
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
 model UserProfile {
-  id                  String               @id @default(cuid())
-  createdAt           DateTime             @default(now())
-  updatedAt           DateTime             @updatedAt
-  displayName         String?
-  bio                 String?              @db.Text
-  avatarUrl           String?
-  primaryAvatarId     String?
-  primaryAvatarGameId GameId?
-  UserAvatarOverrides UserAvatarOverride[]
-  User                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId              String               @unique
+  id                          String                    @id @default(cuid())
+  createdAt                   DateTime                  @default(now())
+  updatedAt                   DateTime                  @updatedAt
+  displayName                 String?
+  bio                         String?                   @db.Text
+  avatarUrl                   String?
+  primaryAvatarId             String?
+  primaryAvatarGameId         GameId?
+  primaryHeaderImageId        String?
+  primaryHeaderImageGameId    GameId?
+  // Focal point of the header art within the banner, 0-1 per axis.
+  // Centered by default.
+  primaryHeaderImagePositionX Float                     @default(0.5)
+  primaryHeaderImagePositionY Float                     @default(0.5)
+  UserAvatarOverrides         UserAvatarOverride[]
+  UserHeaderImageOverrides    UserHeaderImageOverride[]
+  User                        User                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId                      String                    @unique
 }
 
 model UserAvatarOverride {
@@ -137,11 +189,28 @@ model UserAvatarOverride {
   // The game whose profile this override applies to.
   gameId        GameId
   avatarId      String
-  // The game the avatar art itself comes from - may differ from gameId, e.g. a
-  // Clair Obscur avatar used on the Remnant 2 profile.
+  // The game the avatar art itself comes from - may differ from gameId,
+  // e.g. a Clair Obscur avatar used on the Remnant 2 profile.
   avatarGameId  GameId
   UserProfile   UserProfile @relation(fields: [userProfileId], references: [id], onDelete: Cascade)
   userProfileId String
+
+  @@unique([userProfileId, gameId])
+}
+
+model UserHeaderImageOverride {
+  id                   String      @id @default(cuid())
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+  // The game whose profile this override applies to.
+  gameId               GameId
+  headerImageId        String
+  // The game the wallpaper art comes from - may differ from gameId.
+  headerImageGameId    GameId
+  headerImagePositionX Float       @default(0.5)
+  headerImagePositionY Float       @default(0.5)
+  UserProfile          UserProfile @relation(fields: [userProfileId], references: [id], onDelete: Cascade)
+  userProfileId        String
 
   @@unique([userProfileId, gameId])
 }
@@ -171,7 +240,6 @@ model UserFollowedUsers {
 }
 
 enum Role {
-  USER
   MODERATOR
   ADMIN
   SUPERADMIN
@@ -185,9 +253,108 @@ model UserRole {
   userId String
   User   User   @relation("UserRoles", fields: [userId], references: [id], onDelete: Cascade)
 
-  role Role
+  role   Role
+  // `none` is the global scope: such a grant applies to every game. A nullable
+  // column could not express this, because Postgres treats NULLs as distinct
+  // and so would let the same global grant be inserted twice.
+  gameId GameId @default(none)
 
-  @@unique([userId, role])
-  // Reverse lookup only; [userId] is already the unique-index prefix.
-  @@index([role])
+  grantedById String?
+  GrantedBy   User?   @relation("UserRolesGranted", fields: [grantedById], references: [id], onDelete: SetNull)
+
+  @@unique([userId, role, gameId])
+  @@index([role, gameId])
+}
+
+enum ModerationTargetType {
+  BUILD
+  BUILD_COLLECTION
+  USER
+}
+
+enum ModerationReviewReason {
+  NEW_BUILD
+  PUBLISHED
+  EDITED
+  REPORTED
+}
+
+enum ModerationReviewStatus {
+  OPEN
+  RESOLVED
+  DISMISSED
+}
+
+// Items requiring moderator review.
+// Content is never gated for review. Publishing or editing goes live
+// immediately and files one of these for review after the fact.
+model ModerationReviewItem {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  gameId     GameId               @default(none)
+  targetType ModerationTargetType
+  targetId   String
+
+  reason ModerationReviewReason
+  status ModerationReviewStatus @default(OPEN)
+
+  authorId String?
+  Author   User?   @relation("ReviewItemAuthor", fields: [authorId], references: [id], onDelete: SetNull)
+
+  // The moderatable fields as of the last resolution versus as of now. A
+  changedFields    String[]
+  previousSnapshot Json?
+  currentSnapshot  Json?
+
+  resolvedAt   DateTime?
+  resolvedById String?
+  ResolvedBy   User?     @relation("ReviewItemResolver", fields: [resolvedById], references: [id], onDelete: SetNull)
+
+  @@index([gameId, status, createdAt, id])
+  @@index([targetType, targetId, status])
+}
+
+enum ModerationActionType {
+  APPROVE
+  DISMISS
+  SET_PRIVATE
+  LOCK
+  UNLOCK
+  DELETE
+  CLEAR_VIDEO
+  CLEAR_DESCRIPTION
+  MODERATOR_EDIT
+  FEED_ADD
+  FEED_REMOVE
+  USER_BAN
+  USER_UNBAN
+  ROLE_GRANT
+  ROLE_REVOKE
+}
+
+// Append-only audit log of every privileged action.
+model ModerationAction {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  actorId String
+  Actor   User   @relation("ModerationActions", fields: [actorId], references: [id], onDelete: Cascade)
+
+  gameId     GameId               @default(none)
+  action     ModerationActionType
+  targetType ModerationTargetType
+  // Deliberately not a foreign key.
+  // Targets span builds, collections, and users.
+  // The log has to outlive the DELETE actions it records.
+  targetId   String
+
+  previousValue String? @db.Text
+  newValue      String? @db.Text
+  reason        String? @db.Text
+
+  @@index([gameId, createdAt, id])
+  @@index([targetType, targetId, createdAt])
+  @@index([actorId, createdAt])
 }

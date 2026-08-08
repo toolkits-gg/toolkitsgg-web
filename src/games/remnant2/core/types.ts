@@ -1,4 +1,4 @@
-
+import type { AppItem, AppLinkedItemRef } from "#/features/game/types";
 import type { Remnant2AmuletItem } from "#/games/remnant2/core/item-data/amulets";
 import type { Remnant2ArchetypeItem } from "#/games/remnant2/core/item-data/archetypes";
 import type { Remnant2ArmorItem } from "#/games/remnant2/core/item-data/armors";
@@ -30,7 +30,6 @@ import type { SEARCHABLE_ITEM_TAGS } from "#/games/remnant2/core/item-data/tags/
 import type { Remnant2TraitItem } from "#/games/remnant2/core/item-data/traits";
 import type { Remnant2WeaponItem } from "#/games/remnant2/core/item-data/weapons";
 import type { Remnant2DLC, Remnant2ItemCategory } from "@/prisma";
-import type { AppItem, AppLinkedItemRef } from "#/features/game/types.ts";
 
 /**
  * A step modifier is a flat increase per point in the trait
@@ -156,7 +155,7 @@ type Remnant2ItemLocation =
 
 export type {
 	BaseRemnant2Item,
+	Remnant2ItemLocation,
 	Remnant2LinkedItem,
 	Remnant2LocalItem,
-	Remnant2ItemLocation,
 };

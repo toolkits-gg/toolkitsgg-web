@@ -2,7 +2,7 @@ import { ActionIcon, Group, Tooltip } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { LuGithub } from "react-icons/lu";
 import { SiDiscord } from "react-icons/si";
-import { CODEBERG_URL, DISCORD_URL } from "#/constants.ts";
+import { CODEBERG_URL, DISCORD_URL } from "#/constants";
 
 const SocialMedia = () => {
 	return (

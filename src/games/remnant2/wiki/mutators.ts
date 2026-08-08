@@ -6,7 +6,7 @@
  * a single `description` column separated by `<br>`, with the bonus prefixed
  * by `Level N:` (the level varies per mutator). Local mutators store the
  * two apart in `description` and `maxLevelBonus`, with the `Level N:` prefix
- * stripped — so the splitter routes any `Level N:` line into `maxLevelBonus`
+ * stripped - so the splitter routes any `Level N:` line into `maxLevelBonus`
  * (prefix removed). When no prefixed line is present, it falls back to
  * treating the last cleaned line as the bonus.
  *
@@ -15,8 +15,8 @@
  * Run with: pnpm tsx src/games/remnant2/wiki/mutators.ts
  */
 
-import { MUTATORS } from "#/games/remnant2/core/item-data/mutators.ts";
-import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category.ts";
+import { MUTATORS } from "#/games/remnant2/core/item-data/mutators";
+import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category";
 
 const mapMutatorWikiFields = (lines: string[]) => {
 	const LEVEL_BONUS_PREFIX = /^Level \d+:\s*/;

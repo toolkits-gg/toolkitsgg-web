@@ -1,13 +1,13 @@
 import { createFileRoute, getRouteApi } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { useGameId } from "#/features/game/use-game-id.ts";
-import { ProfileTabPlaceholder } from "#/features/user/ProfileTabPlaceholder.tsx";
+import { CreatedBuildsPage } from "#/components/pages/created-builds/CreatedBuilds";
+import { useGameId } from "#/features/game/use-game-id";
 import {
 	buildTabHead,
 	loadProfileTabData,
-} from "#/features/user/profile-tab-head.ts";
-import { getGamePages } from "#/game-registry/pages-registry.tsx";
-import { isRegisteredGameId } from "#/game-registry/public-registry.ts";
+} from "#/features/user/profile-tab-head";
+import { getGameBuilds } from "#/games-registry/builds-registry";
+import { isRegisteredGameId } from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
 
 type CreatedBuildsSearch = {
@@ -34,14 +34,14 @@ const CreatedBuilds = () => {
 		});
 	}, [gameId, urlGameId, navigate]);
 
-	const pages = gameId !== "none" ? getGamePages(gameId) : undefined;
+	const builds = getGameBuilds(gameId);
+	if (!builds) return null;
 
 	return (
-		<>
-			{pages?.renderCreatedBuilds?.({
-				mode: isOwner ? { kind: "self" } : { kind: "public", userId },
-			}) ?? <ProfileTabPlaceholder title="Created Builds" />}
-		</>
+		<CreatedBuildsPage
+			builds={builds}
+			viewMode={isOwner ? { kind: "self" } : { kind: "public", userId }}
+		/>
 	);
 };
 

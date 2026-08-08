@@ -1,11 +1,13 @@
-import type { UserWithProfile } from "#/features/game/data/user-profile/user-profile.ts";
+import type { UserWithProfile } from "#/features/game/data/user-profile/user-profile";
 import {
 	getOptionalUserId,
 	requireUserId,
-} from "#/features/user/require-user.server.ts";
-import { getGameAvatars } from "#/game-registry/public-registry.ts";
-import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/enforce-user-write-limit.ts";
-
+} from "#/features/user/require-user.server";
+import {
+	getGameAvatars,
+	getGameWallpapers,
+} from "#/games-registry/public-registry";
+import { enforceUserWriteLimit } from "#/integrations/rate-limit/enforce-user-write-limit";
 import { type GameId, prisma } from "@/prisma";
 
 type UpdateAvatarData = {
@@ -14,14 +16,22 @@ type UpdateAvatarData = {
 	targetGameId?: GameId;
 };
 
-export const ensureUserProfile = async (userId: string) =>
+type UpdateHeaderImageData = {
+	headerImageId: string;
+	headerImageGameId: GameId;
+	positionX?: number;
+	positionY?: number;
+	targetGameId?: GameId;
+};
+
+const ensureUserProfile = async (userId: string) =>
 	prisma.userProfile.upsert({
 		where: { userId },
 		update: {},
 		create: { userId },
 	});
 
-export const updateAvatar = async (data: UpdateAvatarData) => {
+const updateAvatar = async (data: UpdateAvatarData) => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
 
@@ -64,7 +74,7 @@ export const updateAvatar = async (data: UpdateAvatarData) => {
 	return { ok: true as const };
 };
 
-export const removePrimaryAvatar = async () => {
+const removePrimaryAvatar = async () => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
 	await ensureUserProfile(userId);
@@ -75,7 +85,7 @@ export const removePrimaryAvatar = async () => {
 	return { ok: true as const };
 };
 
-export const removeAvatarOverride = async (targetGameId: GameId) => {
+const removeAvatarOverride = async (targetGameId: GameId) => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
 	const profile = await ensureUserProfile(userId);
@@ -86,10 +96,92 @@ export const removeAvatarOverride = async (targetGameId: GameId) => {
 	return { ok: true as const };
 };
 
-export const updateProfile = async (data: {
-	displayName?: string;
-	bio?: string;
-}) => {
+const updateHeaderImage = async (data: UpdateHeaderImageData) => {
+	const userId = await requireUserId();
+	await enforceUserWriteLimit(userId);
+
+	const wallpapers = getGameWallpapers(data.headerImageGameId);
+	const exists = wallpapers?.some((w) => w.id === data.headerImageId);
+	if (!exists) {
+		throw new Error(
+			`Wallpaper ${data.headerImageId} not found in game ${data.headerImageGameId}`,
+		);
+	}
+
+	const profile = await ensureUserProfile(userId);
+
+	// A position is only meaningful against the image it was framed for, so an
+	// update that names an image but no position recenters rather than keeping
+	// the framing of whatever was there before.
+	const positionX = data.positionX ?? 0.5;
+	const positionY = data.positionY ?? 0.5;
+
+	if (data.targetGameId) {
+		await prisma.userHeaderImageOverride.upsert({
+			where: {
+				userProfileId_gameId: {
+					userProfileId: profile.id,
+					gameId: data.targetGameId,
+				},
+			},
+			update: {
+				headerImageId: data.headerImageId,
+				headerImageGameId: data.headerImageGameId,
+				headerImagePositionX: positionX,
+				headerImagePositionY: positionY,
+			},
+			create: {
+				userProfileId: profile.id,
+				gameId: data.targetGameId,
+				headerImageId: data.headerImageId,
+				headerImageGameId: data.headerImageGameId,
+				headerImagePositionX: positionX,
+				headerImagePositionY: positionY,
+			},
+		});
+	} else {
+		await prisma.userProfile.update({
+			where: { userId },
+			data: {
+				primaryHeaderImageId: data.headerImageId,
+				primaryHeaderImageGameId: data.headerImageGameId,
+				primaryHeaderImagePositionX: positionX,
+				primaryHeaderImagePositionY: positionY,
+			},
+		});
+	}
+
+	return { ok: true as const };
+};
+
+const removePrimaryHeaderImage = async () => {
+	const userId = await requireUserId();
+	await enforceUserWriteLimit(userId);
+	await ensureUserProfile(userId);
+	await prisma.userProfile.update({
+		where: { userId },
+		data: {
+			primaryHeaderImageId: null,
+			primaryHeaderImageGameId: null,
+			primaryHeaderImagePositionX: 0.5,
+			primaryHeaderImagePositionY: 0.5,
+		},
+	});
+	return { ok: true as const };
+};
+
+const removeHeaderImageOverride = async (targetGameId: GameId) => {
+	const userId = await requireUserId();
+	await enforceUserWriteLimit(userId);
+	const profile = await ensureUserProfile(userId);
+
+	await prisma.userHeaderImageOverride.deleteMany({
+		where: { userProfileId: profile.id, gameId: targetGameId },
+	});
+	return { ok: true as const };
+};
+
+const updateProfile = async (data: { displayName?: string; bio?: string }) => {
 	const userId = await requireUserId();
 	await enforceUserWriteLimit(userId);
 	await ensureUserProfile(userId);
@@ -117,27 +209,52 @@ const profileSelect = {
 			avatarUrl: true,
 			primaryAvatarId: true,
 			primaryAvatarGameId: true,
+			primaryHeaderImageId: true,
+			primaryHeaderImageGameId: true,
+			primaryHeaderImagePositionX: true,
+			primaryHeaderImagePositionY: true,
 			UserAvatarOverrides: {
 				select: { gameId: true, avatarId: true, avatarGameId: true },
+			},
+			UserHeaderImageOverrides: {
+				select: {
+					gameId: true,
+					headerImageId: true,
+					headerImageGameId: true,
+					headerImagePositionX: true,
+					headerImagePositionY: true,
+				},
 			},
 		},
 	},
 } as const;
 
-export const getPublicUserProfile = (
-	userId: string,
-): Promise<UserWithProfile> =>
+const getPublicUserProfile = (userId: string): Promise<UserWithProfile> =>
 	prisma.user.findUnique({
 		where: { id: userId },
 		select: profileSelect,
 	});
 
-export const getViewerUserId = () => getOptionalUserId();
+const getViewerUserId = () => getOptionalUserId();
 
-export const getUserProfile = async (): Promise<UserWithProfile> => {
+const getUserProfile = async (): Promise<UserWithProfile> => {
 	const userId = await requireUserId();
 	return prisma.user.findUnique({
 		where: { id: userId },
 		select: profileSelect,
 	});
+};
+
+export {
+	ensureUserProfile,
+	getPublicUserProfile,
+	getUserProfile,
+	getViewerUserId,
+	removeAvatarOverride,
+	removeHeaderImageOverride,
+	removePrimaryAvatar,
+	removePrimaryHeaderImage,
+	updateAvatar,
+	updateHeaderImage,
+	updateProfile,
 };

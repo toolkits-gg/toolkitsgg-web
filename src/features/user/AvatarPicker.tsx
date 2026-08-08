@@ -4,31 +4,28 @@ import {
 	Badge,
 	Button,
 	Divider,
-	Flex,
 	Group,
-	Popover,
 	ScrollArea,
 	SimpleGrid,
 	Stack,
 	Text,
-	TextInput,
 	Tooltip,
 	UnstyledButton,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
-import { LuCheck, LuChevronDown, LuSearch, LuX } from "react-icons/lu";
-import { useFavoriteGames } from "#/features/game/data/favorite-games/use-favorite-games.ts";
-import type { GameAvatar } from "#/features/game/types.ts";
-import { useGameId } from "#/features/game/use-game-id.ts";
-import { useUserProfile } from "#/features/user/use-user-profile.ts";
-import { avatarImageUrl } from "#/features/user/utils.ts";
+import { LuCheck, LuX } from "react-icons/lu";
+import { useFavoriteGames } from "#/features/game/data/favorite-games/use-favorite-games";
+import { defaultBrowsingGameId } from "#/features/game/default-browsing-game";
+import { GamePickerPopover } from "#/features/game/GamePickerPopover";
+import { gameAssetImageUrl } from "#/features/game/game-asset-url";
+import type { GameAvatar } from "#/features/game/types";
+import { useGameId } from "#/features/game/use-game-id";
+import { useUserProfile } from "#/features/user/use-user-profile";
 import {
 	getGameAvatars,
-	getGameLogoComponent,
 	getGameMetadata,
 	REGISTERED_GAME_IDS,
-} from "#/game-registry/public-registry.ts";
+} from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
 import classes from "./AvatarPicker.module.css";
 
@@ -54,24 +51,10 @@ function findAvatarImage(
 	const avatars = getGameAvatars(gameId);
 	const avatar = avatars?.find((a) => a.id === avatarId);
 	if (!avatar) return null;
-	return { avatar, imageUrl: avatarImageUrl(avatar.imageUrl, gameId) };
+	return { avatar, imageUrl: gameAssetImageUrl(avatar.imageUrl, gameId) };
 }
 
-function getDefaultBrowsingGameId(
-	currentGameId: GameId,
-	favoriteGameIds: GameId[],
-): GameId {
-	if (currentGameId !== "none") {
-		const hasAvatars = gamesWithAvatars.some((g) => g.gameId === currentGameId);
-		if (hasAvatars) return currentGameId;
-	}
-	const firstFavorite = gamesWithAvatars.find((g) =>
-		favoriteGameIds.includes(g.gameId),
-	);
-	if (firstFavorite) return firstFavorite.gameId;
-	if (gamesWithAvatars.length > 0) return gamesWithAvatars[0].gameId;
-	return "none" as GameId;
-}
+const gameIdsWithAvatars: GameId[] = gamesWithAvatars.map((g) => g.gameId);
 
 export function AvatarPicker() {
 	const gameId = useGameId();
@@ -89,20 +72,11 @@ export function AvatarPicker() {
 	const [selectedAvatarId, setSelectedAvatarId] = useState<string | null>(null);
 	const [selectedGameId, setSelectedGameId] = useState<GameId | null>(null);
 	const [browsingGameId, setBrowsingGameId] = useState<GameId>(() =>
-		getDefaultBrowsingGameId(gameId, favoriteGameIds),
+		defaultBrowsingGameId(gameId, favoriteGameIds, gameIdsWithAvatars),
 	);
-	const [gameSearch, setGameSearch] = useState("");
-	const [
-		gamePickerOpened,
-		{ toggle: toggleGamePicker, close: closeGamePicker },
-	] = useDisclosure(false);
-
 	const browsingGame = gamesWithAvatars.find(
 		(g) => g.gameId === browsingGameId,
 	);
-	const BrowsingGameLogo = browsingGame
-		? getGameLogoComponent(browsingGame.gameId)
-		: undefined;
 	const overrideForBrowsedGame = avatarOverrides.find(
 		(o) => o.gameId === browsingGameId,
 	);
@@ -125,22 +99,10 @@ export function AvatarPicker() {
 			)
 		: null;
 
-	const filteredGames = gamesWithAvatars.filter((g) =>
-		g.label.toLowerCase().includes(gameSearch.toLowerCase()),
-	);
-	const favoriteGames = filteredGames
-		.filter((g) => favoriteGameIds.includes(g.gameId))
-		.sort((a, b) => a.label.localeCompare(b.label));
-	const otherGames = filteredGames
-		.filter((g) => !favoriteGameIds.includes(g.gameId))
-		.sort((a, b) => a.label.localeCompare(b.label));
-
 	const handleGameChange = (newGameId: GameId) => {
 		setBrowsingGameId(newGameId);
 		setSelectedAvatarId(null);
 		setSelectedGameId(null);
-		closeGamePicker();
-		setGameSearch("");
 	};
 
 	const handleAvatarClick = (avatarId: string, avatarGameId: GameId) => {
@@ -229,7 +191,7 @@ export function AvatarPicker() {
 				>
 					<Stack gap={4} align="center">
 						<Avatar
-							src={avatarImageUrl(avatar.imageUrl, game.gameId)}
+							src={gameAssetImageUrl(avatar.imageUrl, game.gameId)}
 							alt={avatar.name}
 							size={56}
 							radius="sm"
@@ -277,24 +239,6 @@ export function AvatarPicker() {
 					</SimpleGrid>
 				)}
 			</Stack>
-		);
-	};
-
-	const renderGameRow = (game: GameWithAvatars, compact: boolean) => {
-		const LogoComponent = getGameLogoComponent(game.gameId);
-		return (
-			<UnstyledButton
-				key={game.gameId}
-				className={`${classes.gameRow} ${compact ? classes.gameRowCompact : ""}`}
-				onClick={() => handleGameChange(game.gameId)}
-			>
-				<Flex align="center" gap={compact ? "sm" : "md"}>
-					{LogoComponent && <LogoComponent size={compact ? 24 : 36} />}
-					<Text size={compact ? "sm" : "md"} fw={500}>
-						{game.label}
-					</Text>
-				</Flex>
-			</UnstyledButton>
 		);
 	};
 
@@ -369,103 +313,11 @@ export function AvatarPicker() {
 
 			<Divider />
 
-			<Popover
-				width="target"
-				position="bottom-start"
-				shadow="md"
-				opened={gamePickerOpened}
-				onChange={(isOpen) => {
-					if (!isOpen) {
-						closeGamePicker();
-						setGameSearch("");
-					}
-				}}
-				trapFocus
-			>
-				<Popover.Target>
-					<UnstyledButton
-						className={classes.gameSelectorButton}
-						onClick={toggleGamePicker}
-					>
-						<Group wrap="nowrap" gap="sm" justify="space-between">
-							<Flex align="center" gap="sm">
-								{BrowsingGameLogo && <BrowsingGameLogo size={36} />}
-								<Text size="sm" fw={600}>
-									{browsingGame?.label ?? "Select a game"}
-								</Text>
-							</Flex>
-							<LuChevronDown size={16} />
-						</Group>
-					</UnstyledButton>
-				</Popover.Target>
-
-				<Popover.Dropdown className={classes.gameSelectorDropdown}>
-					{gamesWithAvatars.length > 3 && (
-						<TextInput
-							placeholder="Search games..."
-							leftSection={<LuSearch size={16} />}
-							value={gameSearch}
-							onChange={(e) => setGameSearch(e.currentTarget.value)}
-							className={classes.searchInput}
-							size="sm"
-							data-autofocus
-						/>
-					)}
-
-					<ScrollArea.Autosize mah={300} type="auto">
-						{favoriteGames.length > 0 && (
-							<>
-								<Text
-									size="xs"
-									c="dimmed"
-									tt="uppercase"
-									fw={700}
-									px="xs"
-									pt="xs"
-									pb={4}
-								>
-									Favorites
-								</Text>
-								<Stack gap={4}>
-									{favoriteGames.map((game) => renderGameRow(game, false))}
-								</Stack>
-								{otherGames.length > 0 && (
-									<Divider my="xs" className={classes.separator} />
-								)}
-							</>
-						)}
-
-						{otherGames.length > 0 && (
-							<>
-								{favoriteGames.length > 0 && (
-									<Text
-										size="xs"
-										c="dimmed"
-										tt="uppercase"
-										fw={700}
-										px="xs"
-										pt="xs"
-										pb={4}
-									>
-										All Other Games
-									</Text>
-								)}
-								<Stack gap={4}>
-									{otherGames.map((game) =>
-										renderGameRow(game, favoriteGames.length > 0),
-									)}
-								</Stack>
-							</>
-						)}
-
-						{favoriteGames.length === 0 && otherGames.length === 0 && (
-							<Text c="dimmed" ta="center" py="md" size="sm">
-								No games found
-							</Text>
-						)}
-					</ScrollArea.Autosize>
-				</Popover.Dropdown>
-			</Popover>
+			<GamePickerPopover
+				gameIds={gamesWithAvatars.map((g) => g.gameId)}
+				value={browsingGameId}
+				onChange={handleGameChange}
+			/>
 
 			<ScrollArea.Autosize mah={400} type="auto">
 				{browsingGame ? (

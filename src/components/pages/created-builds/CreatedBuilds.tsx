@@ -1,80 +1,37 @@
 import {
-	Badge,
-	Card,
+	Button,
 	Center,
 	EmptyState,
 	Group,
 	Loader,
 	SimpleGrid,
-	Text,
+	Stack,
 } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
-import { AppImage } from "#/components/AppImage.tsx";
+import { LuPlus } from "react-icons/lu";
+import { BuildCard } from "#/components/pages/build/BuildCard";
+import { AddToCollectionMenu } from "#/components/pages/build/build-view/AddToCollectionMenu";
+import { useCreatedBuilds } from "#/components/pages/created-builds/use-created-builds";
 import type {
-	CreatedBuildSummary,
-	GameCreatedBuildsData,
-} from "#/features/game/data/types.ts";
-import type { ProfileTabViewMode } from "#/features/game/types.ts";
-import { useGameId } from "#/features/game/use-game-id.ts";
-import type { BuildVisibility, GameId } from "@/prisma";
-import { useCreatedBuilds } from "./use-created-builds.ts";
+	GameBuildsConfig,
+	ProfileTabViewMode,
+} from "#/features/game/types";
+import { useGameId } from "#/features/game/use-game-id";
 
 type CreatedBuildsPageProps = {
-	data: GameCreatedBuildsData;
+	builds: GameBuildsConfig;
 	viewMode: ProfileTabViewMode;
 };
 
-const VISIBILITY_COLORS: Record<BuildVisibility, string> = {
-	PUBLIC: "green",
-	UNLISTED: "yellow",
-	PRIVATE: "gray",
-};
-
-const BuildCard = ({
-	build,
-	gameId,
-}: {
-	build: CreatedBuildSummary;
-	gameId: GameId;
-}) => {
-	const imageSrc = build.thumbnailUrl ?? build.imageUrl ?? undefined;
-	return (
-		<Link
-			to="/$gameId/build/$buildId"
-			params={{ gameId, buildId: build.id }}
-			style={{ textDecoration: "none", color: "inherit" }}
-		>
-			<Card withBorder padding="sm" radius="md">
-				<Card.Section>
-					<AppImage
-						src={imageSrc}
-						alt={build.name}
-						h={140}
-						fallbackSrc="/placeholder-build.png"
-					/>
-				</Card.Section>
-				<Group justify="space-between" mt="sm" wrap="nowrap">
-					<Text fw={600} lineClamp={1}>
-						{build.name}
-					</Text>
-					<Badge
-						color={VISIBILITY_COLORS[build.visibility] ?? "gray"}
-						variant="light"
-						size="sm"
-					>
-						{build.visibility}
-					</Badge>
-				</Group>
-			</Card>
-		</Link>
-	);
-};
-
 /** Profile-tab grid of a user's created builds (self or public view). */
-const CreatedBuildsPage = ({ data, viewMode }: CreatedBuildsPageProps) => {
+const CreatedBuildsPage = ({ builds, viewMode }: CreatedBuildsPageProps) => {
 	const gameId = useGameId();
-	const { builds, isLoading, isPublicView } = useCreatedBuilds({
-		data,
+	const {
+		builds: list,
+		isLoading,
+		isPublicView,
+	} = useCreatedBuilds({
+		data: builds.data.builds,
 		viewMode,
 	});
 
@@ -86,25 +43,50 @@ const CreatedBuildsPage = ({ data, viewMode }: CreatedBuildsPageProps) => {
 		);
 	}
 
-	if (builds.length === 0) {
-		return (
-			<EmptyState
-				title="No builds yet"
-				description={
-					isPublicView
-						? "This user hasn't shared any public builds."
-						: "You haven't created any builds yet."
-				}
-			/>
-		);
-	}
-
 	return (
-		<SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="md">
-			{builds.map((build) => (
-				<BuildCard key={build.id} build={build} gameId={gameId} />
-			))}
-		</SimpleGrid>
+		<Stack gap="md">
+			{!isPublicView && gameId !== "none" && (
+				<Group justify="flex-end">
+					<Link
+						to="/$gameId/build/create"
+						params={{ gameId }}
+						style={{ textDecoration: "none" }}
+					>
+						<Button leftSection={<LuPlus size={16} />}>New build</Button>
+					</Link>
+				</Group>
+			)}
+
+			{list.length === 0 ? (
+				<EmptyState
+					title="No builds yet"
+					description={
+						isPublicView
+							? "This user hasn't shared any public builds."
+							: "You haven't created any builds yet."
+					}
+				/>
+			) : (
+				<SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="md">
+					{list.map((build) => (
+						<BuildCard
+							key={build.id}
+							build={build}
+							gameId={gameId}
+							showVisibility={!isPublicView}
+							actions={
+								isPublicView ? undefined : (
+									<AddToCollectionMenu
+										build={build}
+										collections={builds.data.collections}
+									/>
+								)
+							}
+						/>
+					))}
+				</SimpleGrid>
+			)}
+		</Stack>
 	);
 };
 

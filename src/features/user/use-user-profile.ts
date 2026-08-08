@@ -1,10 +1,13 @@
 import {
 	useRemoveAvatarOverride,
+	useRemoveHeaderImageOverride,
 	useRemovePrimaryAvatar,
+	useRemovePrimaryHeaderImage,
 	useUpdateAvatar,
+	useUpdateHeaderImage,
 	useUserProfileQuery,
-} from "#/features/game/data/user-profile/use-user-profile-data.ts";
-import { useSession } from "#/integrations/better-auth/auth-client.ts";
+} from "#/features/game/data/user-profile/use-user-profile-data";
+import { useSession } from "#/integrations/better-auth/auth-client";
 import type { GameId } from "@/prisma";
 
 type UseUserProfileArgs = { userId?: string } | undefined;
@@ -18,6 +21,9 @@ const useUserProfile = (args?: UseUserProfileArgs) => {
 	const updateAvatarMutation = useUpdateAvatar();
 	const removePrimaryAvatarMutation = useRemovePrimaryAvatar();
 	const removeAvatarOverrideMutation = useRemoveAvatarOverride();
+	const updateHeaderImageMutation = useUpdateHeaderImage();
+	const removePrimaryHeaderImageMutation = useRemovePrimaryHeaderImage();
+	const removeHeaderImageOverrideMutation = useRemoveHeaderImageOverride();
 
 	const isAuthenticated = !!session?.user;
 	const isLoading = sessionPending || profileQuery.isPending;
@@ -38,6 +44,17 @@ const useUserProfile = (args?: UseUserProfileArgs) => {
 		removePrimaryAvatar: () => removePrimaryAvatarMutation.mutateAsync(),
 		removeAvatarOverride: (targetGameId: GameId) =>
 			removeAvatarOverrideMutation.mutateAsync({ targetGameId }),
+		updateHeaderImage: (params: {
+			headerImageId: string;
+			headerImageGameId: GameId;
+			positionX?: number;
+			positionY?: number;
+			targetGameId?: GameId;
+		}) => updateHeaderImageMutation.mutateAsync(params),
+		removePrimaryHeaderImage: () =>
+			removePrimaryHeaderImageMutation.mutateAsync(),
+		removeHeaderImageOverride: (targetGameId: GameId) =>
+			removeHeaderImageOverrideMutation.mutateAsync({ targetGameId }),
 	};
 };
 

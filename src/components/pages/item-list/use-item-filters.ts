@@ -1,18 +1,17 @@
 import { parseAsBoolean, useQueryStates } from "nuqs";
 import type { ReactNode } from "react";
-import type { ActiveFilter } from "#/components/pages/item-list/ItemFilterBar.tsx";
 import type {
 	AnyGameConfig,
 	AppItem,
 	GameFilterConfig,
-} from "#/features/game/types.ts";
+} from "#/features/game/types";
 import {
 	dimUncollectedItemsParser,
 	showCollectableOnlyParser,
 	showCollectedItemsParser,
 	showUncollectedItemsParser,
-} from "#/features/search-params/parsers/item-collection.ts";
-import { searchParser } from "#/features/search-params/parsers/search.ts";
+} from "#/features/search-params/parsers/item-collection";
+import { searchParser } from "#/features/search-params/parsers/search";
 
 const itemLookupParsers = {
 	search: searchParser,
@@ -46,7 +45,14 @@ type UseItemFiltersArgs = {
 	isCollectedItemsTab: boolean;
 };
 
-type UseItemFiltersResult = {
+type ActiveFilter = {
+	key: string;
+	label: string;
+	value: string;
+	onRemove: () => void;
+};
+
+type ItemFilterControls = {
 	search: string;
 	showCollectedItems: boolean;
 	showUncollectedItems: boolean;
@@ -59,6 +65,9 @@ type UseItemFiltersResult = {
 	clearAllFilters: () => void;
 	activeFilters: ActiveFilter[];
 	renderGameFilters: ReactNode;
+};
+
+type UseItemFiltersResult = ItemFilterControls & {
 	filteredItems: AppItem[];
 	filteredCategories: string[];
 };
@@ -258,5 +267,11 @@ const useItemFilters = ({
 	};
 };
 
-export type { UniversalParamKey, UseItemFiltersArgs, UseItemFiltersResult };
+export type {
+	ActiveFilter,
+	ItemFilterControls,
+	UniversalParamKey,
+	UseItemFiltersArgs,
+	UseItemFiltersResult,
+};
 export { useItemFilters };

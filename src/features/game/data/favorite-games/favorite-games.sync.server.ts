@@ -1,12 +1,12 @@
-// Offline-sync handler for the userFavoriteGame entity (a presence toggle).
+// Sync handler for the userFavoriteGame entity (a presence toggle).
 // Split out from favorite-games.server.ts so the sync-replay path lives apart
 // from the direct CRUD data access. The `.server.ts` suffix opts this into
 // Start's import protection, keeping prisma out of the client bundle. Consumed
-// only by the sync handler game-registry.
+// only by the sync handler games-registry.
 
-import { createPresenceToggleSyncHandler } from "#/features/sync/local-data/presence-sync-handler.ts";
-import type { SyncHandler } from "#/features/sync/local-data/types.ts";
-import { REGISTERED_GAME_IDS } from "#/game-registry/public-registry.ts";
+import { createPresenceToggleSyncHandler } from "#/features/sync/presence-sync-handler";
+import type { SyncHandler } from "#/features/sync/types";
+import { REGISTERED_GAME_IDS } from "#/games-registry/public-registry";
 import { type GameId, prisma } from "@/prisma";
 
 // Self-contained guard (intentionally duplicated from favorite-games.ts) so this

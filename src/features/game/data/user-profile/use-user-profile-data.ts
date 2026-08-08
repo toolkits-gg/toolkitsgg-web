@@ -1,16 +1,8 @@
 // User profile: client data hooks. Each hook inlines the backend choice (remote
-// when authed + online, else local IndexedDB + a queued op for sync). Profile
-// reads default to friendly placeholders when no record exists yet.
+// when signed in, else local IndexedDB + a queued op for sync). Profile reads
+// default to friendly placeholders when no record exists yet.
 
-import { useNetwork } from "@mantine/hooks";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-	deleteLocalAvatarOverride,
-	getLocalAvatarOverrides,
-	getLocalUserProfile,
-	upsertLocalAvatarOverride,
-	upsertLocalUserProfile,
-} from "#/features/game/data/user-profile/user-profile.idb.ts";
 import {
 	buildGetProfileQueryKey,
 	DEFAULT_BIO,
@@ -18,33 +10,53 @@ import {
 	getUserProfileServerFn,
 	mapUserToProfileData,
 	removeAvatarOverrideServerFn,
+	removeHeaderImageOverrideServerFn,
 	removePrimaryAvatarServerFn,
+	removePrimaryHeaderImageServerFn,
 	resolveDisplayName,
 	type UserProfileData,
 	updateAvatarServerFn,
+	updateHeaderImageServerFn,
 	updateProfileServerFn,
-} from "#/features/game/data/user-profile/user-profile.ts";
-import { getOrCreateAnonUserId } from "#/features/sync/local-data/identity/anon-id.ts";
-import { enqueueOp } from "#/features/sync/local-data/queue/pending-ops.ts";
-import { useSession } from "#/integrations/better-auth/auth-client.ts";
-import { getGameMetadata } from "#/game-registry/public-registry.ts";
+} from "#/features/game/data/user-profile/user-profile";
+import {
+	deleteLocalAvatarOverride,
+	deleteLocalHeaderImageOverride,
+	getLocalAvatarOverrides,
+	getLocalHeaderImageOverrides,
+	getLocalUserProfile,
+	upsertLocalAvatarOverride,
+	upsertLocalHeaderImageOverride,
+	upsertLocalUserProfile,
+} from "#/features/game/data/user-profile/user-profile.idb";
+import { getOrCreateAnonUserId } from "#/features/sync/identity/anon-id";
+import { enqueueOp } from "#/features/sync/queue/pending-ops";
+import { getGameMetadata } from "#/games-registry/public-registry";
+import { useSession } from "#/integrations/better-auth/auth-client";
 import type { GameId } from "@/prisma";
 
 const invalidateProfile = (queryClient: ReturnType<typeof useQueryClient>) =>
 	queryClient.invalidateQueries({ queryKey: ["data", "userProfile"] });
 
-export type GetProfileArgs = { userId?: string } | undefined;
-export type UpdateAvatarInput = {
+type GetProfileArgs = { userId?: string } | undefined;
+type UpdateAvatarInput = {
 	avatarId: string;
 	avatarGameId: GameId;
 	targetGameId?: GameId;
 };
+type UpdateHeaderImageInput = {
+	headerImageId: string;
+	headerImageGameId: GameId;
+	/** Framing for this image. Omitted means centered, never "keep the old one". */
+	positionX?: number;
+	positionY?: number;
+	targetGameId?: GameId;
+};
 export const useUserProfileQuery = (args?: GetProfileArgs) => {
 	const { data: session } = useSession();
-	const { online } = useNetwork();
 	const authUserId = session?.user?.id ?? null;
 	const resolvedId = args?.userId ?? authUserId ?? getOrCreateAnonUserId();
-	const remote = !!authUserId && online;
+	const remote = !!authUserId;
 
 	return useQuery({
 		queryKey: buildGetProfileQueryKey(resolvedId),
@@ -58,9 +70,10 @@ export const useUserProfileQuery = (args?: GetProfileArgs) => {
 				return mapUserToProfileData(user);
 			}
 			const userId = args?.userId ?? authUserId ?? getOrCreateAnonUserId();
-			const [profile, overrides] = await Promise.all([
+			const [profile, overrides, headerOverrides] = await Promise.all([
 				getLocalUserProfile(userId),
 				getLocalAvatarOverrides(userId),
+				getLocalHeaderImageOverrides(userId),
 			]);
 			// The session name only describes the signed-in user, so it is not a
 			// fallback when reading somebody else's profile.
@@ -76,6 +89,20 @@ export const useUserProfileQuery = (args?: GetProfileArgs) => {
 					avatarId: o.avatarId,
 					avatarGameId: o.avatarGameId,
 				})),
+				primaryHeaderImageId: profile?.primaryHeaderImageId ?? null,
+				primaryHeaderImageGameId:
+					(profile?.primaryHeaderImageGameId as GameId) ?? null,
+				primaryHeaderImagePositionX:
+					profile?.primaryHeaderImagePositionX ?? 0.5,
+				primaryHeaderImagePositionY:
+					profile?.primaryHeaderImagePositionY ?? 0.5,
+				headerImageOverrides: headerOverrides.map((o) => ({
+					gameId: o.gameId,
+					headerImageId: o.headerImageId,
+					headerImageGameId: o.headerImageGameId,
+					headerImagePositionX: o.headerImagePositionX ?? 0.5,
+					headerImagePositionY: o.headerImagePositionY ?? 0.5,
+				})),
 			};
 		},
 	});
@@ -84,25 +111,23 @@ export const useUserProfileQuery = (args?: GetProfileArgs) => {
 export const useUpdateAvatar = () => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
-	const { online } = useNetwork();
 
 	return useMutation<{ ok: true }, Error, UpdateAvatarInput>({
 		mutationFn: async (input) => {
 			const authUserId = session?.user?.id ?? null;
 			const anonUserId = getOrCreateAnonUserId();
-			const userId = authUserId ?? anonUserId;
-			if (authUserId && online) return updateAvatarServerFn({ data: input });
+			if (authUserId) return updateAvatarServerFn({ data: input });
 
 			if (input.targetGameId) {
 				await upsertLocalAvatarOverride({
-					userId,
+					userId: anonUserId,
 					gameId: input.targetGameId,
 					avatarId: input.avatarId,
 					avatarGameId: input.avatarGameId,
 				});
 			} else {
 				await upsertLocalUserProfile({
-					userId,
+					userId: anonUserId,
 					primaryAvatarId: input.avatarId,
 					primaryAvatarGameId: input.avatarGameId,
 				});
@@ -130,26 +155,24 @@ export const useUpdateAvatar = () => {
 export const useRemovePrimaryAvatar = () => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
-	const { online } = useNetwork();
 
 	return useMutation<{ ok: true }, Error, void>({
 		mutationFn: async () => {
 			const authUserId = session?.user?.id ?? null;
 			const anonUserId = getOrCreateAnonUserId();
-			const userId = authUserId ?? anonUserId;
-			if (authUserId && online) return removePrimaryAvatarServerFn();
+			if (authUserId) return removePrimaryAvatarServerFn();
 
 			await upsertLocalUserProfile({
-				userId,
+				userId: anonUserId,
 				primaryAvatarId: null,
 				primaryAvatarGameId: null,
 			});
 			await enqueueOp({
 				anonUserId,
-				entity: "userProfile",
-				operation: "upsert",
+				entity: "userPrimaryAvatar",
+				operation: "delete",
 				payload: {},
-				idempotencyKey: `userProfile:removePrimary:${anonUserId}`,
+				idempotencyKey: `userPrimaryAvatar:delete:${anonUserId}`,
 				summary: { title: "Removed primary avatar" },
 			});
 			return { ok: true as const };
@@ -161,17 +184,15 @@ export const useRemovePrimaryAvatar = () => {
 export const useRemoveAvatarOverride = () => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
-	const { online } = useNetwork();
 
 	return useMutation<{ ok: true }, Error, { targetGameId: GameId }>({
 		mutationFn: async (input) => {
 			const authUserId = session?.user?.id ?? null;
 			const anonUserId = getOrCreateAnonUserId();
-			const userId = authUserId ?? anonUserId;
-			if (authUserId && online) {
+			if (authUserId) {
 				return removeAvatarOverrideServerFn({ data: input });
 			}
-			await deleteLocalAvatarOverride(userId, input.targetGameId);
+			await deleteLocalAvatarOverride(anonUserId, input.targetGameId);
 			await enqueueOp({
 				anonUserId,
 				entity: "userAvatarOverride",
@@ -190,21 +211,131 @@ export const useRemoveAvatarOverride = () => {
 	});
 };
 
+export const useUpdateHeaderImage = () => {
+	const queryClient = useQueryClient();
+	const { data: session } = useSession();
+
+	return useMutation<{ ok: true }, Error, UpdateHeaderImageInput>({
+		mutationFn: async (input) => {
+			const authUserId = session?.user?.id ?? null;
+			const anonUserId = getOrCreateAnonUserId();
+			if (authUserId) {
+				return updateHeaderImageServerFn({ data: input });
+			}
+
+			if (input.targetGameId) {
+				await upsertLocalHeaderImageOverride({
+					userId: anonUserId,
+					gameId: input.targetGameId,
+					headerImageId: input.headerImageId,
+					headerImageGameId: input.headerImageGameId,
+					headerImagePositionX: input.positionX,
+					headerImagePositionY: input.positionY,
+				});
+			} else {
+				await upsertLocalUserProfile({
+					userId: anonUserId,
+					primaryHeaderImageId: input.headerImageId,
+					primaryHeaderImageGameId: input.headerImageGameId,
+					primaryHeaderImagePositionX: input.positionX,
+					primaryHeaderImagePositionY: input.positionY,
+				});
+			}
+			await enqueueOp({
+				anonUserId,
+				entity: "userHeaderImageOverride",
+				operation: "upsert",
+				payload: input,
+				// The position is part of the key: repositioning the wallpaper that
+				// is already set is a real second edit, and a key that ignored it
+				// would let enqueueOp's dedupe drop the adjustment.
+				idempotencyKey: `userHeaderImageOverride:upsert:${anonUserId}:${input.targetGameId ?? "primary"}:${input.headerImageId}:${input.positionX ?? 0.5},${input.positionY ?? 0.5}`,
+				summary: input.targetGameId
+					? {
+							title: "Set header image override",
+							details: `For ${getGameMetadata(input.targetGameId)?.label ?? input.targetGameId}`,
+							gameId: input.targetGameId,
+						}
+					: { title: "Updated primary header image" },
+			});
+			return { ok: true as const };
+		},
+		onSuccess: () => invalidateProfile(queryClient),
+	});
+};
+
+export const useRemovePrimaryHeaderImage = () => {
+	const queryClient = useQueryClient();
+	const { data: session } = useSession();
+
+	return useMutation<{ ok: true }, Error, void>({
+		mutationFn: async () => {
+			const authUserId = session?.user?.id ?? null;
+			const anonUserId = getOrCreateAnonUserId();
+			if (authUserId) return removePrimaryHeaderImageServerFn();
+
+			await upsertLocalUserProfile({
+				userId: anonUserId,
+				primaryHeaderImageId: null,
+				primaryHeaderImageGameId: null,
+			});
+			await enqueueOp({
+				anonUserId,
+				entity: "userPrimaryHeaderImage",
+				operation: "delete",
+				payload: {},
+				idempotencyKey: `userPrimaryHeaderImage:delete:${anonUserId}`,
+				summary: { title: "Removed primary header image" },
+			});
+			return { ok: true as const };
+		},
+		onSuccess: () => invalidateProfile(queryClient),
+	});
+};
+
+export const useRemoveHeaderImageOverride = () => {
+	const queryClient = useQueryClient();
+	const { data: session } = useSession();
+
+	return useMutation<{ ok: true }, Error, { targetGameId: GameId }>({
+		mutationFn: async (input) => {
+			const authUserId = session?.user?.id ?? null;
+			const anonUserId = getOrCreateAnonUserId();
+			if (authUserId) {
+				return removeHeaderImageOverrideServerFn({ data: input });
+			}
+			await deleteLocalHeaderImageOverride(anonUserId, input.targetGameId);
+			await enqueueOp({
+				anonUserId,
+				entity: "userHeaderImageOverride",
+				operation: "delete",
+				payload: input,
+				idempotencyKey: `userHeaderImageOverride:delete:${anonUserId}:${input.targetGameId}`,
+				summary: {
+					title: "Removed header image override",
+					details: `For ${getGameMetadata(input.targetGameId)?.label ?? input.targetGameId}`,
+					gameId: input.targetGameId,
+				},
+			});
+			return { ok: true as const };
+		},
+		onSuccess: () => invalidateProfile(queryClient),
+	});
+};
+
 export const useUpdateProfile = () => {
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
-	const { online } = useNetwork();
 
 	return useMutation<{ ok: true }, Error, { displayName: string; bio: string }>(
 		{
 			mutationFn: async (input) => {
 				const authUserId = session?.user?.id ?? null;
 				const anonUserId = getOrCreateAnonUserId();
-				const userId = authUserId ?? anonUserId;
-				if (authUserId && online) return updateProfileServerFn({ data: input });
+				if (authUserId) return updateProfileServerFn({ data: input });
 
 				await upsertLocalUserProfile({
-					userId,
+					userId: anonUserId,
 					displayName: input.displayName,
 					bio: input.bio,
 				});
@@ -213,7 +344,9 @@ export const useUpdateProfile = () => {
 					entity: "userProfile",
 					operation: "upsert",
 					payload: input,
-					idempotencyKey: `userProfile:update:${anonUserId}`,
+					// Unique per edit: a stable key would make enqueueOp's dedupe drop a
+					// second edit made before the first one syncs.
+					idempotencyKey: `userProfile:update:${anonUserId}:${crypto.randomUUID()}`,
 					summary: {
 						title: "Updated profile",
 						details: `Display name -> ${input.displayName}`,

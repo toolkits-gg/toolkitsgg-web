@@ -12,6 +12,7 @@ interface NavbarLinksGroupProps {
 	label: string;
 	initiallyOpened?: boolean;
 	links?: NavLinkSubLink[];
+	onNavigate?: () => void;
 }
 
 const NavbarLinksGroup = ({
@@ -19,6 +20,7 @@ const NavbarLinksGroup = ({
 	label,
 	initiallyOpened,
 	links,
+	onNavigate,
 }: NavbarLinksGroupProps) => {
 	const hasLinks = Array.isArray(links);
 	const [expanded, handlers] = useDisclosure(initiallyOpened || false);
@@ -42,6 +44,7 @@ const NavbarLinksGroup = ({
 				className={classes.link}
 				to={link.link || "#"}
 				key={link.label}
+				onClick={onNavigate}
 				data-wizard-target={link.dataWizardTarget}
 			>
 				{link.label}

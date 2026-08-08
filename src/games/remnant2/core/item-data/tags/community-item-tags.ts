@@ -1,4 +1,4 @@
-import type {AppItemTag} from "#/features/game/types.ts";
+import type { AppItemTag } from "#/features/game/types";
 
 /**
  * Community defined item tags for Remnant 2.
@@ -109,4 +109,4 @@ export const COMMUNITY_ITEM_TAGS: AppItemTag[] = [
 		description:
 			"This item is currently bugged and MAY not function as expected. Check remnant.wiki for more information.",
 	},
-]
+];

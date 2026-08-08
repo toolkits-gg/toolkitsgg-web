@@ -1,8 +1,8 @@
 import type {
 	CollectItemInput,
 	GameCollectedItemsData,
-} from "#/features/game/data/types.ts";
-import type { CollectedItemsViewMode } from "#/features/game/types.ts";
+} from "#/features/game/data/types";
+import type { CollectedItemsViewMode } from "#/features/game/types";
 
 type UseCollectedItemsArgs = {
 	data: GameCollectedItemsData;

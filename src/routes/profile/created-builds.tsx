@@ -1,19 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useGameId } from "#/features/game/use-game-id.ts";
-import { ProfileTabPlaceholder } from "#/features/user/ProfileTabPlaceholder.tsx";
-import { getGamePages } from "#/game-registry/pages-registry.tsx";
+import { CreatedBuildsPage } from "#/components/pages/created-builds/CreatedBuilds";
+import { useGameId } from "#/features/game/use-game-id";
+import { getGameBuilds } from "#/games-registry/builds-registry";
 
-function CreatedBuilds() {
+const CreatedBuilds = () => {
 	const gameId = useGameId();
-	const pages = getGamePages(gameId);
-	return (
-		<>
-			{pages?.renderCreatedBuilds?.({ mode: { kind: "self" } }) ?? (
-				<ProfileTabPlaceholder title="Created Builds" />
-			)}
-		</>
-	);
-}
+	const builds = getGameBuilds(gameId);
+	if (!builds) return null;
+	return <CreatedBuildsPage builds={builds} viewMode={{ kind: "self" }} />;
+};
 
 const Route = createFileRoute("/profile/created-builds")({
 	component: CreatedBuilds,

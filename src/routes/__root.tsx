@@ -8,14 +8,14 @@ import "@fontsource/geist/600.css";
 import "@fontsource/geist/700.css";
 import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext } from "@tanstack/react-router";
-import { ComingSoonDocument } from "#/components/ComingSoonDocument.tsx";
-import { MaintenanceModeDocument } from "#/components/MaintenanceModeDocument.tsx";
-import { NotFoundCard } from "#/components/NotFoundCard.tsx";
-import { RootDocument } from "#/components/RootDocument.tsx";
+import { ComingSoonDocument } from "#/components/ComingSoonDocument";
+import { MaintenanceModeDocument } from "#/components/MaintenanceModeDocument";
+import { NotFoundCard } from "#/components/NotFoundCard";
+import { RootDocument } from "#/components/RootDocument";
 import { OG_IMAGE, SERVER_RESOLVED_GAME_ID_SOURCES } from "#/constants";
-import { clientEnv } from "#/env/client-env.ts";
+import { clientEnv } from "#/env/client-env";
 import { getServerResolvedGameInputsServerFn } from "#/features/game/active-game";
-import { getValidatedGameId } from "#/game-registry/public-registry.ts";
+import { getValidatedGameId } from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
 
 interface MyRouterContext {

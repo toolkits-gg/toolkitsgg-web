@@ -1,9 +1,9 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
 import { SERVER_RESOLVED_GAME_ID_SOURCES } from "#/constants";
-import type { ServerResolvedGameIdSources } from "#/features/game/active-game.ts";
-import { setGame } from "#/features/game/store.ts";
-import { setActiveGameCookie } from "#/features/game/utils.ts";
+import type { ServerResolvedGameIdSources } from "#/features/game/active-game";
+import { setGame } from "#/features/game/store";
+import { setActiveGameCookie } from "#/features/game/utils";
 import type { GameId } from "@/prisma";
 
 const useSetActiveGame = (): ((gameId: GameId | null) => void) => {

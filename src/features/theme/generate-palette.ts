@@ -1,8 +1,8 @@
 import type { MantineColorsTuple } from "@mantine/core";
 import { clampChroma, converter, formatHex, parse } from "culori";
-import { RED, WHITE } from "#/features/theme/constants.ts";
-import type { ToolkitThemeColorKey } from "#/features/theme/types.ts";
-import type { ThemeColorInput } from "#/features/theme/utils.ts";
+import { RED, WHITE } from "#/features/theme/constants";
+import type { ToolkitThemeColorKey } from "#/features/theme/types";
+import type { ThemeColorInput } from "#/features/theme/utils";
 
 // ---------------------------------------------------------------------------
 // OKLCH helpers
@@ -54,7 +54,7 @@ const DARK_ANCHOR = 0.02;
 const T_TO_LIGHT_FOR_05 = [0.95, 0.83, 0.62, 0.4, 0.18];
 const T_TO_DARK_FOR_69 = [0.18, 0.36, 0.62, 0.85];
 
-// Chroma multiplier per shade — peaks at [5], falls off toward extremes so very
+// Chroma multiplier per shade - peaks at [5], falls off toward extremes so very
 // light/dark shades don't look muddy.
 const CHROMA_CURVE = [0.12, 0.22, 0.45, 0.65, 0.9, 1.0, 0.95, 0.85, 0.65, 0.4];
 
@@ -80,7 +80,7 @@ const FG_BG_LIGHTNESS_THRESHOLD = 0.65;
 // Neutral target lightnesses
 //
 // Background colors at [5] cluster at predictable points across all three
-// hand-tuned themes — base/popover are deepest, border/input are highest so
+// hand-tuned themes - base/popover are deepest, border/input are highest so
 // they can be visible against cards. Numbers below were dialed in to match the
 // originals' apparent darkness.
 // ---------------------------------------------------------------------------
@@ -198,7 +198,7 @@ const pickForeground = (
 
 // Tinted-gray fg ramp used by `card` and `muted`. Hoisted from the original
 // hand-tuned Clair Obscur / Slay the Spire 2 themes (they used this identical
-// ramp; Remnant 2 had a slightly warmer one — the difference is barely visible).
+// ramp; Remnant 2 had a slightly warmer one - the difference is barely visible).
 const CUSTOM_FG_DARK: MantineColorsTuple = [
 	"#f0f1f4",
 	"#e0e2e7",
@@ -328,4 +328,4 @@ const generateThemeColors = (
 };
 
 export type { ThemePaletteConfig };
-export { generateThemeColors, hexToOklch, pickForeground, rampFromHex };
+export { generateThemeColors };

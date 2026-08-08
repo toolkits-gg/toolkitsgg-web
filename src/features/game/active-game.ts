@@ -1,8 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
-import { subdomainLabel } from "#/features/game/subdomain-rewrite.ts";
-import { getValidatedGameId } from "#/game-registry/public-registry.ts";
-import { parseCookie } from "#/utils.ts";
+import { subdomainLabel } from "#/features/game/subdomain-rewrite";
+import { getValidatedGameId } from "#/games-registry/public-registry";
+import { parseCookie } from "#/utils";
 import type { GameId } from "@/prisma";
 
 const ACTIVE_GAME_COOKIE = "active-game";
@@ -36,7 +36,6 @@ const getServerResolvedGameInputsServerFn = createServerFn({
 });
 
 export {
-	ACTIVE_GAME_COOKIE,
 	getServerResolvedGameInputsServerFn,
 	type ServerResolvedGameIdSources,
 };

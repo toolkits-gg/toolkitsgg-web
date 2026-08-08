@@ -1,6 +1,6 @@
-import { useUserProfileQuery } from "#/features/game/data/user-profile/use-user-profile-data.ts";
-import { useGameId } from "#/features/game/use-game-id.ts";
-import { resolveAvatar } from "#/features/user/utils.ts";
+import { useUserProfileQuery } from "#/features/game/data/user-profile/use-user-profile-data";
+import { useGameId } from "#/features/game/use-game-id";
+import { resolveAvatar } from "#/features/user/utils";
 
 type UseResolvedAvatarArgs = { userId?: string } | undefined;
 

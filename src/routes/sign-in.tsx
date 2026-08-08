@@ -1,4 +1,5 @@
 import {
+	Alert,
 	Anchor,
 	Button,
 	Divider,
@@ -14,42 +15,37 @@ import {
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { SiDiscord } from "react-icons/si";
 import { z } from "zod";
+import { fieldError } from "#/features/user/field-error";
+import { SocialSignInButtons } from "#/features/user/SocialSignInButtons";
 import { authClient } from "#/integrations/better-auth/auth-client";
 
 const emailSchema = z.email("Enter a valid email").min(1, "Email is required");
 
 const passwordSchema = z.string().min(1, "Password is required");
 
-const fieldError = (errors: unknown[]): string | undefined => {
-	const first = errors[0];
-	if (!first) return undefined;
-	if (typeof first === "string") return first;
-	if (typeof first === "object" && "message" in first) {
-		return String((first as { message: unknown }).message);
-	}
-	return String(first);
-};
-
 const SignInPage = () => {
 	const navigate = useNavigate();
 	const [serverError, setServerError] = useState<string | null>(null);
 
-	const handleDiscord = async () => {
-		await authClient.signIn.social({ provider: "discord", callbackURL: "/" });
-	};
+	const [unverifiedEmail, setUnverifiedEmail] = useState<string | null>(null);
 
 	const form = useForm({
 		defaultValues: { email: "", password: "" },
 		onSubmit: async ({ value }) => {
 			setServerError(null);
+			setUnverifiedEmail(null);
 			const result = await authClient.signIn.email({
 				email: value.email,
 				password: value.password,
-				callbackURL: "/",
 			});
 			if (result.error) {
+				// sendOnSignIn is enabled, so better-auth has already mailed a fresh
+				// link by the time this comes back.
+				if (result.error.code === "EMAIL_NOT_VERIFIED") {
+					setUnverifiedEmail(value.email);
+					return;
+				}
 				setServerError(result.error.message ?? "Sign in failed");
 			} else {
 				await navigate({ to: "/" });
@@ -64,14 +60,7 @@ const SignInPage = () => {
 					Sign in
 				</Title>
 				<Stack>
-					<Button
-						leftSection={<SiDiscord size={18} />}
-						color="secondary.5"
-						onClick={handleDiscord}
-						fullWidth
-					>
-						Continue with Discord
-					</Button>
+					<SocialSignInButtons />
 
 					<Divider label="Or continue with email" labelPosition="center" />
 
@@ -137,6 +126,17 @@ const SignInPage = () => {
 									{serverError}
 								</Text>
 							)}
+							{unverifiedEmail && (
+								<Alert color="yellow" title="Verify your email first">
+									We sent a new verification link to {unverifiedEmail}. Open it
+									to finish signing in.
+								</Alert>
+							)}
+							<Group justify="flex-end">
+								<Anchor component={Link} to="/forgot-password" size="xs">
+									Forgot your password?
+								</Anchor>
+							</Group>
 							<Group justify="space-between" mt="xs">
 								<Anchor component={Link} to="/sign-up" c="dimmed" size="xs">
 									{"Don't have an account? Register"}
@@ -168,4 +168,5 @@ const SignInPage = () => {
 };
 
 const Route = createFileRoute("/sign-in")({ component: SignInPage });
+
 export { Route };

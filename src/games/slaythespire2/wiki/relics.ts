@@ -8,18 +8,18 @@
  */
 
 import { cleanWikiText } from "#/features/sync/wiki/clean-wiki-text";
-import { ANCIENT_MAP } from "#/games/slaythespire2/core/item-data/ancients.ts";
-import { CHARACTER_MAP } from "#/games/slaythespire2/core/item-data/characters.ts";
+import { ANCIENT_MAP } from "#/games/slaythespire2/core/item-data/ancients";
+import { CHARACTER_MAP } from "#/games/slaythespire2/core/item-data/characters";
 import {
 	RELIC_RARITY_MAP,
 	RELICS,
-} from "#/games/slaythespire2/core/item-data/relics.ts";
+} from "#/games/slaythespire2/core/item-data/relics";
 import {
 	type CompareResult,
 	getString,
 	resolveMapped,
 	syncWikiCategory,
-} from "#/games/slaythespire2/wiki/sync-category.ts";
+} from "#/games/slaythespire2/wiki/sync-category";
 import type {
 	SlayTheSpire2Ancient,
 	SlayTheSpire2Character,

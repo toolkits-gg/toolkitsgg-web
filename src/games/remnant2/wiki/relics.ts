@@ -7,8 +7,8 @@
  * Run with: pnpm tsx src/games/remnant2/wiki/relics.ts
  */
 
-import { RELICS } from "#/games/remnant2/core/item-data/relics.ts";
-import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category.ts";
+import { RELICS } from "#/games/remnant2/core/item-data/relics";
+import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category";
 
 void syncWikiCategory([
 	{

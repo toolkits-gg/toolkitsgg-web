@@ -13,15 +13,15 @@ import classes from "./TriStateFilter.module.css";
 
 type TriStateValue = "include" | "exclude" | "default";
 
-export type TriStateFilterValue = Record<string, TriStateValue>;
-
-export type AppTriStateFilterProps = {
+type AppTriStateFilterProps = {
 	label: string;
 	options: Record<string, string>;
 	value: TriStateFilterValue;
 	onChange: (value: TriStateFilterValue) => void;
 	placeholder?: string;
 };
+
+export type TriStateFilterValue = Record<string, TriStateValue>;
 
 export const TriStateFilter = ({
 	label,

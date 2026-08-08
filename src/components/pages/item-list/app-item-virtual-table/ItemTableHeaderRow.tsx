@@ -1,8 +1,8 @@
 import { flexRender, type HeaderGroup } from "@tanstack/react-table";
 import clsx from "clsx";
 import { LuChevronDown, LuChevronUp } from "react-icons/lu";
-import { columnStyle } from "#/components/pages/item-list/app-item-virtual-table/item-table-columns.tsx";
-import type { AppItem } from "#/features/game/types.ts";
+import { columnStyle } from "#/components/pages/item-list/app-item-virtual-table/item-table-columns";
+import type { AppItem } from "#/features/game/types";
 import classes from "../AppItemVirtualTable.module.css";
 
 const ARIA_SORT = { asc: "ascending", desc: "descending" } as const;

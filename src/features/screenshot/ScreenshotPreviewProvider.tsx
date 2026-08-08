@@ -1,7 +1,7 @@
 import { notifications } from "@mantine/notifications";
 import type React from "react";
-import { ScreenshotPreview } from "#/features/screenshot/ScreenshotPreview.tsx";
-import { useScreenshotPreviewStore } from "./store.ts";
+import { ScreenshotPreview } from "#/features/screenshot/ScreenshotPreview";
+import { useScreenshotPreviewStore } from "./store";
 
 const ScreenshotPreviewProvider: React.FC = () => {
 	const {

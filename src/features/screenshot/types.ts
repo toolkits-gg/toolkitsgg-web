@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import type { AppLogoSize } from "#/types.ts";
+import type { AppLogoSize } from "#/types";
 
 type WatermarkGameConfig = {
 	METADATA: {

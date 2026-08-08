@@ -1,8 +1,8 @@
 import { useMantineTheme } from "@mantine/core";
 import { domToBlob } from "modern-screenshot";
 import { type RefObject, useRef } from "react";
-import { useScreenshotPreviewStore } from "#/features/screenshot/store.ts";
-import { logger } from "#/integrations/pino/logger.ts";
+import { useScreenshotPreviewStore } from "#/features/screenshot/store";
+import { logger } from "#/integrations/pino/logger";
 
 type ScreenshotResult = {
 	triggerScreenshot: () => void;
@@ -94,4 +94,4 @@ function useScreenshot({
 	return { triggerScreenshot, screenshotLoading };
 }
 
-export { type ScreenshotResult, useScreenshot };
+export { useScreenshot };

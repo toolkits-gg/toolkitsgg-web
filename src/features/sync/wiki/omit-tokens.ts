@@ -15,4 +15,4 @@ const OMIT_TOKENS_REGEX =
 const stripOmitTokens = (text: string): string =>
 	OMIT_TOKENS_REGEX === null ? text : text.replace(OMIT_TOKENS_REGEX, "");
 
-export { OMIT_TOKENS, stripOmitTokens };
+export { stripOmitTokens };

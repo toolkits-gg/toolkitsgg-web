@@ -1,10 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getGamePages } from "#/game-registry/pages-registry.tsx";
+import { BuildEditPage } from "#/components/pages/BuildEdit";
+import { getGameBuilds } from "#/games-registry/builds-registry";
+
+const EditBuild = () => {
+	const { gameId, buildId } = Route.useParams();
+	const builds = getGameBuilds(gameId);
+	if (!builds) return null;
+	return <BuildEditPage builds={builds} buildId={buildId} />;
+};
 
 export const Route = createFileRoute("/$gameId/build/$buildId/edit")({
-	component: function CreateBuildPage() {
-		const { gameId } = Route.useParams();
-		const pages = getGamePages(gameId);
-		return <>{pages?.renderEditBuild()}</>;
-	},
+	component: EditBuild,
 });

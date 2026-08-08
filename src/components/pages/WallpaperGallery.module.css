@@ -1,0 +1,25 @@
+.card {
+	overflow: hidden;
+	transition:
+		transform 150ms ease,
+		border-color 150ms ease;
+}
+
+.card:hover,
+.card:has(.preview:focus-visible) {
+	transform: translateY(-2px);
+	border-color: var(--mantine-color-primary-5);
+}
+
+.preview {
+	display: block;
+	width: 100%;
+	cursor: pointer;
+}
+
+.thumb {
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	width: 100%;
+	background-color: var(--mantine-color-default-border);
+}

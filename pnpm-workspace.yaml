@@ -7,6 +7,7 @@ allowBuilds:
   lightningcss: true
   '@prisma/engines': true
   prisma: true
+  '@sentry/cli': true
 minimumReleaseAgeExclude:
   - '@mantine/carousel@9.4.0'
   - '@mantine/code-highlight@9.4.0'

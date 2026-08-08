@@ -5,9 +5,9 @@ import {
 } from "@mantine/core";
 import { HeadContent, Scripts } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { StatusCard } from "#/components/StatusCard.tsx";
-import { clientEnv } from "#/env/client-env.ts";
-import { defaultTheme } from "#/features/theme/themes/default-theme.ts";
+import { StatusCard } from "#/components/StatusCard";
+import { clientEnv } from "#/env/client-env";
+import { defaultTheme } from "#/features/theme/themes/default-theme";
 import classes from "./LockdownDocument.module.css";
 
 type LockdownDocumentProps = {
@@ -48,7 +48,7 @@ export const LockdownDocument = ({
 				<ColorSchemeScript forceColorScheme="dark" />
 				{/* Must precede `HeadContent`: the root route also emits a <title>,
 				    and the browser honors whichever comes first. */}
-				<title>{`${clientEnv.VITE_APP_NAME} — ${documentTitle}`}</title>
+				<title>{`${clientEnv.VITE_APP_NAME} - ${documentTitle}`}</title>
 				<meta name="robots" content="noindex" />
 				<HeadContent />
 			</head>

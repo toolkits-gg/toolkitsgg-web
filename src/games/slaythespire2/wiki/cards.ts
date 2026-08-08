@@ -8,17 +8,17 @@
  * Run with: pnpm tsx src/games/slaythespire2/wiki/cards.ts
  */
 
-import { renderDescriptionVariant } from "#/components/AppItemDescription.tsx";
+import { renderDescriptionVariant } from "#/components/AppItemDescription";
 import { cleanWikiTextPreservingTokens } from "#/features/sync/wiki/clean-wiki-text";
 import {
 	CARDS,
 	type SlayTheSpire2CardItem,
-} from "#/games/slaythespire2/core/item-data/cards.ts";
+} from "#/games/slaythespire2/core/item-data/cards";
 import {
 	type CompareResult,
 	getString,
 	syncWikiCategory,
-} from "#/games/slaythespire2/wiki/sync-category.ts";
+} from "#/games/slaythespire2/wiki/sync-category";
 
 const CARD_SUBMODULES = [
 	"Ironclad",

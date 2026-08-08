@@ -1,9 +1,7 @@
 import { Box } from "@mantine/core";
 import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
 import { useEffect, useState } from "react";
-
 import type { WizardStep } from "#/features/wizard/types";
-
 import { WizardContent } from "./WizardContent";
 import { WizardOverlay } from "./WizardOverlay";
 
@@ -106,7 +104,6 @@ const Wizard = ({
 		stepChange();
 	}, [opened, currentStep.id, onStepChange]);
 
-	// Determine wizard control position based on target element
 	useEffect(() => {
 		if (!isReady || !currentStep.targetSelector) {
 			return;
@@ -121,13 +118,9 @@ const Wizard = ({
 				const windowHeight = window.innerHeight;
 				const isInLowerHalf = rect.top > windowHeight / 2;
 
-				// On mobile, use top position to avoid overlap with app-navbar elements
-				// On desktop/tablet, use middle position for better visibility
-				if (isInLowerHalf) {
-					setPosition(isMobile ? "top" : "middle");
-				} else {
-					setPosition("bottom");
-				}
+				// The app-navbar covers the middle slot on mobile.
+				const lowTargetPosition = isMobile ? "top" : "middle";
+				setPosition(isInLowerHalf ? lowTargetPosition : "bottom");
 			}
 		};
 
@@ -180,4 +173,4 @@ const Wizard = ({
 	);
 };
 
-export { Wizard, type WizardProps };
+export { Wizard };

@@ -1,41 +1,34 @@
 import { Box, Stack } from "@mantine/core";
-import { useNetwork } from "@mantine/hooks";
-import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { ProfileHeader } from "#/features/user/ProfileHeader.tsx";
-import { ProfileTabNav } from "#/features/user/ProfileTabNav.tsx";
-import { useSession } from "#/integrations/better-auth/auth-client";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { ProfileHeader } from "#/features/user/ProfileHeader";
+import { ProfileTabNav } from "#/features/user/ProfileTabNav";
+import { getSessionUserServerFn } from "#/features/user/session-user";
 
-const LocalProfileLayout = () => {
-	const { data: session } = useSession();
-	const { online } = useNetwork();
-	const navigate = useNavigate();
-
-	const authedUserId = session?.user?.id;
-	useEffect(() => {
-		if (online && authedUserId) {
-			navigate({
-				to: "/account/profile/$userId",
-				params: { userId: authedUserId },
-				replace: true,
-			}).then(() => {
-				// placeholder - no action needed
-			});
-		}
-	}, [online, authedUserId, navigate]);
-
-	return (
-		<Stack gap={0}>
-			<ProfileHeader isOwner={true} />
-			<ProfileTabNav basePath="/profile" showDataSync={false} />
-			<Box p="md">
-				<Outlet />
-			</Box>
-		</Stack>
-	);
-};
+const LocalProfileLayout = () => (
+	<Stack gap={0}>
+		<ProfileHeader isOwner={true} />
+		<ProfileTabNav basePath="/profile" showDataSync />
+		<Box p="md">
+			<Outlet />
+		</Box>
+	</Stack>
+);
 
 const Route = createFileRoute("/profile")({
+	// This tree is the signed-out view; an account has a real profile to go to.
+	// Resolved on the server so the redirect happens before anything renders,
+	// which also keeps the subtree from reading a session that SSR did not see.
+	loader: async () => {
+		const user = await getSessionUserServerFn();
+		if (user) {
+			throw redirect({
+				to: "/account/profile/$userId",
+				params: { userId: user.id },
+				replace: true,
+			});
+		}
+		return null;
+	},
 	component: LocalProfileLayout,
 });
 

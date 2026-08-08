@@ -69,7 +69,7 @@ type SyncCategoryOptions<TItem extends LocalItemBase> = {
 	extraTables?: string;
 	/**
 	 * Extra field projections appended to the items query (comma-separated, in
-	 * cargo syntax — e.g. `"armor.armor_set=set,armor,weight"`).
+	 * cargo syntax - e.g. `"armor.armor_set=set,armor,weight"`).
 	 */
 	extraFields?: string;
 	/** Cargo `join_on` clause, e.g. `"items.item_id=armor.item_id"`. */

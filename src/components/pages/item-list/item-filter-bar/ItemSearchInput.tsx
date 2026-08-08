@@ -1,9 +1,9 @@
 import { Select } from "@mantine/core";
 import { useRef, useState } from "react";
-import { useGameId } from "#/features/game/use-game-id.ts";
-import { getGameItems } from "#/game-registry/public-registry.ts";
+import { useGameId } from "#/features/game/use-game-id";
+import { getGameItems } from "#/games-registry/public-registry";
 
-export type ItemSearchInputProps = {
+type ItemSearchInputProps = {
 	searchValue: string;
 	onSearchChange: (query: string) => void;
 	onLoadingChange?: (loading: boolean) => void;

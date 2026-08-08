@@ -1,6 +1,5 @@
 import { Box } from "@mantine/core";
 import { useEffect, useState } from "react";
-
 import classes from "./WizardOverlay.module.css";
 
 type WizardOverlayProps = {

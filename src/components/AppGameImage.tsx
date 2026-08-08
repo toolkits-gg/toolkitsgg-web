@@ -1,7 +1,7 @@
 import { AppImage, type AppImageProps } from "#/components/AppImage";
-import { useGameId } from "#/features/game/use-game-id.ts";
+import { useGameId } from "#/features/game/use-game-id";
 
-export type AppGameImageProps = AppImageProps & {};
+type AppGameImageProps = AppImageProps & {};
 
 /**
  * Small AppImage wrapper that automatically resolves the image URL

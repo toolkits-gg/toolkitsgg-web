@@ -5,32 +5,16 @@ import type {
 	ToolkitThemeColorKey,
 	ToolkitThemeColors,
 	ToolkitThemeDefinition,
-} from "#/features/theme/types.ts";
+} from "#/features/theme/types";
 import {
 	getGameTheme,
 	REGISTERED_GAME_IDS,
-} from "#/game-registry/public-registry.ts";
+} from "#/games-registry/public-registry";
 
 /**
- * Creates a complete set of color variants for a theme color.
- *
- * Generates all 6 variants required for a semantic color:
- * - Background: dark, light, virtual
- * - Foreground: fgDark, fgLight, fgVirtual
- *
- * @param name - The semantic color key (e.g., 'primary', 'border')
- * @param colors - Color tuples for all variants
- * @returns Object with all 6 color variant properties
- *
- * @example
- * ```ts
- * const primaryColors = createThemeColor('primary', {
- *   dark: ['#1a1a1a', ...],
- *   light: ['#ffffff', ...],
- *   fgDark: ['#ffffff', ...],
- *   fgLight: ['#000000', ...],
- * });
- * ```
+ * Expands one semantic color into the six entries Mantine needs: an explicit
+ * dark and light tuple plus a virtual color that picks between them, and the
+ * same three again for the foreground.
  */
 function createThemeColor<T extends ToolkitThemeColorKey>(
 	name: T,
@@ -73,31 +57,7 @@ export type ThemeColorInput = {
 	fgLight: MantineColorsTuple;
 };
 
-/**
- * Creates theme colors from an object of color definitions.
- * This is a convenience function for creating multiple colors at once.
- *
- * @param colorDefinitions - Object mapping color keys to their color tuples
- * @returns Merged object with all color variants
- *
- * @example
- * ```ts
- * const themeColors = createThemeColors({
- *   primary: {
- *     dark: ['#1a1a1a', ...],
- *     light: ['#ffffff', ...],
- *     fgDark: ['#ffffff', ...],
- *     fgLight: ['#000000', ...],
- *   },
- *   border: {
- *     dark: ['#333333', ...],
- *     light: ['#e5e5e5', ...],
- *     fgDark: ['#cccccc', ...],
- *     fgLight: ['#666666', ...],
- *   },
- * });
- * ```
- */
+/** `createThemeColor` across every semantic color, merged into one map. */
 export function createThemeColors<T extends ToolkitThemeColorKey>(
 	colorDefinitions: Record<T, ThemeColorInput>,
 ): Record<string, MantineColorsTuple> {
@@ -113,11 +73,7 @@ export function createThemeColors<T extends ToolkitThemeColorKey>(
 	return result;
 }
 
-/**
- * Parses the color scheme from the given theme string.
- * @param nextTheme - The current Next.js theme string
- * @returns The parsed color scheme ('light' or 'dark')
- */
+/** Theme class names carry their scheme as a suffix; dark is the default. */
 export const parseColorScheme = (nextTheme: string | undefined) => {
 	if (!nextTheme) return "dark";
 	return nextTheme.includes("-light") ? "light" : "dark";
@@ -128,12 +84,12 @@ export const getAllRegisteredThemeDefinitions =
 	(): ToolkitThemeDefinition[] => {
 		const definitions: ToolkitThemeDefinition[] = [
 			{
-				label: "Default Light",
+				label: "Default - Light",
 				className: "default-light",
 				theme: defaultTheme,
 			},
 			{
-				label: "Default Dark",
+				label: "Default - Dark",
 				className: "default-dark",
 				theme: defaultTheme,
 			},

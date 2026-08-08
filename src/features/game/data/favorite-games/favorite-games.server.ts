@@ -1,5 +1,5 @@
-import { requireUserId } from "#/features/user/require-user.server.ts";
-import { enforceUserWriteLimit } from "#/integrations/rate-limiter-flexible/enforce-user-write-limit.ts";
+import { requireUserId } from "#/features/user/require-user.server";
+import { enforceUserWriteLimit } from "#/integrations/rate-limit/enforce-user-write-limit";
 import { type GameId, prisma } from "@/prisma";
 
 export const favoriteGame = async (gameId: GameId) => {

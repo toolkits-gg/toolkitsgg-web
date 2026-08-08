@@ -1,4 +1,4 @@
-import type { BaseSlayTheSpire2Item } from "#/games/slaythespire2/core/types.ts";
+import type { BaseSlayTheSpire2Item } from "#/games/slaythespire2/core/types";
 import type { SlayTheSpire2Ancient } from "@/prisma";
 
 type SlayTheSpire2AncientItem = BaseSlayTheSpire2Item & {

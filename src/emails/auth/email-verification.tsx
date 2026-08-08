@@ -1,14 +1,7 @@
-import {
-	Body,
-	Button,
-	Container,
-	Head,
-	Html,
-	Section,
-	Tailwind,
-	Text,
-} from "react-email";
-import { clientEnv } from "#/env/client-env.ts";
+import { Text } from "react-email";
+import { EmailButton } from "#/emails/_components/EmailButton";
+import { EmailLayout } from "#/emails/_components/EmailLayout";
+import { clientEnv } from "#/env/client-env";
 
 type EmailVerificationProps = {
 	toName: string;
@@ -19,35 +12,29 @@ const EmailVerification = ({ toName, url }: EmailVerificationProps) => {
 	const appName = clientEnv.VITE_APP_NAME;
 
 	return (
-		<Html>
-			<Head />
-			<Tailwind>
-				<Body className="m-8 text-center font-sans">
-					<Container>
-						<Section>
-							<Text>
-								Hello {toName}, welcome to {appName}! Please verify your email
-								address by clicking the button below.
-							</Text>
-						</Section>
-						<Section>
-							<Button
-								href={url}
-								className="m-2 rounded bg-black p-2 text-white"
-							>
-								Verify Email
-							</Button>
-						</Section>
-					</Container>
-				</Body>
-			</Tailwind>
-		</Html>
+		<EmailLayout
+			preview={`Confirm your address to finish setting up your ${appName} account`}
+			heading="Verify your email"
+		>
+			<Text className="mt-4 text-gray-700 text-sm leading-6">
+				Hi {toName}, welcome to {appName}. Confirm this address and your account
+				is ready to use.
+			</Text>
+
+			<EmailButton href={url} label="Verify email" />
+
+			<Text className="mt-6 mb-0 text-gray-500 text-xs leading-5">
+				This link expires in one hour. If you did not create a {appName}
+				account, you can ignore this email.
+			</Text>
+		</EmailLayout>
 	);
 };
 
 EmailVerification.PreviewProps = {
 	toName: "TK",
-	url: "http://localhost:3000/verify-email/abc123",
+	url: "http://localhost:3000/api/auth/verify-email?token=abc123&callbackURL=%2Fverify-email",
 } as EmailVerificationProps;
 
+export default EmailVerification;
 export { EmailVerification };

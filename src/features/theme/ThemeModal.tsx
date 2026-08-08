@@ -11,13 +11,13 @@ import { type ChangeEvent, useState } from "react";
 import {
 	LOCALSTORAGE_KEYS,
 	MANTINE_COLOR_SCHEMES,
-} from "#/features/theme/constants.ts";
+} from "#/features/theme/constants";
 import {
 	getAllRegisteredThemeClassNames,
 	getAllRegisteredThemeDefinitions,
 	parseColorScheme,
-} from "#/features/theme/utils.ts";
-import { getGameTheme } from "#/game-registry/public-registry.ts";
+} from "#/features/theme/utils";
+import { getGameTheme } from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
 
 // This feature was game-aware, need to rework it
@@ -34,7 +34,7 @@ type ThemeModalProps = {
 const ThemeModal = ({ gameId }: ThemeModalProps) => {
 	const [autoChangeTheme, setAutoChangeTheme] = useLocalStorage({
 		key: LOCALSTORAGE_KEYS.AUTO_CHANGE_THEME,
-		defaultValue: true,
+		defaultValue: false,
 	});
 
 	const { setColorScheme } = useMantineColorScheme();

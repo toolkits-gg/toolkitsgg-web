@@ -16,4 +16,6 @@ const clientEnvSource =
 	typeof import.meta.env === "undefined" ? process.env : import.meta.env;
 
 // Validate client environment
-export const clientEnv = clientEnvSchema.parse(clientEnvSource);
+const clientEnv = clientEnvSchema.parse(clientEnvSource);
+
+export { clientEnv };

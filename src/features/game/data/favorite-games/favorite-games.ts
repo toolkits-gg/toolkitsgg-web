@@ -9,9 +9,8 @@ import {
 	favoriteGame,
 	listFavoriteGames,
 	unfavoriteGame,
-} from "#/features/game/data/favorite-games/favorite-games.server.ts";
-import { REGISTERED_GAME_IDS } from "#/game-registry/public-registry.ts";
-
+} from "#/features/game/data/favorite-games/favorite-games.server";
+import { REGISTERED_GAME_IDS } from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
 
 const GAME_ID_SET = new Set<string>(REGISTERED_GAME_IDS);

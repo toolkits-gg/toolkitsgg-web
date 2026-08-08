@@ -1,15 +1,13 @@
-// Helpers for converting raw wiki markup into `description: string[]`
-//
-// - splitOnLineBreaks: split on <br>, <br/>, <br /> (case-insensitive),
-//   trim segments, drop empties.
-// - cleanWikiTags: collapse `{{a|b|...}}` templates (prefer plural form
-//   when the template has one, otherwise the singular display arg),
-//   strip leading `$` from keyword links, expand @-icon tokens. Every
-//   resolved tag gets its first letter capitalized — tags are special
-//   terms and the source sometimes stores the plural slot lowercased.
-// - cleanWikiText: splitOnLineBreaks composed with cleanWikiTags.
-import { stripOmitTokens } from "#/features/sync/wiki/omit-tokens.ts";
-import { capitalize } from "#/utils.ts";
+/**
+ * Converts raw wiki markup into the `description: string[]` the app stores.
+ *
+ * Templates, keyword links, and icon tokens only render inside the wiki's own
+ * skin, so each has to be resolved to plain text here rather than at display
+ * time. Every resolved label is capitalized: these are special terms, and the
+ * source sometimes stores the plural slot lowercased.
+ */
+import { stripOmitTokens } from "#/features/sync/wiki/omit-tokens";
+import { capitalize } from "#/utils";
 
 type IconTokenEntry =
 	| { kind: "countable"; singular: string; plural: string }
@@ -44,100 +42,108 @@ const splitOnLineBreaks = (text: string): string[] => {
 		.filter((s) => s.length > 0);
 };
 
-const cleanWikiTags = (text: string): string => {
-	let result = text;
+const isCount = (value: string): boolean => /^\d+$/.test(value);
 
-	// 1. Collapse `{{...}}` templates. Two shapes are recognized:
-	//
-	//         Count-first plural picker — 3 args:
-	//           {{count|plural|singular}}
-	//           e.g. {{2|potions|Potion}} -> "Potions" (count=2 -> plural)
-	//           e.g. {{1|potions|Potion}} -> "Potion" (count=1 -> singular)
-	//           e.g. {{2|Rest Sites|Rest Site}} -> "Rest Sites"
-	//
-	//         Count-last label picker — used by C / QueryLink:
-	//           {{C|singular|plural|count}} - 3 args
-	//           {{QueryLink|category|singular|plural|count}} - 4 args
-	//           When the last arg is a numeric count, take the plural
-	//           (last-1) and fall back to singular (last-2) if plural is
-	//           empty (e.g. `{{C|Byrd Swoop||2}}`).
-	//
-	//         Otherwise: treat the last arg as the display label.
-	result = result.replace(/\{\{([^{}]+)}}/g, (match, inner: string) => {
-		const parts = inner.split("|").map((p) => p.trim());
+/** `{{count|plural|singular}}`, e.g. `{{2|potions|Potion}}` -> "Potions". */
+const countFirstForm = (parts: string[]): string | undefined => {
+	if (parts.length !== 3 || !isCount(parts[0])) return undefined;
+
+	const [count, plural, singular] = parts;
+	return Number.parseInt(count, 10) === 1
+		? singular || plural
+		: plural || singular;
+};
+
+/**
+ * `{{C|singular|plural|count}}` and `{{QueryLink|category|singular|plural|count}}`.
+ * The trailing count only identifies the shape: the plural is taken either way,
+ * and the singular stands in when the plural slot is empty.
+ */
+const countLastLabel = (parts: string[]): string | undefined => {
+	if (parts.length < 4 || !isCount(parts[parts.length - 1])) return undefined;
+
+	return parts[parts.length - 2] || parts[parts.length - 3];
+};
+
+/** Every other template: the last arg is the display label. */
+const trailingLabel = (parts: string[]): string =>
+	parts[parts.length - 1] || parts[parts.length - 2];
+
+/** Every recognized shape reads three args, so a gap in them means no match. */
+const hasCompleteLeadingArgs = (parts: string[]): boolean =>
+	Boolean(parts[0] && parts[1] && parts[2]);
+
+const collapseTemplates = (text: string): string =>
+	text.replace(/\{\{([^{}]+)}}/g, (match: string, inner: string) => {
+		const parts = inner.split("|").map((part) => part.trim());
+
 		if (parts.length < 2) {
 			console.warn(`  ! single-arg template not converted: ${match}`);
 			return match;
 		}
-
-		if (!parts[0] || !parts[1] || !parts[2]) {
+		if (!hasCompleteLeadingArgs(parts)) {
 			console.warn(`  ! empty template arg: ${match}`);
 			return match;
 		}
 
-		const first = parts[0];
-		if (/^\d+$/.test(first) && parts.length === 3) {
-			const count = Number.parseInt(first, 10);
-			const plural = parts[1];
-			const singular = parts[2];
-			const chosen = count === 1 ? singular || plural : plural || singular;
-			return capitalize(chosen);
-		}
-		const last = parts[parts.length - 1];
-		if (/^\d+$/.test(last) && parts.length >= 4) {
-			return capitalize(parts[parts.length - 2] || parts[parts.length - 3]);
-		}
-		return capitalize(parts[parts.length - 1] || parts[parts.length - 2]);
+		return capitalize(
+			countFirstForm(parts) ?? countLastLabel(parts) ?? trailingLabel(parts),
+		);
 	});
 
-	// Warn about any remaining nested or unbalanced templates.
-	if (/\{\{/.test(result)) {
-		console.warn(`  ! template syntax remains after pass: ${result}`);
-	}
-
-	// 2. $Word -> Word (single bareword only - apostrophes allowed).
-	result = result.replace(/\$([A-Za-z][\w']*)/g, (_m, word: string) =>
+/** `$Word` -> `Word`, a single bareword with apostrophes allowed. */
+const expandKeywordLinks = (text: string): string =>
+	text.replace(/\$([A-Za-z][\w']*)/g, (_match, word: string) =>
 		capitalize(word),
 	);
 
-	// 3. Replace tokens registered in ICON_TOKEN_MAP. Countable entries
-	//       (@CE / @ST) expand to "<count> <icon-name>": consecutive repeats
-	//       are collapsed, and a preceding number in the surrounding text
-	//       (e.g. "costs 0 @CE") is reused instead of prepending one. Noun
-	//       entries (@Gold, type:Attack) emit the word as-is.
-	result = result.replace(
+/** The number the text already ends on, e.g. the "0" of "costs 0 @CE". */
+const trailingNumber = (text: string): number | undefined => {
+	const match = text.trimEnd().match(/(\d+)$/);
+	return match ? Number.parseInt(match[1], 10) : undefined;
+};
+
+const expandIconTokens = (text: string): string =>
+	text.replace(
 		ICON_TOKEN_REGEX,
 		(match: string, token: string, offset: number, full: string) => {
 			const entry = ICON_TOKEN_MAP[token];
-			if (entry.kind === "noun") {
-				return capitalize(entry.word);
+			if (entry.kind === "noun") return capitalize(entry.word);
+
+			const precedingCount = trailingNumber(full.slice(0, offset));
+			if (precedingCount !== undefined) {
+				return capitalize(precedingCount === 1 ? entry.singular : entry.plural);
 			}
-			const before = full.slice(0, offset).trimEnd();
-			const precedingNumber = before.match(/(\d+)$/);
-			if (precedingNumber) {
-				const prev = Number.parseInt(precedingNumber[1], 10);
-				return capitalize(prev === 1 ? entry.singular : entry.plural);
-			}
-			const count = match.split(token).length - 1;
-			const word = count > 1 ? entry.plural : entry.singular;
-			return `${count} ${capitalize(word)}`;
+
+			const repeats = match.split(token).length - 1;
+			return `${repeats} ${capitalize(repeats > 1 ? entry.plural : entry.singular)}`;
 		},
 	);
 
-	// Surface any leftover @-tokens that aren't in the map, so new wiki
-	// tokens get noticed instead of silently passing through.
-	const unknown = result.match(/@[A-Z]\w*/g);
-	if (unknown) {
-		for (const token of unknown) {
-			console.warn(`  ! unknown icon token '${token}' left as-is`);
-		}
+const collapseWhitespace = (text: string): string =>
+	text.replace(/\s+/g, " ").trim();
+
+const warnOnUnresolvedTemplates = (text: string): void => {
+	if (/\{\{/.test(text)) {
+		console.warn(`  ! template syntax remains after pass: ${text}`);
 	}
+};
 
-	// 4. Strip configured omit tokens (literal substrings), then collapse any
-	//    whitespace they left behind.
-	result = stripOmitTokens(result).replace(/\s+/g, " ").trim();
+/** So a wiki token nobody has mapped yet gets noticed rather than passed through. */
+const warnOnUnknownIconTokens = (text: string): void => {
+	for (const token of text.match(/@[A-Z]\w*/g) ?? []) {
+		console.warn(`  ! unknown icon token '${token}' left as-is`);
+	}
+};
 
-	return result;
+const cleanWikiTags = (text: string): string => {
+	const withoutTemplates = collapseTemplates(text);
+	warnOnUnresolvedTemplates(withoutTemplates);
+
+	const withoutTokens = expandIconTokens(expandKeywordLinks(withoutTemplates));
+	warnOnUnknownIconTokens(withoutTokens);
+
+	return collapseWhitespace(stripOmitTokens(withoutTokens));
 };
 
 const cleanWikiText = (text: string): string[] => {
@@ -194,9 +200,4 @@ const cleanWikiTextPreservingTokens = (text: string): string[] => {
 	);
 };
 
-export {
-	cleanWikiTags,
-	cleanWikiText,
-	cleanWikiTextPreservingTokens,
-	splitOnLineBreaks,
-};
+export { cleanWikiText, cleanWikiTextPreservingTokens, splitOnLineBreaks };

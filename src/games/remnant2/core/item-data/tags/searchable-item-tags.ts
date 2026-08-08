@@ -74,4 +74,4 @@ export const SEARCHABLE_ITEM_TAGS: string[] = [
 	"Weakspot Damage",
 	"Weakspot Hit",
 	"Weapon Damage",
-]
+];

@@ -9,7 +9,7 @@
  * Patterns handled, in order:
  *
  * 1. Strip `<span class="...hoverbox__display...">...</span>` blocks. These
- *    are tooltip bodies — the visible text is in the sibling
+ *    are tooltip bodies - the visible text is in the sibling
  *    `hoverbox__hoverable` span, which we keep. Balanced `<span>` parsing is
  *    used because tooltip content can itself contain spans.
  * 2. Split on `<br>` / `<br/>` / `<br />` (case-insensitive).
@@ -29,7 +29,7 @@
  * shapes get noticed rather than silently mangled.
  */
 
-import { stripOmitTokens } from "#/features/sync/wiki/omit-tokens.ts";
+import { stripOmitTokens } from "#/features/sync/wiki/omit-tokens";
 
 const HTML_ENTITIES: Record<string, string> = {
 	amp: "&",
@@ -38,7 +38,7 @@ const HTML_ENTITIES: Record<string, string> = {
 	quot: '"',
 	apos: "'",
 	nbsp: " ",
-	mdash: "—",
+	mdash: "-",
 	ndash: "–",
 	hellip: "…",
 	rsquo: "’",

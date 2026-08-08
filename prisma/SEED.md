@@ -3,19 +3,19 @@
 There are two seed scripts, and the difference between them matters. One is safe
 to run anywhere, the other will delete every user in the database it points at.
 
-| Script                   | What it does                                                                                    | Safe against    |
-|--------------------------|-------------------------------------------------------------------------------------------------|-----------------|
-| `pnpm db:seed:reference` | Upserts each game's reference data (items). No deletes.                                         | Any environment |
-| `pnpm db:seed`           | Everything above, **plus** wipes all users and game data and recreates the local test accounts. | Local only      |
+| Script               | What it does                                                                                    | Safe against    |
+|----------------------|-------------------------------------------------------------------------------------------------|-----------------|
+| `pnpm db:seed`       | Upserts each game's reference data (items). No deletes.                                         | Any environment |
+| `pnpm db:seed:reset` | Everything above, **plus** wipes all users and game data and recreates the local test accounts. | Local only      |
 
 > [!WARNING]
-> Never run `pnpm db:seed` against a shared or production database. It deletes
+> Never run `pnpm db:seed:reset` against a shared or production database. It deletes
 > every row in `User` (cascading to profiles, favorites, follows, and roles),
 > wipes each game's user-generated data such as Remnant 2 builds and
 > collections, and then creates the `admin` and `user` fixture accounts from
 > your `.env.local`.
 
-The reference seed is idempotent. It only upserts, so running it twice is
+The default seed is idempotent. It only upserts, so running it twice is
 harmless, and re-running is how you recover from a run that failed partway.
 
 ## Before you seed
@@ -37,14 +37,20 @@ container from `compose.local.yaml`.
 ```bash
 pnpm db:local:start   # start the container if it isn't running
 pnpm db:push          # apply the schema
-pnpm db:seed          # fixtures + reference data
+pnpm db:seed:reset    # fixtures + reference data
 ```
 
-`pnpm db:seed` needs these in `.env.local`, all present in `.env.local.example`:
+`pnpm db:seed:reset` needs these in `.env.local`, all present in `.env.local.example`:
 
 - `NODE_ENV`
-- `LOCAL_ADMIN_EMAIL`, `LOCAL_ADMIN_PASSWORD`
+- `SUPER_ADMIN_EMAIL`, `SUPER_ADMIN_PASSWORD`
 - `LOCAL_USER_EMAIL`, `LOCAL_USER_PASSWORD`
+- `LOCAL_MODERATOR_EMAIL`, `LOCAL_MODERATOR_PASSWORD` (optional; omit to skip that fixture)
+
+`SUPER_ADMIN_*` is validated by `src/env/server-env.ts` in every environment,
+not just for seeding. `seedReferenceData()` ensures that account exists and
+holds a global `SUPERADMIN` role; it never rewrites the password of an account
+that already exists, so re-running it against production is safe.
 
 It also imports the auth module to create the fixture accounts, so the rest of
 the server environment (`BETTER_AUTH_SECRET`, `RESEND_KEY`, and so on) must be
@@ -63,17 +69,17 @@ commands as above. Two differences from local Docker:
 - **Use the pooled endpoint for seeding.** Seeding is ordinary DML, so it runs
   fine over the pooler.
 
-Running the full `pnpm db:seed` here is only appropriate if nobody else relies
+Running `pnpm db:seed:reset` here is only appropriate if nobody else relies
 on that branch's data, since it deletes all users.
 
 ## 3. Production on Neon
 
-Only ever run the reference seed. Pass the production connection string inline;
+Only ever run the default seed. Pass the production connection string inline;
 an inline variable takes precedence over the one in `.env.local`, so the npm
 script targets whatever you give it:
 
 ```bash
-DATABASE_URL="<production pooled url>" pnpm db:seed:reference
+DATABASE_URL="<production pooled url>" pnpm db:seed
 ```
 
 Confirm the target before you commit to it. Dev and production branch hostnames
@@ -84,7 +90,7 @@ DATABASE_URL="<production pooled url>" pnpm exec tsx -e \
   "console.log('TARGET:', new URL(process.env.DATABASE_URL).hostname)"
 ```
 
-The reference seed needs **only** `DATABASE_URL`. It does not import the auth
+The default seed needs **only** `DATABASE_URL`. It does not import the auth
 module, so no auth secret, Resend key, or Discord credentials are required.
 
 Expect roughly 15 seconds, and output along these lines:
@@ -111,10 +117,10 @@ networked database, even though it passes against a local one. See
 
 **Adding a game.** Implement `seedReferenceData` on the game's `GameDBSeed`
 (`src/features/game/types.ts`) and register it in
-`src/game-registry/game-db-seed-registry.ts`. `resetUserData` is optional and
+`../src/games-registry/game-db-seed-registry.ts`. `resetUserData` is optional and
 belongs there only if the game stores user-generated data that local fixtures
 should clear.
 
-**`prisma.config.ts` points `migrations.seed` at the destructive seed.** That
+**`prisma.config.ts` points `migrations.seed` at `prisma/seed-reset.ts`.** That
 only runs via `prisma migrate reset` or `migrate dev`, neither of which this
 project uses, but it is worth knowing if migrations are ever adopted.

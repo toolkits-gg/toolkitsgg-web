@@ -1,8 +1,8 @@
-import type { PublicGameConfig } from "#/features/game/types.ts";
+import type { PublicGameConfig } from "#/features/game/types";
 import { ITEMS } from "#/games/clairobscur/core/game-config/items";
 import { METADATA } from "#/games/clairobscur/core/game-config/metadata";
 import { THEME } from "#/games/clairobscur/core/game-config/theme";
-import type { ClairObscurLocalItem } from "#/games/clairobscur/core/types.ts";
+import type { ClairObscurLocalItem } from "#/games/clairobscur/core/types";
 import type { ClairObscurItemCategory } from "@/prisma";
 
 export const PUBLIC_GAME_CONFIG: PublicGameConfig<

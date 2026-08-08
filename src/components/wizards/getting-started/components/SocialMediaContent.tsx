@@ -1,7 +1,7 @@
 import { Button, Stack } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { SiDiscord, SiGithub } from "react-icons/si";
-import { CODEBERG_URL, DISCORD_URL } from "#/constants.ts";
+import { CODEBERG_URL, DISCORD_URL } from "#/constants";
 
 const SocialMediaContent = () => {
 	return (

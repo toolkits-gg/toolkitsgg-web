@@ -43,28 +43,43 @@ model Remnant2Build {
   createdBy   User?    @relation(fields: [createdById], references: [id], onDelete: SetNull)
   createdById String?
 
-  name               String
-  description        String?              @db.Text
-  visibility         BuildVisibility      @default(PUBLIC)
-  moderatorStatus    BuildModeratorStatus @default(PENDING)
-  videoUrl           String?
-  imageUrl           String?
-  thumbnailUrl       String?
-  referenceUrl       String?
-  gameVersion        String?
+  name                 String
+  description          String?              @db.Text
+  visibility           BuildVisibility      @default(PUBLIC)
+  moderatorStatus      BuildModeratorStatus @default(PENDING)
+  // The moderatable fields as a moderator last saw them,
+  // which is what an edit diffs against.
+  // Undefined means no moderator has ever seen this build.
+  lastReviewedSnapshot Json?
+  videoUrl             String?
+  imageUrl             String?
+  // Focal point of imageUrl within a build card, 0-1 per axis.
+  // Centered by default.
+  imagePositionX       Float                @default(0.5)
+  imagePositionY       Float                @default(0.5)
+  // "cover" or "contain".
+  // String rather than an enum because the values are
+  // the CSS keywords themselves.
+  imageFit             String               @default("cover")
+  thumbnailUrl         String?
+  referenceUrl         String?
+  gameVersion          String?
+
   // Denormalized counts.
   // Each is recomputable from a source table except viewCount.
-  itemCount          Int                  @default(0) // count(BuildItems)
-  collectionCount    Int                  @default(0) // count(BuildCollections)
-  duplicateCount     Int                  @default(0) // count(Duplicates)
-  upvoteCount        Int                  @default(0) // count(Upvotes)
-  viewCount          Int                  @default(0) // no source table
-  validatedViewCount Int                  @default(0) // count(Views)
+  itemCount          Int @default(0) // count(BuildItems)
+  collectionCount    Int @default(0) // count(BuildCollections)
+  duplicateCount     Int @default(0) // count(Duplicates)
+  upvoteCount        Int @default(0) // count(Upvotes)
+  viewCount          Int @default(0) // no source table
+  validatedViewCount Int @default(0) // count(Views)
 
-  /**
-   * Remnant2 specific fields
-   */
-  // Relations
+  // The variant set claiming this build, if any.
+  // A build may belong to at most one variant set
+  // SetNull so dropping a set releases its members rather than deleting them.
+  VariantCollection   Remnant2BuildCollection? @relation("Remnant2VariantSet", fields: [variantCollectionId], references: [id], onDelete: SetNull)
+  variantCollectionId String?
+
   BuildItems       Remnant2BuildItem[]
   BuildCollections Remnant2BuildsOnCollections[]
   BuildTags        Remnant2BuildTag[]
@@ -75,7 +90,7 @@ model Remnant2Build {
   // Public listings filter on visibility AND moderatorStatus, so both lead.
   @@index([visibility, moderatorStatus, createdAt, id])
   @@index([visibility, moderatorStatus, upvoteCount, id])
-  // "a user's builds, newest edit first" — see created-builds.server.ts.
+  // "a user's builds, newest edit first" - see created-builds.server.ts.
   @@index([createdById, updatedAt])
 }
 
@@ -95,10 +110,13 @@ enum Remnant2BuildTagName {
 }
 
 model Remnant2BuildTag {
-  createdAt DateTime             @default(now())
-  updatedAt DateTime             @updatedAt
-  tag       Remnant2BuildTagName
-  Build     Remnant2Build        @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  // Typed String, not Remnant2BuildTagName. Valid values are enforced by the
+  // zod validator in created-builds.ts and by the tag options the editor offers.
+  // This is needed for ease of use with generalized game features.
+  tag       String
+  Build     Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
   buildId   String
 
   // A tag can only be attached to a build once.
@@ -127,6 +145,8 @@ model Remnant2BuildFeedMembership {
 // Source of truth for Remnant2Build.upvoteCount.
 model Remnant2BuildUpvote {
   createdAt DateTime      @default(now())
+  // Required by the last-write-wins comparison in the sync handler.
+  updatedAt DateTime      @updatedAt
   Build     Remnant2Build @relation(fields: [buildId], references: [id], onDelete: Cascade)
   buildId   String
   User      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -162,14 +182,17 @@ model Remnant2BuildCollection {
   description     String?                       @db.Text
   visibility      BuildVisibility               @default(PUBLIC)
   moderatorStatus BuildModeratorStatus          @default(PENDING)
+  displayMode     BuildCollectionDisplayMode    @default(CARDS)
   Builds          Remnant2BuildsOnCollections[]
+  // Only populated while displayMode is VARIANTS. See Remnant2Build.variantCollectionId.
+  VariantMembers  Remnant2Build[]               @relation("Remnant2VariantSet")
 
   @@index([createdById])
 }
 
-// Explicit join so a collection can order its builds and record when each was added.
 model Remnant2BuildsOnCollections {
   createdAt    DateTime                @default(now())
+  updatedAt    DateTime                @updatedAt
   position     Int                     @default(0)
   Build        Remnant2Build           @relation(fields: [buildId], references: [id], onDelete: Cascade)
   buildId      String
@@ -193,7 +216,6 @@ model Remnant2Item {
   CollectedItems Remnant2CollectedItem[]
 }
 
-// Remnant2Item when used in a build
 model Remnant2BuildItem {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

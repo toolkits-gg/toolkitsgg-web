@@ -1,6 +1,6 @@
 import { Text } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
-import { CODEBERG_URL, DISCORD_URL } from "#/constants.ts";
+import { CODEBERG_URL, DISCORD_URL } from "#/constants";
 import type { WizardStep } from "#/features/wizard/types";
 import { SocialMediaContent } from "../components/SocialMediaContent";
 import { SupportButtons } from "../components/SupportButtons";

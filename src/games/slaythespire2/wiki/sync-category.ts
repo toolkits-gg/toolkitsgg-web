@@ -33,7 +33,7 @@ const getString = (fields: Record<string, unknown>, key: string): string =>
  * Looks up `raw` in `map` and warns (to console) when the value is non-empty
  * but unmapped. `label` and `name` are used only for the warn message.
  *
- * Returns `undefined` for both "no raw input" and "unknown raw input" — call
+ * Returns `undefined` for both "no raw input" and "unknown raw input" - call
  * sites that need `null` should `?? null` the result.
  */
 const resolveMapped = <T>(
@@ -92,7 +92,7 @@ const fetchWikiItems = async <TWiki extends { name: string }>(
 	for (const wikiUrl of wikiUrls) {
 		for (const item of await fetchModule(wikiUrl, normalizeEntry)) {
 			if (seen.has(item.name)) {
-				console.warn(`  ! duplicate '${item.name}' across modules — last wins`);
+				console.warn(`  ! duplicate '${item.name}' across modules - last wins`);
 			}
 			seen.add(item.name);
 			all.push(item);

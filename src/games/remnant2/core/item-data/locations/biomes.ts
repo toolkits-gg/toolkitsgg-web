@@ -183,8 +183,8 @@ const NERUD_BIOMES = filterBiomes(`N'Erud`);
 const YAESHA_BIOMES = filterBiomes("Yaesha");
 
 export {
-	type BiomeNameForWorld,
 	BIOMES,
+	type BiomeNameForWorld,
 	type Injectable,
 	LOSOMN_BIOMES,
 	NERUD_BIOMES,

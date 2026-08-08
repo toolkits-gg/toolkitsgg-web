@@ -1,7 +1,8 @@
 import { useMediaQuery } from "@mantine/hooks";
 import { LOCALSTORAGE_KEY_PREFIX } from "#/components/wizards/getting-started/constants/localstorage-keys";
 import { GETTING_STARTED_STEPS } from "#/components/wizards/getting-started/constants/steps";
-import { useGameId } from "#/features/game/use-game-id.ts";
+import { useGameId } from "#/features/game/use-game-id";
+import type { WizardStep } from "#/features/wizard/types";
 import { Wizard } from "#/features/wizard/Wizard";
 
 type GettingStartedWizardProps = {
@@ -24,25 +25,18 @@ const GettingStartedWizard = ({
 
 	const isMobile = useMediaQuery("(max-width: 768px)");
 
-	const adaptedSteps = GETTING_STARTED_STEPS.reduce<
-		typeof GETTING_STARTED_STEPS
-	>((acc, step) => {
-		// if no gameId, remove the favorite-game slide since the
-		// favorite game heart icon is not visible
-		if (step.id === "favorite-game" && !gameId) {
-			return acc;
-		}
+	// The heart icon this step points at only exists on a game page.
+	const isStepApplicable = (step: WizardStep) =>
+		step.id !== "favorite-game" || Boolean(gameId);
 
-		// On mobile, remove targetSelector for social-media step since
-		// the footer is not visible with the drawer open
-		if (isMobile && step.id === "social-media") {
-			acc.push({ ...step, targetSelector: undefined });
-		} else {
-			acc.push(step);
-		}
+	// The open drawer covers the footer, so there is nothing to spotlight.
+	const hasHiddenTarget = (step: WizardStep) =>
+		isMobile && step.id === "social-media";
 
-		return acc;
-	}, []);
+	const adaptedSteps = GETTING_STARTED_STEPS.filter(isStepApplicable).map(
+		(step) =>
+			hasHiddenTarget(step) ? { ...step, targetSelector: undefined } : step,
+	);
 
 	const handleBeforeOpen = () => {
 		if (isMobile && !navbarOpened) {

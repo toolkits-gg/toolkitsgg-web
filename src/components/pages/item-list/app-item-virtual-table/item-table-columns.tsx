@@ -2,12 +2,12 @@ import { ActionIcon, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import type { Column, ColumnDef } from "@tanstack/react-table";
 import { LuCheck, LuMaximize, LuPlus, LuX } from "react-icons/lu";
-import { AppGameImage } from "#/components/AppGameImage.tsx";
+import { AppGameImage } from "#/components/AppGameImage";
 import {
 	AppItemDescription,
 	renderDescriptionVariant,
-} from "#/components/AppItemDescription.tsx";
-import type { AppItem } from "#/features/game/types.ts";
+} from "#/components/AppItemDescription";
+import type { AppItem } from "#/features/game/types";
 import classes from "../AppItemVirtualTable.module.css";
 
 /**

@@ -1,5 +1,5 @@
-import { upsertInChunks } from "#/features/game/seed-utils.ts";
-import type { GameDBSeed } from "#/features/game/types.ts";
+import { upsertInChunks } from "#/features/game/seed-utils";
+import type { GameDBSeed } from "#/features/game/types";
 import { ALL_REMNANT2_ITEMS } from "#/games/remnant2/core/game-config/items";
 import { prisma } from "@/prisma";
 

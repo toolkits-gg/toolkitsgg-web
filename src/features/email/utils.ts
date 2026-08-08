@@ -1,4 +1,4 @@
-import { clientEnv } from "#/env/client-env.ts";
+import { clientEnv } from "#/env/client-env";
 
 const getNoReplyFrom = () =>
 	`${clientEnv.VITE_APP_NAME} <${clientEnv.VITE_APP_NOREPLY_EMAIL}>`;

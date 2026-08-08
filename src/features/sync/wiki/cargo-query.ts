@@ -14,7 +14,7 @@
  * The shape is preserved exactly as returned; callers can declare the row
  * type via the generic.
  */
-import { fetchWithUserAgent } from "#/features/sync/wiki/utils.ts";
+import { fetchWithUserAgent } from "#/features/sync/wiki/utils";
 
 type CargoQueryParams = {
 	apiUrl: string;

@@ -8,12 +8,13 @@ import {
 	Title,
 } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
-import { clientEnv } from "#/env/client-env.ts";
+import { clientEnv } from "#/env/client-env";
 import {
+	gameHasContent,
 	getGameLogoComponent,
 	getGameMetadata,
 	REGISTERED_GAME_IDS,
-} from "#/game-registry/public-registry.ts";
+} from "#/games-registry/public-registry";
 
 const ToolkitHomePage = () => {
 	return (
@@ -31,7 +32,7 @@ const ToolkitHomePage = () => {
 						Choose a Game
 					</Title>
 					<SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="md">
-						{REGISTERED_GAME_IDS.map((gameId) => {
+						{REGISTERED_GAME_IDS.filter(gameHasContent).map((gameId) => {
 							const metadata = getGameMetadata(gameId);
 							const Logo = getGameLogoComponent(gameId);
 
@@ -60,7 +61,7 @@ const ToolkitHomePage = () => {
 					</Title>
 					<Card withBorder padding="lg" radius="md">
 						<Text size="sm" c="dimmed" ta="center">
-							No announcements yet — check back soon.
+							No announcements yet - check back soon.
 						</Text>
 					</Card>
 				</Stack>

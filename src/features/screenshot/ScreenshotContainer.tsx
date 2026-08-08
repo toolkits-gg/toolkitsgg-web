@@ -1,8 +1,8 @@
 import { Avatar, Box, type BoxProps, Group, Stack, Text } from "@mantine/core";
 import cx from "clsx";
 import { forwardRef, type PropsWithChildren } from "react";
-import { ScreenshotWatermark } from "#/features/screenshot/ScreenshotWatermark.tsx";
-import type { WatermarkConfig } from "#/features/screenshot/types.ts";
+import { ScreenshotWatermark } from "#/features/screenshot/ScreenshotWatermark";
+import type { WatermarkConfig } from "#/features/screenshot/types";
 import classes from "./ScreenshotContainer.module.css";
 
 type ScreenshotContainerProps = PropsWithChildren<

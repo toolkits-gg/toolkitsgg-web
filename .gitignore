@@ -17,6 +17,8 @@ __unconfig*
 todos.ts
 /prisma/generated
 /.images
+/.email-preview
+/.react-email
 settings.local.json
 .idea
 .junie

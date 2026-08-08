@@ -8,7 +8,7 @@
  */
 
 import { cleanWikiText } from "#/features/sync/wiki/clean-wiki-text";
-import { CHARACTER_MAP } from "#/games/slaythespire2/core/item-data/characters.ts";
+import { CHARACTER_MAP } from "#/games/slaythespire2/core/item-data/characters";
 import {
 	POTION_RARITY_MAP,
 	POTIONS,
@@ -18,7 +18,7 @@ import {
 	getString,
 	resolveMapped,
 	syncWikiCategory,
-} from "#/games/slaythespire2/wiki/sync-category.ts";
+} from "#/games/slaythespire2/wiki/sync-category";
 import type {
 	SlayTheSpire2Character,
 	SlayTheSpire2PotionRarity,

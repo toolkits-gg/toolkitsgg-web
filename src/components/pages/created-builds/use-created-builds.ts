@@ -1,8 +1,8 @@
 import type {
 	CreatedBuildSummary,
 	GameCreatedBuildsData,
-} from "#/features/game/data/types.ts";
-import type { ProfileTabViewMode } from "#/features/game/types.ts";
+} from "#/features/game/data/types";
+import type { ProfileTabViewMode } from "#/features/game/types";
 
 type UseCreatedBuildsArgs = {
 	data: GameCreatedBuildsData;

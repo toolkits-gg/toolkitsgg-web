@@ -11,23 +11,39 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GameIdRouteRouteImport } from './routes/$gameId/route'
+import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as ChangelogRouteImport } from './routes/changelog'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as ProfileRouteRouteImport } from './routes/profile/route'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as SignUpRouteImport } from './routes/sign-up'
+import { Route as VerifyEmailRouteImport } from './routes/verify-email'
 import { Route as GameIdIndexRouteImport } from './routes/$gameId/index'
 import { Route as GameIdItemsRouteImport } from './routes/$gameId/items'
+import { Route as GameIdWallpapersRouteImport } from './routes/$gameId/wallpapers'
+import { Route as AccountSettingsRouteImport } from './routes/account/settings'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminAuditRouteImport } from './routes/admin/audit'
+import { Route as AdminQueueRouteImport } from './routes/admin/queue'
+import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ProfileIndexRouteImport } from './routes/profile/index'
 import { Route as ProfileBuildCollectionsRouteImport } from './routes/profile/build-collections'
 import { Route as ProfileCollectedItemsRouteImport } from './routes/profile/collected-items'
 import { Route as ProfileCollectionStatsRouteImport } from './routes/profile/collection-stats'
 import { Route as ProfileCreatedBuildsRouteImport } from './routes/profile/created-builds'
+import { Route as ProfileDataSyncRouteImport } from './routes/profile/data-sync'
 import { Route as ProfileLikedBuildsRouteImport } from './routes/profile/liked-builds'
+import { Route as GameIdBuildCollectionCollectionIdRouteImport } from './routes/$gameId/build-collection/$collectionId'
 import { Route as GameIdBuildBuildIdRouteRouteImport } from './routes/$gameId/build/$buildId/route'
+import { Route as GameIdBuildCommunityRouteImport } from './routes/$gameId/build/community'
 import { Route as GameIdBuildCreateRouteImport } from './routes/$gameId/build/create'
+import { Route as GameIdBuildFeaturedRouteImport } from './routes/$gameId/build/featured'
+import { Route as GameIdBuildPreviewRouteImport } from './routes/$gameId/build/preview'
 import { Route as AccountProfileUserIdRouteRouteImport } from './routes/account/profile/$userId/route'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as GameIdBuildBuildIdIndexRouteImport } from './routes/$gameId/build/$buildId/index'
 import { Route as GameIdBuildBuildIdEditRouteImport } from './routes/$gameId/build/$buildId/edit'
 import { Route as AccountProfileUserIdIndexRouteImport } from './routes/account/profile/$userId/index'
 import { Route as AccountProfileUserIdBuildCollectionsRouteImport } from './routes/account/profile/$userId/build-collections'
@@ -47,14 +63,29 @@ const GameIdRouteRoute = GameIdRouteRouteImport.update({
   path: '/$gameId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRouteRoute = AdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ChangelogRoute = ChangelogRouteImport.update({
   id: '/changelog',
   path: '/changelog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProfileRouteRoute = ProfileRouteRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignInRoute = SignInRouteImport.update({
@@ -67,6 +98,11 @@ const SignUpRoute = SignUpRouteImport.update({
   path: '/sign-up',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VerifyEmailRoute = VerifyEmailRouteImport.update({
+  id: '/verify-email',
+  path: '/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GameIdIndexRoute = GameIdIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -76,6 +112,36 @@ const GameIdItemsRoute = GameIdItemsRouteImport.update({
   id: '/items',
   path: '/items',
   getParentRoute: () => GameIdRouteRoute,
+} as any)
+const GameIdWallpapersRoute = GameIdWallpapersRouteImport.update({
+  id: '/wallpapers',
+  path: '/wallpapers',
+  getParentRoute: () => GameIdRouteRoute,
+} as any)
+const AccountSettingsRoute = AccountSettingsRouteImport.update({
+  id: '/account/settings',
+  path: '/account/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminAuditRoute = AdminAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminQueueRoute = AdminQueueRouteImport.update({
+  id: '/queue',
+  path: '/queue',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRouteRoute,
 } as any)
 const ApiHealthRoute = ApiHealthRouteImport.update({
   id: '/api/health',
@@ -107,19 +173,45 @@ const ProfileCreatedBuildsRoute = ProfileCreatedBuildsRouteImport.update({
   path: '/created-builds',
   getParentRoute: () => ProfileRouteRoute,
 } as any)
+const ProfileDataSyncRoute = ProfileDataSyncRouteImport.update({
+  id: '/data-sync',
+  path: '/data-sync',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
 const ProfileLikedBuildsRoute = ProfileLikedBuildsRouteImport.update({
   id: '/liked-builds',
   path: '/liked-builds',
   getParentRoute: () => ProfileRouteRoute,
 } as any)
+const GameIdBuildCollectionCollectionIdRoute =
+  GameIdBuildCollectionCollectionIdRouteImport.update({
+    id: '/build-collection/$collectionId',
+    path: '/build-collection/$collectionId',
+    getParentRoute: () => GameIdRouteRoute,
+  } as any)
 const GameIdBuildBuildIdRouteRoute = GameIdBuildBuildIdRouteRouteImport.update({
   id: '/build/$buildId',
   path: '/build/$buildId',
   getParentRoute: () => GameIdRouteRoute,
 } as any)
+const GameIdBuildCommunityRoute = GameIdBuildCommunityRouteImport.update({
+  id: '/build/community',
+  path: '/build/community',
+  getParentRoute: () => GameIdRouteRoute,
+} as any)
 const GameIdBuildCreateRoute = GameIdBuildCreateRouteImport.update({
   id: '/build/create',
   path: '/build/create',
+  getParentRoute: () => GameIdRouteRoute,
+} as any)
+const GameIdBuildFeaturedRoute = GameIdBuildFeaturedRouteImport.update({
+  id: '/build/featured',
+  path: '/build/featured',
+  getParentRoute: () => GameIdRouteRoute,
+} as any)
+const GameIdBuildPreviewRoute = GameIdBuildPreviewRouteImport.update({
+  id: '/build/preview',
+  path: '/build/preview',
   getParentRoute: () => GameIdRouteRoute,
 } as any)
 const AccountProfileUserIdRouteRoute =
@@ -132,6 +224,11 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
+} as any)
+const GameIdBuildBuildIdIndexRoute = GameIdBuildBuildIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GameIdBuildBuildIdRouteRoute,
 } as any)
 const GameIdBuildBuildIdEditRoute = GameIdBuildBuildIdEditRouteImport.update({
   id: '/edit',
@@ -184,22 +281,37 @@ const AccountProfileUserIdLikedBuildsRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$gameId': typeof GameIdRouteRouteWithChildren
+  '/admin': typeof AdminRouteRouteWithChildren
   '/profile': typeof ProfileRouteRouteWithChildren
   '/changelog': typeof ChangelogRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
+  '/verify-email': typeof VerifyEmailRoute
   '/$gameId/items': typeof GameIdItemsRoute
+  '/$gameId/wallpapers': typeof GameIdWallpapersRoute
+  '/account/settings': typeof AccountSettingsRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/queue': typeof AdminQueueRoute
+  '/admin/users': typeof AdminUsersRoute
   '/api/health': typeof ApiHealthRoute
   '/profile/build-collections': typeof ProfileBuildCollectionsRoute
   '/profile/collected-items': typeof ProfileCollectedItemsRoute
   '/profile/collection-stats': typeof ProfileCollectionStatsRoute
   '/profile/created-builds': typeof ProfileCreatedBuildsRoute
+  '/profile/data-sync': typeof ProfileDataSyncRoute
   '/profile/liked-builds': typeof ProfileLikedBuildsRoute
   '/$gameId/': typeof GameIdIndexRoute
+  '/admin/': typeof AdminIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/$gameId/build/$buildId': typeof GameIdBuildBuildIdRouteRouteWithChildren
   '/account/profile/$userId': typeof AccountProfileUserIdRouteRouteWithChildren
+  '/$gameId/build-collection/$collectionId': typeof GameIdBuildCollectionCollectionIdRoute
+  '/$gameId/build/community': typeof GameIdBuildCommunityRoute
   '/$gameId/build/create': typeof GameIdBuildCreateRoute
+  '/$gameId/build/featured': typeof GameIdBuildFeaturedRoute
+  '/$gameId/build/preview': typeof GameIdBuildPreviewRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$gameId/build/$buildId/edit': typeof GameIdBuildBuildIdEditRoute
   '/account/profile/$userId/build-collections': typeof AccountProfileUserIdBuildCollectionsRoute
@@ -208,24 +320,38 @@ export interface FileRoutesByFullPath {
   '/account/profile/$userId/created-builds': typeof AccountProfileUserIdCreatedBuildsRoute
   '/account/profile/$userId/data-sync': typeof AccountProfileUserIdDataSyncRoute
   '/account/profile/$userId/liked-builds': typeof AccountProfileUserIdLikedBuildsRoute
+  '/$gameId/build/$buildId/': typeof GameIdBuildBuildIdIndexRoute
   '/account/profile/$userId/': typeof AccountProfileUserIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/changelog': typeof ChangelogRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
+  '/verify-email': typeof VerifyEmailRoute
   '/$gameId/items': typeof GameIdItemsRoute
+  '/$gameId/wallpapers': typeof GameIdWallpapersRoute
+  '/account/settings': typeof AccountSettingsRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/queue': typeof AdminQueueRoute
+  '/admin/users': typeof AdminUsersRoute
   '/api/health': typeof ApiHealthRoute
   '/profile/build-collections': typeof ProfileBuildCollectionsRoute
   '/profile/collected-items': typeof ProfileCollectedItemsRoute
   '/profile/collection-stats': typeof ProfileCollectionStatsRoute
   '/profile/created-builds': typeof ProfileCreatedBuildsRoute
+  '/profile/data-sync': typeof ProfileDataSyncRoute
   '/profile/liked-builds': typeof ProfileLikedBuildsRoute
   '/$gameId': typeof GameIdIndexRoute
+  '/admin': typeof AdminIndexRoute
   '/profile': typeof ProfileIndexRoute
-  '/$gameId/build/$buildId': typeof GameIdBuildBuildIdRouteRouteWithChildren
+  '/$gameId/build-collection/$collectionId': typeof GameIdBuildCollectionCollectionIdRoute
+  '/$gameId/build/community': typeof GameIdBuildCommunityRoute
   '/$gameId/build/create': typeof GameIdBuildCreateRoute
+  '/$gameId/build/featured': typeof GameIdBuildFeaturedRoute
+  '/$gameId/build/preview': typeof GameIdBuildPreviewRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$gameId/build/$buildId/edit': typeof GameIdBuildBuildIdEditRoute
   '/account/profile/$userId/build-collections': typeof AccountProfileUserIdBuildCollectionsRoute
@@ -234,28 +360,44 @@ export interface FileRoutesByTo {
   '/account/profile/$userId/created-builds': typeof AccountProfileUserIdCreatedBuildsRoute
   '/account/profile/$userId/data-sync': typeof AccountProfileUserIdDataSyncRoute
   '/account/profile/$userId/liked-builds': typeof AccountProfileUserIdLikedBuildsRoute
+  '/$gameId/build/$buildId': typeof GameIdBuildBuildIdIndexRoute
   '/account/profile/$userId': typeof AccountProfileUserIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$gameId': typeof GameIdRouteRouteWithChildren
+  '/admin': typeof AdminRouteRouteWithChildren
   '/profile': typeof ProfileRouteRouteWithChildren
   '/changelog': typeof ChangelogRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
+  '/verify-email': typeof VerifyEmailRoute
   '/$gameId/items': typeof GameIdItemsRoute
+  '/$gameId/wallpapers': typeof GameIdWallpapersRoute
+  '/account/settings': typeof AccountSettingsRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/queue': typeof AdminQueueRoute
+  '/admin/users': typeof AdminUsersRoute
   '/api/health': typeof ApiHealthRoute
   '/profile/build-collections': typeof ProfileBuildCollectionsRoute
   '/profile/collected-items': typeof ProfileCollectedItemsRoute
   '/profile/collection-stats': typeof ProfileCollectionStatsRoute
   '/profile/created-builds': typeof ProfileCreatedBuildsRoute
+  '/profile/data-sync': typeof ProfileDataSyncRoute
   '/profile/liked-builds': typeof ProfileLikedBuildsRoute
   '/$gameId/': typeof GameIdIndexRoute
+  '/admin/': typeof AdminIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/$gameId/build/$buildId': typeof GameIdBuildBuildIdRouteRouteWithChildren
   '/account/profile/$userId': typeof AccountProfileUserIdRouteRouteWithChildren
+  '/$gameId/build-collection/$collectionId': typeof GameIdBuildCollectionCollectionIdRoute
+  '/$gameId/build/community': typeof GameIdBuildCommunityRoute
   '/$gameId/build/create': typeof GameIdBuildCreateRoute
+  '/$gameId/build/featured': typeof GameIdBuildFeaturedRoute
+  '/$gameId/build/preview': typeof GameIdBuildPreviewRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$gameId/build/$buildId/edit': typeof GameIdBuildBuildIdEditRoute
   '/account/profile/$userId/build-collections': typeof AccountProfileUserIdBuildCollectionsRoute
@@ -264,6 +406,7 @@ export interface FileRoutesById {
   '/account/profile/$userId/created-builds': typeof AccountProfileUserIdCreatedBuildsRoute
   '/account/profile/$userId/data-sync': typeof AccountProfileUserIdDataSyncRoute
   '/account/profile/$userId/liked-builds': typeof AccountProfileUserIdLikedBuildsRoute
+  '/$gameId/build/$buildId/': typeof GameIdBuildBuildIdIndexRoute
   '/account/profile/$userId/': typeof AccountProfileUserIdIndexRoute
 }
 export interface FileRouteTypes {
@@ -271,22 +414,37 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$gameId'
+    | '/admin'
     | '/profile'
     | '/changelog'
+    | '/forgot-password'
+    | '/reset-password'
     | '/sign-in'
     | '/sign-up'
+    | '/verify-email'
     | '/$gameId/items'
+    | '/$gameId/wallpapers'
+    | '/account/settings'
+    | '/admin/audit'
+    | '/admin/queue'
+    | '/admin/users'
     | '/api/health'
     | '/profile/build-collections'
     | '/profile/collected-items'
     | '/profile/collection-stats'
     | '/profile/created-builds'
+    | '/profile/data-sync'
     | '/profile/liked-builds'
     | '/$gameId/'
+    | '/admin/'
     | '/profile/'
     | '/$gameId/build/$buildId'
     | '/account/profile/$userId'
+    | '/$gameId/build-collection/$collectionId'
+    | '/$gameId/build/community'
     | '/$gameId/build/create'
+    | '/$gameId/build/featured'
+    | '/$gameId/build/preview'
     | '/api/auth/$'
     | '/$gameId/build/$buildId/edit'
     | '/account/profile/$userId/build-collections'
@@ -295,24 +453,38 @@ export interface FileRouteTypes {
     | '/account/profile/$userId/created-builds'
     | '/account/profile/$userId/data-sync'
     | '/account/profile/$userId/liked-builds'
+    | '/$gameId/build/$buildId/'
     | '/account/profile/$userId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/changelog'
+    | '/forgot-password'
+    | '/reset-password'
     | '/sign-in'
     | '/sign-up'
+    | '/verify-email'
     | '/$gameId/items'
+    | '/$gameId/wallpapers'
+    | '/account/settings'
+    | '/admin/audit'
+    | '/admin/queue'
+    | '/admin/users'
     | '/api/health'
     | '/profile/build-collections'
     | '/profile/collected-items'
     | '/profile/collection-stats'
     | '/profile/created-builds'
+    | '/profile/data-sync'
     | '/profile/liked-builds'
     | '/$gameId'
+    | '/admin'
     | '/profile'
-    | '/$gameId/build/$buildId'
+    | '/$gameId/build-collection/$collectionId'
+    | '/$gameId/build/community'
     | '/$gameId/build/create'
+    | '/$gameId/build/featured'
+    | '/$gameId/build/preview'
     | '/api/auth/$'
     | '/$gameId/build/$buildId/edit'
     | '/account/profile/$userId/build-collections'
@@ -321,27 +493,43 @@ export interface FileRouteTypes {
     | '/account/profile/$userId/created-builds'
     | '/account/profile/$userId/data-sync'
     | '/account/profile/$userId/liked-builds'
+    | '/$gameId/build/$buildId'
     | '/account/profile/$userId'
   id:
     | '__root__'
     | '/'
     | '/$gameId'
+    | '/admin'
     | '/profile'
     | '/changelog'
+    | '/forgot-password'
+    | '/reset-password'
     | '/sign-in'
     | '/sign-up'
+    | '/verify-email'
     | '/$gameId/items'
+    | '/$gameId/wallpapers'
+    | '/account/settings'
+    | '/admin/audit'
+    | '/admin/queue'
+    | '/admin/users'
     | '/api/health'
     | '/profile/build-collections'
     | '/profile/collected-items'
     | '/profile/collection-stats'
     | '/profile/created-builds'
+    | '/profile/data-sync'
     | '/profile/liked-builds'
     | '/$gameId/'
+    | '/admin/'
     | '/profile/'
     | '/$gameId/build/$buildId'
     | '/account/profile/$userId'
+    | '/$gameId/build-collection/$collectionId'
+    | '/$gameId/build/community'
     | '/$gameId/build/create'
+    | '/$gameId/build/featured'
+    | '/$gameId/build/preview'
     | '/api/auth/$'
     | '/$gameId/build/$buildId/edit'
     | '/account/profile/$userId/build-collections'
@@ -350,16 +538,22 @@ export interface FileRouteTypes {
     | '/account/profile/$userId/created-builds'
     | '/account/profile/$userId/data-sync'
     | '/account/profile/$userId/liked-builds'
+    | '/$gameId/build/$buildId/'
     | '/account/profile/$userId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GameIdRouteRoute: typeof GameIdRouteRouteWithChildren
+  AdminRouteRoute: typeof AdminRouteRouteWithChildren
   ProfileRouteRoute: typeof ProfileRouteRouteWithChildren
   ChangelogRoute: typeof ChangelogRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SignInRoute: typeof SignInRoute
   SignUpRoute: typeof SignUpRoute
+  VerifyEmailRoute: typeof VerifyEmailRoute
+  AccountSettingsRoute: typeof AccountSettingsRoute
   ApiHealthRoute: typeof ApiHealthRoute
   AccountProfileUserIdRouteRoute: typeof AccountProfileUserIdRouteRouteWithChildren
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
@@ -381,6 +575,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GameIdRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/changelog': {
       id: '/changelog'
       path: '/changelog'
@@ -388,11 +589,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChangelogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profile': {
       id: '/profile'
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sign-in': {
@@ -409,6 +624,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignUpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/verify-email': {
+      id: '/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof VerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$gameId/': {
       id: '/$gameId/'
       path: '/'
@@ -422,6 +644,48 @@ declare module '@tanstack/react-router' {
       fullPath: '/$gameId/items'
       preLoaderRoute: typeof GameIdItemsRouteImport
       parentRoute: typeof GameIdRouteRoute
+    }
+    '/$gameId/wallpapers': {
+      id: '/$gameId/wallpapers'
+      path: '/wallpapers'
+      fullPath: '/$gameId/wallpapers'
+      preLoaderRoute: typeof GameIdWallpapersRouteImport
+      parentRoute: typeof GameIdRouteRoute
+    }
+    '/account/settings': {
+      id: '/account/settings'
+      path: '/account/settings'
+      fullPath: '/account/settings'
+      preLoaderRoute: typeof AccountSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/audit': {
+      id: '/admin/audit'
+      path: '/audit'
+      fullPath: '/admin/audit'
+      preLoaderRoute: typeof AdminAuditRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/queue': {
+      id: '/admin/queue'
+      path: '/queue'
+      fullPath: '/admin/queue'
+      preLoaderRoute: typeof AdminQueueRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRouteRoute
     }
     '/api/health': {
       id: '/api/health'
@@ -465,12 +729,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileCreatedBuildsRouteImport
       parentRoute: typeof ProfileRouteRoute
     }
+    '/profile/data-sync': {
+      id: '/profile/data-sync'
+      path: '/data-sync'
+      fullPath: '/profile/data-sync'
+      preLoaderRoute: typeof ProfileDataSyncRouteImport
+      parentRoute: typeof ProfileRouteRoute
+    }
     '/profile/liked-builds': {
       id: '/profile/liked-builds'
       path: '/liked-builds'
       fullPath: '/profile/liked-builds'
       preLoaderRoute: typeof ProfileLikedBuildsRouteImport
       parentRoute: typeof ProfileRouteRoute
+    }
+    '/$gameId/build-collection/$collectionId': {
+      id: '/$gameId/build-collection/$collectionId'
+      path: '/build-collection/$collectionId'
+      fullPath: '/$gameId/build-collection/$collectionId'
+      preLoaderRoute: typeof GameIdBuildCollectionCollectionIdRouteImport
+      parentRoute: typeof GameIdRouteRoute
     }
     '/$gameId/build/$buildId': {
       id: '/$gameId/build/$buildId'
@@ -479,11 +757,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GameIdBuildBuildIdRouteRouteImport
       parentRoute: typeof GameIdRouteRoute
     }
+    '/$gameId/build/community': {
+      id: '/$gameId/build/community'
+      path: '/build/community'
+      fullPath: '/$gameId/build/community'
+      preLoaderRoute: typeof GameIdBuildCommunityRouteImport
+      parentRoute: typeof GameIdRouteRoute
+    }
     '/$gameId/build/create': {
       id: '/$gameId/build/create'
       path: '/build/create'
       fullPath: '/$gameId/build/create'
       preLoaderRoute: typeof GameIdBuildCreateRouteImport
+      parentRoute: typeof GameIdRouteRoute
+    }
+    '/$gameId/build/featured': {
+      id: '/$gameId/build/featured'
+      path: '/build/featured'
+      fullPath: '/$gameId/build/featured'
+      preLoaderRoute: typeof GameIdBuildFeaturedRouteImport
+      parentRoute: typeof GameIdRouteRoute
+    }
+    '/$gameId/build/preview': {
+      id: '/$gameId/build/preview'
+      path: '/build/preview'
+      fullPath: '/$gameId/build/preview'
+      preLoaderRoute: typeof GameIdBuildPreviewRouteImport
       parentRoute: typeof GameIdRouteRoute
     }
     '/account/profile/$userId': {
@@ -499,6 +798,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/auth/$'
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/$gameId/build/$buildId/': {
+      id: '/$gameId/build/$buildId/'
+      path: '/'
+      fullPath: '/$gameId/build/$buildId/'
+      preLoaderRoute: typeof GameIdBuildBuildIdIndexRouteImport
+      parentRoute: typeof GameIdBuildBuildIdRouteRoute
     }
     '/$gameId/build/$buildId/edit': {
       id: '/$gameId/build/$buildId/edit'
@@ -561,11 +867,13 @@ declare module '@tanstack/react-router' {
 
 interface GameIdBuildBuildIdRouteRouteChildren {
   GameIdBuildBuildIdEditRoute: typeof GameIdBuildBuildIdEditRoute
+  GameIdBuildBuildIdIndexRoute: typeof GameIdBuildBuildIdIndexRoute
 }
 
 const GameIdBuildBuildIdRouteRouteChildren: GameIdBuildBuildIdRouteRouteChildren =
   {
     GameIdBuildBuildIdEditRoute: GameIdBuildBuildIdEditRoute,
+    GameIdBuildBuildIdIndexRoute: GameIdBuildBuildIdIndexRoute,
   }
 
 const GameIdBuildBuildIdRouteRouteWithChildren =
@@ -575,20 +883,49 @@ const GameIdBuildBuildIdRouteRouteWithChildren =
 
 interface GameIdRouteRouteChildren {
   GameIdItemsRoute: typeof GameIdItemsRoute
+  GameIdWallpapersRoute: typeof GameIdWallpapersRoute
   GameIdIndexRoute: typeof GameIdIndexRoute
   GameIdBuildBuildIdRouteRoute: typeof GameIdBuildBuildIdRouteRouteWithChildren
+  GameIdBuildCollectionCollectionIdRoute: typeof GameIdBuildCollectionCollectionIdRoute
+  GameIdBuildCommunityRoute: typeof GameIdBuildCommunityRoute
   GameIdBuildCreateRoute: typeof GameIdBuildCreateRoute
+  GameIdBuildFeaturedRoute: typeof GameIdBuildFeaturedRoute
+  GameIdBuildPreviewRoute: typeof GameIdBuildPreviewRoute
 }
 
 const GameIdRouteRouteChildren: GameIdRouteRouteChildren = {
   GameIdItemsRoute: GameIdItemsRoute,
+  GameIdWallpapersRoute: GameIdWallpapersRoute,
   GameIdIndexRoute: GameIdIndexRoute,
   GameIdBuildBuildIdRouteRoute: GameIdBuildBuildIdRouteRouteWithChildren,
+  GameIdBuildCollectionCollectionIdRoute:
+    GameIdBuildCollectionCollectionIdRoute,
+  GameIdBuildCommunityRoute: GameIdBuildCommunityRoute,
   GameIdBuildCreateRoute: GameIdBuildCreateRoute,
+  GameIdBuildFeaturedRoute: GameIdBuildFeaturedRoute,
+  GameIdBuildPreviewRoute: GameIdBuildPreviewRoute,
 }
 
 const GameIdRouteRouteWithChildren = GameIdRouteRoute._addFileChildren(
   GameIdRouteRouteChildren,
+)
+
+interface AdminRouteRouteChildren {
+  AdminAuditRoute: typeof AdminAuditRoute
+  AdminQueueRoute: typeof AdminQueueRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminAuditRoute: AdminAuditRoute,
+  AdminQueueRoute: AdminQueueRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
+  AdminRouteRouteChildren,
 )
 
 interface ProfileRouteRouteChildren {
@@ -596,6 +933,7 @@ interface ProfileRouteRouteChildren {
   ProfileCollectedItemsRoute: typeof ProfileCollectedItemsRoute
   ProfileCollectionStatsRoute: typeof ProfileCollectionStatsRoute
   ProfileCreatedBuildsRoute: typeof ProfileCreatedBuildsRoute
+  ProfileDataSyncRoute: typeof ProfileDataSyncRoute
   ProfileLikedBuildsRoute: typeof ProfileLikedBuildsRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
 }
@@ -605,6 +943,7 @@ const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
   ProfileCollectedItemsRoute: ProfileCollectedItemsRoute,
   ProfileCollectionStatsRoute: ProfileCollectionStatsRoute,
   ProfileCreatedBuildsRoute: ProfileCreatedBuildsRoute,
+  ProfileDataSyncRoute: ProfileDataSyncRoute,
   ProfileLikedBuildsRoute: ProfileLikedBuildsRoute,
   ProfileIndexRoute: ProfileIndexRoute,
 }
@@ -646,10 +985,15 @@ const AccountProfileUserIdRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GameIdRouteRoute: GameIdRouteRouteWithChildren,
+  AdminRouteRoute: AdminRouteRouteWithChildren,
   ProfileRouteRoute: ProfileRouteRouteWithChildren,
   ChangelogRoute: ChangelogRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SignInRoute: SignInRoute,
   SignUpRoute: SignUpRoute,
+  VerifyEmailRoute: VerifyEmailRoute,
+  AccountSettingsRoute: AccountSettingsRoute,
   ApiHealthRoute: ApiHealthRoute,
   AccountProfileUserIdRouteRoute: AccountProfileUserIdRouteRouteWithChildren,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
@@ -659,10 +1003,11 @@ export const routeTree = rootRouteImport
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { startInstance } from './start.ts'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }

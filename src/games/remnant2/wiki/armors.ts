@@ -4,7 +4,7 @@
  * classes: Helmet, Body Armor, Leg Armor, Glove Armor.
  *
  * Diffs the joined armor-table fields (`armor`, `weight`, `armor_set`, and
- * the five resistances — bleed, fire, shock, corrosive, blight) against the
+ * the five resistances - bleed, fire, shock, corrosive, blight) against the
  * local top-level `set` and nested `modifiers.{armor, weight, resistBleed,
  * resistFire, resistShock, resistToxin, resistBlight}` values. Wiki's
  * `corrosive_res` maps to local `resistToxin`. Numeric wiki strings are
@@ -19,8 +19,8 @@
  * Run with: pnpm tsx src/games/remnant2/wiki/armors.ts
  */
 
-import { ARMORS } from "#/games/remnant2/core/item-data/armors.ts";
-import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category.ts";
+import { ARMORS } from "#/games/remnant2/core/item-data/armors";
+import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category";
 
 const ARMOR_EXTRA_TABLES = "armor";
 const ARMOR_EXTRA_FIELDS =

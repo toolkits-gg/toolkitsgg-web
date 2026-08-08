@@ -1,4 +1,5 @@
-import type { SlayTheSpire2AncientItem } from "#/games/slaythespire2/core/item-data/ancients.ts";
+import type { AppItem, AppLinkedItemRef } from "#/features/game/types";
+import type { SlayTheSpire2AncientItem } from "#/games/slaythespire2/core/item-data/ancients";
 import type { SlayTheSpire2CardItem } from "#/games/slaythespire2/core/item-data/cards";
 import type { SlayTheSpire2CharacterItem } from "#/games/slaythespire2/core/item-data/characters";
 import type { SlayTheSpire2PotionItem } from "#/games/slaythespire2/core/item-data/potions";
@@ -9,7 +10,6 @@ import type {
 	SlayTheSpire2DLC,
 	SlayTheSpire2ItemCategory,
 } from "@/prisma";
-import type { AppItem, AppLinkedItemRef } from "#/features/game/types.ts";
 
 type SlayTheSpire2ItemLocation = "Overgrowth" | "Underdocks" | "Hive" | "Glory";
 
@@ -105,5 +105,6 @@ type SlayTheSpire2LocalItem =
 export type {
 	BaseSlayTheSpire2Item,
 	SlayTheSpire2ItemLocation,
+	SlayTheSpire2LinkedItem,
 	SlayTheSpire2LocalItem,
 };

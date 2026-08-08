@@ -12,28 +12,22 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
-import { useState } from "react";
-import {
-	LuChevronRight,
-	LuHouse,
-	LuSearch,
-	LuStar,
-	LuUser,
-} from "react-icons/lu";
-
-import { DefaultLogo } from "#/components/AppLogo.tsx";
+import { type KeyboardEvent, useEffect, useRef, useState } from "react";
+import { LuChevronRight, LuHouse, LuSearch, LuStar } from "react-icons/lu";
+import { DefaultLogo } from "#/components/AppLogo";
 import {
 	useFavoriteGame,
 	useFavoriteGames,
 	useUnfavoriteGame,
-} from "#/features/game/data/favorite-games/use-favorite-games.ts";
-import { useGameId } from "#/features/game/use-game-id.ts";
-import { useSetActiveGame } from "#/features/game/use-set-active-game.ts";
+} from "#/features/game/data/favorite-games/use-favorite-games";
+import { useGameId } from "#/features/game/use-game-id";
+import { useSetActiveGame } from "#/features/game/use-set-active-game";
 import {
+	gameHasContent,
 	getGameLogoComponent,
 	getGameMetadata,
 	REGISTERED_GAME_IDS,
-} from "#/game-registry/public-registry.ts";
+} from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
 import classes from "./GameSwitcher.module.css";
 
@@ -42,38 +36,51 @@ type GameEntry = {
 	label: string;
 };
 
-const allGames: GameEntry[] = REGISTERED_GAME_IDS.map((id) => ({
-	id: id as GameId,
-	label: getGameMetadata(id)?.label ?? id,
-}));
+const allGames: GameEntry[] = REGISTERED_GAME_IDS.filter(gameHasContent).map(
+	(id) => ({
+		id: id as GameId,
+		label: getGameMetadata(id)?.label ?? id,
+	}),
+);
 
 const sortByLabel = (a: GameEntry, b: GameEntry) =>
 	a.label.localeCompare(b.label);
 
-// Profile pages render per-game content without a game segment in the path,
-// so switching games there swaps the content rather than the page.
-const isProfilePath = (pathname: string) =>
+// Profile and admin pages render per-game content without a game segment in the
+// path, so switching games there swaps the content rather than the page.
+const keepsPathOnGameChange = (pathname: string) =>
 	pathname === "/profile" ||
 	pathname.startsWith("/profile/") ||
-	pathname.startsWith("/account/profile/");
+	pathname.startsWith("/account/profile/") ||
+	pathname === "/admin" ||
+	pathname.startsWith("/admin/");
 
 type GameRowProps = {
 	entry: GameEntry;
 	isFavorited: boolean;
+	isHighlighted: boolean;
 	onSelect: (id: GameId) => void;
 	onToggleFavorite: (id: GameId, isFavorited: boolean) => void;
+	onHighlight: () => void;
+	rowRef: (node: HTMLDivElement | null) => void;
 };
 
 function GameRow({
 	entry,
 	isFavorited,
+	isHighlighted,
 	onSelect,
 	onToggleFavorite,
+	onHighlight,
+	rowRef,
 }: GameRowProps) {
 	return (
 		<UnstyledButton
+			ref={rowRef}
 			component="div"
 			className={classes.gameRow}
+			data-highlighted={isHighlighted || undefined}
+			onMouseMove={onHighlight}
 			onClick={() => onSelect(entry.id)}
 		>
 			<Group w="100%" justify="space-between" wrap="nowrap">
@@ -105,9 +112,11 @@ function GameRow({
 function GameSwitcher() {
 	const [opened, { toggle, close }] = useDisclosure(false);
 	const [searchQuery, setSearchQuery] = useState("");
-	const activeGameId = useGameId();
+	const [highlightedIndex, setHighlightedIndex] = useState(-1);
+	const rowRefs = useRef(new Map<number, HTMLDivElement>());
 	const navigate = useNavigate();
 	const { location } = useRouterState();
+	const activeGameId = useGameId();
 	const setActiveGame = useSetActiveGame();
 
 	const { data } = useFavoriteGames();
@@ -131,24 +140,24 @@ function GameSwitcher() {
 		.filter((g) => !favoriteGameIds.includes(g.id))
 		.sort(sortByLabel);
 
+	const orderedGames = [...favoriteGames, ...otherGames];
+	const activeIndex =
+		highlightedIndex >= 0 && highlightedIndex < orderedGames.length
+			? highlightedIndex
+			: -1;
+
+	useEffect(() => {
+		rowRefs.current.get(activeIndex)?.scrollIntoView({ block: "nearest" });
+	}, [activeIndex]);
+
 	const handleClose = () => {
 		close();
 		setSearchQuery("");
-	};
-
-	const handleGoHome = async () => {
-		setActiveGame(null);
-		await navigate({ to: "/" });
-		handleClose();
+		setHighlightedIndex(-1);
 	};
 
 	const handleGoGameHome = async () => {
 		await navigate({ to: `/${activeGameId}` as never });
-		handleClose();
-	};
-
-	const handleGoProfileHome = async () => {
-		await navigate({ to: "/profile" });
 		handleClose();
 	};
 
@@ -163,10 +172,48 @@ function GameSwitcher() {
 		) {
 			segments[0] = id;
 			void navigate({ to: `/${segments.join("/")}` as never });
-		} else if (!isProfilePath(location.pathname)) {
+		} else if (!keepsPathOnGameChange(location.pathname)) {
 			void navigate({ to: `/${id}` as never });
 		}
 		handleClose();
+	};
+
+	const handleSearchChange = (value: string) => {
+		setSearchQuery(value);
+		setHighlightedIndex(value.trim().length > 0 ? 0 : -1);
+	};
+
+	const handleSearchKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+			e.preventDefault();
+			if (orderedGames.length === 0) return;
+			const delta = e.key === "ArrowDown" ? 1 : -1;
+			const from = activeIndex < 0 ? (delta > 0 ? -1 : 0) : activeIndex;
+			setHighlightedIndex(
+				(from + delta + orderedGames.length) % orderedGames.length,
+			);
+			return;
+		}
+
+		if (e.key === "Enter") {
+			const target =
+				activeIndex >= 0
+					? orderedGames[activeIndex]
+					: orderedGames.length === 1
+						? orderedGames[0]
+						: undefined;
+			if (!target) return;
+			e.preventDefault();
+			handleSelectGame(target.id);
+		}
+	};
+
+	const registerRow = (index: number) => (node: HTMLDivElement | null) => {
+		if (node) {
+			rowRefs.current.set(index, node);
+		} else {
+			rowRefs.current.delete(index);
+		}
 	};
 
 	const handleToggleFavorite = (id: GameId, isFavorited: boolean) => {
@@ -215,7 +262,8 @@ function GameSwitcher() {
 					placeholder="Search games..."
 					leftSection={<LuSearch size={16} />}
 					value={searchQuery}
-					onChange={(e) => setSearchQuery(e.currentTarget.value)}
+					onChange={(e) => handleSearchChange(e.currentTarget.value)}
+					onKeyDown={handleSearchKeyDown}
 					className={classes.searchInput}
 					size="sm"
 					data-autofocus
@@ -235,30 +283,6 @@ function GameSwitcher() {
 						</Group>
 					</UnstyledButton>
 				)}
-				<UnstyledButton
-					component="div"
-					className={classes.gameRow}
-					onClick={handleGoHome}
-				>
-					<Group gap="xs">
-						<LuHouse size={14} />
-						<Text size="sm" fw={500}>
-							Toolkits.gg Home
-						</Text>
-					</Group>
-				</UnstyledButton>
-				<UnstyledButton
-					component={"div"}
-					className={classes.gameRow}
-					onClick={handleGoProfileHome}
-				>
-					<Group gap="xs">
-						<LuUser size={14} />
-						<Text size="sm" fw={500}>
-							User Profile
-						</Text>
-					</Group>
-				</UnstyledButton>
 
 				<Divider my="xs" className={classes.separator} />
 
@@ -277,13 +301,16 @@ function GameSwitcher() {
 								Favorites
 							</Text>
 							<Stack gap={4}>
-								{favoriteGames.map((entry) => (
+								{favoriteGames.map((entry, index) => (
 									<GameRow
 										key={entry.id}
 										entry={entry}
 										isFavorited
+										isHighlighted={activeIndex === index}
 										onSelect={handleSelectGame}
 										onToggleFavorite={handleToggleFavorite}
+										onHighlight={() => setHighlightedIndex(index)}
+										rowRef={registerRow(index)}
 									/>
 								))}
 							</Stack>
@@ -307,15 +334,21 @@ function GameSwitcher() {
 								All Games
 							</Text>
 							<Stack gap={2}>
-								{otherGames.map((entry) => (
-									<GameRow
-										key={entry.id}
-										entry={entry}
-										isFavorited={false}
-										onSelect={handleSelectGame}
-										onToggleFavorite={handleToggleFavorite}
-									/>
-								))}
+								{otherGames.map((entry, index) => {
+									const orderedIndex = favoriteGames.length + index;
+									return (
+										<GameRow
+											key={entry.id}
+											entry={entry}
+											isFavorited={false}
+											isHighlighted={activeIndex === orderedIndex}
+											onSelect={handleSelectGame}
+											onToggleFavorite={handleToggleFavorite}
+											onHighlight={() => setHighlightedIndex(orderedIndex)}
+											rowRef={registerRow(orderedIndex)}
+										/>
+									);
+								})}
 							</Stack>
 						</>
 					)}

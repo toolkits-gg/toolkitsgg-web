@@ -17,8 +17,15 @@
 	border: 1px solid var(--mantine-color-border-7);
 }
 
+/* The header is sticky, so it needs enough of a fill to hide body content
+   passing underneath it, while staying translucent enough for the ambient glow
+   sitting behind it to read through. */
 .header {
-	background-color: transparent;
+	background-color: light-dark(
+		color-mix(in srgb, var(--mantine-color-gray-1) 88%, transparent),
+		color-mix(in srgb, #000 88%, transparent)
+	);
+	backdrop-filter: blur(10px);
 	margin-bottom: var(--mantine-spacing-md);
 	border-bottom: 1px solid var(--mantine-color-border-5);
 }

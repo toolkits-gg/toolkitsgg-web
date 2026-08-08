@@ -1,0 +1,15 @@
+.preview {
+	width: 72px;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	border-radius: var(--mantine-radius-sm);
+	flex-shrink: 0;
+}
+
+.previewEmpty {
+	width: 72px;
+	aspect-ratio: 16 / 9;
+	border-radius: var(--mantine-radius-sm);
+	border: 1px dashed var(--mantine-color-default-border);
+	flex-shrink: 0;
+}

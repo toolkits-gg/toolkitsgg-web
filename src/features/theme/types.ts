@@ -1,8 +1,4 @@
-import type {
-	DefaultMantineColor,
-	MantineColorsTuple,
-	MantineThemeOverride,
-} from "@mantine/core";
+import type { MantineColorsTuple, MantineThemeOverride } from "@mantine/core";
 
 /**
  * Base color keys used throughout the toolkit
@@ -46,14 +42,6 @@ type ColorVariants<T extends string> =
 	| `${T}Fg`;
 
 /**
- * Union of all possible color keys including variants.
- * This type is used in the Mantine theme override.
- */
-type ToolkitThemeColorName =
-	| ColorVariants<ToolkitThemeColorKey>
-	| DefaultMantineColor;
-
-/**
  * Type-safe definition of all theme colors.
  *
  * For custom colors, Mantine provides a feature called a virtual color.
@@ -85,7 +73,6 @@ type ToolkitThemeDefinition = {
 export type {
 	ColorVariants,
 	ToolkitThemeColorKey,
-	ToolkitThemeColorName,
 	ToolkitThemeColors,
 	ToolkitThemeDefinition,
 };

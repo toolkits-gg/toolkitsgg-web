@@ -1,6 +1,6 @@
 import { upperFirst } from "@mantine/hooks";
-import type { AppItem } from "#/features/game/types.ts";
-import { titleCase } from "#/utils.ts";
+import type { AppItem } from "#/features/game/types";
+import { titleCase } from "#/utils";
 
 type CategoryOption = {
 	label: string;
@@ -12,18 +12,26 @@ type GroupedOption = {
 	items: CategoryOption[];
 };
 
-/** Yields all linkedItem names for an item. */
-const linkedItemNames = function* (
+/** A linkedItems entry paired with the relationship it was authored under. */
+type LinkedItemRef = {
+	relation: string;
+	name: string;
+};
+
+/** Maps a game's linkedItems relationship names to the item category they point at. */
+type LinkedItemCategories = Record<string, string>;
+
+const linkedItemRefs = function* (
 	item: AppItem,
-): Generator<string, undefined> {
+): Generator<LinkedItemRef, undefined> {
 	if (!item.linkedItems) return;
 
-	for (const values of Object.values(item.linkedItems)) {
+	for (const [relation, values] of Object.entries(item.linkedItems)) {
 		const valuesToProcess = Array.isArray(values) ? values : [values];
 
 		for (const value of valuesToProcess) {
 			const name = value?.name;
-			if (name) yield name;
+			if (name) yield { relation, name };
 		}
 	}
 };
@@ -104,29 +112,50 @@ export const getItemSubcategories = (
 	return result;
 };
 
-/** Finds an item by its name, ignoring case. */
-export const findItemByName = <TItem extends AppItem>(
-	name: string,
-	allItems: TItem[],
-): TItem | null =>
-	allItems.find((i) => i.name.toLowerCase() === name.toLowerCase()) ?? null;
-
-/** The name of the first linked item, in the order the relationships were authored. */
-export const getFirstLinkedItemName = (item: AppItem): string | undefined =>
-	linkedItemNames(item).next().value;
+/** Yields every linked item reference on an item, with its relationship name. */
+export const getLinkedItemRefs = (item: AppItem): LinkedItemRef[] =>
+	Array.from(linkedItemRefs(item));
 
 /**
- * Resolves linked items for a given item by matching names
+ * Finds the item a linked item reference points at, ignoring case.
+ * The lookup is scoped to the category the relationship declares, since item
+ * names are only unique within a category.
+ */
+export const findLinkedItem = <TItem extends AppItem>(
+	ref: LinkedItemRef,
+	allItems: TItem[],
+	categories: LinkedItemCategories,
+): TItem | null => {
+	const category = categories[ref.relation];
+	if (!category) return null;
+
+	const name = ref.name.toLowerCase();
+
+	return (
+		allItems.find(
+			(i) => String(i.category) === category && i.name.toLowerCase() === name,
+		) ?? null
+	);
+};
+
+/** The first linked item reference, in the order the relationships were authored. */
+export const getFirstLinkedItemRef = (
+	item: AppItem,
+): LinkedItemRef | undefined => linkedItemRefs(item).next().value;
+
+/**
+ * Resolves linked items for a given item by matching the names
  * from the item's linkedItems field against a list of all items.
  */
 export const resolveLinkedItems = <TItem extends AppItem>(
 	item: TItem,
 	allItems: TItem[],
+	categories: LinkedItemCategories,
 ): TItem[] => {
 	const results: TItem[] = [];
 
-	for (const name of linkedItemNames(item)) {
-		const foundItem = findItemByName(name, allItems);
+	for (const ref of linkedItemRefs(item)) {
+		const foundItem = findLinkedItem(ref, allItems, categories);
 
 		if (foundItem && !results.some((r) => r.id === foundItem.id)) {
 			results.push(foundItem);
@@ -135,3 +164,5 @@ export const resolveLinkedItems = <TItem extends AppItem>(
 
 	return results;
 };
+
+export type { LinkedItemCategories, LinkedItemRef };

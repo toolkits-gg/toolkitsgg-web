@@ -1,5 +1,5 @@
-import { clientEnv } from "#/env/client-env.ts";
-import { getGameAvatars } from "#/game-registry/public-registry.ts";
+import { gameAssetImageUrl } from "#/features/game/game-asset-url";
+import { getGameAvatars } from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
 
 type ResolveAvatarParams = {
@@ -9,11 +9,6 @@ type ResolveAvatarParams = {
 	currentGameId: GameId;
 	fallbackAvatarUrl: string | null | undefined;
 };
-
-function avatarImageUrl(imageUrl: string, gameId: GameId): string {
-	if (imageUrl.startsWith("http")) return imageUrl;
-	return `${clientEnv.VITE_CLOUDFRONT_URL}/games/${gameId}/${imageUrl.replace(/^\//, "")}`;
-}
 
 const resolveAvatar = (
 	params: ResolveAvatarParams,
@@ -36,7 +31,7 @@ const resolveAvatar = (
 		const avatar = avatars?.find((a) => a.id === override.avatarId);
 		if (avatar) {
 			return {
-				avatarUrl: avatarImageUrl(avatar.imageUrl, override.avatarGameId),
+				avatarUrl: gameAssetImageUrl(avatar.imageUrl, override.avatarGameId),
 				avatarId: override.avatarId,
 				gameId: override.avatarGameId,
 			};
@@ -48,7 +43,7 @@ const resolveAvatar = (
 		const avatar = avatars?.find((a) => a.id === primaryAvatarId);
 		if (avatar) {
 			return {
-				avatarUrl: avatarImageUrl(avatar.imageUrl, primaryAvatarGameId),
+				avatarUrl: gameAssetImageUrl(avatar.imageUrl, primaryAvatarGameId),
 				avatarId: primaryAvatarId,
 				gameId: primaryAvatarGameId,
 			};
@@ -62,4 +57,4 @@ const resolveAvatar = (
 	return { avatarUrl: null, avatarId: null, gameId: null };
 };
 
-export { avatarImageUrl, resolveAvatar };
+export { resolveAvatar };

@@ -79,4 +79,4 @@ const useScreenshotPreviewStore = () => {
 	};
 };
 
-export { type ScreenshotPreviewState, useScreenshotPreviewStore };
+export { useScreenshotPreviewStore };

@@ -1,0 +1,36 @@
+.frame {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	border-radius: var(--mantine-radius-md);
+	background-color: light-dark(
+		var(--mantine-color-gray-2),
+		var(--mantine-color-dark-6)
+	);
+	/* Without this the browser claims vertical drags for scrolling on touch. */
+	touch-action: none;
+	user-select: none;
+}
+
+.frame:focus-visible {
+	outline: 2px solid var(--mantine-primary-color-filled);
+	outline-offset: 2px;
+}
+
+/* Doubled up to outrank UnstyledButton's own `cursor: pointer`. */
+.frame.pannable {
+	cursor: grab;
+}
+
+.frame.dragging {
+	cursor: grabbing;
+}
+
+.image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	pointer-events: none;
+	-webkit-user-drag: none;
+}

@@ -5,11 +5,15 @@ import {
 	useParams,
 } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { GameNotFoundCard } from "#/components/GameNotFoundCard.tsx";
-import { NotFoundCard } from "#/components/NotFoundCard.tsx";
-import { gameCanonicalUrl } from "#/features/game/subdomain-rewrite.ts";
-import { useSetActiveGame } from "#/features/game/use-set-active-game.ts";
-import { getValidatedGameId } from "#/game-registry/public-registry.ts";
+import { GameComingSoonCard } from "#/components/GameComingSoonCard";
+import { GameNotFoundCard } from "#/components/GameNotFoundCard";
+import { NotFoundCard } from "#/components/NotFoundCard";
+import { gameCanonicalUrl } from "#/features/game/subdomain-rewrite";
+import { useSetActiveGame } from "#/features/game/use-set-active-game";
+import {
+	gameHasContent,
+	getValidatedGameId,
+} from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
 
 const GameNotFound = () => {
@@ -31,6 +35,8 @@ const GameLayout = () => {
 	useEffect(() => {
 		setActiveGame(gameId as GameId);
 	}, [gameId, setActiveGame]);
+
+	if (!gameHasContent(gameId)) return <GameComingSoonCard gameId={gameId} />;
 
 	return <Outlet />;
 };

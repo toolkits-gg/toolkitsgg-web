@@ -7,8 +7,8 @@
  * Run with: pnpm tsx src/games/remnant2/wiki/mods.ts
  */
 
-import { MODS } from "#/games/remnant2/core/item-data/mods.ts";
-import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category.ts";
+import { MODS } from "#/games/remnant2/core/item-data/mods";
+import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category";
 
 void syncWikiCategory([
 	{

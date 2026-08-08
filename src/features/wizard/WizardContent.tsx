@@ -1,5 +1,4 @@
 import { Box, Button, Group, Paper, Stack, Text, Title } from "@mantine/core";
-
 import type { WizardStep } from "#/features/wizard/types";
 
 type WizardContentProps = {
@@ -104,4 +103,4 @@ const WizardContent = ({
 	);
 };
 
-export { WizardContent, type WizardContentProps };
+export { WizardContent };

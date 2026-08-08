@@ -146,4 +146,4 @@ const ARCHETYPE_COLORS = {
 	{ bg: { light: string; dark: string }; text: { light: string; dark: string } }
 >;
 
-export { GAME_ID, ARCHETYPE_COLORS };
+export { ARCHETYPE_COLORS, GAME_ID };

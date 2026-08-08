@@ -1,0 +1,28 @@
+.body {
+	white-space: pre-wrap;
+	word-break: break-word;
+	padding: 2px var(--mantine-spacing-xs);
+	border-left: 3px solid var(--mantine-color-default-border);
+}
+
+.removed {
+	padding: 0 2px;
+	border-radius: 2px;
+	background-color: var(--mantine-color-red-light);
+	color: var(--mantine-color-red-light-color);
+	text-decoration: line-through;
+}
+
+.added {
+	padding: 0 2px;
+	border-radius: 2px;
+	background-color: var(--mantine-color-green-light);
+	color: var(--mantine-color-green-light-color);
+	text-decoration: none;
+}
+
+.supressed {
+	color: var(--mantine-color-dimmed);
+	font-size: var(--mantine-font-size-xs);
+	user-select: none;
+}

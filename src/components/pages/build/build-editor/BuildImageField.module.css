@@ -1,0 +1,16 @@
+.previewWrapper {
+	position: relative;
+	width: 180px;
+	flex-shrink: 0;
+}
+
+.preview {
+	border-radius: var(--mantine-radius-sm);
+	border: 1px solid var(--mantine-color-default-border);
+}
+
+.clear {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+}

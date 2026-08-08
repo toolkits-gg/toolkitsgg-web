@@ -1,8 +1,7 @@
 import { ActionIcon } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { LuPalette } from "react-icons/lu";
-
-import { ThemeModal } from "#/features/theme/ThemeModal.tsx";
+import { ThemeModal } from "#/features/theme/ThemeModal";
 import type { GameId } from "@/prisma";
 
 type ChangeThemeButtonProps = {

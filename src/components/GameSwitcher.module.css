@@ -36,7 +36,8 @@
 		border-color: var(--mantine-color-border-7);
 	}
 
-	&[data-active] {
+	&[data-active],
+	&[data-highlighted] {
 		background-color: var(--mantine-color-primary-light);
 		color: var(--mantine-color-primary-light-color);
 	}

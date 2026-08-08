@@ -1,11 +1,41 @@
 .banner {
 	height: 120px;
+	position: relative;
 	background: linear-gradient(
 		135deg,
 		var(--mantine-color-primary-7) 0%,
 		var(--mantine-color-primary-4) 50%,
 		var(--mantine-color-primary-6) 100%
 	);
+}
+
+/* background-position is set inline, from the stored focal point. */
+.bannerWithImage {
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+/*
+ * Artwork is arbitrary, so the avatar overlapping the bottom edge and the
+ * display name below it need a floor on contrast regardless of what's behind.
+ */
+.bannerWithImage::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		to bottom,
+		rgb(0 0 0 / 0.1) 0%,
+		rgb(0 0 0 / 0.45) 100%
+	);
+	pointer-events: none;
+}
+
+.bannerAction {
+	position: absolute;
+	top: var(--mantine-spacing-xs);
+	right: var(--mantine-spacing-xs);
+	z-index: 1;
 }
 
 .profileContent {

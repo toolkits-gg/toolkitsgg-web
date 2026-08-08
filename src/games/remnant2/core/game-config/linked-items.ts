@@ -1,9 +1,11 @@
 import {
-	findItemByName,
-	getFirstLinkedItemName,
+	findLinkedItem,
+	getFirstLinkedItemRef,
+	type LinkedItemRef,
 } from "#/features/game/items/utils";
-import type { AppItem } from "#/features/game/types.ts";
+import type { AppItem } from "#/features/game/types";
 import { ITEMS } from "#/games/remnant2/core/game-config/items";
+import { LINKED_ITEM_CATEGORIES } from "#/games/remnant2/core/game-config/linked-item-categories";
 import type { Remnant2LinkedItem } from "#/games/remnant2/core/types";
 
 /**
@@ -19,10 +21,14 @@ export const resolveRemnant2PrimaryLinkedItem = (
 	const linkedItems = item.linkedItems as Remnant2LinkedItem | undefined;
 	if (!linkedItems) return null;
 
-	const name =
-		item.category === "ARCHETYPE"
-			? linkedItems.perks?.[0]?.name
-			: getFirstLinkedItemName(item);
+	let ref: LinkedItemRef | undefined;
 
-	return name ? findItemByName(name, ITEMS.all) : null;
+	if (item.category === "ARCHETYPE") {
+		const primePerk = linkedItems.perks?.[0];
+		if (primePerk) ref = { relation: "perks", name: primePerk.name };
+	} else {
+		ref = getFirstLinkedItemRef(item);
+	}
+
+	return ref ? findLinkedItem(ref, ITEMS.all, LINKED_ITEM_CATEGORIES) : null;
 };

@@ -1,0 +1,40 @@
+import { Link, Text } from "react-email";
+import { EmailLayout } from "#/emails/_components/EmailLayout";
+import { clientEnv } from "#/env/client-env";
+
+type EmailPasswordChangedProps = {
+	toName: string;
+	url: string;
+};
+
+const EmailPasswordChanged = ({ toName, url }: EmailPasswordChangedProps) => {
+	const appName = clientEnv.VITE_APP_NAME;
+
+	return (
+		<EmailLayout
+			preview={`The password for your ${appName} account was changed`}
+			heading="Your password was changed"
+		>
+			<Text className="mt-4 text-gray-700 text-sm leading-6">
+				Hi {toName}, the password for your {appName} account was just changed.
+				If this was you, no further action is needed.
+			</Text>
+
+			<Text className="mt-4 text-gray-700 text-sm leading-6">
+				If this was not you, someone else may have access to your account.{" "}
+				<Link href={url} className="text-brand underline">
+					Reset your password
+				</Link>{" "}
+				right away to lock it back down.
+			</Text>
+		</EmailLayout>
+	);
+};
+
+EmailPasswordChanged.PreviewProps = {
+	toName: "TK",
+	url: "http://localhost:3000/forgot-password",
+} as EmailPasswordChangedProps;
+
+export default EmailPasswordChanged;
+export { EmailPasswordChanged };

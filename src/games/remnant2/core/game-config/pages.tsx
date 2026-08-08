@@ -1,15 +1,11 @@
 import { MultiSelect, SimpleGrid, Stack, Text } from "@mantine/core";
 import { parseAsString } from "nuqs";
 import type { ReactNode } from "react";
-import { BuildCreatePage } from "#/components/pages/BuildCreate.tsx";
-import { BuildEditPage } from "#/components/pages/BuildEdit.tsx";
-import { BuildViewPage } from "#/components/pages/BuildView.tsx";
-import { CreatedBuildsPage } from "#/components/pages/created-builds/CreatedBuilds.tsx";
-import { ItemListPage } from "#/components/pages/ItemList.tsx";
+import { ItemListPage } from "#/components/pages/ItemList";
 import {
 	TriStateFilter,
 	type TriStateFilterValue,
-} from "#/components/TriStateFilter.tsx";
+} from "#/components/TriStateFilter";
 import {
 	formatCategoryLabel,
 	getItemSubcategories,
@@ -20,19 +16,14 @@ import type {
 	AppItem,
 	GameFilterConfig,
 	GamePages,
-} from "#/features/game/types.ts";
+} from "#/features/game/types";
+import { REMNANT2_DLC_LABELS } from "#/games/remnant2/core/game-config/dlc-labels";
+import { REMNANT2_ITEM_CSV_COLUMNS } from "#/games/remnant2/core/game-config/item-csv-columns";
 import { ITEMS } from "#/games/remnant2/core/game-config/items";
+import { LINKED_ITEM_CATEGORIES } from "#/games/remnant2/core/game-config/linked-item-categories";
 import { resolveRemnant2PrimaryLinkedItem } from "#/games/remnant2/core/game-config/linked-items";
-import { remnant2CollectedItemsData } from "#/games/remnant2/data/collected-items/use-collected-items.ts";
-import { remnant2CreatedBuildsData } from "#/games/remnant2/data/created-builds/use-created-builds.ts";
+import { remnant2CollectedItemsData } from "#/games/remnant2/data/collected-items/use-collected-items";
 import type { Remnant2DLC } from "@/prisma";
-
-const REMNANT2_DLC_LABELS: Record<Remnant2DLC, string> = {
-	BASE: "Base Game",
-	DLC1: "The Awakened King",
-	DLC2: "The Forgotten Kingdom",
-	DLC3: "The Dark Horizon",
-};
 
 const parseDlc = (raw: string): TriStateFilterValue => {
 	if (!raw) return {};
@@ -162,26 +153,26 @@ export const PAGES: GamePages = {
 	renderItemLookup: () => (
 		<ItemListPage
 			items={ITEMS}
-			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
+			resolveLinkedItems={(item) =>
+				resolveLinkedItems(item, ITEMS.all, LINKED_ITEM_CATEGORIES)
+			}
 			resolvePrimaryLinkedItem={resolveRemnant2PrimaryLinkedItem}
 			data={remnant2CollectedItemsData}
 			gameFilterConfig={remnant2ItemFilterConfig}
+			itemCsvColumns={REMNANT2_ITEM_CSV_COLUMNS}
 		/>
 	),
 	renderCollectedItems: ({ mode }) => (
 		<ItemListPage
 			items={ITEMS}
-			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
+			resolveLinkedItems={(item) =>
+				resolveLinkedItems(item, ITEMS.all, LINKED_ITEM_CATEGORIES)
+			}
 			resolvePrimaryLinkedItem={resolveRemnant2PrimaryLinkedItem}
 			data={remnant2CollectedItemsData}
 			gameFilterConfig={remnant2ItemFilterConfig}
+			itemCsvColumns={REMNANT2_ITEM_CSV_COLUMNS}
 			viewMode={mode}
 		/>
 	),
-	renderCreatedBuilds: ({ mode }) => (
-		<CreatedBuildsPage data={remnant2CreatedBuildsData} viewMode={mode} />
-	),
-	renderCreateBuild: () => <BuildCreatePage />,
-	renderEditBuild: () => <BuildEditPage />,
-	renderViewBuild: () => <BuildViewPage />,
 };

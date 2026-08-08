@@ -1,7 +1,7 @@
 import { Flex, Text } from "@mantine/core";
 import type { ComponentType } from "react";
-import { DEFAULT_APP_LOGO_SIZE } from "#/constants.ts";
-import type { AppLogoSize } from "#/types.ts";
+import { DEFAULT_APP_LOGO_SIZE } from "#/components/AppLogo";
+import type { AppLogoSize } from "#/types";
 
 type ScreenshotWatermarkProps = {
 	LogoComponent: ComponentType<{ size?: AppLogoSize }>;

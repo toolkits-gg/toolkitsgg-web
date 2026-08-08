@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ProfileTabPlaceholder } from "#/features/user/ProfileTabPlaceholder.tsx";
+import { ProfileTabPlaceholder } from "#/features/user/ProfileTabPlaceholder";
 
 const Route = createFileRoute("/profile/collection-stats")({
 	component: () => <ProfileTabPlaceholder title="Collection Stats" />,

@@ -1,4 +1,4 @@
-import { NotFoundCard } from "#/components/NotFoundCard.tsx";
+import { NotFoundCard } from "#/components/NotFoundCard";
 
 export const GameNotFoundCard = () => {
 	return (

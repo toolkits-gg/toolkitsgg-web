@@ -1,6 +1,6 @@
 import type { AnyRoute } from "@tanstack/react-router";
-import { APP_DOMAIN } from "#/constants.ts";
-import { isRegisteredGameId } from "#/game-registry/public-registry.ts";
+import { APP_DOMAIN } from "#/constants";
+import { isRegisteredGameId } from "#/games-registry/public-registry";
 
 const DEV_DOMAIN = "localhost";
 

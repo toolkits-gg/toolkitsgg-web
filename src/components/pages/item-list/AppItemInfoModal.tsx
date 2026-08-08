@@ -13,18 +13,18 @@ import {
 } from "@mantine/core";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { LuArrowLeft, LuCamera, LuCheck, LuPlus } from "react-icons/lu";
-import { AppGameImage } from "#/components/AppGameImage.tsx";
-import { AppItemDescription } from "#/components/AppItemDescription.tsx";
-import { PrimaryLinkedItem } from "#/components/pages/item-list/app-item-info-modal/PrimaryLinkedItem.tsx";
-import type { CollectItemInput } from "#/features/game/data/types.ts";
-import type { AppItem } from "#/features/game/types.ts";
-import { useGameId } from "#/features/game/use-game-id.ts";
-import { ScreenshotContainer } from "#/features/screenshot/ScreenshotContainer.tsx";
-import type { WatermarkConfig } from "#/features/screenshot/types.ts";
-import { useScreenshot } from "#/features/screenshot/use-screenshot.ts";
-import { getGameMetadata } from "#/game-registry/public-registry.ts";
+import { AppGameImage } from "#/components/AppGameImage";
+import { AppItemDescription } from "#/components/AppItemDescription";
+import { PrimaryLinkedItem } from "#/components/pages/item-list/app-item-info-modal/PrimaryLinkedItem";
+import type { CollectItemInput } from "#/features/game/data/types";
+import type { AppItem } from "#/features/game/types";
+import { useGameId } from "#/features/game/use-game-id";
+import { ScreenshotContainer } from "#/features/screenshot/ScreenshotContainer";
+import type { WatermarkConfig } from "#/features/screenshot/types";
+import { useScreenshot } from "#/features/screenshot/use-screenshot";
+import { getGameMetadata } from "#/games-registry/public-registry";
 
-export type AppItemInfoModalProps = {
+type AppItemInfoModalProps = {
 	item: AppItem;
 	resolveLinkedItems: (item: AppItem) => AppItem[];
 	resolvePrimaryLinkedItem?: (item: AppItem) => AppItem | null;

@@ -1,8 +1,12 @@
 import type { FC } from "react";
 import { BsCollection } from "react-icons/bs";
 import { GiCapeArmor, GiLockedChest } from "react-icons/gi";
-import { LuHouse } from "react-icons/lu";
-import { getGameMetadata } from "#/game-registry/public-registry.ts";
+import { LuHouse, LuImage } from "react-icons/lu";
+import { gameSupportsBuilds } from "#/games-registry/builds-registry";
+import {
+	gameHasWallpapers,
+	getGameMetadata,
+} from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
 
 type NavLinkSubLink = {
@@ -32,7 +36,7 @@ const buildToolkitLinks = (onGettingStartedWizard?: () => void): NavLink[] => [
 		initiallyOpened: true,
 		links: [
 			{
-				label: "Home",
+				label: "Toolkits Home",
 				link: "/",
 			},
 			{
@@ -53,48 +57,6 @@ const buildToolkitLinks = (onGettingStartedWizard?: () => void): NavLink[] => [
 	},
 ];
 
-const buildGameHomeNavLink = (gameId: GameId): NavLink => ({
-	label: getGameMetadata(gameId)?.label ?? gameId,
-	icon: LuHouse,
-	initiallyOpened: true,
-	links: [
-		{
-			label: "Game Home",
-			link: `/${gameId}`,
-		},
-	],
-});
-
-const buildItemsNavLink = (gameId: GameId): NavLink => ({
-	label: "Items",
-	icon: BsCollection,
-	initiallyOpened: true,
-	links: [
-		{
-			label: "Item List",
-			link: `/${gameId}/items`,
-		},
-	],
-});
-
-const buildBuildsNavLink = (gameId: GameId): NavLink => {
-	return {
-		label: "Builds",
-		icon: GiCapeArmor,
-		initiallyOpened: true,
-		links: [
-			{
-				label: "Featured Builds",
-				link: `/${gameId}/build/featured`,
-			},
-			{
-				label: "Community Builds",
-				link: `/${gameId}/build/community`,
-			},
-		],
-	};
-};
-
 type GetNavLinksParams = {
 	gameId: GameId | undefined;
 	onGettingStartedWizard?: () => void;
@@ -106,9 +68,64 @@ const getNavLinks = ({
 }: GetNavLinksParams): NavLink[] => {
 	const navLinks: NavLink[] = [];
 	if (gameId && gameId !== "none") {
-		navLinks.push(buildGameHomeNavLink(gameId));
-		navLinks.push(buildItemsNavLink(gameId));
-		navLinks.push(buildBuildsNavLink(gameId));
+		// Game-specific home page
+		navLinks.push({
+			label: getGameMetadata(gameId)?.label ?? gameId,
+			icon: LuHouse,
+			initiallyOpened: true,
+			links: [
+				{
+					label: "Home",
+					link: `/${gameId}`,
+				},
+			],
+		});
+		navLinks.push({
+			label: "Items",
+			icon: BsCollection,
+			initiallyOpened: true,
+			links: [
+				{
+					label: "Item List",
+					link: `/${gameId}/items`,
+				},
+			],
+		});
+
+		if (gameSupportsBuilds(gameId)) {
+			navLinks.push({
+				label: "Builds",
+				icon: GiCapeArmor,
+				initiallyOpened: true,
+				links: [
+					{
+						label: "Create Build",
+						link: `/${gameId}/build/create`,
+					},
+					{
+						label: "Featured Builds",
+						link: `/${gameId}/build/featured`,
+					},
+					{
+						label: "Community Builds",
+						link: `/${gameId}/build/community`,
+					},
+				],
+			});
+		}
+		if (gameHasWallpapers(gameId)) {
+			navLinks.push({
+				label: "Wallpapers",
+				icon: LuImage,
+				initiallyOpened: true,
+				links: [
+					{
+						label: "Browse Wallpapers",
+						link: `/${gameId}/wallpapers`,
+					},
+				],
+			});
+		}
 	}
 	navLinks.push(...buildToolkitLinks(onGettingStartedWizard));
 	return navLinks;

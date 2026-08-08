@@ -10,11 +10,14 @@ import {
 	getUserProfile,
 	getViewerUserId,
 	removeAvatarOverride,
+	removeHeaderImageOverride,
 	removePrimaryAvatar,
+	removePrimaryHeaderImage,
 	updateAvatar,
+	updateHeaderImage,
 	updateProfile,
-} from "#/features/game/data/user-profile/user-profile.server.ts";
-import { REGISTERED_GAME_IDS } from "#/game-registry/public-registry.ts";
+} from "#/features/game/data/user-profile/user-profile.server";
+import { REGISTERED_GAME_IDS } from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
 
 const GAME_ID_SET = new Set<string>(["none", ...REGISTERED_GAME_IDS]);
@@ -29,6 +32,14 @@ const AvatarInput = z.object({
 	targetGameId: z.string().refine(isGameId).optional(),
 });
 
+const HeaderImageInput = z.object({
+	headerImageId: z.string(),
+	headerImageGameId: z.string().refine(isGameId),
+	positionX: z.number().min(0).max(1).optional(),
+	positionY: z.number().min(0).max(1).optional(),
+	targetGameId: z.string().refine(isGameId).optional(),
+});
+
 export type UserProfileData = {
 	displayName: string;
 	bio: string;
@@ -36,6 +47,17 @@ export type UserProfileData = {
 	primaryAvatarId: string | null;
 	primaryAvatarGameId: GameId | null;
 	avatarOverrides: { gameId: GameId; avatarId: string; avatarGameId: GameId }[];
+	primaryHeaderImageId: string | null;
+	primaryHeaderImageGameId: GameId | null;
+	primaryHeaderImagePositionX: number;
+	primaryHeaderImagePositionY: number;
+	headerImageOverrides: {
+		gameId: GameId;
+		headerImageId: string;
+		headerImageGameId: GameId;
+		headerImagePositionX: number;
+		headerImagePositionY: number;
+	}[];
 };
 
 // Not using UserProfileData type due to needed `null` flexibility.
@@ -53,6 +75,17 @@ export type UserWithProfile = {
 			avatarId: string;
 			avatarGameId: string;
 		}[];
+		primaryHeaderImageId: string | null;
+		primaryHeaderImageGameId: string | null;
+		primaryHeaderImagePositionX: number;
+		primaryHeaderImagePositionY: number;
+		UserHeaderImageOverrides: {
+			gameId: string;
+			headerImageId: string;
+			headerImageGameId: string;
+			headerImagePositionX: number;
+			headerImagePositionY: number;
+		}[];
 	} | null;
 } | null;
 
@@ -61,7 +94,7 @@ export type UserWithProfile = {
  * rather than as column defaults so the database can still tell "never set"
  * apart from a user who typed this exact text.
  */
-export const DEFAULT_DISPLAY_NAME = "Traveler";
+const DEFAULT_DISPLAY_NAME = "Traveler";
 export const DEFAULT_BIO = "No bio provided.";
 
 /**
@@ -73,10 +106,7 @@ export const DEFAULT_BIO = "No bio provided.";
 export const resolveDisplayName = (
 	displayName: string | null | undefined,
 	user: { name?: string | null; username?: string | null } | null | undefined,
-) =>
-	displayName || user?.name || user?.username || DEFAULT_DISPLAY_NAME;
-
-export type GetProfileInput = { userId?: string } | undefined;
+) => displayName || user?.name || user?.username || DEFAULT_DISPLAY_NAME;
 
 export const mapUserToProfileData = (
 	user: UserWithProfile,
@@ -95,11 +125,24 @@ export const mapUserToProfileData = (
 				avatarId: o.avatarId,
 				avatarGameId: o.avatarGameId as GameId,
 			})) ?? [],
+		primaryHeaderImageId: profile?.primaryHeaderImageId ?? null,
+		primaryHeaderImageGameId:
+			(profile?.primaryHeaderImageGameId as GameId) ?? null,
+		primaryHeaderImagePositionX: profile?.primaryHeaderImagePositionX ?? 0.5,
+		primaryHeaderImagePositionY: profile?.primaryHeaderImagePositionY ?? 0.5,
+		headerImageOverrides:
+			profile?.UserHeaderImageOverrides.map((o) => ({
+				gameId: o.gameId as GameId,
+				headerImageId: o.headerImageId,
+				headerImageGameId: o.headerImageGameId as GameId,
+				headerImagePositionX: o.headerImagePositionX,
+				headerImagePositionY: o.headerImagePositionY,
+			})) ?? [],
 	};
 };
 
 // Inner cache-key tail (without the ["data", ...] prefix).
-export const getProfileQueryKeyTail = (userId: string) =>
+const getProfileQueryKeyTail = (userId: string) =>
 	["userProfile", "getProfile", userId] as const;
 
 // Full cache key, used from route loaders that prefetch via queryClient directly
@@ -122,6 +165,20 @@ const RemoveOverrideInput = z.object({
 export const removeAvatarOverrideServerFn = createServerFn({ method: "POST" })
 	.validator((v: unknown) => RemoveOverrideInput.parse(v))
 	.handler(async ({ data }) => removeAvatarOverride(data.targetGameId));
+
+export const updateHeaderImageServerFn = createServerFn({ method: "POST" })
+	.validator((v: unknown) => HeaderImageInput.parse(v))
+	.handler(async ({ data }) => updateHeaderImage(data));
+
+export const removePrimaryHeaderImageServerFn = createServerFn({
+	method: "POST",
+}).handler(async () => removePrimaryHeaderImage());
+
+export const removeHeaderImageOverrideServerFn = createServerFn({
+	method: "POST",
+})
+	.validator((v: unknown) => RemoveOverrideInput.parse(v))
+	.handler(async ({ data }) => removeHeaderImageOverride(data.targetGameId));
 
 const UpdateProfileInput = z.object({
 	displayName: z.string().min(1).max(100).optional(),

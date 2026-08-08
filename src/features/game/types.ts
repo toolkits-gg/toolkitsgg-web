@@ -2,12 +2,24 @@ import type { SingleParserBuilder } from "nuqs";
 import type { createSearchParamsCache } from "nuqs/server";
 import type { ComponentType, ReactNode } from "react";
 import type {
-	GameCollectedItemsData,
-	GameCreatedBuildsData,
-} from "#/features/game/data/types.ts";
-import type { ToolkitThemeDefinition } from "#/features/theme/types.ts";
-import type { AppLogoSize } from "#/types.ts";
+	BuildLoadoutEntry,
+	CreatedBuildRecord,
+	GameBuildsData,
+} from "#/features/game/data/types";
+import type { ToolkitThemeDefinition } from "#/features/theme/types";
+import type { AppLogoSize } from "#/types";
 import type { GameId } from "@/prisma";
+
+/**
+ * A game's map of relationship name to the item(s) that relationship points at.
+ * Games declare their own keys, but every value must be resolvable by name.
+ */
+type AppLinkedItems<TRef extends AppLinkedItemRef = AppLinkedItemRef> = Record<
+	string,
+	TRef | TRef[] | undefined
+>;
+
+type BuildToolMode = "create" | "edit" | "view";
 
 type GameFilterDef = {
 	key: string;
@@ -28,13 +40,6 @@ export type AppItemTag = {
  * Games can narrow TName when their relationship targets are known.
  */
 export type AppLinkedItemRef<TName extends string = string> = { name: TName };
-
-/**
- * A game's map of relationship name to the item(s) that relationship points at.
- * Games declare their own keys, but every value must be resolvable by name.
- */
-export type AppLinkedItems<TRef extends AppLinkedItemRef = AppLinkedItemRef> =
-	Record<string, TRef | TRef[] | undefined>;
 
 /**
  * Shared item definition across the application
@@ -114,9 +119,39 @@ export type GameAvatar = {
 	category?: string;
 };
 
-export type GameIDBSeed = {
-	/** Seeds game-specific items into IDB. Calls getIDBClient() internally. */
-	seed: () => Promise<void>;
+export type WallpaperAttribution = {
+	/** Credited creator, e.g. "ConRaven". The "Courtesy of" wording is the UI's. */
+	name: string;
+	/** Optional profile or source link. Rendered as an external anchor when present. */
+	url?: string;
+};
+
+export type GameWallpaper = {
+	id: string;
+	/** Optional: art that isn't worth labelling ships without one. */
+	name?: string;
+	/** Path relative to the game's CDN root, e.g. "/enemies/boss/abomination1.jpg". */
+	imageUrl: string;
+	/**
+	 * Overrides the derived resized-variant path for art that doesn't follow the
+	 * `<dir>/resized/<base>-<w>x<h><ext>` convention the gulp task writes.
+	 */
+	thumbnailUrl?: string;
+	/**
+	 * Per-image, not per-game: credit belongs to whoever captured that shot, so a
+	 * later addition by someone else stays uncredited rather than inheriting a
+	 * default.
+	 */
+	attribution?: WallpaperAttribution;
+};
+
+/**
+ * Moves a game's locally-owned IDB rows between user ids. Games declare this
+ * because only they know which of their tables are owner-keyed; the sign-in
+ * claim runs it for every registered game without knowing any of their names.
+ */
+export type GameLocalClaim = {
+	claimLocalRows: (fromUserId: string, toUserId: string) => Promise<void>;
 };
 
 export type GameDBSeed = {
@@ -129,9 +164,35 @@ export type GameDBSeed = {
 	resetUserData?: () => Promise<void>;
 };
 
-export type GameData = {
-	collectedItems: GameCollectedItemsData;
-	createdBuilds?: GameCreatedBuildsData;
+/**
+ * What the app-level build editor hands a game's build tool. The tool is a
+ * controlled component: it renders the game's item-selection UI and reports the
+ * resulting loadout back up, while the shell owns saving, local queueing,
+ * dirty state, and every field that isn't game-specific.
+ */
+export type BuildToolRenderArgs = {
+	mode: BuildToolMode;
+	value: BuildLoadoutEntry[];
+	onChange: (next: BuildLoadoutEntry[]) => void;
+	readOnly: boolean;
+	/** True while a screenshot capture is in flight; render the print-friendly layout. */
+	screenshotMode: boolean;
+	/** The persisted build, or null while creating. */
+	build: CreatedBuildRecord | null;
+};
+
+export type BuildTagOption = { value: string; label: string };
+
+/**
+ * Everything a game must supply to opt into builds. Absence of this config in
+ * the builds registry is the opt-out: no build routes, nav links, or profile
+ * tabs are rendered for that game.
+ */
+export type GameBuildsConfig = {
+	data: GameBuildsData;
+	renderBuildTool: (args: BuildToolRenderArgs) => ReactNode;
+	/** The game's build-tag enum, surfaced as MultiSelect options. */
+	tagOptions?: BuildTagOption[];
 };
 
 export type GameMetadata = {
@@ -139,8 +200,6 @@ export type GameMetadata = {
 	name: string;
 	label: string;
 	description: string;
-	/** CloudFront-relative path to the source PNG used for favicon generation */
-	faviconSourcePath: string;
 	LogoComponent: ComponentType<{ size?: AppLogoSize }>;
 	/** Third-party resources related to the game */
 	externalResources: {
@@ -151,12 +210,8 @@ export type GameMetadata = {
 
 export type GamePages = {
 	renderHome?: () => ReactNode;
-	renderCreateBuild: () => ReactNode | undefined;
-	renderViewBuild: () => ReactNode | undefined;
-	renderEditBuild: () => ReactNode | undefined;
 	renderItemLookup: () => ReactNode;
 	renderCollectedItems: (args: { mode: CollectedItemsViewMode }) => ReactNode;
-	renderCreatedBuilds?: (args: { mode: ProfileTabViewMode }) => ReactNode;
 };
 
 export type GameConfig<
@@ -170,17 +225,24 @@ export type GameConfig<
 		categories: TCategory[];
 	};
 	METADATA: GameMetadata;
-	PAGES: GamePages;
 	SEARCH_PARAMS: ReturnType<typeof createSearchParamsCache> | undefined;
 	THEME: ToolkitThemeDefinition | undefined;
 	AVATARS?: GameAvatar[];
-	DATA: GameData;
+	/** Absent when the game has no downloadable artwork. Presence is the opt-in. */
+	WALLPAPERS?: GameWallpaper[];
+	/** Absent when the game has no terms worth highlighting in description text. */
+	INLINE_TAGS?: AppItemTag[];
 };
 
+/**
+ * What a game exports from its config barrel. Pages, builds, seeds, and sync
+ * handlers are deliberately not here: each is consumed by a different bundling
+ * tier and reaches the app through its own registry.
+ */
 export type PublicGameConfig<
 	TItem extends AppItem = AppItem,
 	TCategory extends string | number | symbol = string,
-> = Omit<GameConfig<TItem, TCategory>, "PAGES" | "DATA">;
+> = GameConfig<TItem, TCategory>;
 
 // Widened type for runtime-keyed access (base AppItem, string category)
 export type AnyGameConfig = GameConfig;

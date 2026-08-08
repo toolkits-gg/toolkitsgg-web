@@ -13,9 +13,7 @@ import {
 	Select,
 	Tooltip,
 } from "@mantine/core";
-
-import { GREEN, RED } from "#/features/theme/constants.ts";
-
+import { GREEN, RED } from "#/features/theme/constants";
 import inputClasses from "../modules/Input.module.css";
 import modalClasses from "../modules/Modal.module.css";
 import multiSelectClasses from "../modules/MultiSelect.module.css";

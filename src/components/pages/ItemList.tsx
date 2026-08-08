@@ -1,27 +1,40 @@
 import { Box, Modal } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import { AppItemInfoModal } from "#/components/pages/item-list/AppItemInfoModal.tsx";
-import { AppItemVirtualGrid } from "#/components/pages/item-list/AppItemVirtualGrid.tsx";
-import { AppItemVirtualTable } from "#/components/pages/item-list/AppItemVirtualTable.tsx";
-import { ItemCollectionShareButton } from "#/components/pages/item-list/ItemCollectionShareButton.tsx";
-import { ItemFilterBar } from "#/components/pages/item-list/ItemFilterBar.tsx";
-import { useCollectedItems } from "#/components/pages/item-list/use-collected-items.ts";
-import { useItemFilters } from "#/components/pages/item-list/use-item-filters.ts";
-import { useItemListLayout } from "#/components/pages/item-list/use-item-list-layout.ts";
-import type { GameCollectedItemsData } from "#/features/game/data/types.ts";
+import { AppItemInfoModal } from "#/components/pages/item-list/AppItemInfoModal";
+import { AppItemVirtualGrid } from "#/components/pages/item-list/AppItemVirtualGrid";
+import { AppItemVirtualTable } from "#/components/pages/item-list/AppItemVirtualTable";
+import { ItemCollectionShareButton } from "#/components/pages/item-list/ItemCollectionShareButton";
+import {
+	ItemExportMenu,
+	type ItemExportScope,
+} from "#/components/pages/item-list/ItemExportMenu";
+import { ItemFilterBar } from "#/components/pages/item-list/ItemFilterBar";
+import { useCollectedItems } from "#/components/pages/item-list/use-collected-items";
+import { useItemFilters } from "#/components/pages/item-list/use-item-filters";
+import { useItemListLayout } from "#/components/pages/item-list/use-item-list-layout";
+import { downloadCsv } from "#/features/export/csv";
+import type { GameCollectedItemsData } from "#/features/game/data/types";
+import {
+	buildItemCsv,
+	type ItemCsvColumn,
+} from "#/features/game/items/item-csv";
 import type {
 	AnyGameConfig,
 	AppItem,
 	CollectedItemsViewMode,
 	GameFilterConfig,
-} from "#/features/game/types.ts";
+} from "#/features/game/types";
+import { useGameId } from "#/features/game/use-game-id";
 
-export type ItemListPageProps = {
+type ItemListPageProps = {
 	items: AnyGameConfig["ITEMS"];
 	resolveLinkedItems: (item: AppItem) => AppItem[];
 	resolvePrimaryLinkedItem?: (item: AppItem) => AppItem | null;
 	data: GameCollectedItemsData;
 	gameFilterConfig?: GameFilterConfig;
+	/** Game-specific CSV columns appended to the shared set on export. */
+	itemCsvColumns?: ItemCsvColumn[];
 	viewMode?: CollectedItemsViewMode;
 };
 
@@ -31,6 +44,7 @@ export const ItemListPage = ({
 	resolvePrimaryLinkedItem,
 	data,
 	gameFilterConfig,
+	itemCsvColumns,
 	viewMode,
 }: ItemListPageProps) => {
 	const isCollectedItemsTab = viewMode !== undefined;
@@ -48,6 +62,24 @@ export const ItemListPage = ({
 		isCollectedItemsTab,
 	});
 	const [layout, setLayout] = useItemListLayout();
+	const gameId = useGameId();
+
+	const handleExport = (scope: ItemExportScope) => {
+		const exported = scope === "filtered" ? filters.filteredItems : items.all;
+		const csv = buildItemCsv({
+			items: exported,
+			collectedIds,
+			extraColumns: itemCsvColumns,
+		});
+		const date = new Date().toISOString().slice(0, 10);
+		downloadCsv(`${gameId}-items-${scope}-${date}.csv`, csv);
+		notifications.show({
+			title: "Export complete",
+			message: `Exported ${exported.length.toLocaleString()} items`,
+			color: "green",
+		});
+	};
+
 	// Following a linked item swaps the modal's item, so keep the trail to go back.
 	const [itemHistory, setItemHistory] = useState<AppItem[]>([]);
 	const activeItem = itemHistory.at(-1) ?? null;
@@ -102,27 +134,14 @@ export const ItemListPage = ({
 			{isCollectedItemsTab && <ItemCollectionShareButton />}
 			<ItemFilterBar
 				ref={filterBarRef}
-				search={filters.search}
-				onSearchChange={(v) => filters.setUniversalParam("search", v)}
-				showCollected={filters.showCollectedItems}
-				onShowCollectedChange={(v) =>
-					filters.setUniversalParam("showCollectedItems", v)
+				filters={filters}
+				exportMenu={
+					<ItemExportMenu
+						filteredCount={filters.filteredItems.length}
+						allCount={items.all.length}
+						onExport={handleExport}
+					/>
 				}
-				showUncollected={filters.showUncollectedItems}
-				onShowUncollectedChange={(v) =>
-					filters.setUniversalParam("showUncollectedItems", v)
-				}
-				dimUncollected={filters.dimUncollectedItems}
-				onDimUncollectedChange={(v) =>
-					filters.setUniversalParam("dimUncollectedItems", v)
-				}
-				showCollectableOnly={filters.showCollectableOnly}
-				onShowCollectableOnlyChange={(v) =>
-					filters.setUniversalParam("showCollectableOnly", v)
-				}
-				activeFilters={filters.activeFilters}
-				onClearAllFilters={filters.clearAllFilters}
-				renderGameFilters={filters.renderGameFilters}
 				hasCollectableItems={items.collectable.length > 0}
 				layout={layout}
 				onLayoutChange={setLayout}

@@ -11,14 +11,14 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { ClientOnly, HeadContent, Scripts } from "@tanstack/react-router";
 import { lazy, type PropsWithChildren, Suspense } from "react";
-import { DefaultLogo } from "#/components/AppLogo.tsx";
-import { AppNavbar } from "#/components/AppNavbar.tsx";
-import { AppProviders } from "#/components/AppProviders.tsx";
-import { GameSwitcher } from "#/components/GameSwitcher.tsx";
-import { SocialMedia } from "#/components/SocialMedia.tsx";
-import { GettingStartedWizard } from "#/components/wizards/getting-started/components/GettingStartedWizard.tsx";
-import { useGettingStartedWizard } from "#/components/wizards/getting-started/hooks/use-getting-started-wizard.ts";
-import { clientEnv } from "#/env/client-env.ts";
+import { DefaultLogo } from "#/components/AppLogo";
+import { AppNavbar } from "#/components/AppNavbar";
+import { AppProviders } from "#/components/AppProviders";
+import { GameSwitcher } from "#/components/GameSwitcher";
+import { SocialMedia } from "#/components/SocialMedia";
+import { GettingStartedWizard } from "#/components/wizards/getting-started/components/GettingStartedWizard";
+import { useGettingStartedWizard } from "#/components/wizards/getting-started/hooks/use-getting-started-wizard";
+import { clientEnv } from "#/env/client-env";
 import classes from "./RootDocument.module.css";
 
 // The devtools pull in client-only browser APIs at module scope.
@@ -32,7 +32,8 @@ const Devtools = import.meta.env.DEV
 	: () => null;
 
 export const RootDocument = ({ children }: PropsWithChildren) => {
-	const [navbarOpened, { toggle: toggleNavbar }] = useDisclosure();
+	const [navbarOpened, { toggle: toggleNavbar, close: closeNavbar }] =
+		useDisclosure();
 
 	const { openWizard, closeWizard, setCurrentWizardStepId, wizardOpened } =
 		useGettingStartedWizard();
@@ -92,7 +93,10 @@ export const RootDocument = ({ children }: PropsWithChildren) => {
 						</AppShell.Header>
 
 						<AppShell.Navbar className={classes.navbar}>
-							<AppNavbar onGettingStartedWizard={openWizard} />
+							<AppNavbar
+								onGettingStartedWizard={openWizard}
+								onNavigate={closeNavbar}
+							/>
 						</AppShell.Navbar>
 
 						<AppShell.Main className={classes.main}>{children}</AppShell.Main>

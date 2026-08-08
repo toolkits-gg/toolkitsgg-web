@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ProfileTabPlaceholder } from "#/features/user/ProfileTabPlaceholder.tsx";
+import { ProfileTabPlaceholder } from "#/features/user/ProfileTabPlaceholder";
 import {
 	buildTabHead,
 	loadProfileTabData,
-} from "#/features/user/profile-tab-head.ts";
+} from "#/features/user/profile-tab-head";
 
 const Route = createFileRoute("/account/profile/$userId/collection-stats")({
 	loader: async ({ params, context }) =>

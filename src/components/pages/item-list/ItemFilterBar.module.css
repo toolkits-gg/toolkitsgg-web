@@ -21,14 +21,18 @@
 	flex: 0 0 auto;
 }
 
-.searchInput {
-	flex: 1 1 auto;
-	min-width: 180px;
-	max-width: 480px;
-}
-
 .activeFiltersRow {
 	padding: 0 var(--mantine-spacing-md) var(--mantine-spacing-xs);
+}
+
+.panelWrapper {
+	position: relative;
+}
+
+.panelPaper {
+	border-top: none;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
 .expandedOverlay {

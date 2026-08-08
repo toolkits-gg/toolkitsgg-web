@@ -1,13 +1,7 @@
-import {
-	Body,
-	Button,
-	Container,
-	Head,
-	Html,
-	Section,
-	Tailwind,
-	Text,
-} from "react-email";
+import { Text } from "react-email";
+import { EmailButton } from "#/emails/_components/EmailButton";
+import { EmailLayout } from "#/emails/_components/EmailLayout";
+import { clientEnv } from "#/env/client-env";
 
 type EmailPasswordResetProps = {
 	toName: string;
@@ -15,36 +9,32 @@ type EmailPasswordResetProps = {
 };
 
 const EmailPasswordReset = ({ toName, url }: EmailPasswordResetProps) => {
+	const appName = clientEnv.VITE_APP_NAME;
+
 	return (
-		<Html>
-			<Head />
-			<Tailwind>
-				<Body className="m-8 text-center font-sans">
-					<Container>
-						<Section>
-							<Text>
-								Hello {toName}, you have requested to reset your password. Click
-								the button below to reset your password.
-							</Text>
-						</Section>
-						<Section>
-							<Button
-								href={url}
-								className="m-2 rounded bg-black p-2 text-white"
-							>
-								Reset Password
-							</Button>
-						</Section>
-					</Container>
-				</Body>
-			</Tailwind>
-		</Html>
+		<EmailLayout
+			preview={`Reset the password for your ${appName} account`}
+			heading="Reset your password"
+		>
+			<Text className="mt-4 text-gray-700 text-sm leading-6">
+				Hi {toName}, we received a request to reset the password for your{" "}
+				{appName} account. Choose a new one using the button below.
+			</Text>
+
+			<EmailButton href={url} label="Reset password" />
+
+			<Text className="mt-6 mb-0 text-gray-500 text-xs leading-5">
+				This link expires in one hour and can only be used once. If you did not
+				request a reset, ignore this email; your password will not change.
+			</Text>
+		</EmailLayout>
 	);
 };
 
 EmailPasswordReset.PreviewProps = {
 	toName: "TK",
-	url: "http://localhost:3000/password-reset/abc123",
+	url: "http://localhost:3000/api/auth/reset-password/abc123?callbackURL=%2Freset-password",
 } as EmailPasswordResetProps;
 
+export default EmailPasswordReset;
 export { EmailPasswordReset };

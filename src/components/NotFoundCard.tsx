@@ -2,7 +2,7 @@ import { Button } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { LuCompass } from "react-icons/lu";
-import { StatusCard } from "#/components/StatusCard.tsx";
+import { StatusCard } from "#/components/StatusCard";
 
 type NotFoundCardProps = {
 	badge?: string;

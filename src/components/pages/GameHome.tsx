@@ -16,7 +16,7 @@ import { LuExternalLink } from "react-icons/lu";
 import {
 	getGameLogoComponent,
 	getGameMetadata,
-} from "#/game-registry/public-registry.ts";
+} from "#/games-registry/public-registry";
 
 type QuickLink = {
 	label: string;
@@ -91,7 +91,7 @@ const GameHomePage = ({ gameId }: GameHomePageProps) => {
 					</Title>
 					<Card withBorder padding="lg" radius="md">
 						<Text size="sm" c="dimmed" ta="center">
-							No {metadata?.label ?? gameId} news yet — check back soon.
+							No {metadata?.label ?? gameId} news yet - check back soon.
 						</Text>
 					</Card>
 				</Stack>

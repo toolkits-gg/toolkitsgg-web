@@ -1,28 +1,15 @@
+import { usernameClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
-import { clientEnv } from "#/env/client-env.ts";
+import { clientEnv } from "#/env/client-env";
 
 const authClient = createAuthClient({
 	baseURL: clientEnv.VITE_APP_URL || "http://localhost:3000",
+	// Mirrors the plugins in auth.ts.
+	// Declared explicitly so the client never type-depends
+	// on the server module and everything it pulls in.
+	plugins: [usernameClient()],
 });
 
-// noinspection JSUnusedGlobalSymbols
-const { signIn, signUp, signOut, useSession, resetPassword, verifyEmail } =
-	authClient;
+const { signIn, signUp, signOut, useSession, resetPassword } = authClient;
 
-// noinspection JSUnusedGlobalSymbols
-const signInWithDiscord = async () => {
-	await authClient.signIn.social({
-		provider: "discord",
-	});
-};
-
-export {
-	authClient,
-	resetPassword,
-	signIn,
-	signInWithDiscord,
-	signOut,
-	signUp,
-	useSession,
-	verifyEmail,
-};
+export { authClient, resetPassword, signIn, signOut, signUp, useSession };

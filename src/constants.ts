@@ -1,5 +1,4 @@
-import { clientEnv } from "#/env/client-env.ts";
-import type { AppLogoSize } from "#/types.ts";
+import { clientEnv } from "#/env/client-env";
 
 const DISCORD_URL = "https://discord.gg/VQF23tPKyK";
 const CODEBERG_URL = "https://codeberg.org/toolkitsgg";
@@ -24,8 +23,6 @@ const OG_IMAGE = `${clientEnv.VITE_CLOUDFRONT_URL}/metadata/og-image.png`;
 const SERVER_RESOLVED_GAME_ID_SOURCES = [
 	"server-resolved-game-id-sources",
 ] as const;
-
-export const DEFAULT_APP_LOGO_SIZE: AppLogoSize = 36;
 
 export {
 	APP_DOMAIN,

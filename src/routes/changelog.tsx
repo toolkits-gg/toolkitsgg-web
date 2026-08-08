@@ -1,12 +1,12 @@
 import { Container } from "@mantine/core";
+import { Markdown } from "@tanstack/markdown/react";
 import { createFileRoute } from "@tanstack/react-router";
-import ReactMarkdown from "react-markdown";
 import changelogContent from "../../CHANGELOG.md?raw";
 
 function ChangelogPage() {
 	return (
 		<Container>
-			<ReactMarkdown>{changelogContent}</ReactMarkdown>
+			<Markdown>{changelogContent}</Markdown>
 		</Container>
 	);
 }

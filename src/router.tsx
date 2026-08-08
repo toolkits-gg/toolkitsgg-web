@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/tanstackstart-react";
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
 import { createSubdomainRewrite } from "./features/game/subdomain-rewrite";
@@ -14,9 +15,24 @@ function getRouter() {
 		defaultPreload: "intent",
 		defaultPreloadStaleTime: 0,
 		rewrite: createSubdomainRewrite(routeTree),
+		// The router swallows render/loader errors into its own catch boundary,
+		// so Sentry's global handlers never see them.
+		defaultOnCatch: (error, errorInfo) => {
+			Sentry.captureException(error, {
+				captureContext: {
+					contexts: { react: { componentStack: errorInfo.componentStack } },
+				},
+			});
+		},
 	});
 
 	setupRouterSsrQueryIntegration({ router, queryClient: context.queryClient });
+
+	if (!router.isServer) {
+		Sentry.addIntegration(
+			Sentry.tanstackRouterBrowserTracingIntegration(router),
+		);
+	}
 
 	return router;
 }

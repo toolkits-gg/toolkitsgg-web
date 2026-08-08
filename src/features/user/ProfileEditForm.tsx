@@ -2,7 +2,7 @@ import { Button, Group, Stack, Text, Textarea, TextInput } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { useForm } from "@tanstack/react-form";
 import { useState } from "react";
-import { useUpdateProfile } from "#/features/game/data/user-profile/use-user-profile-data.ts";
+import { useUpdateProfile } from "#/features/game/data/user-profile/use-user-profile-data";
 
 type ProfileEditFormProps = {
 	initialDisplayName: string;

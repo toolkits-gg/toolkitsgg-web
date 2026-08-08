@@ -1,8 +1,8 @@
 import type { MantineThemeOverride } from "@mantine/core";
-import { generateThemeColors } from "#/features/theme/generate-palette.ts";
+import { generateThemeColors } from "#/features/theme/generate-palette";
 import { baseTheme } from "#/features/theme/themes/base-theme";
-import type { ToolkitThemeDefinition } from "#/features/theme/types.ts";
-import { createThemeColors } from "#/features/theme/utils.ts";
+import type { ToolkitThemeDefinition } from "#/features/theme/types";
+import { createThemeColors } from "#/features/theme/utils";
 import { GAME_ID } from "#/games/clairobscur/core/constants";
 
 const clairObscurThemeColors = createThemeColors(
@@ -29,4 +29,4 @@ const THEME: ToolkitThemeDefinition = {
 	theme: clairObscurTheme,
 };
 
-export { clairObscurTheme, THEME };
+export { THEME };

@@ -1,7 +1,7 @@
 import { Button, Stack } from "@mantine/core";
 import { Link } from "@tanstack/react-router";
 import { SiDiscord, SiKofi, SiPatreon, SiPaypal } from "react-icons/si";
-import { DISCORD_URL, KOFI_URL, PATREON_URL, PAYPAL_URL } from "#/constants.ts";
+import { DISCORD_URL, KOFI_URL, PATREON_URL, PAYPAL_URL } from "#/constants";
 
 const SupportButtons = () => {
 	return (
@@ -26,7 +26,7 @@ const SupportButtons = () => {
 				rel="noopener noreferrer"
 				leftSection={<SiPaypal size={18} />}
 				variant="light"
-				color="blue"
+				color="primary"
 				fullWidth
 			>
 				Support via PayPal

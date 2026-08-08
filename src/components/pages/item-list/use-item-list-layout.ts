@@ -16,4 +16,4 @@ const useItemListLayout = () =>
 	});
 
 export type { ItemListLayout };
-export { ITEM_LIST_LAYOUT_KEY, useItemListLayout };
+export { useItemListLayout };

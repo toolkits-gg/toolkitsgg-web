@@ -7,8 +7,8 @@
  * Run with: pnpm tsx src/games/remnant2/wiki/rings.ts
  */
 
-import { RINGS } from "#/games/remnant2/core/item-data/rings.ts";
-import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category.ts";
+import { RINGS } from "#/games/remnant2/core/item-data/rings";
+import { syncWikiCategory } from "#/games/remnant2/wiki/sync-category";
 
 void syncWikiCategory([
 	{

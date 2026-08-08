@@ -1,4 +1,4 @@
-import type { BaseClairObscurItem } from "#/games/clairobscur/core/types.ts";
+import type { BaseClairObscurItem } from "#/games/clairobscur/core/types";
 
 type ClairObscurCharacterItem = BaseClairObscurItem & {};
 

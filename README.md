@@ -1,19 +1,20 @@
 # toolkitsgg-web
 
-This is the web application for Toolkits.gg. Toolkits.gg is a collection of gaming toolkits and utilities designed to enhance your experience in a variety of games. 
+This is the web application for Toolkits.gg. Toolkits.gg is a collection of gaming toolkits and utilities 
+designed to enhance your experience in a variety of games. Completely open-source, ad-free, with as much
+functionality as possible without requiring an account.
 
 ## Quick Links
 
-| Resource                                      | Description                                               |
-|-----------------------------------------------|-----------------------------------------------------------|
-| [Code of Conduct](.github/CODE_OF_CONDUCT.md) | Community standards and expectations                      |
-| [Support](.github/SUPPORT.md)                 | Ways to support the project                               |
-| [Discord](https://discord.gg/VQF23tPKyK)      | Community chat and help                                   |
-| [Local Setup](documentation/LOCALSETUP.md)    | Get the project running on your machine                   |
-| [Contributing](.github/CONTRIBUTING.md)       | Guidelines for contributing code and content              |
-| [Architecture](documentation/ARCHITECTURE.md) | Framework stack, game registry pattern, adding a new game |
-| [Themes](documentation/THEMES.md)             | Per-game theming, palette generation, light/dark handling |
-| [DAL](documentation/DAL.md)                   | Offline-first data layer for persisted state              |
+| Resource                                        | Description                                               |
+|-------------------------------------------------|-----------------------------------------------------------|
+| [Code of Conduct](.github/CODE_OF_CONDUCT.md)   | Community standards and expectations                      |
+| [Support](.github/SUPPORT.md)                   | Ways to support the project                               |
+| [Discord](https://discord.gg/VQF23tPKyK)        | Community chat and help                                   |
+| [Local Setup](documentation/LOCALSETUP.md)      | Get the project running on your machine                   |
+| [Contributing](.github/CONTRIBUTING.md)         | Guidelines for contributing code and content              |
+| [Themes](documentation/THEMES.md)               | Per-game theming, palette generation, light/dark handling |
+| [Adding a Game](documentation/ADDING-A-GAME.md) | Checklist for wiring up a new game                        |
 
 ## Contributing
 
@@ -25,7 +26,7 @@ the site – all help is appreciated.
 
 1. Read the [Contributing Guidelines](.github/CONTRIBUTING.md) and [Code of Conduct](.github/CODE_OF_CONDUCT.md).
 2. Follow the [Local Setup](documentation/LOCALSETUP.md) guide to get your environment ready.
-3. Open a pull request or [create an issue](https://github.com/toolkits-gg/toolkitsgg-web/issues).
+3. Open a pull request or [create an issue](https://codeberg.org/toolkitsgg/toolkitsgg-web/issues).
 
 ## Support
 

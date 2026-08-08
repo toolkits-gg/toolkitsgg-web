@@ -1,23 +1,23 @@
 import { Box, Stack } from "@mantine/core";
 import { createFileRoute, notFound, Outlet } from "@tanstack/react-router";
-import { NotFoundCard } from "#/components/NotFoundCard.tsx";
+import { NotFoundCard } from "#/components/NotFoundCard";
 import {
 	FALLBACK_DISPLAY_NAME,
 	OG_IMAGE,
 	SERVER_RESOLVED_GAME_ID_SOURCES,
-} from "#/constants.ts";
-import { clientEnv } from "#/env/client-env.ts";
+} from "#/constants";
+import { clientEnv } from "#/env/client-env";
 import { getServerResolvedGameInputsServerFn } from "#/features/game/active-game";
 import {
 	buildGetProfileQueryKey,
 	getPublicUserProfileServerFn,
 	getViewerUserIdServerFn,
 	mapUserToProfileData,
-} from "#/features/game/data/user-profile/user-profile.ts";
-import { ProfileHeader } from "#/features/user/ProfileHeader.tsx";
-import { ProfileTabNav } from "#/features/user/ProfileTabNav.tsx";
-import { resolveAvatar } from "#/features/user/utils.ts";
-import { getValidatedGameId } from "#/game-registry/public-registry.ts";
+} from "#/features/game/data/user-profile/user-profile";
+import { ProfileHeader } from "#/features/user/ProfileHeader";
+import { ProfileTabNav } from "#/features/user/ProfileTabNav";
+import { resolveAvatar } from "#/features/user/utils";
+import { getValidatedGameId } from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
 
 const ProfileLayout = () => {
@@ -93,7 +93,7 @@ const Route = createFileRoute("/account/profile/$userId")({
 		const meta = loaderData?.profileMeta;
 		if (!meta) return {};
 		const displayName = meta.displayName || FALLBACK_DISPLAY_NAME;
-		const title = `${displayName} — Toolkits.gg`;
+		const title = `${displayName} - Toolkits.gg`;
 		const description = meta.bio || `${displayName}'s profile on Toolkits.gg`;
 		const url = `${clientEnv.VITE_APP_URL}/account/profile/${params.userId}`;
 		return {

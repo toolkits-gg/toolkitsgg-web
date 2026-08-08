@@ -1,10 +1,7 @@
 import { MultiSelect, Stack, Text } from "@mantine/core";
 import { parseAsString } from "nuqs";
 import type { ReactNode } from "react";
-import { BuildCreatePage } from "#/components/pages/BuildCreate.tsx";
-import { BuildEditPage } from "#/components/pages/BuildEdit.tsx";
-import { BuildViewPage } from "#/components/pages/BuildView.tsx";
-import { ItemListPage } from "#/components/pages/ItemList.tsx";
+import { ItemListPage } from "#/components/pages/ItemList";
 import {
 	formatCategoryLabel,
 	getItemSubcategories,
@@ -15,9 +12,10 @@ import type {
 	AppItem,
 	GameFilterConfig,
 	GamePages,
-} from "#/features/game/types.ts";
+} from "#/features/game/types";
 import { ITEMS } from "#/games/slaythespire2/core/game-config/items";
-import { slayTheSpire2CollectedItemsData } from "#/games/slaythespire2/data/collected-items";
+import { LINKED_ITEM_CATEGORIES } from "#/games/slaythespire2/core/game-config/linked-item-categories";
+import { slayTheSpire2CollectedItemsData } from "#/games/slaythespire2/data/collected-items/use-collected-items";
 
 const slayTheSpire2FilterConfig: GameFilterConfig = {
 	label: "Slay the Spire 2 Filters",
@@ -82,7 +80,9 @@ const PAGES: GamePages = {
 	renderItemLookup: () => (
 		<ItemListPage
 			items={ITEMS}
-			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
+			resolveLinkedItems={(item) =>
+				resolveLinkedItems(item, ITEMS.all, LINKED_ITEM_CATEGORIES)
+			}
 			data={slayTheSpire2CollectedItemsData}
 			gameFilterConfig={slayTheSpire2FilterConfig}
 		/>
@@ -90,15 +90,14 @@ const PAGES: GamePages = {
 	renderCollectedItems: ({ mode }) => (
 		<ItemListPage
 			items={ITEMS}
-			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
+			resolveLinkedItems={(item) =>
+				resolveLinkedItems(item, ITEMS.all, LINKED_ITEM_CATEGORIES)
+			}
 			data={slayTheSpire2CollectedItemsData}
 			gameFilterConfig={slayTheSpire2FilterConfig}
 			viewMode={mode}
 		/>
 	),
-	renderCreateBuild: () => <BuildCreatePage />,
-	renderViewBuild: () => <BuildViewPage />,
-	renderEditBuild: () => <BuildEditPage />,
 };
 
 export { PAGES };

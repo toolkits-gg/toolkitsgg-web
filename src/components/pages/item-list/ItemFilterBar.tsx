@@ -1,54 +1,17 @@
-import {
-	ActionIcon,
-	Badge,
-	Box,
-	Button,
-	Checkbox,
-	CloseButton,
-	Collapse,
-	Flex,
-	Group,
-	Paper,
-	SegmentedControl,
-	SimpleGrid,
-	Stack,
-	Text,
-} from "@mantine/core";
+import { Box } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import type { ReactNode, Ref } from "react";
-import {
-	LuChevronUp,
-	LuFilter,
-	LuLayoutGrid,
-	LuTableProperties,
-	LuX,
-} from "react-icons/lu";
-import { ItemSearchInput } from "#/components/pages/item-list/item-filter-bar/ItemSearchInput.tsx";
-import type { ItemListLayout } from "#/components/pages/item-list/use-item-list-layout.ts";
+import { ActiveFilterChips } from "#/components/pages/item-list/item-filter-bar/ActiveFilterChips";
+import { ItemFilterBarTopRow } from "#/components/pages/item-list/item-filter-bar/ItemFilterBarTopRow";
+import { ItemFilterPanel } from "#/components/pages/item-list/item-filter-bar/ItemFilterPanel";
+import type { ItemFilterControls } from "#/components/pages/item-list/use-item-filters";
+import type { ItemListLayout } from "#/components/pages/item-list/use-item-list-layout";
 import classes from "./ItemFilterBar.module.css";
-
-type ActiveFilter = {
-	key: string;
-	label: string;
-	value: string;
-	onRemove: () => void;
-};
 
 type ItemFilterBarProps = {
 	ref?: Ref<HTMLDivElement>;
-	search: string;
-	onSearchChange: (value: string) => void;
-	showCollected: boolean;
-	onShowCollectedChange: (value: boolean) => void;
-	showUncollected: boolean;
-	onShowUncollectedChange: (value: boolean) => void;
-	dimUncollected: boolean;
-	onDimUncollectedChange: (value: boolean) => void;
-	showCollectableOnly: boolean;
-	onShowCollectableOnlyChange: (value: boolean) => void;
-	activeFilters: ActiveFilter[];
-	onClearAllFilters: () => void;
-	renderGameFilters?: ReactNode;
+	filters: ItemFilterControls;
+	exportMenu?: ReactNode;
 	hasCollectableItems: boolean;
 	layout: ItemListLayout;
 	onLayoutChange: (value: ItemListLayout) => void;
@@ -56,19 +19,8 @@ type ItemFilterBarProps = {
 
 const ItemFilterBar = ({
 	ref,
-	search,
-	onSearchChange,
-	showCollected,
-	onShowCollectedChange,
-	showUncollected,
-	onShowUncollectedChange,
-	dimUncollected,
-	onDimUncollectedChange,
-	showCollectableOnly,
-	onShowCollectableOnlyChange,
-	activeFilters,
-	onClearAllFilters,
-	renderGameFilters,
+	filters,
+	exportMenu,
 	hasCollectableItems,
 	layout,
 	onLayoutChange,
@@ -80,157 +32,27 @@ const ItemFilterBar = ({
 
 	return (
 		<Box ref={ref} className={classes.bar}>
-			<div className={classes.topRow}>
-				<ItemSearchInput
-					searchValue={search}
-					onSearchChange={(e) => onSearchChange(e)}
-				/>
-				<SegmentedControl
-					className={classes.layoutToggle}
-					size="xs"
-					value={layout}
-					onChange={(value) => onLayoutChange(value as ItemListLayout)}
-					data={[
-						{
-							value: "cards",
-							label: <LuLayoutGrid size={16} aria-label="Card layout" />,
-						},
-						{
-							value: "table",
-							label: <LuTableProperties size={16} aria-label="Table layout" />,
-						},
-					]}
-				/>
-				<ActionIcon
-					variant="subtle"
-					size="lg"
-					onClick={() => setExpanded((v) => !v)}
-					aria-label={expanded ? "Collapse filters" : "Expand filters"}
-				>
-					{expanded ? <LuChevronUp size={18} /> : <LuFilter size={18} />}
-				</ActionIcon>
-			</div>
-
-			{activeFilters.length > 0 && (
-				<div className={classes.activeFiltersRow}>
-					<Group gap="2xs" wrap="wrap" align="center">
-						{activeFilters.map((f) => (
-							<Badge
-								key={f.key}
-								variant="light"
-								size="sm"
-								rightSection={
-									<CloseButton
-										size="xs"
-										iconSize={10}
-										onClick={f.onRemove}
-										aria-label={`Remove ${f.label} filter`}
-									/>
-								}
-								pr={2}
-							>
-								{f.label}: {f.value}
-							</Badge>
-						))}
-						<Button
-							variant="subtle"
-							size="compact-xs"
-							onClick={onClearAllFilters}
-						>
-							Clear all
-						</Button>
-					</Group>
-				</div>
-			)}
-
-			<Box style={{ position: "relative" }}>
-				<Collapse expanded={expanded}>
-					<Box className={classes.expandedOverlay}>
-						<Paper
-							withBorder
-							style={{
-								borderTop: "none",
-								borderTopLeftRadius: 0,
-								borderTopRightRadius: 0,
-							}}
-						>
-							<Stack gap="md" p="md">
-								<Flex justify="flex-end">
-									<ActionIcon
-										variant="subtle"
-										size="sm"
-										onClick={() => setExpanded(false)}
-										aria-label="Close filters"
-									>
-										<LuX size={14} />
-									</ActionIcon>
-								</Flex>
-
-								{hasCollectableItems && (
-									<Paper
-										withBorder
-										p="md"
-										bg="light-dark(var(--mantine-color-card-3),var(--mantine-color-card-7))"
-									>
-										<Stack gap="xs">
-											<Text fz="sm" fw={500} c="dimmed" mb={2}>
-												Collection Options
-											</Text>
-											<SimpleGrid cols={{ base: 1, xs: 2, sm: 4 }} spacing="md">
-												<Checkbox
-													checked={showCollected}
-													onChange={(e) =>
-														onShowCollectedChange(e.currentTarget.checked)
-													}
-													label="Show collected"
-													size="sm"
-												/>
-												<Checkbox
-													checked={showUncollected}
-													onChange={(e) =>
-														onShowUncollectedChange(e.currentTarget.checked)
-													}
-													label="Show uncollected"
-													size="sm"
-												/>
-												<Checkbox
-													checked={dimUncollected}
-													onChange={(e) =>
-														onDimUncollectedChange(e.currentTarget.checked)
-													}
-													label="Dim uncollected"
-													size="sm"
-												/>
-												<Checkbox
-													checked={showCollectableOnly}
-													onChange={(e) =>
-														onShowCollectableOnlyChange(e.currentTarget.checked)
-													}
-													label="Collectable only"
-													size="sm"
-												/>
-											</SimpleGrid>
-										</Stack>
-									</Paper>
-								)}
-
-								{renderGameFilters && (
-									<Paper
-										withBorder
-										p="md"
-										bg="light-dark(var(--mantine-color-card-3),var(--mantine-color-card-7))"
-									>
-										{renderGameFilters}
-									</Paper>
-								)}
-							</Stack>
-						</Paper>
-					</Box>
-				</Collapse>
-			</Box>
+			<ItemFilterBarTopRow
+				search={filters.search}
+				onSearchChange={(value) => filters.setUniversalParam("search", value)}
+				layout={layout}
+				onLayoutChange={onLayoutChange}
+				expanded={expanded}
+				onToggleExpanded={() => setExpanded((v) => !v)}
+				exportMenu={exportMenu}
+			/>
+			<ActiveFilterChips
+				activeFilters={filters.activeFilters}
+				onClearAllFilters={filters.clearAllFilters}
+			/>
+			<ItemFilterPanel
+				filters={filters}
+				hasCollectableItems={hasCollectableItems}
+				expanded={expanded}
+				onClose={() => setExpanded(false)}
+			/>
 		</Box>
 	);
 };
 
 export { ItemFilterBar };
-export type { ActiveFilter };

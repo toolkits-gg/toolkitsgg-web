@@ -3,16 +3,19 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { favicons } from "favicons";
 import sharp from "sharp";
-import FAVICON_REGISTRY from "./src/game-registry/favicon-registry.json" with {
+import FAVICON_REGISTRY from "./src/games-registry/favicon-registry.json" with {
 	type: "json",
 };
 import IMAGE_SIZES from "#/image-sizes.json" with {
 	type: "json",
 };
+import WALLPAPER_SIZES from "#/features/wallpaper/wallpaper-sizes.json" with {
+	type: "json",
+};
 
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// ! Deliberately hardcording to avoid injectint env vars
+// ! Deliberately hardcording to avoid injecting env vars
 const CLOUDFRONT_URL = "https://d1ig3kkc8hj9hz.cloudfront.net";
 
 export async function generateFavicons() {
@@ -112,6 +115,9 @@ const collectImageUrlsForGame = async (gameId) => {
 	return [...urls];
 };
 
+// Mirrored by wallpaperVariantPath in src/features/wallpaper/wallpaper-image.ts,
+// which is how the app addresses these files on the CDN. Changing the layout
+// here means changing it there too; that module's test pins the format.
 const expectedOutputPath = (gameId, imageUrl, width, height) => {
 	const ext = path.extname(imageUrl);
 	const dir = path.dirname(imageUrl);
@@ -144,7 +150,7 @@ const processItem = async (gameId, imageUrl, stats) => {
 	const response = await fetch(sourceUrl);
 	if (!response.ok) {
 		stats.missingOnCdn += 1;
-		console.warn(`  ! ${gameId}/${imageUrl} — CDN returned ${response.status}`);
+		console.warn(`  ! ${gameId}/${imageUrl} - CDN returned ${response.status}`);
 		return;
 	}
 	const buffer = Buffer.from(await response.arrayBuffer());
@@ -201,4 +207,103 @@ export async function generateItemImages() {
 		);
 	}
 	console.log("All item images generated.");
+}
+
+// ----------------------------------------------------------------------------
+// Wallpaper resizing
+// ----------------------------------------------------------------------------
+//
+// Same idempotent fetch-and-resize as the item task, with three differences that
+// come from wallpapers being wide art rather than square icons:
+//
+//   - The source list is each game's game-config/wallpapers.json, not a regex
+//     over item-data. Games without that file are skipped.
+//   - Sizes come from wallpaper-sizes.json (16:9), not image-sizes.json.
+//   - `cover` crops to the target aspect instead of `contain` letterboxing it,
+//     and `withoutEnlargement` leaves art smaller than the target alone rather
+//     than upscaling it into blur.
+// ----------------------------------------------------------------------------
+
+const collectWallpapersForGame = async (gameId) => {
+	const file = path.join(
+		ITEM_DATA_GLOB_ROOT,
+		gameId,
+		"core",
+		"game-config",
+		"wallpapers.json",
+	);
+	try {
+		return JSON.parse(await readFile(file, "utf8"));
+	} catch {
+		return [];
+	}
+};
+
+const processWallpaper = async (gameId, imageUrl, stats) => {
+	const targets = Object.values(WALLPAPER_SIZES).map(([w, h]) => ({
+		w,
+		h,
+		out: expectedOutputPath(gameId, imageUrl, w, h),
+	}));
+	const presence = await Promise.all(targets.map((t) => fileExists(t.out)));
+	const missing = targets.filter((_, i) => !presence[i]);
+
+	if (missing.length === 0) {
+		stats.skipped += 1;
+		return;
+	}
+
+	const sourceUrl = `${CLOUDFRONT_URL}/games/${gameId}/${imageUrl.replace(/^\//, "")}`;
+	const response = await fetch(sourceUrl);
+	if (!response.ok) {
+		stats.missingOnCdn += 1;
+		console.warn(`  ! ${gameId}${imageUrl} - CDN returned ${response.status}`);
+		return;
+	}
+	const buffer = Buffer.from(await response.arrayBuffer());
+
+	await Promise.all(
+		missing.map(async ({ w, h, out }) => {
+			const resized = await sharp(buffer)
+				.resize(w, h, {
+					fit: "cover",
+					position: "attention",
+					withoutEnlargement: true,
+				})
+				.toBuffer();
+			await mkdir(path.dirname(out), { recursive: true });
+			await writeFile(out, resized);
+			stats.variantsWritten += 1;
+		}),
+	);
+	stats.generated += 1;
+};
+
+export async function generateWallpaperImages() {
+	const gameIds = Object.keys(FAVICON_REGISTRY).filter((k) => k !== "default");
+	if (gameIds.length === 0) {
+		console.log("No games registered.");
+		return;
+	}
+
+	console.log(
+		`Generating wallpapers for ${gameIds.length} game(s) at ${Object.keys(WALLPAPER_SIZES).length} sizes...`,
+	);
+
+	for (const gameId of gameIds) {
+		const wallpapers = await collectWallpapersForGame(gameId);
+		if (wallpapers.length === 0) {
+			console.log(`  ${gameId}: no wallpapers`);
+			continue;
+		}
+		const stats = { generated: 0, skipped: 0, missingOnCdn: 0, variantsWritten: 0 };
+		const jobs = wallpapers.map(
+			({ imageUrl }) => () => processWallpaper(gameId, imageUrl, stats),
+		);
+		await runWithConcurrency(jobs, FETCH_CONCURRENCY);
+		console.log(
+			`✓ ${gameId}: ${stats.generated} generated (${stats.variantsWritten} variants), ${stats.skipped} skipped, ${stats.missingOnCdn} missing on CDN (${wallpapers.length} wallpapers total)`,
+		);
+	}
+	console.log("All wallpapers generated.");
 }

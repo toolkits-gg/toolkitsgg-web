@@ -1,21 +1,28 @@
 import { Tabs } from "@mantine/core";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
+import { useGameId } from "#/features/game/use-game-id";
+import { gameSupportsBuilds } from "#/games-registry/builds-registry";
 
 type ProfileTabNavProps = {
 	basePath: string;
 	showDataSync?: boolean;
 };
 
-const TABS = [
+type ProfileTab = { label: string; path: string; requiresBuilds?: boolean };
+
+const TABS: readonly ProfileTab[] = [
 	{ label: "Home", path: "" },
 	{ label: "Collected Items", path: "collected-items" },
-	{ label: "Liked Builds", path: "liked-builds" },
-	{ label: "Build Collections", path: "build-collections" },
-	{ label: "Created Builds", path: "created-builds" },
-	{ label: "Featured Builds", path: "featured-builds" },
-] as const;
+	{ label: "Liked Builds", path: "liked-builds", requiresBuilds: true },
+	{
+		label: "Build Collections",
+		path: "build-collections",
+		requiresBuilds: true,
+	},
+	{ label: "Created Builds", path: "created-builds", requiresBuilds: true },
+];
 
-const DATA_SYNC_TAB = { label: "Data Sync", path: "data-sync" } as const;
+const DATA_SYNC_TAB: ProfileTab = { label: "Data Sync", path: "data-sync" };
 
 export function ProfileTabNav({
 	basePath,
@@ -23,13 +30,16 @@ export function ProfileTabNav({
 }: ProfileTabNavProps) {
 	const navigate = useNavigate();
 	const location = useRouterState({ select: (s) => s.location });
+	const gameId = useGameId();
+	const supportsBuilds = gameSupportsBuilds(gameId);
 
 	const getTabValue = (path: string) =>
 		path === "" ? basePath : `${basePath}/${path}`;
 
-	const allTabs = showDataSync
-		? ([...TABS, DATA_SYNC_TAB] as readonly { label: string; path: string }[])
-		: (TABS as readonly { label: string; path: string }[]);
+	const visibleTabs = TABS.filter(
+		(tab) => !tab.requiresBuilds || supportsBuilds,
+	);
+	const allTabs = showDataSync ? [...visibleTabs, DATA_SYNC_TAB] : visibleTabs;
 
 	const activeTab = (() => {
 		const pathname = location.pathname.replace(/\/$/, "");
