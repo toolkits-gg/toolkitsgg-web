@@ -1,6 +1,6 @@
 import { ActionIcon, Box, Flex, Text } from "@mantine/core";
 import clsx from "clsx";
-import { LuCheck, LuInfo, LuPlus, LuX } from "react-icons/lu";
+import { LuCheck, LuMaximize, LuPlus, LuX } from "react-icons/lu";
 import { AppGameImage } from "#/components/AppGameImage.tsx";
 import { AppItemDescription } from "#/components/AppItemDescription.tsx";
 import type { CollectItemInput } from "#/features/game/data/types.ts";
@@ -56,7 +56,7 @@ const ItemCard = ({
 					title="View details"
 					onClick={() => onInfo(item)}
 				>
-					<LuInfo size={16} />
+					<LuMaximize size={16} />
 				</ActionIcon>
 				{readOnly ? null : isCollectable ? (
 					<ActionIcon
