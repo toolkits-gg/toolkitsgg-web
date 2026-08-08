@@ -50,6 +50,13 @@ const allGames: GameEntry[] = REGISTERED_GAME_IDS.map((id) => ({
 const sortByLabel = (a: GameEntry, b: GameEntry) =>
 	a.label.localeCompare(b.label);
 
+// Profile pages render per-game content without a game segment in the path,
+// so switching games there swaps the content rather than the page.
+const isProfilePath = (pathname: string) =>
+	pathname === "/profile" ||
+	pathname.startsWith("/profile/") ||
+	pathname.startsWith("/account/profile/");
+
 type GameRowProps = {
 	entry: GameEntry;
 	isFavorited: boolean;
@@ -156,7 +163,7 @@ function GameSwitcher() {
 		) {
 			segments[0] = id;
 			void navigate({ to: `/${segments.join("/")}` as never });
-		} else {
+		} else if (!isProfilePath(location.pathname)) {
 			void navigate({ to: `/${id}` as never });
 		}
 		handleClose();

@@ -1,7 +1,7 @@
 import { Text, type TextProps } from "@mantine/core";
 import { Fragment, type ReactNode } from "react";
 
-type ItemDescriptionProps = {
+type AppItemDescriptionProps = {
 	description: string[];
 	/** Render only the first description line (e.g. compact card preview). */
 	firstOnly?: boolean;
@@ -50,7 +50,7 @@ const parseDescriptionSegments = (line: string): DescriptionSegment[] => {
 	}
 
 	return segments;
-}
+};
 
 /**
  * Splits a string on `\n` (introduced by a `<br>` inside an upgrade token) into
@@ -65,14 +65,6 @@ const withLineBreaks = (text: string, keyPrefix: string): ReactNode[] => {
 				[<br key={`${keyPrefix}-br-${index}`} />, part],
 	);
 };
-
-export const renderDescriptionVariant = (
-	line: string,
-	variant: "base" | "upgraded",
-): string =>	line.replace(UPGRADE_TOKEN_REGEX, (_match, base: string, upgraded: string) =>
-		variant === "base" ? base : upgraded,
-	);
-
 const renderSegment = (
 	segment: DescriptionSegment,
 	variant: "base" | "upgraded",
@@ -97,12 +89,12 @@ const renderLine = (line: string, variant: "base" | "upgraded"): ReactNode[] =>
 		renderSegment(segment, variant, `seg-${index}`),
 	);
 
-const AppItemDescription = ({
+export const AppItemDescription = ({
 	description,
 	firstOnly = false,
 	variant = "base",
 	...textProps
-}: ItemDescriptionProps) => {
+}: AppItemDescriptionProps) => {
 	const hasDescription = description.length > 0 && description[0] !== "";
 	if (!hasDescription) return null;
 
@@ -120,5 +112,10 @@ const AppItemDescription = ({
 	);
 };
 
-export type { ItemDescriptionProps };
-export { AppItemDescription };
+export const renderDescriptionVariant = (
+	line: string,
+	variant: "base" | "upgraded",
+): string =>
+	line.replace(UPGRADE_TOKEN_REGEX, (_match, base: string, upgraded: string) =>
+		variant === "base" ? base : upgraded,
+	);

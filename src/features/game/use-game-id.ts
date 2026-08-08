@@ -1,16 +1,26 @@
-import { useRouteContext } from "@tanstack/react-router";
+import { useParams, useRouteContext } from "@tanstack/react-router";
 import { useSelector } from "@tanstack/react-store";
 import { gameStore } from "#/features/game/store.ts";
+import { getValidatedGameId } from "#/game-registry/public-registry.ts";
 import type { GameId } from "@/prisma";
 
 /**
- * Client store wins (when set), so GameSwitcher clicks update the UI instantly;
- * otherwise fall back to the SSR value (from initial paint/hydration).
+ * The route wins whenever the URL names a game, so a stale store can't
+ * shadow the page being viewed. Otherwise the client store (when set) keeps
+ * GameSwitcher clicks instant, falling back to the SSR value from initial
+ * paint/hydration.
  */
 const useGameId = (): GameId => {
 	const { ssrGameId } = useRouteContext({ from: "__root__" });
+	const params = useParams({ strict: false });
 	const clientGameId = useSelector(gameStore, (s) => s.gameId);
-	return clientGameId ?? ssrGameId ?? "none";
+
+	return (
+		getValidatedGameId(params.gameId ?? "") ??
+		clientGameId ??
+		ssrGameId ??
+		"none"
+	);
 };
 
 export { useGameId };

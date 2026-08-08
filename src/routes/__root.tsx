@@ -30,12 +30,13 @@ const Route = createRootRouteWithContext<MyRouterContext>()({
 	beforeLoad: async ({ context, location }) => {
 		// Cache the server-fn result for the lifetime of the session - the
 		// active-game cookie doesn't change without a hard reload or setActiveGameCookie
-		const { cookieGameId } = await context.queryClient.ensureQueryData({
-			queryKey: SERVER_RESOLVED_GAME_ID_SOURCES,
-			queryFn: () => getServerResolvedGameInputsServerFn(),
-			staleTime: Number.POSITIVE_INFINITY,
-			gcTime: Number.POSITIVE_INFINITY,
-		});
+		const { cookieGameId, subdomainGameId } =
+			await context.queryClient.ensureQueryData({
+				queryKey: SERVER_RESOLVED_GAME_ID_SOURCES,
+				queryFn: () => getServerResolvedGameInputsServerFn(),
+				staleTime: Number.POSITIVE_INFINITY,
+				gcTime: Number.POSITIVE_INFINITY,
+			});
 
 		const searchParams = new URLSearchParams(location.searchStr);
 		const devOverride = import.meta.env.DEV
@@ -43,13 +44,19 @@ const Route = createRootRouteWithContext<MyRouterContext>()({
 			: null;
 		// On a game subdomain this segment is the one the router rewrite added,
 		// so the subdomain reaches the chain through the URL like any other source.
+		// Reserved paths keep their own path there, which is what subdomainGameId covers.
 		const firstSeg = location.pathname.split("/").filter(Boolean)[0] ?? "";
 		const routeGameId = getValidatedGameId(firstSeg) ?? null;
 		const searchGameId =
 			getValidatedGameId(searchParams.get("gameId") ?? "") ?? null;
 
 		const ssrGameId: GameId | null =
-			routeGameId ?? devOverride ?? searchGameId ?? cookieGameId ?? null;
+			routeGameId ??
+			devOverride ??
+			searchGameId ??
+			subdomainGameId ??
+			cookieGameId ??
+			null;
 
 		return { ssrGameId };
 	},
