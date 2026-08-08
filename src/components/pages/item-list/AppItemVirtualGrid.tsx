@@ -1,6 +1,6 @@
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { useLayoutEffect, useRef, useState } from "react";
-import { ItemCard } from "#/components/pages/item-list/ItemCard.tsx";
+import { ItemCard } from "#/components/pages/item-list/app-item-virtual-grid/ItemCard.tsx";
 import { ItemListEmptyState } from "#/components/pages/item-list/ItemListEmptyState.tsx";
 import { isItemCollectable } from "#/components/pages/item-list/is-item-collectable.ts";
 import type { CollectItemInput } from "#/features/game/data/types.ts";

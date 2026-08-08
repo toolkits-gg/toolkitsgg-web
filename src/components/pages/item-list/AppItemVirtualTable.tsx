@@ -6,15 +6,15 @@ import {
 } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { useRef, useState } from "react";
-import { ItemTableHeaderRow } from "#/components/app-item-virtual-table/ItemTableHeaderRow.tsx";
+import { ItemTableHeaderRow } from "#/components/pages/item-list/app-item-virtual-table/ItemTableHeaderRow.tsx";
 import {
 	ItemTableRow,
 	ROW_HEIGHT,
-} from "#/components/app-item-virtual-table/ItemTableRow.tsx";
+} from "#/components/pages/item-list/app-item-virtual-table/ItemTableRow.tsx";
 import {
 	createItemTableColumns,
 	useItemTableColumnVisibility,
-} from "#/components/app-item-virtual-table/item-table-columns.tsx";
+} from "#/components/pages/item-list/app-item-virtual-table/item-table-columns.tsx";
 import { ItemListEmptyState } from "#/components/pages/item-list/ItemListEmptyState.tsx";
 import { isItemCollectable } from "#/components/pages/item-list/is-item-collectable.ts";
 import type { CollectItemInput } from "#/features/game/data/types.ts";

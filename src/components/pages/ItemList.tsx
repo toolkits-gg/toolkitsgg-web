@@ -1,8 +1,8 @@
 import { Box, Modal } from "@mantine/core";
 import { useLayoutEffect, useRef, useState } from "react";
-import { AppItemInfoModal } from "#/components/AppItemInfoModal.tsx";
-import { AppItemVirtualGrid } from "#/components/AppItemVirtualGrid.tsx";
-import { AppItemVirtualTable } from "#/components/AppItemVirtualTable.tsx";
+import { AppItemInfoModal } from "#/components/pages/item-list/AppItemInfoModal.tsx";
+import { AppItemVirtualGrid } from "#/components/pages/item-list/AppItemVirtualGrid.tsx";
+import { AppItemVirtualTable } from "#/components/pages/item-list/AppItemVirtualTable.tsx";
 import { ItemCollectionShareButton } from "#/components/pages/item-list/ItemCollectionShareButton.tsx";
 import { ItemFilterBar } from "#/components/pages/item-list/ItemFilterBar.tsx";
 import { isItemCollectable } from "#/components/pages/item-list/is-item-collectable.ts";

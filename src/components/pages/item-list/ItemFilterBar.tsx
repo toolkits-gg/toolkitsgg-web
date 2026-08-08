@@ -23,7 +23,7 @@ import {
 	LuTableProperties,
 	LuX,
 } from "react-icons/lu";
-import { ItemSearchInput } from "#/components/pages/item-list/ItemSearchInput.tsx";
+import { ItemSearchInput } from "#/components/pages/item-list/item-filter-bar/ItemSearchInput.tsx";
 import type { ItemListLayout } from "#/components/pages/item-list/use-item-list-layout.ts";
 import classes from "./ItemFilterBar.module.css";
 
