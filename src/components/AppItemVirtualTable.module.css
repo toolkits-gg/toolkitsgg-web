@@ -1,0 +1,136 @@
+.container {
+	width: 100%;
+}
+
+.table {
+	display: grid;
+	/* minmax(0, 1fr) keeps the grid tracks from being sized by the rows'
+	   max-content width, which would otherwise overflow the page. */
+	grid-template-columns: minmax(0, 1fr);
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.thead {
+	display: grid;
+	min-width: 0;
+	position: sticky;
+	top: calc(
+		var(--app-shell-header-offset, 60px) +
+		var(--item-filter-bar-height, 52px)
+	);
+	z-index: 9;
+	background-color: light-dark(
+		var(--mantine-color-primary-1),
+		var(--mantine-color-primary-9)
+	);
+	border-bottom: 1px solid var(--mantine-color-primary-5);
+}
+
+.headerRow {
+	display: flex;
+	width: 100%;
+}
+
+.th {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 6px var(--mantine-spacing-xs);
+	color: var(--mantine-color-dimmed);
+	font-size: var(--mantine-font-size-xs);
+	font-weight: 700;
+	text-align: left;
+	text-transform: uppercase;
+	user-select: none;
+}
+
+.sortable {
+	cursor: pointer;
+
+	&:hover {
+		color: var(--mantine-color-primary-5);
+	}
+}
+
+.thLabel {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.tbody {
+	display: grid;
+	min-width: 0;
+	position: relative;
+	width: 100%;
+}
+
+.row {
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	align-items: center;
+	border-bottom: 1px solid
+		light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-5));
+	border-left: 3px solid transparent;
+	transition:
+		background-color 0.1s,
+		border-color 0.1s;
+}
+
+.interactive {
+	cursor: pointer;
+
+	&:hover {
+		background-color: light-dark(
+			var(--mantine-color-gray-1),
+			var(--mantine-color-dark-6)
+		);
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--mantine-color-primary-5);
+		outline-offset: -2px;
+	}
+}
+
+.collected {
+	border-left-color: light-dark(
+		var(--mantine-color-green-7),
+		var(--mantine-color-green-5)
+	);
+}
+
+.dimmed {
+	filter: grayscale(100%);
+	opacity: 0.5;
+
+	&:hover {
+		filter: grayscale(70%);
+		opacity: 0.75;
+	}
+}
+
+.td {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	padding: 0 var(--mantine-spacing-xs);
+	overflow: hidden;
+}
+
+.notCollectable {
+	&:disabled,
+	&[data-disabled] {
+		border: 0;
+		color: var(--mantine-color-gray-5);
+		background-color: transparent;
+	}
+}
+
+.readOnlyCheck {
+	color: light-dark(var(--mantine-color-green-7), var(--mantine-color-green-5));
+}

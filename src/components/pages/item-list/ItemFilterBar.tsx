@@ -9,14 +9,22 @@ import {
 	Flex,
 	Group,
 	Paper,
+	SegmentedControl,
 	SimpleGrid,
 	Stack,
 	Text,
 } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import type { ReactNode } from "react";
-import { LuChevronUp, LuFilter, LuX } from "react-icons/lu";
+import {
+	LuChevronUp,
+	LuFilter,
+	LuLayoutGrid,
+	LuTableProperties,
+	LuX,
+} from "react-icons/lu";
 import { ItemSearchInput } from "#/components/pages/item-list/ItemSearchInput.tsx";
+import type { ItemListLayout } from "#/components/pages/item-list/use-item-list-layout.ts";
 import classes from "./ItemFilterBar.module.css";
 
 type ActiveFilter = {
@@ -41,6 +49,8 @@ type ItemFilterBarProps = {
 	onClearAllFilters: () => void;
 	renderGameFilters?: ReactNode;
 	hasCollectableItems: boolean;
+	layout: ItemListLayout;
+	onLayoutChange: (value: ItemListLayout) => void;
 };
 
 const ItemFilterBar = ({
@@ -58,6 +68,8 @@ const ItemFilterBar = ({
 	onClearAllFilters,
 	renderGameFilters,
 	hasCollectableItems,
+	layout,
+	onLayoutChange,
 }: ItemFilterBarProps) => {
 	const [expanded, setExpanded] = useLocalStorage({
 		key: "item-filters-expanded",
@@ -70,6 +82,22 @@ const ItemFilterBar = ({
 				<ItemSearchInput
 					searchValue={search}
 					onSearchChange={(e) => onSearchChange(e)}
+				/>
+				<SegmentedControl
+					className={classes.layoutToggle}
+					size="xs"
+					value={layout}
+					onChange={(value) => onLayoutChange(value as ItemListLayout)}
+					data={[
+						{
+							value: "cards",
+							label: <LuLayoutGrid size={16} aria-label="Card layout" />,
+						},
+						{
+							value: "table",
+							label: <LuTableProperties size={16} aria-label="Table layout" />,
+						},
+					]}
 				/>
 				<ActionIcon
 					variant="subtle"

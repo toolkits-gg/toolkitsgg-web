@@ -1,8 +1,8 @@
-import { Modal, Text } from "@mantine/core";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { useLayoutEffect, useRef, useState } from "react";
-import { AppItemInfoModal } from "#/components/AppItemInfoModal.tsx";
 import { ItemCard } from "#/components/pages/item-list/ItemCard.tsx";
+import { ItemListEmptyState } from "#/components/pages/item-list/ItemListEmptyState.tsx";
+import { isItemCollectable } from "#/components/pages/item-list/is-item-collectable.ts";
 import type { CollectItemInput } from "#/features/game/data/types.ts";
 import type { AppItem } from "#/features/game/types.ts";
 import classes from "./AppItemVirtualGrid.module.css";
@@ -18,30 +18,29 @@ type RowData =
 
 export type AppItemVirtualGridProps = {
 	items: AppItem[];
-	resolveLinkedItems: (item: AppItem) => AppItem[];
 	categories: string[];
 	uncollectableCategories: string[];
 	collectedIds: string[];
 	dimUncollected: boolean;
 	onCollect: ({ itemId, itemName }: CollectItemInput) => void;
 	onUncollect: ({ itemId, itemName }: CollectItemInput) => void;
+	onInfo: (item: AppItem) => void;
 	readOnly?: boolean;
 };
 
 export const AppItemVirtualGrid = ({
 	items,
-	resolveLinkedItems,
 	categories,
 	uncollectableCategories,
 	collectedIds,
 	dimUncollected,
 	onCollect,
 	onUncollect,
+	onInfo,
 	readOnly = false,
 }: AppItemVirtualGridProps) => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [columns, setColumns] = useState(1);
-	const [activeItem, setActiveItem] = useState<AppItem | null>(null);
 
 	useLayoutEffect(() => {
 		const el = containerRef.current;
@@ -63,9 +62,7 @@ export const AppItemVirtualGrid = ({
 	}, []);
 
 	const isCollectable = (item: AppItem) =>
-		!uncollectableCategories.some(
-			(uc) => String(item.category).toLowerCase() === uc.toLowerCase(),
-		);
+		isItemCollectable(item.category, uncollectableCategories);
 
 	const rowData: RowData[] = [];
 	for (const category of categories) {
@@ -93,40 +90,10 @@ export const AppItemVirtualGrid = ({
 		scrollMargin: containerRef.current?.offsetTop ?? 0,
 	});
 
-	const handleInfo = (item: AppItem) => {
-		setActiveItem(item);
-	};
-
 	return (
 		<div ref={containerRef} className={classes.container}>
-			<Modal
-				opened={activeItem !== null}
-				onClose={() => setActiveItem(null)}
-				title={activeItem?.name}
-				size="md"
-				centered
-			>
-				{activeItem && (
-					<AppItemInfoModal
-						item={activeItem}
-						resolveLinkedItems={resolveLinkedItems}
-						isCollected={collectedIds.includes(activeItem.id)}
-						isCollectable={isCollectable(activeItem)}
-						onCollect={onCollect}
-						onUncollect={onUncollect}
-						readOnly={readOnly}
-					/>
-				)}
-			</Modal>
 			{rowData.length === 0 ? (
-				<div className={classes.emptyState}>
-					<Text size="xl" fw={600} c="dimmed">
-						No items found
-					</Text>
-					<Text size="sm" c="dimmed" ta="center">
-						Try adjusting your filters or search query
-					</Text>
-				</div>
+				<ItemListEmptyState />
 			) : (
 				<div
 					className={classes.inner}
@@ -211,7 +178,7 @@ export const AppItemVirtualGrid = ({
 											dimUncollected={dimUncollected}
 											onCollect={onCollect}
 											onUncollect={onUncollect}
-											onInfo={handleInfo}
+											onInfo={onInfo}
 											readOnly={readOnly}
 										/>
 									))}
