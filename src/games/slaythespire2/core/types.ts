@@ -9,7 +9,7 @@ import type {
 	SlayTheSpire2DLC,
 	SlayTheSpire2ItemCategory,
 } from "@/prisma";
-import type {AppItem} from "#/features/game/types.ts";
+import type { AppItem, AppLinkedItemRef } from "#/features/game/types.ts";
 
 type SlayTheSpire2ItemLocation = "Overgrowth" | "Underdocks" | "Hive" | "Glory";
 
@@ -19,9 +19,9 @@ type SlayTheSpire2CommunityTags = string[];
 type SlayTheSpire2SearchableTags = string[];
 
 type SlayTheSpire2LinkedItem = Partial<{
-	ancient: { name: SlayTheSpire2Ancient };
-	character: { name: SlayTheSpire2Character };
-	relic: { name: string };
+	ancient: AppLinkedItemRef<SlayTheSpire2Ancient>;
+	character: AppLinkedItemRef<SlayTheSpire2Character>;
+	relic: AppLinkedItemRef;
 }>;
 
 type ItemModifiers = {

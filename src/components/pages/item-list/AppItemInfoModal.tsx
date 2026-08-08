@@ -11,10 +11,11 @@ import {
 	Text,
 	Tooltip,
 } from "@mantine/core";
-import { useEffect, useRef, useState } from "react";
-import { LuCamera, LuCheck, LuPlus } from "react-icons/lu";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { LuArrowLeft, LuCamera, LuCheck, LuPlus } from "react-icons/lu";
 import { AppGameImage } from "#/components/AppGameImage.tsx";
 import { AppItemDescription } from "#/components/AppItemDescription.tsx";
+import { PrimaryLinkedItem } from "#/components/pages/item-list/app-item-info-modal/PrimaryLinkedItem.tsx";
 import type { CollectItemInput } from "#/features/game/data/types.ts";
 import type { AppItem } from "#/features/game/types.ts";
 import { useGameId } from "#/features/game/use-game-id.ts";
@@ -26,20 +27,28 @@ import { getGameMetadata } from "#/game-registry/public-registry.ts";
 export type AppItemInfoModalProps = {
 	item: AppItem;
 	resolveLinkedItems: (item: AppItem) => AppItem[];
+	resolvePrimaryLinkedItem?: (item: AppItem) => AppItem | null;
 	isCollected: boolean;
 	isCollectable: boolean;
 	onCollect: ({ itemId, itemName }: CollectItemInput) => void;
 	onUncollect: ({ itemId, itemName }: CollectItemInput) => void;
+	onSelectLinkedItem?: (item: AppItem) => void;
+	onBack?: () => void;
+	canGoBack?: boolean;
 	readOnly?: boolean;
 };
 
 export const AppItemInfoModal = ({
 	item,
 	resolveLinkedItems,
+	resolvePrimaryLinkedItem,
 	isCollected,
 	isCollectable,
 	onCollect,
 	onUncollect,
+	onSelectLinkedItem,
+	onBack,
+	canGoBack = false,
 	readOnly = false,
 }: AppItemInfoModalProps) => {
 	const [screenshotMode, setScreenshotMode] = useState(false);
@@ -89,7 +98,33 @@ export const AppItemInfoModal = ({
 		}
 	};
 
-	const linkedItems = resolveLinkedItems(item);
+	const linkedItems = useMemo(
+		() => resolveLinkedItems(item),
+		[item, resolveLinkedItems],
+	);
+	const primaryLinkedItem = useMemo(
+		() => resolvePrimaryLinkedItem?.(item) ?? null,
+		[item, resolvePrimaryLinkedItem],
+	);
+
+	const collectControl =
+		screenshotMode || !isCollectable ? null : readOnly ? (
+			isCollected ? (
+				<Badge size="lg" color="green" leftSection={<LuCheck size={12} />}>
+					Collected
+				</Badge>
+			) : null
+		) : (
+			<Button
+				size="compact-sm"
+				variant={isCollected ? "filled" : "light"}
+				color={isCollected ? "green" : "primary"}
+				leftSection={isCollected ? <LuCheck size={14} /> : <LuPlus size={14} />}
+				onClick={handleToggleCollect}
+			>
+				{isCollected ? "Collected" : "Mark as Collected"}
+			</Button>
+		);
 
 	const itemContent = (
 		<Stack gap="md" p="md">
@@ -119,37 +154,19 @@ export const AppItemInfoModal = ({
 							</Text>
 						)}
 					</Group>
-					{!screenshotMode &&
-						isCollectable &&
-						(readOnly ? (
-							isCollected ? (
-								<Box mt="xs">
-									<Badge
-										size="lg"
-										color="green"
-										leftSection={<LuCheck size={12} />}
-									>
-										Collected
-									</Badge>
-								</Box>
-							) : null
-						) : (
-							<Box mt="xs">
-								<Button
-									size="compact-sm"
-									variant={isCollected ? "filled" : "light"}
-									color={isCollected ? "green" : "primary"}
-									leftSection={
-										isCollected ? <LuCheck size={14} /> : <LuPlus size={14} />
-									}
-									onClick={handleToggleCollect}
-								>
-									{isCollected ? "Collected" : "Mark as Collected"}
-								</Button>
-							</Box>
-						))}
+					{primaryLinkedItem && (
+						<Box mt={4}>
+							<PrimaryLinkedItem
+								item={primaryLinkedItem}
+								screenshotMode={screenshotMode}
+								onSelect={onSelectLinkedItem}
+							/>
+						</Box>
+					)}
 				</Stack>
 			</Flex>
+
+			{collectControl && <Group justify="flex-start">{collectControl}</Group>}
 
 			{hasDescription && (
 				<>
@@ -202,7 +219,17 @@ export const AppItemInfoModal = ({
 
 	return (
 		<Stack gap="xs">
-			<Group justify="flex-end" px="md">
+			<Group justify="space-between" px="md">
+				{canGoBack && onBack ? (
+					<Tooltip label="Back" position="right">
+						<ActionIcon variant="subtle" aria-label="Back" onClick={onBack}>
+							<LuArrowLeft size={16} />
+						</ActionIcon>
+					</Tooltip>
+				) : (
+					<Box />
+				)}
+
 				<Tooltip label="Screenshot" position="left">
 					<ActionIcon
 						variant="subtle"

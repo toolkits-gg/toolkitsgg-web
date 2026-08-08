@@ -19,6 +19,7 @@ import type {
 export type ItemListPageProps = {
 	items: AnyGameConfig["ITEMS"];
 	resolveLinkedItems: (item: AppItem) => AppItem[];
+	resolvePrimaryLinkedItem?: (item: AppItem) => AppItem | null;
 	data: GameCollectedItemsData;
 	gameFilterConfig?: GameFilterConfig;
 	viewMode?: CollectedItemsViewMode;
@@ -27,6 +28,7 @@ export type ItemListPageProps = {
 export const ItemListPage = ({
 	items,
 	resolveLinkedItems,
+	resolvePrimaryLinkedItem,
 	data,
 	gameFilterConfig,
 	viewMode,
@@ -46,7 +48,9 @@ export const ItemListPage = ({
 		isCollectedItemsTab,
 	});
 	const [layout, setLayout] = useItemListLayout();
-	const [activeItem, setActiveItem] = useState<AppItem | null>(null);
+	// Following a linked item swaps the modal's item, so keep the trail to go back.
+	const [itemHistory, setItemHistory] = useState<AppItem[]>([]);
+	const activeItem = itemHistory.at(-1) ?? null;
 
 	// The filter bar is sticky and its height changes with the active-filter row,
 	// so publish it as a custom property for the table header to stick beneath.
@@ -72,7 +76,7 @@ export const ItemListPage = ({
 		<Box ref={pageRef}>
 			<Modal
 				opened={activeItem !== null}
-				onClose={() => setActiveItem(null)}
+				onClose={() => setItemHistory([])}
 				title={activeItem?.name}
 				size="md"
 				centered
@@ -81,10 +85,16 @@ export const ItemListPage = ({
 					<AppItemInfoModal
 						item={activeItem}
 						resolveLinkedItems={resolveLinkedItems}
+						resolvePrimaryLinkedItem={resolvePrimaryLinkedItem}
 						isCollected={collectedIds.includes(activeItem.id)}
 						isCollectable={collectableIds.has(activeItem.id)}
 						onCollect={handleCollect}
 						onUncollect={handleUncollect}
+						onSelectLinkedItem={(item) =>
+							setItemHistory((prev) => [...prev, item])
+						}
+						onBack={() => setItemHistory((prev) => prev.slice(0, -1))}
+						canGoBack={itemHistory.length > 1}
 						readOnly={isPublicView}
 					/>
 				)}
@@ -126,7 +136,7 @@ export const ItemListPage = ({
 						dimUncollected={filters.dimUncollectedItems}
 						onCollect={handleCollect}
 						onUncollect={handleUncollect}
-						onInfo={setActiveItem}
+						onInfo={(item) => setItemHistory([item])}
 						readOnly={isPublicView}
 					/>
 				) : (
@@ -138,7 +148,7 @@ export const ItemListPage = ({
 						dimUncollected={filters.dimUncollectedItems}
 						onCollect={handleCollect}
 						onUncollect={handleUncollect}
-						onInfo={setActiveItem}
+						onInfo={(item) => setItemHistory([item])}
 						readOnly={isPublicView}
 					/>
 				)}

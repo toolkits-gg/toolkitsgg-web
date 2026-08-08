@@ -30,7 +30,7 @@ import type { SEARCHABLE_ITEM_TAGS } from "#/games/remnant2/core/item-data/tags/
 import type { Remnant2TraitItem } from "#/games/remnant2/core/item-data/traits";
 import type { Remnant2WeaponItem } from "#/games/remnant2/core/item-data/weapons";
 import type { Remnant2DLC, Remnant2ItemCategory } from "@/prisma";
-import type {AppItem} from "#/features/game/types.ts";
+import type { AppItem, AppLinkedItemRef } from "#/features/game/types.ts";
 
 /**
  * A step modifier is a flat increase per point in the trait
@@ -70,12 +70,12 @@ type ItemModifiers = {
 };
 
 type Remnant2LinkedItem = Partial<{
-	archetype: { name: string };
-	skills: Array<{ name: string }>;
-	weapon: { name: string };
-	mod: { name: string };
-	traits: Array<{ name: string; amount: number }>;
-	perks: Array<{ name: string }>;
+	archetype: AppLinkedItemRef;
+	skills: AppLinkedItemRef[];
+	weapon: AppLinkedItemRef;
+	mod: AppLinkedItemRef;
+	traits: Array<AppLinkedItemRef & { amount: number }>;
+	perks: AppLinkedItemRef[];
 }>;
 
 type Remnant2InlineTags = (typeof INLINE_ITEM_TAGS)[number]["type"][];
@@ -154,4 +154,9 @@ type Remnant2ItemLocation =
 	| { world: "The Backrooms"; dungeon: "The Backrooms" }
 	| { world: "Any"; dungeon: OtherLocation };
 
-export type { BaseRemnant2Item, Remnant2LocalItem, Remnant2ItemLocation };
+export type {
+	BaseRemnant2Item,
+	Remnant2LinkedItem,
+	Remnant2LocalItem,
+	Remnant2ItemLocation,
+};

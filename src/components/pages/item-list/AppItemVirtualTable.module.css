@@ -2,6 +2,11 @@
 	width: 100%;
 }
 
+/* Mantine's default is text is too light on light mode for contrast */
+[data-mantine-color-scheme="light"] .container {
+	--mantine-color-dimmed: var(--mantine-color-gray-7);
+}
+
 .table {
 	display: grid;
 	/* minmax(0, 1fr) keeps the grid tracks from being sized by the rows'
@@ -73,6 +78,7 @@
 	left: 0;
 	width: 100%;
 	align-items: center;
+	background-color: var(--mantine-color-card-5);
 	border-bottom: 1px solid
 		light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-5));
 	border-left: 3px solid transparent;
@@ -98,10 +104,41 @@
 }
 
 .collected {
+	background-color: light-dark(
+		color-mix(
+			in srgb,
+			var(--mantine-color-green-5) 10%,
+			var(--mantine-color-card-5)
+		),
+		color-mix(
+			in srgb,
+			var(--mantine-color-green-4) 9%,
+			var(--mantine-color-card-5)
+		)
+	);
 	border-left-color: light-dark(
 		var(--mantine-color-green-7),
 		var(--mantine-color-green-5)
 	);
+	border-bottom-color: light-dark(
+		var(--mantine-color-green-3),
+		var(--mantine-color-green-8)
+	);
+
+	&:hover {
+		background-color: light-dark(
+			color-mix(
+				in srgb,
+				var(--mantine-color-green-5) 18%,
+				var(--mantine-color-card-5)
+			),
+			color-mix(
+				in srgb,
+				var(--mantine-color-green-4) 16%,
+				var(--mantine-color-card-5)
+			)
+		);
+	}
 }
 
 .dimmed {

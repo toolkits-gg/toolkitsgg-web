@@ -1,0 +1,21 @@
+.chip {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--mantine-spacing-xs);
+	width: fit-content;
+	max-width: 100%;
+	padding: 4px 10px 4px 4px;
+	border: 1px solid var(--mantine-color-default-border);
+	border-radius: var(--mantine-radius-md);
+}
+
+.interactive {
+	transition:
+		border-color 0.15s,
+		background-color 0.15s;
+
+	&:hover {
+		border-color: var(--mantine-color-primary-filled);
+		background-color: var(--mantine-color-default-hover);
+	}
+}

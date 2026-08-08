@@ -24,6 +24,19 @@ export type AppItemTag = {
 };
 
 /**
+ * A reference to another item by name.
+ * Games can narrow TName when their relationship targets are known.
+ */
+export type AppLinkedItemRef<TName extends string = string> = { name: TName };
+
+/**
+ * A game's map of relationship name to the item(s) that relationship points at.
+ * Games declare their own keys, but every value must be resolvable by name.
+ */
+export type AppLinkedItems<TRef extends AppLinkedItemRef = AppLinkedItemRef> =
+	Record<string, TRef | TRef[] | undefined>;
+
+/**
  * Shared item definition across the application
  * Items are defined both in the database and the frontend,
  * but have different properties in each context.
@@ -34,10 +47,7 @@ export type AppItem<
 	TInlineTags = string[],
 	TCommunityTags = string[],
 	TSearchableTags = string[],
-	TLinkedItemOrItems = Record<
-		string,
-		{ name: string } | Array<{ name: string }>
-	>,
+	TLinkedItems extends AppLinkedItems = AppLinkedItems,
 > = {
 	id: string;
 	name: string;
@@ -53,7 +63,7 @@ export type AppItem<
 	 * Items that are linked to this item, either as a single item or an array of items.
 	 * These are things like mods that are linked to a weapon, or a skill that is linked to a character.
 	 */
-	linkedItems?: TLinkedItemOrItems;
+	linkedItems?: TLinkedItems;
 	/**
 	 * Text highlighted in the item description.
 	 * These are part of the item description, but are highlighted for better visibility.

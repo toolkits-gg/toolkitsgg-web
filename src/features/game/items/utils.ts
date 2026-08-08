@@ -12,6 +12,22 @@ type GroupedOption = {
 	items: CategoryOption[];
 };
 
+/** Yields all linkedItem names for an item. */
+const linkedItemNames = function* (
+	item: AppItem,
+): Generator<string, undefined> {
+	if (!item.linkedItems) return;
+
+	for (const values of Object.values(item.linkedItems)) {
+		const valuesToProcess = Array.isArray(values) ? values : [values];
+
+		for (const value of valuesToProcess) {
+			const name = value?.name;
+			if (name) yield name;
+		}
+	}
+};
+
 /** Formats a comma-separated category filter value (or "cat:sub") into a human-readable label. */
 export const formatCategoryLabel = (raw: string): string => {
 	const selected = raw ? raw.split(",").filter(Boolean) : [];
@@ -88,6 +104,17 @@ export const getItemSubcategories = (
 	return result;
 };
 
+/** Finds an item by its name, ignoring case. */
+export const findItemByName = <TItem extends AppItem>(
+	name: string,
+	allItems: TItem[],
+): TItem | null =>
+	allItems.find((i) => i.name.toLowerCase() === name.toLowerCase()) ?? null;
+
+/** The name of the first linked item, in the order the relationships were authored. */
+export const getFirstLinkedItemName = (item: AppItem): string | undefined =>
+	linkedItemNames(item).next().value;
+
 /**
  * Resolves linked items for a given item by matching names
  * from the item's linkedItems field against a list of all items.
@@ -96,25 +123,13 @@ export const resolveLinkedItems = <TItem extends AppItem>(
 	item: TItem,
 	allItems: TItem[],
 ): TItem[] => {
-	if (!item.linkedItems) return [];
-
 	const results: TItem[] = [];
 
-	for (const [_key, values] of Object.entries(item.linkedItems)) {
-		const itemsToProcess = Array.isArray(values) ? values : [values];
+	for (const name of linkedItemNames(item)) {
+		const foundItem = findItemByName(name, allItems);
 
-		for (const value of itemsToProcess) {
-			if (!value || !(value as { name?: string }).name) continue;
-
-			const foundItem = allItems.find(
-				(i) =>
-					i.name.toLowerCase() ===
-					(value as { name: string }).name.toLowerCase(),
-			);
-
-			if (foundItem && !results.some((r) => r.id === foundItem.id)) {
-				results.push(foundItem);
-			}
+		if (foundItem && !results.some((r) => r.id === foundItem.id)) {
+			results.push(foundItem);
 		}
 	}
 

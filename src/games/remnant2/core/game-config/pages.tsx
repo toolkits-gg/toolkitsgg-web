@@ -22,6 +22,7 @@ import type {
 	GamePages,
 } from "#/features/game/types.ts";
 import { ITEMS } from "#/games/remnant2/core/game-config/items";
+import { resolveRemnant2PrimaryLinkedItem } from "#/games/remnant2/core/game-config/linked-items";
 import { remnant2CollectedItemsData } from "#/games/remnant2/data/collected-items/use-collected-items.ts";
 import { remnant2CreatedBuildsData } from "#/games/remnant2/data/created-builds/use-created-builds.ts";
 import type { Remnant2DLC } from "@/prisma";
@@ -162,6 +163,7 @@ export const PAGES: GamePages = {
 		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
+			resolvePrimaryLinkedItem={resolveRemnant2PrimaryLinkedItem}
 			data={remnant2CollectedItemsData}
 			gameFilterConfig={remnant2ItemFilterConfig}
 		/>
@@ -170,6 +172,7 @@ export const PAGES: GamePages = {
 		<ItemListPage
 			items={ITEMS}
 			resolveLinkedItems={(item) => resolveLinkedItems(item, ITEMS.all)}
+			resolvePrimaryLinkedItem={resolveRemnant2PrimaryLinkedItem}
 			data={remnant2CollectedItemsData}
 			gameFilterConfig={remnant2ItemFilterConfig}
 			viewMode={mode}
