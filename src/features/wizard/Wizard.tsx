@@ -80,7 +80,7 @@ const Wizard = ({
 
 			if (cancelled) return;
 
-			// Small delay to allow any animations or navbar to settle
+			// Small delay to allow any animations or app-navbar to settle
 			timer = setTimeout(() => {
 				setIsReady(true);
 			}, 100);
@@ -121,7 +121,7 @@ const Wizard = ({
 				const windowHeight = window.innerHeight;
 				const isInLowerHalf = rect.top > windowHeight / 2;
 
-				// On mobile, use top position to avoid overlap with navbar elements
+				// On mobile, use top position to avoid overlap with app-navbar elements
 				// On desktop/tablet, use middle position for better visibility
 				if (isInLowerHalf) {
 					setPosition(isMobile ? "top" : "middle");
