@@ -59,8 +59,8 @@ function ScreenshotPreview({
 						style={{
 							maxWidth: "100%",
 							maxHeight: 350,
-							width: 150,
-							height: 304,
+							width: "auto",
+							height: "auto",
 							objectFit: "contain",
 						}}
 					/>

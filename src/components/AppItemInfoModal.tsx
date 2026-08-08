@@ -7,7 +7,6 @@ import {
 	Flex,
 	Group,
 	ScrollArea,
-	SimpleGrid,
 	Stack,
 	Text,
 	Tooltip,
@@ -162,24 +161,28 @@ export const AppItemInfoModal = ({
 			{linkedItems.length > 0 && screenshotMode && (
 				<>
 					<Divider label="Linked Items" />
-					<SimpleGrid cols={2} spacing="sm">
+					<Group wrap="wrap" gap="sm" justify="center">
 						{linkedItems.map((linkedItem) => (
 							<Stack
 								key={`${linkedItem.id}-${linkedItem.name}`}
 								align="center"
 								gap={6}
 								p="xs"
+								w={104}
 								style={{
 									borderRadius: "var(--mantine-radius-md)",
 									border: "1px solid var(--mantine-color-default-border)",
 								}}
 							>
 								{linkedItem.imageUrl && (
-									<AppGameImage
-										alt={`Image of ${linkedItem.name}`}
-										src={linkedItem.imageUrl}
-										size="md"
-									/>
+									<Box style={{ flexShrink: 0, width: 64, height: 64 }}>
+										<AppGameImage
+											alt={`Image of ${linkedItem.name}`}
+											src={linkedItem.imageUrl}
+											size="sm"
+											fit="contain"
+										/>
+									</Box>
 								)}
 								<Stack gap={2} align="center">
 									<Text size="xs" fw={600} ta="center" lh={1.3}>
@@ -191,7 +194,7 @@ export const AppItemInfoModal = ({
 								</Stack>
 							</Stack>
 						))}
-					</SimpleGrid>
+					</Group>
 				</>
 			)}
 		</Stack>
