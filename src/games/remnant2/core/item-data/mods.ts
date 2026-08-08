@@ -134,7 +134,7 @@ const MODS: Remnant2ModItem[] = [
 		wikiUrl: `https://remnant2.wiki.gg/Alpha_/_Omega`,
 		linkedItems: {
 			weapon: {
-				name: "Alpha-Omega",
+				name: "Alpha / Omega",
 			},
 		},
 		location: { world: "Any", dungeon: "Linked Item" },
