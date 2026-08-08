@@ -1,11 +1,10 @@
 import { Box, Modal } from "@mantine/core";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { AppItemInfoModal } from "#/components/pages/item-list/AppItemInfoModal.tsx";
 import { AppItemVirtualGrid } from "#/components/pages/item-list/AppItemVirtualGrid.tsx";
 import { AppItemVirtualTable } from "#/components/pages/item-list/AppItemVirtualTable.tsx";
 import { ItemCollectionShareButton } from "#/components/pages/item-list/ItemCollectionShareButton.tsx";
 import { ItemFilterBar } from "#/components/pages/item-list/ItemFilterBar.tsx";
-import { isItemCollectable } from "#/components/pages/item-list/is-item-collectable.ts";
 import { useCollectedItems } from "#/components/pages/item-list/use-collected-items.ts";
 import { useItemFilters } from "#/components/pages/item-list/use-item-filters.ts";
 import { useItemListLayout } from "#/components/pages/item-list/use-item-list-layout.ts";
@@ -35,8 +34,13 @@ export const ItemListPage = ({
 	const isCollectedItemsTab = viewMode !== undefined;
 	const { collectedIds, isPublicView, handleCollect, handleUncollect } =
 		useCollectedItems({ data, viewMode });
+	const collectableIds = useMemo(
+		() => new Set(items.collectable.map((item) => item.id)),
+		[items.collectable],
+	);
 	const filters = useItemFilters({
 		items,
+		collectableIds,
 		collectedIds,
 		gameFilterConfig,
 		isCollectedItemsTab,
@@ -64,8 +68,6 @@ export const ItemListPage = ({
 		return () => observer.disconnect();
 	}, []);
 
-	const uncollectableCategories = items.uncollectableCategories.map(String);
-
 	return (
 		<Box ref={pageRef}>
 			<Modal
@@ -80,10 +82,7 @@ export const ItemListPage = ({
 						item={activeItem}
 						resolveLinkedItems={resolveLinkedItems}
 						isCollected={collectedIds.includes(activeItem.id)}
-						isCollectable={isItemCollectable(
-							activeItem.category,
-							uncollectableCategories,
-						)}
+						isCollectable={collectableIds.has(activeItem.id)}
 						onCollect={handleCollect}
 						onUncollect={handleUncollect}
 						readOnly={isPublicView}
@@ -122,7 +121,7 @@ export const ItemListPage = ({
 				{layout === "table" ? (
 					<AppItemVirtualTable
 						items={filters.filteredItems}
-						uncollectableCategories={uncollectableCategories}
+						collectableIds={collectableIds}
 						collectedIds={collectedIds}
 						dimUncollected={filters.dimUncollectedItems}
 						onCollect={handleCollect}
@@ -134,7 +133,7 @@ export const ItemListPage = ({
 					<AppItemVirtualGrid
 						items={filters.filteredItems}
 						categories={filters.filteredCategories}
-						uncollectableCategories={uncollectableCategories}
+						collectableIds={collectableIds}
 						collectedIds={collectedIds}
 						dimUncollected={filters.dimUncollectedItems}
 						onCollect={handleCollect}

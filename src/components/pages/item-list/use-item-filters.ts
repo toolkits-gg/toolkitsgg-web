@@ -1,7 +1,6 @@
 import { parseAsBoolean, useQueryStates } from "nuqs";
 import type { ReactNode } from "react";
 import type { ActiveFilter } from "#/components/pages/item-list/ItemFilterBar.tsx";
-import { isItemCollectable } from "#/components/pages/item-list/is-item-collectable.ts";
 import type {
 	AnyGameConfig,
 	AppItem,
@@ -41,6 +40,7 @@ type UniversalParamKey =
 
 type UseItemFiltersArgs = {
 	items: AnyGameConfig["ITEMS"];
+	collectableIds: ReadonlySet<string>;
 	collectedIds: string[];
 	gameFilterConfig?: GameFilterConfig;
 	isCollectedItemsTab: boolean;
@@ -65,6 +65,7 @@ type UseItemFiltersResult = {
 
 const useItemFilters = ({
 	items,
+	collectableIds,
 	collectedIds,
 	gameFilterConfig,
 	isCollectedItemsTab,
@@ -141,9 +142,7 @@ const useItemFilters = ({
 		}
 
 		if (showCollectableOnly) {
-			result = result.filter((item) =>
-				isItemCollectable(item.category, items.uncollectableCategories),
-			);
+			result = result.filter((item) => collectableIds.has(item.id));
 		}
 
 		result = result.filter((item) => {

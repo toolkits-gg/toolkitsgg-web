@@ -21,11 +21,6 @@ const allCategories = Object.keys(
 	ITEMS_BY_CATEGORY,
 ) as ClairObscurItemCategory[];
 
-// TODO: If uncollectable items or linked items are added,
-// TODO: filter them out of collectable items
-// TODO: See remnant2/config/items.ts for example of how to do this
-const collectableItems = allItems;
-
 const ITEMS: GameConfig<
 	ClairObscurLocalItem,
 	ClairObscurItemCategory
@@ -33,8 +28,10 @@ const ITEMS: GameConfig<
 	all: allItems,
 	categorized: { ...ITEMS_BY_CATEGORY },
 	categories: allCategories,
-	uncollectableCategories: [],
-	collectable: collectableItems,
+	// TODO: If uncollectable items or linked items are added,
+	// TODO: filter them out of collectable items
+	// TODO: See remnant2/config/items.ts for example of how to do this
+	collectable: allItems,
 };
 
 export { ALL_CLAIROBSCUR_ITEMS, ITEMS };

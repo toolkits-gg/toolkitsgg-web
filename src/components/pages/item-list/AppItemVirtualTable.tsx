@@ -16,14 +16,13 @@ import {
 	useItemTableColumnVisibility,
 } from "#/components/pages/item-list/app-item-virtual-table/item-table-columns.tsx";
 import { ItemListEmptyState } from "#/components/pages/item-list/ItemListEmptyState.tsx";
-import { isItemCollectable } from "#/components/pages/item-list/is-item-collectable.ts";
 import type { CollectItemInput } from "#/features/game/data/types.ts";
 import type { AppItem } from "#/features/game/types.ts";
 import classes from "./AppItemVirtualTable.module.css";
 
 export type AppItemVirtualTableProps = {
 	items: AppItem[];
-	uncollectableCategories: string[];
+	collectableIds: ReadonlySet<string>;
 	collectedIds: string[];
 	dimUncollected: boolean;
 	onCollect: ({ itemId, itemName }: CollectItemInput) => void;
@@ -34,7 +33,7 @@ export type AppItemVirtualTableProps = {
 
 export const AppItemVirtualTable = ({
 	items,
-	uncollectableCategories,
+	collectableIds,
 	collectedIds,
 	dimUncollected,
 	onCollect,
@@ -48,8 +47,7 @@ export const AppItemVirtualTable = ({
 	]);
 	const columnVisibility = useItemTableColumnVisibility();
 
-	const isCollectable = (item: AppItem) =>
-		isItemCollectable(item.category, uncollectableCategories);
+	const isCollectable = (item: AppItem) => collectableIds.has(item.id);
 
 	const toggleCollect = (item: AppItem) => {
 		if (readOnly || !isCollectable(item)) return;
@@ -64,7 +62,7 @@ export const AppItemVirtualTable = ({
 		data: items,
 		columns: createItemTableColumns({
 			collectedIds,
-			uncollectableCategories,
+			collectableIds,
 			readOnly,
 			onToggleCollect: toggleCollect,
 			onInfo,

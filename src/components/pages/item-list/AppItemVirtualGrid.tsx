@@ -2,7 +2,6 @@ import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { useLayoutEffect, useRef, useState } from "react";
 import { ItemCard } from "#/components/pages/item-list/app-item-virtual-grid/ItemCard.tsx";
 import { ItemListEmptyState } from "#/components/pages/item-list/ItemListEmptyState.tsx";
-import { isItemCollectable } from "#/components/pages/item-list/is-item-collectable.ts";
 import type { CollectItemInput } from "#/features/game/data/types.ts";
 import type { AppItem } from "#/features/game/types.ts";
 import classes from "./AppItemVirtualGrid.module.css";
@@ -19,7 +18,7 @@ type RowData =
 export type AppItemVirtualGridProps = {
 	items: AppItem[];
 	categories: string[];
-	uncollectableCategories: string[];
+	collectableIds: ReadonlySet<string>;
 	collectedIds: string[];
 	dimUncollected: boolean;
 	onCollect: ({ itemId, itemName }: CollectItemInput) => void;
@@ -31,7 +30,7 @@ export type AppItemVirtualGridProps = {
 export const AppItemVirtualGrid = ({
 	items,
 	categories,
-	uncollectableCategories,
+	collectableIds,
 	collectedIds,
 	dimUncollected,
 	onCollect,
@@ -61,8 +60,7 @@ export const AppItemVirtualGrid = ({
 		return () => observer.disconnect();
 	}, []);
 
-	const isCollectable = (item: AppItem) =>
-		isItemCollectable(item.category, uncollectableCategories);
+	const isCollectable = (item: AppItem) => collectableIds.has(item.id);
 
 	const rowData: RowData[] = [];
 	for (const category of categories) {

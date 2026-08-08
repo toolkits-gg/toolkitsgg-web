@@ -46,7 +46,6 @@ const ITEMS: GameConfig<
 	all: allItems,
 	categorized: { ...ITEMS_BY_CATEGORY },
 	categories: allCategories,
-	uncollectableCategories: [],
 	collectable: collectableItems,
 };
 

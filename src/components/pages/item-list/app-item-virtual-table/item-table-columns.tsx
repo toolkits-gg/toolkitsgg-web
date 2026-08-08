@@ -7,7 +7,6 @@ import {
 	AppItemDescription,
 	renderDescriptionVariant,
 } from "#/components/AppItemDescription.tsx";
-import { isItemCollectable } from "#/components/pages/item-list/is-item-collectable.ts";
 import type { AppItem } from "#/features/game/types.ts";
 import classes from "../AppItemVirtualTable.module.css";
 
@@ -29,7 +28,7 @@ const columnStyle = (column: Column<AppItem>, size: number) => {
 
 type ItemTableColumnsOptions = {
 	collectedIds: string[];
-	uncollectableCategories: string[];
+	collectableIds: ReadonlySet<string>;
 	readOnly: boolean;
 	onToggleCollect: (item: AppItem) => void;
 	onInfo: (item: AppItem) => void;
@@ -102,7 +101,7 @@ const DescriptionCell = ({ item }: { item: AppItem }) => (
 
 const createItemTableColumns = ({
 	collectedIds,
-	uncollectableCategories,
+	collectableIds,
 	readOnly,
 	onToggleCollect,
 	onInfo,
@@ -117,10 +116,7 @@ const createItemTableColumns = ({
 			<CollectCell
 				item={row.original}
 				collected={collectedIds.includes(row.original.id)}
-				collectable={isItemCollectable(
-					row.original.category,
-					uncollectableCategories,
-				)}
+				collectable={collectableIds.has(row.original.id)}
 				readOnly={readOnly}
 				onToggleCollect={onToggleCollect}
 			/>

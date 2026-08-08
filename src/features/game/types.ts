@@ -158,7 +158,6 @@ export type GameConfig<
 		collectable: TItem[];
 		categorized: Record<TCategory, TItem[]>;
 		categories: TCategory[];
-		uncollectableCategories: TCategory[];
 	};
 	METADATA: GameMetadata;
 	PAGES: GamePages;

@@ -76,10 +76,10 @@ const collectableItems = allItems
 			item.category as Remnant2UncollectableItemCategory,
 		);
 	})
-	/** Remove mods that have linked guns */
+	/** Remove mods that are acquired through a linked item, such as a weapon */
 	.filter((item) => {
 		if (item.category !== "MOD") return true;
-		return item.linkedItems?.weapon === undefined;
+		return item.linkedItems === undefined;
 	})
 	/** Remove legendary relic fragments */
 	.filter((item) => {
@@ -92,7 +92,6 @@ const ITEMS: GameConfig<Remnant2LocalItem, Remnant2ItemCategory>["ITEMS"] = {
 	all: allItems,
 	categorized: { ...ITEMS_BY_CATEGORY },
 	categories: allCategories,
-	uncollectableCategories: UNCOLLECTABLE_ITEM_CATEGORIES,
 	collectable: collectableItems,
 };
 
