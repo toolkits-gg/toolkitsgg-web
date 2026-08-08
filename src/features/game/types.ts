@@ -105,8 +105,6 @@ export type GameAvatar = {
 };
 
 export type GameIDBSeed = {
-	/** localStorage flag key to prevent re-seeding, e.g. 'idb-seeded-remnant2' */
-	seedFlag: string;
 	/** Seeds game-specific items into IDB. Calls getIDBClient() internally. */
 	seed: () => Promise<void>;
 };

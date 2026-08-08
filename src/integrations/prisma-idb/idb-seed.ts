@@ -28,7 +28,10 @@ const ensureSentinelUser = () => {
 				},
 			});
 		}
-	})();
+	})().catch((error: unknown) => {
+		sentinelUserPromise = null;
+		throw error;
+	});
 
 	return sentinelUserPromise;
 };
@@ -38,8 +41,7 @@ const seedIDBForGame = (gameId?: Exclude<GameId, "none">): Promise<void> => {
 
 	if (gameId) {
 		const gameSeed = allGameIDBSeeds[gameId];
-		if (!gameSeed || localStorage.getItem(gameSeed.seedFlag))
-			return Promise.resolve();
+		if (!gameSeed) return Promise.resolve();
 
 		const existing = gameSeedPromises.get(gameId);
 		if (existing) return existing;
@@ -47,20 +49,20 @@ const seedIDBForGame = (gameId?: Exclude<GameId, "none">): Promise<void> => {
 		const promise = (async () => {
 			await ensureSentinelUser();
 			await gameSeed.seed();
-			localStorage.setItem(gameSeed.seedFlag, "true");
-		})();
+		})().catch((error: unknown) => {
+			// Don't cache a rejection: the next collect should be able to retry.
+			gameSeedPromises.delete(gameId);
+			throw error;
+		});
 
 		gameSeedPromises.set(gameId, promise);
 		return promise;
 	}
 
-	const unseededGames = Object.entries(allGameIDBSeeds).filter(
-		([, gameSeed]) => !localStorage.getItem(gameSeed.seedFlag),
-	);
-	if (unseededGames.length === 0) return Promise.resolve();
-
 	return Promise.all(
-		unseededGames.map(([id]) => seedIDBForGame(id as Exclude<GameId, "none">)),
+		Object.keys(allGameIDBSeeds).map((id) =>
+			seedIDBForGame(id as Exclude<GameId, "none">),
+		),
 	).then(() => {});
 };
 

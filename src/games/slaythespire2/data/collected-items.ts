@@ -3,6 +3,7 @@
 // path, mirrors the write to IDB and enqueues a pending op for later sync.
 
 import { useNetwork } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type {
 	CollectedItemRecord,
@@ -20,6 +21,7 @@ import {
 import { useSession } from "#/integrations/better-auth/auth-client.ts";
 import { ensureIdbUserStub } from "#/integrations/prisma-idb/ensure-user-stub.ts";
 import { getIDBClient } from "#/integrations/prisma-idb/idb-client.ts";
+import { seedIDBForGame } from "#/integrations/prisma-idb/idb-seed.ts";
 
 const ENTITY = "slayTheSpire2CollectedItem";
 
@@ -68,33 +70,40 @@ const useCollect = () => {
 				return collectItemServerFn({ data: { itemId: input.itemId } });
 			}
 			const idb = await getIDBClient();
+			// The local collected-item row FKs to the item store, which prisma-idb
+			// enforces, so the game's items have to exist locally before the upsert.
+			await seedIDBForGame("slaythespire2");
 			await ensureIdbUserStub(idb, userId);
 			const existing = await idb.slayTheSpire2CollectedItem.findFirst({
 				where: { userId, itemId: input.itemId },
 			});
-			const [record] = await Promise.all([
-				idb.slayTheSpire2CollectedItem.upsert({
-					where: { userId_itemId: { userId, itemId: input.itemId } },
-					update: {},
-					create: { userId, itemId: input.itemId },
-				}),
-				enqueueOp({
-					anonUserId,
-					entity: ENTITY,
-					operation: "upsert",
-					payload: { itemId: input.itemId, itemName: input.itemName },
-					idempotencyKey: `${ENTITY}:upsert:${anonUserId}:${input.itemId}`,
-					serverUpdatedAt: toIso(existing?.updatedAt),
-					summary: {
-						title: `Collected: ${input.itemName}`,
-						gameId: "slaythespire2",
-					},
-				}),
-			]);
+			const record = await idb.slayTheSpire2CollectedItem.upsert({
+				where: { userId_itemId: { userId, itemId: input.itemId } },
+				update: {},
+				create: { userId, itemId: input.itemId },
+			});
+			await enqueueOp({
+				anonUserId,
+				entity: ENTITY,
+				operation: "upsert",
+				payload: { itemId: input.itemId, itemName: input.itemName },
+				idempotencyKey: `${ENTITY}:upsert:${anonUserId}:${input.itemId}`,
+				serverUpdatedAt: toIso(existing?.updatedAt),
+				summary: {
+					title: `Collected: ${input.itemName}`,
+					gameId: "slaythespire2",
+				},
+			});
 			return record;
 		},
 		onSuccess: () =>
 			queryClient.invalidateQueries({ queryKey: ["data", ENTITY] }),
+		onError: (error) =>
+			notifications.show({
+				title: "Could not collect item",
+				message: error.message,
+				color: "red",
+			}),
 	});
 };
 
@@ -115,27 +124,31 @@ const useUncollect = () => {
 			const existing = await idb.slayTheSpire2CollectedItem.findFirst({
 				where: { userId, itemId: input.itemId },
 			});
-			await Promise.all([
-				idb.slayTheSpire2CollectedItem.deleteMany({
-					where: { userId, itemId: input.itemId },
-				}),
-				enqueueOp({
-					anonUserId,
-					entity: ENTITY,
-					operation: "delete",
-					payload: { itemId: input.itemId, itemName: input.itemName },
-					idempotencyKey: `${ENTITY}:delete:${anonUserId}:${input.itemId}`,
-					serverUpdatedAt: toIso(existing?.updatedAt),
-					summary: {
-						title: `Uncollected: ${input.itemName}`,
-						gameId: "slaythespire2",
-					},
-				}),
-			]);
+			await idb.slayTheSpire2CollectedItem.deleteMany({
+				where: { userId, itemId: input.itemId },
+			});
+			await enqueueOp({
+				anonUserId,
+				entity: ENTITY,
+				operation: "delete",
+				payload: { itemId: input.itemId, itemName: input.itemName },
+				idempotencyKey: `${ENTITY}:delete:${anonUserId}:${input.itemId}`,
+				serverUpdatedAt: toIso(existing?.updatedAt),
+				summary: {
+					title: `Uncollected: ${input.itemName}`,
+					gameId: "slaythespire2",
+				},
+			});
 			return { ok: true as const };
 		},
 		onSuccess: () =>
 			queryClient.invalidateQueries({ queryKey: ["data", ENTITY] }),
+		onError: (error) =>
+			notifications.show({
+				title: "Could not uncollect item",
+				message: error.message,
+				color: "red",
+			}),
 	});
 };
 
