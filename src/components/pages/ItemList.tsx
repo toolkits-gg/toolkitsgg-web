@@ -54,10 +54,11 @@ export const ItemListPage = ({
 		if (!bar || !page) return;
 
 		const observer = new ResizeObserver(([entry]) => {
-			page.style.setProperty(
-				"--item-filter-bar-height",
-				`${entry.contentRect.height}px`,
-			);
+			if (!entry) return;
+			// Border box, so the bar's bottom border is not double-counted as a gap.
+			const height =
+				entry.borderBoxSize[0]?.blockSize ?? entry.contentRect.height;
+			page.style.setProperty("--item-filter-bar-height", `${height}px`);
 		});
 		observer.observe(bar);
 		return () => observer.disconnect();
@@ -90,34 +91,33 @@ export const ItemListPage = ({
 				)}
 			</Modal>
 			{isCollectedItemsTab && <ItemCollectionShareButton />}
-			<Box ref={filterBarRef}>
-				<ItemFilterBar
-					search={filters.search}
-					onSearchChange={(v) => filters.setUniversalParam("search", v)}
-					showCollected={filters.showCollectedItems}
-					onShowCollectedChange={(v) =>
-						filters.setUniversalParam("showCollectedItems", v)
-					}
-					showUncollected={filters.showUncollectedItems}
-					onShowUncollectedChange={(v) =>
-						filters.setUniversalParam("showUncollectedItems", v)
-					}
-					dimUncollected={filters.dimUncollectedItems}
-					onDimUncollectedChange={(v) =>
-						filters.setUniversalParam("dimUncollectedItems", v)
-					}
-					showCollectableOnly={filters.showCollectableOnly}
-					onShowCollectableOnlyChange={(v) =>
-						filters.setUniversalParam("showCollectableOnly", v)
-					}
-					activeFilters={filters.activeFilters}
-					onClearAllFilters={filters.clearAllFilters}
-					renderGameFilters={filters.renderGameFilters}
-					hasCollectableItems={items.collectable.length > 0}
-					layout={layout}
-					onLayoutChange={setLayout}
-				/>
-			</Box>
+			<ItemFilterBar
+				ref={filterBarRef}
+				search={filters.search}
+				onSearchChange={(v) => filters.setUniversalParam("search", v)}
+				showCollected={filters.showCollectedItems}
+				onShowCollectedChange={(v) =>
+					filters.setUniversalParam("showCollectedItems", v)
+				}
+				showUncollected={filters.showUncollectedItems}
+				onShowUncollectedChange={(v) =>
+					filters.setUniversalParam("showUncollectedItems", v)
+				}
+				dimUncollected={filters.dimUncollectedItems}
+				onDimUncollectedChange={(v) =>
+					filters.setUniversalParam("dimUncollectedItems", v)
+				}
+				showCollectableOnly={filters.showCollectableOnly}
+				onShowCollectableOnlyChange={(v) =>
+					filters.setUniversalParam("showCollectableOnly", v)
+				}
+				activeFilters={filters.activeFilters}
+				onClearAllFilters={filters.clearAllFilters}
+				renderGameFilters={filters.renderGameFilters}
+				hasCollectableItems={items.collectable.length > 0}
+				layout={layout}
+				onLayoutChange={setLayout}
+			/>
 			<Box p="md">
 				{layout === "table" ? (
 					<AppItemVirtualTable

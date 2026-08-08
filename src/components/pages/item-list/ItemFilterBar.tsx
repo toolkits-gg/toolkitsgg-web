@@ -15,7 +15,7 @@ import {
 	Text,
 } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
-import type { ReactNode } from "react";
+import type { ReactNode, Ref } from "react";
 import {
 	LuChevronUp,
 	LuFilter,
@@ -35,6 +35,7 @@ type ActiveFilter = {
 };
 
 type ItemFilterBarProps = {
+	ref?: Ref<HTMLDivElement>;
 	search: string;
 	onSearchChange: (value: string) => void;
 	showCollected: boolean;
@@ -54,6 +55,7 @@ type ItemFilterBarProps = {
 };
 
 const ItemFilterBar = ({
+	ref,
 	search,
 	onSearchChange,
 	showCollected,
@@ -77,7 +79,7 @@ const ItemFilterBar = ({
 	});
 
 	return (
-		<Box className={classes.bar}>
+		<Box ref={ref} className={classes.bar}>
 			<div className={classes.topRow}>
 				<ItemSearchInput
 					searchValue={search}
