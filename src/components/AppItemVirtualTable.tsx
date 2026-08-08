@@ -20,7 +20,10 @@ import {
 	LuX,
 } from "react-icons/lu";
 import { AppGameImage } from "#/components/AppGameImage.tsx";
-import { AppItemDescription } from "#/components/AppItemDescription.tsx";
+import {
+	AppItemDescription,
+	renderDescriptionVariant,
+} from "#/components/AppItemDescription.tsx";
 import { ItemListEmptyState } from "#/components/pages/item-list/ItemListEmptyState.tsx";
 import { isItemCollectable } from "#/components/pages/item-list/is-item-collectable.ts";
 import type { CollectItemInput } from "#/features/game/data/types.ts";
@@ -202,10 +205,14 @@ export const AppItemVirtualTable = ({
 			cell: ({ row }) => (
 				<AppItemDescription
 					description={row.original.description}
-					firstOnly
+					singleLine
 					size="xs"
 					c="dimmed"
 					truncate="end"
+					title={row.original.description
+						.map((line) => renderDescriptionVariant(line, "base"))
+						.join(" ")
+						.replace(/\n/g, " ")}
 				/>
 			),
 		},

@@ -5,8 +5,11 @@ type AppItemDescriptionProps = {
 	description: string[];
 	/** Render only the first description line (e.g. compact card preview). */
 	firstOnly?: boolean;
+	/** Collapse every line into one `Text` so it can truncate as a single run. */
+	singleLine?: boolean;
 	/** Which side of `[base|upgraded]` tokens to show. Defaults to "base". */
 	variant?: "base" | "upgraded";
+	title?: string;
 } & TextProps;
 
 // Parses inline upgrade tokens embedded in item descriptions.
@@ -56,8 +59,14 @@ const parseDescriptionSegments = (line: string): DescriptionSegment[] => {
  * Splits a string on `\n` (introduced by a `<br>` inside an upgrade token) into
  * text nodes separated by <br/> elements.
  */
-const withLineBreaks = (text: string, keyPrefix: string): ReactNode[] => {
+const withLineBreaks = (
+	text: string,
+	keyPrefix: string,
+	singleLine: boolean,
+): ReactNode[] => {
 	const parts = text.split("\n");
+	if (singleLine) return [parts.join(" ")];
+
 	return parts.flatMap((part, index) =>
 		index === 0
 			? [part]
@@ -69,9 +78,14 @@ const renderSegment = (
 	segment: DescriptionSegment,
 	variant: "base" | "upgraded",
 	key: string,
+	singleLine: boolean,
 ): ReactNode => {
 	if (segment.kind === "text") {
-		return <Fragment key={key}>{withLineBreaks(segment.text, key)}</Fragment>;
+		return (
+			<Fragment key={key}>
+				{withLineBreaks(segment.text, key, singleLine)}
+			</Fragment>
+		);
 	}
 
 	const value = variant === "base" ? segment.base : segment.upgraded;
@@ -79,19 +93,24 @@ const renderSegment = (
 
 	return (
 		<Text key={key} component="span" inherit c="teal" fw={600}>
-			{withLineBreaks(value, key)}
+			{withLineBreaks(value, key, singleLine)}
 		</Text>
 	);
 };
 
-const renderLine = (line: string, variant: "base" | "upgraded"): ReactNode[] =>
+const renderLine = (
+	line: string,
+	variant: "base" | "upgraded",
+	singleLine = false,
+): ReactNode[] =>
 	parseDescriptionSegments(line).map((segment, index) =>
-		renderSegment(segment, variant, `seg-${index}`),
+		renderSegment(segment, variant, `seg-${index}`, singleLine),
 	);
 
 export const AppItemDescription = ({
 	description,
 	firstOnly = false,
+	singleLine = false,
 	variant = "base",
 	...textProps
 }: AppItemDescriptionProps) => {
@@ -99,6 +118,20 @@ export const AppItemDescription = ({
 	if (!hasDescription) return null;
 
 	const lines = firstOnly ? description.slice(0, 1) : description;
+
+	if (singleLine) {
+		return (
+			<Text {...textProps}>
+				{lines.map((line, index) => (
+					// biome-ignore lint/suspicious/noArrayIndexKey: static description lines never reorder, and lines may repeat so content alone is not unique
+					<Fragment key={`line-${index}-${line}`}>
+						{index > 0 ? " " : null}
+						{renderLine(line, variant, true)}
+					</Fragment>
+				))}
+			</Text>
+		);
+	}
 
 	return (
 		<>
