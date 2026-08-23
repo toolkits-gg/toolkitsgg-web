@@ -27,11 +27,11 @@ import {
 	getGameWallpapers,
 } from "#/games-registry/public-registry";
 import type { GameId } from "@/prisma";
-import classes from "./WallpaperGallery.module.css";
+import classes from "./WallpaperGalleryPage.module.css";
 
 type WallpaperGalleryProps = { gameId: GameId };
 
-const WallpaperGallery = ({ gameId }: WallpaperGalleryProps) => {
+const WallpaperGalleryPage = ({ gameId }: WallpaperGalleryProps) => {
 	const wallpapers = useMemo(() => getGameWallpapers(gameId) ?? [], [gameId]);
 	const [search, setSearch] = useState("");
 	const [debouncedSearch] = useDebouncedValue(search, 250);
@@ -172,4 +172,4 @@ const WallpaperGallery = ({ gameId }: WallpaperGalleryProps) => {
 	);
 };
 
-export { WallpaperGallery };
+export { WallpaperGalleryPage };

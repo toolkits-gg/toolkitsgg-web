@@ -6,19 +6,19 @@ import {
 } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { useRef, useState } from "react";
-import { ItemTableHeaderRow } from "#/components/pages/item-list/app-item-virtual-table/ItemTableHeaderRow";
+import { ItemListEmptyState } from "#/components/pages/item-list/ItemListEmptyState";
+import { ItemTableHeaderRow } from "#/components/pages/item-list/item-virtual-table/ItemTableHeaderRow";
 import {
 	ItemTableRow,
 	ROW_HEIGHT,
-} from "#/components/pages/item-list/app-item-virtual-table/ItemTableRow";
+} from "#/components/pages/item-list/item-virtual-table/ItemTableRow";
 import {
 	createItemTableColumns,
 	useItemTableColumnVisibility,
-} from "#/components/pages/item-list/app-item-virtual-table/item-table-columns";
-import { ItemListEmptyState } from "#/components/pages/item-list/ItemListEmptyState";
+} from "#/components/pages/item-list/item-virtual-table/item-table-columns";
 import type { CollectItemInput } from "#/features/game/data/types";
 import type { AppItem } from "#/features/game/types";
-import classes from "./AppItemVirtualTable.module.css";
+import classes from "./ItemVirtualTable.module.css";
 
 type AppItemVirtualTableProps = {
 	items: AppItem[];
@@ -31,7 +31,7 @@ type AppItemVirtualTableProps = {
 	readOnly?: boolean;
 };
 
-export const AppItemVirtualTable = ({
+export const ItemVirtualTable = ({
 	items,
 	collectableIds,
 	collectedIds,

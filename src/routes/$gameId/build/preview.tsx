@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { BuildPreviewPage } from "#/components/pages/BuildPreview";
+import { BuildPreviewPage } from "#/components/pages/BuildPreviewPage.tsx";
 import {
 	gameSupportsBuilds,
 	getGameBuilds,

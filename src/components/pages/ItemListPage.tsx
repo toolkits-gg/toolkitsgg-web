@@ -1,15 +1,15 @@
 import { Box, Modal } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import { AppItemInfoModal } from "#/components/pages/item-list/AppItemInfoModal";
-import { AppItemVirtualGrid } from "#/components/pages/item-list/AppItemVirtualGrid";
-import { AppItemVirtualTable } from "#/components/pages/item-list/AppItemVirtualTable";
 import { ItemCollectionShareButton } from "#/components/pages/item-list/ItemCollectionShareButton";
 import {
 	ItemExportMenu,
 	type ItemExportScope,
 } from "#/components/pages/item-list/ItemExportMenu";
 import { ItemFilterBar } from "#/components/pages/item-list/ItemFilterBar";
+import { ItemInfoModal } from "#/components/pages/item-list/ItemInfoModal.tsx";
+import { ItemVirtualGrid } from "#/components/pages/item-list/ItemVirtualGrid.tsx";
+import { ItemVirtualTable } from "#/components/pages/item-list/ItemVirtualTable.tsx";
 import { useCollectedItems } from "#/components/pages/item-list/use-collected-items";
 import { useItemFilters } from "#/components/pages/item-list/use-item-filters";
 import { useItemListLayout } from "#/components/pages/item-list/use-item-list-layout";
@@ -114,7 +114,7 @@ export const ItemListPage = ({
 				centered
 			>
 				{activeItem && (
-					<AppItemInfoModal
+					<ItemInfoModal
 						item={activeItem}
 						resolveLinkedItems={resolveLinkedItems}
 						resolvePrimaryLinkedItem={resolvePrimaryLinkedItem}
@@ -148,7 +148,7 @@ export const ItemListPage = ({
 			/>
 			<Box p="md">
 				{layout === "table" ? (
-					<AppItemVirtualTable
+					<ItemVirtualTable
 						items={filters.filteredItems}
 						collectableIds={collectableIds}
 						collectedIds={collectedIds}
@@ -159,7 +159,7 @@ export const ItemListPage = ({
 						readOnly={isPublicView}
 					/>
 				) : (
-					<AppItemVirtualGrid
+					<ItemVirtualGrid
 						items={filters.filteredItems}
 						categories={filters.filteredCategories}
 						collectableIds={collectableIds}

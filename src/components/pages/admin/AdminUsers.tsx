@@ -15,7 +15,6 @@ import { useState } from "react";
 import { LuSearch, LuX } from "react-icons/lu";
 import { ReasonModal } from "#/components/pages/admin/ReasonModal";
 import { ROLE_VALUES } from "#/features/auth/capabilities";
-import type { AdminUserRow } from "#/features/auth/roles.server";
 import {
 	banUserServerFn,
 	GAME_ID_VALUES,
@@ -24,6 +23,7 @@ import {
 	searchUsersServerFn,
 	unbanUserServerFn,
 } from "#/features/auth/roles";
+import type { AdminUserRow } from "#/features/auth/roles.server";
 import { useViewerGrants } from "#/features/auth/use-viewer-grants";
 import type { GameId, Role } from "@/prisma";
 

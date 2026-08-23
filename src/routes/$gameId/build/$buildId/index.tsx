@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BuildViewPage } from "#/components/pages/BuildView";
+import { BuildViewPage } from "#/components/pages/BuildViewPage.tsx";
 import { getGameBuilds } from "#/games-registry/builds-registry";
 
 const ViewBuild = () => {

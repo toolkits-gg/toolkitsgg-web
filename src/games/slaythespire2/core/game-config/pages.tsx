@@ -1,7 +1,7 @@
 import { MultiSelect, Stack, Text } from "@mantine/core";
 import { parseAsString } from "nuqs";
 import type { ReactNode } from "react";
-import { ItemListPage } from "#/components/pages/ItemList";
+import { ItemListPage } from "#/components/pages/ItemListPage.tsx";
 import {
 	formatCategoryLabel,
 	getItemSubcategories,

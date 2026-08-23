@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BuildEditPage } from "#/components/pages/BuildEdit";
+import { BuildEditPage } from "#/components/pages/BuildEditPage.tsx";
 import { getGameBuilds } from "#/games-registry/builds-registry";
 
 const EditBuild = () => {

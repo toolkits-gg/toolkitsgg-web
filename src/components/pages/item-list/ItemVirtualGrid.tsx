@@ -1,10 +1,10 @@
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { useLayoutEffect, useRef, useState } from "react";
-import { ItemCard } from "#/components/pages/item-list/app-item-virtual-grid/ItemCard";
 import { ItemListEmptyState } from "#/components/pages/item-list/ItemListEmptyState";
+import { ItemCard } from "#/components/pages/item-list/item-virtual-grid/ItemCard";
 import type { CollectItemInput } from "#/features/game/data/types";
 import type { AppItem } from "#/features/game/types";
-import classes from "./AppItemVirtualGrid.module.css";
+import classes from "./ItemVirtualGrid.module.css";
 
 const HEADER_HEIGHT = 64;
 const ITEM_ROW_HEIGHT = 112;
@@ -27,7 +27,7 @@ type AppItemVirtualGridProps = {
 	readOnly?: boolean;
 };
 
-export const AppItemVirtualGrid = ({
+export const ItemVirtualGrid = ({
 	items,
 	categories,
 	collectableIds,

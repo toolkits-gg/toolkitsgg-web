@@ -15,7 +15,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { LuArrowLeft, LuCamera, LuCheck, LuPlus } from "react-icons/lu";
 import { GameImage } from "#/components/GameImage.tsx";
 import { ItemDescription } from "#/components/ItemDescription.tsx";
-import { PrimaryLinkedItem } from "#/components/pages/item-list/app-item-info-modal/PrimaryLinkedItem";
+import { PrimaryLinkedItem } from "#/components/pages/item-list/item-info-modal/PrimaryLinkedItem";
 import type { CollectItemInput } from "#/features/game/data/types";
 import type { AppItem } from "#/features/game/types";
 import { useGameId } from "#/features/game/use-game-id";
@@ -24,7 +24,7 @@ import type { WatermarkConfig } from "#/features/screenshot/types";
 import { useScreenshot } from "#/features/screenshot/use-screenshot";
 import { getGameMetadata } from "#/games-registry/public-registry";
 
-type AppItemInfoModalProps = {
+type ItemInfoModalProps = {
 	item: AppItem;
 	resolveLinkedItems: (item: AppItem) => AppItem[];
 	resolvePrimaryLinkedItem?: (item: AppItem) => AppItem | null;
@@ -38,7 +38,7 @@ type AppItemInfoModalProps = {
 	readOnly?: boolean;
 };
 
-export const AppItemInfoModal = ({
+export const ItemInfoModal = ({
 	item,
 	resolveLinkedItems,
 	resolvePrimaryLinkedItem,
@@ -50,7 +50,7 @@ export const AppItemInfoModal = ({
 	onBack,
 	canGoBack = false,
 	readOnly = false,
-}: AppItemInfoModalProps) => {
+}: ItemInfoModalProps) => {
 	const [screenshotMode, setScreenshotMode] = useState(false);
 	const containerRef = useRef<HTMLDivElement>(null);
 

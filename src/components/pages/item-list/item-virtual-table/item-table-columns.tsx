@@ -8,7 +8,7 @@ import {
 	renderDescriptionVariant,
 } from "#/components/ItemDescription.tsx";
 import type { AppItem } from "#/features/game/types";
-import classes from "../AppItemVirtualTable.module.css";
+import classes from "../ItemVirtualTable.module.css";
 
 /**
  * Rows are flex containers rather than real table cells so the virtualizer can

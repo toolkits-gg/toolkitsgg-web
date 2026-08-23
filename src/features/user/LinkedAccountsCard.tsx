@@ -12,10 +12,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { SOCIAL_PROVIDERS } from "#/features/user/social-providers";
-import {
-	ACCOUNTS_QUERY_KEY,
-	useAccounts,
-} from "#/features/user/use-accounts";
+import { ACCOUNTS_QUERY_KEY, useAccounts } from "#/features/user/use-accounts";
 import { authClient } from "#/integrations/better-auth/auth-client";
 
 const SETTINGS_PATH = "/account/settings";

@@ -1,4 +1,4 @@
-import { ItemListPage } from "#/components/pages/ItemList";
+import { ItemListPage } from "#/components/pages/ItemListPage.tsx";
 import { resolveLinkedItems } from "#/features/game/items/utils";
 import type { GamePages } from "#/features/game/types";
 import { ITEMS } from "#/games/clairobscur/core/game-config/items";

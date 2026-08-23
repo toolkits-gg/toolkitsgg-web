@@ -1,8 +1,8 @@
 import { flexRender, type Row } from "@tanstack/react-table";
 import clsx from "clsx";
-import { columnStyle } from "#/components/pages/item-list/app-item-virtual-table/item-table-columns";
+import { columnStyle } from "#/components/pages/item-list/item-virtual-table/item-table-columns";
 import type { AppItem } from "#/features/game/types";
-import classes from "../AppItemVirtualTable.module.css";
+import classes from "../ItemVirtualTable.module.css";
 
 const ROW_HEIGHT = 40;
 

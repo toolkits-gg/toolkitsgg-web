@@ -1,7 +1,4 @@
-import {
-	type ImageFit,
-	toImageFit,
-} from "#/features/image-position/image-fit";
+import { type ImageFit, toImageFit } from "#/features/image-position/image-fit";
 import {
 	type ImagePosition,
 	toImagePosition,
