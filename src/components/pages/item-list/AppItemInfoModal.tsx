@@ -13,8 +13,8 @@ import {
 } from "@mantine/core";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { LuArrowLeft, LuCamera, LuCheck, LuPlus } from "react-icons/lu";
-import { AppGameImage } from "#/components/AppGameImage";
-import { AppItemDescription } from "#/components/AppItemDescription";
+import { GameImage } from "#/components/GameImage.tsx";
+import { ItemDescription } from "#/components/ItemDescription.tsx";
 import { PrimaryLinkedItem } from "#/components/pages/item-list/app-item-info-modal/PrimaryLinkedItem";
 import type { CollectItemInput } from "#/features/game/data/types";
 import type { AppItem } from "#/features/game/types";
@@ -131,7 +131,7 @@ export const AppItemInfoModal = ({
 			<Flex gap="md" align="flex-start">
 				{item.imageUrl ? (
 					<Box style={{ flexShrink: 0, width: 96, height: 96 }}>
-						<AppGameImage
+						<GameImage
 							alt={`Image of ${item.name}`}
 							src={item.imageUrl}
 							size="md"
@@ -171,7 +171,7 @@ export const AppItemInfoModal = ({
 			{hasDescription && (
 				<>
 					<Divider label="Description" />
-					<AppItemDescription description={item.description} size="xs" mt={0} />
+					<ItemDescription description={item.description} size="xs" mt={0} />
 				</>
 			)}
 
@@ -193,7 +193,7 @@ export const AppItemInfoModal = ({
 							>
 								{linkedItem.imageUrl && (
 									<Box style={{ flexShrink: 0, width: 64, height: 64 }}>
-										<AppGameImage
+										<GameImage
 											alt={`Image of ${linkedItem.name}`}
 											src={linkedItem.imageUrl}
 											size="sm"

@@ -8,7 +8,7 @@
  * Run with: pnpm tsx src/games/slaythespire2/wiki/cards.ts
  */
 
-import { renderDescriptionVariant } from "#/components/AppItemDescription";
+import { renderDescriptionVariant } from "#/components/ItemDescription.tsx";
 import { cleanWikiTextPreservingTokens } from "#/features/sync/wiki/clean-wiki-text";
 import {
 	CARDS,

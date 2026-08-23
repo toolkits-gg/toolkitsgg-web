@@ -1,4 +1,4 @@
-import { renderDescriptionVariant } from "#/components/AppItemDescription";
+import { renderDescriptionVariant } from "#/components/ItemDescription.tsx";
 import { toCsv } from "#/features/export/csv";
 import { getLinkedItemRefs } from "#/features/game/items/utils";
 import type { AppItem } from "#/features/game/types";

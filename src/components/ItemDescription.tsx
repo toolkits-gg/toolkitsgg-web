@@ -6,7 +6,7 @@ import {
 } from "#/features/game/inline-tags/InlineTags";
 import type { InlineTagMatcher } from "#/features/game/inline-tags/matcher";
 
-type AppItemDescriptionProps = {
+type ItemDescriptionProps = {
 	description: string[];
 	firstOnly?: boolean; // Render only the first description line (e.g. compact card preview).
 	singleLine?: boolean; // Collapse every line into one `Text` so it can truncate as a single run.
@@ -114,14 +114,14 @@ const renderLine = (line: string, ctx: RenderContext): ReactNode[] =>
 		renderSegment(segment, `seg-${index}`, ctx),
 	);
 
-export const AppItemDescription = ({
+export const ItemDescription = ({
 	description,
 	firstOnly = false,
 	singleLine = false,
 	variant = "base",
 	withTooltips,
 	...textProps
-}: AppItemDescriptionProps) => {
+}: ItemDescriptionProps) => {
 	const matcher = useInlineTagMatcher();
 	const hasDescription = description.length > 0 && description[0] !== "";
 	if (!hasDescription) return null;

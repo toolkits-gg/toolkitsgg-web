@@ -8,7 +8,7 @@ import {
 	Text,
 } from "@mantine/core";
 import { LuTrash2 } from "react-icons/lu";
-import { AppGameImage } from "#/components/AppGameImage";
+import { GameImage } from "#/components/GameImage.tsx";
 import type { BuildToolRenderArgs } from "#/features/game/types";
 import { ITEMS } from "#/games/remnant2/core/game-config/items";
 
@@ -51,7 +51,7 @@ const Remnant2BuildTool = ({
 								<Group justify="space-between" wrap="nowrap">
 									<Group gap="sm" wrap="nowrap">
 										{item?.imageUrl && (
-											<AppGameImage
+											<GameImage
 												src={item.imageUrl}
 												alt={`Image of ${item.name}`}
 												size="sm"

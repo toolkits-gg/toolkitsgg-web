@@ -2,11 +2,11 @@ import { ActionIcon, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import type { Column, ColumnDef } from "@tanstack/react-table";
 import { LuCheck, LuMaximize, LuPlus, LuX } from "react-icons/lu";
-import { AppGameImage } from "#/components/AppGameImage";
+import { GameImage } from "#/components/GameImage.tsx";
 import {
-	AppItemDescription,
+	ItemDescription,
 	renderDescriptionVariant,
-} from "#/components/AppItemDescription";
+} from "#/components/ItemDescription.tsx";
 import type { AppItem } from "#/features/game/types";
 import classes from "../AppItemVirtualTable.module.css";
 
@@ -86,7 +86,7 @@ const CollectCell = ({
 };
 
 const DescriptionCell = ({ item }: { item: AppItem }) => (
-	<AppItemDescription
+	<ItemDescription
 		description={item.description}
 		singleLine
 		size="xs"
@@ -130,7 +130,7 @@ const createItemTableColumns = ({
 		enableSorting: false,
 		cell: ({ row }) =>
 			row.original.imageUrl ? (
-				<AppGameImage
+				<GameImage
 					src={row.original.imageUrl}
 					size="xs"
 					alt={`Image of ${row.original.name}`}

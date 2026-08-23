@@ -1,8 +1,8 @@
 import { ActionIcon, Box, Flex, Text } from "@mantine/core";
 import clsx from "clsx";
 import { LuCheck, LuMaximize, LuPlus, LuX } from "react-icons/lu";
-import { AppGameImage } from "#/components/AppGameImage";
-import { AppItemDescription } from "#/components/AppItemDescription";
+import { GameImage } from "#/components/GameImage.tsx";
+import { ItemDescription } from "#/components/ItemDescription.tsx";
 import type { CollectItemInput } from "#/features/game/data/types";
 import type { AppItem } from "#/features/game/types";
 import classes from "./ItemCard.module.css";
@@ -88,7 +88,7 @@ const ItemCard = ({
 			<Flex gap="xs" align="center" h="100%">
 				{item.imageUrl ? (
 					<Box style={{ flexShrink: 0, width: 48, height: 48 }}>
-						<AppGameImage
+						<GameImage
 							src={item.imageUrl}
 							size="sm"
 							alt={`Image of ${item.name}`}
@@ -108,7 +108,7 @@ const ItemCard = ({
 							</Text>
 						)}
 					</Text>
-					<AppItemDescription
+					<ItemDescription
 						description={item.description}
 						firstOnly
 						withTooltips={false}
