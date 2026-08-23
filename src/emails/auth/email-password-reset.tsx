@@ -1,6 +1,6 @@
 import { Text } from "react-email";
-import { EmailButton } from "#/emails/_components/EmailButton";
-import { EmailLayout } from "#/emails/_components/EmailLayout";
+import { EmailButton } from "#/emails/components/EmailButton";
+import { EmailLayout } from "#/emails/components/EmailLayout";
 import { clientEnv } from "#/env/client-env";
 
 type EmailPasswordResetProps = {

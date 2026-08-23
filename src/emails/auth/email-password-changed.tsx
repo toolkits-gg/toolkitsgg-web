@@ -1,5 +1,5 @@
 import { Link, Text } from "react-email";
-import { EmailLayout } from "#/emails/_components/EmailLayout";
+import { EmailLayout } from "#/emails/components/EmailLayout";
 import { clientEnv } from "#/env/client-env";
 
 type EmailPasswordChangedProps = {
