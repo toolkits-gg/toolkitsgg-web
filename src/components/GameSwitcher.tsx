@@ -46,7 +46,7 @@ const allGames: GameEntry[] = REGISTERED_GAME_IDS.filter(gameHasContent).map(
 const sortByLabel = (a: GameEntry, b: GameEntry) =>
 	a.label.localeCompare(b.label);
 
-// Profile and admin pages render per-game content without a game segment in the
+// Profile and admin documents render per-game content without a game segment in the
 // path, so switching games there swaps the content rather than the page.
 const keepsPathOnGameChange = (pathname: string) =>
 	pathname === "/profile" ||

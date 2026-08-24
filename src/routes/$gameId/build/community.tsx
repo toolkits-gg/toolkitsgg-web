@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { BuildFeedPage } from "#/components/pages/build-feeds/BuildFeed";
+import { BuildFeedPage } from "#/documents/build-feeds/BuildFeedPage.tsx";
 import { COMMUNITY_FEED } from "#/features/game/data/utils";
 import {
 	gameSupportsBuilds,

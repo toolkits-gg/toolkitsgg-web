@@ -1,7 +1,7 @@
 import { MultiSelect, Stack, Text } from "@mantine/core";
 import { parseAsString } from "nuqs";
 import type { ReactNode } from "react";
-import { ItemListPage } from "#/components/pages/ItemListPage.tsx";
+import { ItemListDocument } from "#/documents/item-list/ItemListDocument.tsx";
 import {
 	formatCategoryLabel,
 	getItemSubcategories,
@@ -78,7 +78,7 @@ const slayTheSpire2FilterConfig: GameFilterConfig = {
 
 const PAGES: GamePages = {
 	renderItemLookup: () => (
-		<ItemListPage
+		<ItemListDocument
 			items={ITEMS}
 			resolveLinkedItems={(item) =>
 				resolveLinkedItems(item, ITEMS.all, LINKED_ITEM_CATEGORIES)
@@ -88,7 +88,7 @@ const PAGES: GamePages = {
 		/>
 	),
 	renderCollectedItems: ({ mode }) => (
-		<ItemListPage
+		<ItemListDocument
 			items={ITEMS}
 			resolveLinkedItems={(item) =>
 				resolveLinkedItems(item, ITEMS.all, LINKED_ITEM_CATEGORIES)

@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { BuildCollectionView } from "#/components/pages/build-collections/BuildCollectionView";
+import { BuildCollectionView } from "#/documents/build-collections/BuildCollectionView";
 import {
 	gameSupportsBuilds,
 	getGameBuilds,

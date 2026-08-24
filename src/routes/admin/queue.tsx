@@ -1,6 +1,6 @@
 import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
-import { ReviewQueue } from "#/components/pages/admin/ReviewQueue";
+import { ReviewQueue } from "#/documents/admin/ReviewQueue";
 import { useGameId } from "#/features/game/use-game-id";
 import { getGameBuilds } from "#/games-registry/builds-registry";
 

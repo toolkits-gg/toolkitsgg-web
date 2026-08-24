@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AdminLayout } from "#/components/pages/admin/AdminLayout";
+import { AdminLayout } from "#/documents/admin/AdminLayout";
 import { listViewerGrantsServerFn } from "#/features/auth/roles";
 
 const Route = createFileRoute("/admin")({

@@ -11,7 +11,7 @@
  * coerced via `Number()` so the diff isn't fooled by `"12.7"` vs `12.7`.
  *
  * Description is intentionally not diffed: the wiki's `items.description`
- * column is empty for armor pages (the prose lives in a different template
+ * column is empty for armor documents (the prose lives in a different template
  * field), so comparing it just produces noise.
  *
  * Prints matched / new / stale entries to the terminal.

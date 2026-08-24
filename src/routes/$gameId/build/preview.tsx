@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { BuildPreviewPage } from "#/components/pages/BuildPreviewPage.tsx";
+import { BuildPreviewDocument } from "#/documents/build/BuildPreviewDocument.tsx";
 import {
 	gameSupportsBuilds,
 	getGameBuilds,
@@ -9,7 +9,7 @@ const PreviewBuild = () => {
 	const { gameId } = Route.useParams();
 	const builds = getGameBuilds(gameId);
 	if (!builds) return null;
-	return <BuildPreviewPage builds={builds} />;
+	return <BuildPreviewDocument builds={builds} />;
 };
 
 export const Route = createFileRoute("/$gameId/build/preview")({

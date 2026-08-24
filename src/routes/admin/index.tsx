@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AdminHome } from "#/components/pages/admin/AdminHome";
+import { AdminHomeDocument } from "#/documents/admin/AdminHomeDocument.tsx";
 
 const Route = createFileRoute("/admin/")({
-	component: AdminHome,
+	component: AdminHomeDocument,
 });
 
 export { Route };

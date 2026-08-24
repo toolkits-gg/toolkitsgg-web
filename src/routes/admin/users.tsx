@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AdminUsers } from "#/components/pages/admin/AdminUsers";
+import { AdminUsers } from "#/documents/admin/AdminUsers";
 
 const Route = createFileRoute("/admin/users")({
 	component: AdminUsers,

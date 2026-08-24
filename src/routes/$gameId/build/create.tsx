@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { BuildCreatePage } from "#/components/pages/BuildCreatePage.tsx";
+import { BuildCreateDocument } from "#/documents/build/BuildCreateDocument.tsx";
 import {
 	gameSupportsBuilds,
 	getGameBuilds,
@@ -9,7 +9,7 @@ const CreateBuild = () => {
 	const { gameId } = Route.useParams();
 	const builds = getGameBuilds(gameId);
 	if (!builds) return null;
-	return <BuildCreatePage builds={builds} />;
+	return <BuildCreateDocument builds={builds} />;
 };
 
 export const Route = createFileRoute("/$gameId/build/create")({

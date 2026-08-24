@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { WallpaperGalleryPage } from "#/components/pages/WallpaperGalleryPage.tsx";
+import { WallpaperGalleryDocument } from "#/documents/WallpaperGalleryDocument.tsx";
 import {
 	gameHasWallpapers,
 	getValidatedGameId,
@@ -9,7 +9,7 @@ const Wallpapers = () => {
 	const { gameId } = Route.useParams();
 	const validated = getValidatedGameId(gameId);
 	if (!validated) return null;
-	return <WallpaperGalleryPage gameId={validated} />;
+	return <WallpaperGalleryDocument gameId={validated} />;
 };
 
 export const Route = createFileRoute("/$gameId/wallpapers")({

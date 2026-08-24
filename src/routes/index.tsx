@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { ToolkitHomePage } from "#/components/pages/ToolkitHome";
+import { ToolkitHomeDocument } from "#/documents/ToolkitHomeDocument.tsx";
 import { useSetActiveGame } from "#/features/game/use-set-active-game";
 
 const HomePage = () => {
@@ -8,7 +8,7 @@ const HomePage = () => {
 
 	useEffect(() => setActiveGame(null), [setActiveGame]);
 
-	return <ToolkitHomePage />;
+	return <ToolkitHomeDocument />;
 };
 
 const Route = createFileRoute("/")({

@@ -1,6 +1,6 @@
 import { Alert } from "@mantine/core";
 import { createFileRoute } from "@tanstack/react-router";
-import { AuditLog } from "#/components/pages/admin/AuditLog";
+import { AuditLogDocument } from "#/documents/admin/AuditLogDocument.tsx";
 import { useGameId } from "#/features/game/use-game-id";
 import { getGameBuilds } from "#/games-registry/builds-registry";
 
@@ -10,7 +10,7 @@ const AdminAudit = () => {
 	if (!builds) {
 		return <Alert color="yellow">{gameId} has no moderation history.</Alert>;
 	}
-	return <AuditLog builds={builds} />;
+	return <AuditLogDocument builds={builds} />;
 };
 
 const Route = createFileRoute("/admin/audit")({

@@ -31,7 +31,7 @@ const GameLayout = () => {
 	const setActiveGame = useSetActiveGame();
 
 	// Persist the route's game so reserved routes without a game segment
-	// (profile pages) still resolve it after navigating away.
+	// (profile documents) still resolve it after navigating away.
 	useEffect(() => {
 		setActiveGame(gameId as GameId);
 	}, [gameId, setActiveGame]);

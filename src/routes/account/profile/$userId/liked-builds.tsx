@@ -1,6 +1,6 @@
 import { createFileRoute, getRouteApi } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { LikedBuildsPage } from "#/components/pages/liked-builds/LikedBuilds";
+import { LikedBuildsDocument } from "#/documents/LikedBuildsDocument.tsx";
 import { useGameId } from "#/features/game/use-game-id";
 import {
 	buildTabHead,
@@ -38,7 +38,7 @@ const LikedBuilds = () => {
 	if (!builds) return null;
 
 	return (
-		<LikedBuildsPage
+		<LikedBuildsDocument
 			builds={builds}
 			viewMode={isOwner ? { kind: "self" } : { kind: "public", userId }}
 		/>

@@ -78,7 +78,7 @@ const Wizard = ({
 
 			if (cancelled) return;
 
-			// Small delay to allow any animations or app-navbar to settle
+			// Small delay to allow any animations or navbar to settle
 			timer = setTimeout(() => {
 				setIsReady(true);
 			}, 100);
@@ -118,7 +118,7 @@ const Wizard = ({
 				const windowHeight = window.innerHeight;
 				const isInLowerHalf = rect.top > windowHeight / 2;
 
-				// The app-navbar covers the middle slot on mobile.
+				// The navbar covers the middle slot on mobile.
 				const lowTargetPosition = isMobile ? "top" : "middle";
 				setPosition(isInLowerHalf ? lowTargetPosition : "bottom");
 			}
