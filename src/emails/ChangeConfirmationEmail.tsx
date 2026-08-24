@@ -1,9 +1,9 @@
 import { Text } from "react-email";
-import { EmailButton } from "#/emails/components/EmailButton";
-import { EmailLayout } from "#/emails/components/EmailLayout";
-import { clientEnv } from "#/env/client-env";
+import { EmailButton } from "#/emails/EmailButton.tsx";
+import { EmailLayout } from "#/emails/EmailLayout.tsx";
+import { clientEnv } from "#/env/client-env.ts";
 
-type EmailChangeConfirmationProps = {
+type ChangeConfirmationEmailProps = {
 	toName: string;
 	newEmail: string;
 	url: string;
@@ -13,11 +13,11 @@ type EmailChangeConfirmationProps = {
  * Sent to the address currently on file, not the new one, so that losing control
  * of an inbox is not enough to move an account to an attacker's address.
  */
-const EmailChangeConfirmation = ({
+const ChangeConfirmationEmail = ({
 	toName,
 	newEmail,
 	url,
-}: EmailChangeConfirmationProps) => {
+}: ChangeConfirmationEmailProps) => {
 	const appName = clientEnv.VITE_APP_NAME;
 
 	return (
@@ -42,11 +42,11 @@ const EmailChangeConfirmation = ({
 	);
 };
 
-EmailChangeConfirmation.PreviewProps = {
+ChangeConfirmationEmail.PreviewProps = {
 	toName: "TK",
 	newEmail: "new-address@example.com",
 	url: "http://localhost:3000/api/auth/verify-email?token=abc123&callbackURL=%2Faccount%2Femail",
-} as EmailChangeConfirmationProps;
+} as ChangeConfirmationEmailProps;
 
-export default EmailChangeConfirmation;
-export { EmailChangeConfirmation };
+export default ChangeConfirmationEmail;
+export { ChangeConfirmationEmail };

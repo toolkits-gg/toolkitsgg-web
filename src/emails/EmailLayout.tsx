@@ -13,8 +13,8 @@ import {
 	Tailwind,
 	Text,
 } from "react-email";
-import { CHANGELOG_URL, DISCORD_URL } from "#/constants";
-import { clientEnv } from "#/env/client-env";
+import { CHANGELOG_URL, DISCORD_URL } from "#/constants.ts";
+import { clientEnv } from "#/env/client-env.ts";
 
 type EmailLayoutProps = {
 	/** Inbox preview line. Kept distinct from the heading so it adds information. */

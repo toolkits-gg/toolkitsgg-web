@@ -2,11 +2,11 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { username as usernamePlugin } from "better-auth/plugins";
 import { APP_DOMAIN } from "#/constants";
-import { EmailChangeConfirmation } from "#/emails/auth/email-change-confirmation";
-import { EmailPasswordChanged } from "#/emails/auth/email-password-changed";
-import { EmailPasswordReset } from "#/emails/auth/email-password-reset";
-import { EmailVerification } from "#/emails/auth/email-verification";
-import { EmailWelcome } from "#/emails/auth/email-welcome";
+import { ChangeConfirmationEmail } from "#/emails/ChangeConfirmationEmail.tsx";
+import { EmailVerificationEmail } from "#/emails/EmailVerificationEmail.tsx";
+import { PasswordChangedEmail } from "#/emails/PasswordChangedEmail.tsx";
+import { PasswordResetEmail } from "#/emails/PasswordResetEmail.tsx";
+import { WelcomeEmail } from "#/emails/WelcomeEmail.tsx";
 import { clientEnv } from "#/env/client-env";
 import { serverEnv } from "#/env/server-env";
 import { sendEmail } from "#/features/email/send-email";
@@ -142,7 +142,7 @@ const auth = betterAuth({
 				to: user.email,
 				subject: "Reset your password",
 				template: "email-password-reset",
-				react: EmailPasswordReset({ toName: displayName(user), url }),
+				react: PasswordResetEmail({ toName: displayName(user), url }),
 			});
 		},
 		async onPasswordReset({ user }) {
@@ -150,7 +150,7 @@ const auth = betterAuth({
 				to: user.email,
 				subject: "Your password was changed",
 				template: "email-password-changed",
-				react: EmailPasswordChanged({
+				react: PasswordChangedEmail({
 					toName: displayName(user),
 					url: `${appUrl}/forgot-password`,
 				}),
@@ -166,7 +166,7 @@ const auth = betterAuth({
 				to: user.email,
 				subject: "Verify your email address",
 				template: "email-verification",
-				react: EmailVerification({
+				react: EmailVerificationEmail({
 					toName: displayName(user),
 					url: withVerifyEmailCallback(url),
 				}),
@@ -178,7 +178,7 @@ const auth = betterAuth({
 				to: user.email,
 				subject: `Welcome to ${clientEnv.VITE_APP_NAME}`,
 				template: "email-welcome",
-				react: EmailWelcome({ toName: displayName(user), url: appUrl }),
+				react: WelcomeEmail({ toName: displayName(user), url: appUrl }),
 			});
 		},
 	},
@@ -258,7 +258,7 @@ const auth = betterAuth({
 					to: user.email,
 					subject: "Confirm your new email address",
 					template: "email-change-confirmation",
-					react: EmailChangeConfirmation({
+					react: ChangeConfirmationEmail({
 						toName: displayName(user),
 						newEmail,
 						url,

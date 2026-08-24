@@ -1,14 +1,17 @@
 import { Text } from "react-email";
-import { EmailButton } from "#/emails/components/EmailButton";
-import { EmailLayout } from "#/emails/components/EmailLayout";
-import { clientEnv } from "#/env/client-env";
+import { EmailButton } from "#/emails/EmailButton.tsx";
+import { EmailLayout } from "#/emails/EmailLayout.tsx";
+import { clientEnv } from "#/env/client-env.ts";
 
-type EmailVerificationProps = {
+type EmailVerificationEmailProps = {
 	toName: string;
 	url: string;
 };
 
-const EmailVerification = ({ toName, url }: EmailVerificationProps) => {
+const EmailVerificationEmail = ({
+	toName,
+	url,
+}: EmailVerificationEmailProps) => {
 	const appName = clientEnv.VITE_APP_NAME;
 
 	return (
@@ -31,10 +34,10 @@ const EmailVerification = ({ toName, url }: EmailVerificationProps) => {
 	);
 };
 
-EmailVerification.PreviewProps = {
+EmailVerificationEmail.PreviewProps = {
 	toName: "TK",
 	url: "http://localhost:3000/api/auth/verify-email?token=abc123&callbackURL=%2Fverify-email",
-} as EmailVerificationProps;
+} as EmailVerificationEmailProps;
 
-export default EmailVerification;
-export { EmailVerification };
+export default EmailVerificationEmail;
+export { EmailVerificationEmail };

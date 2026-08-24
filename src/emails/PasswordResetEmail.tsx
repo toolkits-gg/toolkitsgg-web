@@ -1,14 +1,14 @@
 import { Text } from "react-email";
-import { EmailButton } from "#/emails/components/EmailButton";
-import { EmailLayout } from "#/emails/components/EmailLayout";
-import { clientEnv } from "#/env/client-env";
+import { EmailButton } from "#/emails/EmailButton.tsx";
+import { EmailLayout } from "#/emails/EmailLayout.tsx";
+import { clientEnv } from "#/env/client-env.ts";
 
-type EmailPasswordResetProps = {
+type PasswordResetEmailProps = {
 	toName: string;
 	url: string;
 };
 
-const EmailPasswordReset = ({ toName, url }: EmailPasswordResetProps) => {
+const PasswordResetEmail = ({ toName, url }: PasswordResetEmailProps) => {
 	const appName = clientEnv.VITE_APP_NAME;
 
 	return (
@@ -31,10 +31,10 @@ const EmailPasswordReset = ({ toName, url }: EmailPasswordResetProps) => {
 	);
 };
 
-EmailPasswordReset.PreviewProps = {
+PasswordResetEmail.PreviewProps = {
 	toName: "TK",
 	url: "http://localhost:3000/api/auth/reset-password/abc123?callbackURL=%2Freset-password",
-} as EmailPasswordResetProps;
+} as PasswordResetEmailProps;
 
-export default EmailPasswordReset;
-export { EmailPasswordReset };
+export default PasswordResetEmail;
+export { PasswordResetEmail };

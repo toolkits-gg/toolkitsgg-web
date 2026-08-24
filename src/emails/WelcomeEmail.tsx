@@ -1,14 +1,14 @@
 import { Text } from "react-email";
-import { EmailButton } from "#/emails/components/EmailButton";
-import { EmailLayout } from "#/emails/components/EmailLayout";
-import { clientEnv } from "#/env/client-env";
+import { EmailButton } from "#/emails/EmailButton.tsx";
+import { EmailLayout } from "#/emails/EmailLayout.tsx";
+import { clientEnv } from "#/env/client-env.ts";
 
-type EmailWelcomeProps = {
+type WelcomeEmailProps = {
 	toName: string;
 	url: string;
 };
 
-const EmailWelcome = ({ toName, url }: EmailWelcomeProps) => {
+const WelcomeEmail = ({ toName, url }: WelcomeEmailProps) => {
 	const appName = clientEnv.VITE_APP_NAME;
 
 	return (
@@ -32,10 +32,10 @@ const EmailWelcome = ({ toName, url }: EmailWelcomeProps) => {
 	);
 };
 
-EmailWelcome.PreviewProps = {
+WelcomeEmail.PreviewProps = {
 	toName: "TK",
 	url: "http://localhost:3000/",
-} as EmailWelcomeProps;
+} as WelcomeEmailProps;
 
-export default EmailWelcome;
-export { EmailWelcome };
+export default WelcomeEmail;
+export { WelcomeEmail };

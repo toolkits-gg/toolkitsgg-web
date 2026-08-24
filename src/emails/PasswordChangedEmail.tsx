@@ -1,13 +1,13 @@
 import { Link, Text } from "react-email";
-import { EmailLayout } from "#/emails/components/EmailLayout";
-import { clientEnv } from "#/env/client-env";
+import { EmailLayout } from "#/emails/EmailLayout.tsx";
+import { clientEnv } from "#/env/client-env.ts";
 
-type EmailPasswordChangedProps = {
+type PasswordChangedEmailProps = {
 	toName: string;
 	url: string;
 };
 
-const EmailPasswordChanged = ({ toName, url }: EmailPasswordChangedProps) => {
+const PasswordChangedEmail = ({ toName, url }: PasswordChangedEmailProps) => {
 	const appName = clientEnv.VITE_APP_NAME;
 
 	return (
@@ -31,10 +31,10 @@ const EmailPasswordChanged = ({ toName, url }: EmailPasswordChangedProps) => {
 	);
 };
 
-EmailPasswordChanged.PreviewProps = {
+PasswordChangedEmail.PreviewProps = {
 	toName: "TK",
 	url: "http://localhost:3000/forgot-password",
-} as EmailPasswordChangedProps;
+} as PasswordChangedEmailProps;
 
-export default EmailPasswordChanged;
-export { EmailPasswordChanged };
+export default PasswordChangedEmail;
+export { PasswordChangedEmail };
