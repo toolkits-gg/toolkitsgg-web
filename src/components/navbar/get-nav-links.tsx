@@ -68,33 +68,42 @@ const getNavLinks = ({
 }: GetNavLinksParams): NavLink[] => {
 	const navLinks: NavLink[] = [];
 	if (gameId && gameId !== "none") {
+		const sectionLinks = [
+			{
+				label: "Home",
+				link: `/${gameId}`,
+			},
+			{
+				label: "Item List",
+				link: `/${gameId}/items`,
+			},
+		];
+
+		if (gameHasWallpapers(gameId)) {
+			sectionLinks.push({
+				label: "Wallpapers",
+				icon: LuImage,
+				initiallyOpened: true,
+				links: [
+					{
+						label: "Browse Wallpapers",
+						link: `/${gameId}/wallpapers`,
+					},
+				],
+			});
+		}
+
 		// Game-specific home page
 		navLinks.push({
-			label: getGameMetadata(gameId)?.label ?? gameId,
+			label: `${getGameMetadata(gameId)?.label} Links` ?? gameId,
 			icon: LuHouse,
 			initiallyOpened: true,
-			links: [
-				{
-					label: "Home",
-					link: `/${gameId}`,
-				},
-			],
-		});
-		navLinks.push({
-			label: "Items",
-			icon: BsCollection,
-			initiallyOpened: true,
-			links: [
-				{
-					label: "Item List",
-					link: `/${gameId}/items`,
-				},
-			],
+			links: sectionLinks,
 		});
 
 		if (gameSupportsBuilds(gameId)) {
 			navLinks.push({
-				label: "Builds",
+				label: `${getGameMetadata(gameId)?.label ?? ""} Builds`,
 				icon: GiCapeArmor,
 				initiallyOpened: true,
 				links: [
@@ -109,19 +118,6 @@ const getNavLinks = ({
 					{
 						label: "Community Builds",
 						link: `/${gameId}/build/community`,
-					},
-				],
-			});
-		}
-		if (gameHasWallpapers(gameId)) {
-			navLinks.push({
-				label: "Wallpapers",
-				icon: LuImage,
-				initiallyOpened: true,
-				links: [
-					{
-						label: "Browse Wallpapers",
-						link: `/${gameId}/wallpapers`,
 					},
 				],
 			});
