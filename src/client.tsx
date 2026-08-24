@@ -1,5 +1,5 @@
-// Sentry initialization should be imported first!
-import "./instrument.client";
+//! Sentry initialization should be imported first!
+import "./integrations/sentry/instrument.client.ts";
 
 import { StartClient } from "@tanstack/react-start/client";
 import { StrictMode, startTransition } from "react";
