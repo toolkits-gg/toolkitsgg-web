@@ -1,7 +1,6 @@
 import type { FC } from "react";
-import { BsCollection } from "react-icons/bs";
 import { GiCapeArmor, GiLockedChest } from "react-icons/gi";
-import { LuHouse, LuImage } from "react-icons/lu";
+import { LuHouse } from "react-icons/lu";
 import { gameSupportsBuilds } from "#/games-registry/builds-registry";
 import {
 	gameHasWallpapers,
@@ -68,7 +67,7 @@ const getNavLinks = ({
 }: GetNavLinksParams): NavLink[] => {
 	const navLinks: NavLink[] = [];
 	if (gameId && gameId !== "none") {
-		const sectionLinks = [
+		const sectionLinks: NavLinkSubLink[] = [
 			{
 				label: "Home",
 				link: `/${gameId}`,
@@ -81,21 +80,14 @@ const getNavLinks = ({
 
 		if (gameHasWallpapers(gameId)) {
 			sectionLinks.push({
-				label: "Wallpapers",
-				icon: LuImage,
-				initiallyOpened: true,
-				links: [
-					{
-						label: "Browse Wallpapers",
-						link: `/${gameId}/wallpapers`,
-					},
-				],
+				label: "Browse Wallpapers",
+				link: `/${gameId}/wallpapers`,
 			});
 		}
 
 		// Game-specific home page
 		navLinks.push({
-			label: `${getGameMetadata(gameId)?.label} Links` ?? gameId,
+			label: `${getGameMetadata(gameId)?.label ?? gameId} Links`,
 			icon: LuHouse,
 			initiallyOpened: true,
 			links: sectionLinks,

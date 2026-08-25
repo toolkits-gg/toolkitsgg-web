@@ -1,9 +1,11 @@
 import { usernameClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
-import { clientEnv } from "#/env/client-env";
 
+// No baseURL deliberately, so auth calls stay on the origin the page was
+// served from.
+// A pinned origin makes every call from a game subdomain
+// cross-origin, and the better-auth handler sends no CORS headers.
 const authClient = createAuthClient({
-	baseURL: clientEnv.VITE_APP_URL || "http://localhost:3000",
 	// Mirrors the plugins in auth.ts.
 	// Declared explicitly so the client never type-depends
 	// on the server module and everything it pulls in.
